@@ -197,16 +197,46 @@ If there exists a derivation like $\Psi'$ in Lemma~\ref{LemInterpolant}, then $\
 \section{Streamlining}
 
 \begin{defi}
-An atomic flow is called \emph{unambiguous} for polarity assignment $\pi_p$ if there does not exist an interaction (resp. cointeraction) node and two paths positive paths $p_1$, between the interaction (resp. cointeraction) node, and $p_2$ between the interaction (resp. cointeraction) node and a cointeraction (resp. interaction node).
+An atomic flow is called \emph{unambiguous} for polarity assignment $\pi_p$ if there does not exist an interaction (resp. cointeraction) node and two positive paths $p_1$, between the interaction (resp. cointeraction) node, and $p_2$ between the interaction (resp. cointeraction) node and a cointeraction (resp. interaction node).
 \end{defi}
 
 \begin{lem}
 Given a derivation $\Delta$ with atomic flow $A$ there exists a derivation $\Delta'$ with unambiguous atomic flow $A'$ for some polarity assignment $\pi_p$ such that $|A'|/|A|\in O(1)$.
 \end{lem}
 
+\begin{defi}\label{DefRedIS}
+We define the reduction $\rightarrow_{is}$ (where $is$ stands for \emph{isolated subflow}) as follows, for all atomic flows $A$ and $B$:
+
+where $h,k\geq0$, edges have been renamed with accents, flows $\tilde{A}$ and $\hat{A}$ are both isomorphic to $A$ and $B$ is connected.
+\end{defi}
+
+\begin{thm}
+Reduction $\rightarrow_{is}$ is sound.
+\end{thm}
+\begin{proof}
+Let $\Phi$ be a derivation with flow $C$, such that $C\rightarrow_{si} D$. We show that there exists a derivation $\Psi$ with flow $D$ and with the same premiss and conclusion as $\Phi$. In the following we refer to the figure in Definition~\ref{DefRedIS}. We assume that $\Phi$ has premiss $\xi$ and conclusion $\zeta$. Now we will conduct experiments with respect to $B$. Since $B$ is connected we know that it has two polarity assignments $\pi_+$ and $\pi_-$, where each polarity assignment assigns the given polarity to all the edges in $B$. Now let $\Psi'$ be the $\top$-experiment under $\pi_+$ and let $\Psi''$ be the $\bot$-experiment under $\pi_-$ both with respect to $B$. Then we have:
+\[
+\vlder{\Phi_+^\top}{}{\vls[\zeta.{\bar a}.\cdots.{\bar a}]}{\xi}
+,\quad
+\vlder{\Phi_-^\bot}{}{\zeta}{\vls({\bar a}.\cdots.{\bar a}.\xi)}
+\]
+We can now connect the two experiments to get the desired derivation:
+\[
+\vlderivation{
+\vlin{\cod}{}{\zeta}{
+\vlde{\Phi_+^\top}{}{\vls[\zeta.\zeta]}{
+\vlde{}{\{\acd\}}{\vls[\zeta.({\bar a}.\cdots.{\bar a}.\xi)]}{
+\vlin{\swi}{}{\vls[\zeta.({\bar a}.\xi)]}{
+\vlde{}{\{\acu\}}{\vls([\zeta.{\bar a}].\xi)}{
+\vlde{\Phi_-^\bot}{}{\vls([\zeta.{\bar a}.\cdots.{\bar a}].\xi)}{
+\vlin{\cou}{}{\vls(\xi.\xi)}{
+\vlhy{\xi}}}}}}}}
+}
+\]
+\end{proof}
 
 
-{\footnotesize\begin{verbatim}hm
+{\footnotesize\begin{verbatim}
 Here is the picture. In constructions 1-3, a,b,c,d (which are just labels, and
 not atom names) are supposed to represent groups of wires (but I have drawn only
 one for simplicity).
