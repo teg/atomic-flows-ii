@@ -1,0 +1,1172 @@
+% VirginiaLake LaTeX macros by Alessio Guglielmi
+%
+% Many thanks to Ross Moore (Macquarie University) for suggestions leading 
+% to \vlupdate
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{virginialake}[2008/03/10 v1.10]
+\newif\ifvirginialakeusesxy\virginialakeusesxytrue
+\DeclareOption{noxy}{\virginialakeusesxyfalse}
+\newif\ifvirginialakepdftex\virginialakepdftexfalse
+\DeclareOption{pdftex}{\virginialakepdftextrue}
+\newif\ifvirginialakegoodsyntax\virginialakegoodsyntaxfalse
+\DeclareOption{goodsyntax}{\virginialakegoodsyntaxtrue}
+\newif\ifvirginialakelutzsyntax\virginialakelutzsyntaxfalse
+\DeclareOption{lutzsyntax}{\virginialakelutzsyntaxtrue}
+\ProcessOptions
+\ifvirginialakeusesxy
+    \RequirePackage[usenames]{color}
+    \ifvirginialakepdftex
+       \RequirePackage[line,arrow,curve,frame,color]{xy}
+    \else
+       \RequirePackage[line,arrow,curve,frame,color,crayon,ps,dvips]{xy}
+   \fi
+\fi
+
+%----------------------------------------------------------------------- IFMTARG
+% Code from ifmtarg.sty, reproduced below with permission - A.G.
+%
+% ifmtarg.sty
+%
+% Provides an if-then-else command for an empty macro argument
+% (empty = zero or more spaces only)
+% Use as \@ifmtarg{arg1}{Code for arg1 empty}{Code for arg1 not empty}
+%
+% author: Peter Wilson (CUA)
+%         (now at peter.r.wilson@boeing.com)
+% Copyright Peter Wilson, 1996
+% Copyright Peter Wilson and Donald Arseneau, 2000
+% Released under the LaTeX Project Public License
+%
+%% Commands by Donald Arseneau
+\begingroup
+\catcode`\Q=3
+\long\gdef\@ifmtarg#1{\@xifmtarg#1QQ\@secondoftwo\@firstoftwo\@nil}
+\long\gdef\@xifmtarg#1#2Q#3#4#5\@nil{#4}
+\long\gdef\@ifnotmtarg#1{\@xifmtarg#1QQ\@firstofone\@gobble\@nil}
+\endgroup
+%---------------------------------------------------------------- END OF IFMTARG
+
+%------------------------------------------------ MACROS FOR FORMULAE/STRUCTURES
+
+\newcommand{\vlor}{\mathchoice
+      {\mathbin{\raise.2ex \hbox{$\scriptstyle      \vee           $}}}
+      {\mathbin{\raise.2ex \hbox{$\scriptstyle      \vee           $}}}
+      {\mathbin{\raise.12ex\hbox{$\scriptscriptstyle\vee           $}}}
+      {\mathbin{           \hbox{$\scriptscriptstyle\vee           $}}}}
+
+\newcommand{\vlan}{\mathchoice
+      {\mathbin{\raise.2ex \hbox{$\scriptstyle      \wedge         $}}}
+      {\mathbin{\raise.2ex \hbox{$\scriptstyle      \wedge         $}}}
+      {\mathbin{\raise.12ex\hbox{$\scriptscriptstyle\wedge         $}}}
+      {\mathbin{           \hbox{$\scriptscriptstyle\wedge         $}}}}
+
+\newcommand{\vlim}{\mathchoice
+      {\mathbin{\raise.2ex \hbox{$\scriptstyle      \to            $}}}
+      {\mathbin{\raise.2ex \hbox{$\scriptstyle      \to            $}}}
+      {\mathbin{\raise.12ex\hbox{$\scriptscriptstyle\to            $}}}
+      {\mathbin{           \hbox{$\scriptscriptstyle\to            $}}}}
+
+\newcommand{\vlmi}{\mathchoice
+      {\mathbin{\raise.2ex \hbox{$\scriptstyle      \leftarrow     $}}}
+      {\mathbin{\raise.2ex \hbox{$\scriptstyle      \leftarrow     $}}}
+      {\mathbin{\raise.12ex\hbox{$\scriptscriptstyle\leftarrow     $}}}
+      {\mathbin{           \hbox{$\scriptscriptstyle\leftarrow     $}}}}
+
+\newcommand{\vldi}{\mathchoice
+      {\mathbin{\raise.2ex \hbox{$\scriptstyle      \leftrightarrow$}}}
+      {\mathbin{\raise.2ex \hbox{$\scriptstyle      \leftrightarrow$}}}
+      {\mathbin{\raise.12ex\hbox{$\scriptscriptstyle\leftrightarrow$}}}
+      {\mathbin{           \hbox{$\scriptscriptstyle\leftrightarrow$}}}}
+
+\newcommand{\vlne}{\mathchoice
+      {\mathord{\raise.2ex \hbox{$\scriptstyle      \neg           $}}}
+      {\mathord{\raise.2ex \hbox{$\scriptstyle      \neg           $}}}
+      {\mathord{\raise.12ex\hbox{$\scriptscriptstyle\neg           $}}}
+      {\mathord{           \hbox{$\scriptscriptstyle\neg           $}}}}
+
+\newcommand{\vlgoodsyntax}{
+   \def\vlleftparbracket   {\ifvirginialakesmallbrackets[\else\left [\fi}
+   \def\vlrightparbracket  {\ifvirginialakesmallbrackets]\else\right]\fi}
+   \let\vlleftparbracketex \vlleftparbracket
+   \let\vlrightparbracketex\vlrightparbracket
+   \let\vlleftparbracketcn \vlleftparbracket
+   \let\vlrightparbracketcn\vlrightparbracket
+   \def\vlleftcopbracket   {\ifvirginialakesmallbrackets(\else\left (\fi}
+   \def\vlrightcopbracket  {\ifvirginialakesmallbrackets)\else\right)\fi}
+   \let\vlleftcopbracketex \vlleftcopbracket
+   \let\vlrightcopbracketex\vlrightcopbracket
+   \let\vlleftcopbracketcn \vlleftcopbracket
+   \let\vlrightcopbracketcn\vlrightcopbracket
+   \def\vldsp{\ }
+   \def\vlcsp{\ }
+   \let\vldots=\dots}
+
+\newcommand{\vllutzsyntax}{
+   \def\vlleftparbracket   {\ifvirginialakesmallbrackets[\else\left [\fi}
+   \def\vlrightparbracket  {\ifvirginialakesmallbrackets]\else\right]\fi}
+   \let\vlleftparbracketex \relax
+   \let\vlrightparbracketex\relax
+   \let\vlleftparbracketcn \{
+   \let\vlrightparbracketcn\}
+   \def\vlleftcopbracket   {\ifvirginialakesmallbrackets(\else\left (\fi}
+   \def\vlrightcopbracket  {\ifvirginialakesmallbrackets)\else\right)\fi}
+   \let\vlleftcopbracketex \relax
+   \let\vlrightcopbracketex\relax
+   \let\vlleftcopbracketcn \{
+   \let\vlrightcopbracketcn\}
+   \def\vldsp{\vlor}
+   \def\vlcsp{\vlan}
+   \let\vldots=\cdots}
+
+\newcommand{\vlnogoodsyntax}{
+   \def\vlleftparbracket   {\ifvirginialakesmallbrackets(\else\left (\fi}
+   \def\vlrightparbracket  {\ifvirginialakesmallbrackets)\else\right)\fi}
+   \let\vlleftparbracketex \relax
+   \let\vlrightparbracketex\relax
+   \let\vlleftparbracketcn \{
+   \let\vlrightparbracketcn\}
+   \let\vlleftcopbracket   \vlleftparbracket
+   \let\vlrightcopbracket  \vlrightparbracket
+   \let\vlleftcopbracketex \relax
+   \let\vlrightcopbracketex\relax
+   \let\vlleftcopbracketcn \{
+   \let\vlrightcopbracketcn\}
+   \def\vldsp{\vlor}
+   \def\vlcsp{\vlan}
+   \let\vldots=\cdots}
+
+\ifvirginialakegoodsyntax
+   \vlgoodsyntax
+\else
+   \ifvirginialakelutzsyntax
+      \vllutzsyntax
+   \else
+      \vlnogoodsyntax
+   \fi
+\fi
+
+\newif\ifvirginialakesmallbrackets\virginialakesmallbracketsfalse
+
+\newcommand{\vlsmallbrackets}{\virginialakesmallbracketstrue}
+
+\newcommand{\vlnosmallbrackets}{\virginialakesmallbracketsfalse}
+
+\newcommand{\vlprepstructuresaux}{\catcode`.=\active
+                                  \catcode`[=\active
+                                  \catcode`]=\active
+                                  \catcode`(=\active
+                                  \catcode`)=\active}
+
+\let\vldot  .
+\let\vlsqbrl[
+\let\vlsqbrr]
+\let\vlrobrl(
+\let\vlrobrr)
+
+\newif\ifvirginialakestructuressyntax\virginialakestructuressyntaxtrue
+
+\newcommand{\vlnostructuressyntax}{\virginialakestructuressyntaxfalse}
+
+\newcommand{\vlgobble}[1]{}
+
+{%--------------------------------------
+\vlprepstructuresaux
+
+\gdef\vlnos{\let.\vldot
+            \let[\vlsqbrl
+            \let]\vlsqbrr
+            \let(\vlrobrl
+            \let)\vlrobrr}
+
+\gdef\vlprepstructures{\ifvirginialakestructuressyntax
+                          \vlprepstructuresaux\vlnos\fi}
+
+\gdef\vlparopen  {\vlleftparbracket  \bgroup\catcode`.=\active\let.\vldsp
+                                            \catcode`]=\active\let]\vlparclose}
+
+\gdef\vlcopopen  {\vlleftcopbracket  \bgroup\catcode`.=\active\let.\vlcsp
+                                            \catcode`)=\active\let)\vlcopclose}
+
+\gdef\vlparopenex{\vlleftparbracketex\bgroup\catcode`.=\active\let.\vldsp\vlsbr
+                                           \catcode`]=\active\let]\vlparcloseex}
+
+\gdef\vlcopopenex{\vlleftcopbracketex\bgroup\catcode`.=\active\let.\vlcsp\vlsbr
+                                           \catcode`)=\active\let)\vlcopcloseex}
+
+\gdef\vlparopencn{\vlleftparbracketcn\bgroup\catcode`.=\active\let.\vldsp\vlsbr
+                                           \catcode`]=\active\let]\vlparclosecn}
+
+\gdef\vlcopopencn{\vlleftcopbracketcn\bgroup\catcode`.=\active\let.\vlcsp\vlsbr
+                                           \catcode`)=\active\let)\vlcopclosecn}
+
+\gdef\vls  {\catcode`[=\active\let[\vlparopenex
+            \catcode`(=\active\let(\vlcopopenex}
+
+\gdef\vlsbr{\catcode`[=\active\let[\vlparopen
+            \catcode`(=\active\let(\vlcopopen}
+
+\gdef\vlscn{\catcode`[=\active\let[\vlparopencn
+            \catcode`(=\active\let(\vlcopopencn}
+
+\gdef\vlupdate #1{
+   \expandafter\let\csname\expandafter\vlgobble\string #1vltemp\endcsname #1
+   \def #1{\bgroup\vlprepstructures
+     \csname\expandafter\vlgobble\string #1vlaux\endcsname}
+   \expandafter\def\csname\expandafter\vlgobble\string #1vlaux\endcsname ##1{
+      \csname\expandafter\vlgobble\string #1vltemp\endcsname{##1}\egroup}}
+}%--------------------------------------
+
+\newcommand{\vlparclose  }{\egroup\vlrightparbracket  }
+
+\newcommand{\vlparcloseex}{\egroup\vlrightparbracketex}
+
+\newcommand{\vlparclosecn}{\egroup\vlrightparbracketcn}
+
+\newcommand{\vlcopclose  }{\egroup\vlrightcopbracket  }
+
+\newcommand{\vlcopcloseex}{\egroup\vlrightcopbracketex}
+
+\newcommand{\vlcopclosecn}{\egroup\vlrightcopbracketcn}
+
+\newcommand{\vlhole}{\{\enspace\}}
+
+\newcommand{\vlstore}{\bgroup\vlprepstructures\afterassignment\egroup
+                      \global\def\vlread}
+
+%----------------------------------------- END OF MACROS FOR FORMULAE/STRUCTURES
+
+%-------------------------------------------------------- MACROS FOR DERIVATIONS
+%
+%                                                   +-------+--------+-------+
+%                                                   |  dcl  |  dcc   |  dcr  |
+%                                                   +-------+--------+-------+
+%                                                       +---+        +---+
+%                                                       | l |--------| m |
+%                                                       +---+        +---+
+%                                                             +----+
+%                                                             | dc |
+%                                                             +----+
+%                                                   <---dl--->      <---dr--->
+%
+
+\newdimen\dercldim                                % dcl
+\newdimen\derccdim                                % dcc
+\newdimen\dercrdim                                % dcr
+\newdimen\derdim                                  % d
+\newdimen\derdldim                                % ddl
+\newdimen\derdrdim                                % ddr
+\newbox\derboxtwo                                 % b2
+\newbox\derboxthree                               % b3
+\newbox\derboxfour                                % b4
+\newdimen\derquad
+\newdimen\deropen
+\newbox\stembox
+
+\newcount\vlsavederboxonec
+\newcount\vlsavederdimc
+
+\newcommand{\vlderivationinit}{\bgroup
+   \vlprepstructures
+   \vlsavederboxonec=\count14\advance\vlsavederboxonec by1
+   \newbox\derboxone                              % b1
+   \vlsavederdimc=\count11\advance\vlsavederdimc by1
+   \newdimen\derldim                              % dl
+   \newdimen\dercdim                              % dc
+   \newdimen\derrdim}                             % dr
+
+\newcommand{\vlderivationterm}{\egroup
+   \global\advance\count14 by-1
+   \global\chardef\derboxone=\vlsavederboxonec
+   \global\advance\count11 by-3
+   \global\dimendef\derldim=\vlsavederdimc
+   \global\advance\vlsavederdimc by1
+   \global\dimendef\dercdim=\vlsavederdimc
+   \global\advance\vlsavederdimc by1
+   \global\dimendef\derrdim=\vlsavederdimc
+   \global\advance\vlsavederdimc by-2}
+
+\newcommand{\vlderivationaux}[1]{#1\vcenter{\box\derboxone}\vlderivationterm}
+
+\newcommand{\vlderivation}{\vlderivationinit\vlderivationaux}
+
+\newcommand{\vlhyaux}[1]{\global\setbox\derboxone=\hbox{#1}
+   \global\derldim=0pt                            % dl=0
+   \global\dercdim=\wd\derboxone                  % dc=wd(b1)
+   \global\derrdim=0pt                            % dr=0
+   }
+
+\newcommand{\vlhy}[1]{\vlhyaux{\strut$#1$}}
+
+\newcommand{\vlstemaux}{\dercldim=\derldim
+                        \derccdim=\dercdim
+                        \dercrdim=\derrdim}
+
+\newcommand{\vldaux}[6]{\setbox\derboxtwo=\hbox{\unhbox\derboxone}
+                                                  % b2=b1
+   \setbox\derboxthree=\hbox{$#1$}                % b3; l=wd(b3)
+   \setbox\derboxfour =\hbox{$#2$}                % b4; m=wd(b4)
+   #3                                             % dl=0, dc=wd(b1), dr=0
+   \derdim=\dercdim\advance\derdim by-\derccdim\divide\derdim by2
+                                                  % d=(dc-dcc)/2
+   \global\derldim=\dercldim\global\advance\derldim by-\derdim
+                                                  % dl=dcl-d
+   \global\derrdim=\dercrdim\global\advance\derrdim by-\derdim
+                                                  % dr=dcr-d
+   \deropen=\fontdimen5\textfont2\divide\deropen by3
+   \setbox\derboxone=\hbox{\vbox{\offinterlineskip
+         \hbox{\ifdim\derldim<0pt\kern-\derldim\fi
+               \box\derboxtwo
+               \ifdim\derrdim<0pt\kern-\derrdim\fi}%
+         #4%
+         \hbox{\ifdim\dercldim>\derldim
+                  \ifdim\derldim>0pt\kern\derldim\fi
+                  \else\kern\dercldim\fi
+               \hbox to0pt{\hss\copy\derboxthree}%
+               \vbox{\ifdim\derccdim>\dercdim\hsize=\derccdim
+                                        \else\hsize=\dercdim \fi
+                    #5}%
+               \hbox to0pt{\copy\derboxfour\hss}%
+               \ifdim\dercrdim>\derrdim
+                  \ifdim\derrdim>0pt\kern\derrdim\fi
+                  \else\kern\dercrdim\fi}%
+         #6%
+         \hbox{\ifdim\derldim>0pt\kern\derldim\fi
+               \box\derboxone
+               \ifdim\derrdim>0pt\kern\derrdim\fi}}}
+   \ifdim\derldim<0pt\global\derldim=0pt\fi       % dl=max(dl,0)
+   \ifdim\derrdim<0pt\global\derrdim=0pt\fi       % dr=max(dr,0)
+   \derdldim=\wd\derboxthree\advance\derdldim by-\dercldim
+                                                  % ddl=l-dcl
+   \derdrdim=\wd\derboxfour \advance\derdrdim by-\dercrdim
+                                                  % ddr=m-dcr
+   \ifdim\derdim<0pt
+      \ifdim\derdldim<0pt
+         \derdldim=0pt                            % d<0, ddl<0 -> ddl=0
+      \fi
+      \ifdim\derdrdim<0pt
+         \derdrdim=0pt                            % d<0, ddr<0 -> ddr=0
+      \fi
+   \else
+      \ifdim\derldim>0pt
+         \ifdim\derdldim>-\derdim
+            \advance\derdldim by\derdim           % d>=0, dl>0, ddl+d>0 -> 
+         \else                                    %                    ddl=ddl+d
+            \derdldim=0pt                         % d>=0, dl>0, ddl+d<=0 ->
+         \fi                                      %                        ddl=0
+      \else
+         \advance\derdldim by\dercldim            % d>=0, dl=0 -> ddl=ddl+dcl
+      \fi
+      \ifdim\derrdim>0pt
+         \ifdim\derdrdim>-\derdim
+            \advance\derdrdim by\derdim           % d>=0, dr>0, ddr+d>0 -> 
+         \else                                    %                    ddr=ddr+d
+            \derdrdim=0pt                         % d>=0, dr>0, ddr+d<=0 ->
+         \fi                                      %                        ddr=0
+      \else
+         \advance\derdrdim by\dercrdim            % d>=0, dr=0 -> ddr=ddr+dcr
+      \fi
+   \fi
+   \global\setbox\derboxone=\hbox
+      {\kern\derdldim\unhbox\derboxone\kern\derdrdim}
+   \global\advance\derldim by\derdldim            % dl=dl+ddl
+   \global\advance\derrdim by\derdrdim            % dr=dr+ddr
+   }
+
+\newcommand{\vlstemraux }[4]{{#4}\vlstemaux\vldaux
+   {\scriptstyle #1}
+   {\scriptstyle #2}
+   {\vlhyaux{#3}}
+   {\kern-\deropen\kern-\ht\strutbox\kern-\dp\strutbox}
+   {\hbox{$\vcenter{\vbox{\offinterlineskip
+                    \hbox{$\copy\stembox$}%\kern-1\dp\stembox
+                    \hbox{$\copy\stembox$}}}$}}
+   {\kern-\deropen}}
+
+\newcommand{\vlstemrraux}[4]{{#4}\vlstemaux\vldaux
+   {\scriptstyle #1}
+   {\scriptstyle #2}
+   {\vlhy{#3}}
+   {\kern\deropen}
+   {\hbox{\hfil}}
+   {\kern\deropen}}
+
+\newif\ifvlsmallleftlabels\vlsmallleftlabelstrue
+
+\newcommand{\vlnosmallleftlabels}{\vlsmallleftlabelsfalse}
+
+\newcommand{\vlsmallleftlabels}{\vlsmallleftlabelstrue}
+
+\newcommand{\vlleftlabel }[1]{\@ifnotmtarg{#1}{\ifvlsmallleftlabels
+                               \scriptstyle\fi #1\;}\relax}
+
+\newcommand{\vlrightlabel}[1]{\@ifnotmtarg{#1}{\;#1}\relax}
+
+\newcommand{\vlde}[4]{\setbox\stembox=\hbox{$\scriptstyle\|$}
+   \vlstemrraux{                }{                 }{#3              }  {
+   \vlstemraux {\vlleftlabel{#1}}{\vlrightlabel{#2}}{\kern\wd\stembox} {
+   \vlstemrraux{                }{                 }{\kern\wd\stembox}{
+   #4                                                                 }}}}
+
+\newcommand{\vlpr}[3]{\vlde{#1}{#2}{#3}
+   {\vlhyaux{\vbox to0pt{\vss
+                           \kern3pt\hbox{$\scriptstyle-$}\vss\kern-2\deropen}}}}
+
+\newcommand{\vlproofaux}[3]{\vlderivationaux{\vlpr{#1}{#2}{#3}}}
+
+\newcommand{\vlproof}{\vlderivationinit\vlproofaux}
+
+\newcommand{\vlderaux}[4]{\vlderivationaux{\vlde{#1}{#2}{#3}{\vlhy{#4}}}}
+
+\newcommand{\vlder}{\vlderivationinit\vlderaux}
+
+\newcommand{\vldsinaux}[3]{\vldaux
+   {\smash{\ifvlsmallleftlabels\lower\fontdimen22\scriptfont2
+                          \else\lower\fontdimen22\textfont2\fi
+                                       \hbox{$\vlleftlabel {#1}$}}}
+   {\smash{\lower\fontdimen22\textfont2\hbox{$\vlrightlabel{#2}$}}}
+   {\vlhy{#3}}
+   {\kern\deropen}
+   {\hrule height.2pt depth.2pt width\hsize}
+   {\kern\deropen}}
+
+\newbox\derboxin
+\newdimen\derboxinwidth
+\newcommand{\vlin}[4]{#4
+   \dercldim=\derldim
+   \derccdim=\dercdim
+   \dercrdim=\derrdim
+   \setbox\derboxin=\hbox{$#3$}
+   \derboxinwidth=1em\advance\derboxinwidth by-\wd\derboxin
+   \ifdim\derboxinwidth>0pt\divide\derboxinwidth by2\else\derboxinwidth=0pt\fi
+   \vldsinaux{#1}{#2}{\kern\derboxinwidth\box\derboxin\kern\derboxinwidth}}
+
+\newcommand{\vliin}[5]{\derquad=\fontdimen6\textfont2
+   {#4}
+           \dercldim  =\derldim
+           \derccdim  =\dercdim
+   \setbox\derboxtwo=\hbox{\unhbox\derboxone\kern\derquad}
+   \advance\derccdim by\derrdim
+   \advance\derccdim by\derquad
+   {#5}
+   \setbox\derboxone=\hbox{\unhbox\derboxtwo\unhbox\derboxone}
+   \advance\derccdim by\derldim
+   \advance\derccdim by\dercdim
+           \dercrdim  =\derrdim
+   \vldsinaux{#1}{#2}{#3}}
+
+\newcommand{\vldsiiinaux}[3]{\derquad=\fontdimen6\textfont2
+   {#1}
+           \dercldim  =\derldim
+           \derccdim  =\dercdim
+   \setbox\derboxtwo=\hbox{\unhbox\derboxone\kern\derquad}
+   \advance\derccdim by\derrdim
+   \advance\derccdim by\derquad
+   {#2}
+   \setbox\derboxtwo=\hbox{\unhbox\derboxtwo\unhbox\derboxone\kern\derquad}
+   \advance\derccdim by\derldim
+   \advance\derccdim by\dercdim
+   \advance\derccdim by\derrdim
+   \advance\derccdim by\derquad
+   {#3}
+   \setbox\derboxone=\hbox{\unhbox\derboxtwo\unhbox\derboxone}
+   \advance\derccdim by\derldim
+   \advance\derccdim by\dercdim
+           \dercrdim  =\derrdim}
+
+\newcommand{\vliiin}[6]{\vldsiiinaux{#4}{#5}{#6}\vldsinaux{#1}{#2}{#3}}
+
+\newcommand{\vlinfaux  }[4]{\vlderivationaux{\vlin  {#1}{#2}{#3}{\vlhy{#4}}}}
+
+\newcommand{\vliinfaux }[5]{\vlderivationaux{\vliin {#1}{#2}{#3}{\vlhy{#4}}
+                                                                {\vlhy{#5}}}}
+
+\newcommand{\vliiinfaux}[6]{\vlderivationaux{\vliiin{#1}{#2}{#3}{\vlhy{#4}}
+                                                                {\vlhy{#5}}
+                                                                {\vlhy{#6}}}}
+
+\newcommand{\vlinf  }{\vlderivationinit\vlinfaux  }
+
+\newcommand{\vliinf }{\vlderivationinit\vliinfaux }
+
+\newcommand{\vliiinf}{\vlderivationinit\vliiinfaux}
+
+\catcode`@=12
+
+\newcommand{\vltraux}[3]{\vldaux
+   {}
+   {}
+   {\vlhy{#2}}
+   {}
+   {\hbox{$\xy
+          0;<\hsize,0pt>:<0pt,#3\hsize>::
+          (-0.5,0.5);(0.5,0.5)**\crv{(0.1,0.6)&(-0.1,0.4)};
+          (0,0)**@{-};(-0.5,0.5)**@{-};
+          (0,0.3)*{\scriptstyle #1\strut}
+          \endxy$}}
+   {}}
+
+\catcode`\@=11
+
+\newcommand{\vltf}[6]{\vldsiiinaux{#3}{#4}{#5}\vltraux{#1}{#2}{#6}}
+
+\newcommand{\vltr}[5]{\vltf{#1}{#2}{#3}{#4}{#5}1}
+
+\newcommand{\vltreeder}[5]{\vlderivation{\vltr{#1}{#2}{\vlhy{#3}}
+                                                      {\vlhy{#4}}
+                                                      {\vlhy{#5}}}}
+
+%------------------------------------------------- END OF MACROS FOR DERIVATIONS
+
+%------------------------------------------------------- MACROS FOR ATOMIC FLOWS
+
+\catcode`@=12
+
+\newdimen\atflowunit\atflowunit=0.01pt
+\newdimen\atflowelwidth
+\newdimen\atflowelwidthtriangle
+\newdimen\atflowelheight
+\newdimen\atflowthickone
+\newdimen\atflowthicktwo
+\newdimen\atflowthickthree
+\newdimen\atflowthickfour
+
+\newcommand\afsetunits{
+\atflowelwidth        =425\atflowunit
+\atflowelwidthtriangle=250\atflowunit
+\atflowelheight       =325\atflowunit
+\atflowthickone       = 60\atflowunit
+\atflowthicktwo       = 40\atflowunit
+\atflowthickthree     =160\atflowunit
+\atflowthickfour      =120\atflowunit}
+
+\afsetunits
+
+\newcommand{\aflabelright}[1]{\hbox to0pt{$\scriptstyle\>#1\strut$\hss}}
+
+\newcommand{\aflabelleft}[1]{\hbox to0pt{\hss$\scriptstyle #1\>\strut$}}
+
+\newcommand{\atomicflow}[1]{\vcenter{\xy
+<\atflowelwidth,0pt>:<0pt,\atflowelheight>::#1\endxy}}
+
+\newcommand{\atomicflowinv}[1]{\vcenter{\xy
+<\atflowelwidth,0pt>:<0pt,-\atflowelheight>::#1\endxy}}
+
+\newcommand{\afnegspace}{\nopagebreak[4]\vskip-4\atflowelheight\noindent}
+
+\newcommand{\afraise}[1]{\raise2\atflowelheight\hbox{$#1$}}
+
+\newcommand{\aflower}[1]{\lower2\atflowelheight\hbox{$#1$}}
+
+\newcommand{\atflowdown}{\vbox to0pt{\vss\hbox{\xy
+0;<\atflowelwidthtriangle,0pt>:<0pt,\atflowelwidthtriangle>::
+(1.3,0.1);(1.3,1.4)**[|<\atflowthickthree>][white]@{-};
+(  0,1.5);(1.3,0  )**[|<\atflowthickfour>]@{-};
+(2.6,1.5);(1.3,0  )**[|<\atflowthickfour>]@{-};
+(  0,1.5);(2.6,1.5)**[|<\atflowthickfour>]@{-}
+\endxy}\vss}}
+
+\newcommand{\atflowdownex}{\vbox to0pt{\vss\hbox{\xy
+0;<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(1.3,0.1);(1.3,1.4)**[|<\atflowthickthree>][white]@{-};
+(  0,1.5);(1.3,0  )**[|<\atflowthickfour>]@{-};
+(2.6,1.5);(1.3,0  )**[|<\atflowthickfour>]@{-};
+(  0,1.5);(2.6,1.5)**[|<\atflowthickfour>]@{-}
+\endxy}\vss}}
+
+\newcommand{\atflowdownexsq}{\vbox to0pt{\vss\hbox{\xy
+0;<\atflowelwidthtriangle,0pt>:<0pt,\atflowelwidthtriangle >::
+(1.3,0.1);(1.3,1.4)**[|<\atflowthickthree>][white]@{-};
+(  0,1.5);(1.3,0  )**[|<\atflowthickfour>]@{-};
+(2.6,1.5);(1.3,0  )**[|<\atflowthickfour>]@{-};
+(  0,1.5);(2.6,1.5)**[|<\atflowthickfour>]@{-}
+\endxy}\vss}}
+
+\newcommand{\atflowup}{\vbox to0pt{\vss\hbox{\xy
+0;<\atflowelwidthtriangle,0pt>:<0pt,-\atflowelwidthtriangle>::
+(1.3,0.1);(1.3,1.4)**[|<\atflowthickthree>][white]@{-};
+(0  ,1.5);(1.3,0  )**[|<\atflowthickfour>]@{-};
+(2.6,1.5);(1.3,0  )**[|<\atflowthickfour>]@{-};
+(0  ,1.5);(2.6,1.5)**[|<\atflowthickfour>]@{-}
+\endxy}\vss}}
+
+\newcommand{\atflowupex}{\vbox to0pt{\vss\hbox{\xy
+0;<\atflowelwidth,0pt>:<0pt,-\atflowelheight>::
+(1.3,0.1);(1.3,1.4)**[|<\atflowthickthree>][white]@{-};
+(0  ,1.5);(1.3,0  )**[|<\atflowthickfour>]@{-};
+(2.6,1.5);(1.3,0  )**[|<\atflowthickfour>]@{-};
+(0  ,1.5);(2.6,1.5)**[|<\atflowthickfour>]@{-}
+\endxy}\vss}}
+
+\newcommand{\atflowupexsq}{\vbox to0pt{\vss\hbox{\xy
+0;<\atflowelwidthtriangle,0pt>:<0pt,-\atflowelwidthtriangle >::
+(1.3,0.1);(1.3,1.4)**[|<\atflowthickthree>][white]@{-};
+(  0,1.5);(1.3,0  )**[|<\atflowthickfour>]@{-};
+(2.6,1.5);(1.3,0  )**[|<\atflowthickfour>]@{-};
+(  0,1.5);(2.6,1.5)**[|<\atflowthickfour>]@{-}
+\endxy}\vss}}
+
+\newif\ifaftriangle\aftriangletrue
+
+\newcommand\afaidexcolaux[2]{
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(0,1);(0,-3)**[|<\atflowthickone>][#1]@{-};
+(4,1);(4,-3)**[|<\atflowthickone>][#2]@{-}}}
+
+\newcommand{\afaidexcoll}[9]{\multiply\atflowelwidth by#7
+                               \divide\atflowelwidth by#8
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(4  ,2    )*{\afaidexcolaux #9};
+(1.5,4    );(6.5,4)**[|<\atflowthickthree>]@{-};
+(4  ,4.625)*{\ifaftriangle\atflowup\fi};
+(2  ,2    )*{\aflabelleft {#1}};
+(2  ,2    )*{\aflabelright{#2}};
+(6  ,2    )*{\aflabelleft {#3}};
+(6  ,2    )*{\aflabelright{#4}};
+(4  ,6    )*{\aflabelleft {#5\,}};
+(4  ,6    )*{\aflabelright{\,#6}}}}
+
+\newcommand\afaidexcol[8]{\toks0={{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}}\afterassignment\afaidexcoldo\afrestparams}
+
+\newcommand\afrestparams[2]{\toks1={{{#1}{#2}}}}
+
+\newcommand\afrestparamss[3]{\toks1={{{#1}{#2}{#3}}}}
+
+\newcommand\afaidexcoldo{\expandafter\afaidexcoll\the\toks0\the\toks1}
+
+\newcommand{\afaid   }[6]{\afaidexcoll{#1}{#2}{#3}{#4}{#5}{#6}11{{}{}}}
+
+\newcommand{\afaidcol}[8]{\afaidexcoll{#1}{#2}{#3}{#4}{#5}{#6}11{{#7}{#8}}}
+
+\newcommand{\afaidex }[8]{\afaidexcoll{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}{{}{}}}
+
+\newcommand{\afaidnwcol}[3]{
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(1.5,4    );(6.5,4)**[|<\atflowthickthree>]@{-};
+(4  ,4.625)*{\ifaftriangle\atflowup\fi};
+(4  ,6    )*{\aflabelleft {#1\,}};
+(4  ,6    )*{\aflabelright{\,#2}}}}
+
+\newcommand{\afaidnw}[2]{\afaidnwcol{#1}{#2}{}}
+
+\newcommand\afaiuexcolaux[2]{
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(0,-1);(0,3)**[|<\atflowthickone>][#1]@{-};
+(4,-1);(4,3)**[|<\atflowthickone>][#2]@{-}}}
+
+\newcommand{\afaiuexcoll}[9]{\multiply\atflowelwidth by#7
+                               \divide\atflowelwidth by#8
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(4,6    )*{\afaiuexcolaux #9};
+(1.5,4  );(6.5,4)**[|<\atflowthickthree>]@{-};
+(4,3.375)*{\ifaftriangle\atflowdown\fi};
+(2,6    )*{\aflabelleft {#1}};
+(2,6    )*{\aflabelright{#2}};
+(6,6    )*{\aflabelleft {#3}};
+(6,6    )*{\aflabelright{#4}};
+(4,2    )*{\aflabelleft {#5\,}};
+(4,2    )*{\aflabelright{\,#6}}}}
+
+\newcommand\afaiuexcol[8]{\toks0={{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}}\afterassignment\afaiuexcoldo\afrestparams}
+
+\newcommand\afaiuexcoldo{\expandafter\afaiuexcoll\the\toks0\the\toks1}
+
+\newcommand{\afaiu   }[6]{\afaiuexcoll{#1}{#2}{#3}{#4}{#5}{#6}11{{}{}{}}}
+
+\newcommand{\afaiucol}[8]{\afaiuexcoll{#1}{#2}{#3}{#4}{#5}{#6}11{{#7}{#8}}}
+
+\newcommand{\afaiuex }[8]{\afaiuexcoll{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}{{}{}}}
+
+\newcommand{\afaiunwcol}[3]{
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(1.5,4    );(6.5,4)**[|<\atflowthickthree>]@{-};
+(4  ,3.375)*{\ifaftriangle\atflowdown\fi};
+(4  ,2    )*{\aflabelleft {#1\,}};
+(4  ,2    )*{\aflabelright{\,#2}}}}
+
+\newcommand{\afaiunw}[2]{\afaiunwcol{#1}{#2}{}}
+
+\newcommand\afacdcolaux[3]{
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(-2, 4);(-0.8, 0.4)**[|<\atflowthickone>][#1]\crv{(-2,1.8)};
+( 2, 4);( 0.8, 0.4)**[|<\atflowthickone>][#2]\crv{( 2,1.8)};
+( 0,-4);(   0,-1  )**[|<\atflowthickone>][#3]@{-}}}
+
+\newcommand\afacdexcolaux[3]{
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(-2, 4);(-1.3, 0.5)**[|<\atflowthickone>][#1]\crv{(-2,1.25)};
+( 2, 4);( 1.3, 0.5)**[|<\atflowthickone>][#2]\crv{( 2,1.25)};
+( 0,-4);( 0  ,-1  )**[|<\atflowthickone>][#3]@{-}}}
+
+\newcommand\afacdexsqcolaux[3]{
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(-2, 8);(0, 0.5)-<1.3\atflowelwidthtriangle,0pt>**[|<\atflowthickone>][#1]
+                               \crv{(-2,2)&(0,2)-<5\atflowelwidthtriangle,0pt>};
+( 2, 8);(0, 0.5)+<1.3\atflowelwidthtriangle,0pt>**[|<\atflowthickone>][#2]
+                               \crv{( 2,2)&(0,2)+<5\atflowelwidthtriangle,0pt>};
+( 0,-4);(0,-1  )**[|<\atflowthickone>][#3]@{-}}}
+
+\newcommand{\afacdcoll}[9]{\multiply\atflowelwidth by#7
+                             \divide\atflowelwidth by#8
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(2.3,6 )*{\aflabelleft {#1}};
+(2.5,6 )*{\aflabelright{#2}};
+(5.5,6 )*{\aflabelleft {#3}};
+(5.7,6 )*{\aflabelright{#4}};
+(4,4   )*{\afacdcolaux #9  };
+(4,3.75)*{\atflowdownexsq  };
+(4,2   )*{\aflabelleft {#5}};
+(4,2   )*{\aflabelright{#6}}}}
+
+\newcommand{\afacdexcoll}[9]{\multiply\atflowelwidth by#7
+                               \divide\atflowelwidth by#8
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(2.1,6 )*{\aflabelleft {#1}};
+(2.3,6 )*{\aflabelright{#2}};
+(5.7,6 )*{\aflabelleft {#3}};
+(5.9,6 )*{\aflabelright{#4}};
+(4,4   )*{\afacdexcolaux #9};
+(4,3.75)*{\atflowdownex    };
+(4,2   )*{\aflabelleft {#5}};
+(4,2   )*{\aflabelright{#6}}}}
+
+\newcommand{\afacdexsqcoll}[9]{\multiply\atflowelwidth by#7
+                                 \divide\atflowelwidth by#8
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(2.1,8 )*{\aflabelleft   {#1}};
+(2.3,9 )*{\aflabelright  {#2}};
+(5.7,9 )*{\aflabelleft   {#3}};
+(5.9,8 )*{\aflabelright  {#4}};
+(4,6   )*{\afacdexsqcolaux #9};
+(4,3.75)*{\atflowdownexsq    };
+(4,2   )*{\aflabelleft   {#5}};
+(4,2   )*{\aflabelright  {#6}}}}
+
+\newcommand\afacdexcol[8]{\toks0={{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}}\afterassignment\afacdexcoldo\afrestparamss}
+
+\newcommand\afacdexsqcol[8]{\toks0={{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}}\afterassignment\afacdexsqcoldo\afrestparamss}
+
+\newcommand\afacdexcoldo  {\expandafter\afacdexcoll  \the\toks0\the\toks1}
+
+\newcommand\afacdexsqcoldo{\expandafter\afacdexsqcoll\the\toks0\the\toks1}
+
+\newcommand{\afacd    }[6]{\afacdcoll  {#1}{#2}{#3}{#4}{#5}{#6}11{{}{}{}}}
+
+\newcommand{\afacdcol }[9]{\afacdcoll  {#1}{#2}{#3}{#4}{#5}{#6}11{{#7}{#8}{#9}}}
+
+\newcommand{\afacdex  }[8]{\afacdexcoll{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}{{}{}{}}}
+
+\newcommand{\afacdexsq}[8]{\afacdexsqcoll
+                                       {#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}{{}{}{}}}
+
+\newcommand\afacdnwcolaux[2]{
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(-2,4);(-0.8,0.4)**[|<\atflowthickone>][#1]\crv{(-2,1.8)};
+( 2,4);( 0.8,0.4)**[|<\atflowthickone>][#2]\crv{( 2,1.8)}}}
+
+\newcommand\afacdnwexcolaux[2]{
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(-2,4);(-1.3,0.5)**[|<\atflowthickone>][#1]\crv{(-2,1.25)};
+( 2,4);( 1.3,0.5)**[|<\atflowthickone>][#2]\crv{( 2,1.25)}}}
+
+\newcommand\afacdnwexsqcolaux[2]{
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(-2,8);(0,0.5)-<1.3\atflowelwidthtriangle,0pt>**[|<\atflowthickone>][#1]
+                              \crv{(-2,2)&(0,2)-<5\atflowelwidthtriangle,0pt>};
+( 2,8);(0,0.5)+<1.3\atflowelwidthtriangle,0pt>**[|<\atflowthickone>][#2]
+                              \crv{( 2,2)&(0,2)+<5\atflowelwidthtriangle,0pt>}}}
+
+\newcommand{\afacdnwcoll}[8]{\multiply\atflowelwidth by#5
+                               \divide\atflowelwidth by#6
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(4  ,6.25 )*{\afacdnwcolaux  {#7}{#8}};
+(4  ,4.375)*{\atflowdown             };
+(2.3,6.625)*{\aflabelleft    {#1}    };
+(2.5,6.625)*{\aflabelright   {#2}    };
+(5.5,6.625)*{\aflabelleft    {#3}    };
+(5.7,6.625)*{\aflabelright   {#4}    }}}
+
+\newcommand{\afacdnwexcol}[8]{\multiply\atflowelwidth by#5
+                                \divide\atflowelwidth by#6
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(4  ,6.25 )*{\afacdnwexcolaux{#7}{#8}};
+(4  ,4.375)*{\atflowdownex           };
+(2.1,6.625)*{\aflabelleft    {#1}    };
+(2.3,6.625)*{\aflabelright   {#2}    };
+(5.7,6.625)*{\aflabelleft    {#3}    };
+(5.9,6.625)*{\aflabelright   {#4}    }}}
+
+\newcommand{\afacdnwexsqcol}[8]{\multiply\atflowelwidth by#5
+                                  \divide\atflowelwidth by#6
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(4  ,8.25 )*{\afacdnwexsqcolaux{#7}{#8}};
+(4  ,4.375)*{\atflowdownexsq           };
+(2.1,8.625)*{\aflabelleft      {#1}    };
+(2.3,9.625)*{\aflabelright     {#2}    };
+(5.7,9.625)*{\aflabelleft      {#3}    };
+(5.9,8.625)*{\aflabelright     {#4}    }}}
+
+\newcommand{\afacdnw    }[4]{\afacdnwcoll   {#1}{#2}{#3}{#4}11{}{}}
+
+\newcommand{\afacdnwcol }[6]{\afacdnwcoll   {#1}{#2}{#3}{#4}11{#5}{#6}}
+
+\newcommand{\afacdnwex  }[6]{\afacdnwexcol  {#1}{#2}{#3}{#4}{#5}{#6}{}{}}
+
+\newcommand{\afacdnwexsq}[6]{\afacdnwexsqcol{#1}{#2}{#3}{#4}{#5}{#6}{}{}}
+
+\newcommand\afacucolaux[3]{
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(-2,-4);(-0.8,-0.4)**[|<\atflowthickone>][#1]\crv{(-2,-1.8)};
+( 2,-4);( 0.8,-0.4)**[|<\atflowthickone>][#2]\crv{( 2,-1.8)};
+( 0, 4);( 0  , 1  )**[|<\atflowthickone>][#3]@{-}}}
+
+\newcommand\afacuexcolaux[3]{
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(-2,-4);(-1.3,-0.5)**[|<\atflowthickone>][#1]\crv{(-2,-1.25)};
+( 2,-4);( 1.3,-0.5)**[|<\atflowthickone>][#2]\crv{( 2,-1.25)};
+( 0, 4);( 0  , 1  )**[|<\atflowthickone>][#3]@{-}}}
+
+\newcommand\afacuexsqcolaux[3]{
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(-2,-8);(0,-0.5)-<1.3\atflowelwidthtriangle,0pt>**[|<\atflowthickone>][#1]
+                             \crv{(-2,-2)&(0,-2)-<5\atflowelwidthtriangle,0pt>};
+( 2,-8);(0,-0.5)+<1.3\atflowelwidthtriangle,0pt>**[|<\atflowthickone>][#2]
+                             \crv{( 2,-2)&(0,-2)+<5\atflowelwidthtriangle,0pt>};
+( 0, 4);(0, 1  )**[|<\atflowthickone>][#3]@{-}}}
+
+\newcommand{\afacucoll}[9]{\multiply\atflowelwidth by#7
+                             \divide\atflowelwidth by#8
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(4  ,4   )*{\afacucolaux #9  };
+(4  ,4.25)*{\atflowupexsq    };
+(2.3,2   )*{\aflabelleft {#1}};
+(2.5,2   )*{\aflabelright{#2}};
+(5.5,2   )*{\aflabelleft {#3}};
+(5.7,2   )*{\aflabelright{#4}};
+(4  ,6   )*{\aflabelleft {#5}};
+(4  ,6   )*{\aflabelright{#6}}}}
+
+\newcommand{\afacuexcoll}[9]{\multiply\atflowelwidth by#7
+                               \divide\atflowelwidth by#8
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(4  ,4   )*{\afacuexcolaux #9};
+(4  ,4.25)*{\atflowupex      };
+(2.1,2   )*{\aflabelleft {#1}};
+(2.3,2   )*{\aflabelright{#2}};
+(5.7,2   )*{\aflabelleft {#3}};
+(5.9,2   )*{\aflabelright{#4}};
+(4  ,6   )*{\aflabelleft {#5}};
+(4  ,6   )*{\aflabelright{#6}}}}
+
+\newcommand{\afacuexsqcoll}[9]{\multiply\atflowelwidth by#7
+                                 \divide\atflowelwidth by#8
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(4  , 2   )*{\afacuexsqcolaux #9};
+(4  , 4.25)*{\atflowupexsq      };
+(2.1, 0   )*{\aflabelleft   {#1}};
+(2.3,-1   )*{\aflabelright  {#2}};
+(5.7,-1   )*{\aflabelleft   {#3}};
+(5.9, 0   )*{\aflabelright  {#4}};
+(4  , 6   )*{\aflabelleft   {#5}};
+(4  , 6   )*{\aflabelright  {#6}}}}
+
+\newcommand\afacuexcol[8]{\toks0={{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}}\afterassignment\afacuexcoldo\afrestparamss}
+
+\newcommand\afacuexsqcol[8]{\toks0={{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}}\afterassignment\afacuexsqcoldo\afrestparamss}
+
+\newcommand\afacuexcoldo  {\expandafter\afacuexcoll\the\toks0\the\toks1}
+
+\newcommand\afacuexsqcoldo{\expandafter\afacuexsqcoll\the\toks0\the\toks1}
+
+\newcommand{\afacu    }[6]{\afacucoll  {#1}{#2}{#3}{#4}{#5}{#6}11{{}{}{}}}
+
+\newcommand{\afacucol }[9]{\afacucoll  {#1}{#2}{#3}{#4}{#5}{#6}11{{#7}{#8}{#9}}}
+
+\newcommand{\afacuex  }[8]{\afacuexcoll{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}{{}{}{}}}
+
+\newcommand{\afacuexsq}[8]{\afacuexsqcoll
+                                       {#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}{{}{}{}}}
+
+\newcommand\afacunwcolaux[2]{
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(-2,-4);(-0.8,-0.4)**[|<\atflowthickone>][#1]\crv{(-2,-1.8)};
+( 2,-4);( 0.8,-0.4)**[|<\atflowthickone>][#2]\crv{( 2,-1.8)}}}
+
+\newcommand\afacunwexcolaux[2]{
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(-2,-4);(-1.3,-0.5)**[|<\atflowthickone>][#1]\crv{(-2,-1.25)};
+( 2,-4);( 1.3,-0.5)**[|<\atflowthickone>][#2]\crv{( 2,-1.25)}}}
+
+\newcommand\afacunwexsqcolaux[2]{
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(-2,-8);(0,-0.5)-<1.3\atflowelwidthtriangle,0pt>**[|<\atflowthickone>][#1]
+                            \crv{(-2,-2)&(0,-2)-<5\atflowelwidthtriangle,0pt>};
+( 2,-8);(0,-0.5)+<1.3\atflowelwidthtriangle,0pt>**[|<\atflowthickone>][#2]
+                            \crv{( 2,-2)&(0,-2)+<5\atflowelwidthtriangle,0pt>}}}
+
+\newcommand{\afacunwcoll}[8]{\multiply\atflowelwidth by#5
+                               \divide\atflowelwidth by#6
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(4  ,1.75)*{\afacunwcolaux  {#7}{#8}};
+(4  ,4.25)*{\atflowup               };
+(2.3,2   )*{\aflabelleft    {#1}    };
+(2.5,2   )*{\aflabelright   {#2}    };
+(5.5,2   )*{\aflabelleft    {#3}    };
+(5.7,2   )*{\aflabelright   {#4}    }}}
+
+\newcommand{\afacunwexcol}[8]{\multiply\atflowelwidth by#5
+                                \divide\atflowelwidth by#6
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(4  ,1.75)*{\afacunwexcolaux{#7}{#8}};
+(4  ,4.25)*{\atflowupex             };
+(2.1,2   )*{\aflabelleft    {#1}    };
+(2.3,2   )*{\aflabelright   {#2}    };
+(5.7,2   )*{\aflabelleft    {#3}    };
+(5.9,2   )*{\aflabelright   {#4}    }}}
+
+\newcommand{\afacunwexsqcol}[8]{\multiply\atflowelwidth by#5
+                                \divide\atflowelwidth by#6
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(4  ,-0.25)*{\afacunwexsqcolaux{#7}{#8}};
+(4  , 4.25)*{\atflowupexsq             };
+(2.1, 0   )*{\aflabelleft      {#1}    };
+(2.3,-1   )*{\aflabelright     {#2}    };
+(5.7,-1   )*{\aflabelleft      {#3}    };
+(5.9, 0   )*{\aflabelright     {#4}    }}}
+
+\newcommand{\afacunw    }[4]{\afacunwcoll   {#1}{#2}{#3}{#4}11{}{}}
+
+\newcommand{\afacunwcol }[6]{\afacunwcoll   {#1}{#2}{#3}{#4}11{#5}{#6}}
+
+\newcommand{\afacunwex  }[6]{\afacunwexcol  {#1}{#2}{#3}{#4}{#5}{#6}{}{}}
+
+\newcommand{\afacunwexsq}[6]{\afacunwexsqcol{#1}{#2}{#3}{#4}{#5}{#6}{}{}}
+
+\newcommand{\afawdcol}[6]{
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(0,3.5);(0,0)**[|<\atflowthickone>][#6]@{-};
+(0,4  )*{\atflowdown      };
+(0,6  )*{\aflabelleft {#1}};
+(0,6  )*{\aflabelright{#2}};
+(0,2  )*{\aflabelleft {#3}};
+(0,2  )*{\aflabelright{#4}}}}
+
+\newcommand{\afawd}[4]{\afawdcol{#1}{#2}{#3}{#4}{}{}}
+
+\newcommand{\afawdnw}[2]{
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(0,4  )*{\atflowdown      };
+(0,6  )*{\aflabelleft {#1}};
+(0,6  )*{\aflabelright{#2}}}}
+
+\newcommand{\afawucol}[6]{
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(0,4.5);(0,8)**[|<\atflowthickone>][#6]@{-};
+(0,4  )*{\atflowup        };
+(0,2  )*{\aflabelleft {#1}};
+(0,2  )*{\aflabelright{#2}};
+(0,6  )*{\aflabelleft {#3}};
+(0,6  )*{\aflabelright{#4}}}}
+
+\newcommand{\afawu}[4]{\afawucol{#1}{#2}{#3}{#4}{}{}}
+
+\newcommand{\afawunw}[2]{
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(0,4  )*{\atflowup        };
+(0,2  )*{\aflabelleft {#1}};
+(0,2  )*{\aflabelright{#2}}}}
+
+\newcommand{\afexcol}[4]{\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+( 0, 0)="A";
+( 1, 0)="B";
+( 0,#2)="C";
+( 1,20)="D";
+{"A";"B":"C";"D",x}="E";
+( 1,10)="F";
+{"A";"C":"E";"F",x}="G";
+(#1, 0)="H";
+(#1,#2)="I";
+{"A";"I":"C";"H",x}="J";
+{"G";"J":"H";"I",x}="K";
+"A";"I"**[|<\atflowthickone>][#4]\crv{"G"&"K"};
+"H";"C"**[|<\atflowthickone>][#3]\crv{"K"&"G"}}}
+
+\newcommand{\afex}[2]{\afexcol{#1}{#2}{}{}}
+
+\newcommand{\afcjlcol}[3]{\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+( 0,#2)="A";
+( 1,#2)="B";
+( 0, 0)="C";
+( 0,#2)+(1,20)="D";
+{"A";"B":"C";"D",x}="E";
+( 0,#2)+(1,10)="F";
+{"A";"C":"E";"F",x}="G";
+(#1,#2)="H";
+(#1, 0)="I";
+{"A";"I":"C";"H",x}="J";
+{"G";"J":"H";"I",x}="K";
+"A";"I"**[|<\atflowthickone>][#3]\crv{"G"&"K"}}}
+
+\newcommand{\afcjl}[2]{\afcjlcol{#1}{#2}{}}
+
+\newcommand{\afcjrcol}[3]{\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+( 0, 0)="A";
+( 1, 0)="B";
+( 0,#2)="C";
+( 1,20)="D";
+{"A";"B":"C";"D",x}="E";
+( 1,10)="F";
+{"A";"C":"E";"F",x}="G";
+(#1, 0)="H";
+(#1,#2)="I";
+{"A";"I":"C";"H",x}="J";
+{"G";"J":"H";"I",x}="K";
+"A";"I"**[|<\atflowthickone>][#3]\crv{"G"&"K"}}}
+
+\newcommand{\afcjr}[2]{\afcjrcol{#1}{#2}{}}
+
+\newcommand{\aftcjlcol}[3]{\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+( 0,#2)="A";
+( 1,#2)="B";
+( 0, 0)="C";
+( 0,#2)+(1,20)="D";
+{"A";"B":"C";"D",x}="E";
+(0,#2)+(1,10)="F";
+{"A";"C":"E";"F",x}="G";
+(#1,#2)="H";
+(#1, 0)="I";
+{"A";"I":"C";"H",x}="J";
+{"G";"J":"H";"I",x}="K";
+"A";"I"**[|<\atflowthicktwo>][#3]\crv{"G"&"K"}}}
+
+\newcommand{\aftcjl}[2]{\aftcjlcol{#1}{#2}{}}
+
+\newcommand{\aftcjrcol}[3]{\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+( 0, 0)="A";
+( 1, 0)="B";
+( 0,#2)="C";
+( 1,20)="D";
+{"A";"B":"C";"D",x}="E";
+( 1,10)="F";
+{"A";"C":"E";"F",x}="G";
+(#1, 0)="H";
+(#1,#2)="I";
+{"A";"I":"C";"H",x}="J";
+{"G";"J":"H";"I",x}="K";
+"A";"I"**[|<\atflowthicktwo>][#3]\crv{"G"&"K"}}}
+
+\newcommand{\aftcjr}[2]{\aftcjrcol{#1}{#2}{}}
+
+\newcommand{\afvjcol}[2]{\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(0,0);(0,#1)**[|<\atflowthickone>][#2]@{-}}}
+
+\newcommand{\afvj}[1]{\afvjcol{#1}{}}
+
+\newcommand{\afvjdcol}[4]{\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(0,0);(0,#1)**[|<\atflowthickone>][#4]@{-};
+(0,#1)-(0,2)*{\aflabelleft {#2}};
+(0,#1)-(0,2)*{\aflabelright{#3}}}}
+
+\newcommand{\afvjd}[3]{\afvjdcol{#1}{#2}{#3}{}}
+
+\newcommand{\afvjucol}[4]{\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(0,0);(0,#1)**[|<\atflowthickone>][#4]@{-};
+(0,2)*{\aflabelleft {#2}};
+(0,2)*{\aflabelright{#3}}}}
+
+\newcommand{\afvju}[3]{\afvjucol{#1}{#2}{#3}{}}
+
+\newcommand{\aftvjcol}[2]{\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(0,0);(0,#1)**[|<\atflowthicktwo>][#2]@{-}}}
+
+\newcommand{\aftvj}[1]{\aftvjcol{#1}{}}
+
+\newcommand{\aftvjdcol}[4]{\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(0,0);(0,#1)**[|<\atflowthicktwo>][#4]@{-};
+(0,#1)-(0,2)*{\aflabelleft {#2}};
+(0,#1)-(0,2)*{\aflabelright{#3}}}}
+
+\newcommand{\aftvjd}[3]{\aftvjdcol{#1}{#2}{#3}{}}
+
+\newcommand{\aftvjucol}[4]{\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(0,0);(0,#1)**[|<\atflowthicktwo>][#4]@{-};
+(0,2)*{\aflabelleft {#2}};
+(0,2)*{\aflabelright{#3}}}}
+
+\newcommand{\aftvju}[3]{\aftvjucol{#1}{#2}{#3}{}}
+
+\newcommand{\affcol}[4]{\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(0,0.5);(0,#1)**[|<\atflowthicktwo>][#4]@{-};
+(0,0  )*{\atflowdown};
+(0,2  )*{\aflabelleft {#2}};
+(0,2  )*{\aflabelright{#3}}}}
+
+\newcommand{\aff}[3]{\affcol{#1}{#2}{#3}{}}
+
+\newcommand{\aftcol}[4]{\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(0,#1)-(0,0.5);(0,0)**[|<\atflowthicktwo>][#4]@{-};
+(0,#1)*{\atflowup};
+(0,#1)-(0,2)*{\aflabelleft {#2}};
+(0,#1)-(0,2)*{\aflabelright{#3}}}}
+
+\newcommand{\aft}[3]{\aftcol{#1}{#2}{#3}{}}
+
+\newcommand{\afvdj}{\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(0,0);(0,1)**[|<\atflowthickone>]@{.}}}
+
+\newcommand{\affr}[2]{\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(0 , 0);
+(0 ,#2)**[|<\atflowthicktwo>]@{-};
+(#1,#2)**[|<\atflowthicktwo>]@{-};
+(#1, 0)**[|<\atflowthicktwo>]@{-};
+(0 , 0)**[|<\atflowthicktwo>]@{-}}}
+
+\newcommand{\afexpd}[3]{\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(#1,#2)+(#3,0);(0,0)**[|<\atflowthickone>]@{-};
+(#1,0 )+(#1,0)**[|<\atflowthicktwo>]@{-};
+(#1,#2)+(#3,0)**[|<\atflowthickone>]@{-}}}
+
+\newcommand{\afexpu}[3]{\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(#1,0)+(#3,0 );(0,#2)**[|<\atflowthickone>]@{-};
+(#1,0)+(#1,#2)**[|<\atflowthicktwo>]@{-};
+(#1,0)+(#3,0 )**[|<\atflowthickone>]@{-}}}
+
+\newcommand{\invisiblemark}{\vbox to0pt{\color{white}\vss
+\hbox to0pt{\hss\vrule height1sp depth0pt width1sp}}}
+
+\catcode`@=11
+
+%------------------------------------------------ END OF MACROS FOR ATOMIC FLOWS
+
+%----------------------------------------- \vlsmash, \vlupsmash AND \vldownsmash
+
+\def\upsmash{\relax % \relax, in case this comes first in \halign
+  \ifmmode\def\next{\mathpalette\mathupsm@sh}\else\let\next\makeupsm@sh
+  \fi\next}
+\def\makeupsm@sh#1{\setbox\z@\hbox{#1}\finupsm@sh}
+\def\mathupsm@sh#1#2{\setbox\z@\hbox{$\m@th#1{#2}$}\finupsm@sh}
+\def\finupsm@sh{\ht\z@\z@ \box\z@}
+\def\downsmash{\relax % \relax, in case this comes first in \halign
+  \ifmmode\def\next{\mathpalette\mathdownsm@sh}\else\let\next\makedownsm@sh
+  \fi\next}
+\def\makedownsm@sh#1{\setbox\z@\hbox{#1}\findownsm@sh}
+\def\mathdownsm@sh#1#2{\setbox\z@\hbox{$\m@th#1{#2}$}\findownsm@sh}
+\def\findownsm@sh{\dp\z@\z@ \box\z@}
+
+\newcommand{\vldownsmashend}{\egroup\downsmash{\vlread}}
+
+\newcommand{\vlupsmashend  }{\egroup  \upsmash{\vlread}}
+
+\newcommand{\vlsmashend    }{\egroup    \smash{\vlread}}
+
+\newcommand{\vldownsmash}{\bgroup\vlprepstructures
+                          \afterassignment\vldownsmashend\global\def\vlread}
+
+\newcommand{\vlupsmash  }{\bgroup\vlprepstructures
+                          \afterassignment  \vlupsmashend\global\def\vlread}
+
+\newcommand{\vlsmash    }{\bgroup\vlprepstructures
+                          \afterassignment    \vlsmashend\global\def\vlread}
+
+%---------------------------------- END OF \vlsmash, \vlupsmash AND \vldownsmash
+
