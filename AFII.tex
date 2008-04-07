@@ -214,7 +214,7 @@ where $h,k\geq0$, edges have been renamed with accents, flows $\tilde{A}$ and $\
 Reduction $\rightarrow_{is}$ is sound.
 \end{thm}
 \begin{proof}
-Let $\Phi$ be a derivation with flow $C$, such that $C\rightarrow_{si} D$. We show that there exists a derivation $\Psi$ with flow $D$ and with the same premiss and conclusion as $\Phi$. In the following we refer to the figure in Definition~\ref{DefRedIS}. We assume that $\Phi$ has premiss $\xi$ and conclusion $\zeta$. Now we will conduct experiments with respect to $B$. Since $B$ is connected we know that it has two polarity assignments $\pi_+$ and $\pi_-$, where each polarity assignment assigns the given polarity to all the edges in $B$. Now let $\Psi'$ be the $\top$-experiment under $\pi_+$ and let $\Psi''$ be the $\bot$-experiment under $\pi_-$ both with respect to $B$. Then we have:
+Let $\Phi$ be a derivation with flow $C$, such that $C\rightarrow_{si} D$. We show that there exists a derivation $\Psi$ with flow $D$ and with the same premiss and conclusion as $\Phi$. In the following we refer to the figure in Definition~\ref{DefRedIS}. We assume that $\Phi$ has premiss $\xi$ and conclusion $\zeta$. Now we will conduct experiments with respect to $B$. Since $B$ is connected we know that it has two polarity assignments $\pi_+$ and $\pi_-$, where each polarity assignment assigns the given polarity to all the edges in $B$. Now let $\Phi_+^\top$ be the $\top$-experiment under $\pi_+$ and let $\Phi_-^\bot$ be the $\bot$-experiment under $\pi_-$ both with respect to $B$. Then we have:
 \[
 \vlder{\Phi_+^\top}{}{\vls[\zeta.{\bar a}.\cdots.{\bar a}]}{\xi}
 ,\quad
@@ -224,11 +224,11 @@ We can now connect the two experiments to get the desired derivation:
 \[
 \vlderivation{
 \vlin{\cod}{}{\zeta}{
-\vlde{\Phi_+^\top}{}{\vls[\zeta.\zeta]}{
-\vlde{}{\{\acd\}}{\vls[\zeta.({\bar a}.\cdots.{\bar a}.\xi)]}{
+\vlde{\vls[\zeta.\Phi_+^\top]}{}{\vls[\zeta.\zeta]}{
+\vlin{\acu^\star}{}{\vls[\zeta.({\bar a}.\cdots.{\bar a}.\xi)]}{
 \vlin{\swi}{}{\vls[\zeta.({\bar a}.\xi)]}{
-\vlde{}{\{\acu\}}{\vls([\zeta.{\bar a}].\xi)}{
-\vlde{\Phi_-^\bot}{}{\vls([\zeta.{\bar a}.\cdots.{\bar a}].\xi)}{
+\vlin{\acd^\star}{}{\vls([\zeta.{\bar a}].\xi)}{
+\vlde{\vls(\Phi_-^\bot.\xi)}{}{\vls([\zeta.{\bar a}.\cdots.{\bar a}].\xi)}{
 \vlin{\cou}{}{\vls(\xi.\xi)}{
 \vlhy{\xi}}}}}}}}
 }
