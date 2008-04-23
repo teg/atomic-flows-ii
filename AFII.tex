@@ -199,11 +199,11 @@ If there exists a derivation like $\Psi'$ in Lemma~\ref{LemInterpolant}, then $\
 We want to show two things in this section. Firstly that any subflow with no path to either $\top$ nor $\bot$ can be eliminated (at the expense of copying the rest of the flow). Secondly that we can transform an atomic flow in such a way that every path from an interaction to a cointeraction node is in a subflow which is not connected to $\top$ nor $\bot$. We do the latter first.
 
 \begin{defi}
-An atomic flow is called \emph{unambiguous} for polarity assignment $\pi_p$ if there does not exist an interaction (resp. cointeraction) node and two positive paths $p_1$, between the interaction (resp. cointeraction) node, and $p_2$ between the interaction (resp. cointeraction) node and a cointeraction (resp. interaction node).
+We call an atomic flow \emph{ambiguous} for polarity assignment $\pi_p$ if there exist an interaction (resp. cointeraction) node with a positive path from the interaction (resp. cointeraction) to $\bot$ (resp. $\top$) and a positive path from the interaction (resp. cointeraction) node to a cointeraction (resp. interaction node). If an atomic flow is not ambiguous for plority assignment $\pi_p$ we say that it is \emph{unambiguous}.
 \end{defi}
 
 \begin{lem}
-Given a derivation $\Delta$ with atomic flow $A$ there exists a derivation $\Delta'$ with unambiguous atomic flow $A'$ for some polarity assignment $\pi_p$ such that $|A'|/|A|\in O(1)$.
+Given a derivation $\Delta$ from $\alpha$ to $\beta$ with atomic flow $A$ there exists a derivation $\Delta'$ from $\alpha$ to $\beta$ with unambiguous atomic flow $A'$ for some polarity assignment $\pi_p$ such that $|A'|/|A|\in O(1)$.
 \end{lem}
 
 \begin{proof}[Proof (Sketch)]
