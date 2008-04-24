@@ -105,22 +105,21 @@ Given a derivation $\Phi$ from $\alpha$ to $\beta$, an atomic flow $B$ and a pol
 \begin{lem}
 Given any derivation $\Phi$ with atomic flow $C$, an atomic flow $B$ and a polarity assignment $\pi$, such that there exists an experiment on $C$ with respect to $B$ under $\pi$ then there exists a derivation $\Psi$ such that $\Psi$ is an experiment on $\Phi$ with respect to $B$ under $\pi$.
 \end{lem}
+\begin{proof}
+Let $\Phi$ be from $\alpha$ to $\beta$, denote the experiment on $C$ with $C'$ and let $\alpha'$, $\beta'$, $\xi'$ and $\zeta'$ denote the formulae obtained from $\alpha$, $\beta$, $\xi$ and $\zeta$ by substituting atoms mapping to positive (resp. negative) edges which occur in $C$ but not in $C'$ with $\ttt$ (resp. $\fff$). For simplicity, let us call the (co)interactions mapping to the (co)interaction nodes in $C$ which are not in neither $A$ nor $B$, \emph{evidenced (co)interactions}.
+
+We then obtain $\Psi$ from $\Phi$ by substituting each formula $\xi$ with $\vls[(\xi'.\gamma_i^\top).\gamma_j^\bot]$; where $i$ (resp. $j$) is the number of evidenced interactions (resp. cointeractions) below (resp. above) $\xi$ in $\Phi$ such that the edge connecting the corresponding node to $A$ is positive (resp. negative) under $\pi$, $\gamma_0^\top=\ttt$, $\gamma_{i}^\top=\vls(\gamma_{i-1}^\top.a_i)$, $\gamma_0^\bot=\fff$ and $\gamma_{j}^\bot=\vls[\gamma_{j-1}^\bot.a_j]$; where $a_i$ (resp. $a_j$) is the atom taking part in interaction (resp. cointeraction) number $i$ (resp. $j$) from the top (resp. bottom) in $\Phi$.
+
+It is now straight forward to check that the following substitutions of inference rules gives a derivation of the right form:
+\begin{itemize}
+ \item Let $\vlinf{\rho}{}{\zeta}{\xi}$ be a linear inference rule or a structural inference rule mapping to a node in $A$, then it is substituted with $\vlinf{\rho}{}{\vls[(\zeta'.\gamma_i^\top).\gamma_j^\bot]}{\vls[(\xi'.\gamma_i^\top).\gamma_j^\bot]}$;
+ \item let $\vlinf{\rho}{}{\zeta}{\xi}$ be a structural inference rule mapping to a node in $B$, then it is substituted with $\vlinf{=}{}{\vls[(\zeta'.\gamma_i^\top).\gamma_j^\bot]}{\vls[(\xi'.\gamma_i^\top).\gamma_j^\bot]}$\footnote{we might need a special case for $\vlinf{\rho}{}{\xi'\{\ttt\}}{\xi'\{\fff\}}$ where $\rho\in\{\awd,\awu\}$};
+ \item let $\vlinf{\aid}{}{\xi\{\vls[a^\ppl.{\bar a}^\pmi]\}}{\xi\{\ttt\}}$ be an evidenced interaction rule, then if the edge connecting the node to $A$ is positive under $\pi$ it is substituted with $\vlinf{\sus}{}{\vls[(\xi'\{\vls[a^\ppl.\fff]\}.\gamma_i^\top).\gamma_j^\bot]}{\vls[(\xi'\{\ttt\}.\gamma_{i+1}^\top).\gamma_j^\bot]}$ otherwise it is substituted with $\vlinf{\awd}{}{\vls[(\xi'\{\vls[\ttt.{\bar a}^\pmi]\}.\gamma_i^\top).\gamma_j^\bot]}{\vls[(\xi'\{\ttt\}.\gamma_{i}^\top).\gamma_j^\bot]}$; and
+ \item let $\vlinf{\aiu}{}{\xi\{\fff\}}{\xi\{\vls(a^\ppl.{\bar a}^\pmi)\}}$ be an evidenced cointeraction rule, then if the edge connecting the node to $A$ is negative under $\pi$ it is substituted with $\vlinf{\sus}{}{\vls[(\xi'\{\fff\}.\gamma_{i}^\top).\gamma_{j+1}^\bot]}{\vls[(\xi'\{\vls(\ttt.{\bar a}^\pmi)\}.\gamma_i^\top).\gamma_j^\bot]}$ otherwise it is substituted with $\vlinf{\awd}{}{\vls[(\xi'\{\vls[\ttt.{\bar a}^\pmi]\}.\gamma_i^\top).\gamma_j^\bot]}{\vls[(\xi'\{\ttt\}.\gamma_{i}^\top).\gamma_j^\bot]}$\footnote{note that there is no correspondence between negative and positive atoms and negative and positive polarities, the roles could be reversed. Alternatively we could do this without showing the atoms, but that might be too obfuscated?}.
+\end{itemize}
+\end{proof}
 
 STOP READING HERE!!!
-
-\begin{lem}
-Let $\vlder{\Psi}{}{\beta}{\alpha}$ be a derivation and $A$ a subflow of its atomic flow, containing $k$ instances of $\aid$ and $n$ connected components, then we call $\vlder{\Psi^\bot_p}{}{\vls(\beta^\bot_p.\gamma^0_p)}{\vls(\alpha^\bot_p.\gamma^k_p)}$ a \emph{$\bot$-experiment on $\Psi$ under polarity assignment $\pi_p$ with respect to $A$} if $\Psi_p$ is obtained from $\Psi$ by
-\begin{itemize}
-\item replacing each $\vlinf{\aid}{}{\xi\{\vls[a_i^\ppl.{\bar a_i^\pmi}]\}}{\xi\{\ttt\}}$ mapping to a node in $A$ by $\vlinf{\sus}{}{\vls(\xi^\bot_p\vlsbr[a_i^\ppl.\fff].\gamma^j_p)}{\vls(\xi^\bot_p\{\ttt\}.\gamma^{j+1}_p)}$ where $\gamma^{j+1}_p=\vls(a_i^\ppl.\gamma^j_p)$ for some $0\leq j \leq k$, $0 \leq i \leq n$;
-\item replacing each $\vlinf{\aiu}{}{\xi\{\fff\}}{\xi\vlsbr(a_i^\ppl.{\bar a_i^\pmi})}$ mapping to a node in $A$ by $\vlinf{\awu}{}{\vls(\xi_p\{\fff\}.\gamma^j_p)}{\vls(\xi_p\vlsbr(a_i^\ppl.\fff).\gamma^j_p)}$ for some $0\leq j \leq k$, $0 \leq i \leq n$; and
-\item replacing each other inference rule $\vlinf{\rho}{}{\xi}{\zeta}$ by $\vlinf{\rho}{}{\vls(\xi^\bot_p.\gamma^j_p)}{\vls(\zeta^\bot_p.\gamma^j_p)}$ for some $0\leq j \leq k$ ,
-\end{itemize}
-where $\alpha^\bot_p,\beta^\bot_p,\xi^\bot_p,\zeta^\bot_p$ denote formulae obtained from $\alpha,\beta,\xi,\zeta$, respectively, by replacing atom occurrences mapping to edges in $A$ with a negative polarity assignment under $\pi_p$, with $\fff$; and where $\gamma^0_p=\ttt$. We sometimes refer to $\gamma^k_p$ as $\gamma_p$.
-\end{lem}
-
-\begin{pro}
-If $\Psi^\bot_p$ is a $\bot$-experiment on $\Psi$ with respect to some atomic flow $A$ then $\Psi^\bot_p$ is a valid derivation.
-\end{pro}
 
 \begin{pro}\label{PropExperimentShapeBot}
 A $\bot$-experiment under polarity assignment $\pi_p$ on a proof\/ $\vlproof{\Pi}{\SKS}{\beta}$ with respect to an atomic flow containing all the (co)interaction nodes of $\Pi$ is of the form $\vlder{}{\SKS\setminus\{\aid,\aiu\}}{\beta_p}{\gamma_p}$. Where $\beta_p$ and $\gamma_p$ are given by Definition~\ref{DefExperiment}.
