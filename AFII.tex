@@ -89,7 +89,19 @@ Here we need to define all the things we use later on\dots
 
 The important notion in this paper is the notion of \emph{experiments}. An experiment is basically a truth value assignment to an atom in a derivation. We will have the need for partial assignment, meaning that we assign a value to an atom $a$, but not to its dual $\bar a$. We call this partial assignment a \emph{$\bot$-experiment} if we assign $\fff$ and a \emph{$\top$-experiment} if we assign $\ttt$.
 
+
+
 \begin{defi}\label{DefExperiment}
+Let $\Phi$ be a derivation from $\alpha$ to $\beta$ with atomic $A$, we then say that $\Psi$ from $\vls(\alpha^\fff.\gamma)$ to $\beta^\fff$ with atomic flow $B$ is an $\fff$-experiment on $A$ under polarity assignment $\pi$ if
+\begin{enumerate}
+ \item $A$ and $B$ are given by
+ \item $\pi$ is such that all the edges connecting $B$ and (co)interaction nodes are negative;
+ \item $\alpha^\pi$ is obtained from $\alpha$ and $\beta^\pi$ is obtained from $\beta$ by substituting atoms mapping to positive edges in $B$ by $\ttt$ and atoms mapping to negative edges in $B$ by $\fff$; and
+ \item $\gamma$ is a conjunction of all the atoms taking part in the evidenced interactions in $A$.
+\end{enumerate}
+\end{defi}
+
+\begin{lem}
 Let $\vlder{\Psi}{}{\beta}{\alpha}$ be a derivation and $A$ a subflow of its atomic flow, containing $k$ instances of $\aid$ and $n$ connected components, then we call $\vlder{\Psi^\bot_p}{}{\vls(\beta^\bot_p.\gamma^0_p)}{\vls(\alpha^\bot_p.\gamma^k_p)}$ a \emph{$\bot$-experiment on $\Psi$ under polarity assignment $\pi_p$ with respect to $A$} if $\Psi_p$ is obtained from $\Psi$ by
 \begin{itemize}
 \item replacing each $\vlinf{\aid}{}{\xi\{\vls[a_i^\ppl.{\bar a_i^\pmi}]\}}{\xi\{\ttt\}}$ mapping to a node in $A$ by $\vlinf{\sus}{}{\vls(\xi^\bot_p\vlsbr[a_i^\ppl.\fff].\gamma^j_p)}{\vls(\xi^\bot_p\{\ttt\}.\gamma^{j+1}_p)}$ where $\gamma^{j+1}_p=\vls(a_i^\ppl.\gamma^j_p)$ for some $0\leq j \leq k$, $0 \leq i \leq n$;
@@ -97,7 +109,7 @@ Let $\vlder{\Psi}{}{\beta}{\alpha}$ be a derivation and $A$ a subflow of its ato
 \item replacing each other inference rule $\vlinf{\rho}{}{\xi}{\zeta}$ by $\vlinf{\rho}{}{\vls(\xi^\bot_p.\gamma^j_p)}{\vls(\zeta^\bot_p.\gamma^j_p)}$ for some $0\leq j \leq k$ ,
 \end{itemize}
 where $\alpha^\bot_p,\beta^\bot_p,\xi^\bot_p,\zeta^\bot_p$ denote formulae obtained from $\alpha,\beta,\xi,\zeta$, respectively, by replacing atom occurrences mapping to edges in $A$ with a negative polarity assignment under $\pi_p$, with $\fff$; and where $\gamma^0_p=\ttt$. We sometimes refer to $\gamma^k_p$ as $\gamma_p$.
-\end{defi}
+\end{lem}
 
 \begin{pro}
 If $\Psi^\bot_p$ is a $\bot$-experiment on $\Psi$ with respect to some atomic flow $A$ then $\Psi^\bot_p$ is a valid derivation.
