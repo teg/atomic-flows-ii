@@ -87,19 +87,26 @@ Here we need to define all the things we use later on\dots
 %===============================================================================
 \section{Cut Elimination For Proofs}
 
-The important notion in this paper is the notion of \emph{experiments}. An experiment is basically a truth value assignment to an atom in a derivation. We will have the need for partial assignment, meaning that we assign a value to an atom $a$, but not to its dual $\bar a$. We call this partial assignment a \emph{$\bot$-experiment} if we assign $\fff$ and a \emph{$\top$-experiment} if we assign $\ttt$.
+The important notion in this paper is the notion of \emph{experiments}. An experiment is basically truth value assignments to some of the occurrences of some of the atoms in a derivation.
 
-
-
-\begin{defi}\label{DefExperiment}
-Let $\Phi$ be a derivation from $\alpha$ to $\beta$ with atomic $A$, we then say that $\Psi$ from $\vls(\alpha^\fff.\gamma)$ to $\beta^\fff$ with atomic flow $B$ is an $\fff$-experiment on $A$ under polarity assignment $\pi$ if
-\begin{enumerate}
- \item $A$ and $B$ are given by
- \item $\pi$ is such that all the edges connecting $B$ and (co)interaction nodes are negative;
- \item $\alpha^\pi$ is obtained from $\alpha$ and $\beta^\pi$ is obtained from $\beta$ by substituting atoms mapping to positive edges in $B$ by $\ttt$ and atoms mapping to negative edges in $B$ by $\fff$; and
- \item $\gamma$ is a conjunction of all the atoms taking part in the evidenced interactions in $A$.
-\end{enumerate}
+\begin{defi}\label{DefExperimentFlow}
+Given an atomic flow $C$;\newline\includegraphics[width=4in]{original.eps},\newline a polarity assignment $\pi$ respecting the polarities indicated on $C$, and a subflow, $B$, of $C$ as indicated above. We call\newline\includegraphics[width=2in]{experiment.eps}\newline an experiment on $C$ with respect to $B$ under $\pi$.
 \end{defi}
+
+\begin{defi}\label{DefExperimentDerivation}
+Given a derivation $\Phi$ from $\alpha$ to $\beta$, an atomic flow $B$ and a polarity assignment $\pi$, we say that $\Psi$ from $\vls(\alpha'.\gamma^\top)$ to $\vls[\beta'.\gamma^\bot]$ is an experiment on $\Phi$ with respect to $B$ under $\pi$ if
+\begin{itemize}
+ \item the atomic flow of $\Psi$ is an experiment on the atomic flow of $\Phi$ with respect to $B$ under $\pi$;
+ \item $\alpha'$ and $\beta'$ are obtained from $\alpha$ and $\beta$ respectively by substituting all the atoms mapping to positive (resp. negative) edges which occur in the atomic flow of $\Phi$, but not in the atomic flow of $\Psi$ with $\ttt$ (resp. $\fff$); and
+ \item $\gamma^\top$ (resp. $\gamma^\bot$) is a conjunction (resp. disjunction) of all the atoms mapping to edges adjacent to $\top$ (resp. $\bot$) which occur in the atomic flow of $\Psi$, but not in the atomic flow of $\Phi$.
+\end{itemize}
+\end{defi}
+
+\begin{lem}
+Given any derivation $\Phi$ with atomic flow $C$, an atomic flow $B$ and a polarity assignment $\pi$, such that there exists an experiment on $C$ with respect to $B$ under $\pi$ then there exists a derivation $\Psi$ such that $\Psi$ is an experiment on $\Phi$ with respect to $B$ under $\pi$.
+\end{lem}
+
+STOP READING HERE!!!
 
 \begin{lem}
 Let $\vlder{\Psi}{}{\beta}{\alpha}$ be a derivation and $A$ a subflow of its atomic flow, containing $k$ instances of $\aid$ and $n$ connected components, then we call $\vlder{\Psi^\bot_p}{}{\vls(\beta^\bot_p.\gamma^0_p)}{\vls(\alpha^\bot_p.\gamma^k_p)}$ a \emph{$\bot$-experiment on $\Psi$ under polarity assignment $\pi_p$ with respect to $A$} if $\Psi_p$ is obtained from $\Psi$ by
