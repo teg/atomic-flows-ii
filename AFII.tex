@@ -90,11 +90,11 @@ Here we need to define all the things we use later on\dots
 The important notion in this paper is the notion of \emph{experiments}. An experiment is basically truth value assignments to some of the occurrences of some of the atoms in a derivation.
 
 \begin{defi}\label{DefExperimentFlow}
-Given an atomic flow $C$;\newline\includegraphics[width=4in]{original.eps},\newline a polarity assignment $\pi$ respecting the polarities indicated on $C$, and a subflow, $B$, of $C$ as indicated above. We call\newline\includegraphics[width=2in]{experiment.eps}\newline an experiment on $C$ with respect to $B$ under $\pi$.
+Given an atomic flow $C$;\newline\includegraphics[width=4in]{original.eps},\newline a polarity assignment $\pi$ respecting the polarities indicated on $C$, and a subflow, $B$, of $C$ as indicated above. We call\newline\includegraphics[width=2in]{experiment.eps}\newline \emph{an experiment on $C$ with respect to $B$ under $\pi$}.
 \end{defi}
 
 \begin{defi}\label{DefExperimentDerivation}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$, an atomic flow $B$ and a polarity assignment $\pi$, we say that $\Psi$ from $\vls(\alpha'.\gamma^\top)$ to $\vls[\beta'.\gamma^\bot]$ is an experiment on $\Phi$ with respect to $B$ under $\pi$ if
+Given a derivation $\Phi$ from $\alpha$ to $\beta$, an atomic flow $B$ and a polarity assignment $\pi$, we say that $\Psi$ from $\vls(\alpha'.\gamma^\top)$ to $\vls[\beta'.\gamma^\bot]$ is \emph{an experiment on $\Phi$ with respect to $B$ under $\pi$} if
 \begin{itemize}
  \item the atomic flow of $\Psi$ is an experiment on the atomic flow of $\Phi$ with respect to $B$ under $\pi$;
  \item $\alpha'$ and $\beta'$ are obtained from $\alpha$ and $\beta$ respectively by substituting all the atoms mapping to positive (resp. negative) edges which occur in the atomic flow of $\Phi$, but not in the atomic flow of $\Psi$ with $\ttt$ (resp. $\fff$); and
@@ -106,9 +106,9 @@ Given a derivation $\Phi$ from $\alpha$ to $\beta$, an atomic flow $B$ and a pol
 Given any derivation $\Phi$ with atomic flow $C$, an atomic flow $B$ and a polarity assignment $\pi$, such that there exists an experiment on $C$ with respect to $B$ under $\pi$ then there exists a derivation $\Psi$ such that $\Psi$ is an experiment on $\Phi$ with respect to $B$ under $\pi$.
 \end{lem}
 \begin{proof}
-Let $\Phi$ be from $\alpha$ to $\beta$, denote the experiment on $C$ with $C'$ and let $\alpha'$, $\beta'$, $\xi'$ and $\zeta'$ denote the formulae obtained from $\alpha$, $\beta$, $\xi$ and $\zeta$ by substituting atoms mapping to positive (resp. negative) edges which occur in $C$ but not in $C'$ with $\ttt$ (resp. $\fff$). For simplicity, let us call the (co)interactions mapping to the (co)interaction nodes in $C$ which are not in neither $A$ nor $B$, \emph{evidenced (co)interactions}.
+Let $\Phi$ have premiss $\alpha$ and conclusion $\beta$, let $C'$ be an experiment on $C$ and let $\alpha'$, $\beta'$, $\xi'$ and $\zeta'$ denote the formulae obtained from $\alpha$, $\beta$, $\xi$ and $\zeta$ by substituting atoms mapping to positive (resp. negative) edges which occur in $C$ but not in $C'$ with $\ttt$ (resp. $\fff$). For simplicity, let us call the (co)interactions mapping to the (co)interaction nodes in $C$ which are not in neither $A$ nor $B$, \emph{evidenced (co)interactions}\footnote{we should consider to make this a proper definition, or if we want all the (co)interactions to be `evidenced'}.
 
-We then obtain $\Psi$ from $\Phi$ by substituting each formula $\xi$ with $\vls[(\xi'.\gamma_i^\top).\gamma_j^\bot]$; where $i$ (resp. $j$) is the number of evidenced interactions (resp. cointeractions) below (resp. above) $\xi$ in $\Phi$ such that the edge connecting the corresponding node to $A$ is positive (resp. negative) under $\pi$, $\gamma_0^\top=\ttt$, $\gamma_{i}^\top=\vls(\gamma_{i-1}^\top.a_i)$, $\gamma_0^\bot=\fff$ and $\gamma_{j}^\bot=\vls[\gamma_{j-1}^\bot.a_j]$; where $a_i$ (resp. $a_j$) is the atom taking part in interaction (resp. cointeraction) number $i$ (resp. $j$) from the top (resp. bottom) in $\Phi$.
+We then obtain $\Psi$ from $\Phi$ by substituting each formula $\xi$ with $\vls[(\xi'.\gamma_i^\top).\gamma_j^\bot]$; where $i$ (resp. $j$) is the number of evidenced interactions (resp. cointeractions) below (resp. above) $\xi$ in $\Phi$ such that the edge connecting the corresponding node to $A$ is positive (resp. negative) under $\pi$, $\gamma_0^\top=\ttt$, $\gamma_{i}^\top=\vls(\gamma_{i-1}^\top.a_i)$, $\gamma_0^\bot=\fff$ and $\gamma_{j}^\bot=\vls[\gamma_{j-1}^\bot.a_j]$; where $a_i$ (resp. $a_j$) is the atom, mapping to a positive edge, taking part in interaction (resp. cointeraction) number $i$ (resp. $j$) from the top (resp. bottom) in $\Phi$.
 
 It is now straight forward to check that the following substitutions of inference rules gives a derivation of the right form:
 \begin{itemize}
@@ -119,97 +119,101 @@ It is now straight forward to check that the following substitutions of inferenc
 \end{itemize}
 \end{proof}
 
-STOP READING HERE!!!
+\begin{defi}
+Let $C$ be an atomic flow and $\pi$ a polarity assignment to $C$. If $B$ is the subflow of $C$ containing only negative (resp. positive) nodes and $A$ is the subflow of $C$ containing only positive (resp. negative) nodes, then the experiment on $C$ with respect to $B$ under $\pi$ is called the \emph{$\fff$-experiment (resp. $\ttt$-experiment) on $C$ under $\pi$}. The definition extends to derivations in the obvious way.
+\end{defi}
 
 \begin{pro}\label{PropExperimentShapeBot}
-A $\bot$-experiment under polarity assignment $\pi_p$ on a proof\/ $\vlproof{\Pi}{\SKS}{\beta}$ with respect to an atomic flow containing all the (co)interaction nodes of $\Pi$ is of the form $\vlder{}{\SKS\setminus\{\aid,\aiu\}}{\beta_p}{\gamma_p}$. Where $\beta_p$ and $\gamma_p$ are given by Definition~\ref{DefExperiment}.
+For any proof\/ $\vlproof{\Pi}{\SKS}{\beta}$ and any polarity assignment to its atomic  flow, $\pi$, the $\fff$-experiment on $\Pi$ under $\pi$ is of the form $\vlder{}{\SKS\setminus\{\aid,\aiu\}}{\beta'}{\gamma^\top}$. Where $\beta'$ and $\gamma^\top$ are given by Definition~\ref{DefExperimentDerivation}.
 \end{pro}
 
 \begin{lem}\label{LemGlueTop}
-The disjunction of the premises of all the $\bot$-experiments on a given proof is a tautology with a proof of the form $\vlproof{}{\{\aid,\acu,\swi\}}{\bigvee_{p=1}^{2^n}\gamma_p}$
+Let $\Pi$ be a proof, let $\mathcal{P}$ be the set of all the polarity assignments to the atomic flow of $\Pi$ and for each $\pi\in\mathcal{P}$ let the $\fff$-experiment on $\Pi$ under $\pi$ have premiss $\gamma_\pi$. Then there exists a proof $\vlproof{}{\{\aid,\acu,\swi\}}{\bigvee_{\pi\in\mathcal{P}}\gamma_\pi}$.
 \end{lem}
 
 \begin{lem}\label{LemGlueBottom}
-Given all the $\bot$-experiments on a derivation $\vlder{}{}{\beta}{\alpha}\ $ with respect to any atomic flow, there exists a derivation $\vlder{}{\{\acd,\med\}}{\beta}{\bigvee_{p=1}^{2^n}\beta^\bot_p}$.
+Let $\Phi$ be a derivation from $\alpha$ to $\beta$, let $\mathcal{P}$ be the set of all the polarity assignments to the atomic flow of $\Phi$ and for each $\pi\in\mathcal{P}$ let the $\fff$-experiment on $\Phi$ under $\pi$ have conclusion $\beta_\pi$. Then there exists a derivation $\vlder{}{\{\acd,\med\}}{\beta}{\bigvee_{\pi\in\mathcal{P}}\beta_\pi}$.
 \end{lem}
 
 \begin{thm}
 Given a proof $\vlproof{\Pi}{\SKS}{\beta}$ there exists a cut-free proof $\vlproof{}{\SKS\setminus\{\aiu\}}{\beta}$.
 \end{thm}
 \begin{proof}
-Consider all the possible experiments on $\Pi$; $\Pi_1,\dots,\Pi_{2^n}$. By Lemma~\ref{LemGlueTop} and Lemma~\ref{LemGlueBottom} we can build the following proof:
+Let $\mathcal{P}$ be the set of all the polarity assignments to the atomic flow of $\Pi$ and for each $\pi\in\mathcal{P}$ let the experiment on $\Pi$ under $\pi$ be $\vlder{\Pi_\pi}{\SKS\setminus\{\aid,\aiu\}}{\beta_\pi}{\gamma_\pi}$. Then by Lemma~\ref{LemGlueTop} and Lemma~\ref{LemGlueBottom} we can build the following proof:
 \[
 \vlderivation{
 \vlde{}{\{\acd,\med\}}{\beta                                  } {
-\vlde{\bigvee_{p=1}^{2^n}\Pi_p}
-       {\SKS\setminus\{\aid,\aiu\}}{\bigvee_{p=1}^{2^n}\beta^p}{
-\vlpr{}{\{\aid,\acu,\swi\}}{\bigvee_{p=1}^{2^n}\gamma_p       }}}
+\vlde{\bigvee_{\pi\in\mathcal{P}}\Pi_\pi}
+       {\SKS\setminus\{\aid,\aiu\}}{\bigvee_{\pi\in\mathcal{P}}\beta_\pi}{
+\vlpr{}{\{\aid,\acu,\swi\}}{\bigvee_{\pi\in\mathcal{P}}\gamma_\pi       }}}
 }
 \]
 \end{proof}
 
-%===============================================================================
-\section{Interpolation}
+STOP READING HERE!!!
 
-\begin{defi}\label{DefExperiment2}
-Let $\vlder{\Psi}{\{\aid,\aiu,\swi,\med\}}{\beta}{\alpha}$ be a streamlined derivation, then we call $\vlder{\Psi_p}{\{\aid,\aiu,\swi,\med\}}{\beta_p}{\alpha_p}$ an \emph{experiment on $\Psi$ under polarity assignment $\pi_p$ with respect to atomic flow $A$} if $\Psi_p$ is obtained from $\Psi$ by
-\begin{itemize}
-\item replacing each $\vlinf{\aid}{}{\xi\{\vls[a_i^\ppl.{\bar a_i^\pmi}]\}}{\xi\{\ttt\}}$ mapping to a node in $A$ by $\vlinf{=}{}{\xi_p\vlsbr[\ttt.\fff]}{\xi_p\{\ttt\}}$, for some $0 \leq i \leq n$;
-\item replacing each $\vlinf{\aiu}{}{\xi\{\fff\}}{\xi\{\vls(a_i^\ppl.{\bar a_i^\pmi})\}}$ mapping to a node in $A$ by $\vlinf{=}{}{\xi_p\{\fff\}}{\xi_p\vlsbr(\ttt.\fff)}$, for some $0 \leq i \leq n$; and
-\item replacing each other rule instance $\vlinf{\rho}{}{\xi}{\zeta}$ by $\vlinf{\rho}{}{\xi_p}{\zeta_p}$,
-\end{itemize}
-where $\rho\in\{\swi,\med\}$ and $\alpha_p,\beta_p,\xi_p,\zeta_p$ denote the formulae obtained from $\alpha,\beta,\xi,\zeta$, respectively, by replacing atom occurrences mapped to edges of $A$. Atoms mapping to positive (resp. negative) edges under $\pi_p$ are replaced with $\ttt$ (resp. $\fff$).
-\end{defi}
+%%===============================================================================
+%\section{Interpolation}
 
-\begin{rem}
-If we define a $\top$-experiment to be the dual of a $\bot$-experiment in the usual way, then an \emph{experiment} on $\Psi$ is exactly a $\top$-experiment on a $\bot$-experiment on $\Psi$ (or the other way around) (under the same polarity assignment, with respect to the same atomic flow).
-\end{rem}
+%\begin{defi}\label{DefExperiment2}
+%Let $\vlder{\Psi}{\{\aid,\aiu,\swi,\med\}}{\beta}{\alpha}$ be a streamlined derivation, then we call $\vlder{\Psi_p}{\{\aid,\aiu,\swi,\med\}}{\beta_p}{\alpha_p}$ an \emph{experiment on $\Psi$ under polarity assignment $\pi_p$ with respect to atomic flow $A$} if $\Psi_p$ is obtained from $\Psi$ by
+%\begin{itemize}
+%\item replacing each $\vlinf{\aid}{}{\xi\{\vls[a_i^\ppl.{\bar a_i^\pmi}]\}}{\xi\{\ttt\}}$ mapping to a node in $A$ by $\vlinf{=}{}{\xi_p\vlsbr[\ttt.\fff]}{\xi_p\{\ttt\}}$, for some $0 \leq i \leq n$;
+%\item replacing each $\vlinf{\aiu}{}{\xi\{\fff\}}{\xi\{\vls(a_i^\ppl.{\bar a_i^\pmi})\}}$ mapping to a node in $A$ by $\vlinf{=}{}{\xi_p\{\fff\}}{\xi_p\vlsbr(\ttt.\fff)}$, for some $0 \leq i \leq n$; and
+%\item replacing each other rule instance $\vlinf{\rho}{}{\xi}{\zeta}$ by $\vlinf{\rho}{}{\xi_p}{\zeta_p}$,
+%\end{itemize}
+%where $\rho\in\{\swi,\med\}$ and $\alpha_p,\beta_p,\xi_p,\zeta_p$ denote the formulae obtained from $\alpha,\beta,\xi,\zeta$, respectively, by replacing atom occurrences mapped to edges of $A$. Atoms mapping to positive (resp. negative) edges under $\pi_p$ are replaced with $\ttt$ (resp. $\fff$).
+%\end{defi}
 
-\begin{pro}
-If $\Psi_p$ is an experiment on $\Psi$ with respect to the atomic flow containing all the $\aid$ nodes of $\Psi$, then $\Psi_p$ is a valid derivation.
-\end{pro}
+%\begin{rem}
+%If we define a $\top$-experiment to be the dual of a $\bot$-experiment in the usual way, then an \emph{experiment} on $\Psi$ is exactly a $\top$-experiment on a $\bot$-experiment on $\Psi$ (or the other way around) (under the same polarity assignment, with respect to the same atomic flow).
+%\end{rem}
 
-\begin{pro}\label{PropExperimentShape}
-An experiment under polarity assignment $\pi_p$ on a streamlined derivation\/ $\vlder{\Psi}{\{\aid,\aiu,\swi,\med\}}{\beta}{\alpha}$ with respect to an atomic flow containing all the $\aid$ nodes of $\Psi$ is of the form $\vlder{}{\{\aiu,\swi,\med\}}{\beta_p}{\alpha}$. Where $\beta_p$ is given by Definition~\ref{DefExperiment2}.
-\end{pro}
+%\begin{pro}
+%If $\Psi_p$ is an experiment on $\Psi$ with respect to the atomic flow containing all the $\aid$ nodes of $\Psi$, then $\Psi_p$ is a valid derivation.
+%\end{pro}
 
-\begin{lem}\label{LemGlue}
-Given a derivation $\vlder{\Psi}{}{\beta}{\alpha}\ $, and all the experiments on $\Pi$ with respect to a given atomic flow there exists a derivation $\vlder{}{\{\aid,\swi\}}{\bigvee_{p=1}^{2^n}\beta_p^\bot}{\bigwedge_{p=1}^{2^n}\beta_p}$, where $\beta^\bot_p$ is given by Definition~\ref{DefExperiment}.
-\end{lem}
+%\begin{pro}\label{PropExperimentShape}
+%An experiment under polarity assignment $\pi_p$ on a streamlined derivation\/ $\vlder{\Psi}{\{\aid,\aiu,\swi,\med\}}{\beta}{\alpha}$ with respect to an atomic flow containing all the $\aid$ nodes of $\Psi$ is of the form $\vlder{}{\{\aiu,\swi,\med\}}{\beta_p}{\alpha}$. Where $\beta_p$ is given by Definition~\ref{DefExperiment2}.
+%\end{pro}
 
-\begin{lem}\label{LemInterpolant}
-Given a streamlined derivation of the form
-\[
-\vlder{\Psi}{\{\aid,\aiu,\swi,\med\}}{\beta}{\alpha}
-\]
-there is a derivation, $\Psi'$, of the form
-\[
-\vlderivation{
-\vlde{}{\{\aid,\acd,\swi,\med\}}{\beta} {
-\vlde{}{\{\aiu,\acu,\swi,\med\}}{\gamma}{
-\vlhy{\alpha}}}
-}
-\]
-\end{lem}
+%\begin{lem}\label{LemGlue}
+%Given a derivation $\vlder{\Psi}{}{\beta}{\alpha}\ $, and all the experiments on $\Pi$ with respect to a given atomic flow there exists a derivation $\vlder{}{\{\aid,\swi\}}{\bigvee_{p=1}^{2^n}\beta_p^\bot}{\bigwedge_{p=1}^{2^n}\beta_p}$, where $\beta^\bot_p$ is given by Definition~\ref{DefExperiment}.
+%\end{lem}
 
-\begin{proof}
-Consider all the experiments on $\Psi$; $\Psi_1,\dots,\Psi_{2^n}$. Using these derivations and Lemma~\ref{LemGlueBottom} and Lemma~\ref{LemGlue} we can build:
-\[
-\vlderivation{
-\vlde{}{\{\acd,\med\}}     {\beta                          }   {
-\vlde{}{\{\aid,\swi\}}     {\bigvee_{p=1}^{2^n}\beta^\bot_p}  {
-\vlde{\bigwedge_{p=1}^{2^n}\Psi_p}{\{\aiu,\swi,\med\}}
-                           {\bigwedge_{p=1}^{2^n}\beta_p   } {
-\vlde{}{\{\acu,\med\}}     {\bigwedge_{p=1}^{2^n}\alpha    }{
-\vlhy                      {\alpha                         }}}}}
-}\quad, 
-\]
-Where $\gamma=\bigwedge_{p=1}^{2^n}\beta_p$.
-\end{proof}
+%\begin{lem}\label{LemInterpolant}
+%Given a streamlined derivation of the form
+%\[
+%\vlder{\Psi}{\{\aid,\aiu,\swi,\med\}}{\beta}{\alpha}
+%\]
+%there is a derivation, $\Psi'$, of the form
+%\[
+%\vlderivation{
+%\vlde{}{\{\aid,\acd,\swi,\med\}}{\beta} {
+%\vlde{}{\{\aiu,\acu,\swi,\med\}}{\gamma}{
+%\vlhy{\alpha}}}
+%}
+%\]
+%\end{lem}
 
-\begin{pro}
-If there exists a derivation like $\Psi'$ in Lemma~\ref{LemInterpolant}, then $\gamma$ is an interpolant of $\alpha$ and $\beta$.
-\end{pro}
+%\begin{proof}
+%Consider all the experiments on $\Psi$; $\Psi_1,\dots,\Psi_{2^n}$. Using these derivations and Lemma~\ref{LemGlueBottom} and Lemma~\ref{LemGlue} we can build:
+%\[
+%\vlderivation{
+%\vlde{}{\{\acd,\med\}}     {\beta                          }   {
+%\vlde{}{\{\aid,\swi\}}     {\bigvee_{p=1}^{2^n}\beta^\bot_p}  {
+%\vlde{\bigwedge_{p=1}^{2^n}\Psi_p}{\{\aiu,\swi,\med\}}
+%                           {\bigwedge_{p=1}^{2^n}\beta_p   } {
+%\vlde{}{\{\acu,\med\}}     {\bigwedge_{p=1}^{2^n}\alpha    }{
+%\vlhy                      {\alpha                         }}}}}
+%}\quad, 
+%\]
+%Where $\gamma=\bigwedge_{p=1}^{2^n}\beta_p$.
+%\end{proof}
+
+%\begin{pro}
+%If there exists a derivation like $\Psi'$ in Lemma~\ref{LemInterpolant}, then $\gamma$ is an interpolant of $\alpha$ and $\beta$.
+%\end{pro}
 
 %===============================================================================
 \section{Streamlining}
