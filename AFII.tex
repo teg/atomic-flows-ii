@@ -89,34 +89,42 @@ Here we need to define all the things we use later on\dots
 
 The important notion in this paper is the notion of \emph{experiments}. An experiment is basically truth value assignments to some of the occurrences of some of the atoms in a derivation.
 
-\begin{defi}\label{DefExperimentFlow}
-Given an atomic flow $C$;\newline\includegraphics[width=4in]{original.eps},\newline a polarity assignment $\pi$ respecting the polarities indicated on $C$, and a subflow, $B$, of $C$ as indicated above. We call\newline\includegraphics[width=2in]{experiment.eps}\newline \emph{an experiment on $C$ with respect to $B$ under $\pi$}.
-\end{defi}
-
-\begin{defi}\label{DefExperimentDerivation}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$, an atomic flow $B$ and a polarity assignment $\pi$, we say that $\Psi$ from $\vls(\alpha'.\gamma^\top)$ to $\vls[\beta'.\gamma^\bot]$ is \emph{an experiment on $\Phi$ with respect to $B$ under $\pi$} if
+\begin{defi}\label{DefExperiment}
+Given a derivation $\Phi$ from $\alpha$ to $\beta$ with atomic flow $C$, a polarity assignment $\pi$ to $C$ and a derivation $\Phi'$ from $\vls(\alpha'.\gamma)$ to $\vls[\beta'.\delta]$ with atomic flow $C'$, together with a subflow $B$ of $C$ as indicated in the diagram below
+\newline
+\begin{tabular}{ccc}
+$\vlder{\Phi}{}{\beta}{\alpha}$ & $\qquad\rightarrow\qquad$ & $C=$\includegraphics[width=2in]{original.eps} \\
+                                &                           & $\downarrow$ \\
+$\vlder{\Phi'}{}{\vls[\beta'.\delta]}{\vls(\alpha'.\gamma)}$ & $\rightarrow$ & $C'=$\includegraphics[width=1in]{experiment.eps}, \\
+\end{tabular}
+\newline
+we say that
 \begin{itemize}
- \item the atomic flow of $\Psi$ is an experiment on the atomic flow of $\Phi$ with respect to $B$ under $\pi$;
- \item $\alpha'$ and $\beta'$ are obtained from $\alpha$ and $\beta$ respectively by substituting all the atoms mapping to positive (resp. negative) edges which occur in the atomic flow of $\Phi$, but not in the atomic flow of $\Psi$ with $\ttt$ (resp. $\fff$); and
- \item $\gamma^\top$ (resp. $\gamma^\bot$) is a conjunction (resp. disjunction) of all the atoms mapping to edges adjacent to $\top$ (resp. $\bot$) which occur in the atomic flow of $\Psi$, but not in the atomic flow of $\Phi$.
+\item $C'$ is an \emph{experiment on $C$ with respect to $B$ under $\pi$}; and
+\item $\Phi'$ is an \emph{experiment on $\Phi$ with respect to $B$ under $\pi$} if
+\begin{itemize}
+ \item $\alpha'$ and $\beta'$ are obtained from $\alpha$ and $\beta$ respectively by substituting all the atoms mapping to positive (resp. negative) edges of $B$ with $\ttt$ (resp. $\fff$); and
+ \item $\gamma$ (resp. $\delta$) is a conjunction (resp. disjunction) of all the atoms mapping to edges adjacent to $\top$ (resp. $\bot$) in $C'$, but not in $C$.
+\end{itemize}
 \end{itemize}
 \end{defi}
 
 \begin{lem}
-Given any derivation $\Phi$ with atomic flow $C$, an atomic flow $B$ and a polarity assignment $\pi$, such that there exists an experiment on $C$ with respect to $B$ under $\pi$ then there exists a derivation $\Psi$ such that $\Psi$ is an experiment on $\Phi$ with respect to $B$ under $\pi$.
+Given any derivation $\Phi$ with atomic flow $C$, an atomic subflow $B$ of $C$ and a polarity assignment $\pi$, such that there exists an experiment on $C$ with respect to $B$ under $\pi$ then there exists a derivation $\Phi'$ such that $\Phi'$ is an experiment on $\Phi$ with respect to $B$ under $\pi$.
 \end{lem}
 \begin{proof}
 Let $\Phi$ have premiss $\alpha$ and conclusion $\beta$, let $C'$ be an experiment on $C$ and let $\alpha'$, $\beta'$, $\xi'$ and $\zeta'$ denote the formulae obtained from $\alpha$, $\beta$, $\xi$ and $\zeta$ by substituting atoms mapping to positive (resp. negative) edges which occur in $C$ but not in $C'$ with $\ttt$ (resp. $\fff$). For simplicity, let us call the (co)interactions mapping to the (co)interaction nodes in $C$ which are not in neither $A$ nor $B$, \emph{evidenced (co)interactions}\footnote{we should consider to make this a proper definition, or if we want all the (co)interactions to be `evidenced'}.
 
-We then obtain $\Psi$ from $\Phi$ by substituting each formula $\xi$ with $\vls[(\xi'.\gamma_i^\top).\gamma_j^\bot]$; where $i$ (resp. $j$) is the number of evidenced interactions (resp. cointeractions) below (resp. above) $\xi$ in $\Phi$ such that the edge connecting the corresponding node to $A$ is positive (resp. negative) under $\pi$, $\gamma_0^\top=\ttt$, $\gamma_{i}^\top=\vls(\gamma_{i-1}^\top.a_i)$, $\gamma_0^\bot=\fff$ and $\gamma_{j}^\bot=\vls[\gamma_{j-1}^\bot.a_j]$; where $a_i$ (resp. $a_j$) is the atom, mapping to a positive edge, taking part in interaction (resp. cointeraction) number $i$ (resp. $j$) from the top (resp. bottom) in $\Phi$.
+We then obtain $\Phi'$ from $\Phi$ by substituting each formula $\xi$ with $\vls[(\xi'.\gamma_i).\delta_j]$; where $i$ (resp. $j$) is the number of evidenced interactions (resp. cointeractions) below (resp. above) $\xi$ in $\Phi$ such that the edge connecting the corresponding node to $A$ is positive (resp. negative) under $\pi$, $\gamma_0=\ttt$, $\gamma_{i}=\vls(\gamma_{i-1}.a_i)$, $\delta_0=\fff$ and $\delta_{j}=\vls[\delta_{j-1}.a_j]$; where $a_i$ (resp. $a_j$) is the atom, mapping to a positive edge, taking part in interaction (resp. cointeraction) number $i$ (resp. $j$) from the top (resp. bottom) in $\Phi$.
 
-It is now straight forward to check that the following substitutions of inference rules gives a derivation of the right form:
+It is now straight forward to check that the following substitutions of inference rules gives a derivation with the right atomic flow:
 \begin{itemize}
- \item Let $\vlinf{\rho}{}{\zeta}{\xi}$ be a linear inference rule or a structural inference rule mapping to a node in $A$, then it is substituted with $\vlinf{\rho}{}{\vls[(\zeta'.\gamma_i^\top).\gamma_j^\bot]}{\vls[(\xi'.\gamma_i^\top).\gamma_j^\bot]}$;
- \item let $\vlinf{\rho}{}{\zeta}{\xi}$ be a structural inference rule mapping to a node in $B$, then it is substituted with $\vlinf{=}{}{\vls[(\zeta'.\gamma_i^\top).\gamma_j^\bot]}{\vls[(\xi'.\gamma_i^\top).\gamma_j^\bot]}$\footnote{we might need a special case for $\vlinf{\rho}{}{\xi'\{\ttt\}}{\xi'\{\fff\}}$ where $\rho\in\{\awd,\awu\}$};
- \item let $\vlinf{\aid}{}{\xi\{\vls[a^\ppl.{\bar a}^\pmi]\}}{\xi\{\ttt\}}$ be an evidenced interaction rule, then if the edge connecting the node to $A$ is positive under $\pi$ it is substituted with $\vlinf{\sus}{}{\vls[(\xi'\{\vls[a^\ppl.\fff]\}.\gamma_i^\top).\gamma_j^\bot]}{\vls[(\xi'\{\ttt\}.\gamma_{i+1}^\top).\gamma_j^\bot]}$ otherwise it is substituted with $\vlinf{\awd}{}{\vls[(\xi'\{\vls[\ttt.{\bar a}^\pmi]\}.\gamma_i^\top).\gamma_j^\bot]}{\vls[(\xi'\{\ttt\}.\gamma_{i}^\top).\gamma_j^\bot]}$; and
- \item let $\vlinf{\aiu}{}{\xi\{\fff\}}{\xi\{\vls(a^\ppl.{\bar a}^\pmi)\}}$ be an evidenced cointeraction rule, then if the edge connecting the node to $A$ is negative under $\pi$ it is substituted with $\vlinf{\sus}{}{\vls[(\xi'\{\fff\}.\gamma_{i}^\top).\gamma_{j+1}^\bot]}{\vls[(\xi'\{\vls(\ttt.{\bar a}^\pmi)\}.\gamma_i^\top).\gamma_j^\bot]}$ otherwise it is substituted with $\vlinf{\awd}{}{\vls[(\xi'\{\vls[\ttt.{\bar a}^\pmi]\}.\gamma_i^\top).\gamma_j^\bot]}{\vls[(\xi'\{\ttt\}.\gamma_{i}^\top).\gamma_j^\bot]}$\footnote{note that there is no correspondence between negative and positive atoms and negative and positive polarities, the roles could be reversed. Alternatively we could do this without showing the atoms, but that might be too obfuscated?}.
+ \item Let $\vlinf{\rho}{}{\zeta}{\xi}$ be a linear inference rule or a structural inference rule mapping to a node in $A$, then it is substituted with $\vlinf{\rho}{}{\vls[(\zeta'.\gamma_i).\delta_j]}{\vls[(\xi'.\gamma_i).\delta_j]}$;
+ \item let $\vlinf{\rho}{}{\zeta}{\xi}$ be a structural inference rule mapping to a node in $B$, then it is substituted with $\vlinf{=}{}{\vls[(\zeta'.\gamma_i).\delta_j]}{\vls[(\xi'.\gamma_i).\delta_j]}$\footnote{we might need a special case for $\vlinf{\rho}{}{\xi'\{\ttt\}}{\xi'\{\fff\}}$ where $\rho\in\{\awd,\awu\}$};
+ \item let $\vlinf{\aid}{}{\xi\{\vls[a^\ppl.{\bar a}^\pmi]\}}{\xi\{\ttt\}}$ be an evidenced interaction rule, then if the edge connecting the node to $A$ is positive under $\pi$ it is substituted with $\vlinf{\sus}{}{\vls[(\xi'\{\vls[a^\ppl.\fff]\}.\gamma_i).\delta_j]}{\vls[(\xi'\{\ttt\}.\gamma_{i+1}).\delta_j]}$ otherwise it is substituted with $\vlinf{\awd}{}{\vls[(\xi'\{\vls[\ttt.{\bar a}^\pmi]\}.\gamma_i).\delta_j]}{\vls[(\xi'\{\ttt\}.\gamma_i).\delta_j]}$; and
+ \item let $\vlinf{\aiu}{}{\xi\{\fff\}}{\xi\{\vls(a^\ppl.{\bar a}^\pmi)\}}$ be an evidenced cointeraction rule, then if the edge connecting the node to $A$ is negative under $\pi$ it is substituted with $\vlinf{\sus}{}{\vls[(\xi'\{\fff\}.\gamma_i).\delta_{j+1}]}{\vls[(\xi'\{\vls(\ttt.{\bar a}^\pmi)\}.\gamma_i).\delta_j]}$ otherwise it is substituted with $\vlinf{\awd}{}{\vls[(\xi'\{\vls[\ttt.{\bar a}^\pmi]\}.\gamma_i).\delta_j]}{\vls[(\xi'\{\ttt\}.\gamma_i).\delta_j]}$\footnote{note that there is no correspondence between negative and positive atoms and negative and positive polarities, the roles could be reversed. Alternatively we could do this without showing the atoms, but that might be too obfuscated?}.
 \end{itemize}
+The derivation $\Phi'$ we have obtained is a derivation from $\vls[(\alpha'.\gamma_k).\delta_0]$ to $\vls[(\beta'.\gamma_0).\delta_l]$ for some $k,l$, notice that $\gamma_0=\ttt$ and $\delta_0=\fff$, so we get $\Phi'$ from $\vls(\alpha'.\gamma_k)$ to $\vls[\beta'.\delta_l]$ as we want.
 \end{proof}
 
 \begin{defi}
@@ -124,11 +132,11 @@ Let $C$ be an atomic flow and $\pi$ a polarity assignment to $C$. If $B$ is the 
 \end{defi}
 
 \begin{pro}\label{PropExperimentShapeBot}
-For any proof\/ $\vlproof{\Pi}{\SKS}{\beta}$ and any polarity assignment to its atomic  flow, $\pi$, the $\fff$-experiment on $\Pi$ under $\pi$ is of the form $\vlder{}{\SKS\setminus\{\aid,\aiu\}}{\beta'}{\gamma^\top}$. Where $\beta'$ and $\gamma^\top$ are given by Definition~\ref{DefExperimentDerivation}.
+For any proof\/ $\vlproof{\Pi}{\SKS}{\beta}$ and any polarity assignment to its atomic  flow, $\pi$, the $\fff$-experiment on $\Pi$ under $\pi$ is of the form $\vlder{}{\SKS\setminus\{\aid,\aiu\}}{\beta'}{\gamma}$. Where $\beta'$ and $\gamma$ are given by Definition~\ref{DefExperiment}.
 \end{pro}
 
 \begin{lem}\label{LemGlueTop}
-Let $\Pi$ be a proof, let $\mathcal{P}$ be the set of all the polarity assignments to the atomic flow of $\Pi$ and for each $\pi\in\mathcal{P}$ let the $\fff$-experiment on $\Pi$ under $\pi$ have premiss $\gamma_\pi$. Then there exists a proof $\vlproof{}{\{\aid,\acu,\swi\}}{\bigvee_{\pi\in\mathcal{P}}\gamma_\pi}$.
+Let $\Pi$ be a proof, let $\mathcal{P}$ be the set of all the polarity assignments to the atomic flow of $\Pi$ and for each $\pi\in\mathcal{P}$ let the $\fff$-experiment on $\Pi$ under $\pi$ have premiss $\gamma_\pi$. Then there exists a proof $\vlproof{}{\{\aid,\acu,\swi,\med\}}{\bigvee_{\pi\in\mathcal{P}}\gamma_\pi}$ of size $O(|\mathcal{P}|)$ and a proof $\vlproof{}{\{\aid,\acd,\swi,\med\}}{\bigvee_{\pi\in\mathcal{P}}\gamma_\pi}$ of size $O(2^{|\mathcal{P}|})$.
 \end{lem}
 
 \begin{lem}\label{LemGlueBottom}
