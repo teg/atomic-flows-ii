@@ -136,8 +136,16 @@ For any proof\/ $\vlproof{\Pi}{\SKS}{\beta}$ and any polarity assignment to its 
 \end{pro}
 
 \begin{lem}\label{LemGlueTop}
-Let $\Pi$ be a proof, let $\mathcal{P}$ be the set of all the polarity assignments to the atomic flow of $\Pi$ and for each $\pi\in\mathcal{P}$ let the $\fff$-experiment on $\Pi$ under $\pi$ have premiss $\gamma_\pi$. Then there exists a proof $\vlproof{}{\{\aid,\acu,\swi,\med\}}{\bigvee_{\pi\in\mathcal{P}}\gamma_\pi}$ of size $O(|\mathcal{P}|)$ and a proof $\vlproof{}{\{\aid,\acd,\swi,\med\}}{\bigvee_{\pi\in\mathcal{P}}\gamma_\pi}$ of size $O(2^{|\mathcal{P}|})$.
+Let $\Pi$ be a proof, let $\mathcal{P}$ be the set of all the polarity assignments to the atomic flow of $\Pi$ and for each $\pi\in\mathcal{P}$ let the $\fff$-experiment on $\Pi$ under $\pi$ have premiss $\gamma_\pi$. Then there exist \emph{canonical} proofs $\vlproof{}{\{\aid,\acu,\swi,\med\}}{\bigvee_{\pi\in\mathcal{P}}\gamma_\pi}$ and $\vlproof{}{\{\aid,\acd,\swi,\med\}}{\bigvee_{\pi\in\mathcal{P}}\gamma_\pi}$ of size $O(|\mathcal{P}|)$.
 \end{lem}
+
+\begin{proof}
+Enumerate the atoms occurring in $\gamma_\pi$ for any $\pi$ $a_0,\dots,a_n$. Let $\pi_i$ be $\pi_{i+1}$ restricted to the subflow mapped to by $a_0,\dots,a_i$, let $\gamma_{\pi_i}=\gamma_\pi\{a_{i+1}\leftarrow\ttt,\dots,a_n\leftarrow\ttt\}$ and let $\mathcal{P}_i$ be the set of all the possible $\pi_i$. Notice that $|\mathcal{P}|=2^i$.
+
+We induct on $i$. The inductive case becomes; $\vlproof{}{\{\aid,\acu,\swi,\med\}}{\bigvee_{\pi\in\mathcal{P_i}}\gamma_\pi}$
+
+Given a subflow $A$ of the original atomic flow, let $\pi'$ be the restriction of $\pi$ to $A$. Then $\gamma_\pi'$ is obtained from $\gamma_\pi$ by substituting the atoms not in $\pi'$ with $\ttt$. Let $\gamma\in\mathcal{P}$ contain $n$ atoms, then define $\mathcal{P}_n=\mathcal{P}$ and $\mathcal{P}_{i-1}=\{\pi|\pi\in\mathcal{P}\}$
+\end{proof}
 
 \begin{lem}\label{LemGlueBottom}
 Let $\Phi$ be a derivation from $\alpha$ to $\beta$, let $\mathcal{P}$ be the set of all the polarity assignments to the atomic flow of $\Phi$ and for each $\pi\in\mathcal{P}$ let the $\fff$-experiment on $\Phi$ under $\pi$ have conclusion $\beta_\pi$. Then there exists a derivation $\vlder{}{\{\acd,\med\}}{\beta}{\bigvee_{\pi\in\mathcal{P}}\beta_\pi}$.
