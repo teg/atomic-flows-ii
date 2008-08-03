@@ -84,21 +84,20 @@
                                 {\scriptstyle-}
                                 {\scriptscriptstyle-}}}
 
-We study a generalisation of cut elimination for propositional classical logic in deep inference that we call streamlining. This work is a continuation of the work on atomic ﬂows started in [1].
+We study a generalisation of cut elimination for propositional classical logic in deep inference that we call \emph{streamlining}. This work is a continuation of the work on \emph{atomic flows} started in [1].
 
-Atomic ﬂows are graphical representations of derivations conserving the size of the derivations and the causal relationship between the structural inference rules. All information about logical connectives and logical inference rules are disregarded. The important property of atomic ﬂows is that they contain all the information necessary to perform normalisation. We can either just normalise the atomic ﬂows, or use the atomic ﬂows to decide how to normalise the derivations.
+Atomic flows are graphical representations of derivations conserving their size as well as the causal relationship between the structural inference rules. All information about logical connectives and logical inference rules are disregarded. The crucial property of atomic flows is that they contain all the information necessary to perform normalisation. We can either just normalise the atomic flows, or use the atomic flows to decide how to normalise the derivations.
 
-A streamlined derivation is a derivation whose atomic ﬂow has a speciﬁc
-shape, in particular this shape entails that
+A streamlined derivation is a derivation whose atomic flow has a speciﬁc shape, in particular this shape entails that
 
 \begin{enumerate}
 \item a streamlined derivation contains no causal relationship between an axiom and a cut; and
-\item in the special case where the premiss of a streamlined derivation is ‘true’, the derivation is cut-free.
+\item in the special case where the premiss of a streamlined derivation is $\ttt$, the derivation is cut-free.
 \end{enumerate}
 
-Given the atomic ﬂow of a derivation we can tell what the atomic ﬂow of the streamlined derivation would be. This is of particular interest because the atomic ﬂows do not have access to any information about logical inference rules, which are usually considered to be important in performing cut-elimination.
+Given the atomic flow of a derivation we can tell what the atomic flow of the streamlined derivation would be. This is of particular interest because the atomic flows do not have access to any information about logical inference rules, which are usually considered to be important in performing cut-elimination.
 
-The novelty of this work is to only use global proof transformations when performing normalisation. We single out axioms and cuts and consider the rest of the atomic ﬂow to be inside ``black boxes'' which we do not need to look inside. Then by knowing which axioms are connected with which cuts we can normalise the derivation without having any more information about its internal structure. The streamlining procedures presented in [1] had two sources of exponential growth, it was not strongly normalising and the proof of termination was not very intuitive. With the new methods we have removed one source of exponential growth and both termination and strong normalisation are immediate.
+The novelty of this work is to only use global proof transformations when performing normalisation. We single out axioms and cuts and consider the rest of the atomic flow to be inside ``black boxes'' which we do not need to look inside. Then by knowing which axioms are connected with which cuts we can normalise the derivation without having any more information about its internal structure. The streamlining procedures presented in [1] had two sources of exponential growth, it was not strongly normalising and the proof of termination was not very intuitive. With the new methods we have removed one source of exponential growth and both termination and strong normalisation are immediate.
 
 
 %===============================================================================
@@ -168,8 +167,25 @@ Given a subflow $A$ of the original atomic flow, let $\pi'$ be the restriction o
 Let $\Phi$ be a derivation from $\alpha$ to $\beta$, let $\mathcal{P}$ be the set of all the polarity assignments to the atomic flow of $\Phi$ and for each $\pi\in\mathcal{P}$ let the $\fff$-experiment on $\Phi$ under $\pi$ have conclusion $\beta_\pi$. Then there exists a derivation $\vlder{}{\{\acd,\med\}}{\beta}{\bigvee_{\pi\in\mathcal{P}}\beta_\pi}$.
 \end{lem}
 
+\begin{proof}
+It is trivial to observe that there exists
+\[
+\vlderivation{
+\vlde{}{\{\acd,\med\}}{\beta}
+ {
+  \vlde{}{\{\awd\}}{\bigvee_{\pi\in\mathcal{P}}\beta}
+  {
+   \vlhy{\bigvee_{\pi\in\mathcal{P}}\beta_\pi}
+  }
+ }
+} 
+\]
+Furthermore, observe that there is a path from every atom occurance in the conclusion to an atom occurence in the premise. Hence, all the $\awd$ rules are eliminate by applying weakening reductions to the derivaiton, giving us $\vlder{}{\{\acd,\med\}}{\beta}{\bigvee_{\pi\in\mathcal{P}}\beta_\pi}$ as required.
+\end{proof}
+
+
 \begin{thm}
-Given a proof $\vlproof{\Pi}{\SKS}{\beta}$ there exists a cut-free proof $\vlproof{}{\SKS\setminus\{\aiu\}}{\beta}$.
+Given a proof $\vlproof{\Pi}{\SKS}{\beta}$ there exists a canonical cut-free proof $\vlproof{}{\SKS\setminus\{\aiu\}}{\beta}$.
 \end{thm}
 \begin{proof}
 Let $\mathcal{P}$ be the set of all the polarity assignments to the atomic flow of $\Pi$ and for each $\pi\in\mathcal{P}$ let the experiment on $\Pi$ under $\pi$ be $\vlder{\Pi_\pi}{\SKS\setminus\{\aid,\aiu\}}{\beta_\pi}{\gamma_\pi}$. Then by Lemma~\ref{LemGlueTop} and Lemma~\ref{LemGlueBottom} we can build the following proof:
@@ -179,11 +195,10 @@ Let $\mathcal{P}$ be the set of all the polarity assignments to the atomic flow 
 \vlde{\bigvee_{\pi\in\mathcal{P}}\Pi_\pi}
        {\SKS\setminus\{\aid,\aiu\}}{\bigvee_{\pi\in\mathcal{P}}\beta_\pi}{
 \vlpr{}{\{\aid,\acu,\swi\}}{\bigvee_{\pi\in\mathcal{P}}\gamma_\pi       }}}
-}
+}\quad.
 \]
+There is only one way of building such a proof in the sense that the atomic flow of the proof will be unique (modulo associativity of contraction).
 \end{proof}
-
-STOP READING HERE!!!
 
 %%===============================================================================
 %\section{Interpolation}
