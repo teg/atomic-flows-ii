@@ -153,6 +153,8 @@ It is now straight forward to check that the following substitutions of inferenc
 The derivation $\Phi'$ we have obtained is a derivation from $\vls[(\alpha'.\gamma_k).\delta_0]$ to $\vls[(\beta'.\gamma_0).\delta_l]$ for some $k,l$, notice that $\gamma_0=\ttt$ and $\delta_0=\fff$, so we get $\Phi'$ from $\vls(\alpha'.\gamma_k)$ to $\vls[\beta'.\delta_l]$ as we want.
 \end{proof}
 
+When doing cut-elimination the experiments we need are of a specific form; we need to preserve the conclusion, so we cannot create any new bottom wires. This is the motivation for the following definition.
+
 \begin{defi}
 Let $C$ be an atomic flow and $\pi$ a polarity assignment to $C$. If $B$ is the subflow of $C$ containing only negative (resp. positive) nodes and $A$ is the subflow of $C$ containing only positive (resp. negative) nodes, then the experiment on $C$ with respect to $B$ under $\pi$ is called the \emph{$\fff$-experiment (resp. $\ttt$-experiment) on $C$ under $\pi$}. The definition extends to derivations in the obvious way.
 \end{defi}
