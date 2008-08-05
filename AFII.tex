@@ -165,6 +165,10 @@ We now observe that a $\fff$-experiment indeed gives us the what we want. The ob
 For any proof\/ $\vlproof{\Pi}{\SKS}{\beta}$ and any polarity assignment to its atomic  flow, $\pi$, the $\fff$-experiment on $\Pi$ under $\pi$ is of the form $\vlder{}{\SKS\setminus\{\aid,\aiu\}}{\beta'}{\gamma}$. Where $\beta'$ and $\gamma$ are given by Definition~\ref{DefExperiment}.
 \end{pro}
 
+We have seen how we can generate one derivation for each polarity assignment, now we will see how we can glue all of these derivations together to get us the proof we want.
+
+The disjunction of all the possible truth value assignments is obviously a tautology. We now show that we can construct a \emph{canonical} proof of this tautology. By ``canonical'' we mean that we can do it in such a way that there is no arbitrary choice involved. In particular this entails that the atomic flow of all the different atoms will be the same.
+
 \begin{lem}\label{LemGlueTop}
 Let $\Pi$ be a proof, let $\mathcal{P}$ be the set of all the polarity assignments to the atomic flow of $\Pi$ and for each $\pi\in\mathcal{P}$ let the $\fff$-experiment on $\Pi$ under $\pi$ have premiss $\gamma_\pi$. Then there exist \emph{canonical} proofs $\vlproof{}{\{\aid,\acu,\swi,\med\}}{\bigvee_{\pi\in\mathcal{P}}\gamma_\pi}$ and $\vlproof{}{\{\aid,\acd,\swi,\med\}}{\bigvee_{\pi\in\mathcal{P}}\gamma_\pi}$ of size $O(|\mathcal{P}|)$.
 \end{lem}
