@@ -99,7 +99,32 @@ Given the atomic flow of a derivation we can tell what the atomic flow of the st
 
 The novelty of this work is to only use global proof transformations when performing normalisation. We single out axioms and cuts and consider the rest of the atomic flow to be inside ``black boxes'' which we do not need to look inside. Then by knowing which axioms are connected with which cuts we can normalise the derivation without having any more information about its internal structure. The streamlining procedures presented in \cite{GuglGund:07:Normalis:lr} had two sources of exponential growth, it was not strongly normalising and the proof of termination was not very intuitive. With the new methods we have removed one source of exponential growth and both termination and strong normalisation are immediate.
 
+\section{Deep Inference and Atomic Flows}
 
+Deep inference is a relatively new proof-theoretic methodology developed over the past ten years. Deep inference differs from the traditional Gentzen-style methodologies in that it allows inference at any level of formulae, not only at the root connective. This allows for much greater freedom in designing formalisms and logical systems, but it also makes normalisation theory much more challenging.
+
+In this paper we are working in the deep-inference formalism calculus of structures\cite{Gugl:06:A-System:kl}, but the results here are not specific to this formalism as we will discuss later.
+
+The system we use for propositional classical logic is system $\SKS$\cite{BrunTiu:01:A-Local-:mz}:
+
+\begin{figure}[h]
+\begin{center}
+\begin{tabular}{ccc}
+$\vlinf{\aid}{}{\vls[a.\bar{a}]}{\ttt}$ & $\vlinf{\acd}{}{a}{\vls[a.a]}$ & $\vlinf{\awd}{}{a}{\fff}$ \\
+interaction (axiom) & contraction & weakening \\
+$\vlinf{\aiu}{}{\fff}{\vls(\bar{a}.a)}$ & $\vlinf{\acu}{}{\vls(a.a)}{a}$ & $\vlinf{\awd}{}{\ttt}{a}$ \\
+cointeraction (cut) & cocontraction & coweakening
+\end{tabular}
+\begin{tabular}{cc}
+$\vlinf{\swi}{}{\vls([\alpha.\beta].\gamma)}{\vls[\alpha.(\beta.\gamma)]}$ & $\vlinf{\med}{}{\vls([\alpha.\beta].[\gamma.\delta])}{\vls[(\alpha.\gamma).(\beta.\delta)]}$ \\
+switch & medial
+\end{tabular}
+\end{center}
+\end{figure}
+
+Furmulae are considered equal modulo associativity and commutativity of $\wedge$ and $\vee$; and idempotency and identity of $\ttt$ and $\fff$. Furthermore, negation is only allowed on atoms due to DeMorgan's Laws.
+
+In this paper we will mainly concern ourselves with the structural rules.
 %===============================================================================
 \section{Confluent Cut-Elimination For Proofs}
 
