@@ -105,7 +105,11 @@ The novelty of this work is to only use global proof transformations when perfor
 
 The important notion in this paper is the notion of \emph{experiments}. An experiment is basically truth value assignments to some of the occurrences of some of the atoms in a derivation.
 
-The idea behind the confluent cut-elimination can informally be described as followsis the observation that for any proof with cuts we can obtain a cut-free derivation with the same conclusion, but with
+The idea behind the confluent cut-elimination can informally be described as follows:
+
+Take any proof with cuts, if we know the truth value of the atoms involved in the cuts we can eliminate the cuts to obtain a smaller derivation. In other words given $\vlproof{}{\SKS}{\alpha}$ we can obtain $\vlder{}{\SKS\cap\{\aid\}}{\alpha}{\gamma}$ where $\gamma$ is the conjunction of atoms or their negations which give the truth value assignment. Obviously we can not know the truth values given in $\gamma$, so this derivation is not what we want. However, there is a finite number of possible truth value assignments, so if we construct one derivation for assignment, we know that one of them is the right one. We can therefore plug all these derivaitons together in a big disjunction and obtain a proof $\vlproof{}{\SKS\cap\{\aid\}}{\alpha}$ as desired.
+
+Each of the derivaitons obtained as described above, are a special case of what we call \emph{experiments}, we will now give their formal definition.
 
 \begin{defi}\label{DefExperiment}
 Given a derivation $\Phi$ from $\alpha$ to $\beta$ with atomic flow $C$, a polarity assignment $\pi$ to $C$ and a derivation $\Phi'$ from $\vls(\alpha'.\gamma)$ to $\vls[\beta'.\delta]$ with atomic flow $C'$, together with a subflow $B$ of $C$ as indicated in the diagram below
