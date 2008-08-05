@@ -159,6 +159,8 @@ When doing cut-elimination the experiments we need are of a specific form; we ne
 Let $C$ be an atomic flow and $\pi$ a polarity assignment to $C$. If $B$ is the subflow of $C$ containing only negative (resp. positive) nodes and $A$ is the subflow of $C$ containing only positive (resp. negative) nodes, then the experiment on $C$ with respect to $B$ under $\pi$ is called the \emph{$\fff$-experiment (resp. $\ttt$-experiment) on $C$ under $\pi$}. The definition extends to derivations in the obvious way.
 \end{defi}
 
+We now observe that a $\fff$-experiment indeed gives us the what we want. The observant reader might note that instead of the original conclusion, $\beta$, we get $\beta'$, which in this case is $\beta$ with some atom occurences substituted with $\fff$, as we shall se later, this is not a problem. We could indeed fix this straight away by applying $\awd$'s.
+
 \begin{pro}\label{PropExperimentShapeBot}
 For any proof\/ $\vlproof{\Pi}{\SKS}{\beta}$ and any polarity assignment to its atomic  flow, $\pi$, the $\fff$-experiment on $\Pi$ under $\pi$ is of the form $\vlder{}{\SKS\setminus\{\aid,\aiu\}}{\beta'}{\gamma}$. Where $\beta'$ and $\gamma$ are given by Definition~\ref{DefExperiment}.
 \end{pro}
