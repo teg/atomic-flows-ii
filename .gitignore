@@ -5,3 +5,6 @@
 *.log
 *.out
 *.pdf
+*.bbl
+*.blg
+.directory

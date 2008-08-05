@@ -84,7 +84,7 @@
                                 {\scriptstyle-}
                                 {\scriptscriptstyle-}}}
 
-We study a generalisation of cut elimination for propositional classical logic in deep inference that we call \emph{streamlining}. This work is a continuation of the work on \emph{atomic flows} started in [1].
+In \cite{GuglGund:07:Normalis:lr} we introduced \emph{atomic flows} as a tool to study normalisation. In this paper we look at global normalisation procedures and argue that they provide for more general and principled tools thtan what we studied before. The paper is inn two parts, the first part gives a \emph{confluent} cut-elimination procedure for propositional classical logic and the second part gives a generalisation of the \emph{streamlinig} procedure described in \cite{GuglGund:07:Normalis:lr}
 
 Atomic flows are graphical representations of derivations conserving their size as well as the causal relationship between the structural inference rules. All information about logical connectives and logical inference rules are disregarded. The crucial property of atomic flows is that they contain all the information necessary to perform normalisation. We can either just normalise the atomic flows, or use the atomic flows to decide how to normalise the derivations.
 
@@ -97,13 +97,15 @@ A streamlined derivation is a derivation whose atomic flow has a speciﬁc shape
 
 Given the atomic flow of a derivation we can tell what the atomic flow of the streamlined derivation would be. This is of particular interest because the atomic flows do not have access to any information about logical inference rules, which are usually considered to be important in performing cut-elimination.
 
-The novelty of this work is to only use global proof transformations when performing normalisation. We single out axioms and cuts and consider the rest of the atomic flow to be inside ``black boxes'' which we do not need to look inside. Then by knowing which axioms are connected with which cuts we can normalise the derivation without having any more information about its internal structure. The streamlining procedures presented in [1] had two sources of exponential growth, it was not strongly normalising and the proof of termination was not very intuitive. With the new methods we have removed one source of exponential growth and both termination and strong normalisation are immediate.
+The novelty of this work is to only use global proof transformations when performing normalisation. We single out axioms and cuts and consider the rest of the atomic flow to be inside ``black boxes'' which we do not need to look inside. Then by knowing which axioms are connected with which cuts we can normalise the derivation without having any more information about its internal structure. The streamlining procedures presented in \cite{GuglGund:07:Normalis:lr} had two sources of exponential growth, it was not strongly normalising and the proof of termination was not very intuitive. With the new methods we have removed one source of exponential growth and both termination and strong normalisation are immediate.
 
 
 %===============================================================================
-\section{Cut Elimination For Proofs}
+\section{Confluent Cut-Elimination For Proofs}
 
 The important notion in this paper is the notion of \emph{experiments}. An experiment is basically truth value assignments to some of the occurrences of some of the atoms in a derivation.
+
+The idea behind the confluent cut-elimination can informally be described as followsis the observation that for any proof with cuts we can obtain a cut-free derivation with the same conclusion, but with
 
 \begin{defi}\label{DefExperiment}
 Given a derivation $\Phi$ from $\alpha$ to $\beta$ with atomic flow $C$, a polarity assignment $\pi$ to $C$ and a derivation $\Phi'$ from $\vls(\alpha'.\gamma)$ to $\vls[\beta'.\delta]$ with atomic flow $C'$, together with a subflow $B$ of $C$ as indicated in the diagram below
@@ -178,7 +180,7 @@ It is trivial to observe that there exists
    \vlhy{\bigvee_{\pi\in\mathcal{P}}\beta_\pi}
   }
  }
-} 
+}
 \]
 Furthermore, observe that there is a path from every atom occurance in the conclusion to an atom occurence in the premise. Hence, all the $\awd$ rules are eliminate by applying weakening reductions to the derivaiton, giving us $\vlder{}{\{\acd,\med\}}{\beta}{\bigvee_{\pi\in\mathcal{P}}\beta_\pi}$ as required.
 \end{proof}
@@ -254,7 +256,7 @@ There is only one way of building such a proof in the sense that the atomic flow
 %                           {\bigwedge_{p=1}^{2^n}\beta_p   } {
 %\vlde{}{\{\acu,\med\}}     {\bigwedge_{p=1}^{2^n}\alpha    }{
 %\vlhy                      {\alpha                         }}}}}
-%}\quad, 
+%}\quad,
 %\]
 %Where $\gamma=\bigwedge_{p=1}^{2^n}\beta_p$.
 %\end{proof}
@@ -496,7 +498,7 @@ We can now connect the two experiments to get the desired derivation:
 
 \iflmcs\else\let\oldurl\url\renewcommand{\url}[1]{\hfill\break\oldurl{#1}}\fi
 
-%\bibliographystyle{alpha}
-%\bibliography{biblio}
+\bibliographystyle{alpha}
+\bibliography{di-biblio}
 
 \end{document}
