@@ -103,9 +103,7 @@ The novelty of this work is to only use global proof transformations when perfor
 %===============================================================================
 \section{Confluent Cut-Elimination For Proofs}
 
-The important notion in this paper is the notion of \emph{experiments}. An experiment is basically truth value assignments to some of the occurrences of some of the atoms in a derivation.
-
-The idea behind the confluent cut-elimination can informally be described as follows:
+In this section we describe a confluent cut-elimination procedure using atomic flows. It is confluent in the sense that given the atomic flow of any proof, the atomic flow of the corresponding cut-free proof is unique.
 
 Take any proof with cuts, if we know the truth value of the atoms involved in the cuts we can eliminate the cuts to obtain a smaller derivation. In other words given $\vlproof{}{\SKS}{\alpha}$ we can obtain $\vlder{}{\SKS\cap\{\aid\}}{\alpha}{\gamma}$ where $\gamma$ is the conjunction of atoms or their negations which give the truth value assignment. Obviously we can not know the truth values given in $\gamma$, so this derivation is not what we want. However, there is a finite number of possible truth value assignments, so if we construct one derivation for assignment, we know that one of them is the right one. We can therefore plug all these derivaitons together in a big disjunction and obtain a proof $\vlproof{}{\SKS\cap\{\aid\}}{\alpha}$ as desired.
 
