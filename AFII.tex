@@ -136,13 +136,97 @@ Each of the derivaitons obtained as described above, are a special case of what 
 
 \begin{defi}\label{DefExperiment}
 Given a derivation $\Phi$ from $\alpha$ to $\beta$ with atomic flow $C$, a polarity assignment $\pi$ to $C$ and a derivation $\Phi'$ from $\vls(\alpha'.\gamma)$ to $\vls[\beta'.\delta]$ with atomic flow $C'$, together with a subflow $B$ of $C$ as indicated in the diagram below
-\newline
+\begin{center}
 \begin{tabular}{ccc}
-$\vlder{\Phi}{}{\beta}{\alpha}$ & $\qquad\rightarrow\qquad$ & $C=$\includegraphics[width=2in]{original.eps} \\
+$\vlder{\Phi}{}{\beta}{\alpha}$ & $\qquad\rightarrow\qquad$ &
+$
+C=\atomicflow{
+%boxes
+(-13,0)*{\affr{24}{16}};
+(13,0)*{\affr{24}{16}};
+%top edges
+(-24,13)*{\afvj{10}};
+(-22,13)*{\cdots};
+(-20,13)*{\afvj{10}};
+(20,13)*{\afvj{10}};
+(22,13)*{\cdots};
+(24,13)*{\afvj{10}};
+%axioms
+(0,12)*{\afaid{}{\ppl}{\pmi}{}{}{}};
+(-4,10)*{\cdots};
+(4,10)*{\cdots};
+(0,14)*{\afaidex{}{\ppl}{\pmi}{}{}{}{3}{1}};
+(-6,9)*{\afvj{2}};
+(6,9)*{\afvj{2}};
+(0,16)*{\afaidex{}{\pmi}{\ppl}{}{}{}{5}{1}};
+(-10,10)*{\afvj{4}};
+(10,10)*{\afvj{4}};
+(-12,12)*{\cdots};
+(12,12)*{\cdots};
+(0,18)*{\afaidex{}{\pmi}{\ppl}{}{}{}{7}{1}};
+(-14,11)*{\afvj{6}};
+(14,11)*{\afvj{6}};
+%bottom edges
+(-24,-13)*{\afvj{10}};
+(-22,-13)*{\cdots};
+(-20,-13)*{\afvj{10}};
+(20,-13)*{\afvj{10}};
+(22,-13)*{\cdots};
+(24,-13)*{\afvj{10}};
+%cuts
+(0,-12)*{\afaiu{}{\ppl}{\pmi}{}{}{}};
+(-4,-10)*{\cdots};
+(4,-10)*{\cdots};
+(0,-14)*{\afaiuex{}{\ppl}{\pmi}{}{}{}{3}{1}};
+(-6,-9)*{\afvj{2}};
+(6,-9)*{\afvj{2}};
+(0,-16)*{\afaiuex{}{\pmi}{\ppl}{}{}{}{5}{1}};
+(-10,-10)*{\afvj{4}};
+(10,-10)*{\afvj{4}};
+(-12,-12)*{\cdots};
+(12,-12)*{\cdots};
+(0,-18)*{\afaiuex{}{\pmi}{\ppl}{}{}{}{7}{1}};
+(-14,-11)*{\afvj{6}};
+(14,-11)*{\afvj{6}};
+%labels
+(-4,6)*{A};
+(22,6)*{B};
+}
+$ \\
                                 &                           & $\downarrow$ \\
-$\vlder{\Phi'}{}{\vls[\beta'.\delta]}{\vls(\alpha'.\gamma)}$ & $\rightarrow$ & $C'=$\includegraphics[width=1in]{experiment.eps}, \\
+$\vlder{\Phi'}{}{\vls[\beta'.\delta]}{\vls(\alpha'.\gamma)}$ & $\rightarrow$ &
+$
+C'=\atomicflow{
+%boxes
+(-13,0)*{\affr{24}{16}};
+%top edges
+(-24,10)*{\afvj{4}};
+(-22,10)*{\cdots};
+(-20,10)*{\afvj{4}};
+%axioms
+(-2,12)*{\afawd{}{}{}{}};
+(-4,10)*{\cdots};
+(-6,12)*{\afawd{}{}{}{}};
+(-10,10)*{\afvj{4}};
+(-12,10)*{\cdots};
+(-14,10)*{\afvj{4}};
+%bottom edges
+(-24,-10)*{\afvj{4}};
+(-22,-10)*{\cdots};
+(-20,-10)*{\afvj{4}};
+%cuts
+(-2,-10)*{\afvj{4}};
+(-4,-10)*{\cdots};
+(-6,-10)*{\afvj{4}};
+(-10,-12)*{\afawu{}{}{}{}};
+(-12,-10)*{\cdots};
+(-14,-12)*{\afawu{}{}{}{}};
+%labels
+(-4,6)*{A};
+}\quad,
+$\\
 \end{tabular}
-\newline
+\end{center}
 we say that
 \begin{itemize}
 \item $C'$ is an \emph{experiment on $C$ with respect to $B$ under $\pi$}; and
