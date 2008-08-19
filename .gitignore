@@ -7,4 +7,5 @@
 *.pdf
 *.bbl
 *.blg
+*.ps
 .directory
