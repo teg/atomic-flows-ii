@@ -84,7 +84,7 @@
                                 {\scriptstyle-}
                                 {\scriptscriptstyle-}}}
 
-In \cite{GuglGund:07:Normalis:lr} we introduced \emph{atomic flows} as a tool to study normalisation. In this paper we look at global normalisation procedures and argue that they provide for more general and principled tools thtan what we studied before. The paper is inn two parts, the first part gives a \emph{confluent} cut-elimination procedure for propositional classical logic and the second part gives a generalisation of the \emph{streamlinig} procedure described in \cite{GuglGund:07:Normalis:lr}
+In \cite{GuglGund:07:Normalis:lr} we introduced \emph{atomic flows} as a tool to study normalisation. In this paper we focus on global normalisation procedures and show how they provide for more general and principled tools than what we studied before. The paper is inn two parts, the first part gives a \emph{confluent} cut-elimination procedure for propositional classical logic and the second part gives a generalisation of the \emph{streamlinig} procedure described in \cite{GuglGund:07:Normalis:lr}.
 
 Atomic flows are graphical representations of derivations conserving their size as well as the causal relationship between the structural inference rules. All information about logical connectives and logical inference rules are disregarded. The crucial property of atomic flows is that they contain all the information necessary to perform normalisation. We can either just normalise the atomic flows, or use the atomic flows to decide how to normalise the derivations.
 
@@ -122,7 +122,7 @@ switch & medial
 \end{center}
 \end{figure}
 
-Furmulae are considered equal modulo associativity and commutativity of $\wedge$ and $\vee$; and idempotency and identity of $\ttt$ and $\fff$. Furthermore, negation is only allowed on atoms due to DeMorgan's Laws.
+Furmulae are considered equal modulo associativity and commutativity of $\wedge$ and $\vee$; and idempotency and identity of $\ttt$ and $\fff$. Furthermore, negation is only allowed on atoms which is possible due to DeMorgan's Laws.
 
 In this paper we will mainly concern ourselves with the structural rules.
 %===============================================================================
@@ -142,55 +142,55 @@ $\vlder{\Phi}{}{\beta}{\alpha}$ & $\qquad\rightarrow\qquad$ &
 $
 C=\atomicflow{
 %boxes
-(-13,0)*{\affr{24}{16}};
-(13,0)*{\affr{24}{16}};
+(-13,0)*{\affr{24}{8}};
+(13,0)*{\affr{24}{8}};
 %top edges
-(-24,13)*{\afvj{10}};
-(-22,13)*{\cdots};
-(-20,13)*{\afvj{10}};
-(20,13)*{\afvj{10}};
-(22,13)*{\cdots};
-(24,13)*{\afvj{10}};
+(-24,9)*{\afvj{10}};
+(-22,9)*{\cdots};
+(-20,9)*{\afvj{10}};
+(20,9)*{\afvj{10}};
+(22,9)*{\cdots};
+(24,9)*{\afvj{10}};
 %axioms
-(0,12)*{\afaid{}{\ppl}{\pmi}{}{}{}};
-(-4,10)*{\cdots};
-(4,10)*{\cdots};
-(0,14)*{\afaidex{}{\ppl}{\pmi}{}{}{}{3}{1}};
-(-6,9)*{\afvj{2}};
-(6,9)*{\afvj{2}};
-(0,16)*{\afaidex{}{\pmi}{\ppl}{}{}{}{5}{1}};
-(-10,10)*{\afvj{4}};
-(10,10)*{\afvj{4}};
-(-12,12)*{\cdots};
-(12,12)*{\cdots};
-(0,18)*{\afaidex{}{\pmi}{\ppl}{}{}{}{7}{1}};
-(-14,11)*{\afvj{6}};
-(14,11)*{\afvj{6}};
+(0,8)*{\afaid{}{\ppl}{\pmi}{}{}{}};
+(-4,6)*{\cdots};
+(4,6)*{\cdots};
+(0,10)*{\afaidex{}{\ppl}{\pmi}{}{}{}{3}{1}};
+(-6,5)*{\afvj{2}};
+(6,5)*{\afvj{2}};
+(0,12)*{\afaidex{}{\pmi}{\ppl}{}{}{}{5}{1}};
+(-10,6)*{\afvj{4}};
+(10,6)*{\afvj{4}};
+(-12,8)*{\cdots};
+(12,8)*{\cdots};
+(0,14)*{\afaidex{}{\pmi}{\ppl}{}{}{}{7}{1}};
+(-14,7)*{\afvj{6}};
+(14,7)*{\afvj{6}};
 %bottom edges
-(-24,-13)*{\afvj{10}};
-(-22,-13)*{\cdots};
-(-20,-13)*{\afvj{10}};
-(20,-13)*{\afvj{10}};
-(22,-13)*{\cdots};
-(24,-13)*{\afvj{10}};
+(-24,-9)*{\afvj{10}};
+(-22,-9)*{\cdots};
+(-20,-9)*{\afvj{10}};
+(20,-9)*{\afvj{10}};
+(22,-9)*{\cdots};
+(24,-9)*{\afvj{10}};
 %cuts
-(0,-12)*{\afaiu{}{\ppl}{\pmi}{}{}{}};
-(-4,-10)*{\cdots};
-(4,-10)*{\cdots};
-(0,-14)*{\afaiuex{}{\ppl}{\pmi}{}{}{}{3}{1}};
-(-6,-9)*{\afvj{2}};
-(6,-9)*{\afvj{2}};
-(0,-16)*{\afaiuex{}{\pmi}{\ppl}{}{}{}{5}{1}};
-(-10,-10)*{\afvj{4}};
-(10,-10)*{\afvj{4}};
-(-12,-12)*{\cdots};
-(12,-12)*{\cdots};
-(0,-18)*{\afaiuex{}{\pmi}{\ppl}{}{}{}{7}{1}};
-(-14,-11)*{\afvj{6}};
-(14,-11)*{\afvj{6}};
+(0,-8)*{\afaiu{}{\ppl}{\pmi}{}{}{}};
+(-4,-6)*{\cdots};
+(4,-6)*{\cdots};
+(0,-10)*{\afaiuex{}{\ppl}{\pmi}{}{}{}{3}{1}};
+(-6,-5)*{\afvj{2}};
+(6,-5)*{\afvj{2}};
+(0,-12)*{\afaiuex{}{\pmi}{\ppl}{}{}{}{5}{1}};
+(-10,-6)*{\afvj{4}};
+(10,-6)*{\afvj{4}};
+(-12,-8)*{\cdots};
+(12,-8)*{\cdots};
+(0,-14)*{\afaiuex{}{\pmi}{\ppl}{}{}{}{7}{1}};
+(-14,-7)*{\afvj{6}};
+(14,-7)*{\afvj{6}};
 %labels
-(-4,6)*{A};
-(22,6)*{B};
+(-4,2)*{A};
+(22,2)*{B};
 }
 $ \\
                                 &                           & $\downarrow$ \\
@@ -198,31 +198,31 @@ $\vlder{\Phi'}{}{\vls[\beta'.\delta]}{\vls(\alpha'.\gamma)}$ & $\rightarrow$ &
 $
 C'=\atomicflow{
 %boxes
-(-13,0)*{\affr{24}{16}};
+(-13,0)*{\affr{24}{8}};
 %top edges
-(-24,10)*{\afvj{4}};
-(-22,10)*{\cdots};
-(-20,10)*{\afvj{4}};
+(-24,6)*{\afvj{4}};
+(-22,6)*{\cdots};
+(-20,6)*{\afvj{4}};
 %axioms
-(-2,12)*{\afawd{}{}{}{}};
-(-4,10)*{\cdots};
-(-6,12)*{\afawd{}{}{}{}};
-(-10,10)*{\afvj{4}};
-(-12,10)*{\cdots};
-(-14,10)*{\afvj{4}};
+(-2,8)*{\afawd{}{}{}{}};
+(-4,6)*{\cdots};
+(-6,8)*{\afawd{}{}{}{}};
+(-10,6)*{\afvj{4}};
+(-12,6)*{\cdots};
+(-14,6)*{\afvj{4}};
 %bottom edges
-(-24,-10)*{\afvj{4}};
-(-22,-10)*{\cdots};
-(-20,-10)*{\afvj{4}};
+(-24,-6)*{\afvj{4}};
+(-22,-6)*{\cdots};
+(-20,-6)*{\afvj{4}};
 %cuts
-(-2,-10)*{\afvj{4}};
-(-4,-10)*{\cdots};
-(-6,-10)*{\afvj{4}};
-(-10,-12)*{\afawu{}{}{}{}};
-(-12,-10)*{\cdots};
-(-14,-12)*{\afawu{}{}{}{}};
+(-2,-6)*{\afvj{4}};
+(-4,-6)*{\cdots};
+(-6,-6)*{\afvj{4}};
+(-10,-8)*{\afawu{}{}{}{}};
+(-12,-6)*{\cdots};
+(-14,-8)*{\afawu{}{}{}{}};
 %labels
-(-4,6)*{A};
+(-4,2)*{A};
 }\quad,
 $\\
 \end{tabular}
@@ -232,13 +232,18 @@ we say that
 \item $C'$ is an \emph{experiment on $C$ with respect to $B$ under $\pi$}; and
 \item $\Phi'$ is an \emph{experiment on $\Phi$ with respect to $B$ under $\pi$} if
 \begin{itemize}
- \item $\alpha'$ and $\beta'$ are obtained from $\alpha$ and $\beta$ respectively by substituting all the atoms mapping to positive (resp. negative) edges of $B$ with $\ttt$ (resp. $\fff$); and
- \item $\gamma$ (resp. $\delta$) is a conjuncton (resp. disjunction) of all the atoms mapping to top (resp. bottom) edges in $C'$, but not in $C$.
+ \item $\alpha'$ and $\beta'$ are obtained from $\alpha$ and $\beta$ respectively by substituting all the atoms mapping to positive (resp.\ negative) edges of $B$ with $\ttt$ (resp.\ $\fff$); and
+ \item $\gamma$ (resp.\ $\delta$) is a conjuncton (resp.\ disjunction) of all the atoms mapping to top (resp.\ bottom) edges in $C'$, but not in $C$.
 % TODO define ``top edge'' and ``bottom edge''
-% \item $\gamma$ (resp. $\delta$) is a conjunction (resp. disjunction) of all the atoms mapping to edges adjacent to $\top$ (resp. $\bot$) in $C'$, but not in $C$.
+% \item $\gamma$ (resp.\ $\delta$) is a conjunction (resp.\ disjunction) of all the atoms mapping to edges adjacent to $\top$ (resp.\ $\bot$) in $C'$, but not in $C$.
 \end{itemize}
 \end{itemize}
 \end{defi}
+
+\begin{defi}
+Given a derivation $\Phi$ with atomic flow $C$ as in Definition~\ref{DefExperiment}. The (co)interaction nodes in $C$ which are not in $A$ nor $B$ we call \emph{evidenced (co)interaction nodes} and the inference rules corresponding to evidenced nodes we call \emph{evidenced (co)interaction rulse}.
+\end{defi}
+
 
 Given an atomic flow $C$ as described above, it is obvious that we can create the atomic flow $C'$. We now need to show that we can always obtain the corresponding derivation $\Phi'$, so in this sense making experiments is a ``sound'' operation.
 
@@ -246,9 +251,9 @@ Given an atomic flow $C$ as described above, it is obvious that we can create th
 Given any derivation $\Phi$ with atomic flow $C$, an atomic subflow $B$ of $C$ and a polarity assignment $\pi$, such that there exists an experiment on $C$ with respect to $B$ under $\pi$ then there exists a derivation $\Phi'$ such that $\Phi'$ is an experiment on $\Phi$ with respect to $B$ under $\pi$.
 \end{lem}
 \begin{proof}
-Let $\Phi$ have premiss $\alpha$ and conclusion $\beta$, let $C'$ be an experiment on $C$ and let $\alpha'$, $\beta'$, $\xi'$ and $\zeta'$ denote the formulae obtained from $\alpha$, $\beta$, $\xi$ and $\zeta$ by substituting atoms mapping to positive (resp. negative) edges which occur in $C$ but not in $C'$ with $\ttt$ (resp. $\fff$). For simplicity, let us call the (co)interactions mapping to the (co)interaction nodes in $C$ which are not in neither $A$ nor $B$, \emph{evidenced (co)interactions}\footnote{we should consider to make this a proper definition, or if we want all the (co)interactions to be `evidenced'}.
+Let $\Phi$ have premiss $\alpha$ and conclusion $\beta$, let $C'$ be an experiment on $C$ and let $\alpha'$, $\beta'$, $\xi'$ and $\zeta'$ denote the formulae obtained from $\alpha$, $\beta$, $\xi$ and $\zeta$ by substituting atoms mapping to positive (resp.\ negative) edges which occur in $C$ but not in $C'$ with $\ttt$ (resp.\ $\fff$).
 
-We then obtain $\Phi'$ from $\Phi$ by substituting each formula $\xi$ with $\vls[(\xi'.\gamma_i).\delta_j]$; where $i$ (resp. $j$) is the number of evidenced interactions (resp. cointeractions) below (resp. above) $\xi$ in $\Phi$ such that the edge connecting the corresponding node to $A$ is positive (resp. negative) under $\pi$, $\gamma_0=\ttt$, $\gamma_{i}=\vls(\gamma_{i-1}.a_i)$, $\delta_0=\fff$ and $\delta_{j}=\vls[\delta_{j-1}.a_j]$; where $a_i$ (resp. $a_j$) is the atom, mapping to a positive edge, taking part in interaction (resp. cointeraction) number $i$ (resp. $j$) from the top (resp. bottom) in $\Phi$.
+We then obtain $\Phi'$ from $\Phi$ by substituting each formula $\xi$ with $\vls[(\xi'.\gamma_i).\delta_j]$; where $i$ (resp.\ $j$) is the number of evidenced interactions (resp.\ cointeractions) below (resp.\ above) $\xi$ in $\Phi$ such that the edge connecting the corresponding node to $A$ is positive (resp.\ negative) under $\pi$, $\gamma_0=\ttt$, $\gamma_{i}=\vls(\gamma_{i-1}.a_i)$, $\delta_0=\fff$ and $\delta_{j}=\vls[\delta_{j-1}.a_j]$; where $a_i$ (resp.\ $a_j$) is the atom, mapping to a positive edge, taking part in interaction (resp.\ cointeraction) number $i$ (resp.\ $j$) from the top (resp.\ bottom) in $\Phi$.
 
 It is now straight forward to check that the following substitutions of inference rules gives a derivation with the right atomic flow:
 \begin{itemize}
@@ -260,10 +265,10 @@ It is now straight forward to check that the following substitutions of inferenc
 The derivation $\Phi'$ we have obtained is a derivation from $\vls[(\alpha'.\gamma_k).\delta_0]$ to $\vls[(\beta'.\gamma_0).\delta_l]$ for some $k,l$, notice that $\gamma_0=\ttt$ and $\delta_0=\fff$, so we get $\Phi'$ from $\vls(\alpha'.\gamma_k)$ to $\vls[\beta'.\delta_l]$ as we want.
 \end{proof}
 
-When doing cut-elimination the experiments we need are of a specific form; we need to preserve the conclusion, so we cannot create any new bottom wires. This is the motivation for the following definition.
+When performing cut-elimination the experiments we need are of a specific form; we need to preserve the conclusion, so we cannot create any new bottom edges. This is the motivation for the following definition.
 
 \begin{defi}
-Let $C$ be an atomic flow and $\pi$ a polarity assignment to $C$. If $B$ is the subflow of $C$ containing only negative (resp. positive) nodes and $A$ is the subflow of $C$ containing only positive (resp. negative) nodes, then the experiment on $C$ with respect to $B$ under $\pi$ is called the \emph{$\fff$-experiment (resp. $\ttt$-experiment) on $C$ under $\pi$}. The definition extends to derivations in the obvious way.
+Let $C$ be an atomic flow and $\pi$ a polarity assignment to $C$. If $B$ is the subflow of $C$ containing only negative (resp.\ positive) nodes and $A$ is the subflow of $C$ containing only positive (resp.\ negative) nodes, then the experiment on $C$ with respect to $B$ under $\pi$ is called the \emph{$\fff$-experiment (resp.\ $\ttt$-experiment) on $C$ under $\pi$}. The definition extends to derivations in the obvious way.
 \end{defi}
 
 We now observe that a $\fff$-experiment indeed gives us the what we want. The observant reader might note that instead of the original conclusion, $\beta$, we get $\beta'$, which in this case is $\beta$ with some atom occurences substituted with $\fff$, as we shall se later, this is not a problem. We could indeed fix this straight away by applying $\awd$'s.
@@ -272,7 +277,7 @@ We now observe that a $\fff$-experiment indeed gives us the what we want. The ob
 For any proof\/ $\vlproof{\Pi}{\SKS}{\beta}$ and any polarity assignment to its atomic  flow, $\pi$, the $\fff$-experiment on $\Pi$ under $\pi$ is of the form $\vlder{}{\SKS\setminus\{\aid,\aiu\}}{\beta'}{\gamma}$. Where $\beta'$ and $\gamma$ are given by Definition~\ref{DefExperiment}.
 \end{pro}
 
-We have seen how we can generate one derivation for each polarity assignment, now we will see how we can glue all of these derivations together to get us the proof we want.
+We have seen how we can generate one derivation for each polarity assignment, now we will see how we can glue all of them together to obtain the cut-free proof.
 
 The disjunction of all the possible truth value assignments is obviously a tautology. We now show that we can construct a \emph{canonical} proof of this tautology. By ``canonical'' we mean that we can do it in such a way that there is no arbitrary choice involved. In particular this entails that the atomic flow of all the different atoms will be the same.
 
@@ -335,7 +340,7 @@ There is only one way of building such a proof in the sense that the atomic flow
 %\item replacing each $\vlinf{\aiu}{}{\xi\{\fff\}}{\xi\{\vls(a_i^\ppl.{\bar a_i^\pmi})\}}$ mapping to a node in $A$ by $\vlinf{=}{}{\xi_p\{\fff\}}{\xi_p\vlsbr(\ttt.\fff)}$, for some $0 \leq i \leq n$; and
 %\item replacing each other rule instance $\vlinf{\rho}{}{\xi}{\zeta}$ by $\vlinf{\rho}{}{\xi_p}{\zeta_p}$,
 %\end{itemize}
-%where $\rho\in\{\swi,\med\}$ and $\alpha_p,\beta_p,\xi_p,\zeta_p$ denote the formulae obtained from $\alpha,\beta,\xi,\zeta$, respectively, by replacing atom occurrences mapped to edges of $A$. Atoms mapping to positive (resp. negative) edges under $\pi_p$ are replaced with $\ttt$ (resp. $\fff$).
+%where $\rho\in\{\swi,\med\}$ and $\alpha_p,\beta_p,\xi_p,\zeta_p$ denote the formulae obtained from $\alpha,\beta,\xi,\zeta$, respectively, by replacing atom occurrences mapped to edges of $A$. Atoms mapping to positive (resp.\ negative) edges under $\pi_p$ are replaced with $\ttt$ (resp.\ $\fff$).
 %\end{defi}
 
 %\begin{rem}
@@ -394,7 +399,7 @@ There is only one way of building such a proof in the sense that the atomic flow
 We want to show two things in this section. Firstly that any subflow with no path to either $\top$ nor $\bot$ can be eliminated (at the expense of copying the rest of the flow). Secondly that we can transform an atomic flow in such a way that every path from an interaction to a cointeraction node is in a subflow which is not connected to $\top$ nor $\bot$. We do the latter first.
 
 \begin{defi}
-We call an atomic flow \emph{ambiguous} for polarity assignment $\pi_p$ if there exist an interaction (resp. cointeraction) node with a positive path from the interaction (resp. cointeraction) to $\bot$ (resp. $\top$) and a positive path from the interaction (resp. cointeraction) node to a cointeraction (resp. interaction node). If an atomic flow is not ambiguous for plority assignment $\pi_p$ we say that it is \emph{unambiguous}.
+We call an atomic flow \emph{ambiguous} for polarity assignment $\pi_p$ if there exist an interaction (resp.\ cointeraction) node with a positive path from the interaction (resp.\ cointeraction) to $\bot$ (resp.\ $\top$) and a positive path from the interaction (resp.\ cointeraction) node to a cointeraction (resp.\ interaction node). If an atomic flow is not ambiguous for plority assignment $\pi_p$ we say that it is \emph{unambiguous}.
 \end{defi}
 
 \begin{lem}
