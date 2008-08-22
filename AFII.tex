@@ -271,7 +271,7 @@ When performing cut-elimination the experiments we need are of a specific form; 
 Let $C$ be an atomic flow and $\pi$ a polarity assignment to $C$. If $B$ is the subflow of $C$ containing only negative (resp.\ positive) nodes and $A$ is the subflow of $C$ containing only positive (resp.\ negative) nodes, then the experiment on $C$ with respect to $B$ under $\pi$ is called the \emph{$\fff$-experiment (resp.\ $\ttt$-experiment) on $C$ under $\pi$}. The definition extends to derivations in the obvious way.
 \end{defi}
 
-We now observe that a $\fff$-experiment indeed gives us the what we want. The observant reader might note that instead of the original conclusion, $\beta$, we get $\beta'$, which in this case is $\beta$ with some atom occurences substituted with $\fff$, as we shall se later, this is not a problem. We could indeed fix this straight away by applying $\awd$'s.
+We now observe that an $\fff$-experiment indeed gives us the what we want. The observant reader might note that instead of the original conclusion, $\beta$, we get $\beta'$, which in this case is $\beta$ with some atom occurences substituted with $\fff$, as we shall se later, this is not a problem. We could indeed fix this straight away by applying $\awd$'s.
 
 \begin{pro}\label{PropExperimentShapeBot}
 For any proof\/ $\vlproof{\Pi}{\SKS}{\beta}$ and any polarity assignment to its atomic  flow, $\pi$, the $\fff$-experiment on $\Pi$ under $\pi$ is of the form $\vlder{}{\SKS\setminus\{\aid,\aiu\}}{\beta'}{\gamma}$. Where $\beta'$ and $\gamma$ are given by Definition~\ref{DefExperiment}.
@@ -286,11 +286,36 @@ Let $\Pi$ be a proof, let $\mathcal{P}$ be the set of all the polarity assignmen
 \end{lem}
 
 \begin{proof}
-Enumerate the atoms occurring in $\gamma_\pi$ for any $\pi$ $a_0,\dots,a_n$. Let $\pi_i$ be $\pi_{i+1}$ restricted to the subflow mapped to by $a_0,\dots,a_i$, let $\gamma_{\pi_i}=\gamma_\pi\{a_{i+1}\leftarrow\ttt,\dots,a_n\leftarrow\ttt\}$ and let $\mathcal{P}_i$ be the set of all the possible $\pi_i$. Notice that $|\mathcal{P}|=2^i$.
+Enumerate the atoms occurring in $\gamma_\pi$ for any $\pi$: $a_1,\dots,a_n$. Let $\pi_i$ be $\pi_{i+1}$ restricted to the subflow mapped to by $a_1,\dots,a_i$, let $\mathcal{P}_i$ be the set of all the possible $\pi_i$ and let $\gamma_{\pi_i}=\gamma_\pi\{a_{i+1}\leftarrow\ttt,\dots,a_n\leftarrow\ttt\}$.
 
-We induct on $i$. The inductive case becomes; $\vlproof{}{\{\aid,\acu,\swi,\med\}}{\bigvee_{\pi\in\mathcal{P_i}}\gamma_\pi}$
+We induct on $i$. The base case is trivial:
+\[
+\vlinf{=}{}{\bigvee_{\pi\in\mathcal{P}_{0}}\gamma_\pi}{\ttt}
+\]
 
-Given a subflow $A$ of the original atomic flow, let $\pi'$ be the restriction of $\pi$ to $A$. Then $\gamma_\pi'$ is obtained from $\gamma_\pi$ by substituting the atoms not in $\pi'$ with $\ttt$. Let $\gamma\in\mathcal{P}$ contain $n$ atoms, then define $\mathcal{P}_n=\mathcal{P}$ and $\mathcal{P}_{i-1}=\{\pi|\pi\in\mathcal{P}\}$
+
+The inductive case is:
+
+\[
+\vlderivation
+{
+\vlin{=}{}{\bigvee_{\pi\in\mathcal{P}_{i+1}}\gamma_\pi}
+ {
+ \vlde{}{\{\swi\}}{\bigvee_{\pi\in\mathcal{P}_i}\vls[(\gamma_\pi.a_{i+1}).(\gamma_\pi.\bar{a}_{i+1})]}
+  {
+  \vlde{}{\{\med,\acu\}}{\vls(\bigvee_{\pi\in\mathcal{P}_i}\vlsbr(\gamma_\pi.\gamma_\pi).\bigwedge_{\pi\in\mathcal{P}_i}\vlsbr[a_{i+1}.\bar{a}_{i+1}])}
+   {
+   \vlin{\aid}{}{\vls(\bigvee_{\pi\in\mathcal{P}_i}\gamma_\pi.\vlsbr[a_{i+1}.\bar{a}_{i+1}])}
+    {
+    \vlpr{IH}{\{\aid,\acu,\swi,\med\}}{\bigvee_{\pi\in\mathcal{P}_i}\gamma_\pi}
+    }
+   }
+  }
+ }
+}
+\]
+
+Notice that there is the same number of occurances of each atom and that the atomic flow of each atom only contains one axiom, so the number of cocontractions must be the same. Hence the atomic flow of each of the atoms are the same modulo associativity of (co)contraction; and in this sense the proofs are canonical.
 \end{proof}
 
 \begin{lem}\label{LemGlueBottom}
