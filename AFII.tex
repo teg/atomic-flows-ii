@@ -424,12 +424,80 @@ There is only one way of building such a proof in the sense that the atomic flow
 We want to show two things in this section. Firstly that any subflow with no path to either $\top$ nor $\bot$ can be eliminated (at the expense of copying the rest of the flow). Secondly that we can transform an atomic flow in such a way that every path from an interaction to a cointeraction node is in a subflow which is not connected to $\top$ nor $\bot$. We do the latter first.
 
 \begin{defi}
-We call an atomic flow \emph{ambiguous} for polarity assignment $\pi_p$ if there exist an interaction (resp.\ cointeraction) node with a positive path from the interaction (resp.\ cointeraction) to $\bot$ (resp.\ $\top$) and a positive path from the interaction (resp.\ cointeraction) node to a cointeraction (resp.\ interaction node). If an atomic flow is not ambiguous for plority assignment $\pi_p$ we say that it is \emph{unambiguous}.
+An atomic flow with the following shape under polarity assignment $\pi$ is said to be \emph{$\ppl$-prenormalised under $\pi$}
+\[
+\atomicflow{
+%boxes
+(-20,8)*{\affr{14}{8}};
+(-20,-8)*{\affr{14}{8}};
+(-28,20)*{\affr{14}{8}};
+(-28,-20)*{\affr{14}{8}};
+(0,0)*{\affr{22}{8}};
+(16,0)*{\affr{6}{8}};
+%axioms
+(6,5)*{\afvj{2}};
+(8,6)*{\cdots};
+(12,8)*{\afaid{\pmi}{}{\ppl}{}{}{}};
+(12,10)*{\afaidex{\pmi}{}{\ppl}{}{}{}{3}{1}};
+(16,6)*{\cdots};
+(18,5)*{\afvj{2}};
+%
+(-12,16)*{\afaid{\ppl}{}{\pmi}{}{}{}};
+(-18,13)*{\afvj{2}};
+(-16,14)*{\cdots};
+(-8,10)*{\cdots};
+(-12,18)*{\afaidex{\ppl}{}{\pmi}{}{}{}{3}{1}};
+(-10,8)*{\afvj{8}};
+(-6,9)*{\afvj{10}};
+%cuts
+(6,-5)*{\afvj{2}};
+(8,-6)*{\cdots};
+(12,-8)*{\afaiu{\pmi}{}{\ppl}{}{}{}};
+(12,-10)*{\afaiuex{\pmi}{}{\ppl}{}{}{}{3}{1}};
+(16,-6)*{\cdots};
+(18,-5)*{\afvj{2}};
+%
+(-12,-16)*{\afaiu{\ppl}{}{\pmi}{}{}{}};
+(-18,-13)*{\afvj{2}};
+(-16,-14)*{\cdots};
+(-8,-10)*{\cdots};
+(-12,-18)*{\afaiuex{\ppl}{}{\pmi}{}{}{}{3}{1}};
+(-10,-8)*{\afvj{8}};
+(-6,-9)*{\afvj{10}};
+%top edges
+(-2,6)*{\afvj{4}};
+(0,6)*{\cdots};
+(2,6)*{\afvj{4}};
+(-26,14)*{\afvj{4}};
+(-24,14)*{\cdots};
+(-22,14)*{\afvj{4}};
+(-24,0)*{\afcjl{12}{8}};
+(-28,0)*{\afcjl{12}{8}};
+(-34,10)*{\afvj{12}};
+(-32,6)*{\cdots};
+(-30,10)*{\afvj{12}};
+(-30,26)*{\afvj{4}};
+(-28,26)*{\cdots};
+(-26,26)*{\afvj{4}};
+%bottom edges
+(-2,-6)*{\afvj{4}};
+(0,-6)*{\cdots};
+(2,-6)*{\afvj{4}};
+(-26,-14)*{\afvj{4}};
+(-24,-14)*{\cdots};
+(-22,-14)*{\afvj{4}};
+(-24,0)*{\afcjr{12}{8}};
+(-28,0)*{\afcjr{12}{8}};
+(-34,-10)*{\afvj{12}};
+(-32,-6)*{\cdots};
+(-30,-10)*{\afvj{12}};
+(-30,-26)*{\afvj{4}};
+(-28,-26)*{\cdots};
+(-26,-26)*{\afvj{4}};
+}\quad,
+\]
+where the boxes represent any atomic flow not containing axioms nor cuts. We call an atomic flow \emph{$\pmi$-normalised under $\pi$} if it is $\ppl$-normalised under the dual of $\pi$.
 \end{defi}
-
-\begin{lem}
-Given a derivation $\Delta$ from $\alpha$ to $\beta$ with atomic flow $A$ there exists a derivation $\Delta'$ from $\alpha$ to $\beta$ with unambiguous atomic flow $A'$ for some polarity assignment $\pi_p$ such that $|A'|/|A|\in O(1)$.
-\end{lem}
 
 \begin{proof}[Proof (Sketch)]
 {\footnotesize\begin{verbatim}
