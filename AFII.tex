@@ -421,7 +421,9 @@ There is only one way of building such a proof in the sense that the atomic flow
 %===============================================================================
 \section{Streamlining}
 
-We want to show two things in this section. Firstly that any subflow with no path to either $\top$ nor $\bot$ can be eliminated (at the expense of copying the rest of the flow). Secondly that we can transform an atomic flow in such a way that every path from an interaction to a cointeraction node is in a subflow which is not connected to $\top$ nor $\bot$. We do the latter first.
+The idea behind the streamlining procedures we show here is to substitute units in place of atoms to eliminate axiom-cut pairs. These kind of substitutions are only possible if we can find ``closed'' subflows which are not connected to the premiss or conclusion of the derivation.
+
+We first show how we can always \emph{prenormalise} a derivation, this takes a derivation and splits it in two parts one which is streamlined and one which is not directly connected to the premiss nor the conclusion. We then show how to streamline the latter part of the atomic flow.
 
 \begin{defi}
 An atomic flow with the following shape under polarity assignment $\pi$ is said to be \emph{$\ppl$-prenormalised under $\pi$}
@@ -429,45 +431,51 @@ An atomic flow with the following shape under polarity assignment $\pi$ is said 
 \atomicflow{
 %boxes
 (-20,8)*{\affr{14}{8}};
+(-15,10)*{\ppl};
 (-20,-8)*{\affr{14}{8}};
+(-15,-6)*{\ppl};
 (-28,20)*{\affr{14}{8}};
+(-23,22)*{\ppl};
 (-28,-20)*{\affr{14}{8}};
+(-23,-18)*{\ppl};
 (0,0)*{\affr{22}{8}};
+(9,2)*{\pmi};
 (16,0)*{\affr{6}{8}};
+(17,2)*{\ppl};
 %axioms
 (6,5)*{\afvj{2}};
 (8,6)*{\cdots};
-(12,8)*{\afaid{\pmi}{}{\ppl}{}{}{}};
-(12,10)*{\afaidex{\pmi}{}{\ppl}{}{}{}{3}{1}};
+(12,8)*{\afaid{}{}{}{}{}{}};
+(12,10)*{\afaidex{}{}{}{}{}{}{3}{1}};
 (16,6)*{\cdots};
 (18,5)*{\afvj{2}};
 %
-(-12,16)*{\afaid{\ppl}{}{\pmi}{}{}{}};
+(-12,16)*{\afaid{}{}{}{}{}{}};
 (-18,13)*{\afvj{2}};
 (-16,14)*{\cdots};
 (-8,10)*{\cdots};
-(-12,18)*{\afaidex{\ppl}{}{\pmi}{}{}{}{3}{1}};
+(-12,18)*{\afaidex{}{}{}{}{}{}{3}{1}};
 (-10,8)*{\afvj{8}};
 (-6,9)*{\afvj{10}};
 %cuts
 (6,-5)*{\afvj{2}};
 (8,-6)*{\cdots};
-(12,-8)*{\afaiu{\pmi}{}{\ppl}{}{}{}};
-(12,-10)*{\afaiuex{\pmi}{}{\ppl}{}{}{}{3}{1}};
+(12,-8)*{\afaiu{}{}{}{}{}{}};
+(12,-10)*{\afaiuex{}{}{}{}{}{}{3}{1}};
 (16,-6)*{\cdots};
 (18,-5)*{\afvj{2}};
 %
-(-12,-16)*{\afaiu{\ppl}{}{\pmi}{}{}{}};
+(-12,-16)*{\afaiu{}{}{}{}{}{}};
 (-18,-13)*{\afvj{2}};
 (-16,-14)*{\cdots};
 (-8,-10)*{\cdots};
-(-12,-18)*{\afaiuex{\ppl}{}{\pmi}{}{}{}{3}{1}};
+(-12,-18)*{\afaiuex{}{}{}{}{}{}{3}{1}};
 (-10,-8)*{\afvj{8}};
 (-6,-9)*{\afvj{10}};
 %top edges
-(-2,6)*{\afvj{4}};
-(0,6)*{\cdots};
-(2,6)*{\afvj{4}};
+(-2,16)*{\afvj{24}};
+(0,16)*{\cdots};
+(2,16)*{\afvj{24}};
 (-26,14)*{\afvj{4}};
 (-24,14)*{\cdots};
 (-22,14)*{\afvj{4}};
@@ -480,9 +488,9 @@ An atomic flow with the following shape under polarity assignment $\pi$ is said 
 (-28,26)*{\cdots};
 (-26,26)*{\afvj{4}};
 %bottom edges
-(-2,-6)*{\afvj{4}};
-(0,-6)*{\cdots};
-(2,-6)*{\afvj{4}};
+(-2,-16)*{\afvj{24}};
+(0,-16)*{\cdots};
+(2,-16)*{\afvj{24}};
 (-26,-14)*{\afvj{4}};
 (-24,-14)*{\cdots};
 (-22,-14)*{\afvj{4}};
@@ -496,14 +504,14 @@ An atomic flow with the following shape under polarity assignment $\pi$ is said 
 (-26,-26)*{\afvj{4}};
 }\quad,
 \]
-where the boxes represent any atomic flow not containing axioms nor cuts. We call an atomic flow \emph{$\pmi$-prenormalised under $\pi$} if it is $\ppl$-prenormalised under the dual of $\pi$. The definitions extend to derivations in the obvious way.
+where the boxes represent any atomic flow not containing axioms nor cuts and the labels indicate the polarity of all the edges in the respective boxes. We call an atomic flow \emph{$\pmi$-prenormalised under $\pi$} if it is $\ppl$-prenormalised under the dual of $\pi$. The definitions extend to derivations in the obvious way.
 \end{defi}
 
 \begin{lem}
 Given a derivation $\Phi$ from $\alpha$ to $\beta$. Then there exist a $\ppl$-prenormalised derivation $\Phi^+$ and a $\pmi$-prenormalised derivation $\Phi^-$ from $\alpha$ to $\beta$ such that $|\Phi^+|,|\Phi^-|\in O(|\Phi|)$.
 \end{lem}
 \begin{proof}
-We prove the case for $\pmi$-prenormalised, the other case trivially follows.
+We prove the case for $\ppl$-prenormalised, $\pmi$-prenormalised trivially follows.
 
 The atomic flow of any derivation is of the form
 \[
@@ -562,11 +570,11 @@ We will now show how we can build the required derivation with atomic flow
 (30,2)*{B_4};
 %contractions
 (5,14.5)*{\afvj{5}};
-(8,8)*{\afacdex{}{}{\pmi}{}{}{}{3}{2}};
+(8,8)*{\afacdex{}{}{}{}{}{}{3}{2}};
 (10,6)*{\cdots};
 (9,16.5)*{\afvj{1}};
 (11,14)*{\afvj{5}};
-(12,12)*{\afacdex{}{}{\pmi}{}{}{}{3}{2}};
+(12,12)*{\afacdex{}{}{}{}{}{}{3}{2}};
 (12,6)*{\afvj{4}};
 %weakenings
 (-42,8)*{\afawd{}{}{}{}};
@@ -621,11 +629,11 @@ We will now show how we can build the required derivation with atomic flow
 %% INVERSE
 %cocontractions
 (5,-14.5)*{\afvj{5}};
-(8,-8)*{\afacuex{}{}{\pmi}{}{}{}{3}{2}};
+(8,-8)*{\afacuex{}{}{}{}{}{}{3}{2}};
 (10,-6)*{\cdots};
 (9,-16.5)*{\afvj{1}};
 (11,-14)*{\afvj{5}};
-(12,-12)*{\afacuex{}{}{\pmi}{}{}{}{3}{2}};
+(12,-12)*{\afacuex{}{}{}{}{}{}{3}{2}};
 (12,-6)*{\afvj{4}};
 %coweakenings
 (-42,-8)*{\afawu{}{}{}{}};
@@ -681,7 +689,7 @@ We will now show how we can build the required derivation with atomic flow
 \]
 where $B_1,B_2,B_3,B_4$ are isomorphic to $B$. It is straightforward to observe that this atomic flow is $\ppl$-prenormalised.
 
-We build $\Phi^+$ by applying substitutions to $\Phi$. For every atom occurence $a$ which maps to an edge in $B$ we substitute it with the formula $\vls[(a_1.a_2).(a_3.a_4)]$. Where $a=a_1=a_2=a_3=a_4$ and the subscripts denote which of the $B_1,B_2,B_3,B_4$ the atom maps to. Rule instances $\vlinf{\aid}{}{\vls[\bar{a}.a]}{\ttt}$ and $\vlinf{\aiu}{}{\fff}{\vls(\bar{a}.a)}$ where $a$ maps to an edge in $B$ are substituted with derivations
+We build $\Phi^+$ by applying substitutions to $\Phi$. Let $a$ be an atom occurence which maps to an edge in $B$. We substitute $a$ with the formula $\vls[(a_1.a_2).(a_3.a_4)]$, where $a=a_1=a_2=a_3=a_4$ and the subscripts denote which of the $B_1,B_2,B_3,B_4$ the atom maps to. Rule instances $\vlinf{\aid}{}{\vls[\bar{a}.a]}{\ttt}$ and $\vlinf{\aiu}{}{\fff}{\vls(\bar{a}.a)}$ are substituted with derivations
 \[
 \vlderivation
 {
@@ -725,7 +733,7 @@ We build $\Phi^+$ by applying substitutions to $\Phi$. For every atom occurence 
  }
 }\quad,
 \]
-respectively. Finally any occurance of $\vls[(a_1.a_2).(a_3.a_4)]$ in the premiss and $\vls[(a_1.a_2).(a_3.a_4)]$ in the conclusion are substituted with the derivations
+respectively. Rule instances $\acd,\acu,\awd,\awu$ which apply to $a$ are substituted with their generic counterparts applied to $\vls[(a_1.a_2).(a_3.a_4)]$. Finally any occurance of $\vls[(a_1.a_2).(a_3.a_4)]$ in the premiss and $\vls[(a_1.a_2).(a_3.a_4)]$ in the conclusion are substituted with the derivations
 \[
 \vlderivation
 {
@@ -757,7 +765,7 @@ respectively. Finally any occurance of $\vls[(a_1.a_2).(a_3.a_4)]$ in the premis
  }
 }\quad,
 \]
-respectively. It is now straightforward to verify that the derivation so obtained has the aforementioned atomic flow.
+respectively. It is now straightforward to verify that the derivation so obtained has the aforementioned atomic flow and the result follows.
 \end{proof}
 
 \begin{defi}\label{DefRedIS}
