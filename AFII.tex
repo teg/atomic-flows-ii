@@ -496,194 +496,268 @@ An atomic flow with the following shape under polarity assignment $\pi$ is said 
 (-26,-26)*{\afvj{4}};
 }\quad,
 \]
-where the boxes represent any atomic flow not containing axioms nor cuts. We call an atomic flow \emph{$\pmi$-normalised under $\pi$} if it is $\ppl$-normalised under the dual of $\pi$.
+where the boxes represent any atomic flow not containing axioms nor cuts. We call an atomic flow \emph{$\pmi$-prenormalised under $\pi$} if it is $\ppl$-prenormalised under the dual of $\pi$. The definitions extend to derivations in the obvious way.
 \end{defi}
 
-\begin{proof}[Proof (Sketch)]
-{\footnotesize\begin{verbatim}
-Here is the picture. In constructions 1-3, a,b,c,d (which are just labels, and
-not atom names) are supposed to represent groups of wires (but I have drawn only
-one for simplicity).
+\begin{lem}
+Given a derivation $\Phi$ from $\alpha$ to $\beta$. Then there exist a $\ppl$-prenormalised derivation $\Phi^+$ and a $\pmi$-prenormalised derivation $\Phi^-$ from $\alpha$ to $\beta$ such that $|\Phi^+|,|\Phi^-|\in O(|\Phi|)$.
+\end{lem}
+\begin{proof}
+We prove the case for $\pmi$-prenormalised, the other case trivially follows.
 
-1) The construction Alessio found when there is one group of top wires, and two
-groups of bottom wires. In the derivation this is obtained by substituting "a
-\leftarrow a \land a".
-
-2) The dual of 1.
-
-3) Consider group a and b as one group and apply (1). Now consider c and d as
-one group and apply (2). Finally apply some weakening reductions. The result is
-four boxes, one with paths from a to c, one with path from a to d, one with
-paths from b to c and one with paths from a to d.
-
-4) (3) applied to the case we are interested in, where a go to interactions and
-c to cuts. I labelled the four boxes, to show that I shuffled them around a bit
-for readability. Box 1 is eliminated and 2-4 kept.
-\end{verbatim}}
-
+The atomic flow of any derivation is of the form
 \[
 \atomicflow{
-(-2,8)*{\afvj4};
-(0,8)*{\cdots};
-(2,8)*{\afvj4};
-(0,0)*{\affr{12}{12}};
-(-5,-8)*{\afvj4};
-(-3,-8)*{\cdots};
-(-1,-8)*{\afvj4};
-(5,-8)*{\afvj4};
-(3,-8)*{\cdots};
-(1,-8)*{\afvj4};
-}\quad\rightarrow\quad
-\atomicflow{
-(-2,12)*{\afacuexsq{}{}{}{}{}{}{4}{1}};
-(0,16)*{\cdots};
-(2,12)*{\afacuexsq{}{}{}{}{}{}{4}{1}};
-(-8,0)*{\affr{12}{12}};
-(8,0)*{\affr{12}{12}};
-(-13,-8)*{\afvj4};
-(-11,-8)*{\cdots};
-(-9,-8)*{\afvj4};
-(-3,-10)*{\afawu{}{}{}{}};
-(-5,-8)*{\cdots};
-(-7,-10)*{\afawu{}{}{}{}};
-(13,-8)*{\afvj4};
-(11,-8)*{\cdots};
-(9,-8)*{\afvj4};
-(3,-10)*{\afawu{}{}{}{}};
-(5,-8)*{\cdots};
-(7,-10)*{\afawu{}{}{}{}};
-}
+(-14,7)*{\afvj{6}};
+(-12,7)*{\cdots};
+(-10,7)*{\afvj{6}};
+%
+(-14,-7)*{\afvj{6}};
+(-12,-7)*{\cdots};
+(-10,-7)*{\afvj{6}};
+%
+(-6,5)*{\afvj{2}};
+(0,8)*{\afaid{}{}{}{}{}{}};
+(-4,6)*{\cdots};
+(4,6)*{\cdots};
+(0,10)*{\afaidex{}{}{}{}{}{}{3}{1}};
+(6,5)*{\afvj{2}};
+%
+(-6,-5)*{\afvj{2}};
+(0,-8)*{\afaiu{}{}{}{}{}{}};
+(-4,-6)*{\cdots};
+(4,-6)*{\cdots};
+(0,-10)*{\afaiuex{}{}{}{}{}{}{3}{1}};
+(6,-5)*{\afvj{2}};
+%
+(-8,0)*{\affr{14}{8}};
+(-2,2)*{A};
+(8,0)*{\affr{14}{8}};
+(14,2)*{B};
+%
+(14,7)*{\afvj{6}};
+(12,7)*{\cdots};
+(10,7)*{\afvj{6}};
+%
+(14,-7)*{\afvj{6}};
+(12,-7)*{\cdots};
+(10,-7)*{\afvj{6}};
+}\quad,
 \]
+where $A$ and $B$ do not contain any interaction nor cointeraction nodes, all the edges in $A$ are negative and all the edges in $B$ are positive.
 
+We will now show how we can build the required derivation with atomic flow
 \[
-\atomicflowinv{
-(-2,8)*{\afvj4};
-(0,8)*{\cdots};
-(2,8)*{\afvj4};
-(0,0)*{\affr{12}{12}};
-(-5,-8)*{\afvj4};
-(-3,-8)*{\cdots};
-(-1,-8)*{\afvj4};
-(5,-8)*{\afvj4};
-(3,-8)*{\cdots};
-(1,-8)*{\afvj4};
-}\quad\rightarrow\quad
 \atomicflow{
-(-2,-12)*{\afacdexsq{}{}{}{}{}{}{4}{1}};
-(0,-16)*{\cdots};
-(2,-12)*{\afacdexsq{}{}{}{}{}{}{4}{1}};
-(-8,0)*{\affr{12}{12}};
-(8,0)*{\affr{12}{12}};
-(-13,8)*{\afvj4};
-(-11,8)*{\cdots};
-(-9,8)*{\afvj4};
-(-3,10)*{\afawd{}{}{}{}};
-(-5,8)*{\cdots};
-(-7,10)*{\afawd{}{}{}{}};
-(13,8)*{\afvj4};
-(11,8)*{\cdots};
-(9,8)*{\afvj4};
-(3,10)*{\afawd{}{}{}{}};
-(5,8)*{\cdots};
-(7,10)*{\afawd{}{}{}{}};
-}
-\]
-
-\[
-\atomicflowinv{
-(-5,8)*{\afvj4};
-(-3,8)*{\cdots};
-(-1,8)*{\afvj4};
-(5,8)*{\afvj4};
-(3,8)*{\cdots};
-(1,8)*{\afvj4};
-(0,0)*{\affr{12}{12}};
-(-5,-8)*{\afvj4};
-(-3,-8)*{\cdots};
-(-1,-8)*{\afvj4};
-(5,-8)*{\afvj4};
-(3,-8)*{\cdots};
-(1,-8)*{\afvj4};
-}\quad\rightarrow\quad
-\atomicflow{
-(-21,16)*{\afacuexsq{}{}{}{}{}{}{4}{1}};
-(-19,20)*{\cdots};
-(-17,16)*{\afacuexsq{}{}{}{}{}{}{4}{1}};
-%---
-(21,16)*{\afacuexsq{}{}{}{}{}{}{4}{1}};
-(19,20)*{\cdots};
-(17,16)*{\afacuexsq{}{}{}{}{}{}{4}{1}};
-%---
-(-25,8)*{\afvj4};
-(-29,8)*{\afvj4};
-%---
-(-19,10)*{\afawd{}{}{}{}};
-(-21,8)*{\cdots};
-(-23,10)*{\afawd{}{}{}{}};
-%---
-(-9,8)*{\afvj4};
-(-13,8)*{\afvj4};
-%---
-(-3,10)*{\afawd{}{}{}{}};
-(-5,8)*{\cdots};
-(-7,10)*{\afawd{}{}{}{}};
-%---
-(3,10)*{\afawd{}{}{}{}};
-(5,8)*{\cdots};
-(7,10)*{\afawd{}{}{}{}};
-%---
-(9,8)*{\afvj4};
-(13,8)*{\afvj4};
-%---
-(19,10)*{\afawd{}{}{}{}};
+%boxes
+(-36,0)*{\affr{14}{8}};
+(-31,2)*{B_3};
+(-12,12)*{\affr{14}{8}};
+(-7,14)*{B_1};
+(-12,-12)*{\affr{14}{8}};
+(-7,-10)*{B_2};
+(5,0)*{\affr{16}{8}};
+(11,2)*{A};
+(25,0)*{\affr{14}{8}};
+(30,2)*{B_4};
+%contractions
+(5,14.5)*{\afvj{5}};
+(8,8)*{\afacdex{}{}{\pmi}{}{}{}{3}{2}};
+(10,6)*{\cdots};
+(9,16.5)*{\afvj{1}};
+(11,14)*{\afvj{5}};
+(12,12)*{\afacdex{}{}{\pmi}{}{}{}{3}{2}};
+(12,6)*{\afvj{4}};
+%weakenings
+(-42,8)*{\afawd{}{}{}{}};
+(-40,6)*{\cdots};
+(-38,8)*{\afawd{}{}{}{}};
+%
+(-18,-4)*{\afawd{}{}{}{}};
+(-16,-6)*{\cdots};
+(-14,-4)*{\afawd{}{}{}{}};
+%
+(-10,20)*{\afawd{}{}{}{}};
+(-8,18)*{\cdots};
+(-6,20)*{\afawd{}{}{}{}};
+%
+(31,8)*{\afawd{}{}{}{}};
+(29,6)*{\cdots};
+(27,8)*{\afawd{}{}{}{}};
+%axioms
+(17,16)*{\afaidnw{}{}};
+(17,18)*{\afaidex{}{}{}{}{}{}{3}{1}};
+(23,10)*{\afvj{12}};
 (21,8)*{\cdots};
-(23,10)*{\afawd{}{}{}{}};
-%---
-(25,8)*{\afvj4};
-(29,8)*{\afvj4};
-%---
-(-24,0)*{\affr{12}{12}};
-(-8,0)*{\affr{12}{12}};
-(8,0)*{\affr{12}{12}};
-(24,0)*{\affr{12}{12}};
-%---
-(-25,-8)*{\afvj4};
-(-29,-8)*{\afvj4};
-%---
-(-19,-10)*{\afawu{}{}{}{}};
-(-21,-8)*{\cdots};
-(-23,-10)*{\afawu{}{}{}{}};
-%---
-(-9,-10)*{\afawu{}{}{}{}};
-(-11,-8)*{\cdots};
-(-13,-10)*{\afawu{}{}{}{}};
-%---
-(-3,-8)*{\afvj4};
-(-7,-8)*{\afvj4};
-%---
-(3,-8)*{\afvj4};
-(7,-8)*{\afvj4};
-%---
-(9,-10)*{\afawu{}{}{}{}};
-(11,-8)*{\cdots};
-(13,-10)*{\afawu{}{}{}{}};
-%---
-(19,-10)*{\afawu{}{}{}{}};
+(19,10)*{\afvj{12}};
+%
+(-12,25)*{\afaidnw{}{}};
+(-18,22.5)*{\afvj{13}};
+(-16,22)*{\cdots};
+(-14,20.5)*{\afvj{9}};
+(-12,29)*{\afaidex{}{}{}{}{}{}{3}{1}};
+%cocontractions
+(-30,12)*{\afacuex{}{}{}{}{}{}{2}{1}};
+%(-32,6)*{\cdots};
+(-26,12)*{\afacuex{}{}{}{}{}{}{2}{1}};
+%top edges
+(-30,23)*{\afvj{14}};
+(-28,21)*{\cdots};
+(-26,23)*{\afvj{14}};
+%
+(-2,16.5)*{\afvj{25}};
+(0,16.5)*{\cdots};
+(2,16.5)*{\afvj{25}};
+%
+(-14,0)*{\afcjl{16}{16}};
+(-18,0)*{\afcjl{16}{16}};
+%
+(-34,6)*{\afvj{4}};
+(-32,6)*{\cdots};
+(-30,6)*{\afvj{4}};
+%
+(-2.5,21)*{\afcjl{15}{8}};
+(1.5,21)*{\afcjl{15}{8}};
+%% INVERSE
+%cocontractions
+(5,-14.5)*{\afvj{5}};
+(8,-8)*{\afacuex{}{}{\pmi}{}{}{}{3}{2}};
+(10,-6)*{\cdots};
+(9,-16.5)*{\afvj{1}};
+(11,-14)*{\afvj{5}};
+(12,-12)*{\afacuex{}{}{\pmi}{}{}{}{3}{2}};
+(12,-6)*{\afvj{4}};
+%coweakenings
+(-42,-8)*{\afawu{}{}{}{}};
+(-40,-6)*{\cdots};
+(-38,-8)*{\afawu{}{}{}{}};
+%
+(-18,4)*{\afawu{}{}{}{}};
+(-16,6)*{\cdots};
+(-14,4)*{\afawu{}{}{}{}};
+%
+(-10,-20)*{\afawu{}{}{}{}};
+(-8,-18)*{\cdots};
+(-6,-20)*{\afawu{}{}{}{}};
+%
+(31,-8)*{\afawu{}{}{}{}};
+(29,-6)*{\cdots};
+(27,-8)*{\afawu{}{}{}{}};
+%cuts
+(17,-18)*{\afaiunw{}{}};
+(17,-18)*{\afaiuex{}{}{}{}{}{}{3}{1}};
+(23,-10)*{\afvj{12}};
 (21,-8)*{\cdots};
-(23,-10)*{\afawu{}{}{}{}};
-%---
-(25,-8)*{\afvj4};
-(29,-8)*{\afvj4};
-%---
-(-13,-16)*{\afacdexsq{}{}{}{}{}{}{8}{1}};
-(-11,-20)*{\cdots};
-(-9,-16)*{\afacdexsq{}{}{}{}{}{}{8}{1}};
-%---
-(13,-16)*{\afacdexsq{}{}{}{}{}{}{8}{1}};
-(11,-20)*{\cdots};
-(9,-16)*{\afacdexsq{}{}{}{}{}{}{8}{1}};
-}
+(19,-10)*{\afvj{12}};
+%
+(-12,-27)*{\afaiunw{}{}};
+(-18,-22.5)*{\afvj{13}};
+(-16,-22)*{\cdots};
+(-14,-20.5)*{\afvj{9}};
+(-12,-29)*{\afaiuex{}{}{}{}{}{}{3}{1}};
+%contractions
+(-30,-12)*{\afacdex{}{}{}{}{}{}{2}{1}};
+%(-32,6)*{\cdots};
+(-26,-12)*{\afacdex{}{}{}{}{}{}{2}{1}};
+%bottom edges
+(-30,-23)*{\afvj{14}};
+(-28,-21)*{\cdots};
+(-26,-23)*{\afvj{14}};
+%
+(-2,-16.5)*{\afvj{25}};
+(0,-16.5)*{\cdots};
+(2,-16.5)*{\afvj{25}};
+%
+(-14,0)*{\afcjr{16}{16}};
+(-18,0)*{\afcjr{16}{16}};
+%
+(-34,-6)*{\afvj{4}};
+(-32,-6)*{\cdots};
+(-30,-6)*{\afvj{4}};
+%
+(-2.5,-21)*{\afcjr{15}{8}};
+(1.5,-21)*{\afcjr{15}{8}};
+}\quad,
 \]
+where $B_1,B_2,B_3,B_4$ are isomorphic to $B$. It is straightforward to observe that this atomic flow is $\ppl$-prenormalised.
+
+We build $\Phi^+$ by applying substitutions to $\Phi$. For every atom occurence $a$ which maps to an edge in $B$ we substitute it with the formula $\vls[(a_1.a_2).(a_3.a_4)]$. Where $a=a_1=a_2=a_3=a_4$ and the subscripts denote which of the $B_1,B_2,B_3,B_4$ the atom maps to. Rule instances $\vlinf{\aid}{}{\vls[\bar{a}.a]}{\ttt}$ and $\vlinf{\aiu}{}{\fff}{\vls(\bar{a}.a)}$ where $a$ maps to an edge in $B$ are substituted with derivations
+\[
+\vlderivation
+{
+\vlin{\acd}{}{\vls[\bar{a}.(a_1.a_2).(a_3.a_4)]}
+ {
+ \vlin{\awd\times2}{}{\vls[\bar{a}.\bar{a}.(a_1.a_2).(a_3.a_4)]}
+  {
+  \vlin{\med}{}{\vls[\bar{a}.\bar{a}.(a_1.\fff).(\fff.a_4)]}
+   {
+   \vlin{=}{}{\vls[\bar{a}.\bar{a}.([a_1.\fff].[\fff.a_4])]}
+    {
+    \vlin{\swi\times2}{}{\vls[\bar{a}.\bar{a}.(a_1.a_4)]}
+     {
+     \vlin{\aid\times2}{}{\vls([\bar{a}.a_1].[\bar{a}.a_4])}
+      {
+      \vlhy{\ttt}
+      }
+     }
+    }
+   }
+  }
+ }
+}\qquad
+\vlderivation
+{
+\vlin{\aiu\times2}{}{\fff}
+ {
+ \vlin{\swi\times2}{}{\vls[(\bar{a}.a_2).(\bar{a}.a_4)]}
+  {
+  \vlin{=}{}{\vls(\bar{a}.\bar{a}.[a_2.a_4])}
+   {
+   \vlin{\awu\times2}{}{\vls(\bar{a}.\bar{a}.[(\ttt.a_2).(\ttt.a_4)])}
+    {
+    \vlin{\acu}{}{\vls(\bar{a}.\bar{a}.[(a_1.a_2).(a_3.a_4)])}
+     {
+     \vlhy{\vls(\bar{a}.[(a_1.a_2).(a_3.a_4)])}
+     }
+    }
+   }
+  }
+ }
+}\quad,
+\]
+respectively. Finally any occurance of $\vls[(a_1.a_2).(a_3.a_4)]$ in the premiss and $\vls[(a_1.a_2).(a_3.a_4)]$ in the conclusion are substituted with the derivations
+\[
+\vlderivation
+{
+ \vlin{\awd\times2}{}{\vls[(a_1.a_2).(a_3.a_4)]}
+ {
+  \vlin{\med}{}{\vls[(\fff.a_2).(a_3.\fff)]}
+  {
+   \vlin{=}{}{\vls([\fff.a_3].[a_2.\fff])}
+   {
+    \vlin{\acu}{}{\vls(a_3.a_2)}
+    {
+     \vlhy{a}
+    }
+   }
+  }
+ }
+}\qquad
+\vlderivation
+{
+ \vlin{\acd}{}{a}
+ {
+  \vlin{=}{}{\vls[a_1.a_3]}
+  {
+   \vlin{\awu\times2}{}{\vls[(a_1.\ttt).(a_3.\ttt)]}
+   {
+    \vlhy{\vls[(a_1.a_2).(a_3.a_4)]}
+   }
+  }
+ }
+}\quad,
+\]
+respectively. It is now straightforward to verify that the derivation so obtained has the aforementioned atomic flow.
 \end{proof}
 
 \begin{defi}\label{DefRedIS}
