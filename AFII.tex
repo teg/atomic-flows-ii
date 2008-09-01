@@ -751,9 +751,83 @@ respectively. It is now straightforward to verify that the derivation so obtaine
 \end{proof}
 
 \begin{defi}\label{DefRedIS}
-We define the reduction $\rightarrow_{is}$ (where $is$ stands for \emph{isolated subflow}) as follows, for all atomic flows $A$ and $B$:
-
-where $h,k\geq0$, edges have been renamed with accents, flows $\tilde{A}$ and $\hat{A}$ are both isomorphic to $A$ and $B$ is connected.
+We define the reduction $\rightarrow_{is}$ (where $is$ stands for \emph{isolated subflow}) as follows, for all atomic flows $A$ and $B$, where $B$ is connected:
+\[
+\atomicflow{
+(-14,7)*{\afvj{6}};
+(-12,7)*{\cdots};
+(-10,7)*{\afvj{6}};
+%
+(-14,-7)*{\afvj{6}};
+(-12,-7)*{\cdots};
+(-10,-7)*{\afvj{6}};
+%
+(-6,5)*{\afvj{2}};
+(0,8)*{\afaid{}{}{}{}{}{}};
+(-4,6)*{\cdots};
+(4,6)*{\cdots};
+(0,10)*{\afaidex{}{}{}{}{}{}{3}{1}};
+(6,5)*{\afvj{2}};
+%
+(-6,-5)*{\afvj{2}};
+(0,-8)*{\afaiu{}{}{}{}{}{}};
+(-4,-6)*{\cdots};
+(4,-6)*{\cdots};
+(0,-10)*{\afaiuex{}{}{}{}{}{}{3}{1}};
+(6,-5)*{\afvj{2}};
+%
+(-8,0)*{\affr{14}{8}};
+(-2,2)*{A};
+(4,0)*{\affr{6}{8}};
+(6,2)*{B};
+}\quad\rightarrow_{is}\quad
+\atomicflow{
+(-14,16)*{\afvj{24}};
+(-12,16)*{\cdots};
+(-10,16)*{\afvj{24}};
+%
+(-14,-6)*{\afvj{4}};
+(-12,-6)*{\cdots};
+(-10,-6)*{\afvj{4}};
+%
+(-4,8)*{\afacu{}{}{}{}{}{}};
+(-4,5)*{\cdots};
+%
+(-2,-8)*{\afawu{}{}{}{}};
+(-4,-6)*{\cdots};
+(-6,-8)*{\afawu{}{}{}{}};
+%
+(-8,0)*{\affr{14}{8}};
+(-2,2)*{\hat{A}};
+%
+(-2,-12)*{\afacdex{}{}{}{}{}{}{4}{1}};
+(-4,-15)*{\cdots};
+(-6,-12)*{\afacdex{}{}{}{}{}{}{4}{1}};
+%-------------
+(-2,32)*{\afacuex{}{}{}{}{}{}{4}{1}};
+(-4,35 )*{\cdots};
+(-6,32)*{\afacuex{}{}{}{}{}{}{4}{1}};
+%
+(2,26)*{\afvj{4}};
+(4,27)*{\cdots};
+(6,26)*{\afvj{4}};
+%
+(2,4)*{\afvj{24}};
+(4,4)*{\cdots};
+(6,4)*{\afvj{24}};
+%
+(-4,11.5)*{\afacdnw{}{}{}{}};
+(-4,15)*{\cdots};
+%
+(-6,28)*{\afawd{}{}{}{}};
+(-4,26)*{\cdots};
+(-2,28)*{\afawd{}{}{}{}};
+%
+(0,20)*{\affr{14}{8}};
+(6,22)*{\tilde{A}};
+}\quad,
+\]
+where $h,k\geq0$, edges have been renamed with accents, flows $\tilde{A}$ and $\hat{A}$ are both isomorphic to $A$.
 \end{defi}
 
 \begin{thm}
