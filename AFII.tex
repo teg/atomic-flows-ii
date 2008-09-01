@@ -421,7 +421,7 @@ There is only one way of building such a proof in the sense that the atomic flow
 %===============================================================================
 \section{Streamlining}
 
-The idea behind the streamlining procedures we show here is to substitute units in place of atoms to eliminate axiom-cut pairs. These kind of substitutions are only possible if we can find ``closed'' subflows which are not connected to the premiss or conclusion of the derivation.
+The idea behind the streamlining procedures we show here is to substitute units in place of atoms to eliminate axiom-cut pairs. These kind of substitutions are only possible if we can find ``closed'' subflows which are not connected to the premiss nor conclusion of the derivation.
 
 We first show how we can always \emph{prenormalise} a derivation, this takes a derivation and splits it in two parts one which is streamlined and one which is not directly connected to the premiss nor the conclusion. We then show how to streamline the latter part of the atomic flow.
 
@@ -508,7 +508,7 @@ where the boxes represent any atomic flow not containing axioms nor cuts and the
 \end{defi}
 
 \begin{lem}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$. Then there exist a $\ppl$-prenormalised derivation $\Phi^+$ and a $\pmi$-prenormalised derivation $\Phi^-$ from $\alpha$ to $\beta$ such that $|\Phi^+|,|\Phi^-|\in O(|\Phi|)$.
+Given a derivation $\Phi$ from $\alpha$ to $\beta$, there exist a $\ppl$-prenormalised derivation $\Phi^+$ and a $\pmi$-prenormalised derivation $\Phi^-$ from $\alpha$ to $\beta$ such that $|\Phi^+|,|\Phi^-|\in O(|\Phi|)$.
 \end{lem}
 \begin{proof}
 We prove the case for $\ppl$-prenormalised, $\pmi$-prenormalised trivially follows.
@@ -559,11 +559,11 @@ We will now show how we can build the required derivation with atomic flow
 \atomicflow{
 %boxes
 (-36,0)*{\affr{14}{8}};
-(-31,2)*{B_3};
+(-31,2)*{B_1};
 (-12,12)*{\affr{14}{8}};
-(-7,14)*{B_1};
+(-7,14)*{B_2};
 (-12,-12)*{\affr{14}{8}};
-(-7,-10)*{B_2};
+(-7,-10)*{B_3};
 (5,0)*{\affr{16}{8}};
 (11,2)*{A};
 (25,0)*{\affr{14}{8}};
@@ -687,27 +687,21 @@ We will now show how we can build the required derivation with atomic flow
 (1.5,-21)*{\afcjr{15}{8}};
 }\quad,
 \]
-where $B_1,B_2,B_3,B_4$ are isomorphic to $B$. It is straightforward to observe that this atomic flow is $\ppl$-prenormalised.
+where $B_1,B_2,B_3,B_4$ are all isomorphic to $B$. It is straightforward to observe that this atomic flow is $\ppl$-prenormalised.
 
-We build $\Phi^+$ by applying substitutions to $\Phi$. Let $a$ be an atom occurence which maps to an edge in $B$. We substitute $a$ with the formula $\vls[(a_1.a_2).(a_3.a_4)]$, where $a=a_1=a_2=a_3=a_4$ and the subscripts denote which of the $B_1,B_2,B_3,B_4$ the atom maps to. Rule instances $\vlinf{\aid}{}{\vls[\bar{a}.a]}{\ttt}$ and $\vlinf{\aiu}{}{\fff}{\vls(\bar{a}.a)}$ are substituted with derivations
+We build $\Phi^+$ by applying substitutions to $\Phi$. Let $a$ be an atom occurence which maps to an edge in $B$. We substitute $a$ with the formula $\vls([a_1.a_2].[a_3.a_4])$, where $a=a_1=a_2=a_3=a_4$ and the subscripts denote which of the $B_1,B_2,B_3,B_4$ the atom maps to. Rule instances $\vlinf{\aid}{}{\vls[\bar{a}.a]}{\ttt}$ and $\vlinf{\aiu}{}{\fff}{\vls(\bar{a}.a)}$ are substituted with derivations
 \[
 \vlderivation
 {
-\vlin{\acd}{}{\vls[\bar{a}.(a_1.a_2).(a_3.a_4)]}
+\vlin{\awd\times2}{}{\vls[\bar{a}.([a_1.a_2].[a_3.a_4])]}
  {
- \vlin{\awd\times2}{}{\vls[\bar{a}.\bar{a}.(a_1.a_2).(a_3.a_4)]}
+ \vlin{\acd}{}{\vls[\bar{a}.(a_2.a_4)]}
   {
-  \vlin{\med}{}{\vls[\bar{a}.\bar{a}.(a_1.\fff).(\fff.a_4)]}
+  \vlin{\swi\times2}{}{\vls[\bar{a}.\bar{a}.(a_2.a_4)]}
    {
-   \vlin{=}{}{\vls[\bar{a}.\bar{a}.([a_1.\fff].[\fff.a_4])]}
+   \vlin{\aid\times2}{}{\vls([\bar{a}.a_2].[\bar{a}.a_4])}
     {
-    \vlin{\swi\times2}{}{\vls[\bar{a}.\bar{a}.(a_1.a_4)]}
-     {
-     \vlin{\aid\times2}{}{\vls([\bar{a}.a_1].[\bar{a}.a_4])}
-      {
-      \vlhy{\ttt}
-      }
-     }
+    \vlhy{\ttt}
     }
    }
   }
@@ -717,37 +711,28 @@ We build $\Phi^+$ by applying substitutions to $\Phi$. Let $a$ be an atom occure
 {
 \vlin{\aiu\times2}{}{\fff}
  {
- \vlin{\swi\times2}{}{\vls[(\bar{a}.a_2).(\bar{a}.a_4)]}
+ \vlin{\swi\times2}{}{\vls[(\bar{a}.a_3).(\bar{a}.a_4)]}
   {
-  \vlin{=}{}{\vls(\bar{a}.\bar{a}.[a_2.a_4])}
+  \vlin{\acu}{}{\vls(\bar{a}.\bar{a}.[a_3.a_4])}
    {
-   \vlin{\awu\times2}{}{\vls(\bar{a}.\bar{a}.[(\ttt.a_2).(\ttt.a_4)])}
+   \vlin{\awu\times2}{}{\vls(\bar{a}.[a_3.a_4])}
     {
-    \vlin{\acu}{}{\vls(\bar{a}.\bar{a}.[(a_1.a_2).(a_3.a_4)])}
-     {
-     \vlhy{\vls(\bar{a}.[(a_1.a_2).(a_3.a_4)])}
-     }
+    \vlhy{\vls(\bar{a}.[a_1.a_2].[a_3.a_4])}
     }
    }
   }
  }
 }\quad,
 \]
-respectively. Rule instances $\acd,\acu,\awd,\awu$ which apply to $a$ are substituted with their generic counterparts applied to $\vls[(a_1.a_2).(a_3.a_4)]$. Finally any occurance of $\vls[(a_1.a_2).(a_3.a_4)]$ in the premiss and $\vls[(a_1.a_2).(a_3.a_4)]$ in the conclusion are substituted with the derivations
+respectively. Rule instances $\acd,\acu,\awd,\awu$ which apply to $a$ are substituted with their generic counterparts applied to $\vls([a_1.a_2].[a_3.a_4])$. Finally any occurance of $\vls([a_1.a_2].[a_3.a_4])$ in the premiss or conclusion are substituted with the derivations
 \[
 \vlderivation
 {
- \vlin{\awd\times2}{}{\vls[(a_1.a_2).(a_3.a_4)]}
+ \vlin{\awd\times2}{}{\vls([a_1.a_2].[a_3.a_4])}
  {
-  \vlin{\med}{}{\vls[(\fff.a_2).(a_3.\fff)]}
+  \vlin{\acu}{}{\vls(a_1.a_3)}
   {
-   \vlin{=}{}{\vls([\fff.a_3].[a_2.\fff])}
-   {
-    \vlin{\acu}{}{\vls(a_3.a_2)}
-    {
-     \vlhy{a}
-    }
-   }
+   \vlhy{a}
   }
  }
 }\qquad
@@ -755,12 +740,9 @@ respectively. Rule instances $\acd,\acu,\awd,\awu$ which apply to $a$ are substi
 {
  \vlin{\acd}{}{a}
  {
-  \vlin{=}{}{\vls[a_1.a_3]}
+  \vlin{\awu\times2}{}{\vls[a_1.a_2]}
   {
-   \vlin{\awu\times2}{}{\vls[(a_1.\ttt).(a_3.\ttt)]}
-   {
-    \vlhy{\vls[(a_1.a_2).(a_3.a_4)]}
-   }
+   \vlhy{\vls([a_1.a_2].[a_3.a_4])}
   }
  }
 }\quad,
