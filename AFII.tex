@@ -504,10 +504,14 @@ An atomic flow with the following shape under polarity assignment $\pi$ is said 
 (-26,-26)*{\afvj{4}};
 }\quad,
 \]
-where the boxes represent any atomic flow not containing axioms nor cuts and the labels indicate the polarity of all the edges in the respective boxes. We call an atomic flow \emph{$\pmi$-prenormalised under $\pi$} if it is $\ppl$-prenormalised under the dual of $\pi$. The definitions extend to derivations in the obvious way.
+where the boxes represent any atomic flow not containing axioms nor cuts and the labels indicate the polarity of all the edges in the respective boxes. We call an atomic flow \emph{$\pmi$-prenormalised under $\pi$} if it is $\ppl$-prenormalised under the dual of $\pi$ and \emph{prenormalised} if it is both $\ppl$-prenormalised and $\pmi$-prenormalised under any polarity assignment. The definitions extend to derivations in the obvious way.
 \end{defi}
 
-\begin{lem}
+\begin{pro}
+If $\Phi$ is prenormalised and contains no isolated subflows then $\Phi$ is streamlined.
+\end{pro}
+
+\begin{lem}\label{LemPreNor}
 Given a derivation $\Phi$ from $\alpha$ to $\beta$, there exist a $\ppl$-prenormalised derivation $\Phi^+$ and a $\pmi$-prenormalised derivation $\Phi^-$ from $\alpha$ to $\beta$ such that $|\Phi^+|,|\Phi^-|\in O(|\Phi|)$.
 \end{lem}
 \begin{proof}
@@ -750,8 +754,12 @@ respectively. Rule instances $\acd,\acu,\awd,\awu$ which apply to $a$ are substi
 respectively. It is now straightforward to verify that the derivation so obtained has the aforementioned atomic flow and the result follows.
 \end{proof}
 
+\begin{lem}
+If the $\pmi$-prenormalisd derivation $\Psi$ from $\alpha$ to $\beta$ is obtained from $\Phi$ as described in Lemma~\ref{LemPreNor} and $\Phi$ is $\ppl$-prenormalised and contains no positive isolated subflows then $\Psi$ is prenormalised and contains no positive isolated subflows.
+\end{lem}
+
 \begin{defi}\label{DefRedIS}
-We define the reduction $\rightarrow_{is}$ (where $is$ stands for \emph{isolated subflow}) as follows, for all atomic flows $A$ and $B$, where $B$ is connected:
+We define the reduction $\rightarrow_{is}$ (where $is$ stands for \emph{isolated subflow}) as follows, for all atomic flows $A$ and $B$, where $B$ is connected and flows $\tilde{A},\hat{A}$ are both isomorphic to $A$.
 \[
 \atomicflow{
 (-14,7)*{\afvj{6}};
@@ -825,9 +833,8 @@ We define the reduction $\rightarrow_{is}$ (where $is$ stands for \emph{isolated
 %
 (0,20)*{\affr{14}{8}};
 (6,22)*{\tilde{A}};
-}\quad,
+}\quad.
 \]
-where $h,k\geq0$, edges have been renamed with accents, flows $\tilde{A}$ and $\hat{A}$ are both isomorphic to $A$.
 \end{defi}
 
 \begin{thm}
@@ -837,23 +844,103 @@ Reduction $\rightarrow_{is}$ is sound.
 Let $\Phi$ be a derivation with flow $C$, such that $C\rightarrow_{si} D$. We show that there exists a derivation $\Psi$ with flow $D$ and with the same premiss and conclusion as $\Phi$. In the following we refer to the figure in Definition~\ref{DefRedIS}. We assume that $\Phi$ has premiss $\xi$ and conclusion $\zeta$. Now we will conduct experiments with respect to $B$. Since $B$ is connected we know that it has two polarity assignments $\pi_+$ and $\pi_-$, where each polarity assignment assigns the given polarity to all the edges in $B$. Now let $\Phi_+^\top$ be the $\top$-experiment under $\pi_+$ and let $\Phi_-^\bot$ be the $\bot$-experiment under $\pi_-$ both with respect to $B$. Then we have:
 \[
 \vlder{\Phi_+^\top}{}{\vls[\zeta.{\bar a}.\cdots.{\bar a}]}{\xi}
-,\quad
+\quad,\quad
 \vlder{\Phi_-^\bot}{}{\zeta}{\vls({\bar a}.\cdots.{\bar a}.\xi)}
 \]
 We can now connect the two experiments to get the desired derivation:
 \[
 \vlderivation{
 \vlin{\cod}{}{\zeta}{
-\vlde{\vls[\zeta.\Phi_+^\top]}{}{\vls[\zeta.\zeta]}{
+\vlde{\vls[\zeta.\Phi_-^\bot]}{}{\vls[\zeta.\zeta]}{
 \vlin{\acu^\star}{}{\vls[\zeta.({\bar a}.\cdots.{\bar a}.\xi)]}{
 \vlin{\swi}{}{\vls[\zeta.({\bar a}.\xi)]}{
 \vlin{\acd^\star}{}{\vls([\zeta.{\bar a}].\xi)}{
-\vlde{\vls(\Phi_-^\bot.\xi)}{}{\vls([\zeta.{\bar a}.\cdots.{\bar a}].\xi)}{
+\vlde{\vls(\Phi_+^\top.\xi)}{}{\vls([\zeta.{\bar a}.\cdots.{\bar a}].\xi)}{
 \vlin{\cou}{}{\vls(\xi.\xi)}{
 \vlhy{\xi}}}}}}}}
 }
 \]
 \end{proof}
+
+\begin{lem}\label{LemExOneISF}
+If $\Phi$ from $\alpha$ to $\beta$ is $\ppl$-prenormalised with at least one isolated subflow then there exist $\Phi'$
+\[
+\Phi' =
+\vlderivation
+{
+ \vlde{}{\{\aiu\}}{\beta}
+ {
+  \vlde{\Psi}{}{\beta'}
+  {
+   \vlde{}{\{\aid\}}{\alpha'}
+   {
+    \vlhy{\alpha}
+   }
+  }
+ }
+}\quad,
+\]
+with the same atomic flow as $\Phi$ such that $\Psi$ is $\ppl$-prenormalised and has exactly one isolated subflow.
+\end{lem}
+\begin{proof}
+Any $\aid$ (resp. $\aiu$) can be permuted above (resp. below) any other rule at the cost of $\swi$ and $=$ rules. So the unwanted $\aid$ and $\aiu$ rules can be permuted out of the way leaving $\Psi$ in the middle without changing the atomic flow.
+\end{proof}
+
+\begin{lem}\label{LemRemoveISF}
+If
+\[
+\Phi'=\vlderivation
+{
+ \vlde{}{\{\aiu\}}{\beta}
+ {
+  \vlde{\Psi}{}{\beta'}
+  {
+   \vlde{}{\{\aid\}}{\alpha'}
+   {
+    \vlhy{\alpha}
+   }
+  }
+ }
+}
+\]
+is as in Lemma~\ref{LemExOneISF}, it contains $n$ isolated subflows and $\Psi\rightarrow_{is}\Psi'$ then
+\[
+\vlderivation
+{
+ \vlde{}{\{\aiu\}}{\beta}
+ {
+  \vlde{\Psi'}{}{\beta'}
+  {
+   \vlde{}{\{\aid\}}{\alpha'}
+   {
+    \vlhy{\alpha}
+   }
+  }
+ }
+}
+\]
+is $\ppl$-prenormalised and contains $n-1$ isolated subflows.
+\end{lem}
+
+\begin{lem}
+If $\Phi$ from $\alpha$ to $\beta$ is $\ppl$-prenormalised then there exists $\Psi$ from $\alpha$ to $\beta$ with no isolated subflows.
+\end{lem}
+\begin{proof}
+Corollary of Lemmata~\ref{LemExOneISF} and \ref{LemRemoveISF}.
+\end{proof}
+
+\newcommand{\Mik}{\mathsf{Mik}}
+\begin{defi}
+For every $\SKS$ derivation $\Phi_0$, algorithm $\Mik$ performs the following steps
+\begin{itemize}
+  \item $\Phi_0$ is turned into $\Phi_1$ which is $\ppl$-prenormalised;
+  \item all the isolated subflows are removed from $\Phi_1$ to create $\Phi_2$;
+  \item $\Phi_2$ is turned into $\Phi_3$ which is prenormalised;
+  \item all the isolated subflows are removed from $\Phi_3$ to create the output of the algorithm, $\Phi_4$.
+\end{itemize}
+
+\end{defi}
+
 
 \iflmcs\else\let\oldurl\url\renewcommand{\url}[1]{\hfill\break\oldurl{#1}}\fi
 
