@@ -241,7 +241,7 @@ we say that
 \end{defi}
 
 \begin{defi}
-Given a derivation $\Phi$ with atomic flow $C$ as in Definition~\ref{DefExperiment}. The (co)interaction nodes in $C$ which are not in $A$ nor $B$ we call \emph{evidenced (co)interaction nodes} and the inference rules corresponding to evidenced nodes we call \emph{evidenced (co)interaction rulse}.
+Given a derivation $\Phi$ with atomic flow $C$ as in Definition~\ref{DefExperiment}. The (co)interaction nodes in $C$ which are not in $A$ nor $B$ we call \emph{evidenced (co)interaction nodes} and the inference rules corresponding to evidenced nodes we call \emph{evidenced (co)interaction rules}.
 \end{defi}
 
 
@@ -268,13 +268,13 @@ The derivation $\Phi'$ we have obtained is a derivation from $\vls[(\alpha'.\gam
 When performing cut-elimination the experiments we need are of a specific form; we need to preserve the conclusion, so we cannot create any new bottom edges. This is the motivation for the following definition.
 
 \begin{defi}
-Let $C$ be an atomic flow and $\pi$ a polarity assignment to $C$. If $B$ is the subflow of $C$ containing only negative (resp.\ positive) nodes and $A$ is the subflow of $C$ containing only positive (resp.\ negative) nodes, then the experiment on $C$ with respect to $B$ under $\pi$ is called the \emph{$\fff$-experiment (resp.\ $\ttt$-experiment) on $C$ under $\pi$}. The definition extends to derivations in the obvious way.
+Let $C$ be an atomic flow and $\pi$ a polarity assignment to $C$. If $B$ is the subflow of $C$ containing only negative (resp.\ positive) nodes and $A$ is the subflow of $C$ containing only positive (resp.\ negative) nodes, then the experiment on $C$ with respect to $B$ under $\pi$ is called the \emph{$\top$-experiment (resp.\ $\bot$-experiment) on $C$ under $\pi$}. The definition extends to derivations in the obvious way.
 \end{defi}
 
-We now observe that an $\fff$-experiment indeed gives us the what we want. The observant reader might note that instead of the original conclusion, $\beta$, we get $\beta'$, which in this case is $\beta$ with some atom occurences substituted with $\fff$, as we shall se later, this is not a problem. We could indeed fix this straight away by applying $\awd$'s.
+We now observe that an $\top$-experiment indeed gives us the what we want. The observant reader might note that instead of the original conclusion, $\beta$, we get $\beta'$, which in this case is $\beta$ with some atom occurences substituted with $\fff$, as we shall se later, this is not a problem. We could indeed fix this straight away by applying $\awd$'s.
 
 \begin{pro}\label{PropExperimentShapeBot}
-For any proof\/ $\vlproof{\Pi}{\SKS}{\beta}$ and any polarity assignment to its atomic  flow, $\pi$, the $\fff$-experiment on $\Pi$ under $\pi$ is of the form $\vlder{}{\SKS\setminus\{\aid,\aiu\}}{\beta'}{\gamma}$. Where $\beta'$ and $\gamma$ are given by Definition~\ref{DefExperiment}.
+For any proof\/ $\vlproof{\Pi}{\SKS}{\beta}$ and any polarity assignment to its atomic  flow, $\pi$, the $\top$-experiment on $\Pi$ under $\pi$ is of the form $\vlder{}{\SKS\setminus\{\aid,\aiu\}}{\beta'}{\gamma}$. Where $\beta'$ and $\gamma$ are given by Definition~\ref{DefExperiment}.
 \end{pro}
 
 We have seen how we can generate one derivation for each polarity assignment, now we will see how we can glue all of them together to obtain the cut-free proof.
@@ -282,7 +282,7 @@ We have seen how we can generate one derivation for each polarity assignment, no
 The disjunction of all the possible truth value assignments is obviously a tautology. We now show that we can construct a \emph{canonical} proof of this tautology. By ``canonical'' we mean that we can do it in such a way that there is no arbitrary choice involved. In particular this entails that the atomic flow of all the different atoms will be the same.
 
 \begin{lem}\label{LemGlueTop}
-Let $\Pi$ be a proof, let $\mathcal{P}$ be the set of all the polarity assignments to the atomic flow of $\Pi$ and for each $\pi\in\mathcal{P}$ let the $\fff$-experiment on $\Pi$ under $\pi$ have premiss $\gamma_\pi$. Then there exist \emph{canonical} proofs $\vlproof{}{\{\aid,\acu,\swi,\med\}}{\bigvee_{\pi\in\mathcal{P}}\gamma_\pi}$ and $\vlproof{}{\{\aid,\acd,\swi,\med\}}{\bigvee_{\pi\in\mathcal{P}}\gamma_\pi}$ of size $O(|\mathcal{P}|)$.
+Let $\Pi$ be a proof, let $\mathcal{P}$ be the set of all the polarity assignments to the atomic flow of $\Pi$ and for each $\pi\in\mathcal{P}$ let the $\top$-experiment on $\Pi$ under $\pi$ have premiss $\gamma_\pi$. Then there exist \emph{canonical} proofs $\vlproof{}{\{\aid,\acu,\swi,\med\}}{\bigvee_{\pi\in\mathcal{P}}\gamma_\pi}$ and $\vlproof{}{\{\aid,\acd,\swi,\med\}}{\bigvee_{\pi\in\mathcal{P}}\gamma_\pi}$ of size $O(|\mathcal{P}|)$.
 \end{lem}
 
 \begin{proof}
@@ -319,7 +319,7 @@ Notice that there is the same number of occurances of each atom and that the ato
 \end{proof}
 
 \begin{lem}\label{LemGlueBottom}
-Let $\Phi$ be a derivation from $\alpha$ to $\beta$, let $\mathcal{P}$ be the set of all the polarity assignments to the atomic flow of $\Phi$ and for each $\pi\in\mathcal{P}$ let the $\fff$-experiment on $\Phi$ under $\pi$ have conclusion $\beta_\pi$. Then there exists a derivation $\vlder{}{\{\acd,\med\}}{\beta}{\bigvee_{\pi\in\mathcal{P}}\beta_\pi}$.
+Let $\Phi$ be a derivation from $\alpha$ to $\beta$, let $\mathcal{P}$ be the set of all the polarity assignments to the atomic flow of $\Phi$ and for each $\pi\in\mathcal{P}$ let the $\top$-experiment on $\Phi$ under $\pi$ have conclusion $\beta_\pi$. Then there exists a derivation $\vlder{}{\{\acd,\med\}}{\beta}{\bigvee_{\pi\in\mathcal{P}}\beta_\pi}$.
 \end{lem}
 
 \begin{proof}
@@ -369,7 +369,7 @@ There is only one way of building such a proof in the sense that the atomic flow
 %\end{defi}
 
 %\begin{rem}
-%If we define a $\top$-experiment to be the dual of a $\bot$-experiment in the usual way, then an \emph{experiment} on $\Psi$ is exactly a $\top$-experiment on a $\bot$-experiment on $\Psi$ (or the other way around) (under the same polarity assignment, with respect to the same atomic flow).
+%If we define a $\bot$-experiment to be the dual of a $\top$-experiment in the usual way, then an \emph{experiment} on $\Psi$ is exactly a $\bot$-experiment on a $\top$-experiment on $\Psi$ (or the other way around) (under the same polarity assignment, with respect to the same atomic flow).
 %\end{rem}
 
 %\begin{pro}
@@ -421,11 +421,11 @@ There is only one way of building such a proof in the sense that the atomic flow
 %===============================================================================
 \section{Streamlining}
 
-The idea behind the streamlining procedures we show here is to substitute units in place of atoms to eliminate axiom-cut pairs. These kind of substitutions are only possible if we can find ``closed'' subflows which are not connected to the premiss nor conclusion of the derivation.
+The idea behind the streamlining procedures we show here is to substitute units in place of atoms to eliminate axiom-cut pairs. These kind of substitutions are only possible if we can find \emph{isolated subflows} which are not connected to the premiss nor conclusion of the derivation.
 
-We first show how we can always \emph{prenormalise} a derivation, this takes a derivation and splits it in two parts one which is streamlined and one which is not directly connected to the premiss nor the conclusion. We then show how to streamline the latter part of the atomic flow.
+We first show how we can always \emph{prenormalise} a derivation, this takes a derivation and splits it in two parts one which is streamlined and one which consists of isolated subflows. We then show how to streamline the latter part of the atomic flow.
 
-\begin{defi}
+\begin{defi}\label{DefPrenormal}
 An atomic flow with the following shape under polarity assignment $\pi$ is said to be \emph{$\ppl$-prenormalised under $\pi$}
 \[
 \atomicflow{
@@ -507,11 +507,17 @@ An atomic flow with the following shape under polarity assignment $\pi$ is said 
 where the boxes represent any atomic flow not containing axioms nor cuts and the labels indicate the polarity of all the edges in the respective boxes. We call an atomic flow \emph{$\pmi$-prenormalised under $\pi$} if it is $\ppl$-prenormalised under the dual of $\pi$ and \emph{prenormalised} if it is both $\ppl$-prenormalised and $\pmi$-prenormalised under any polarity assignment. The definitions extend to derivations in the obvious way.
 \end{defi}
 
-\begin{pro}
+\begin{defi}
+A subflow is called an \emph{isolated subflow} if there is no path from the subflow to $\top$ nor to $\bot$.
+\end{defi}
+
+Note that the positive sublfow to the left in Definition~\ref{DefPrenormal} is streamlined and the positive subflow to the right is isolated.
+
+\begin{pro}\label{PropStr}
 If $\Phi$ is prenormalised and contains no isolated subflows then $\Phi$ is streamlined.
 \end{pro}
 
-\begin{lem}\label{LemPreNor}
+\begin{lem}\label{LemPosPreNor}
 Given a derivation $\Phi$ from $\alpha$ to $\beta$, there exist a $\ppl$-prenormalised derivation $\Phi^+$ and a $\pmi$-prenormalised derivation $\Phi^-$ from $\alpha$ to $\beta$ such that $|\Phi^+|,|\Phi^-|\in O(|\Phi|)$.
 \end{lem}
 \begin{proof}
@@ -754,8 +760,8 @@ respectively. Rule instances $\acd,\acu,\awd,\awu$ which apply to $a$ are substi
 respectively. It is now straightforward to verify that the derivation so obtained has the aforementioned atomic flow and the result follows.
 \end{proof}
 
-\begin{lem}
-If the $\pmi$-prenormalisd derivation $\Psi$ from $\alpha$ to $\beta$ is obtained from $\Phi$ as described in Lemma~\ref{LemPreNor} and $\Phi$ is $\ppl$-prenormalised and contains no positive isolated subflows then $\Psi$ is prenormalised and contains no positive isolated subflows.
+\begin{lem}\label{LemPreNor}
+If the $\pmi$-prenormalisd (resp. $\ppl$-premormalised) derivation $\Psi$ from $\alpha$ to $\beta$ is obtained from $\Phi$ as described in Lemma~\ref{LemPreNor} and $\Phi$ is $\ppl$-prenormalised (resp. $\pmi$-prenormalised) and contains no positive (resp. negative) isolated subflows then $\Psi$ is prenormalised and contains no positive (resp. negative) isolated subflows.
 \end{lem}
 
 \begin{defi}\label{DefRedIS}
@@ -922,8 +928,8 @@ is as in Lemma~\ref{LemExOneISF}, it contains $n$ isolated subflows and $\Psi\ri
 is $\ppl$-prenormalised and contains $n-1$ isolated subflows.
 \end{lem}
 
-\begin{lem}
-If $\Phi$ from $\alpha$ to $\beta$ is $\ppl$-prenormalised then there exists $\Psi$ from $\alpha$ to $\beta$ with no isolated subflows.
+\begin{lem}\label{LemNoISF}
+If $\Phi$ from $\alpha$ to $\beta$ is $\ppl$-prenormalised (resp. $\pmi$-prenormalised) then there exists $\Psi$ from $\alpha$ to $\beta$ with no positive (resp. negative) isolated subflows.
 \end{lem}
 \begin{proof}
 Corollary of Lemmata~\ref{LemExOneISF} and \ref{LemRemoveISF}.
@@ -934,12 +940,21 @@ Corollary of Lemmata~\ref{LemExOneISF} and \ref{LemRemoveISF}.
 For every $\SKS$ derivation $\Phi_0$, algorithm $\Mik$ performs the following steps
 \begin{itemize}
   \item $\Phi_0$ is turned into $\Phi_1$ which is $\ppl$-prenormalised;
-  \item all the isolated subflows are removed from $\Phi_1$ to create $\Phi_2$;
+  \item all the positive isolated subflows are removed from $\Phi_1$ to create $\Phi_2$;
   \item $\Phi_2$ is turned into $\Phi_3$ which is prenormalised;
-  \item all the isolated subflows are removed from $\Phi_3$ to create the output of the algorithm, $\Phi_4$.
+  \item all the negative isolated subflows are removed from $\Phi_3$ to create the output of the algorithm, $\Phi_4$.
 \end{itemize}
 
 \end{defi}
+
+\begin{thm}
+The output $\Phi_4$ of algorithm $\Mik$ for any input derivation $\Phi_0$ is streamlined.
+\end{thm}
+
+\begin{proof}
+$\Phi_1$ is $\ppl$-prenormalised by Lemma~\ref{LemPosPreNor}. $\Phi_2$ contains no positive isolated subflows by Lemma~\ref{LemNoISF}. $\Phi_3$ is prenormalised and contains no positive isolated subflow by Lemmata~\ref{LemPosPreNor} and \ref{LemPreNor}. $\Phi_4$ is streamlined by Lemma~\ref{LemNoISF} and Proposition~\ref{PropStr}.
+\end{proof}
+
 
 
 \iflmcs\else\let\oldurl\url\renewcommand{\url}[1]{\hfill\break\oldurl{#1}}\fi
