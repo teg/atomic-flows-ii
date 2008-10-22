@@ -732,7 +732,7 @@ We will now show how we can build the required derivation with atomic flow
 \]
 where $B_1,B_2,B_3,B_4$ are all isomorphic to $B$. It is straightforward to observe that this atomic flow is $\ppl$-prenormalised.
 
-We build $\Phi^+$ by applying substitutions to $\Phi$. Let $a$ be an atom occurence which maps to an edge in $B$. We substitute $a$ with the formula $\vls([a_1.a_2].[a_3.a_4])$, where $a=a_1=a_2=a_3=a_4$ and the subscripts denote which of the $B_1,B_2,B_3,B_4$ the atom maps to. Rule instances $\vlinf{\aid}{}{\vls[\bar{a}.a]}{\ttt}$ and $\vlinf{\aiu}{}{\fff}{\vls(\bar{a}.a)}$ are substituted with derivations
+We build $\Phi^+$ by applying substitutions to $\Phi$. For every atom occurence, $a$, which maps to an edge in $B$. We substitute $a$ with the formula $\vls([a_1.a_2].[a_3.a_4])$, where $a=a_1=a_2=a_3=a_4$ and the subscripts denote which of the $B_1,B_2,B_3,B_4$ the atom occurence maps to. Rule instances $\vlinf{\aid}{}{\vls[\bar{a}.a]}{\ttt}$ and $\vlinf{\aiu}{}{\fff}{\vls(\bar{a}.a)}$ are substituted with derivations
 \[
 \vlderivation
 {
@@ -794,8 +794,10 @@ respectively. It is now straightforward to verify that the derivation so obtaine
 \end{proof}
 
 \begin{lem}\label{LemPreNor}
-If the $\pmi$-prenormalisd (resp. $\ppl$-premormalised) derivation $\Psi$ from $\alpha$ to $\beta$ is obtained from $\Phi$ as described in Lemma~\ref{LemPreNor} and $\Phi$ is $\ppl$-prenormalised (resp. $\pmi$-prenormalised) and contains no positive (resp. negative) isolated subflows then $\Psi$ is prenormalised and contains no positive (resp. negative) isolated subflows.
+If the $\ppl$-prenormalised (resp. $\pmi$-prenormalised) derivation $\Psi$ from $\alpha$ to $\beta$ is obtained from $\Phi$ as described in Lemma~\ref{LemPreNor} and $\Phi$ is $\pmi$-prenormalised (resp. $\ppl$-prenormalised) and contains no negative (resp. positive) isolated subflows then $\Psi$ is prenormalised and contains no negative (resp. positive) isolated subflows.
 \end{lem}
+
+\TODO{Define what the contraction with dots in the middle means in the following atomic flow.}
 
 \begin{defi}\label{DefRedIS}
 We define the reduction $\rightarrow_{is}$ (where $is$ stands for \emph{isolated subflow}) as follows, for all atomic flows $A$ and $B$, where $B$ is connected and flows $\tilde{A},\hat{A}$ are both isomorphic to $A$.
