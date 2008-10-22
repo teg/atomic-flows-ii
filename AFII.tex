@@ -5,7 +5,7 @@
 \usepackage{stmaryrd}
 \usepackage{graphicx}
 \usepackage[lutzsyntax]{virginialake}\vlsmallbrackets\aftrianglefalse
-\iflmcs\def\url #1#2{\relax}\else\usepackage{hyperref}\fi
+\iflmcs\def\url #1#2{\relax}\else\usepackage[pdfborder={0 0 0}]{hyperref}\fi
 
 %--------- Theorem etc
 \newtheorem{thm}{Theorem}[section]
@@ -85,6 +85,9 @@
                                 {\scriptscriptstyle-}}}
 
 \Ale{were the previous methods crap?}
+
+\Tom{in my opinion the method shown here is a strict improvement, let me know if you know of any downsides (I might have forgotten)}
+
 \Ale{global?}
 
 In \cite{GuglGund:07:Normalis:lr} we introduced \emph{atomic flows} as a tool to study normalisation. In this paper we focus on global normalisation procedures and show how they provide for more general and principled tools than what we studied before. The paper is in two parts, the first part gives a \emph{confluent} cut-elimination procedure for propositional classical logic and the second part gives a generalisation of the \emph{streamlining} procedure described in \cite{GuglGund:07:Normalis:lr}.
@@ -93,7 +96,7 @@ In \cite{GuglGund:07:Normalis:lr} we introduced \emph{atomic flows} as a tool to
 
 Atomic flows are graphical representations of derivations conserving their size as well as the causal relationship between the structural inference rules. All information about logical connectives and logical inference rules is disregarded. The crucial property of atomic flows is that they contain all the information necessary to perform normalisation. We can either just normalise the atomic flows, or use the atomic flows to decide how to normalise the derivations.
 
-\Ale{previous sentence, could not read comment --- see hand written comments}
+\Ale{previous sentence, see hand written comments [could not read comment]}
 
 A streamlined derivation is a derivation whose atomic flow has a speciﬁc shape, in particular this entails that
 
@@ -103,7 +106,10 @@ A streamlined derivation is a derivation whose atomic flow has a speciﬁc shape
 \end{enumerate}
 
 \Ale{causal relationship not understandable}
+
 \Ale{put a picture}
+
+\Tom{will do (later, when the text is finished)}
 
 Given the atomic flow of a derivation, we can tell what the atomic flow of the streamlined derivation would be. This is of particular interest because the atomic flows do not have access to any information about logical inference rules. This is remarkable because the relationship of the logical inference rules is usually considered crusial to have cut-elimination.
 
@@ -144,12 +150,16 @@ In this paper we will mainly concern ourselves with the structural rules.
 \section{Confluent Cut-Elimination For Proofs}
 
 \Ale{no hyphen in `cut-elimination'?}
+
 \Ale{formal definition of confluency}
 
 In this section, we describe a confluent cut-elimination procedure using atomic flows. It is confluent in the sense that given the atomic flow of any proof, the atomic flow of the resulting cut-free proof is unique.
 
 \Ale{unclear, very unclear and unclear.}
+
 \Ale{don't refer to $\gamma$ as a truth value assignment}
+
+\Tom{i agree, this needs to be rewritten (when the formal things have been fixed)}
 
 Take any proof with cuts, if we know the truth value of the atoms involved in the cuts we can eliminate the cuts to obtain a smaller derivation. In other words given $\vlproof{}{\SKS}{\alpha}$ we can obtain $\vlder{}{\SKS\setminus\{\aid\}}{\alpha}{\gamma}$ where $\gamma$ is a truth value assignment represented as the conjunction of atoms or their negations. Obviously we want a proof for all truth value assignments, and not just one. There is a finite number of possible truth value assignments and we can construct one derivation for each one. We can therefore plug all these derivations together in a big disjunction and obtain a proof $\vlproof{}{\SKS\setminus\{\aid\}}{\alpha}$ as desired.
 
