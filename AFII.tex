@@ -84,28 +84,43 @@
                                 {\scriptstyle-}
                                 {\scriptscriptstyle-}}}
 
-In \cite{GuglGund:07:Normalis:lr} we introduced \emph{atomic flows} as a tool to study normalisation. In this paper we focus on global normalisation procedures and show how they provide for more general and principled tools than what we studied before. The paper is inn two parts, the first part gives a \emph{confluent} cut-elimination procedure for propositional classical logic and the second part gives a generalisation of the \emph{streamlinig} procedure described in \cite{GuglGund:07:Normalis:lr}.
+\Ale{were the previous methods crap?}
+\Ale{global?}
 
-Atomic flows are graphical representations of derivations conserving their size as well as the causal relationship between the structural inference rules. All information about logical connectives and logical inference rules are disregarded. The crucial property of atomic flows is that they contain all the information necessary to perform normalisation. We can either just normalise the atomic flows, or use the atomic flows to decide how to normalise the derivations.
+In \cite{GuglGund:07:Normalis:lr} we introduced \emph{atomic flows} as a tool to study normalisation. In this paper we focus on global normalisation procedures and show how they provide for more general and principled tools than what we studied before. The paper is in two parts, the first part gives a \emph{confluent} cut-elimination procedure for propositional classical logic and the second part gives a generalisation of the \emph{streamlining} procedure described in \cite{GuglGund:07:Normalis:lr}.
 
-A streamlined derivation is a derivation whose atomic flow has a speciﬁc shape, in particular this shape entails that
+\Ale{is the causual relationship known?}
+
+Atomic flows are graphical representations of derivations conserving their size as well as the causal relationship between the structural inference rules. All information about logical connectives and logical inference rules is disregarded. The crucial property of atomic flows is that they contain all the information necessary to perform normalisation. We can either just normalise the atomic flows, or use the atomic flows to decide how to normalise the derivations.
+
+\Ale{previous sentence, could not read comment --- see hand written comments}
+
+A streamlined derivation is a derivation whose atomic flow has a speciﬁc shape, in particular this entails that
 
 \begin{enumerate}
 \item a streamlined derivation contains no causal relationship between an axiom and a cut; and
 \item in the special case where the premiss of a streamlined derivation is $\ttt$, the derivation is cut-free.
 \end{enumerate}
 
-Given the atomic flow of a derivation we can tell what the atomic flow of the streamlined derivation would be. This is of particular interest because the atomic flows do not have access to any information about logical inference rules, which are usually considered to be important in performing cut-elimination.
+\Ale{causal relationship not understandable}
+\Ale{put a picture}
 
-The novelty of this work is to only use global proof transformations when performing normalisation. We single out axioms and cuts and consider the rest of the atomic flow to be inside ``black boxes'' which we do not need to look inside. Then by knowing which axioms are connected with which cuts we can normalise the derivation without having any more information about its internal structure. The streamlining procedures presented in \cite{GuglGund:07:Normalis:lr} had two sources of exponential growth, it was not strongly normalising and the proof of termination was not very intuitive. With the new methods we have removed one source of exponential growth and both termination and strong normalisation are immediate.
+Given the atomic flow of a derivation, we can tell what the atomic flow of the streamlined derivation would be. This is of particular interest because the atomic flows do not have access to any information about logical inference rules. This is remarkable because the relationship of the logical inference rules is usually considered crusial to have cut-elimination.
+
+The novelty of this work is to only use global proof transformations when performing normalisation. We single out axioms and cuts and consider the rest of the atomic flow to be inside `black boxes' which we do not need to look inside. Then, by knowing which axioms are connected with which cuts, we can normalise the derivation without having any more information about its internal structure. The streamlining procedures presented in \cite{GuglGund:07:Normalis:lr} had two sources of exponential growth, it was not strongly normalising and the proof of termination was not very intuitive. With the new methods we have removed one source of exponential growth and both termination and strong normalisation are immediate.
+
+\Ale{was there anything good about the previous paper?}
+\Ale{isn't strong normalisation enough?}
 
 \section{Deep Inference and Atomic Flows}
 
-Deep inference is a relatively new proof-theoretic methodology developed over the past ten years. Deep inference differs from the traditional Gentzen-style methodologies in that it allows inference at any level of formulae, not only at the root connective. This allows for much greater freedom in designing formalisms and logical systems, but it also makes normalisation theory much more challenging.
+Deep inference is a relatively new proof-theoretic methodology developed over the past ten years. Deep inference differs from the traditional Gentzen-style methodology in that it allows inference at any level in formulae, not only at the root connective. This allows for much greater freedom in designing formalisms and logical systems, but it also makes normalisation theory much more challenging.
 
-In this paper we are working in the deep-inference formalism calculus of structures\cite{Gugl:06:A-System:kl}, but the results here are not specific to this formalism as we will discuss later.
+In this paper, we are working in the deep-inference formalism `calculus of structures' \cite{Gugl:06:A-System:kl}, but the results here are not specific to this formalism as we will discuss later.
 
-The system we use for propositional classical logic is system $\SKS$\cite{BrunTiu:01:A-Local-:mz}:
+The system we use for propositional classical logic is system $\SKS$ \cite{BrunTiu:01:A-Local-:mz}:
+
+\Ale{adjust spacing}
 
 \begin{figure}[h]
 \begin{center}
@@ -116,23 +131,31 @@ $\vlinf{\aiu}{}{\fff}{\vls(\bar{a}.a)}$ & $\vlinf{\acu}{}{\vls(a.a)}{a}$ & $\vli
 cointeraction (cut) & cocontraction & coweakening
 \end{tabular}
 \begin{tabular}{cc}
-$\vlinf{\swi}{}{\vls([\alpha.\beta].\gamma)}{\vls[\alpha.(\beta.\gamma)]}$ & $\vlinf{\med}{}{\vls([\alpha.\beta].[\gamma.\delta])}{\vls[(\alpha.\gamma).(\beta.\delta)]}$ \\
+$\vlinf{\swi}{}{\vls[(\alpha.\beta).\gamma]}{\vls(\alpha.[\beta.\gamma])}$ & $\vlinf{\med}{}{\vls([\alpha.\beta].[\gamma.\delta])}{\vls[(\alpha.\gamma).(\beta.\delta)]}$ \\
 switch & medial
 \end{tabular}
 \end{center}
 \end{figure}
 
-Furmulae are considered equal modulo associativity and commutativity of $\wedge$ and $\vee$; and idempotency and identity of $\ttt$ and $\fff$. Furthermore, negation is only allowed on atoms which is possible due to DeMorgan's Laws.
+Furmulae are considered equal modulo associativity and commutativity of $\wedge$ and $\vee$, and idempotency and identity of $\ttt$ and $\fff$. Furthermore, negation is only allowed on atoms which is possible due to De Morgan's laws.
 
 In this paper we will mainly concern ourselves with the structural rules.
 %===============================================================================
 \section{Confluent Cut-Elimination For Proofs}
 
-In this section we describe a confluent cut-elimination procedure using atomic flows. It is confluent in the sense that given the atomic flow of any proof, the atomic flow of the resulting cut-free proof is unique.
+\Ale{no hyphen in `cut-elimination'?}
+\Ale{formal definition of confluency}
 
-Take any proof with cuts, if we know the truth value of the atoms involved in the cuts we can eliminate the cuts to obtain a smaller derivation. In other words given $\vlproof{}{\SKS}{\alpha}$ we can obtain $\vlder{}{\SKS\setminus\{\aid\}}{\alpha}{\gamma}$ where $\gamma$ is a truth value assignment represented as the conjunction of atoms or their negations. Obviously we want a proof for all truth value assignments, and not just one. Since there is a finite number of possible truth value assignments and we can construct one derivation for each one. We can therefore plug all these derivaitons together in a big disjunction and obtain a proof $\vlproof{}{\SKS\setminus\{\aid\}}{\alpha}$ as desired.
+In this section, we describe a confluent cut-elimination procedure using atomic flows. It is confluent in the sense that given the atomic flow of any proof, the atomic flow of the resulting cut-free proof is unique.
 
-Each of the derivaitons obtained as described above, are a special case of what we call \emph{experiments}, we will now give their formal definition.
+\Ale{unclear, very unclear and unclear.}
+\Ale{don't refer to $\gamma$ as a truth value assignment}
+
+Take any proof with cuts, if we know the truth value of the atoms involved in the cuts we can eliminate the cuts to obtain a smaller derivation. In other words given $\vlproof{}{\SKS}{\alpha}$ we can obtain $\vlder{}{\SKS\setminus\{\aid\}}{\alpha}{\gamma}$ where $\gamma$ is a truth value assignment represented as the conjunction of atoms or their negations. Obviously we want a proof for all truth value assignments, and not just one. There is a finite number of possible truth value assignments and we can construct one derivation for each one. We can therefore plug all these derivations together in a big disjunction and obtain a proof $\vlproof{}{\SKS\setminus\{\aid\}}{\alpha}$ as desired.
+
+Each of the derivaitons obtained as described above, is a special case of what we call \emph{experiments}. We will now give their formal definition.
+
+\Ale{redo the definition of experiments (see handwritten notes for details)}
 
 \begin{defi}\label{DefExperiment}
 Given a derivation $\Phi$ from $\alpha$ to $\beta$ with atomic flow $C$, a polarity assignment $\pi$ to $C$ and a derivation $\Phi'$ from $\vls(\alpha'.\gamma)$ to $\vls[\beta'.\delta]$ with atomic flow $C'$, together with a subflow $B$ of $C$ as indicated in the diagram below
