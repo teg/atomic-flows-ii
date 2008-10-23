@@ -167,142 +167,29 @@ Each of the derivaitons obtained as described above, is a special case of what w
 
 \Ale{redo the definition of experiments (see handwritten notes for details)}
 
-\begin{defi}\label{DefExperiment}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$ with atomic flow $C$, a polarity assignment $\pi$ to $C$ and a derivation $\Phi'$ from $\vls(\alpha'.\gamma)$ to $\vls[\beta'.\delta]$ with atomic flow $C'$, together with a subflow $B$ of $C$ as indicated in the diagram below
-\begin{center}
-\begin{tabular}{ccc}
-$\vlder{\Phi}{}{\beta}{\alpha}$ & $\qquad\rightarrow\qquad$ &
-$
-C=\atomicflow{
-%boxes
-(-13,0)*{\affr{24}{8}};
-(13,0)*{\affr{24}{8}};
-%top edges
-(-24,9)*{\afvj{10}};
-(-22,9)*{\cdots};
-(-20,9)*{\afvj{10}};
-(20,9)*{\afvj{10}};
-(22,9)*{\cdots};
-(24,9)*{\afvj{10}};
-%axioms
-(0,8)*{\afaid{}{\ppl}{\pmi}{}{}{}};
-(-4,6)*{\cdots};
-(4,6)*{\cdots};
-(0,10)*{\afaidex{}{\ppl}{\pmi}{}{}{}{3}{1}};
-(-6,5)*{\afvj{2}};
-(6,5)*{\afvj{2}};
-(0,12)*{\afaidex{}{\pmi}{\ppl}{}{}{}{5}{1}};
-(-10,6)*{\afvj{4}};
-(10,6)*{\afvj{4}};
-(-12,8)*{\cdots};
-(12,8)*{\cdots};
-(0,14)*{\afaidex{}{\pmi}{\ppl}{}{}{}{7}{1}};
-(-14,7)*{\afvj{6}};
-(14,7)*{\afvj{6}};
-%bottom edges
-(-24,-9)*{\afvj{10}};
-(-22,-9)*{\cdots};
-(-20,-9)*{\afvj{10}};
-(20,-9)*{\afvj{10}};
-(22,-9)*{\cdots};
-(24,-9)*{\afvj{10}};
-%cuts
-(0,-8)*{\afaiu{}{\ppl}{\pmi}{}{}{}};
-(-4,-6)*{\cdots};
-(4,-6)*{\cdots};
-(0,-10)*{\afaiuex{}{\ppl}{\pmi}{}{}{}{3}{1}};
-(-6,-5)*{\afvj{2}};
-(6,-5)*{\afvj{2}};
-(0,-12)*{\afaiuex{}{\pmi}{\ppl}{}{}{}{5}{1}};
-(-10,-6)*{\afvj{4}};
-(10,-6)*{\afvj{4}};
-(-12,-8)*{\cdots};
-(12,-8)*{\cdots};
-(0,-14)*{\afaiuex{}{\pmi}{\ppl}{}{}{}{7}{1}};
-(-14,-7)*{\afvj{6}};
-(14,-7)*{\afvj{6}};
-%labels
-(-4,2)*{A};
-(22,2)*{B};
-}
-$ \\
-                                &                           & $\downarrow$ \\
-$\vlder{\Phi'}{}{\vls[\beta'.\delta]}{\vls(\alpha'.\gamma)}$ & $\rightarrow$ &
-$
-C'=\atomicflow{
-%boxes
-(-13,0)*{\affr{24}{8}};
-%top edges
-(-24,6)*{\afvj{4}};
-(-22,6)*{\cdots};
-(-20,6)*{\afvj{4}};
-%axioms
-(-2,8)*{\afawd{}{}{}{}};
-(-4,6)*{\cdots};
-(-6,8)*{\afawd{}{}{}{}};
-(-10,6)*{\afvj{4}};
-(-12,6)*{\cdots};
-(-14,6)*{\afvj{4}};
-%bottom edges
-(-24,-6)*{\afvj{4}};
-(-22,-6)*{\cdots};
-(-20,-6)*{\afvj{4}};
-%cuts
-(-2,-6)*{\afvj{4}};
-(-4,-6)*{\cdots};
-(-6,-6)*{\afvj{4}};
-(-10,-8)*{\afawu{}{}{}{}};
-(-12,-6)*{\cdots};
-(-14,-8)*{\afawu{}{}{}{}};
-%labels
-(-4,2)*{A};
-}\quad,
-$\\
-\end{tabular}
-\end{center}
-we say that
+\begin{defi}\label{DefTopExperiment}
+Given a derivation $\Phi$ from $\alpha$ to $\beta$ and an atom $a$ which occurs in $\Phi$, a \emph{$\top$-experiment on $\Phi$ with respect to $a$} is a derivation $\Phi'$ obtained from $\Phi$ as follows:
 \begin{itemize}
-\item $C'$ is an \emph{experiment on $C$ with respect to $B$ under $\pi$}; and
-\item $\Phi'$ is an \emph{experiment on $\Phi$ with respect to $B$ under $\pi$} if
-\begin{itemize}
- \item $\alpha'$ and $\beta'$ are obtained from $\alpha$ and $\beta$ respectively by substituting all the atoms mapping to positive (resp.\ negative) edges of $B$ with $\ttt$ (resp.\ $\fff$); and
- \item $\gamma$ (resp.\ $\delta$) is a conjuncton (resp.\ disjunction) of all the atoms mapping to top (resp.\ bottom) edges in $C'$, but not in $C$.
-% TODO define ``top edge'' and ``bottom edge''
-% \item $\gamma$ (resp.\ $\delta$) is a conjunction (resp.\ disjunction) of all the atoms mapping to edges adjacent to $\top$ (resp.\ $\bot$) in $C'$, but not in $C$.
-\end{itemize}
+ \item substitute each formula $\xi$ with $\vls[\xi'.\delta_i]$; where $\xi'$ is obtained by substituting $a$ with $\ttt$ in $\xi$, $i$ is the number of cointeractions applied to $a$ above $\xi$ in $\Phi$, $\delta_0=\fff$ and $\delta_i=\vls[\delta_{i-1}.{\bar a}]$;
+ \item let $\vlinf{\rho}{}{\zeta}{\xi}$ be a linear inference rule or a structural inference rule not applied to $a$, then it is substituted with $\vlinf{\rho}{}{\vls[\zeta'.\delta_i]}{\vls[\xi'.\delta_i]}$;
+ \item let $\vlinf{\rho}{}{\zeta}{\xi}$ be a structural inference rule applied to $a$, then it is substituted with $\vlinf{=}{}{\vls[\zeta'.\delta_i]}{\vls[\xi'.\delta_i]}$\footnote{we might need a special case for $\vlinf{\awd}{}{\xi'\{\ttt\}}{\xi'\{\fff\}}$};
+ \item the rule $\vlinf{\aid}{}{\xi\{\vls[a.{\bar a}]\}}{\xi\{\ttt\}}$ is substituted with $\vlinf{\awd}{}{\vls[\xi'\{\vls[\ttt.{\bar a}]\}.\delta_i]}{\vls[\xi'\{\ttt\}.\delta_i]}$; and
+ \item the rule $\vlinf{\aiu}{}{\xi\{\fff\}}{\xi\{\vls(a.{\bar a})\}}$ is substituted with $\vlinf{\sus}{}{\vls[\xi'\{\fff\}.\delta_{i+1}]}{\vls[\xi'\{\vls(\ttt.{\bar a})\}.\delta_i]}$.
 \end{itemize}
 \end{defi}
 
-\begin{defi}
-Given a derivation $\Phi$ with atomic flow $C$ as in Definition~\ref{DefExperiment}. The (co)interaction nodes in $C$ which are not in $A$ nor $B$ we call \emph{evidenced (co)interaction nodes} and the inference rules corresponding to evidenced nodes we call \emph{evidenced (co)interaction rules}.
-\end{defi}
-
-
-Given an atomic flow $C$ as described above, it is obvious that we can create the atomic flow $C'$. We now need to show that we can always obtain the corresponding derivation $\Phi'$, so in this sense making experiments is a ``sound'' operation.
-
-\begin{lem}
-Given any derivation $\Phi$ with atomic flow $C$, an atomic subflow $B$ of $C$ and a polarity assignment $\pi$, such that there exists an experiment on $C$ with respect to $B$ under $\pi$ then there exists a derivation $\Phi'$ such that $\Phi'$ is an experiment on $\Phi$ with respect to $B$ under $\pi$.
-\end{lem}
-\begin{proof}
-Let $\Phi$ have premiss $\alpha$ and conclusion $\beta$, let $C'$ be an experiment on $C$ and let $\alpha'$, $\beta'$, $\xi'$ and $\zeta'$ denote the formulae obtained from $\alpha$, $\beta$, $\xi$ and $\zeta$ by substituting atoms mapping to positive (resp.\ negative) edges which occur in $C$ but not in $C'$ with $\ttt$ (resp.\ $\fff$).
-
-We then obtain $\Phi'$ from $\Phi$ by substituting each formula $\xi$ with $\vls[(\xi'.\gamma_i).\delta_j]$; where $i$ (resp.\ $j$) is the number of evidenced interactions (resp.\ cointeractions) below (resp.\ above) $\xi$ in $\Phi$ such that the edge connecting the corresponding node to $A$ is positive (resp.\ negative) under $\pi$, $\gamma_0=\ttt$, $\gamma_{i}=\vls(\gamma_{i-1}.a_i)$, $\delta_0=\fff$ and $\delta_{j}=\vls[\delta_{j-1}.a_j]$; where $a_i$ (resp.\ $a_j$) is the atom, mapping to a positive edge, taking part in interaction (resp.\ cointeraction) number $i$ (resp.\ $j$) from the top (resp.\ bottom) in $\Phi$.
-
-It is now straight forward to check that the following substitutions of inference rules gives a derivation with the right atomic flow:
+\begin{defi}\label{DefBotExperiment}
+Given a derivation $\Phi$ from $\alpha$ to $\beta$ and an atom $a$ which occurs in $\Phi$, a \emph{$\bot$-experiment on $\Phi$ with respect to $a$} is a derivation $\Phi'$ obtained from $\Phi$ as follows:
 \begin{itemize}
- \item Let $\vlinf{\rho}{}{\zeta}{\xi}$ be a linear inference rule or a structural inference rule mapping to a node in $A$, then it is substituted with $\vlinf{\rho}{}{\vls[(\zeta'.\gamma_i).\delta_j]}{\vls[(\xi'.\gamma_i).\delta_j]}$;
- \item let $\vlinf{\rho}{}{\zeta}{\xi}$ be a structural inference rule mapping to a node in $B$, then it is substituted with $\vlinf{=}{}{\vls[(\zeta'.\gamma_i).\delta_j]}{\vls[(\xi'.\gamma_i).\delta_j]}$\footnote{we might need a special case for $\vlinf{\rho}{}{\xi'\{\ttt\}}{\xi'\{\fff\}}$ where $\rho\in\{\awd,\awu\}$};
- \item let $\vlinf{\aid}{}{\xi\{\vls[a^\ppl.{\bar a}^\pmi]\}}{\xi\{\ttt\}}$ be an evidenced interaction rule, then if the edge connecting the node to $A$ is positive under $\pi$ it is substituted with $\vlinf{\sus}{}{\vls[(\xi'\{\vls[a^\ppl.\fff]\}.\gamma_i).\delta_j]}{\vls[(\xi'\{\ttt\}.\gamma_{i+1}).\delta_j]}$ otherwise it is substituted with $\vlinf{\awd}{}{\vls[(\xi'\{\vls[\ttt.{\bar a}^\pmi]\}.\gamma_i).\delta_j]}{\vls[(\xi'\{\ttt\}.\gamma_i).\delta_j]}$; and
- \item let $\vlinf{\aiu}{}{\xi\{\fff\}}{\xi\{\vls(a^\ppl.{\bar a}^\pmi)\}}$ be an evidenced cointeraction rule, then if the edge connecting the node to $A$ is negative under $\pi$ it is substituted with $\vlinf{\sus}{}{\vls[(\xi'\{\fff\}.\gamma_i).\delta_{j+1}]}{\vls[(\xi'\{\vls(\ttt.{\bar a}^\pmi)\}.\gamma_i).\delta_j]}$ otherwise it is substituted with $\vlinf{\awd}{}{\vls[(\xi'\{\vls[\ttt.{\bar a}^\pmi]\}.\gamma_i).\delta_j]}{\vls[(\xi'\{\ttt\}.\gamma_i).\delta_j]}$\footnote{note that there is no correspondence between negative and positive atoms and negative and positive polarities, the roles could be reversed. Alternatively we could do this without showing the atoms, but that might be too obfuscated?}.
+ \item substitute each formula $\xi$ with $\vls(\xi'.\delta_i)$; where $\xi'$ is obtained by substituting $a$ with $\fff$ in $\xi$, $i$ is the number of interactions applied to $a$ below $\xi$ in $\Phi$, $\delta_0=\ttt$ and $\delta_i=\vls(\delta_{i-1}.{\bar a})$;
+ \item let $\vlinf{\rho}{}{\zeta}{\xi}$ be a linear inference rule or a structural inference rule not applied to $a$, then it is substituted with $\vlinf{\rho}{}{\vls[\zeta'.\delta_i]}{\vls[\xi'.\delta_i]}$;
+ \item let $\vlinf{\rho}{}{\zeta}{\xi}$ be a structural inference rule applied to $a$, then it is substituted with $\vlinf{=}{}{\vls[\zeta'.\delta_i]}{\vls[\xi'.\delta_i]}$\footnote{we might need a special case for $\vlinf{\awu}{}{\xi'\{\ttt\}}{\xi'\{\fff\}}$};
+ \item the rule $\vlinf{\aid}{}{\xi\{\vls[a.{\bar a}]\}}{\xi\{\ttt\}}$ is substituted with $\vlinf{\sus}{}{\vls[\xi'\{\vls[\ttt.{\bar a}]\}.\delta_i]}{\vls[\xi'\{\ttt\}.\delta_{i+1}]}$; and
+ \item the rule $\vlinf{\aiu}{}{\xi\{\fff\}}{\xi\{\vls(a.{\bar a})\}}$ is substituted with $\vlinf{\awu}{}{\vls[\xi'\{\ttt\}.\delta_i]}{\vls[\xi'\{\vls(\ttt.{\bar a})\}.\delta_i]}$.
 \end{itemize}
-The derivation $\Phi'$ we have obtained is a derivation from $\vls[(\alpha'.\gamma_k).\delta_0]$ to $\vls[(\beta'.\gamma_0).\delta_l]$ for some $k,l$, notice that $\gamma_0=\ttt$ and $\delta_0=\fff$, so we get $\Phi'$ from $\vls(\alpha'.\gamma_k)$ to $\vls[\beta'.\delta_l]$ as we want.
-\end{proof}
-
-When performing cut-elimination the experiments we need are of a specific form; we need to preserve the conclusion, so we cannot create any new bottom edges. This is the motivation for the following definition.
-
-\begin{defi}
-Let $C$ be an atomic flow and $\pi$ a polarity assignment to $C$. If $B$ is the subflow of $C$ containing only negative (resp.\ positive) nodes and $A$ is the subflow of $C$ containing only positive (resp.\ negative) nodes, then the experiment on $C$ with respect to $B$ under $\pi$ is called the \emph{$\top$-experiment (resp.\ $\bot$-experiment) on $C$ under $\pi$}. The definition extends to derivations in the obvious way.
 \end{defi}
+
+\TODO{Change the rest of the paper to reflect the new definition.}
 
 We now observe that an $\top$-experiment indeed gives us the what we want. The observant reader might note that instead of the original conclusion, $\beta$, we get $\beta'$, which in this case is $\beta$ with some atom occurences substituted with $\fff$, as we shall se later, this is not a problem. We could indeed fix this straight away by applying $\awd$'s.
 
