@@ -170,22 +170,23 @@ Each of the derivaitons obtained as described above, is a special case of what w
 \begin{defi}\label{DefTopExperiment}
 Given a derivation $\Phi$ from $\alpha$ to $\beta$ and an atom $a$ which occurs in $\Phi$, a \emph{$\top$-experiment on $\Phi$ with respect to $a$} is a derivation $\Phi'$ obtained from $\Phi$ as follows:
 \begin{itemize}
- \item substitute each formula $\xi$ with $\vls[\xi'.\delta_i]$; where $\xi'$ is obtained by substituting $a$ with $\ttt$ in $\xi$, $i$ is the number of cointeractions applied to $a$ above $\xi$ in $\Phi$, $\delta_0=\fff$ and $\delta_i=\vls[\delta_{i-1}.{\bar a}]$;
- \item let $\vlinf{\rho}{}{\zeta}{\xi}$ be a linear inference rule or a structural inference rule not applied to $a$, then it is substituted with $\vlinf{\rho}{}{\vls[\zeta'.\delta_i]}{\vls[\xi'.\delta_i]}$;
- \item let $\vlinf{\rho}{}{\zeta}{\xi}$ be a structural inference rule applied to $a$, then it is substituted with $\vlinf{=}{}{\vls[\zeta'.\delta_i]}{\vls[\xi'.\delta_i]}$\footnote{we might need a special case for $\vlinf{\awd}{}{\xi'\{\ttt\}}{\xi'\{\fff\}}$};
- \item the rule $\vlinf{\aid}{}{\xi\{\vls[a.{\bar a}]\}}{\xi\{\ttt\}}$ is substituted with $\vlinf{\awd}{}{\vls[\xi'\{\vls[\ttt.{\bar a}]\}.\delta_i]}{\vls[\xi'\{\ttt\}.\delta_i]}$; and
- \item the rule $\vlinf{\aiu}{}{\xi\{\fff\}}{\xi\{\vls(a.{\bar a})\}}$ is substituted with $\vlinf{\sus}{}{\vls[\xi'\{\fff\}.\delta_{i+1}]}{\vls[\xi'\{\vls(\ttt.{\bar a})\}.\delta_i]}$.
+ \item given a formula $\xi$ in $\Phi$, let $i$ be the number of interactions applied to $a$ below $\xi$, then the formula $\xi'$ is obtained by substituting $\fff$ for $a$ in $\xi$ and the formula $\delta_i$ is defined by: $\delta_0=\ttt$ and $\delta_{i+1}=\vls(\delta_i.{\bar a})$;
+ \item each rule instance $\vlinf{\rho}{}{\zeta}{\xi}$, where $\rho\in\{\acd,\acu,\awd\}$, which is applied to $a$, is substituted with $\vlinf{=}{}{\vls(\zeta'.\delta_i)}{\vls(\xi'.\delta_i)}$;
+ \item each rule instance $\vlinf{\awu}{}{\xi\{\ttt\}}{\xi\{a\}}$ is substituted with $\vlinf{\awu}{}{\vls(\xi'\{\ttt\}.\delta_i)}{\vls(\xi'\{\fff\}.\delta_i)}$;
+ \item each rule instance $\vlinf{\aid}{}{\xi\{\vls[a.{\bar a}]\}}{\xi\{\ttt\}}$ is substituted with $\vlinf{\sus}{}{\vls(\xi'\{\vls[\fff.{\bar a}]\}.\delta_i)}{\vls(\xi'\{\ttt\}.\delta_{i+1})}$;
+ \item each rule instance $\vlinf{\aiu}{}{\xi\{\fff\}}{\xi\{\vls(a.{\bar a})\}}$ is substituted with $\vlinf{\awu}{}{\vls(\xi'\{\fff\}.\delta_i)}{\vls(\xi'\{\vls(\fff.{\bar a})\}.\delta_i)}$; and
+ \item each other rule instance $\vlinf{\rho}{}{\zeta}{\xi}$ is substituted with $\vlinf{\rho}{}{\vls(\zeta'.\delta_i)}{\vls(\xi'.\delta_i)}$.
 \end{itemize}
 \end{defi}
 
 \begin{defi}\label{DefBotExperiment}
 Given a derivation $\Phi$ from $\alpha$ to $\beta$ and an atom $a$ which occurs in $\Phi$, a \emph{$\bot$-experiment on $\Phi$ with respect to $a$} is a derivation $\Phi'$ obtained from $\Phi$ as follows:
 \begin{itemize}
- \item substitute each formula $\xi$ with $\vls(\xi'.\delta_i)$; where $\xi'$ is obtained by substituting $a$ with $\fff$ in $\xi$, $i$ is the number of interactions applied to $a$ below $\xi$ in $\Phi$, $\delta_0=\ttt$ and $\delta_i=\vls(\delta_{i-1}.{\bar a})$;
- \item let $\vlinf{\rho}{}{\zeta}{\xi}$ be a linear inference rule or a structural inference rule not applied to $a$, then it is substituted with $\vlinf{\rho}{}{\vls[\zeta'.\delta_i]}{\vls[\xi'.\delta_i]}$;
- \item let $\vlinf{\rho}{}{\zeta}{\xi}$ be a structural inference rule applied to $a$, then it is substituted with $\vlinf{=}{}{\vls[\zeta'.\delta_i]}{\vls[\xi'.\delta_i]}$\footnote{we might need a special case for $\vlinf{\awu}{}{\xi'\{\ttt\}}{\xi'\{\fff\}}$};
- \item the rule $\vlinf{\aid}{}{\xi\{\vls[a.{\bar a}]\}}{\xi\{\ttt\}}$ is substituted with $\vlinf{\sus}{}{\vls[\xi'\{\vls[\ttt.{\bar a}]\}.\delta_i]}{\vls[\xi'\{\ttt\}.\delta_{i+1}]}$; and
- \item the rule $\vlinf{\aiu}{}{\xi\{\fff\}}{\xi\{\vls(a.{\bar a})\}}$ is substituted with $\vlinf{\awu}{}{\vls[\xi'\{\ttt\}.\delta_i]}{\vls[\xi'\{\vls(\ttt.{\bar a})\}.\delta_i]}$.
+ \item given a formula $\xi$ in $\Phi$, let $i$ be the number of cointeractions applied to $a$ above $\xi$, then the formula $\xi'$ is obtained by substituting $\ttt$ for $a$ in $\xi$ and the formula $\delta_i$ is defined by: $\delta_0=\fff$ and $\delta_{i+1}=\vls[\delta_i.{\bar a}]$; \item each rule instance $\vlinf{\rho}{}{\zeta}{\xi}$, where $\rho\in\{\acd,\acu,\awu\}$, which is applied to $a$, is substituted with $\vlinf{=}{}{\vls[\zeta'.\delta_i]}{\vls[\xi'.\delta_i]}$;
+ \item each rule instance $\vlinf{\awd}{}{\xi\{a\}}{\xi\{\fff\}}$ is substituted with $\vlinf{\awu}{}{\vls[\xi'\{\ttt\}.\delta_i]}{\vls[\xi'\{\fff\}.\delta_i]}$;
+ \item each rule instance $\vlinf{\aid}{}{\xi\{\vls[a.{\bar a}]\}}{\xi\{\ttt\}}$ is substituted with $\vlinf{\awd}{}{\vls[\xi'\{\vls[\ttt.{\bar a}]\}.\delta_i]}{\vls[\xi'\{\ttt\}.\delta_i]}$;
+ \item each rule instance $\vlinf{\aiu}{}{\xi\{\fff\}}{\xi\{\vls(a.{\bar a})\}}$ is substituted with $\vlinf{\sus}{}{\vls[\xi'\{\fff\}.\delta_{i+1}]}{\vls[\xi'\{\vls(\ttt.{\bar a})\}.\delta_i]}$; and
+ \item each other rule instance $\vlinf{\rho}{}{\zeta}{\xi}$ is substituted with $\vlinf{\rho}{}{\vls[\zeta'.\delta_i]}{\vls[\xi'.\delta_i]}$.
 \end{itemize}
 \end{defi}
 
