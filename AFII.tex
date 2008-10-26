@@ -157,11 +157,11 @@ In this section, we describe a confluent cut-elimination procedure using atomic 
 
 \Ale{unclear, very unclear and unclear.}
 
-\Ale{don't refer to $\gamma$ as a truth value assignment}
+\Ale{don't refer to $\delta$ as a truth value assignment}
 
 \Tom{i agree, this needs to be rewritten (when the formal things have been fixed)}
 
-Take any proof with cuts, if we know the truth value of the atoms involved in the cuts we can eliminate the cuts to obtain a smaller derivation. In other words given $\vlproof{}{\SKS}{\alpha}$ we can obtain $\vlder{}{\SKS\setminus\{\aid\}}{\alpha}{\gamma}$ where $\gamma$ is a truth value assignment represented as the conjunction of atoms or their negations. Obviously we want a proof for all truth value assignments, and not just one. There is a finite number of possible truth value assignments and we can construct one derivation for each one. We can therefore plug all these derivations together in a big disjunction and obtain a proof $\vlproof{}{\SKS\setminus\{\aid\}}{\alpha}$ as desired.
+Take any proof with cuts, if we know the truth value of the atoms involved in the cuts we can eliminate the cuts to obtain a smaller derivation. In other words given $\vlproof{}{\SKS}{\alpha}$ we can obtain $\vlder{}{\SKS\setminus\{\aid\}}{\alpha}{\delta}$ where $\delta$ is a truth value assignment represented as the conjunction of atoms or their negations. Obviously we want a proof for all truth value assignments, and not just one. There is a finite number of possible truth value assignments and we can construct one derivation for each one. We can therefore plug all these derivations together in a big disjunction and obtain a proof $\vlproof{}{\SKS\setminus\{\aid\}}{\alpha}$ as desired.
 
 Each of the derivaitons obtained as described above, is a special case of what we call \emph{experiments}. We will now give their formal definition.
 
@@ -194,8 +194,21 @@ We now observe that an $\top$-experiment indeed gives us the what we want. The o
 
 \TODO{Define what it means to do an experiment with respect to a \emph{selection of atoms} instead of just a single atom. A \emph{selection} is a set with some restrictions.}
 
+\begin{defi}
+Let $\Phi$ be a derivation and $A$ a set of atoms, then $A$ is called a \emph{selection of atoms from $\Phi$} if $A$ is the smallest set such that for every $a$ which occurs in a (co)interaction in $\Phi$ exactly one of $a$ and $\bar a$ are in $A$.
+\end{defi}
+
+\begin{defi}
+Given a derivation, $\Phi$, and a selection of atoms from $\Phi$, $A$, a \emph{$\top$-experiment (resp.\ $\bot$-experiment) on $\Phi$ with respect to $A$} is:
+\begin{itemize}
+ \item the $\top$-experiment (resp.\ $\bot$-experiment) on $\Phi$ with respect to $a$ if $A=\{a\}$;
+ \item the $\top$-experiment (resp.\ $\bot$-experiment) on the $\top$-experiment (resp.\ $\bot$-experiment) on $\Phi$ with respect to $a\in A$ with respect to $A\setminus\{a\}$, otherwise.
+\end{itemize}
+\end{defi}
+
+
 \begin{pro}\label{PropExperimentShapeBot}
-For any proof\/ $\vlproof{\Pi}{\SKS}{\beta}$ and any selection of atoms occuring in $\Pi$, $A$, the $\top$-experiment on $\Pi$ with respect to $A$ is of the form $\vlder{}{\SKS\setminus\{\aid,\aiu\}}{\beta'}{\gamma}$. Where $\beta'$ and $\delta$ are given by Definition~\ref{DefTopExperiment}.
+For any proof\/ $\vlproof{\Pi}{\SKS}{\beta}$ and any selection of atoms from $\Pi$, $A$, the $\top$-experiment on $\Pi$ with respect to $A$ is of the form $\vlder{}{\SKS\setminus\{\aid,\aiu\}}{\beta'}{\delta}$. Where $\beta'$ and $\delta$ are given by Definition~\ref{DefTopExperiment}.
 \end{pro}
 
 We have seen how we can generate one derivation for choice of atoms, now we will see how we can glue all of them together to obtain the cut-free proof.
@@ -203,7 +216,7 @@ We have seen how we can generate one derivation for choice of atoms, now we will
 The disjunction of all the possible truth value assignments is obviously a tautology. We now show that we can construct a \emph{canonical} proof of this tautology. By ``canonical'' we mean that we can do it in such a way that there is no arbitrary choice involved. In particular this entails that the atomic flow of all the different atoms will be the same.
 
 \begin{lem}\label{LemGlueTop}
-Let $\Pi$ be a proof, let $\mathcal{P}$ be the set of all the selections of atoms occuring in $\Pi$ and for each $A\in\mathcal{P}$ let the $\top$-experiment on $\Pi$ with respect to $A$ have premiss $\delta_A$. Then there exist \emph{canonical} proofs $\vlproof{}{\{\aid,\acu,\swi,\med\}}{\bigvee_{A\in\mathcal{P}}\delta_A}$ and $\vlproof{}{\{\aid,\acd,\swi,\med\}}{\bigvee_{A\in\mathcal{P}}\delta_A}$ of size $O(|\mathcal{P}|)$.
+Let $\Pi$ be a proof, let $\mathcal{P}$ be the set of all possible selections of atoms from $\Pi$ and for each $A\in\mathcal{P}$ let the $\top$-experiment on $\Pi$ with respect to $A$ have premiss $\delta_A$. Then there exist \emph{canonical} proofs $\vlproof{}{\{\aid,\acu,\swi,\med\}}{\bigvee_{A\in\mathcal{P}}\delta_A}$ and $\vlproof{}{\{\aid,\acd,\swi,\med\}}{\bigvee_{A\in\mathcal{P}}\delta_A}$ of size $O(|\mathcal{P}|)$.
 \end{lem}
 
 \begin{proof}
@@ -345,6 +358,8 @@ There is only one way of building such a proof in the sense that the atomic flow
 \TODO{Rewrite with respect to the new definition of experiment.}
 
 The idea behind the streamlining procedures we show here is to substitute units in place of atoms to eliminate axiom-cut pairs. These kind of substitutions are only possible if we can find \emph{isolated subflows} which are not connected to the premiss nor conclusion of the derivation.
+
+\subsection{Prenormalisation}
 
 We first show how we can always \emph{prenormalise} a derivation, this takes a derivation and splits it in two parts one which is streamlined and one which consists of isolated subflows. We then show how to streamline the latter part of the atomic flow.
 
@@ -687,7 +702,7 @@ respectively. It is now straightforward to verify that the derivation so obtaine
 If the $\ppl$-prenormalised (resp. $\pmi$-prenormalised) derivation $\Psi$ from $\alpha$ to $\beta$ is obtained from $\Phi$ as described in Lemma~\ref{LemPreNor} and $\Phi$ is $\pmi$-prenormalised (resp. $\ppl$-prenormalised) and contains no negative (resp. positive) isolated subflows then $\Psi$ is prenormalised and contains no negative (resp. positive) isolated subflows.
 \end{lem}
 
-\TODO{Define what the contraction with dots in the middle means in the following atomic flow.}
+\subsection{Eliminating Isolated Subflows}
 
 \begin{defi}\label{DefRedIS}
 We define the reduction $\rightarrow_{is}$ (where $is$ stands for \emph{isolated subflow}) as follows, for all atomic flows $A$ and $B$, where $B$ is connected and flows $\tilde{A},\hat{A}$ are both isomorphic to $A$.
@@ -768,28 +783,31 @@ We define the reduction $\rightarrow_{is}$ (where $is$ stands for \emph{isolated
 \]
 \end{defi}
 
+\TODO{Define what the contraction with dots in the middle means in the following atomic flow.}
+
 \begin{thm}
 Reduction $\rightarrow_{is}$ is sound.
 \end{thm}
+\TODO{Change the definition so that ``the atom mapping to $B$'' does not map to anything else...}
 \begin{proof}
-Let $\Phi$ be a derivation with flow $C$, such that $C\rightarrow_{si} D$. We show that there exists a derivation $\Psi$ with flow $D$ and with the same premiss and conclusion as $\Phi$. In the following we refer to the figure in Definition~\ref{DefRedIS}. We assume that $\Phi$ has premiss $\xi$ and conclusion $\zeta$. Now we will conduct experiments with respect to $B$. Since $B$ is connected we know that it has two polarity assignments $\pi_+$ and $\pi_-$, where each polarity assignment assigns the given polarity to all the edges in $B$. Now let $\Phi_+^\top$ be the $\top$-experiment under $\pi_+$ and let $\Phi_-^\bot$ be the $\bot$-experiment under $\pi_-$ both with respect to $B$. Then we have:
+Let $\Phi$ be a derivation with flow $C$, such that $C\rightarrow_{si} D$. We show that there exists a derivation $\Psi$ with flow $D$ and with the same premiss and conclusion as $\Phi$. In the following we refer to the figure in Definition~\ref{DefRedIS}. We assume that $\Phi$ has premiss $\xi$ and conclusion $\zeta$. Let $a$ be the atom mapping to the subflow $B$. Now let $\Phi^\top$ be the $\top$-experiment and let $\Phi^\bot$ be the $\bot$-experiment on $\Phi$, both with respect to $a$. Then we have:
 \[
-\vlder{\Phi_+^\top}{}{\vls[\zeta.{\bar a}.\cdots.{\bar a}]}{\xi}
+\vlder{\Phi^\bot}{}{\vls[\zeta.{\bar a}.\cdots.{\bar a}]}{\xi}
 \quad,\quad
-\vlder{\Phi_-^\bot}{}{\zeta}{\vls({\bar a}.\cdots.{\bar a}.\xi)}
+\vlder{\Phi^\top}{}{\zeta}{\vls({\bar a}.\cdots.{\bar a}.\xi)}\quad.
 \]
-We can now connect the two experiments to get the desired derivation:
+Notice that since $B$ is isolated the formulae $\xi$ and $\zeta$ are the same in the experiments as in the original derivation. We can now connect the two experiments to get the desired derivation:
 \[
 \vlderivation{
 \vlin{\cod}{}{\zeta}{
-\vlde{\vls[\zeta.\Phi_-^\bot]}{}{\vls[\zeta.\zeta]}{
+\vlde{\vls[\zeta.\Phi^\top]}{}{\vls[\zeta.\zeta]}{
 \vlin{\acu^\star}{}{\vls[\zeta.({\bar a}.\cdots.{\bar a}.\xi)]}{
 \vlin{\swi}{}{\vls[\zeta.({\bar a}.\xi)]}{
 \vlin{\acd^\star}{}{\vls([\zeta.{\bar a}].\xi)}{
-\vlde{\vls(\Phi_+^\top.\xi)}{}{\vls([\zeta.{\bar a}.\cdots.{\bar a}].\xi)}{
+\vlde{\vls(\Phi^\bot.\xi)}{}{\vls([\zeta.{\bar a}.\cdots.{\bar a}].\xi)}{
 \vlin{\cou}{}{\vls(\xi.\xi)}{
 \vlhy{\xi}}}}}}}}
-}
+}\quad.
 \]
 \end{proof}
 
