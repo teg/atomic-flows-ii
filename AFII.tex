@@ -167,6 +167,102 @@ Each of the derivaitons obtained as described above, is a special case of what w
 
 \Ale{redo the definition of experiments (see handwritten notes for details)}
 
+%---------------------------------------
+\begin{figure}[tbp]
+\[
+\begin{array}{lc}
+%---------------------------------------
+\atomicflow
+{
+( 0  ,0)*{\afawd{}{}{\star}{}};
+}
+\quad\to\quad
+\atomicflow
+{
+( 0  ,3.3)*{\aflabelright{}};
+}
+&\qquad
+\vlinf{\awd}{}{\xi\vlsbr\{a^\star\}}{\xi\{\fff\}}
+\quad\rightarrow\quad
+\vlinf{=}{}{\vls(\xi'\{\fff\}.\delta_i)}{\vls(\xi'\{\fff\}.\delta_i)}
+\\
+\noalign{\bigskip}
+%---------------------------------------
+\\
+\atomicflow
+{
+( 0  ,0)*{\afacd{\star}{}{\star}{}{\star}{}};
+}
+\quad\to\quad
+\atomicflow
+{
+( 0  ,3.3)*{\aflabelright{}};
+}
+&\qquad
+\vlinf{\acd}{}{\xi\vlsbr\{a^\star\}}{\xi\vlsbr[a^\star.a^\star]}
+\quad\rightarrow\quad
+\vlinf{=}{}{\vls(\xi'\{\fff\}.\delta_i)}{\vls(\xi'\{\fff\}.\delta_i)}
+\\
+\noalign{\bigskip}
+%---------------------------------------
+\\
+\atomicflow
+{
+( 0  ,0)*{\afacu{\star}{}{}{}{\star}{}};
+}
+\quad\to\quad
+\atomicflow
+{
+( 0  ,0)*{\afawd{}{}{}{}};
+}
+&\qquad
+\vlinf{\acu}{}{\xi\vlsbr(a^\star.a)}{\xi\{a^\star\}}
+\quad\rightarrow\quad
+\vlinf{\awd}{}{\vls(\xi'\{a\}.\delta_i)}{\vls(\xi'\{\fff\}.\delta_i)}
+\\
+\noalign{\bigskip}
+%---------------------------------------
+\\
+\atomicflow
+{
+( 0  ,0)*{\afaid{\star}{}{}{}{}{}};
+}
+\quad\to\quad
+\atomicflow
+{
+( 0  ,0)*{\afvj{6}};
+}
+&\qquad
+\vlinf{\aid}{}{\xi\{\vls[a^\star.{\bar a}]\}}{\xi\{\ttt\}}\quad\rightarrow\quad
+\vlinf{\sus}{}{\vls(\xi'\{\vls[\fff.{\bar a}]\}.\delta_i)}{\vls(\xi'\{\ttt\}.\delta_{i+1})}
+\\
+\noalign{\bigskip}
+%---------------------------------------
+\\
+\atomicflow
+{
+( 0  ,0)*{\afaiu{\star}{}{}{}{}{}};
+}
+\quad\to\quad
+\atomicflow
+{
+( 0  ,0)*{\afawu{}{}{}{}};
+}
+&\qquad
+\vlinf{\aiu}{}{\xi\{\fff\}}{\xi\{\vls(a^\star.{\bar a})\}}
+\quad\rightarrow\quad
+\vlinf{\awu}{}{\vls(\xi'\{\fff\}.\delta_i)}{\vls(\xi'\{\vls(\fff.{\bar a})\}.\delta_i)}
+\\
+\noalign{\bigskip}
+%---------------------------------------
+\\
+%---------------------------------------
+\end{array}
+\]
+\caption{`Cone reductions'.}
+\label{FigRedW}
+\end{figure}%
+
 \begin{defi}\label{DefTopExperiment}
 Given a derivation $\Phi$ from $\alpha$ to $\beta$ and an atom $a$ which occurs in $\Phi$, a \emph{$\top$-experiment on $\Phi$ with respect to $a$} is a derivation $\Phi'$ obtained from $\Phi$ as follows:
 \begin{itemize}
