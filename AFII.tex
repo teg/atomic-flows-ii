@@ -155,15 +155,15 @@ In this paper we will mainly concern ourselves with the structural rules.
 \section{Streamlining via Experiments}
 
 \begin{defi}
-Let $\Phi$ be a derivation from $\alpha$ to $\beta$. Let $\Phi'$ be the derivaiton obtained by permuting all the interactions to the top and the cointeractions to the bottom:
+Let $\Phi$ be a derivation from $\alpha$ to $\beta$ containing $N$ different atoms, $k_i$ interactions and $l_i$ cointeractions on atom $i$. Consider the derivaiton obtained by permuting all the interactions to the top and the cointeractions to the bottom:
 \[
 \vlderivation
 {
  \vlde{}{\{\aiu\}}{\beta}
  {
-  \vlde{\Phi_c}{\SKS\setminus\{\aid,\aiu\}}{\vls[\beta.(a_1.{\bar a_1}).\cdots.(a_l.{\bar a_l})]}
+  \vlde{\Phi_c}{\SKS\setminus\{\aid,\aiu\}}{\beta_n=\vls[\beta.\bigvee_{i=1}^n\bigvee_{j=1}^{l_i}(a_i.{\bar a_i})]}
   {
-   \vlde{}{\{\aid\}}{\vls(\alpha.[a_1.{\bar a_1}].\cdots.[a_k.{\bar a_k}])}
+   \vlde{}{\{\aid\}}{\vls(\alpha.\bigwedge_{i=1}^N\bigwedge_{j=1}^{k_i}[a_i.{\bar a_i}])}
    {
     \vlhy{\alpha}
    }
@@ -173,24 +173,6 @@ Let $\Phi$ be a derivation from $\alpha$ to $\beta$. Let $\Phi'$ be the derivait
 \]
 then $\Phi_c$ is called the \emph{core} of $\Phi$.
 \end{defi}
-
-
-\begin{defi}
-Let $a$ be an atom and $\Phi$ be a derivation. Then a $\top$-experiment (resp.\ $\bot$-experiment) on $\Phi$ with respect to $a$ is a derivation $\Phi_{a_\top}$ (resp. $\Phi_{a_\bot}$) obtained from $\Phi$ by substituting every interaction (resp.\ cointeraction) applied to $a$ and $\bar a$ with a weakening (resp.\ coweakening) applied to $a$ and a $\sus$ applied to $\bar a$ to bring it to the outside of the derivation and create a $\ttt$ (resp.\ $\fff$) in its place.
-\end{defi}
-
-\begin{lem}
-Let $\Phi$ be a derivation and $a$ and atom in $\Phi$, then the atomic flow of $a$ in $\Phi_{a_\top}$ and in $\Phi_{a_\bot}$ are:
-\end{lem}
-
-
-As an example consider the derivation $\vlder{\Phi}{}{\beta}{\alpha}$ containing three interactions and two cointeractions applied to $a$. Then the $\top$-experiment on $\Phi$ with respect to $a$ is $\vlder{\Phi_{a_\top}}{}{\beta}{\vls(\alpha.{\bar a}.{\bar a}.{\bar a})}$, the $\top$-experiment on $\Phi$ with respect to $\bar a$ is $\vlder{\Phi_{\bar a_\top}}{}{\beta}{\vls(\alpha.a.a.a)}$, the $\bot$-experiment on $\Phi$ with respect to $a$ is $\vlder{\Phi_{a_\bot}}{}{\vls[\beta.{\bar a}.{\bar a}]}{\alpha}$ and the $\bot$-experiment on $\Phi$ with respect to $\bar a$ is $\vlder{\Phi_{\bar a_\bot}}{}{\vls[\beta.a.a]}{\alpha}$.
-
-One may wish to do repeated experiments and this works in the obvious way. For instance if $\Phi$ also has one interaction applied to $b$ the $\top$-experiment on $\Phi_{a_\bot}$ with respect to $b$ is $\vlder{\Phi_{a_\bot b_\top}}{}{\vls[\beta.{\bar a}.{\bar a}]}{\vls(\alpha.{\bar b})}$.
-
-\begin{pro}
-Let $\Phi$ be a derivation containing the atom $a$ then $\Phi_{a_\top}=\Phi_{a_\top {\bar a_\top}}$ , $\Phi_{a_\top {\bar a_\bot}}=\Phi_{{\bar a_\bot} a_\top}$, $\Phi_{a_\top b_\top}=\Phi_{b_\top a_\top}$ and $\Phi_{a_\top b_\bot}=\Phi_{b_\bot a_\top}$.
-\end{pro}
 
 \begin{thm}
 Let $\Phi$ be a derivation from $\alpha$ to $\beta$. Then there exist a streamlined derivation $\Psi$ from $\alpha$ to $\beta$.
@@ -309,6 +291,9 @@ In particur that means  that the core of $\Phi$ is $\vlder{\Phi_c}{}{\beta_N}{\a
 }
 \]
 By studying the atomic flow of this derivation and verifying that there is no connection between an interaction and a cointeraction the result follows (we need to perform a simple induction argument here once we have the atomic flows).
+
+\TODO{What if $k_i$ or $l_i$ is 0?}
+
 \end{proof}
 
 
