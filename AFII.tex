@@ -152,7 +152,28 @@ Furmulae are considered equal modulo associativity and commutativity of $\wedge$
 
 In this paper we will mainly concern ourselves with the structural rules.
 %===============================================================================
-\section{Confluent Cut-Elimination For Proofs}
+\section{Streamlining via Experiments}
+
+\begin{defi}
+Let $\Phi$ be a derivation from $\alpha$ to $\beta$. Let $\Phi'$ be the derivaiton obtained by permuting all the interactions to the top and the cointeractions to the bottom:
+\[
+\vlderivation
+{
+ \vlde{}{\{\aiu\}}{\beta}
+ {
+  \vlde{\Phi_c}{\SKS\setminus\{\aid,\aiu\}}{\vls[\beta.(a_1.{\bar a_1}).\cdots.(a_l.{\bar a_l})]}
+  {
+   \vlde{}{\{\aid\}}{\vls(\alpha.[a_1.{\bar a_1}].\cdots.[a_k.{\bar a_k}])}
+   {
+    \vlhy{\alpha}
+   }
+  }
+ }
+}\quad,
+\]
+then $\Phi_c$ is called the \emph{core} of $\Phi$.
+\end{defi}
+
 
 \begin{defi}
 Let $a$ be an atom and $\Phi$ be a derivation. Then a $\top$-experiment (resp.\ $\bot$-experiment) on $\Phi$ with respect to $a$ is a derivation $\Phi_{a_\top}$ (resp. $\Phi_{a_\bot}$) obtained from $\Phi$ by substituting every interaction (resp.\ cointeraction) applied to $a$ and $\bar a$ with a weakening (resp.\ coweakening) applied to $a$ and a $\sus$ applied to $\bar a$ to bring it to the outside of the derivation and create a $\ttt$ (resp.\ $\fff$) in its place.
@@ -172,33 +193,122 @@ Let $\Phi$ be a derivation containing the atom $a$ then $\Phi_{a_\top}=\Phi_{a_\
 \end{pro}
 
 \begin{thm}
-Let $\Phi$ be a derivation from $\alpha$ to $\beta$ containing the atom $a$. Then there exist a derivation $\Phi_a$ such that the atomic flow of $a$ in $\Phi_a$ is streamlined and if the atomic flow of $b$ in $\Phi$ was streamlined then the atomic flow of $b$ in $\Phi_a$ is streamlined.
+Let $\Phi$ be a derivation from $\alpha$ to $\beta$. Then there exist a streamlined derivation $\Psi$ from $\alpha$ to $\beta$.
 \end{thm}
 
 \begin{proof}
-Consider the experiments $\Phi_{a_\bot},\Phi_{a_\top {\bar a_\bot}},\Phi_{a_\bot {\bar a_\top}},\Phi_{a_\top}$. Now build $\Phi_a$:
+Let $\Phi$ have $N$ atoms and for all $n\leq N$ define:
 \[
-\vlderivation
-{
- \vlin{\cod}{}{\beta}
- {
-  \vlin{\swi}{}{\vls[\beta.\beta.\beta.\Phi_{a_\top}]}
-  {
-   \vlin{\swi}{}{\vls([\beta.\beta.\Phi_{a_\bot {\bar a_\top}}].\alpha)}
+\alpha_n=\vls(\alpha.\bigwedge_{i=1}^n\bigwedge_{j=1}^{k_i}[a_i.{\bar a_i}])\qquad
+\beta_n=\vls[\beta.\bigvee_{i=1}^n\bigvee_{j=1}^{l_i}(a_i.{\bar a_i})]
+\]
+In particur that means  that the core of $\Phi$ is $\vlder{\Phi_c}{}{\beta_N}{\alpha_N}$. We now define the derivation $\Psi$. Let $\Psi=\Psi_0$, $\Psi_N=\Phi_c$ and $\Psi_n$ where $0\leq n<N$ is defined by:
+\[
+\Delta_{n,1}=
+   \vlderivation
    {
-    \vlin{\swi}{}{\vls([\beta.\Phi_{a_\top {\bar a_\bot}}].\alpha.\alpha)}
+    \vlin{\awu}{}{\vls[\beta_n.{\bar a_{n+1}}]}
     {
-     \vlin{\cou}{}{\vls(\Phi_{a_\bot}.\alpha.\alpha.\alpha)}
+     \vlin{\cou^\star}{}{\vls[\beta_n.(a_{n+1}.{\bar a_{n+1}})]}
      {
-      \vlhy{\alpha}
+      \vlde{\Psi_{n+1}}{}{\beta_{n+1}}
+      {
+       \vlin{\cod^\star}{}{\alpha_{n+1}}
+       {
+        \vlin{\aid}{}{\vls(\alpha_n.[a_n.{\bar a_{n+1}}])}
+        {
+        \vlhy{\alpha_n}
+        }
+       }
+      }
+     }
+    }
+   }
+\Delta_{n,2}=
+   \vlderivation
+   {
+    \vlin{\awu}{}{\vls[\beta_n.a_{n+1}]}
+    {
+     \vlin{\cou^\star}{}{\vls[\beta_n.(a_{n+1}.{\bar a_{n+1}})]}
+     {
+      \vlde{\Psi_{n+1}}{}{\beta_{n+1}}
+      {
+       \vlin{\cod^\star}{}{\alpha_{n+1}}
+       {
+        \vlin{\awd}{}{\vls(\alpha_n.[a_n.{\bar a_{n+1}}])}
+        {
+        \vlhy{\vls(\alpha_n.{\bar a_{n+1}})}
+        }
+       }
+      }
+     }
+    }
+   }
+\]
+\[
+\Delta_{n,3}=
+   \vlderivation
+   {
+    \vlin{\awu}{}{\vls[\beta_n.{\bar a_{n+1}}]}
+    {
+     \vlin{\cou^\star}{}{\vls[\beta_n.(a_{n+1}.{\bar a_{n+1}})]}
+     {
+      \vlde{\Psi_{n+1}}{}{\beta_{n+1}}
+      {
+       \vlin{\cod^\star}{}{\alpha_{n+1}}
+       {
+        \vlin{\awd}{}{\vls(\alpha_n.[a_n.{\bar a_{n+1}}])}
+        {
+        \vlhy{\vls(\alpha_n.a_{n+1})}
+        }
+       }
+      }
+     }
+    }
+   }
+\Delta_{n,4}=
+   \vlderivation
+   {
+    \vlin{\aiu}{}{\beta_n}
+    {
+     \vlin{\cou^\star}{}{\vls[\beta_n.(a_{n+1}.{\bar a_{n+1}})]}
+     {
+      \vlde{\Psi_{n+1}}{}{\beta_{n+1}}
+      {
+       \vlin{\cod^\star}{}{\alpha_{n+1}}
+       {
+        \vlin{\awd}{}{\vls(\alpha_n.[a_n.{\bar a_{n+1}}])}
+        {
+        \vlhy{\vls(\alpha_n.{\bar a_{n+1}})}
+        }
+       }
+      }
+     }
+    }
+   }
+\]
+\[
+\Psi_n=\vlderivation
+{
+ \vlin{\cod}{}{\beta_n}
+ {
+  \vlin{\swi}{}{\vls[\beta_n.\beta_n.\beta_n.\Delta_{n,4}]}
+  {
+   \vlin{\swi}{}{\vls([\beta_n.\beta_n.\Delta_{n,3}].\alpha_n)}
+   {
+    \vlin{\swi}{}{\vls([\beta_n.\Delta_{n,2}].\alpha_n.\alpha_n)}
+    {
+     \vlin{\cou}{}{\vls(\Delta_{n,1}.\alpha_n.\alpha_n.\alpha_n)}
+     {
+      \vlhy{\alpha_n}
      }
     }
    }
   }
  }
-}\quad.
+}
 \]
-By studying the atomic flow of this derivaiton and verifying that there is no connection between an interaction and a cointeraction the result follows.
+By studying the atomic flow of this derivation and verifying that there is no connection between an interaction and a cointeraction the result follows (we need to perform a simple induction argument here once we have the atomic flows).
 \end{proof}
 
 
