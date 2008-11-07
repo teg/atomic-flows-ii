@@ -133,11 +133,16 @@ The system we use for propositional classical logic is system $\SKS$ \cite{BrunT
 \begin{tabular}{ccc}
 $\vlinf{\aid}{}{\vls[a.\bar{a}]}{\ttt}$ & $\vlinf{\acd}{}{a}{\vls[a.a]}$ & $\vlinf{\awd}{}{a}{\fff}$ \\
 interaction (axiom) & contraction & weakening \\
+\noalign{\bigskip}
+\\
 $\vlinf{\aiu}{}{\fff}{\vls(\bar{a}.a)}$ & $\vlinf{\acu}{}{\vls(a.a)}{a}$ & $\vlinf{\awd}{}{\ttt}{a}$ \\
-cointeraction (cut) & cocontraction & coweakening
+cointeraction (cut) & cocontraction & coweakening \\
+\noalign{\bigskip}
+\\
 \end{tabular}
 \begin{tabular}{cc}
-$\vlinf{\swi}{}{\vls[(\alpha.\beta).\gamma]}{\vls(\alpha.[\beta.\gamma])}$ & $\vlinf{\med}{}{\vls([\alpha.\beta].[\gamma.\delta])}{\vls[(\alpha.\gamma).(\beta.\delta)]}$ \\
+$\vlinf{\swi}{}{\vls[(\alpha.\beta).\gamma]}{\vls(\alpha.[\beta.\gamma])}$ &
+$\vlinf{\med}{}{\vls([\alpha.\beta].[\gamma.\delta])}{\vls[(\alpha.\gamma).(\beta.\delta)]}$ \\
 switch & medial
 \end{tabular}
 \end{center}
@@ -260,8 +265,17 @@ Each of the derivaitons obtained as described above, is a special case of what w
 \end{array}
 \]
 \caption{`Cone reductions'.}
-\label{FigRedW}
+\label{FigConeRed}
 \end{figure}%
+
+\begin{defi}
+Given a derivation $\Phi$ from $\alpha$ to $\beta$, a cut in $\Phi$ and a choice of one of the two atom occurences, $a$, in the cut, a \emph{$\top$-experiment on $\Phi$ with respect to $a$} is a derivation $\Phi'$ obtained from $\Phi$ by substitutions:
+Mark all the atom occurences in the cone of $a$ with $\star$. Now if $\xi$ is in $\Phi$, then $\xi'$ is obtained from $\xi$ by substituting $\fff$ for all the atom occurences marked with $\star$ and the formula $\delta_i$ is defined by: $\delta_0=\ttt$ and $\delta_{i+1}=\vls(\delta_i.{\bar a})$.
+\begin{itemize}
+  \item Substitute each formula in $\Phi$, $\xi$, with $\vls(\xi'.\delta_i)$ where $i$ is the number of axioms involving $a^\star$ below $\xi$ in the $\Phi$; and
+  \item substitute each structural inference rule involving $a^\star$ as shown in Table~\ref{FigConeRed}.
+\end{itemize}
+\end{defi}
 
 \begin{defi}\label{DefTopExperiment}
 Given a derivation $\Phi$ from $\alpha$ to $\beta$ and an atom $a$ which occurs in $\Phi$, a \emph{$\top$-experiment on $\Phi$ with respect to $a$} is a derivation $\Phi'$ obtained from $\Phi$ as follows:
