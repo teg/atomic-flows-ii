@@ -1,6 +1,6 @@
 % VirginiaLake LaTeX macros by Alessio Guglielmi
 %
-% Many thanks to Ross Moore (Macquarie University) for suggestions leading 
+% Many thanks to Ross Moore (Macquarie University) for suggestions leading
 % to \vlupdate
 
 \NeedsTeXFormat{LaTeX2e}
@@ -15,7 +15,7 @@
 \DeclareOption{lutzsyntax}{\virginialakelutzsyntaxtrue}
 \ProcessOptions
 \ifvirginialakeusesxy
-    \RequirePackage[usenames]{color}
+    \RequirePackage[usenames]{xcolor}
     \ifvirginialakepdftex
        \RequirePackage[line,arrow,curve,frame,color]{xy}
     \else
@@ -350,7 +350,7 @@
    \else
       \ifdim\derldim>0pt
          \ifdim\derdldim>-\derdim
-            \advance\derdldim by\derdim           % d>=0, dl>0, ddl+d>0 -> 
+            \advance\derdldim by\derdim           % d>=0, dl>0, ddl+d>0 ->
          \else                                    %                    ddl=ddl+d
             \derdldim=0pt                         % d>=0, dl>0, ddl+d<=0 ->
          \fi                                      %                        ddl=0
@@ -359,7 +359,7 @@
       \fi
       \ifdim\derrdim>0pt
          \ifdim\derdrdim>-\derdim
-            \advance\derdrdim by\derdim           % d>=0, dr>0, ddr+d>0 -> 
+            \advance\derdrdim by\derdim           % d>=0, dr>0, ddr+d>0 ->
          \else                                    %                    ddr=ddr+d
             \derdrdim=0pt                         % d>=0, dr>0, ddr+d<=0 ->
          \fi                                      %                        ddr=0
