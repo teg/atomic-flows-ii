@@ -163,19 +163,17 @@
 \section{Streamlining via Experiments}
 
 \begin{defi}
-Let $\Phi$ be a derivation from $\alpha$ to $\beta$, then the \emph{core of $\Phi$} is defined as follows:
+Given a derivation $\Phi$ from $\alpha$ to $\beta$, then the \emph{core of $\Phi$} is defined as follows:
 
-Consider each atom, $a$, occuring in $\Phi$ separately.
-
-Firstly, for each occurence of $\vlinf{\aid}{}{\vls[a.{\bar a}]}{\ttt}$ and $\vlinf{\aiu}{}{\fff}{\vls(a.{\bar a})}$ do the following transformation:
+Firstly, for each instance of $\aid$ and $\aiu$ do the following transformation:
 \[
 \vlderivation
 {
- \vlde{\Delta_2}{}{\beta}
+ \vlde{\Psi'}{}{\beta}
  {
   \vlin{\aid}{}{\xi\vlsbr[a.{\bar a}]}
   {
-   \vlde{\Delta_1}{}{\xi\{\ttt\}}
+   \vlde{\Psi}{}{\xi\{\ttt\}}
    {
     \vlhy{\alpha}
    }
@@ -184,11 +182,11 @@ Firstly, for each occurence of $\vlinf{\aid}{}{\vls[a.{\bar a}]}{\ttt}$ and $\vl
 }\quad\rightarrow\quad
 \vlderivation
 {
- \vlde{\Delta_2}{}{\beta}
+ \vlde{\Psi'}{}{\beta}
  {
   \vlin{\sus}{}{\xi\vlsbr[a.{\bar a}]}
   {
-   \vlde{\vls(\Delta_1.[a.{\bar a}])}{}{\vls(\xi\{\ttt\}.[a.{\bar a}])}
+   \vlde{\vls(\Psi.[a.{\bar a}])}{}{\vls(\xi\{\ttt\}.[a.{\bar a}])}
    {
     \vlhy{\vls(\alpha.[a.{\bar a}])}
    }
@@ -197,11 +195,11 @@ Firstly, for each occurence of $\vlinf{\aid}{}{\vls[a.{\bar a}]}{\ttt}$ and $\vl
 }\qquad\qquad
 \vlderivation
 {
- \vlde{\Delta_2}{}{\beta}
+ \vlde{\Psi'}{}{\beta}
  {
   \vlin{\aid}{}{\xi\{\fff\}}
   {
-   \vlde{\Delta_1}{}{\xi\vlsbr(a.{\bar a})}
+   \vlde{\Psi}{}{\xi\vlsbr(a.{\bar a})}
    {
     \vlhy{\alpha}
    }
@@ -210,11 +208,11 @@ Firstly, for each occurence of $\vlinf{\aid}{}{\vls[a.{\bar a}]}{\ttt}$ and $\vl
 }\quad\rightarrow\quad
 \vlderivation
 {
- \vlde{\vls[\Delta_2.(a.{\bar a})]}{}{\vls[\beta.(a.{\bar a})]}
+ \vlde{\vls[\Psi'.(a.{\bar a})]}{}{\vls[\beta.(a.{\bar a})]}
  {
   \vlin{\aid}{}{\vls[\xi\{\fff\}.(a.{\bar a})]}
   {
-   \vlde{\Delta_1}{}{\xi\vlsbr(a.{\bar a})}
+   \vlde{\Psi}{}{\xi\vlsbr(a.{\bar a})}
    {
     \vlhy{\alpha}
    }
@@ -223,42 +221,33 @@ Firstly, for each occurence of $\vlinf{\aid}{}{\vls[a.{\bar a}]}{\ttt}$ and $\vl
 }\quad.
 \]
 
-Secondly,
+Secondly, for each atom $a$;
 
 \begin{itemize}
-  \item if there is no occurence of $\vlsbr[a.{\bar a}]$ (resp.\ $\vlsbr(a.{\bar a})$) in the premis (resp.\ conclusion) apply $\awu$ (resp.\ $\awd$) to create one;
-  \item if there are more than one occurence apply $\cou$ (resp.\ $cod$) until there is only one left.
+  \item if there is no occurrence of $\vls[a.{\bar a}]$ (resp., $\vls(a.{\bar a})$) in the premiss (resp., conclusion) apply $\awu$ (resp., $\awd$) to create one;
+  \item if there are more than one occurrence contract them into one using $\cou$ (resp., $\cod$).
 \end{itemize}
-
-The core of $\Phi$ is sometimes denoted $\vlder{\Phi_c}{\SKS\setminus\{\aid,\aiu\}}{\vls[\beta.\bigvee_{i=1}^n (a.{\bar a})]}{\vls(\alpha.\bigwedge_{i=1}^n [a.{\bar a}])}$.
 
 \end{defi}
 
 \begin{defi}
-The \emph{$n$-normaliser} is a derivation scheme defined as follows:
+The \emph{$n$-normaliser} is a derivation scheme over the meta variables $\Phi$ (derivation), $\alpha,\beta$ (formulae), $a_1,\dots,a_n$ (atoms).
 
-Let $\hat\Phi,\hat\alpha,\hat\beta,\hat a_1,\dots,\hat a_n$ be meta variables.
+We define the $n$-normaliser, $\Psi$, inductively:
 
-Let $0\leq k\leq n$, then
-\[
-\alpha_k=\vls(\hat\alpha.\bigwedge_{i={k+1}}^n[\hat a_i.{\bar{\hat a}_i}])\qquad
-\beta_k=\vls[\hat\beta.\bigvee_{i={k+1}}^n(\hat a_i.{\bar{\hat a}_i})]\quad.
-\]
+Let $\Psi_1=\Phi$ and for $1<k\leq n+1$ define the four helper derivations $\Delta_k,\Delta'_k,\Delta''_k,\Delta'''_k$:
 
-Now define the $n$-normaliser, $\Psi$, inductively:
-
-Let $\Psi_0=\hat\Phi$ and for $0<k\leq n$ define
 \[
 \Delta_k=
    \vlderivation
    {
-    \vlin{\awu}{}{\vls[\beta_k.{\bar{\hat a}_k}]}
+    \vlin{\awu}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_k.{\bar a_k}).{\bar a_{k-1}}]}
     {
-     \vlde{\Psi_{k-1}}{}{\beta_{k-1}}
+     \vlde{\Psi_{k-1}}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_{k-1}.{\bar a_{k-1}})]}
      {
-      \vlin{\aid}{}{\alpha_{k-1}}
+      \vlin{\aid}{}{\vls([a_{k-1}.{\bar a_{k-1}}].\cdots.[a_n.{\bar a_n}].\alpha)}
       {
-       \vlhy{\alpha_k}
+       \vlhy{\vls([a_k.{\bar a_k}].\cdots.[a_n.{\bar a_n}].\alpha)}
       }
      }
     }
@@ -266,27 +255,29 @@ Let $\Psi_0=\hat\Phi$ and for $0<k\leq n$ define
 \Delta'_k=
    \vlderivation
    {
-    \vlin{\awu}{}{\vls[\beta_k.{\hat a}_k]}
+    \vlin{\awu}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_k.{\bar a_k}).a_{k-1}]}
     {
-     \vlde{\Psi_{k-1}}{}{\beta_{k-1}}
+     \vlde{\Psi_{k-1}}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_{k-1}.{\bar a_{k-1}})]}
      {
-      \vlin{\awd}{}{\alpha_{k-1}}
+      \vlin{\awd}{}{\vls([a_{k-1}.{\bar a_{k-1}}].\cdots.[a_n.{\bar a_n}].\alpha)}
       {
-       \vlhy{\vls({\bar{\hat a}_k}.\alpha_k)}
+       \vlhy{\vls({\bar a_{k-1}}.[a_k.{\bar a_k}].\cdots.[a_n.{\bar a_n}].\alpha)}
       }
      }
     }
    }
+\]
+\[
 \Delta''_k=
    \vlderivation
    {
-    \vlin{\awu}{}{\vls[\beta_k.{\bar{\hat a}_k}]}
+    \vlin{\awu}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_k.{\bar a_k}).{\bar a_{k-1}}]}
     {
-     \vlde{\Psi_{k-1}}{}{\beta_{k-1}}
+     \vlde{\Psi_{k-1}}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_{k-1}.{\bar a_{k-1}})]}
      {
-      \vlin{\awd}{}{\alpha_{k-1}}
+      \vlin{\awd}{}{\vls([a_{k-1}.{\bar a_{k-1}}].\cdots.[a_n.{\bar a_n}].\alpha)}
       {
-       \vlhy{\vls({\hat a}_k.\alpha_k)}
+       \vlhy{\vls(a_{k-1}.[a_k.{\bar a_k}].\cdots.[a_n.{\bar a_n}].\alpha)}
       }
      }
     }
@@ -294,33 +285,35 @@ Let $\Psi_0=\hat\Phi$ and for $0<k\leq n$ define
 \Delta'''_k=
    \vlderivation
    {
-    \vlin{\aiu}{}{\beta_k}
+    \vlin{\aiu}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_k.{\bar a_k})]}
     {
-     \vlde{\Psi_{k-1}}{}{\beta_{k-1}}
+     \vlde{\Psi_{k-1}}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_{k-1}.{\bar a_{k-1}})]}
      {
-      \vlin{\awd}{}{\alpha_{k-1}}
+      \vlin{\awd}{}{\vls([a_{k-1}.{\bar a_{k-1}}].\cdots.[a_n.{\bar a_n}].\alpha)}
       {
-       \vlhy{\vls({\bar{\hat a}_k}.\alpha_k)}
+       \vlhy{\vls({\bar a_{k-1}}.[a_k.{\bar a_k}].\cdots.[a_n.{\bar a_n}].\alpha)}
       }
      }
     }
    }
 \]
 
+Then define $\Psi_k$
+
 \[
-\Psi_k=\vlderivation
+\vlderivation
 {
- \vlin{\cod}{}{\beta_k}
+ \vlin{\cod^\star}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_k.{\bar a_k})]}
  {
-  \vlin{\swi}{}{\vls[\beta_k.\beta_k.\beta_k.\Delta'''_k]}
+  \vlin{\swi}{}{\vls[[\beta.(a_n.{\bar a_n}).\cdots.(a_k.{\bar a_k})].[\beta.(a_n.{\bar a_n}).\cdots.(a_k.{\bar a_k})].[\beta.(a_n.{\bar a_n}).\cdots.(a_k.{\bar a_k})].\Delta'''_k]}
   {
-   \vlin{\swi}{}{\vls([\beta_k.\beta_k.\Delta''_k].\alpha_k)}
+   \vlin{\swi}{}{\vls([[\beta.(a_n.{\bar a_n}).\cdots.(a_k.{\bar a_k})].[\beta.(a_n.{\bar a_n}).\cdots.(a_k.{\bar a_k})].\Delta''_k].([a_k.{\bar a_k}].\cdots.[a_n.{\bar a_n}].\alpha))}
    {
-    \vlin{\swi}{}{\vls([\beta_k.\Delta'_k].\alpha_k.\alpha_k)}
+    \vlin{\swi}{}{\vls([[\beta.(a_n.{\bar a_n}).\cdots.(a_k.{\bar a_k})].\Delta'_k].([a_k.{\bar a_k}].\cdots.[a_n.{\bar a_n}].\alpha).([a_k.{\bar a_k}].\cdots.[a_n.{\bar a_n}].\alpha))}
     {
-     \vlin{\cou}{}{\vls(\Delta_k.\alpha_k.\alpha_k.\alpha_k)}
+     \vlin{\cou^\star}{}{\vls(\Delta_k.([a_k.{\bar a_k}].\cdots.[a_n.{\bar a_n}].\alpha).([a_k.{\bar a_k}].\cdots.[a_n.{\bar a_n}].\alpha).([a_k.{\bar a_k}].\cdots.[a_n.{\bar a_n}].\alpha))}
      {
-      \vlhy{\alpha_k}
+      \vlhy{\vls([a_k.{\bar a_k}].\cdots.[a_n.{\bar a_n}].\alpha)}
      }
     }
    }
@@ -333,11 +326,11 @@ Finally let $\Psi=\Psi_n$.
 \end{defi}
 
 \begin{defi}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$ containing the atoms $a_1,\dots,a_n$, the \emph{normaliser of $\Phi$} is the derivation obtained by instantiating the $n$-normaliser as follows: $\hat\Phi=\Phi_c,\hat\alpha=\alpha,\hat\beta=\beta,{\hat a}_1=a_1,\dots,{\hat a}_n=a_n$.
+Given a derivation $\Phi$ from $\alpha$ to $\beta$ containing the atoms $a_1,\dots,a_n$, the \emph{normaliser of $\Phi$} is the derivation obtained by instantiating the $n$-normaliser with the core of $\Phi$, the formulae $\alpha$ and $\beta$ and the atoms $a_1,\dots,a_n$.
 \end{defi}
 
 \begin{thm}
-Let $\Phi$ be a derivation, then the normaliser of $\Phi$ is streamlined.
+The normaliser of any derivation is streamlined.
 \end{thm}
 
 
