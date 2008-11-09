@@ -11,6 +11,7 @@
 %                  Trash .aux file after toggling
 \usepackage{stmaryrd}
 \usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
 \usepackage[lutzsyntax]{virginialake}\vlsmallbrackets\aftrianglefalse
 \iflmcs\def\url #1#2{\relax}\else\usepackage[pdfborder={0 0 0}]{hyperref}\fi
 
@@ -58,7 +59,7 @@
 % \begin{abstract}
 % \end{abstract}
 
-\maketitle
+%\maketitle
 
 %===============================================================================
 % \section{Introduction}
@@ -162,14 +163,11 @@
 \section{Streamlining via Experiments}
 
 \begin{defi}
-Let $\Phi$ be a derivation from $\alpha$ to $\beta$, where the atomic flow of atom $a$ is $A_1,A_2,A_3$ or $A_4$, then a derivation $\Phi_c$ from $\vls(\alpha.\bigwedge_{i=1}^n[a_i.{\bar a_i}])$ to $\vls[\beta.\bigvee_{i=1}^n(a_i.{\bar a_i})]$, where the atomic flow of atom $b$ is $B_1,B_2,B_3$ or $B_4$ respectively, is called the \emph{core of $\Phi$}.
-\end{defi}
+Let $\Phi$ be a derivation from $\alpha$ to $\beta$, then the \emph{core of $\Phi$} is defined as follows:
 
-\begin{lem}
-Let $\Phi$ be a derivation from $\alpha$ to $\beta$ containing $n$ atoms. Then the core of $\Phi$ exists.
-\end{lem}
-\begin{proof}
-Consider the atom $a$ occuring in $\Phi$. For each occurence of $\vlinf{\aid}{}{\vls[a.{\bar a}]}{\ttt}$ and $\vlinf{\aiu}{}{\fff}{\vls(a.{\bar a})}$ do the following transformation:
+Consider each atom, $a$, occuring in $\Phi$ separately.
+
+Firstly, for each occurence of $\vlinf{\aid}{}{\vls[a.{\bar a}]}{\ttt}$ and $\vlinf{\aiu}{}{\fff}{\vls(a.{\bar a})}$ do the following transformation:
 \[
 \vlderivation
 {
@@ -196,7 +194,7 @@ Consider the atom $a$ occuring in $\Phi$. For each occurence of $\vlinf{\aid}{}{
    }
   }
  }
-}\qquad
+}\qquad\qquad
 \vlderivation
 {
  \vlde{\Delta_2}{}{\beta}
@@ -225,32 +223,36 @@ Consider the atom $a$ occuring in $\Phi$. For each occurence of $\vlinf{\aid}{}{
 }\quad.
 \]
 
-We now argue about the top of the derivation, but the dual argument holds for the bottom. We have to consider three cases:
+Secondly,
+
 \begin{itemize}
-  \item if there is exactly one occurence of $\vls[a.{\bar a}]$ we are done;
-  \item if there are no occurences then we create one by applying $\awu$; and
-  \item if there are more than one occurence we apply $\cou$ until there is only one left.
+  \item if there is no occurence of $\vlsbr[a.{\bar a}]$ (resp.\ $\vlsbr(a.{\bar a})$) in the premis (resp.\ conclusion) apply $\awu$ (resp.\ $\awd$) to create one;
+  \item if there are more than one occurence apply $\cou$ (resp.\ $cod$) until there is only one left.
 \end{itemize}
 
-It is now straightforward to check that the resulting derivaiton is the core of $\Phi$.
+The core of $\Phi$ is sometimes denoted $\vlder{\Phi_c}{\SKS\setminus\{\aid,\aiu\}}{\vls[\beta.\bigvee_{i=1}^n (a.{\bar a})]}{\vls(\alpha.\bigwedge_{i=1}^n [a.{\bar a}])}$.
 
-\end{proof}
+\end{defi}
 
 \begin{defi}
-Given a derivation $\Phi$ from $\vls(\alpha.\bigwedge_{i=1}^n[a_i.{\bar a_i}])$ to $\vls[\beta.\bigvee_{i=1}^n(a_i.{\bar a_i})]$ the \emph{normaliser of $\Phi$ with respect to $a_1,\dots,a_n$}, is the derivation $\Psi$ from $\alpha$ to $\beta$, defined inductively by:
+The \emph{$n$-normaliser} is a derivation scheme defined as follows:
+
+Let $\hat\Phi,\hat\alpha,\hat\beta,\hat a_1,\dots,\hat a_n$ be meta variables.
 
 Let $0\leq k\leq n$, then
 \[
-\alpha_k=\vls(\alpha.\bigwedge_{i={k+1}}^n[a_i.{\bar a_i}])\qquad
-\beta_k=\vls[\beta.\bigvee_{i={k+1}}^n(a_i.{\bar a_i})]\quad.
+\alpha_k=\vls(\hat\alpha.\bigwedge_{i={k+1}}^n[\hat a_i.{\bar{\hat a}_i}])\qquad
+\beta_k=\vls[\hat\beta.\bigvee_{i={k+1}}^n(\hat a_i.{\bar{\hat a}_i})]\quad.
 \]
 
-Now let $\Psi_0=\Phi$ and for $0<k\leq n$ define
+Now define the $n$-normaliser, $\Psi$, inductively:
+
+Let $\Psi_0=\hat\Phi$ and for $0<k\leq n$ define
 \[
 \Delta_k=
    \vlderivation
    {
-    \vlin{\awu}{}{\vls[\beta_k.{\bar a_k}]}
+    \vlin{\awu}{}{\vls[\beta_k.{\bar{\hat a}_k}]}
     {
      \vlde{\Psi_{k-1}}{}{\beta_{k-1}}
      {
@@ -264,13 +266,13 @@ Now let $\Psi_0=\Phi$ and for $0<k\leq n$ define
 \Delta'_k=
    \vlderivation
    {
-    \vlin{\awu}{}{\vls[\beta_k.a_k]}
+    \vlin{\awu}{}{\vls[\beta_k.{\hat a}_k]}
     {
      \vlde{\Psi_{k-1}}{}{\beta_{k-1}}
      {
       \vlin{\awd}{}{\alpha_{k-1}}
       {
-       \vlhy{\vls({\bar a_k}.\alpha_k)}
+       \vlhy{\vls({\bar{\hat a}_k}.\alpha_k)}
       }
      }
     }
@@ -278,13 +280,13 @@ Now let $\Psi_0=\Phi$ and for $0<k\leq n$ define
 \Delta''_k=
    \vlderivation
    {
-    \vlin{\awu}{}{\vls[\beta_k.{\bar a_k}]}
+    \vlin{\awu}{}{\vls[\beta_k.{\bar{\hat a}_k}]}
     {
      \vlde{\Psi_{k-1}}{}{\beta_{k-1}}
      {
       \vlin{\awd}{}{\alpha_{k-1}}
       {
-       \vlhy{\vls(a_k.\alpha_k)}
+       \vlhy{\vls({\hat a}_k.\alpha_k)}
       }
      }
     }
@@ -298,7 +300,7 @@ Now let $\Psi_0=\Phi$ and for $0<k\leq n$ define
      {
       \vlin{\awd}{}{\alpha_{k-1}}
       {
-       \vlhy{\vls({\bar a_k}.\alpha_k)}
+       \vlhy{\vls({\bar{\hat a}_k}.\alpha_k)}
       }
      }
     }
@@ -330,8 +332,12 @@ Now let $\Psi_0=\Phi$ and for $0<k\leq n$ define
 Finally let $\Psi=\Psi_n$.
 \end{defi}
 
+\begin{defi}
+Given a derivation $\Phi$ from $\alpha$ to $\beta$ containing the atoms $a_1,\dots,a_n$, the \emph{normaliser of $\Phi$} is the derivation obtained by instantiating the $n$-normaliser as follows: $\hat\Phi=\Phi_c,\hat\alpha=\alpha,\hat\beta=\beta,{\hat a}_1=a_1,\dots,{\hat a}_n=a_n$.
+\end{defi}
+
 \begin{thm}
-Let $\Phi$ be a derivation from $\alpha$ to $\beta$, then the normaliser of the core of $\Phi$ is streamlined.
+Let $\Phi$ be a derivation, then the normaliser of $\Phi$ is streamlined.
 \end{thm}
 
 
