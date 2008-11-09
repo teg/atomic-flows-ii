@@ -44,7 +44,7 @@
       {Normalisation Control in Deep Inference\\ via Atomic Flows II}
 
 \author{Alessio Guglielmi}
-\address{University of Bath, Bath BA2 7AY, UK}
+%\address{University of Bath, Bath BA2 7AY, UK}
 
 \author{Tom Gundersen}
 \iflmcs\address{University of Bath, Bath BA2 7AY, UK}\fi
@@ -55,13 +55,13 @@
 
 \subjclass{F.4.1 Mathematical Logic---Proof theory}
 
-\begin{abstract}
-\end{abstract}
+% \begin{abstract}
+% \end{abstract}
 
 \maketitle
 
 %===============================================================================
-\section{Introduction}
+% \section{Introduction}
 \newcommand{\ot}{\mathbin\shortleftarrow}
 \newcommand{\fff}{\mathsf f}
 \newcommand{\ttt}{\mathsf t}
@@ -91,205 +91,234 @@
                                 {\scriptstyle-}
                                 {\scriptscriptstyle-}}}
 
-\Ale{were the previous methods crap?}
-
-\Tom{in my opinion the method shown here is a strict improvement, let me know if you know of any downsides (I might have forgotten)}
-
-\Ale{global?}
-
-In \cite{GuglGund:07:Normalis:lr} we introduced \emph{atomic flows} as a tool to study normalisation. In this paper we focus on global normalisation procedures and show how they provide for more general and principled tools than what we studied before. The paper is in two parts, the first part gives a \emph{confluent} cut-elimination procedure for propositional classical logic and the second part gives a generalisation of the \emph{streamlining} procedure described in \cite{GuglGund:07:Normalis:lr}.
-
-\Ale{is the causual relationship known?}
-
-Atomic flows are graphical representations of derivations conserving their size as well as the causal relationship between the structural inference rules. All information about logical connectives and logical inference rules is disregarded. The crucial property of atomic flows is that they contain all the information necessary to perform normalisation. We can either just normalise the atomic flows, or use the atomic flows to decide how to normalise the derivations.
-
-\Ale{previous sentence, see hand written comments [could not read comment]}
-
-A streamlined derivation is a derivation whose atomic flow has a speciﬁc shape, in particular this entails that
-
-\begin{enumerate}
-\item a streamlined derivation contains no causal relationship between an axiom and a cut; and
-\item in the special case where the premiss of a streamlined derivation is $\ttt$, the derivation is cut-free.
-\end{enumerate}
-
-\Ale{causal relationship not understandable}
-
-\Ale{put a picture}
-
-\Tom{will do (later, when the text is finished)}
-
-Given the atomic flow of a derivation, we can tell what the atomic flow of the streamlined derivation would be. This is of particular interest because the atomic flows do not have access to any information about logical inference rules. This is remarkable because the relationship of the logical inference rules is usually considered crusial to have cut-elimination.
-
-The novelty of this work is to only use global proof transformations when performing normalisation. We single out axioms and cuts and consider the rest of the atomic flow to be inside `black boxes' which we do not need to look inside. Then, by knowing which axioms are connected with which cuts, we can normalise the derivation without having any more information about its internal structure. The streamlining procedures presented in \cite{GuglGund:07:Normalis:lr} had two sources of exponential growth, it was not strongly normalising and the proof of termination was not very intuitive. With the new methods we have removed one source of exponential growth and both termination and strong normalisation are immediate.
-
-\Ale{was there anything good about the previous paper?}
-\Ale{isn't strong normalisation enough?}
-
-\section{Deep Inference and Atomic Flows}
-
-Deep inference is a relatively new proof-theoretic methodology developed over the past ten years. Deep inference differs from the traditional Gentzen-style methodology in that it allows inference at any level in formulae, not only at the root connective. This allows for much greater freedom in designing formalisms and logical systems, but it also makes normalisation theory much more challenging.
-
-In this paper, we are working in the deep-inference formalism `calculus of structures' \cite{Gugl:06:A-System:kl}, but the results here are not specific to this formalism as we will discuss later.
-
-The system we use for propositional classical logic is system $\SKS$ \cite{BrunTiu:01:A-Local-:mz}:
-
-\Ale{adjust spacing}
-
-\begin{figure}[h]
-\begin{center}
-\begin{tabular}{ccc}
-$\vlinf{\aid}{}{\vls[a.\bar{a}]}{\ttt}$ & $\vlinf{\acd}{}{a}{\vls[a.a]}$ & $\vlinf{\awd}{}{a}{\fff}$ \\
-interaction (axiom) & contraction & weakening \\
-\noalign{\bigskip}
-\\
-$\vlinf{\aiu}{}{\fff}{\vls(\bar{a}.a)}$ & $\vlinf{\acu}{}{\vls(a.a)}{a}$ & $\vlinf{\awd}{}{\ttt}{a}$ \\
-cointeraction (cut) & cocontraction & coweakening \\
-\noalign{\bigskip}
-\\
-\end{tabular}
-\begin{tabular}{cc}
-$\vlinf{\swi}{}{\vls[(\alpha.\beta).\gamma]}{\vls(\alpha.[\beta.\gamma])}$ &
-$\vlinf{\med}{}{\vls([\alpha.\beta].[\gamma.\delta])}{\vls[(\alpha.\gamma).(\beta.\delta)]}$ \\
-switch & medial
-\end{tabular}
-\end{center}
-\end{figure}
-
-Furmulae are considered equal modulo associativity and commutativity of $\wedge$ and $\vee$, and idempotency and identity of $\ttt$ and $\fff$. Furthermore, negation is only allowed on atoms which is possible due to De Morgan's laws.
-
-In this paper we will mainly concern ourselves with the structural rules.
+% \Ale{were the previous methods crap?}
+%
+% \Tom{in my opinion the method shown here is a strict improvement, let me know if you know of any downsides (I might have forgotten)}
+%
+% \Ale{global?}
+%
+% In \cite{GuglGund:07:Normalis:lr} we introduced \emph{atomic flows} as a tool to study normalisation. In this paper we focus on global normalisation procedures and show how they provide for more general and principled tools than what we studied before. The paper is in two parts, the first part gives a \emph{confluent} cut-elimination procedure for propositional classical logic and the second part gives a generalisation of the \emph{streamlining} procedure described in \cite{GuglGund:07:Normalis:lr}.
+%
+% \Ale{is the causual relationship known?}
+%
+% Atomic flows are graphical representations of derivations conserving their size as well as the causal relationship between the structural inference rules. All information about logical connectives and logical inference rules is disregarded. The crucial property of atomic flows is that they contain all the information necessary to perform normalisation. We can either just normalise the atomic flows, or use the atomic flows to decide how to normalise the derivations.
+%
+% \Ale{previous sentence, see hand written comments [could not read comment]}
+%
+% A streamlined derivation is a derivation whose atomic flow has a speciﬁc shape, in particular this entails that
+%
+% \begin{enumerate}
+% \item a streamlined derivation contains no causal relationship between an axiom and a cut; and
+% \item in the special case where the premiss of a streamlined derivation is $\ttt$, the derivation is cut-free.
+% \end{enumerate}
+%
+% \Ale{causal relationship not understandable}
+%
+% \Ale{put a picture}
+%
+% \Tom{will do (later, when the text is finished)}
+%
+% Given the atomic flow of a derivation, we can tell what the atomic flow of the streamlined derivation would be. This is of particular interest because the atomic flows do not have access to any information about logical inference rules. This is remarkable because the relationship of the logical inference rules is usually considered crusial to have cut-elimination.
+%
+% The novelty of this work is to only use global proof transformations when performing normalisation. We single out axioms and cuts and consider the rest of the atomic flow to be inside `black boxes' which we do not need to look inside. Then, by knowing which axioms are connected with which cuts, we can normalise the derivation without having any more information about its internal structure. The streamlining procedures presented in \cite{GuglGund:07:Normalis:lr} had two sources of exponential growth, it was not strongly normalising and the proof of termination was not very intuitive. With the new methods we have removed one source of exponential growth and both termination and strong normalisation are immediate.
+%
+% \Ale{was there anything good about the previous paper?}
+% \Ale{isn't strong normalisation enough?}
+%
+% \section{Deep Inference and Atomic Flows}
+%
+% Deep inference is a relatively new proof-theoretic methodology developed over the past ten years. Deep inference differs from the traditional Gentzen-style methodology in that it allows inference at any level in formulae, not only at the root connective. This allows for much greater freedom in designing formalisms and logical systems, but it also makes normalisation theory much more challenging.
+%
+% In this paper, we are working in the deep-inference formalism `calculus of structures' \cite{Gugl:06:A-System:kl}, but the results here are not specific to this formalism as we will discuss later.
+%
+% The system we use for propositional classical logic is system $\SKS$ \cite{BrunTiu:01:A-Local-:mz}:
+%
+% \Ale{adjust spacing}
+%
+% \begin{figure}[h]
+% \begin{center}
+% \begin{tabular}{ccc}
+% $\vlinf{\aid}{}{\vls[a.\bar{a}]}{\ttt}$ & $\vlinf{\acd}{}{a}{\vls[a.a]}$ & $\vlinf{\awd}{}{a}{\fff}$ \\
+% interaction (axiom) & contraction & weakening \\
+% \noalign{\bigskip}
+% \\
+% $\vlinf{\aiu}{}{\fff}{\vls(\bar{a}.a)}$ & $\vlinf{\acu}{}{\vls(a.a)}{a}$ & $\vlinf{\awd}{}{\ttt}{a}$ \\
+% cointeraction (cut) & cocontraction & coweakening \\
+% \noalign{\bigskip}
+% \\
+% \end{tabular}
+% \begin{tabular}{cc}
+% $\vlinf{\swi}{}{\vls[(\alpha.\beta).\gamma]}{\vls(\alpha.[\beta.\gamma])}$ &
+% $\vlinf{\med}{}{\vls([\alpha.\beta].[\gamma.\delta])}{\vls[(\alpha.\gamma).(\beta.\delta)]}$ \\
+% switch & medial
+% \end{tabular}
+% \end{center}
+% \end{figure}
+%
+% Furmulae are considered equal modulo associativity and commutativity of $\wedge$ and $\vee$, and idempotency and identity of $\ttt$ and $\fff$. Furthermore, negation is only allowed on atoms which is possible due to De Morgan's laws.
+%
+% In this paper we will mainly concern ourselves with the structural rules.
 %===============================================================================
 \section{Streamlining via Experiments}
 
 \begin{defi}
-Let $\Phi$ be a derivation from $\alpha$ to $\beta$ containing $N$ different atoms, $k_i$ interactions and $l_i$ cointeractions on atom $i$. Consider the derivaiton obtained by permuting all the interactions to the top and the cointeractions to the bottom:
+Let $\Phi$ be a derivation from $\alpha$ to $\beta$, where the atomic flow of atom $a$ is $A_1,A_2,A_3$ or $A_4$, then a derivation $\Phi_c$ from $\vls(\alpha.\bigwedge_{i=1}^n[a_i.{\bar a_i}])$ to $\vls[\beta.\bigvee_{i=1}^n(a_i.{\bar a_i})]$, where the atomic flow of atom $b$ is $B_1,B_2,B_3$ or $B_4$ respectively, is called the \emph{core of $\Phi$}.
+\end{defi}
+
+\begin{lem}
+Let $\Phi$ be a derivation from $\alpha$ to $\beta$ containing $n$ atoms. Then the core of $\Phi$ exists.
+\end{lem}
+\begin{proof}
+Consider the atom $a$ occuring in $\Phi$. For each occurence of $\vlinf{\aid}{}{\vls[a.{\bar a}]}{\ttt}$ and $\vlinf{\aiu}{}{\fff}{\vls(a.{\bar a})}$ do the following transformation:
 \[
 \vlderivation
 {
- \vlde{}{\{\aiu\}}{\beta}
+ \vlde{\Delta_2}{}{\beta}
  {
-  \vlde{\Phi_c}{\SKS\setminus\{\aid,\aiu\}}{\beta_n=\vls[\beta.\bigvee_{i=1}^n\bigvee_{j=1}^{l_i}(a_i.{\bar a_i})]}
+  \vlin{\aid}{}{\xi\vlsbr[a.{\bar a}]}
   {
-   \vlde{}{\{\aid\}}{\vls(\alpha.\bigwedge_{i=1}^N\bigwedge_{j=1}^{k_i}[a_i.{\bar a_i}])}
+   \vlde{\Delta_1}{}{\xi\{\ttt\}}
    {
     \vlhy{\alpha}
    }
   }
  }
-}\quad,
-\]
-then $\Phi_c$ is called the \emph{core} of $\Phi$.
-\end{defi}
-
-\begin{thm}
-Let $\Phi$ be a derivation from $\alpha$ to $\beta$. Then there exist a streamlined derivation $\Psi$ from $\alpha$ to $\beta$.
-\end{thm}
-
-\begin{proof}
-Let $\Phi$ have $N$ atoms and for all $n\leq N$ define:
-\[
-\alpha_n=\vls(\alpha.\bigwedge_{i=1}^n\bigwedge_{j=1}^{k_i}[a_i.{\bar a_i}])\qquad
-\beta_n=\vls[\beta.\bigvee_{i=1}^n\bigvee_{j=1}^{l_i}(a_i.{\bar a_i})]
-\]
-In particur that means  that the core of $\Phi$ is $\vlder{\Phi_c}{}{\beta_N}{\alpha_N}$. We now define the derivation $\Psi$. Let $\Psi=\Psi_0$, $\Psi_N=\Phi_c$ and $\Psi_n$ where $0\leq n<N$ is defined by:
-\[
-\Delta_{n,1}=
-   \vlderivation
-   {
-    \vlin{\awu}{}{\vls[\beta_n.{\bar a_{n+1}}]}
-    {
-     \vlin{\cou^\star}{}{\vls[\beta_n.(a_{n+1}.{\bar a_{n+1}})]}
-     {
-      \vlde{\Psi_{n+1}}{}{\beta_{n+1}}
-      {
-       \vlin{\cod^\star}{}{\alpha_{n+1}}
-       {
-        \vlin{\aid}{}{\vls(\alpha_n.[a_{n+1}.{\bar a_{n+1}}])}
-        {
-        \vlhy{\alpha_n}
-        }
-       }
-      }
-     }
-    }
-   }
-\Delta_{n,2}=
-   \vlderivation
-   {
-    \vlin{\awu}{}{\vls[\beta_n.a_{n+1}]}
-    {
-     \vlin{\cou^\star}{}{\vls[\beta_n.(a_{n+1}.{\bar a_{n+1}})]}
-     {
-      \vlde{\Psi_{n+1}}{}{\beta_{n+1}}
-      {
-       \vlin{\cod^\star}{}{\alpha_{n+1}}
-       {
-        \vlin{\awd}{}{\vls(\alpha_n.[a_{n+1}.{\bar a_{n+1}}])}
-        {
-        \vlhy{\vls(\alpha_n.{\bar a_{n+1}})}
-        }
-       }
-      }
-     }
-    }
-   }
-\]
-\[
-\Delta_{n,3}=
-   \vlderivation
-   {
-    \vlin{\awu}{}{\vls[\beta_n.{\bar a_{n+1}}]}
-    {
-     \vlin{\cou^\star}{}{\vls[\beta_n.(a_{n+1}.{\bar a_{n+1}})]}
-     {
-      \vlde{\Psi_{n+1}}{}{\beta_{n+1}}
-      {
-       \vlin{\cod^\star}{}{\alpha_{n+1}}
-       {
-        \vlin{\awd}{}{\vls(\alpha_n.[a_{n+1}.{\bar a_{n+1}}])}
-        {
-        \vlhy{\vls(\alpha_n.a_{n+1})}
-        }
-       }
-      }
-     }
-    }
-   }
-\Delta_{n,4}=
-   \vlderivation
-   {
-    \vlin{\aiu}{}{\beta_n}
-    {
-     \vlin{\cou^\star}{}{\vls[\beta_n.(a_{n+1}.{\bar a_{n+1}})]}
-     {
-      \vlde{\Psi_{n+1}}{}{\beta_{n+1}}
-      {
-       \vlin{\cod^\star}{}{\alpha_{n+1}}
-       {
-        \vlin{\awd}{}{\vls(\alpha_n.[a_{n+1}.{\bar a_{n+1}}])}
-        {
-        \vlhy{\vls(\alpha_n.{\bar a_{n+1}})}
-        }
-       }
-      }
-     }
-    }
-   }
-\]
-\[
-\Psi_n=\vlderivation
+}\quad\rightarrow\quad
+\vlderivation
 {
- \vlin{\cod}{}{\beta_n}
+ \vlde{\Delta_2}{}{\beta}
  {
-  \vlin{\swi}{}{\vls[\beta_n.\beta_n.\beta_n.\Delta_{n,4}]}
+  \vlin{\sus}{}{\xi\vlsbr[a.{\bar a}]}
   {
-   \vlin{\swi}{}{\vls([\beta_n.\beta_n.\Delta_{n,3}].\alpha_n)}
+   \vlde{\vls(\Delta_1.[a.{\bar a}])}{}{\vls(\xi\{\ttt\}.[a.{\bar a}])}
    {
-    \vlin{\swi}{}{\vls([\beta_n.\Delta_{n,2}].\alpha_n.\alpha_n)}
+    \vlhy{\vls(\alpha.[a.{\bar a}])}
+   }
+  }
+ }
+}\qquad
+\vlderivation
+{
+ \vlde{\Delta_2}{}{\beta}
+ {
+  \vlin{\aid}{}{\xi\{\fff\}}
+  {
+   \vlde{\Delta_1}{}{\xi\vlsbr(a.{\bar a})}
+   {
+    \vlhy{\alpha}
+   }
+  }
+ }
+}\quad\rightarrow\quad
+\vlderivation
+{
+ \vlde{\vls[\Delta_2.(a.{\bar a})]}{}{\vls[\beta.(a.{\bar a})]}
+ {
+  \vlin{\aid}{}{\vls[\xi\{\fff\}.(a.{\bar a})]}
+  {
+   \vlde{\Delta_1}{}{\xi\vlsbr(a.{\bar a})}
+   {
+    \vlhy{\alpha}
+   }
+  }
+ }
+}\quad.
+\]
+
+We now argue about the top of the derivation, but the dual argument holds for the bottom. We have to consider three cases:
+\begin{itemize}
+  \item if there is exactly one occurence of $\vls[a.{\bar a}]$ we are done;
+  \item if there are no occurences then we create one by applying $\awu$; and
+  \item if there are more than one occurence we apply $\cou$ until there is only one left.
+\end{itemize}
+
+It is now straightforward to check that the resulting derivaiton is the core of $\Phi$.
+
+\end{proof}
+
+\begin{defi}
+Given a derivation $\Phi$ from $\vls(\alpha.\bigwedge_{i=1}^n[a_i.{\bar a_i}])$ to $\vls[\beta.\bigvee_{i=1}^n(a_i.{\bar a_i})]$ the \emph{normaliser of $\Phi$ with respect to $a_1,\dots,a_n$}, is the derivation $\Psi$ from $\alpha$ to $\beta$, defined inductively by:
+
+Let $0\leq k\leq n$, then
+\[
+\alpha_k=\vls(\alpha.\bigwedge_{i={k+1}}^n[a_i.{\bar a_i}])\qquad
+\beta_k=\vls[\beta.\bigvee_{i={k+1}}^n(a_i.{\bar a_i})]\quad.
+\]
+
+Now let $\Psi_0=\Phi$ and for $0<k\leq n$ define
+\[
+\Delta_k=
+   \vlderivation
+   {
+    \vlin{\awu}{}{\vls[\beta_k.{\bar a_k}]}
     {
-     \vlin{\cou}{}{\vls(\Delta_{n,1}.\alpha_n.\alpha_n.\alpha_n)}
+     \vlde{\Psi_{k-1}}{}{\beta_{k-1}}
      {
-      \vlhy{\alpha_n}
+      \vlin{\aid}{}{\alpha_{k-1}}
+      {
+       \vlhy{\alpha_k}
+      }
+     }
+    }
+   }
+\Delta'_k=
+   \vlderivation
+   {
+    \vlin{\awu}{}{\vls[\beta_k.a_k]}
+    {
+     \vlde{\Psi_{k-1}}{}{\beta_{k-1}}
+     {
+      \vlin{\awd}{}{\alpha_{k-1}}
+      {
+       \vlhy{\vls({\bar a_k}.\alpha_k)}
+      }
+     }
+    }
+   }
+\Delta''_k=
+   \vlderivation
+   {
+    \vlin{\awu}{}{\vls[\beta_k.{\bar a_k}]}
+    {
+     \vlde{\Psi_{k-1}}{}{\beta_{k-1}}
+     {
+      \vlin{\awd}{}{\alpha_{k-1}}
+      {
+       \vlhy{\vls(a_k.\alpha_k)}
+      }
+     }
+    }
+   }
+\Delta'''_k=
+   \vlderivation
+   {
+    \vlin{\aiu}{}{\beta_k}
+    {
+     \vlde{\Psi_{k-1}}{}{\beta_{k-1}}
+     {
+      \vlin{\awd}{}{\alpha_{k-1}}
+      {
+       \vlhy{\vls({\bar a_k}.\alpha_k)}
+      }
+     }
+    }
+   }
+\]
+
+\[
+\Psi_k=\vlderivation
+{
+ \vlin{\cod}{}{\beta_k}
+ {
+  \vlin{\swi}{}{\vls[\beta_k.\beta_k.\beta_k.\Delta'''_k]}
+  {
+   \vlin{\swi}{}{\vls([\beta_k.\beta_k.\Delta''_k].\alpha_k)}
+   {
+    \vlin{\swi}{}{\vls([\beta_k.\Delta'_k].\alpha_k.\alpha_k)}
+    {
+     \vlin{\cou}{}{\vls(\Delta_k.\alpha_k.\alpha_k.\alpha_k)}
+     {
+      \vlhy{\alpha_k}
      }
     }
    }
@@ -298,16 +327,17 @@ In particur that means  that the core of $\Phi$ is $\vlder{\Phi_c}{}{\beta_N}{\a
 }
 \]
 
-Given that $\Psi_N$ is interaction and cointeraction free, the only interaction and cointeraction on $a_{n+1}$ are the ones evidenced in $\Psi_n$, so to prove the theorem all we have to do is study the atomic flow of $\Psi_n$, where occurences of $\Psi_{n+1}$ are ``black boxes'':
+Finally let $\Psi=\Psi_n$.
+\end{defi}
 
-\TODO{What if $k_i$ or $l_i$ is 0?}
+\begin{thm}
+Let $\Phi$ be a derivation from $\alpha$ to $\beta$, then the normaliser of the core of $\Phi$ is streamlined.
+\end{thm}
 
-\end{proof}
 
-
-\iflmcs\else\let\oldurl\url\renewcommand{\url}[1]{\hfill\break\oldurl{#1}}\fi
-
-\bibliographystyle{alpha}
-\bibliography{di-biblio}
+% \iflmcs\else\let\oldurl\url\renewcommand{\url}[1]{\hfill\break\oldurl{#1}}\fi
+%
+% \bibliographystyle{alpha}
+% \bibliography{di-biblio}
 
 \end{document}
