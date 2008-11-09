@@ -36,7 +36,7 @@
             {\color{red}\noindent{\bf\the\todocount\ TODO:} #1}}\vlupdate{\TODO}
 \renewcommand{\Ale}[1]{\relax}  % Comment/uncomment these three lines
 \renewcommand{\Tom}[1]{\relax}  % in order to display/hide inline comments
-\renewcommand{\TODO}[1]{\relax} %
+%\renewcommand{\TODO}[1]{\relax} %
 %-------------------------------------------------------- REMOVE WHEN PAPER DONE
 
 \begin{document}
@@ -162,6 +162,10 @@
 %===============================================================================
 \section{Streamlining via Experiments}
 
+\begin{lem}
+Given a formula $\xi\{\alpha\}$ there exist derivations $\vlder{}{\{\swi\}}{\xi\{\alpha\}}{\vls(\xi\{\ttt\}.\alpha)}$ and $\vlder{}{\{\swi\}}{\vls[\xi\{\fff\}.\alpha]}{\xi\{\alpha\}}$.
+\end{lem}
+
 \begin{defi}
 Given a derivation $\Phi$ from $\alpha$ to $\beta$, then the \emph{core of $\Phi$} is defined as follows:
 
@@ -184,7 +188,7 @@ Firstly, for each instance of $\aid$ and $\aiu$ do the following transformation:
 {
  \vlde{\Psi'}{}{\beta}
  {
-  \vlin{\sus}{}{\xi\vlsbr[a.{\bar a}]}
+  \vlde{}{\{\swi\}}{\xi\vlsbr[a.{\bar a}]}
   {
    \vlde{\vls(\Psi.[a.{\bar a}])}{}{\vls(\xi\{\ttt\}.[a.{\bar a}])}
    {
@@ -210,7 +214,7 @@ Firstly, for each instance of $\aid$ and $\aiu$ do the following transformation:
 {
  \vlde{\vls[\Psi'.(a.{\bar a})]}{}{\vls[\beta.(a.{\bar a})]}
  {
-  \vlin{\aid}{}{\vls[\xi\{\fff\}.(a.{\bar a})]}
+  \vlde{}{\{\swi\}}{\vls[\xi\{\fff\}.(a.{\bar a})]}
   {
    \vlde{\Psi}{}{\xi\vlsbr(a.{\bar a})}
    {
@@ -220,6 +224,8 @@ Firstly, for each instance of $\aid$ and $\aiu$ do the following transformation:
  }
 }\quad.
 \]
+
+\TODO{Complete the first definition (after `secondly' (I don't like `secondly')).}
 
 Secondly, for each atom $a$;
 
@@ -237,17 +243,19 @@ We define the $n$-normaliser, $\Psi$, inductively:
 
 Let $\Psi_1=\Phi$ and for $1<k\leq n+1$ define the four helper derivations $\Delta_k,\Delta'_k,\Delta''_k,\Delta'''_k$:
 
+\TODO{Use conjunctions in the displays.}
+
 \[
 \Delta_k=
    \vlderivation
    {
-    \vlin{\awu}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_k.{\bar a_k}).{\bar a_{k-1}}]}
+    \vlin{\awu}{}{\vls[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i}).{\bar a_{k-1}}]}
     {
-     \vlde{\Psi_{k-1}}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_{k-1}.{\bar a_{k-1}})]}
+     \vlde{\Psi_{k-1}}{}{\vls[\beta.\bigvee_{i={k-1}}^n\vlsbr(a_i.{\bar a_i})]}
      {
-      \vlin{\aid}{}{\vls([a_{k-1}.{\bar a_{k-1}}].\cdots.[a_n.{\bar a_n}].\alpha)}
+      \vlin{\aid}{}{\vls(\bigwedge_{i={k-1}}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
       {
-       \vlhy{\vls([a_k.{\bar a_k}].\cdots.[a_n.{\bar a_n}].\alpha)}
+       \vlhy{\vls(\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
       }
      }
     }
@@ -255,13 +263,13 @@ Let $\Psi_1=\Phi$ and for $1<k\leq n+1$ define the four helper derivations $\Del
 \Delta'_k=
    \vlderivation
    {
-    \vlin{\awu}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_k.{\bar a_k}).a_{k-1}]}
+    \vlin{\awu}{}{\vls[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i}).a_{k-1}]}
     {
-     \vlde{\Psi_{k-1}}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_{k-1}.{\bar a_{k-1}})]}
+     \vlde{\Psi_{k-1}}{}{\vls[\beta.\bigvee_{i={k-1}}^n\vlsbr(a_i.{\bar a_i})]}
      {
-      \vlin{\awd}{}{\vls([a_{k-1}.{\bar a_{k-1}}].\cdots.[a_n.{\bar a_n}].\alpha)}
+      \vlin{\awd}{}{\vls(\bigwedge_{i={k-1}}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
       {
-       \vlhy{\vls({\bar a_{k-1}}.[a_k.{\bar a_k}].\cdots.[a_n.{\bar a_n}].\alpha)}
+       \vlhy{\vls({\bar a_{k-1}}.\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
       }
      }
     }
@@ -271,13 +279,13 @@ Let $\Psi_1=\Phi$ and for $1<k\leq n+1$ define the four helper derivations $\Del
 \Delta''_k=
    \vlderivation
    {
-    \vlin{\awu}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_k.{\bar a_k}).{\bar a_{k-1}}]}
+    \vlin{\awu}{}{\vls[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i}).{\bar a_{k-1}}]}
     {
-     \vlde{\Psi_{k-1}}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_{k-1}.{\bar a_{k-1}})]}
+     \vlde{\Psi_{k-1}}{}{\vls[\beta.\bigvee_{i={k-1}}^n\vlsbr(a_i.{\bar a_i})]}
      {
-      \vlin{\awd}{}{\vls([a_{k-1}.{\bar a_{k-1}}].\cdots.[a_n.{\bar a_n}].\alpha)}
+      \vlin{\awd}{}{\vls(\bigwedge_{i={k-1}}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
       {
-       \vlhy{\vls(a_{k-1}.[a_k.{\bar a_k}].\cdots.[a_n.{\bar a_n}].\alpha)}
+       \vlhy{\vls(a_{k-1}.\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
       }
      }
     }
@@ -285,13 +293,13 @@ Let $\Psi_1=\Phi$ and for $1<k\leq n+1$ define the four helper derivations $\Del
 \Delta'''_k=
    \vlderivation
    {
-    \vlin{\aiu}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_k.{\bar a_k})]}
+    \vlin{\aiu}{}{\vls[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i})]}
     {
-     \vlde{\Psi_{k-1}}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_{k-1}.{\bar a_{k-1}})]}
+     \vlde{\Psi_{k-1}}{}{\vls[\beta.\bigvee_{i={k-1}}^n\vlsbr(a_i.{\bar a_i})]}
      {
-      \vlin{\awd}{}{\vls([a_{k-1}.{\bar a_{k-1}}].\cdots.[a_n.{\bar a_n}].\alpha)}
+      \vlin{\awd}{}{\vls(\bigwedge_{i={k-1}}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
       {
-       \vlhy{\vls({\bar a_{k-1}}.[a_k.{\bar a_k}].\cdots.[a_n.{\bar a_n}].\alpha)}
+       \vlhy{\vls({\bar a_{k-1}}.\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
       }
      }
     }
@@ -303,17 +311,17 @@ Then define $\Psi_k$
 \[
 \vlderivation
 {
- \vlin{\cod^\star}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_k.{\bar a_k})]}
+ \vlin{\cod^\star}{}{\vls[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i})]}
  {
-  \vlin{\swi}{}{\vls[[\beta.(a_n.{\bar a_n}).\cdots.(a_k.{\bar a_k})].[\beta.(a_n.{\bar a_n}).\cdots.(a_k.{\bar a_k})].[\beta.(a_n.{\bar a_n}).\cdots.(a_k.{\bar a_k})].\Delta'''_k]}
+  \vlin{\swi}{}{\vls[[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i})].[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i})].[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i})].\Delta'''_k]}
   {
-   \vlin{\swi}{}{\vls([[\beta.(a_n.{\bar a_n}).\cdots.(a_k.{\bar a_k})].[\beta.(a_n.{\bar a_n}).\cdots.(a_k.{\bar a_k})].\Delta''_k].([a_k.{\bar a_k}].\cdots.[a_n.{\bar a_n}].\alpha))}
+   \vlin{\swi}{}{\vls([[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i})].[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i})].\Delta''_k].(\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha))}
    {
-    \vlin{\swi}{}{\vls([[\beta.(a_n.{\bar a_n}).\cdots.(a_k.{\bar a_k})].\Delta'_k].([a_k.{\bar a_k}].\cdots.[a_n.{\bar a_n}].\alpha).([a_k.{\bar a_k}].\cdots.[a_n.{\bar a_n}].\alpha))}
+    \vlin{\swi}{}{\vls([[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i})].\Delta'_k].(\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha).(\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha))}
     {
-     \vlin{\cou^\star}{}{\vls(\Delta_k.([a_k.{\bar a_k}].\cdots.[a_n.{\bar a_n}].\alpha).([a_k.{\bar a_k}].\cdots.[a_n.{\bar a_n}].\alpha).([a_k.{\bar a_k}].\cdots.[a_n.{\bar a_n}].\alpha))}
+     \vlin{\cou^\star}{}{\vls(\Delta_k.(\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha).(\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha).(\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha))}
      {
-      \vlhy{\vls([a_k.{\bar a_k}].\cdots.[a_n.{\bar a_n}].\alpha)}
+      \vlhy{\vls(\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
      }
     }
    }
@@ -322,8 +330,10 @@ Then define $\Psi_k$
 }
 \]
 
-Finally let $\Psi=\Psi_n$.
+Finally let $\Psi=\Psi_{n+1}$.
 \end{defi}
+
+\TODO{Def. is unclear, and it can be simplified a lot.}
 
 \begin{defi}
 Given a derivation $\Phi$ from $\alpha$ to $\beta$ containing the atoms $a_1,\dots,a_n$, the \emph{normaliser of $\Phi$} is the derivation obtained by instantiating the $n$-normaliser with the core of $\Phi$, the formulae $\alpha$ and $\beta$ and the atoms $a_1,\dots,a_n$.
