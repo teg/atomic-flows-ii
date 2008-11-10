@@ -198,8 +198,13 @@ For each case we can build the required derivation:
 
 \end{proof}
 
+\begin{lem}
+Given a formula $\alpha$ and a non-negative integer $n$, there exist derivations $\vlder{}{\acd,\med,\awd}{\alpha}{\bigvee_{i=1}^{n}\alpha}$\\ and $\vlder{}{\acu,\med,\awu}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$.
+\end{lem}
+
+
 \begin{defi}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$, then the \emph{core of $\Phi$} is defined as follows:
+Given a derivation $\Phi$ from $\alpha$ to $\beta$, the \emph{core of $\Phi$} is defined as follows:
 
 Obtain $\Phi'$ from $\Phi$ by applying the following transformation for each instance of $\aid$ and $\aiu$ in $\Phi$:
 \[
@@ -257,14 +262,23 @@ Obtain $\Phi'$ from $\Phi$ by applying the following transformation for each ins
 }\quad.
 \]
 
-\TODO{Complete the first definition}
-
-Obtain the core of $\Phi$ from $\Phi'$ by, for each atom $a$;
-
-\begin{itemize}
-  \item if there is no occurrence of $\vls[a.{\bar a}]$ (resp., $\vls(a.{\bar a})$) in the premiss (resp., conclusion) apply $\awu$ (resp., $\awd$) to create one;
-  \item if there are more than one occurrence contract them into one using $\cou$ (resp., $\cod$).
-\end{itemize}
+Obtain the core of $\Phi$ from $\Phi'$ by using Lemma :
+\[
+\vlderivation
+{
+ \vlde{}{\{\acd,\awd,\med\}}{\vls[\beta.\bigvee_{i=1}^n(a.{\bar a})]}
+ {
+  \vlde{\Phi'}{\SKS\setminus\{\aid,\aiu\}}{\beta'}
+  {
+   \vlde{}{\{\acu,\awu,\med\}}{\alpha'}
+   {
+    \vlhy{\vls(\alpha.\bigwedge_{i=1}^n[a.{\bar a}])}
+   }
+  }
+ }
+}
+\]
+to ensure that there is exactly one instance of $\vls[a.{\bar a}]$ in the premiss and one instance of $\vls(a.{\bar a})$ in the conclusion for each atom $a$.
 
 \end{defi}
 
