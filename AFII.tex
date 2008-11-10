@@ -1,7 +1,5 @@
 \documentclass[a4paper]{amsart}
 
-\newif\iflmcs\lmcsfalse % <--------------- TOGGLE THIS FOR FINAL VERSION OF LMCS
-
 %                  XeTeX
 \usepackage{xunicode}
 \usepackage{fontspec}
@@ -13,7 +11,7 @@
 \usepackage{graphicx}
 \usepackage[margin=1in]{geometry}
 \usepackage[lutzsyntax]{virginialake}\vlsmallbrackets\aftrianglefalse
-\iflmcs\def\url #1#2{\relax}\else\usepackage[pdfborder={0 0 0}]{hyperref}\fi
+\usepackage[pdfborder={0 0 0}]{hyperref}
 
 %--------- Theorem etc
 \newtheorem{thm}{Theorem}[section]
@@ -44,11 +42,8 @@
 \title[Normalisation Control in Deep Inference   via Atomic Flows II]
       {Normalisation Control in Deep Inference\\ via Atomic Flows II}
 
-\author{Alessio Guglielmi}
+\author{Alessio Guglielmi and Tom Gundersen}
 %\address{University of Bath, Bath BA2 7AY, UK}
-
-\author{Tom Gundersen}
-\iflmcs\address{University of Bath, Bath BA2 7AY, UK}\fi
 
 \thanks{This work was in part funded by an Overseas Research Scholarship and a Research Studentship, both from the University of Bath, and by the British Council Alliance Programme.}
 
@@ -59,7 +54,7 @@
 % \begin{abstract}
 % \end{abstract}
 
-%\maketitle
+\maketitle
 
 %===============================================================================
 % \section{Introduction}
@@ -166,10 +161,47 @@
 Given a formula $\xi\{\alpha\}$ there exist derivations $\vlder{}{\{\swi\}}{\xi\{\alpha\}}{\vls(\xi\{\ttt\}.\alpha)}$ and $\vlder{}{\{\swi\}}{\vls[\xi\{\fff\}.\alpha]}{\xi\{\alpha\}}$.
 \end{lem}
 
+\begin{proof}
+We prove the first case, the second is true by symmetry. We need to consider three cases:
+\begin{itemize}
+  \item $\xi\{\}=\{\}$;
+  \item $\xi\{\}=\vls[\beta.\xi'\{\}]$; and
+  \item $\xi\{\}=\vls(\beta.\xi'\{\})$.
+\end{itemize}
+
+For each case we can build the required derivation:
+
+\[
+\vlinf{=}{}{\alpha}{\vls(\ttt.\alpha)}\quad,\qquad
+\vlderivation
+{
+ \vlde{\mbox{IH}}{\{\swi\}}{\vls[\beta.\xi'\{\alpha\}]}
+ {
+  \vlin{\swi}{}{\vls[\beta.(\xi'\{\ttt\}.\alpha)]}
+  {
+   \vlhy{\vls([\beta.\xi'\{\ttt\}].\alpha)}
+  }
+ }
+}\quad\mbox{and}\qquad
+\vlderivation
+{
+ \vlde{\mbox{IH}}{\{\swi\}}{\vls(\beta.\xi'\{\alpha\})}
+ {
+  \vlin{=}{}{\vls(\beta.(\xi'\{\ttt\}.\alpha))}
+  {
+   \vlhy{\vls((\beta.\xi'\{\ttt\}).\alpha)}
+  }
+ }
+}
+\]
+
+
+\end{proof}
+
 \begin{defi}
 Given a derivation $\Phi$ from $\alpha$ to $\beta$, then the \emph{core of $\Phi$} is defined as follows:
 
-Firstly, for each instance of $\aid$ and $\aiu$ do the following transformation:
+Obtain $\Phi'$ from $\Phi$ by applying the following transformation for each instance of $\aid$ and $\aiu$ in $\Phi$:
 \[
 \vlderivation
 {
@@ -196,7 +228,7 @@ Firstly, for each instance of $\aid$ and $\aiu$ do the following transformation:
    }
   }
  }
-}\qquad\qquad
+}\qquad\mbox{and}\qquad
 \vlderivation
 {
  \vlde{\Psi'}{}{\beta}
@@ -225,9 +257,9 @@ Firstly, for each instance of $\aid$ and $\aiu$ do the following transformation:
 }\quad.
 \]
 
-\TODO{Complete the first definition (after `secondly' (I don't like `secondly')).}
+\TODO{Complete the first definition}
 
-Secondly, for each atom $a$;
+Obtain the core of $\Phi$ from $\Phi'$ by, for each atom $a$;
 
 \begin{itemize}
   \item if there is no occurrence of $\vls[a.{\bar a}]$ (resp., $\vls(a.{\bar a})$) in the premiss (resp., conclusion) apply $\awu$ (resp., $\awd$) to create one;
@@ -259,7 +291,7 @@ Let $\Psi_1=\Phi$ and for $1<k\leq n+1$ define the four helper derivations $\Del
       }
      }
     }
-   }
+   }\quad,\qquad
 \Delta'_k=
    \vlderivation
    {
@@ -273,7 +305,7 @@ Let $\Psi_1=\Phi$ and for $1<k\leq n+1$ define the four helper derivations $\Del
       }
      }
     }
-   }
+   }\quad,
 \]
 \[
 \Delta''_k=
@@ -289,7 +321,7 @@ Let $\Psi_1=\Phi$ and for $1<k\leq n+1$ define the four helper derivations $\Del
       }
      }
     }
-   }
+   }\quad\mbox{and}\qquad
 \Delta'''_k=
    \vlderivation
    {
@@ -303,7 +335,7 @@ Let $\Psi_1=\Phi$ and for $1<k\leq n+1$ define the four helper derivations $\Del
       }
      }
     }
-   }
+   }\quad.
 \]
 
 Then define $\Psi_k$
@@ -336,7 +368,7 @@ Finally let $\Psi=\Psi_{n+1}$.
 \TODO{Def. is unclear, and it can be simplified a lot.}
 
 \begin{defi}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$ containing the atoms $a_1,\dots,a_n$, the \emph{normaliser of $\Phi$} is the derivation obtained by instantiating the $n$-normaliser with the core of $\Phi$, the formulae $\alpha$ and $\beta$ and the atoms $a_1,\dots,a_n$.
+Given a derivation $\Phi$ and given the atoms in $\Phi$, $a_1,\dots,a_n$ which are not streamlined, the \emph{normaliser of $\Phi$} is the derivation obtained by instantiating the $n$-normaliser with the core, premiss and conclusion $\Phi$ as well as the atoms $a_1,\dots,a_n$.
 \end{defi}
 
 \begin{thm}
