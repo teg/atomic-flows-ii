@@ -204,8 +204,10 @@ Given a formula $\alpha$ and a non-negative integer $n$, there exist derivations
 
 
 \begin{defi}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$, the \emph{core of $\Phi$} is defined as follows:
+Given a derivation $\Phi$ from $\alpha$ to $\beta$ and an enumeration $a_1,\dots,\, a \emph{core of $\Phi$} is defined as a derivation $\Phi'$ from $\vls(\alpha.[a_1.\bar a_1].\cdots.[a_n.\bar a_n])$ to $\vls[\beta.(a_1.\bar a_1).\cdots.(a_n.\bar a_n)]$ not contaning any (co)interactions on $a_1,\dots,a_n$.
+\end{defi}
 
+\begin{defi}
 Obtain $\Phi'$ from $\Phi$ by applying the following transformation for each instance of $\aid$ and $\aiu$ in $\Phi$:
 \[
 \vlderivation
