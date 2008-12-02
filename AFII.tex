@@ -158,15 +158,15 @@
 \section{Streamlining via Experiments}
 
 \begin{lem}
-Given a formula $\xi\{\alpha\}$ there exist derivations $\vlder{}{\{\swi\}}{\xi\{\alpha\}}{\vls(\xi\{\ttt\}.\alpha)}$ and $\vlder{}{\{\swi\}}{\vls[\xi\{\fff\}.\alpha]}{\xi\{\alpha\}}$.
+Given a context $\xi\{\}$ and a formula $\alpha$ there exist derivations $\vlder{}{\{\swi\}}{\xi\{\alpha\}}{\vls(\xi\{\ttt\}.\alpha)}$ and $\vlder{}{\{\swi\}}{\vls[\xi\{\fff\}.\alpha]}{\xi\{\alpha\}}$.
 \end{lem}
 
 \begin{proof}
-We prove the first case, the second is true by symmetry. We need to consider three cases:
+We show how to construct the first derivation, the second can be done by symmetry. We argue by induction on the number of atoms in $\xi\{\}$.
 \begin{itemize}
-  \item $\xi\{\}=\{\}$;
-  \item $\xi\{\}=\vls[\beta.\xi'\{\}]$; and
-  \item $\xi\{\}=\vls(\beta.\xi'\{\})$.
+  \item $\xi\{\}=\{\}$,
+  \item $\xi\{\}=\vls[\beta.\xi'\{\}]$ and $\beta$ is not a unit,
+  \item $\xi\{\}=\vls(\beta.\xi'\{\})$ and $\beta$ is not a unit,
 \end{itemize}
 
 For each case we can build the required derivation:
@@ -175,45 +175,41 @@ For each case we can build the required derivation:
 \vlinf{=}{}{\alpha}{\vls(\ttt.\alpha)}\quad,\qquad
 \vlderivation
 {
- \vlde{\mbox{IH}}{\{\swi\}}{\vls[\beta.\xi'\{\alpha\}]}
+ \vlde{}{\{\swi\}}{\vls[\beta.\xi'\{\alpha\}]}
  {
   \vlin{\swi}{}{\vls[\beta.(\xi'\{\ttt\}.\alpha)]}
   {
    \vlhy{\vls([\beta.\xi'\{\ttt\}].\alpha)}
   }
  }
-}\quad\mbox{and}\qquad
+}\qquad\mbox{and}\qquad
 \vlderivation
 {
- \vlde{\mbox{IH}}{\{\swi\}}{\vls(\beta.\xi'\{\alpha\})}
+ \vlde{}{\{\swi\}}{\vls(\beta.\xi'\{\alpha\})}
  {
   \vlin{=}{}{\vls(\beta.(\xi'\{\ttt\}.\alpha))}
   {
    \vlhy{\vls((\beta.\xi'\{\ttt\}).\alpha)}
   }
  }
-}
+}\quad.
 \]
 
 
 \end{proof}
 
-\begin{lem}
-Given a formula $\alpha$ and a non-negative integer $n$, there exist derivations $\vlder{}{\acd,\med,\awd}{\alpha}{\bigvee_{i=1}^{n}\alpha}$\\ and $\vlder{}{\acu,\med,\awu}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$.
+\begin{lem}\label{LemContr}
+Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\acd,\med}{\alpha}{\bigvee_{i=1}^{n}\alpha}$\\ and $\vlder{}{\acu,\med}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$.
 \end{lem}
 
 
 \begin{defi}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$ where each of the atoms $a_1,\dots,a_n$ take part in both interactions and cointeractions, a \emph{core of $\Phi$} is defined as a derivation from $\vls(\alpha.[a_1.\bar a_1].\cdots.[a_n.\bar a_n])$ to $\vls[\beta.(a_1.\bar a_1).\cdots.(a_n.\bar a_n)]$ not contaning any interactions nor cointeractions on $a_1,\dots,a_n$.
+Given a derivation $\Phi$ from $\alpha$ to $\beta$ where each of the atoms $a_1,\dots,a_n$ take part in both interactions and cointeractions, a \emph{core of\ $\Phi$} is defined as a derivation from $\vls(\alpha.[a_1.\bar a_1].\cdots.[a_n.\bar a_n])$ to $\vls[\beta.(a_1.\bar a_1).\cdots.(a_n.\bar a_n)]$ not contaning any interactions nor cointeractions on $a_1,\dots,a_n$.
 \end{defi}
 
 \begin{lem}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$ a core of $\Phi$ can be constructed in the following way: $\dots$
-
-We call this \emph{the core of $\Phi$}.
-\end{lem}
-
-Obtain $\Phi'$ from $\Phi$ by applying the following transformation for each instance of $\aid$ and $\aiu$ in $\Phi$:
+Given a derivation $\Phi$ from $\alpha$ to $\beta$ where each of the atoms $a_1,\dots,a_n$ take part in both interactions and cointeractions a core of $\Phi$ can be constructed in the following way:
+Obtain $\Phi'$ from $\Phi$ by applying the following transformation for each instance of $\aid$ and $\aiu$ applied to one of $a_1,\dots,a_n$ in $\Phi$:
 \[
 \vlderivation
 {
@@ -269,15 +265,15 @@ Obtain $\Phi'$ from $\Phi$ by applying the following transformation for each ins
 }\quad.
 \]
 
-Obtain the core of $\Phi$ from $\Phi'$ by using Lemma :
+Obtain the core of $\Phi$ from $\Phi'$ by using Lemma~\ref{LemContr}:
 \[
 \vlderivation
 {
- \vlde{}{\{\acd,\awd,\med\}}{\vls[\beta.\bigvee_{i=1}^n(a.{\bar a})]}
+ \vlde{}{\{\acd,\med\}}{\vls[\beta.\bigvee_{i=1}^n(a.{\bar a})]}
  {
   \vlde{\Phi'}{\SKS\setminus\{\aid,\aiu\}}{\beta'}
   {
-   \vlde{}{\{\acu,\awu,\med\}}{\alpha'}
+   \vlde{}{\{\acu,\med\}}{\alpha'}
    {
     \vlhy{\vls(\alpha.\bigwedge_{i=1}^n[a.{\bar a}])}
    }
@@ -285,9 +281,9 @@ Obtain the core of $\Phi$ from $\Phi'$ by using Lemma :
  }
 }
 \]
-to ensure that there is exactly one instance of $\vls[a.{\bar a}]$ in the premiss and one instance of $\vls(a.{\bar a})$ in the conclusion for each atom $a$.
+to ensure that there is exactly one instance of $\vls[a_i.{\bar a_i}]$ in the premiss and one instance of $\vls(a_i.{\bar a_i})$ in the conclusion for each atom $a_i$ from $a_1,\dots,a_n$.
 
-\end{defi}
+\end{lem}
 
 \begin{defi}
 The \emph{$n$-normaliser} is a derivation scheme over the meta variables $\Phi$ (derivation), $\alpha,\beta$ (formulae), $a_1,\dots,a_n$ (atoms).
