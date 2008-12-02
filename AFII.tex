@@ -158,15 +158,15 @@
 \section{Streamlining via Experiments}
 
 \begin{lem}
-Given a context $\xi\{\}$ and a formula $\alpha$ there exist derivations $\vlder{}{\{\swi\}}{\xi\{\alpha\}}{\vls(\xi\{\ttt\}.\alpha)}$ and $\vlder{}{\{\swi\}}{\vls[\xi\{\fff\}.\alpha]}{\xi\{\alpha\}}$.
+Given a context $\xi\vlhole$ and a formula $\alpha$ there exist derivations $\vlder{}{\{\swi\}}{\xi\{\alpha\}}{\vls(\xi\{\ttt\}.\alpha)}$ and $\vlder{}{\{\swi\}}{\vls[\xi\{\fff\}.\alpha]}{\xi\{\alpha\}}$.
 \end{lem}
 
 \begin{proof}
 We show how to construct the first derivation, the second one can be done by symmetry. We argue by induction on the number of atoms in $\xi\{\}$. There are three cases to consider:
 \begin{itemize}
-  \item $\xi\{\}=\{\}$,
-  \item $\xi\{\}=\vls[\beta.\xi'\{\}]$ and $\beta$ is not a unit,
-  \item $\xi\{\}=\vls(\beta.\xi'\{\})$ and $\beta$ is not a unit.
+  \item $\xi\vlhole=\vlhole$,
+  \item $\xi\vlhole=\vls[\beta.\xi'\vlhole]$ and $\beta$ is not a unit,
+  \item $\xi\vlhole=\vls(\beta.\xi'\vlhole)$ and $\beta$ is not a unit.
 \end{itemize}
 
 For each case we can build the required derivation:
@@ -194,8 +194,6 @@ For each case we can build the required derivation:
  }
 }\quad.
 \]
-
-
 \end{proof}
 
 \begin{lem}\label{LemContr}
@@ -289,13 +287,11 @@ We sometimes refer to $\Phi_c$ as \emph{the core of $\Phi$}.
 \end{proof}
 
 \begin{defi}
-The \emph{$n$-normaliser} is a derivation scheme over the meta variables $\Phi$ (derivation), $\alpha,\beta$ (formulae), $a_1,\dots,a_n$ (atoms).
+The \emph{$n$-normaliser} is a derivation scheme over the meta variables $\Phi$ (derivation), $\alpha,\beta$ (formulae) and $a_1,\dots,a_n$ (atoms).
 
 We define the $n$-normaliser, $\Psi$, inductively:
 
 Let $\Psi_1=\Phi$ and for $1<k\leq n+1$ define the three helper derivations $\Delta_k,\Delta'_k,\Delta''_k$:
-
-\TODO{Use conjunctions in the displays.}
 
 \[
 \Delta_k=
