@@ -197,7 +197,7 @@ Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\v
 
 
 \begin{defi}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$, where $a_1,\dots,a_n$ are all the atoms that appear in both interaction and cointeraction instances, a \emph{core of\ $\Phi$} is defined as a derivation 
+Given a derivation $\Phi$ from $\alpha$ to $\beta$, where $a_1,\dots,a_n$ are all the distinct atoms that appear in both interaction and cointeraction instances, a \emph{core of\ $\Phi$} is defined as a derivation 
 \[
 \vlder{}{}{\vls[\beta.(a_n.\bar a_n).\cdots.(a_1.\bar a_1)]}{\vls([a_1.\bar a_1].\cdots.[a_n.\bar a_n].\alpha)}
 \]
@@ -209,7 +209,7 @@ Given a derivation $\Phi$ from $\alpha$ to $\beta$, a core of $\Phi$ can be cons
 \end{lem}
 
 \begin{proof}
-Let $a_1,\dots,a_n$ be all the atoms which take part in both interaction and cointeraction instances in $\Phi$. Obtain $\Phi'$ from $\Phi$ by using Lemma~\ref{LemSuperSwitch} to perform the following transformation for each instance of $\aid$ and $\aiu$ applied to one of $a_1,\dots,a_n$ in $\Phi$:
+Let $a_1,\dots,a_n$ be all the atoms which occur in both interaction and cointeraction instances in $\Phi$. Obtain $\Phi'$ from $\Phi$ by using Lemma~\ref{LemSuperSwitch} to perform the following transformation for each instance of $\aid$ and $\aiu$ applied to $a$ from $a_1,\dots,a_n$ in $\Phi$:
 \[
 \vlderivation
 {
@@ -278,72 +278,70 @@ Obtain the core of $\Phi$ from $\Phi'$ by using Lemma~\ref{LemContr}:
 \end{proof}
 
 \begin{defi}
-A core of a derivation $\Phi$ constructed as described in the proof of Lemma~\ref{LemConstrCore} is called \emph{the core of $\Phi$}.
+A core of a derivation $\Phi$ constructed as described in the proof of Lemma~\ref{LemConstrCore} is called \emph{the canonical core of $\Phi$}.
 \end{defi}
 
 \begin{defi}
-The \emph{$n$-normaliser}, $\Psi$, is a derivation scheme over the meta variables $\Phi$ (derivation), $\alpha,\beta$ (formulae) and $a_1,\dots,a_n$ (atoms).
-
-We define $\vlder{\Psi_k}{}{\vls[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i})]}{\vls(\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha)}$ inductively. Let $\Psi_1=\vlder{\Phi}{}{\vls[\beta.\bigvee_{i=1}^n\vlsbr(a_i.{\bar a_i})]}{\vls(\bigwedge_{i=1}^n\vlsbr[a_i.{\bar a_i}].\alpha)}$ and for $1<k\leq n+1$ define the three helper derivations $\Delta^\top_k,\Delta_k,\Delta^\bot_k$:
-
+For any natural number $n$ the \emph{$n$-normaliser}, $\Psi_n(\Phi,\alpha,\beta,a_1,\dots,a_n)$, is a derivation scheme over the meta variables $\Phi$ (derivation), $\alpha$, $\beta$ (formulae) and $a_1,\dots,a_n$ (atoms), where
 \[
-\Delta^\top_k=
-   \vlderivation
-   {
-    \vlde{\Psi_{k-1}}{}{\vls[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i}).(\vlinf{\awu}{}{\ttt}{a_{k-1}}.\bar a_{k-1})]}
-    {
-     \vlhy{\vls(\vlinf{\aid}{}{\vls[a_{k-1}.\bar a_{k-1}]}{\ttt}.\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
-    }
-   }\quad,\qquad
-\Delta_k=
-   \vlderivation
-   {
-    \vlde{\Psi_{k-1}}{}{\vls[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i}).(a_{k-1}.\vlinf{\awu}{}{\ttt}{\bar a_{k-1}})]}
-    {
-     \vlhy{\vls([\vlinf{\awd}{}{a_{k-1}}{\fff}.\bar a_{k-1}].\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
-    }
-   }\quad,
+\Phi=\vlder{}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}\quad.
 \]
+If $\Phi,\alpha,\beta,a_1,\dots,a_n$ are clear from the context then we use the following shorthand
 \[
-\Delta^\bot_k=
-   \vlderivation
-   {
-    \vlde{\Psi_{k-1}}{}{\vls[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i}).\vlinf{\aiu}{}{\fff}{\vls(a_{k-1}.\bar a_{k-1})}]}
-    {
-     \vlhy{\vls([a_{k-1}.\vlinf{\awd}{}{\bar a_{k-1}}{\fff}].\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
-    }
-   }\quad.
+\Psi_k=\Psi_k(\Phi,\vls([a_{k+1}.\bar a_{k+1}].\cdots.[a_n.\bar a_n].\alpha),\vls[\beta.(a_n.\bar a_n).\cdots.(a_{k+1}.\bar a_{k+1})],a_1,\dots,a_k)\quad.
 \]
-
-Then define $\Psi_k$ to be
-
-
+We define $\Psi_n$ inductively. Let $\Psi_0=\Phi$ and for $n>0$ let $\Psi_n$ be
 \newbox\DeltaTopK
-\setbox\DeltaTopK=\hbox{$\vlder{\Delta^\top_k}{}{\vls[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i}).\bar a_{k-1}]}{\vls(\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha)}$}
-\newbox\DeltaK
-\setbox\DeltaK=\hbox{$\vlder{\Delta_k}{}{\vls[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i}).a_{k-1}]}{\vls(\bar a_{k-1}.\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha)}$}
+\setbox\DeltaTopK=
+\hbox{$
+\vlderivation
+{
+ \vlde{\Psi_{n-1}}{}{\vls[\beta.(\vlinf{\awu}{}{\ttt}{a_n}.\bar a_n)]}
+ {
+  \vlhy{\vls(\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha)}
+ }
+}$
+}
 \newbox\DeltaBotK
-\setbox\DeltaBotK=\hbox{$\vlder{\Delta^\bot_k}{}{\vls[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i})]}{\vls(a_{k-1}.\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha)}$}
+\setbox\DeltaBotK=
+\hbox{
+$\vlderivation
+{
+ \vlde{\Psi_{n-1}}{}{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(a_n.\bar a_n)}]}
+ {
+  \vlhy{\vls([a_n.\vlinf{\awd}{}{\bar a_n}{\fff}].\alpha)}
+ }
+}$
+}
+\newbox\DeltaK
+\setbox\DeltaK=
+\hbox{$
+\vlderivation
+{
+ \vlde{\Psi_{n-1}}{}{\vls[\beta.(a_n.\vlinf{\awu}{}{\ttt}{\bar a_n})]}
+ {
+  \vlhy{\vls([\vlinf{\awd}{}{a_n}{\fff}.\bar a_n].\alpha)}
+ }
+}$
+}
 \[
 \vlderivation
 {
- \vlin{\cod^\star}{}{\vls[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i})]}
+ \vlin{\cod^\star}{}{\beta}
  {
-  \vlin{\swi}{}{\vls[[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i})].[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i})].\box\DeltaBotK]}
+  \vlin{\swi}{}{\vls[\beta.\beta.\box\DeltaBotK]}
   {
-   \vlin{\swi}{}{\vls([[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i})].\box\DeltaK].(\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha))}
+   \vlin{\swi}{}{\vls([\beta.\box\DeltaK].\alpha)}
    {
-    \vlin{\cou^\star}{}{\vls(\box\DeltaTopK.(\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha).(\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha))}
+    \vlin{\cou^\star}{}{\vls(\box\DeltaTopK.\alpha.\alpha)}
     {
-     \vlhy{\vls(\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
+     \vlhy{\alpha}
     }
    }
   }
  }
 }\quad.
 \]
-
-Finally let $\Psi=\Psi_{n+1}$.
 \end{defi}
 
 \begin{defi}
