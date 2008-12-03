@@ -1,10 +1,10 @@
 \documentclass[a4paper]{amsart}
 
 %                  XeTeX
-\usepackage{xunicode}
-\usepackage{fontspec}
-\usepackage{xltxtra}
-\setromanfont[Mapping=tex-text]{Linux Libertine O}
+%\usepackage{xunicode}
+%\usepackage{fontspec}
+%\usepackage{xltxtra}
+%setromanfont[Mapping=tex-text]{Linux Libertine O}
 
 %                  Trash .aux file after toggling
 \usepackage{stmaryrd}
@@ -162,11 +162,11 @@ Given a context $\xi\vlhole$ and a formula $\alpha$ there exist derivations $\vl
 \end{lem}
 
 \begin{proof}
-We show how to construct the first derivation, the second one can be done by symmetry. We argue by induction on the number of atoms in $\xi\{\}$. There are three cases to consider:
+We show how to construct the first derivation, the second one can be done by symmetry. We argue by induction on the number of atoms in $\xi\vlhole$. There are three cases to consider, where $\beta$ is not a unit:
 \begin{itemize}
   \item $\xi\vlhole=\vlhole$,
-  \item $\xi\vlhole=\vls[\xi'\vlhole.\beta]$ and $\beta$ is not a unit,
-  \item $\xi\vlhole=\vls(\xi'\vlhole.\beta)$ and $\beta$ is not a unit.
+  \item $\xi\vlhole=\vls[\xi'\vlhole.\beta]$,
+  \item $\xi\vlhole=\vls(\xi'\vlhole.\beta)$.
 \end{itemize}
 
 For each case we can build the required derivation:
@@ -175,25 +175,20 @@ For each case we can build the required derivation:
 \vlinf{=}{}{\alpha}{\vls(\alpha.\ttt)}\quad,\qquad
 \vlderivation
 {
- \vlde{}{\{\swi\}}{\vls[\xi'\{\alpha\}.\beta]}
+ \vlin{\swi}{}{\vls[\vlder{\Psi}{\{\swi\}}{\xi'\{\alpha\}}{\vls(\alpha.\xi'\{\ttt\})}.\beta]}
  {
-  \vlin{\swi}{}{\vls[(\alpha.\xi'\{\ttt\}).\beta]}
-  {
-   \vlhy{\vls(\alpha.[\xi'\{\ttt\}.\beta])}
-  }
+  \vlhy{\vls(\alpha.[\xi'\{\ttt\}.\beta])}
  }
 }\qquad\mbox{and}\qquad
 \vlderivation
 {
- \vlde{}{\{\swi\}}{\vls(\xi'\{\alpha\}.\beta)}
+ \vlin{=}{}{\vls(\vlder{\Psi'}{\{\swi\}}{\xi'\{\alpha\}}{\vls(\alpha.\xi'\{\ttt\})}.\beta)}
  {
-  \vlin{=}{}{\vls((\alpha.\xi'\{\ttt\}).\beta)}
-  {
-   \vlhy{\vls(\alpha.(\xi'\{\ttt\}.\beta))}
-  }
+  \vlhy{\vls(\alpha.(\xi'\{\ttt\}.\beta))}
  }
-}\quad.
+}\quad,
 \]
+where $\Psi$ and $\Psi'$ exists by the inductive hypothesis.
 \end{proof}
 
 \begin{lem}\label{LemContr}
@@ -231,10 +226,7 @@ Let $a_1,\dots,a_n$ be all the atoms which take part in both interaction and coi
  {
   \vlde{}{\{\swi\}}{\xi\vlsbr[a.{\bar a}]}
   {
-   \vlde{\vls([a.{\bar a}].\Psi)}{}{\vls([a.{\bar a}].\xi\{\ttt\})}
-   {
-    \vlhy{\vls([a.{\bar a}].\alpha)}
-   }
+   \vlhy{\vls([a.{\bar a}].\vlder{\Psi}{}{\xi\{\ttt\}}{\alpha})}
   }
  }
 }\qquad\mbox{and}\qquad
@@ -253,14 +245,11 @@ Let $a_1,\dots,a_n$ be all the atoms which take part in both interaction and coi
 }\quad\rightarrow\quad
 \vlderivation
 {
- \vlde{\vls[\Psi'.(a.{\bar a})]}{}{\vls[\beta.(a.{\bar a})]}
+ \vlde{}{\{\swi\}}{\vls[\vlder{\Psi'}{}{\beta}{\xi\{\fff\}}.(a.{\bar a})]}
  {
-  \vlde{}{\{\swi\}}{\vls[\xi\{\fff\}.(a.{\bar a})]}
+  \vlde{\Psi}{}{\xi\vlsbr(a.{\bar a})}
   {
-   \vlde{\Psi}{}{\xi\vlsbr(a.{\bar a})}
-   {
-    \vlhy{\alpha}
-   }
+   \vlhy{\alpha}
   }
  }
 }\quad.
@@ -297,15 +286,9 @@ Let $\Psi_1=\Phi$ and for $1<k\leq n+1$ define the three helper derivations $\De
 \Delta_k=
    \vlderivation
    {
-    \vlin{\awu}{}{\vls[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i}).{\bar a_{k-1}}]}
+    \vlde{\Psi_{k-1}}{}{\vls[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i}).(\vlinf{\awu}{}{\ttt}{a_{k-1}}.\bar a_{k-1})]}
     {
-     \vlde{\Psi_{k-1}}{}{\vls[\beta.\bigvee_{i={k-1}}^n\vlsbr(a_i.{\bar a_i})]}
-     {
-      \vlin{\aid}{}{\vls(\bigwedge_{i={k-1}}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
-      {
-       \vlhy{\vls(\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
-      }
-     }
+     \vlhy{\vls(\vlinf{\aid}{}{\vls[a_{k-1}.\bar a_{k-1}]}{\ttt}\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
     }
    }\quad,\qquad
 \Delta'_k=
@@ -347,11 +330,11 @@ Then define $\Psi_k$
 {
  \vlin{\cod^\star}{}{\vls[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i})]}
  {
-  \vlin{\swi}{}{\vls([[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i})].[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i})].\Delta_k''])}
+  \vlin{\swi}{}{\vls[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i}).\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i}).\Delta_k'']}
   {
-   \vlin{\swi}{}{\vls([[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i})].\Delta'_k].(\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha))}
+   \vlin{\swi}{}{\vls([\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i}).\Delta'_k].\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
    {
-    \vlin{\cou^\star}{}{\vls(\Delta_k.(\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha).(\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha))}
+    \vlin{\cou^\star}{}{\vls(\Delta_k.\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha.\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
     {
      \vlhy{\vls(\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
     }
