@@ -197,7 +197,7 @@ Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\v
 
 
 \begin{defi}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$, where $a_1,\dots,a_n$ are all the atoms that appear in both interaction and cointeraction instances, a \emph{core of\ $\Phi$} is defined as a derivation from $\vls([a_1.\bar a_1].\cdots.[a_n.\bar a_n].\alpha)$ to $\vls[\beta.(a_1.\bar a_1).\cdots.(a_n.\bar a_n)]$ not contaning any interaction nor cointeraction instances on $a_1,\dots,a_n$.
+Given a derivation $\Phi$ from $\alpha$ to $\beta$, where $a_1,\dots,a_n$ are all the atoms that appear in both interaction and cointeraction instances, a \emph{core of\ $\Phi$} is defined as a derivation from $\vls([a_1.\bar a_1].\cdots.[a_n.\bar a_n].\alpha)$ to $\vls[\beta.(a_n.\bar a_n).\cdots.(a_1.\bar a_1)]$ not contaning any interaction nor cointeraction instances on $a_1,\dots,a_n$.
 \end{defi}
 
 \begin{lem}
@@ -259,7 +259,7 @@ Obtain the core of $\Phi$, labelled $\Phi_c$, from $\Phi'$ by using Lemma~\ref{L
 \[
 \vlderivation
 {
- \vlde{}{\{\acd,\med\}}{\vls[\beta.(a_1.{\bar a_1}).\cdots.(a_n.{\bar a_n})]}
+ \vlde{}{\{\acd,\med\}}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}
  {
   \vlde{\Phi_c}{\SKS}{\beta'}
   {
@@ -288,21 +288,15 @@ Let $\Psi_1=\Phi$ and for $1<k\leq n+1$ define the three helper derivations $\De
    {
     \vlde{\Psi_{k-1}}{}{\vls[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i}).(\vlinf{\awu}{}{\ttt}{a_{k-1}}.\bar a_{k-1})]}
     {
-     \vlhy{\vls(\vlinf{\aid}{}{\vls[a_{k-1}.\bar a_{k-1}]}{\ttt}\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
+     \vlhy{\vls(\vlinf{\aid}{}{\vls[a_{k-1}.\bar a_{k-1}]}{\ttt}.\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
     }
    }\quad,\qquad
 \Delta'_k=
    \vlderivation
    {
-    \vlin{\awu}{}{\vls[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i}).a_{k-1}]}
+    \vlde{\Psi_{k-1}}{}{\vls[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i}).(a_{k-1}.\vlinf{\awu}{}{\ttt}{\bar a_{k-1}})]}
     {
-     \vlde{\Psi_{k-1}}{}{\vls[\beta.\bigvee_{i={k-1}}^n\vlsbr(a_i.{\bar a_i})]}
-     {
-      \vlin{\awd}{}{\vls(\bigwedge_{i={k-1}}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
-      {
-       \vlhy{\vls({\bar a_{k-1}}.\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
-      }
-     }
+     \vlhy{\vls([\vlinf{\awd}{}{a_{k-1}}{\fff}.\bar a_{k-1}].\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
     }
    }\quad,
 \]
@@ -310,15 +304,9 @@ Let $\Psi_1=\Phi$ and for $1<k\leq n+1$ define the three helper derivations $\De
 \Delta''_k=
    \vlderivation
    {
-    \vlin{\aiu}{}{\vls[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i})]}
+    \vlde{\Psi_{k-1}}{}{\vls[\beta.\bigvee_{i=k}^n\vlsbr(a_i.{\bar a_i}).\vlinf{\aiu}{}{\fff}{\vls(a_{k-1}.\bar a_{k-1})}]}
     {
-     \vlde{\Psi_{k-1}}{}{\vls[\beta.\bigvee_{i={k-1}}^n\vlsbr(a_i.{\bar a_i})]}
-     {
-      \vlin{\awd}{}{\vls(\bigwedge_{i={k-1}}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
-      {
-       \vlhy{\vls(a_{k-1}.\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
-      }
-     }
+     \vlhy{\vls([a_{k-1}.\vlinf{\awd}{}{\bar a_{k-1}}{\fff}].\bigwedge_{i=k}^n\vlsbr[a_i.{\bar a_i}].\alpha)}
     }
    }\quad.
 \]
