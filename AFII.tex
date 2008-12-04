@@ -195,7 +195,6 @@ where $\Psi$ and $\Psi'$ exists by the inductive hypothesis.
 Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$\\ and $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$.
 \end{lem}
 
-
 \begin{defi}
 Given a derivation $\Phi$ from $\alpha$ to $\beta$, where $a_1,\dots,a_n$ are all the distinct atoms that appear in both interaction and cointeraction instances, a \emph{core of\ $\Phi$} is defined as a derivation 
 \[
@@ -209,7 +208,7 @@ Given a derivation $\Phi$ from $\alpha$ to $\beta$, a core of $\Phi$ can be cons
 \end{lem}
 
 \begin{proof}
-Let $a_1,\dots,a_n$ be all the atoms which occur in both interaction and cointeraction instances in $\Phi$. Obtain $\Phi'$ from $\Phi$ by using Lemma~\ref{LemSuperSwitch} to perform the following transformation for each instance of $\aid$ and $\aiu$ applied to $a$ from $a_1,\dots,a_n$ in $\Phi$:
+Let $a_1,\dots,a_n$ be all the atoms that occur in both interaction and cointeraction instances in $\Phi$. Obtain $\Phi'$ from $\Phi$ by using Lemma~\ref{LemSuperSwitch} to perform the following transformation for each instance of $\aid$ and $\aiu$ applied to $a$ from $a_1,\dots,a_n$ in $\Phi$:
 \[
 \vlderivation
 {
@@ -277,26 +276,31 @@ Obtain the core of $\Phi$ from $\Phi'$ by using Lemma~\ref{LemContr}:
 \]
 \end{proof}
 
-\begin{defi}
-A core of a derivation $\Phi$ constructed as described in the proof of Lemma~\ref{LemConstrCore} is called \emph{the canonical core of $\Phi$}.
-\end{defi}
+\newcommand{\Core}{\mathsf{Core}}
 
 \begin{defi}
-For any natural number $n$ the \emph{$n$-normaliser}, $\Psi_n(\Phi,\alpha,\beta,a_1,\dots,a_n)$, is a derivation scheme over the meta variables $\Phi$ (derivation), $\alpha$, $\beta$ (formulae) and $a_1,\dots,a_n$ (atoms), where
+A core of a derivation $\Phi$ constructed as described in the proof of Lemma~\ref{LemConstrCore} is called \emph{the canonical core of $\Phi$}, written $\Core(\Phi)$.
+\end{defi}
+
+\newcommand{\Norm}{\mathsf{Norm}}
+
+\begin{defi}
+The \emph{normaliser}, $\Norm(\Phi,a_1,\dots,a_n)$, is an operator taking as input an enumeration of atoms and a derivation of the form
 \[
-\Phi=\vlder{}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}\quad.
+\vlder{\Phi}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}\quad,
 \]
-If $\Phi,\alpha,\beta,a_1,\dots,a_n$ are clear from the context then we use the following shorthand
+where $\alpha$ and $\beta$ are formulae and returning a derivation of the form
 \[
-\Psi_k=\Psi_k(\Phi,\vls([a_{k+1}.\bar a_{k+1}].\cdots.[a_n.\bar a_n].\alpha),\vls[\beta.(a_n.\bar a_n).\cdots.(a_{k+1}.\bar a_{k+1})],a_1,\dots,a_k)\quad.
+\vlder{\Norm(\Phi,a_1,\dots,a_n)}{}{\beta}{\alpha}\quad.
 \]
-We define $\Psi_n$ inductively. Let $\Psi_0=\Phi$ and for $n>0$ let $\Psi_n$ be
+
+We define $\Norm$ inductively on the number of arguments. Let $\Norm(\Phi)=\Phi$ and for $n>0$ let $\Norm(\Phi,a_1,\dots,a_n)$ be
 \newbox\DeltaTopK
 \setbox\DeltaTopK=
 \hbox{$
 \vlderivation
 {
- \vlde{\Psi_{n-1}}{}{\vls[\beta.(\vlinf{\awu}{}{\ttt}{a_n}.\bar a_n)]}
+ \vlde{\Norm(\Phi,a_1,\dots,a_{n-1})}{}{\vls[\beta.(\vlinf{\awu}{}{\ttt}{a_n}.\bar a_n)]}
  {
   \vlhy{\vls(\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha)}
  }
@@ -307,7 +311,7 @@ We define $\Psi_n$ inductively. Let $\Psi_0=\Phi$ and for $n>0$ let $\Psi_n$ be
 \hbox{
 $\vlderivation
 {
- \vlde{\Psi_{n-1}}{}{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(a_n.\bar a_n)}]}
+ \vlde{\Norm(\Phi,a_1,\dots,a_{n-1})}{}{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(a_n.\bar a_n)}]}
  {
   \vlhy{\vls([a_n.\vlinf{\awd}{}{\bar a_n}{\fff}].\alpha)}
  }
@@ -318,7 +322,7 @@ $\vlderivation
 \hbox{$
 \vlderivation
 {
- \vlde{\Psi_{n-1}}{}{\vls[\beta.(a_n.\vlinf{\awu}{}{\ttt}{\bar a_n})]}
+ \vlde{\Norm(\Phi,a_1,\dots,a_{n-1})}{}{\vls[\beta.(a_n.\vlinf{\awu}{}{\ttt}{\bar a_n})]}
  {
   \vlhy{\vls([\vlinf{\awd}{}{a_n}{\fff}.\bar a_n].\alpha)}
  }
@@ -344,12 +348,8 @@ $\vlderivation
 \]
 \end{defi}
 
-\begin{defi}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$, where $a_1,\dots,a_n$ are all the atoms that appear in both interaction and cointeraction instances, the \emph{normaliser of $\Phi$} is the derivation obtained by instantiating the $n$-normaliser with the core, premiss and conclusion of $\Phi$ and the atoms $a_1,\dots,a_n$.
-\end{defi}
-
 \begin{thm}
-The normaliser of any derivation is streamlined.
+Given a derivation $\Phi$ from $\alpha$ to $\beta$, where $a_1,\dots,a_n$ are all the atoms that appear in both interaction and cointeraction instances then $\Norm(\Core(\Phi),a_1,\dots,a_n)$ is streamlined.
 \end{thm}
 \begin{proof}
 
