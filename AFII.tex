@@ -87,6 +87,53 @@
                                 {\scriptstyle-}
                                 {\scriptscriptstyle-}}}
 
+\newcommand{\Occ}{\mathsf{Oc}}
+\newcommand{\Units}{\mathcal{U}}
+\newcommand{\Atoms}{\mathcal{A}}
+\newcommand{\Holes}{\mathcal{H}}
+\newcommand{\Contexts}{\mathcal{FC}}
+\newcommand{\Formulae}{\mathcal{F}}
+
+\begin{defi}
+A set of \emph{units}, $\Units=\{\ttt,\fff\}$, with
+\begin{itemize}
+ \item $\bar \cdot:\Units\rightarrow \Units$ --- a function $\bar \ttt=\fff;\bar \fff=\ttt$.
+\end{itemize}
+
+A countably infinite set of \emph{atom occurences}, $\Atoms$, with
+\begin{itemize}
+ \item $=$ --- an equavalence relation on $A$ with countably infinite equivalence classes,
+ \item $\bar \cdot:\Atoms\rightarrow \Atoms$ --- an involutive function respecting $=$.
+\end{itemize}
+
+A countably infinite set of \emph{holes}, $\Holes$,
+
+A minimal set of formula contexts, $\Contexts$, such that
+\begin{itemize}
+ \item $\Units,\Atoms,\Holes\subset \Contexts$,
+ \item $\vls[.]$ --- if $\alpha,\beta\in\Contexts$ and $\Occ(\alpha)\cap\Occ(\beta)=\emptyset$ then $\vls[\alpha.\beta]\in\Contexts$ and $\Occ(\vls[\alpha.\beta])$ $=\Occ(\alpha)\cup\Occ(\beta)$,
+ \item $\vls(.)$ --- if $\alpha,\beta\in\Contexts$ and $\Occ(\alpha)\cap\Occ(\beta)=\emptyset$ then $\vls(\alpha.\beta)\in\Contexts$ and $\Occ(\vls(\alpha.\beta))$ $=\Occ(\alpha)\cup\Occ(\beta)$.
+\end{itemize}
+
+A maximal set of formulae, $\Formulae\subset\Contexts$, such that
+\begin{itemize}
+ \item for every $\alpha\in\Formulae$ we have that $\Occ(\alpha)\cap\Holes=\emptyset$.
+\end{itemize}
+
+\newcommand{\PowerSet}[1]{\mathcal{P}(#1)}
+
+A function $\Occ$
+\begin{itemize}
+ \item $\Occ:\Units\rightarrow\PowerSet{\Atoms};u\mapsto\emptyset$,
+ \item $\Occ:\Atoms\rightarrow\PowerSet{\Atoms};a\mapsto\{a\}$,
+ \item $\Occ:\Holes\rightarrow\PowerSet{\Atoms};h\mapsto\{h\}$,
+ \item $\Occ:\Contexts\setminus(\Units\cup\Atoms\cup\Holes)\rightarrow\PowerSet{\Atoms};\vls[\alpha.\beta]\mapsto\Occ(\alpha)\cup\Occ(\beta);\vls(\alpha.\beta)\mapsto\Occ(\alpha)\cup\Occ(\beta)$.
+\end{itemize}
+
+
+\end{defi}
+
+
 % \Ale{were the previous methods crap?}
 %
 % \Tom{in my opinion the method shown here is a strict improvement, let me know if you know of any downsides (I might have forgotten)}
