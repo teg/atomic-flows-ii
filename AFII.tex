@@ -277,6 +277,27 @@ Finally apply $\awu$ to all the atom occurences in the conclusion of $\Core(\Phi
 An experiment on a derivation $\Phi$ with respect to $a_1,\dots,a_n$ constructed as described in the proof of Lemma~\ref{LemConstrExp} is called \emph{the canonical experiment on $\Phi$ with respect to $a_1,\dots,a_n$}, written $\Exp(\Phi,a_1,\dots,a_n)$.
 \end{defi}
 
+\[
+\vlderivation
+{
+ \vlin{=}{}{\bigvee_{i=1}^{2^k}\alpha_{k,i}}
+ {
+  \vlde{}{\{\swi\}}{\bigvee_{i=1}^{2^{k-1}}\vls[(\alpha_{k-1,i}.a).(\alpha_{k-1,i}.\bar a)]}
+  {
+   \vlde{}{\{\swi\}}{\bigvee_{i=1}^{2^{k-1}}\vls([a.\bar a].\alpha_{k-1,i}.\alpha_{k-1,i})}
+   {
+    \vlde{}{\{\med,\acu\}}{\vls(\bigwedge_{i=1}^{2^{k-1}}[a.\bar a].\bigvee_{i=1}^{2^{k-1}}\vls(\alpha_{k-1,i}.\alpha_{k-1,i}))}
+    {
+     \vlin{\aid}{}{\vls([a.\bar a].\bigvee_{i=1}^{2^{k-1}}\alpha_{k-1,i})}
+     {
+      \vlhy{\bigvee_{i=1}^{2^{k-1}}\alpha_{k-1,i}}
+     }
+    }
+   }
+  }
+ }
+}
+\]
 
 %===============================================================================
 \section{Normaliser}
