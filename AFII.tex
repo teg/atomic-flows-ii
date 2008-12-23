@@ -1,11 +1,5 @@
 \documentclass[a4paper]{amsart}
 
-%                  XeTeX
-%\usepackage{xunicode}
-%\usepackage{fontspec}
-%\usepackage{xltxtra}
-%setromanfont[Mapping=tex-text]{Linux Libertine O}
-
 %                  Trash .aux file after toggling
 \usepackage{stmaryrd}
 \usepackage{graphicx}
@@ -86,74 +80,69 @@
                                 {\scriptstyle-}
                                 {\scriptstyle-}
                                 {\scriptscriptstyle-}}}
+%---------------------------------------
+\begin{figure}[tbp]
+\[
+\begin{array}{lc}
+&\qquad
+\vlinf{\awd}{}{a^\star}{\fff}
+\quad\rightarrow\quad
+\vlinf{=}{}{\fff}{\fff}
+\\
+\noalign{\bigskip}
+%---------------------------------------
+\\
+&\qquad
+\vlinf{\acd}{}{a^\star}{\vls[a^\star.a^\star]}
+\quad\rightarrow\quad
+\vlinf{=}{}{\fff}{\fff}
+\\
+\noalign{\bigskip}
+%---------------------------------------
+\\
+&\qquad
+\vlinf{\acu}{}{\vls(a^\star.a)}{a^\star}
+\quad\rightarrow\quad
+\vlinf{\awd}{}{a}{\fff}
+\\
+\noalign{\bigskip}
+%---------------------------------------
+\\
+&\qquad
+\vlinf{\aid}{}{\vls[a^\star.{\bar a}]}{\ttt}\quad\rightarrow\quad
+\vlinf{=}{}{\vls[\fff.{\bar a}]}{\bar a}
+\\
+\noalign{\bigskip}
+%---------------------------------------
+\\
+&\qquad
+\vlinf{\aiu}{}{\fff}{\vls(a^\star.{\bar a})}
+\quad\rightarrow\quad
+\vlinf{\awu}{}{\fff}{\vls(\fff.{\bar a})}
+\\
+\noalign{\bigskip}
+%---------------------------------------
+\\
+%---------------------------------------
+\end{array}
+\]
+\caption{`Cone reductions'.}
+\label{FigConeRed}
+\end{figure}%
 
-% \Ale{were the previous methods crap?}
-%
-% \Tom{in my opinion the method shown here is a strict improvement, let me know if you know of any downsides (I might have forgotten)}
-%
-% \Ale{global?}
-%
-% In \cite{GuglGund:07:Normalis:lr} we introduced \emph{atomic flows} as a tool to study normalisation. In this paper we focus on global normalisation procedures and show how they provide for more general and principled tools than what we studied before. The paper is in two parts, the first part gives a \emph{confluent} cut-elimination procedure for propositional classical logic and the second part gives a generalisation of the \emph{streamlining} procedure described in \cite{GuglGund:07:Normalis:lr}.
-%
-% \Ale{is the causual relationship known?}
-%
-% Atomic flows are graphical representations of derivations conserving their size as well as the causal relationship between the structural inference rules. All information about logical connectives and logical inference rules is disregarded. The crucial property of atomic flows is that they contain all the information necessary to perform normalisation. We can either just normalise the atomic flows, or use the atomic flows to decide how to normalise the derivations.
-%
-% \Ale{previous sentence, see hand written comments [could not read comment]}
-%
-% A streamlined derivation is a derivation whose atomic flow has a speciﬁc shape, in particular this entails that
-%
-% \begin{enumerate}
-% \item a streamlined derivation contains no causal relationship between an axiom and a cut; and
-% \item in the special case where the premiss of a streamlined derivation is $\ttt$, the derivation is cut-free.
-% \end{enumerate}
-%
-% \Ale{causal relationship not understandable}
-%
-% \Ale{put a picture}
-%
-% \Tom{will do (later, when the text is finished)}
-%
-% Given the atomic flow of a derivation, we can tell what the atomic flow of the streamlined derivation would be. This is of particular interest because the atomic flows do not have access to any information about logical inference rules. This is remarkable because the relationship of the logical inference rules is usually considered crusial to have cut-elimination.
-%
-% The novelty of this work is to only use global proof transformations when performing normalisation. We single out axioms and cuts and consider the rest of the atomic flow to be inside `black boxes' which we do not need to look inside. Then, by knowing which axioms are connected with which cuts, we can normalise the derivation without having any more information about its internal structure. The streamlining procedures presented in \cite{GuglGund:07:Normalis:lr} had two sources of exponential growth, it was not strongly normalising and the proof of termination was not very intuitive. With the new methods we have removed one source of exponential growth and both termination and strong normalisation are immediate.
-%
-% \Ale{was there anything good about the previous paper?}
-% \Ale{isn't strong normalisation enough?}
-%
-% \section{Deep Inference and Atomic Flows}
-%
-% Deep inference is a relatively new proof-theoretic methodology developed over the past ten years. Deep inference differs from the traditional Gentzen-style methodology in that it allows inference at any level in formulae, not only at the root connective. This allows for much greater freedom in designing formalisms and logical systems, but it also makes normalisation theory much more challenging.
-%
-% In this paper, we are working in the deep-inference formalism `calculus of structures' \cite{Gugl:06:A-System:kl}, but the results here are not specific to this formalism as we will discuss later.
-%
-% The system we use for propositional classical logic is system $\SKS$ \cite{BrunTiu:01:A-Local-:mz}:
-%
-% \Ale{adjust spacing}
-%
-% \begin{figure}[h]
-% \begin{center}
-% \begin{tabular}{ccc}
-% $\vlinf{\aid}{}{\vls[a.\bar{a}]}{\ttt}$ & $\vlinf{\acd}{}{a}{\vls[a.a]}$ & $\vlinf{\awd}{}{a}{\fff}$ \\
-% interaction (axiom) & contraction & weakening \\
-% \noalign{\bigskip}
-% \\
-% $\vlinf{\aiu}{}{\fff}{\vls(\bar{a}.a)}$ & $\vlinf{\acu}{}{\vls(a.a)}{a}$ & $\vlinf{\awd}{}{\ttt}{a}$ \\
-% cointeraction (cut) & cocontraction & coweakening \\
-% \noalign{\bigskip}
-% \\
-% \end{tabular}
-% \begin{tabular}{cc}
-% $\vlinf{\swi}{}{\vls[(\alpha.\beta).\gamma]}{\vls(\alpha.[\beta.\gamma])}$ &
-% $\vlinf{\med}{}{\vls([\alpha.\beta].[\gamma.\delta])}{\vls[(\alpha.\gamma).(\beta.\delta)]}$ \\
-% switch & medial
-% \end{tabular}
-% \end{center}
-% \end{figure}
-%
-% Furmulae are considered equal modulo associativity and commutativity of $\wedge$ and $\vee$, and idempotency and identity of $\ttt$ and $\fff$. Furthermore, negation is only allowed on atoms which is possible due to De Morgan's laws.
-%
-% In this paper we will mainly concern ourselves with the structural rules.
+% TODO: Clean up table
+% TODO: make sure every derivation is on the desired form
+% TODO: define `cone'
+
+\begin{defi}
+Given a derivation $\Phi$ from $\alpha$ to $\beta$, a cut in $\Phi$ and a choice, $a$, of one of the two atom occurences appearing in the cut, an \emph{experiment on $\Phi$ with respect to $a$} is a derivation $\Phi'$ obtained from $\Phi$ by substitutions:
+Mark all the atom occurences in the cone of $a$ with $\star$.
+\begin{itemize}
+  \item substitute each occurence of $a^\star$ with $\fff$ and
+  \item substitute each structural inference rule applied to $a^\star$ as shown in Table~\ref{FigConeRed}.
+\end{itemize}
+\end{defi}
+
 %===============================================================================
 \section{Streamlining via Experiments}
 
@@ -356,7 +345,7 @@ Given a derivation $\Phi$ from $\alpha$ to $\beta$, where $a_1,\dots,a_n$ are al
 Consider the atomic flow of the atom $a_k$ in the derivation $\Psi_k$. Note that the interaction and cointeraction evidenced in this atomic flow are the only ones that apply to the atom $a_k$ in $\Psi$. It is straightforward to see that the given atomic flow does not contain any path from the interaction to the cointeraction. This holds for every $a_k$ so $\Psi$ is streamlined.
 
 \begin{center}
-\includegraphics[scale=0.5]{./threeboxes.png}
+%\includegraphics[scale=0.5]{./threeboxes.png}
 \end{center}
 
 \end{proof}
