@@ -81,71 +81,7 @@
                                 {\scriptstyle-}
                                 {\scriptscriptstyle-}}}
 %---------------------------------------
-\begin{figure}[tbp]
-\[
-\begin{array}{lc}
-&\qquad
-\vlinf{\awd}{}{a^\star}{\fff}
-\quad\rightarrow\quad
-\vlinf{=}{}{\fff}{\fff}
-\\
-\noalign{\bigskip}
-%---------------------------------------
-\\
-&\qquad
-\vlinf{\acd}{}{a^\star}{\vls[a^\star.a^\star]}
-\quad\rightarrow\quad
-\vlinf{=}{}{\fff}{\fff}
-\\
-\noalign{\bigskip}
-%---------------------------------------
-\\
-&\qquad
-\vlinf{\acu}{}{\vls(a^\star.a)}{a^\star}
-\quad\rightarrow\quad
-\vlinf{\awd}{}{a}{\fff}
-\\
-\noalign{\bigskip}
-%---------------------------------------
-\\
-&\qquad
-\vlinf{\aid}{}{\vls[a^\star.{\bar a}]}{\ttt}\quad\rightarrow\quad
-\vlinf{=}{}{\vls[\fff.{\bar a}]}{\bar a}
-\\
-\noalign{\bigskip}
-%---------------------------------------
-\\
-&\qquad
-\vlinf{\aiu}{}{\fff}{\vls(a^\star.{\bar a})}
-\quad\rightarrow\quad
-\vlinf{\awu}{}{\fff}{\vls(\fff.{\bar a})}
-\\
-\noalign{\bigskip}
-%---------------------------------------
-\\
-%---------------------------------------
-\end{array}
-\]
-\caption{`Cone reductions'.}
-\label{FigConeRed}
-\end{figure}%
-
-% TODO: Clean up table
-% TODO: make sure every derivation is on the desired form
-% TODO: define `cone'
-
-\begin{defi}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$, a cut in $\Phi$ and a choice, $a$, of one of the two atom occurences appearing in the cut, an \emph{experiment on $\Phi$ with respect to $a$} is a derivation $\Phi'$ obtained from $\Phi$ by substitutions:
-Mark all the atom occurences in the cone of $a$ with $\star$.
-\begin{itemize}
-  \item substitute each occurence of $a^\star$ with $\fff$ and
-  \item substitute each structural inference rule applied to $a^\star$ as shown in Table~\ref{FigConeRed}.
-\end{itemize}
-\end{defi}
-
-%===============================================================================
-\section{Streamlining via Experiments}
-
+\section{Preliminaries}
 \begin{lem}\label{LemSuperSwitch}
 Given a context $\xi\vlhole$ and a formula $\alpha$ there exist derivations $\vlder{}{\{\swi\}}{\xi\{\alpha\}}{\vls(\alpha.\xi\{\ttt\})}$ and $\vlder{}{\{\swi\}}{\vls[\xi\{\fff\}.\alpha]}{\xi\{\alpha\}}$.
 \end{lem}
@@ -270,6 +206,80 @@ Obtain the core of $\Phi$ from $\Phi'$ by using Lemma~\ref{LemContr}:
 \begin{defi}
 A core of a derivation $\Phi$ constructed as described in the proof of Lemma~\ref{LemConstrCore} is called \emph{the canonical core of $\Phi$}, written $\Core(\Phi)$.
 \end{defi}
+
+
+\section{Experiments}
+
+\begin{figure}[tbp]
+\[
+\begin{array}{c}
+\vlinf{\awd}{}{a^\star}{\fff}
+\quad\rightarrow\quad
+\vlinf{=}{}{\fff}{\fff}
+\\
+\noalign{\bigskip}
+\vlinf{\acd}{}{a^\star}{\vls[a^\star.a^\star]}
+\quad\rightarrow\quad
+\vlinf{=}{}{\fff}{\fff}
+\\
+\noalign{\bigskip}
+\vlinf{\acu}{}{\vls(a^\star.a)}{a^\star}
+\quad\rightarrow\quad
+\vlinf{\awd}{}{a}{\fff}
+% \\
+% \noalign{\bigskip}
+% \vlinf{\aid}{}{\vls[a^\star.{\bar a}]}{\ttt}\quad\rightarrow\quad
+% \vlinf{=}{}{\vls[\fff.{\bar a}]}{\bar a}
+% \\
+% \noalign{\bigskip}
+% \vlinf{\aiu}{}{\fff}{\vls(a^\star.{\bar a})}
+% \quad\rightarrow\quad
+% \vlinf{\awu}{}{\fff}{\vls(\fff.{\bar a})}
+\end{array}
+\]
+\caption{`Cone reductions'.}
+\label{FigConeRed}
+\end{figure}%
+
+% TODO: Clean up table
+% TODO: make sure every derivation is on the desired form
+% TODO: define `cone'
+
+\begin{defi}
+Given a derivation $\Phi$ from $\alpha$ to $\beta$ and, $a_1,\dots,a_n$, a choice of either $a$ or $\bar a$ for each atom occuring in a cointeraction instance in $\Phi$ an \emph{experiment on $\Phi$ with respect to $a_1,\dots,a_n$} is a derivation from $\vls(\bar a_1.\cdots.\bar a_n)$ to $\beta$ which does not contain any interaction nor cointeraction instances and which has the same size as $\Phi$ up to a polynomial.
+\end{defi}
+
+\begin{lem}\label{LemConstrExp}
+Given a derivation $\Phi$ from $\alpha$ to $\beta$ and, $a_1,\dots,a_n$, a choice of either $a$ or $\bar a$ for each atom occuring in a cointeraction instance in $\Phi$. There exists an experiment on $\Phi$ with respect to $a_1,\dots,a_n$.
+\end{lem}
+
+\begin{proof}
+Mark the cones of the atom occurences in the conclusion of $\Core(\Phi)$ which are not in $\beta$ and which are in $a_1,\dots,a_n$ with $\star$. Then perform the following substitutions to obtain $\Core(\Phi)^\star$:
+\begin{itemize}
+  \item substitute each occurence of $a^\star$ with $\fff$ and
+  \item substitute each structural inference rule applied to $a^\star$ as shown in Table~\ref{FigConeRed}.
+\end{itemize}
+Finally apply $\awu$ to all the atom occurences in the conclusion of $\Core(\Phi)^\star$ which are not in $\beta$ to obtain the experiment:
+\[
+\vlderivation
+{
+ \vlde{\Core(\Phi)\{a_1^\star\mapsto\fff,\dots,a_n^\star\mapsto\fff\}}{}{\vls[\beta.(\vlinf{\awu}{}{\ttt}{\bar a_1}.\fff).\cdots.(\vlinf{\awu}{}{\ttt}{\bar a_n}.\fff)]}
+ {
+  \vlhy{\vls(\bar a_1.\cdots.\bar a_n)}
+ }
+}
+\]
+\end{proof}
+
+\newcommand{\Exp}{\mathsf{Exp}}
+
+\begin{defi}
+An experiment on a derivation $\Phi$ with respect to $a_1,\dots,a_n$ constructed as described in the proof of Lemma~\ref{LemConstrExp} is called \emph{the canonical experiment on $\Phi$ with respect to $a_1,\dots,a_n$}, written $\Exp(\Phi,a_1,\dots,a_n)$.
+\end{defi}
+
+
+%===============================================================================
+\section{Normaliser}
 
 \newcommand{\Norm}{\mathsf{Norm}}
 
