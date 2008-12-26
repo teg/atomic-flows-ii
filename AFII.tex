@@ -72,6 +72,7 @@
 \newcommand{\cod}{{\contr{\downarrow}}}
 \newcommand{\cou}{{\contr{\uparrow}}}
 \newcommand{\SKS}{\mathsf{SKS}}
+\newcommand{\KS}{\mathsf{KS}}
 \newcommand{\ppl  }{{\mathchoice{\scriptstyle+}
                                 {\scriptstyle+}
                                 {\scriptstyle+}
@@ -263,7 +264,7 @@ Finally apply $\awu$ to all the atom occurences in the conclusion of $\Core(\Phi
 \[
 \vlderivation
 {
- \vlde{\Core(\Phi)\{a_1^\star\mapsto\fff,\dots,a_n^\star\mapsto\fff\}}{}{\vls[\beta.(\vlinf{\awu}{}{\ttt}{\bar a_1}.\fff).\cdots.(\vlinf{\awu}{}{\ttt}{\bar a_n}.\fff)]}
+ \vlde{\Core(\Phi)\{a_1^\star\ot\fff,\dots,a_n^\star\ot\fff\}}{}{\vls[\beta.(\vlinf{\awu}{}{\ttt}{\bar a_1}.\fff).\cdots.(\vlinf{\awu}{}{\ttt}{\bar a_n}.\fff)]}
  {
   \vlhy{\vls(\bar a_1.\cdots.\bar a_n)}
  }
@@ -277,27 +278,61 @@ Finally apply $\awu$ to all the atom occurences in the conclusion of $\Core(\Phi
 An experiment on a derivation $\Phi$ with respect to $a_1,\dots,a_n$ constructed as described in the proof of Lemma~\ref{LemConstrExp} is called \emph{the canonical experiment on $\Phi$ with respect to $a_1,\dots,a_n$}, written $\Exp(\Phi,a_1,\dots,a_n)$.
 \end{defi}
 
+%TODO: define canonical
+
+\begin{lem}
+Given a set of atoms of size $2n$ closed under negation. Consider an enumeration, $A_n$, of all the possible chocies of $n$ distinct, non-dual atoms from this set. Then $\bigvee_{\{a_1,\dots,a_n\}\in A_n}\vls(a_1.\cdots.a_n)$ is a tautology with a canonical proof in $\{\aid,\acu,\med,\swi\}$.
+\end{lem}
+
+\begin{proof}
+Argue by induction on $n$. The base case, $n=0$, is trivial and the inductive case is:
 \[
 \vlderivation
 {
- \vlin{=}{}{\bigvee_{i=1}^{2^k}\alpha_{k,i}}
+ \vlin{=}{}{\bigvee_{\{a_1,\dots,a_k\}\in A_k}\vls(a_1.\cdots.a_k)}
  {
-  \vlde{}{\{\swi\}}{\bigvee_{i=1}^{2^{k-1}}\vls[(\alpha_{k-1,i}.a).(\alpha_{k-1,i}.\bar a)]}
+  \vlde{}{\{\swi\}}{\bigvee_{\{a_1,\dots,a_{k-1}\}\in A_{k-1}}\vls[(a_1.\cdots.a_{k-1}.a_k).(a_1.\cdots.a_{k-1}.\bar a_k)]}
   {
-   \vlde{}{\{\swi\}}{\bigvee_{i=1}^{2^{k-1}}\vls([a.\bar a].\alpha_{k-1,i}.\alpha_{k-1,i})}
+   \vlde{}{\{\swi\}}{\bigvee_{\{a_1,\dots,a_{k-1}\}\in A_{k-1}}\vls([a_k.\bar a_k].(a_1.\cdots.a_{k-1}).(a_1.\cdots.a_{k-1}))}
    {
-    \vlde{}{\{\med,\acu\}}{\vls(\bigwedge_{i=1}^{2^{k-1}}[a.\bar a].\bigvee_{i=1}^{2^{k-1}}\vls(\alpha_{k-1,i}.\alpha_{k-1,i}))}
+    \vlde{}{\{\med,\acu\}}{\vls(\bigwedge_{i=1}^{2^{k-1}}[a_k.\bar a_k].\bigvee_{\{a_1,\dots,a_{k-1}\}\in A_{k-1}}\vls((a_1.\cdots.a_{k-1}).(a_1.\cdots.a_{k-1})))}
     {
-     \vlin{\aid}{}{\vls([a.\bar a].\bigvee_{i=1}^{2^{k-1}}\alpha_{k-1,i})}
+     \vlin{\aid}{}{\vls([a_k.\bar a_k].\bigvee_{\{a_1,\dots,a_{k-1}\}\in A_{k-1}}(a_1.\cdots.a_{k-1}))}
      {
-      \vlhy{\bigvee_{i=1}^{2^{k-1}}\alpha_{k-1,i}}
+      \vlhy{\bigvee_{\{a_1,\dots,a_{k-1}\}\in A_{k-1}}\vls(a_1.\cdots.a_{k-1})}
      }
     }
    }
   }
  }
+}\quad.
+\]
+Notice that the conclusion consists of the same number of occurences of each atom and every atom occurs in exactly one interaction instance. It follows that each atom occurs in the same number of cocontraction instances and hence the atomic flow of each atom is the same and the proof is canonical.
+\end{proof}
+
+%TODO: Define SKS and KS
+
+\begin{thm}
+Given a proof, $\Phi$, of $\alpha$ in $\SKS$ there exists a canonical proof of $\alpha$ in $\SKS\setminus\{\aiu\}$.
+\end{thm}
+
+\begin{proof}
+Let $\{a_1,\dots,a_n,\bar a_1,\dots,\bar a_n\}$ be the set of atoms in $\Phi$ which occur in cointeraction instances and let $A$ be an enumeration of all the possible chocies of $n$ distinct, non-dual atoms from this set. Now build the canonical derivation:
+\[
+\vlderivation
+{
+ \vlde{}{\{\acd,\med\}}{\alpha}
+ {
+  \vlpr{}{\{\aid,\acu,\swi,\med\}}{\bigvee_{\{a_1,\dots,a_n\}\in A}\vlder{\Exp(\Phi,a_1,\dots,a_n)}{\SKS\setminus\{\aid,\aiu\}}{\alpha}{\vls(a_1.\cdots.a_n)}}
+ }
 }
 \]
+\end{proof}
+
+\begin{cor}
+Given a proof of $\alpha$ in $\SKS$ there exists a canonical proof of $\alpha$ in $\KS$.
+\end{cor}
+
 
 %===============================================================================
 \section{Normaliser}
