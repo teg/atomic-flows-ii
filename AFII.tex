@@ -121,6 +121,8 @@ where $\Psi$ and $\Psi'$ exists by the inductive hypothesis.
 Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$\\ and $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$.
 \end{lem}
 
+%TODO: Need to get rid of cuts that are not connected to axioms
+
 \begin{defi}
 Given a derivation $\Phi$ from $\alpha$ to $\beta$, where $a_1,\dots,a_n$ are all the distinct atoms that appear in both interaction and cointeraction instances, a \emph{core of\ $\Phi$} is defined as a derivation 
 \[
@@ -217,7 +219,7 @@ A core of a derivation $\Phi$ constructed as described in the proof of Lemma~\re
 \begin{defi}
 Given a derivation $\Phi$ containing the atom occurence $a$,
 \begin{itemize}
- \item let $a$ be in the conclusion of an inference rule $\rho$ and let $\alpha$ be a minimal renaming which renames $a$ and preserves the validity of $\rho$, then the \emph{predecessors of $a$} are the atom occurences in the premiss of $\rho$ which are renamed by $\sigma$,
+ \item if $a$ is in the conclusion of an inference rule $\rho$ and $\sigma$ is a minimal renaming which renames $a$ and preserves the validity of $\rho$, then the \emph{predecessors of $a$} are the atom occurences in the premiss of $\rho$ which are renamed by $\sigma$,
  \item the \emph{cone of $a$} is the set containing $a$ and the cones of the predecessors of $a$.
 \end{itemize}
 \end{defi}
@@ -249,7 +251,6 @@ Given a derivation $\Phi$ from $\alpha$ to $\beta$ and, $a_1,\dots,a_n$, a choic
 \vlinf{\awd}{}{a}{\fff}
 \end{array}
 \]
-\caption{`Cone reductions'.}
 \label{FigConeRed}
 \end{figure}%
 
