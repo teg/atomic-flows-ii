@@ -228,8 +228,6 @@ Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\v
 For convenience we sometimes refer to these derivations as inference rules. In particular if $n=2$ we write $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ and if $n>2$ we write $\vlinf{\cod^\star}{}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlinf{\cou^\star}{}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$.
 \end{rem}
 
-%TODO: Need to get rid of cuts that are not connected to axioms
-
 \begin{defi}
 Given a derivation $\Phi$ from $\alpha$ to $\beta$, where $a_1,\dots,a_n$ are all the distinct atoms that appear in both interaction and cointeraction instances, a \emph{core of\ $\Phi$} is defined as a derivation 
 \[
@@ -332,15 +330,20 @@ Given a derivation $\Phi$ containing the atom occurence $a$,
 \end{defi}
 
 \begin{defi}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$ and, $a_1,\dots,a_n$, a choice of either $a$ or $\bar a$ for each atom occuring in a cointeraction instance in $\Phi$ an \emph{experiment on $\Phi$ with respect to $a_1,\dots,a_n$} is a derivation from $\vls(\bar a_1.\cdots.\bar a_n)$ to $\beta$ which does not contain any interaction nor cointeraction instances and which has the same size as $\Phi$ up to a polynomial.
+Given a derivation $\Phi$ from $\alpha$ to $\beta$ and, $a_1,\dots,a_n$, a choice of either $a$ or $\bar a$ for each atom occuring in both an interaction and a cointeraction instance in $\Phi$ an \emph{experiment on $\Phi$ with respect to $a_1,\dots,a_n$} is a derivation from $\vls(\bar a_1.\cdots.\bar a_n)$ to $\beta$ which does not contain any interaction nor cointeraction instances and which has the same size as $\Phi$ up to a polynomial.
 \end{defi}
 
 \begin{lem}\label{LemConstrExp}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$ and, $a_1,\dots,a_n$, a choice of either $a$ or $\bar a$ for each atom occuring in a cointeraction instance in $\Phi$. There exists an experiment on $\Phi$ with respect to $a_1,\dots,a_n$.
+Given a derivation $\Phi$ from $\alpha$ to $\beta$ and, $a_1,\dots,a_n$, a choice of either $a$ or $\bar a$ for each atom occuring in both an interaction and a cointeraction instance in $\Phi$. There exists an experiment on $\Phi$ with respect to $a_1,\dots,a_n$.
 \end{lem}
 
 \begin{proof}
-\begin{figure}[tbp]
+Mark the cones of the atom occurences in the conclusion of $\Core(\Phi)$ which are not in $\beta$ and which are in $a_1,\dots,a_n$ as well as the cones of both the atom occurences occuring in cointeraction instances in $\Core(\Phi)$ with $\star$. Then perform the following substitutions to obtain $\Core(\Phi)^\star$:
+\begin{itemize}
+  \item substitute each occurence of $a^\star$ with $\fff$ and
+  \item substitute each structural inference rule applied to $a^\star$ as shown in Table~\ref{FigConeRed}.
+\end{itemize}
+\begin{figure}[htbp]
 \[
 \begin{array}{c}
 \vlinf{\awd}{}{a^\star}{\fff}
@@ -356,21 +359,23 @@ Given a derivation $\Phi$ from $\alpha$ to $\beta$ and, $a_1,\dots,a_n$, a choic
 \vlinf{\acu}{}{\vls(a^\star.a)}{a^\star}
 \quad\rightarrow\quad
 \vlinf{\awd}{}{a}{\fff}
+\\
+\noalign{\bigskip}
+\vlinf{\aiu}{}{\fff}{\vls(a^\star.\bar a^\star)}
+\quad\rightarrow\quad
+\vlinf{=}{}{\fff}{\vls(\fff.\fff)}
 \end{array}
 \]
 \label{FigConeRed}
 \end{figure}%
 
-Mark the cones of the atom occurences in the conclusion of $\Core(\Phi)$ which are not in $\beta$ and which are in $a_1,\dots,a_n$ with $\star$. Then perform the following substitutions to obtain $\Core(\Phi)^\star$:
-\begin{itemize}
-  \item substitute each occurence of $a^\star$ with $\fff$ and
-  \item substitute each structural inference rule applied to $a^\star$ as shown in Table~\ref{FigConeRed}.
-\end{itemize}
+Notice that since $\Phi$ is a proof we know that the atoms which occur in cointeraction instances in $\Core(\Phi)$ originate from $\awd$ instances so the above substitution yields a valid derivation.
+
 Finally apply $\awu$ to all the atom occurences in the conclusion of $\Core(\Phi)^\star$ which are not in $\beta$ to obtain the experiment:
 \[
 \vlderivation
 {
- \vlde{\Core(\Phi)\{a_1^\star\ot\fff,\dots,a_n^\star\ot\fff\}}{}{\vls[\beta.(\vlinf{\awu}{}{\ttt}{\bar a_1}.\fff).\cdots.(\vlinf{\awu}{}{\ttt}{\bar a_n}.\fff)]}
+ \vlde{\Core(\Phi)\{a_1^\star\ot\fff,\dots}{}{\vls[\beta.(\vlinf{\awu}{}{\ttt}{\bar a_1}.\fff).\cdots.(\vlinf{\awu}{}{\ttt}{\bar a_n}.\fff)]}
  {
   \vlhy{\vls(\bar a_1.\cdots.\bar a_n)}
  }
@@ -415,8 +420,6 @@ Argue by induction on $n$. The base case, $n=0$, is trivial and the inductive ca
 \]
 Notice that the conclusion consists of the same number of occurences of each atom and every atom occurs in exactly one interaction instance. It follows that each atom occurs in the same number of cocontraction instances and hence the atomic flow of each atom is the same and the proof is canonical.
 \end{proof}
-
-%TODO: Define SKS and KS
 
 \begin{thm}
 Given a proof, $\Phi$, of $\alpha$ in $\SKS$ there exists a canonical proof of $\alpha$ in $\SKS\setminus\{\aiu\}$.
