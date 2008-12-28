@@ -382,7 +382,7 @@ Finally apply $\awu$ to all the atom occurences in the conclusion of $\Core(\Phi
 \[
 \vlderivation
 {
- \vlde{\Core(\Phi)\{a_1^\star\ot\fff,\dots}{}{\vls[\beta.(\vlinf{\awu}{}{\ttt}{\bar a_1}.\fff).\cdots.(\vlinf{\awu}{}{\ttt}{\bar a_n}.\fff)]}
+ \vlde{\Core(\Phi)\{a_1^\star\ot\fff,\dots\}}{}{\vls[\beta.(\vlinf{\awu}{}{\ttt}{\bar a_1}.\fff).\cdots.(\vlinf{\awu}{}{\ttt}{\bar a_n}.\fff)]}
  {
   \vlhy{\vls(\bar a_1.\cdots.\bar a_n)}
  }
@@ -399,11 +399,11 @@ An experiment on a derivation $\Phi$ with respect to $a_1,\dots,a_n$ constructed
 %TODO: define canonical
 
 \begin{lem}
-Given a set of atoms of size $2n$ closed under negation. Consider an enumeration, $A_n$, of all the possible chocies of $n$ distinct, non-dual atoms from this set. Then $\bigvee_{\{a_1,\dots,a_n\}\in A_n}\vls(a_1.\cdots.a_n)$ is a tautology with a canonical proof in $\{\aid,\acu,\med,\swi\}$.
+Given a set of atoms of size $2n$ closed under negation. Consider an enumeration, $A$, of all the possible chocies of $n$ distinct, non-dual atoms from this set. Then $\bigvee_{\{a_1,\dots,a_n\}\in A}\vls(a_1.\cdots.a_n)$ is a tautology with a canonical proof in $\{\aid,\acu,\med,\swi\}$.
 \end{lem}
 
 \begin{proof}
-Argue by induction on $n$. The base case, $n=0$, is trivial and the inductive case is:
+Argue by induction on $n$. Let $A_k$ be $A$ restricted to $\{a_1,\dots,a_k\}$. The base case, $n=0$, is trivial and the inductive case is:
 \[
 \vlderivation
 {
@@ -433,7 +433,7 @@ Given a proof, $\Phi$, of $\alpha$ in $\SKS$ there exists a canonical proof of $
 \end{thm}
 
 \begin{proof}
-Let $\{a_1,\dots,a_n,\bar a_1,\dots,\bar a_n\}$ be the set of atoms in $\Phi$ which occur in cointeraction instances and let $A$ be an enumeration of all the possible chocies of $n$ distinct, non-dual atoms from this set. Now build the canonical derivation:
+Let $\{a_1,\dots,a_n,\bar a_1,\dots,\bar a_n\}$ be the set of atoms in $\Phi$ which occur in both interaction and cointeraction instances and let $A$ be an enumeration of all the possible chocies of $n$ distinct, non-dual atoms from this set. Now build the canonical derivation:
 \[
 \vlderivation
 {
