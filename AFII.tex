@@ -217,9 +217,16 @@ For each case we can build the required derivation:
 where $\Psi$ and $\Psi'$ exists by the inductive hypothesis.
 \end{proof}
 
+\newcommand{\contr}{\mathsf{c}}
+\newcommand{\cod}{{\contr{\downarrow}}}
+\newcommand{\cou}{{\contr{\uparrow}}}
+
 \begin{lem}\label{LemContr}
-Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$\\ and $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$.
-\end{lem}
+Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$\\ and $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$. \end{lem}
+
+\begin{rem}
+For convenience we sometimes refer to these derivations as inference rules. In particular if $n=2$ we write $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ and if $n>2$ we write $\vlinf{\cod^\star}{}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlinf{\cou^\star}{}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$.
+\end{rem}
 
 %TODO: Need to get rid of cuts that are not connected to axioms
 
@@ -482,10 +489,6 @@ $\vlderivation
  }
 }$
 }
-%TODO: Define \cod and \cou
-\newcommand{\contr}{\mathsf{c}}
-\newcommand{\cod}{{\contr{\downarrow}}}
-\newcommand{\cou}{{\contr{\uparrow}}}
 \[
 \vlderivation
 {
