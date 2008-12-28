@@ -51,10 +51,44 @@
 \maketitle
 
 %===============================================================================
-% \section{Introduction}
-\newcommand{\ot}{\mathbin\shortleftarrow}
+\section{Background on Deep Inference}
+
+Deep inference is a relatively recent development in proof theory. It is a methodology according to which several formalisms can be defined with excellent structural properties. The calculus of structures \cite{Gugl:06:A-System:kl} is one of them and is now well developed for classical \cite{Brun:03:Atomic-C:oz,Brun:06:Cut-Elim:cq,Brun:06:Locality:zh,BrunTiu:01:A-Local-:mz,Brun:06:Deep-Inf:qy}, intuitionistic \cite{Tiu:06:A-Local-:gf}, linear \cite{Stra:02:A-Local-:ul,Stra:03:MELL-in-:oy}, modal \cite{Brun::Deep-Seq:ay,GoreTiu:06:Classica:uq,Stou:06:A-Deep-I:rt} and commutative/non-commutative logics \cite{Gugl:06:A-System:kl,Tiu:06:A-System:ai,Stra:03:Linear-L:lp,Brus:02:A-Purely:wd,Di-G:04:Structur:wy,GuglStra:01:Non-comm:rp,GuglStra:02:A-Non-co:lq,GuglStra:02:A-Non-co:dq,Kahr:06:Reducing:hc,Kahr:07:System-B:fk}. The basic proof complexity properties of the calculus of structures are known \cite{BrusGugl:07:On-the-P:fk}. The calculus of structures promoted the discovery of a new class of proof nets for classical and linear logic \cite{LamaStra:05:Construc:qq,LamaStra:05:Naming-P:ov,LamaStra:06:From-Pro:et,StraLama:04:On-Proof:ec} (see also \cite{Guir:06:The-Thre:qt}). There exist implementations in Maude of deep-inference proof systems \cite{Kahr:07:Maude-as:lr}. For a better introduction than this, we refer the reader to \cite{Brun:03:Atomic-C:oz}.
+
 \newcommand{\fff}{\mathsf f}
 \newcommand{\ttt}{\mathsf t}
+\newcommand{\ot}{\mathbin\shortleftarrow}
+
+%---------------------------------------
+\begin{defi}
+\emph{Formulae}, $\alpha$, $\beta$, $\gamma$, $\delta$ are freely built from: \emph{units}, $\fff$ (false), $\ttt$ (true); \emph{atoms}, $a$, $b$, $c$, $d$, $e$; \emph{disjunction} and \emph{conjunction}, ${\vlsbr[\alpha.\beta]}$ and $\vlsbr(\alpha.\beta)$. On the set of atoms a (non-identical) involution $\bar\cdot$ is defined, and dual atom occurrences, as $a$ and $\bar a$, can appear in formulae. We denote \emph{contexts}, \emph{i.e.}, formulae with a hole, by $\xi\vlhole$ and $\zeta\vlhole$; we also use \emph{multiple} contexts, $\xi\vlhole\cdots\vlhole$, \emph{i.e.}, formulae with many holes; for example, if $\xi\{a\}$ is $\vls(b.[a.c])$, then $\xi\vlhole$ is $\vls(b.[\vlhole.c])$, $\xi\{b\}$ is $\vls(b.[b.c])$ and $\xi\vlscn(a.d)$ is $\vls(b.[(a.d).c])$; if $\xi\{a\}\{b\}\{c\}$ is $\vls(b.[(a.d).c])$ then $\xi\{b\}\{c\}\{a\}$ is $\vls(c.[(b.d).a])$.
+\end{defi}
+
+%---------------------------------------
+\begin{rem}
+Negation is only defined for atoms, which is not a limitation thanks to De Morgan laws.
+\end{rem}
+
+Note that when we write $\xi\{a\}$, we mean that an occurrence of $a$ exists in the formula, we singled it out and we refer specifically to that occurrence. It is important to distinguish between an atom $a$ and a set of occurrences of atom $a$ inside a formula or a derivation. In the following, we mark in various ways occurrences of atoms, and we perform several substitutions of formulae in the place of atom occurrences.
+
+\newcommand{\one}{{\mathchoice{\scriptstyle\mathbf1}
+                              {\scriptstyle\mathbf1}
+                              {\scriptstyle\mathbf1}
+                              {\scriptscriptstyle\mathbf1}}}
+\newcommand{\two}{{\mathchoice{\scriptstyle\mathbf2}
+                              {\scriptstyle\mathbf2}
+                              {\scriptstyle\mathbf2}
+                              {\scriptscriptstyle\mathbf2}}}
+\newcommand{\mk}[1]{{#1}^{\scriptscriptstyle\bullet}}
+%---------------------------------------
+\begin{defi}
+\emph{Inference rules}, $\rho$, have one \emph{premiss} and one \emph{conclusion}, and their \emph{instances} are used in \emph{inference steps} to rewrite inside formulae. A \emph{derivation}, $\Phi$, from $\alpha$ (\emph{premiss}) to $\beta$ (\emph{conclusion}) is a chain of inference steps with $\alpha$ at the top and $\beta$ at the bottom, and is usually indicated by $\vlder{\Phi}{\mathcal S}{\beta}{\alpha}$, where $\mathcal S$ is the name of the deductive system or a set of inference rules; a \emph{proof} is a derivation from $\ttt$; besides $\Phi$, we denote derivations with $\Psi$. We denote with $\xi\{\Phi\}$ the result of including every formula of $\Phi$ into the context $\xi\vlhole$: since we adopt deep inference, $\xi\{\Phi\}$ is a valid derivation. We denote with $\Phi\{a\ot\alpha\}$, $\Phi\{\fff\ot\alpha\}$ and $\Phi\{\ttt\ot \alpha\}$ the operation of substituting $\alpha$ into a set of \emph{occurrences} of an atom $a$ or unit in $\Phi$; the result is not necessarily a valid derivation, because some instances of rules might break; which occurrences to replace is always made clear by suitable decorations of $a$, $\fff$ and $\ttt$, like $a^\one$ and $\mk\fff$.
+\end{defi}
+
+\newcommand{\KS}{\mathsf{KS}}
+\newcommand{\SKS}{\mathsf{SKS}}
+Now we define the two standard deductive systems for classical propositional logic in deep inference that are used throughout the paper. $\KS$ is analytic, in the sense that premisses only contain subformulae of conclusions, and $\SKS$ is not \cite{Brun:03:Atomic-C:oz,Brun:06:Cut-Elim:cq,Brun:06:Locality:zh,BrunTiu:01:A-Local-:mz}.
+
 \newcommand{\ai}{\mathsf{ai}}
 \newcommand{\aw}{\mathsf{aw}}
 \newcommand{\ac}{\mathsf{ac}}
@@ -66,21 +100,87 @@
 \newcommand{\acu}{{\ac{\uparrow}}}
 \newcommand{\swi}{\mathsf{s}}
 \newcommand{\med}{\mathsf{m}}
-\newcommand{\sus}{\mathsf{ss}}
-\newcommand{\said}{\mathsf{s}\aid}
-\newcommand{\contr}{\mathsf{c}}
-\newcommand{\cod}{{\contr{\downarrow}}}
-\newcommand{\cou}{{\contr{\uparrow}}}
-\newcommand{\SKS}{\mathsf{SKS}}
-\newcommand{\KS}{\mathsf{KS}}
-\newcommand{\ppl  }{{\mathchoice{\scriptstyle+}
-                                {\scriptstyle+}
-                                {\scriptstyle+}
-                                {\scriptscriptstyle+}}}
-\newcommand{\pmi  }{{\mathchoice{\scriptstyle-}
-                                {\scriptstyle-}
-                                {\scriptstyle-}
-                                {\scriptscriptstyle-}}}
+%---------------------------------------
+\begin{defi}
+System $\SKS$ in the calculus of structures is defined by the following \emph{structural} rules:
+\[
+\begin{array}{@{}c@{}c@{}c@{}}
+      \vlinf{\aid}{}{\vls[a.{\bar a}]}{\ttt}&
+\qquad\vlinf{\awd}{}a\fff&
+\qquad\vlinf{\acd}{}a{\vls[a.a]}\\
+\noalign{\smallskip}
+      \emph{interaction}&
+\qquad\emph{weakening}&
+\qquad\emph{contraction}\\
+\noalign{\bigskip}
+      \vlinf{\aiu}{}\fff{\vls(a.{\bar a})}&
+\qquad\vlinf{\awu}{}\ttt a&
+\qquad\vlinf{\acu}{}{\vls (a.a)}a\\
+\noalign{\smallskip}
+      \emph{cointeraction}&
+\qquad\emph{coweakening}&
+\qquad\emph{cocontraction}\\
+\end{array}\quad,
+\]
+and by the two \emph{logical} rules:
+\[
+\begin{array}{@{}c@{}c@{}}
+\vlinf{\swi}{}{\vls[(\alpha.\beta).\gamma]}{\vls(\alpha.[\beta.\gamma])}&\qquad
+\vlinf{\med}{}{\vls([\alpha.\gamma].[\beta.\delta])}
+              {\vls[(\alpha.\beta).(\gamma.\delta)]}\\
+\noalign{\smallskip}
+\emph{switch}&\qquad\emph{medial}\\
+\end{array}\quad.
+\]
+The rule cointeraction is also called an (\emph{atomic}) \emph{cut}. In addition to the rules shown, there is a rule $\vldownsmash{\vlinf={}\delta\gamma}$, such that $\gamma$ and $\delta$ are opposite sides in one of the following equations:
+\vlstore{
+\vls[\alpha.\beta]         &=\vls[\beta.\alpha]         \quad,&
+\vls[\alpha.\fff]          &=\vls[\alpha]               \quad,\\
+\vls(\alpha.\beta)         &=\vls(\beta.\alpha)         \quad,&
+\vls(\alpha.\ttt)          &=\vls(\alpha)               \quad,\\
+\vls[[\alpha.\beta].\gamma]&=\vls[\alpha.[\beta.\gamma]]\quad,&
+\vls[\ttt.\ttt]            &=\vls[\ttt]                 \quad,\\
+\vls((\alpha.\beta).\gamma)&=\vls(\alpha.(\beta.\gamma))\quad,&
+\vls(\fff.\fff)            &=\vls(\fff)                 \quad\vldot}
+\begin{align*}
+\vlread
+\end{align*}
+We do not always show the instances of rule $=$, and when we do show them, we gather several contiguous instances into one. System $\KS$ is the same as $\SKS$, but without the rules $\aiu$, $\awu$ and $\acu$. A \emph{cut-free} derivation is a derivation where $\aiu$ is not used. All derivations in this paper are in $\SKS$, unless indicated otherwise.
+\end{defi}
+
+Note that all the structural rules only apply to atoms. As shown later, equivalent structural rules applying to formulae instead of atoms can be derived from the atomic ones together with the logical rules. The fact that we can work only with atomic structural rules is essential later on.
+
+Instead of the term `axiom' we use `interaction'; the reason is that, in deep inference, axioms do not close derivation branches. However, it is not misleading to think of interaction instances as axiom instances in the sequent calculus. In several papers, including \cite{Brun:03:Atomic-C:oz}, the reader can find explanations of how reducing a proof in $\SKS$ to a proof in $\KS$ is a cut-elimination process in the traditional sense. In other words, the rules $\aiu$, $\awu$ and $\acu$ are, together, morally equivalent to a cut in the sequent calculus.
+
+
+%===============================================================================
+% \section{Introduction}
+% \newcommand{\ot}{\mathbin\shortleftarrow}
+% \newcommand{\fff}{\mathsf f}
+% \newcommand{\ttt}{\mathsf t}
+% \newcommand{\ai}{\mathsf{ai}}
+% \newcommand{\aw}{\mathsf{aw}}
+% \newcommand{\ac}{\mathsf{ac}}
+% \newcommand{\aid}{{\ai{\downarrow}}}
+% \newcommand{\awd}{{\aw{\downarrow}}}
+% \newcommand{\acd}{{\ac{\downarrow}}}
+% \newcommand{\aiu}{{\ai{\uparrow}}}
+% \newcommand{\awu}{{\aw{\uparrow}}}
+% \newcommand{\acu}{{\ac{\uparrow}}}
+% \newcommand{\swi}{\mathsf{s}}
+% \newcommand{\med}{\mathsf{m}}
+% \newcommand{\sus}{\mathsf{ss}}
+% \newcommand{\said}{\mathsf{s}\aid}
+% \newcommand{\SKS}{\mathsf{SKS}}
+% \newcommand{\KS}{\mathsf{KS}}
+% \newcommand{\ppl  }{{\mathchoice{\scriptstyle+}
+%                                 {\scriptstyle+}
+%                                 {\scriptstyle+}
+%                                 {\scriptscriptstyle+}}}
+% \newcommand{\pmi  }{{\mathchoice{\scriptstyle-}
+%                                 {\scriptstyle-}
+%                                 {\scriptstyle-}
+%                                 {\scriptscriptstyle-}}}
 %---------------------------------------
 \section{Preliminaries}
 \begin{lem}\label{LemSuperSwitch}
@@ -382,6 +482,10 @@ $\vlderivation
  }
 }$
 }
+%TODO: Define \cod and \cou
+\newcommand{\contr}{\mathsf{c}}
+\newcommand{\cod}{{\contr{\downarrow}}}
+\newcommand{\cou}{{\contr{\uparrow}}}
 \[
 \vlderivation
 {
