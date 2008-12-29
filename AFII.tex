@@ -15,6 +15,7 @@
 
 \theoremstyle{remark}
 \newtheorem{rem}[thm]{Remark}
+\newtheorem{exa}[thm]{Example}
 
 \theoremstyle{definition}
 \newtheorem{defi}[thm]{Definition}
@@ -152,6 +153,350 @@ Note that all the structural rules only apply to atoms. As shown later, equivale
 
 Instead of the term `axiom' we use `interaction'; the reason is that, in deep inference, axioms do not close derivation branches. However, it is not misleading to think of interaction instances as axiom instances in the sequent calculus. In several papers, including \cite{Brun:03:Atomic-C:oz}, the reader can find explanations of how reducing a proof in $\SKS$ to a proof in $\KS$ is a cut-elimination process in the traditional sense. In other words, the rules $\aiu$, $\awu$ and $\acu$ are, together, morally equivalent to a cut in the sequent calculus.
 
+%===============================================================================
+
+\subsection{Atomic Flows and Derivations}
+
+Atomic flows are somewhat similar to proof nets. However, we prove that, no matter how we freely build an atomic flow (as opposed to a proof net structure), the flow is associated with some derivation. So, atomic flows are always `sequentialisable', in proof-net parlance. In fact, atomic flows carry much less information than derivations do, because they do not keep track of the logical relations between the atoms they trace, only their structural information is retained (in the sense of structural rules, as opposed to logical ones).
+
+We can think of atomic flows as composite diagrams that are freely generated from a set of six elementary diagrams. Technically, atomic flows are special kinds of labelled directed acyclic graphs, and the properties of their vertices are dictated by their labels, which we define as follows.
+
+%---------------------------------------
+\begin{defi}
+We call the following six diagrams (\emph{atomic-flow}) \emph{labels}:
+\[
+\begin{array}{@{}c@{}c@{}c@{}}
+      \vcenter{\afaid{}{}{}{}{}{}}&
+\qquad\vcenter{\afawd{}{}{}{}}&
+\qquad\vcenter{\afacd{}{}{}{}{}{}}\\
+\noalign{\smallskip}
+      \mbox{$\aid$ or \emph{interaction}}&
+\qquad\mbox{$\awd$ or \emph{weakening}}&
+\qquad\mbox{$\acd$ or \emph{contraction}}\\
+\noalign{\bigskip}
+      \vcenter{\afaiu{}{}{}{}{}{}}&
+\qquad\vcenter{\afawu{}{}{}{}}&
+\qquad\vcenter{\afacu{}{}{}{}{}{}}\\
+\noalign{\smallskip}
+      \mbox{$\aiu$ or \emph{cointeraction}}&
+\qquad\mbox{$\awu$ or \emph{coweakening}}&
+\qquad\mbox{$\acu$ or \emph{cocontraction}}\\
+\end{array}\quad.
+\]
+Cointeraction is also called \emph{cut}.
+\end{defi}
+
+\newcommand{\ppl  }{{\mathchoice{\scriptstyle+}
+                                {\scriptstyle+}
+                                {\scriptstyle+}
+                                {\scriptscriptstyle+}}}
+\newcommand{\pmi  }{{\mathchoice{\scriptstyle-}
+                                {\scriptstyle-}
+                                {\scriptstyle-}
+                                {\scriptscriptstyle-}}}
+\newcommand{\three}{{\mathchoice{\scriptstyle\mathbf3}
+                                {\scriptstyle\mathbf3}
+                                {\scriptstyle\mathbf3}
+                                {\scriptscriptstyle\mathbf3}}}
+\newcommand{\four }{{\mathchoice{\scriptstyle\mathbf4}
+                                {\scriptstyle\mathbf4}
+                                {\scriptstyle\mathbf4}
+                                {\scriptscriptstyle\mathbf4}}}
+\newcommand{\five }{{\mathchoice{\scriptstyle\mathbf5}
+                                {\scriptstyle\mathbf5}
+                                {\scriptstyle\mathbf5}
+                                {\scriptscriptstyle\mathbf5}}}
+\newcommand{\six  }{{\mathchoice{\scriptstyle\mathbf6}
+                                {\scriptstyle\mathbf6}
+                                {\scriptstyle\mathbf6}
+                                {\scriptscriptstyle\mathbf6}}}
+\newcommand{\seven}{{\mathchoice{\scriptstyle\mathbf7}
+                                {\scriptstyle\mathbf7}
+                                {\scriptstyle\mathbf7}
+                                {\scriptscriptstyle\mathbf7}}}
+\newcommand{\eight}{{\mathchoice{\scriptstyle\mathbf8}
+                                {\scriptstyle\mathbf8}
+                                {\scriptstyle\mathbf8}
+                                {\scriptscriptstyle\mathbf8}}}
+\newcommand{\nine }{{\mathchoice{\scriptstyle\mathbf9}
+                                {\scriptstyle\mathbf9}
+                                {\scriptstyle\mathbf9}
+                                {\scriptscriptstyle\mathbf9}}}
+\newcommand{\card}[1]{\mathord\vert #1\mathord\vert}
+\newcommand{\up}{{\mathit up}}
+\newcommand{\lo}{{\mathit lo}}
+%---------------------------------------
+\begin{defi}
+An (\emph{atomic}) \emph{flow} is a tuple $(V,E,\eta,\up,\lo)$ such that:
+\begin{enumerate}
+%-------------------
+\item $V$ is a finite set of \emph{vertices}, denoted by $\nu$;
+%-------------------
+\item $E$ is a finite set of \emph{edges}, denoted by $\epsilon$;
+%-------------------
+\item $\eta\colon V\to\{\aid,\aiu,\awd,\awu,\acd,\acu\}$ maps vertices to their \emph{labels};
+%-------------------
+\item $\up\colon E\to V\cup\{\top\}$ and $\lo\colon E\to V\cup\{\bot\}$ are, respectively, the \emph{upper} and \emph{lower} maps, and $\top$ and $\bot$ are special vertices not belonging to $V$; we define, for every $\nu\in V\cup\{\top,\bot\}$, the set $L_\nu=\{\,\epsilon\mid\up(\epsilon)=\nu\,\}$ of \emph{lower edges of $\nu$}, the set $U_\nu=\{\,\epsilon\mid\lo(\epsilon)=\nu\,\}$ of \emph{upper edges of $\nu$}, and the set $E_\nu=L_\nu\cup U_\nu$ of \emph{edges of $\nu$};
+%-------------------
+\item if $\card S$ denotes the cardinality of set $S$, we have that
+\begin{align*}
+\mbox{if $\eta(\nu)=\aid$ then $\card{L_\nu}=2$ and $\card{U_\nu}=0$,}&\\
+\mbox{if $\eta(\nu)=\aiu$ then $\card{L_\nu}=0$ and $\card{U_\nu}=2$,}&\\
+\mbox{if $\eta(\nu)=\awd$ then $\card{L_\nu}=1$ and $\card{U_\nu}=0$,}&\\
+\mbox{if $\eta(\nu)=\awu$ then $\card{L_\nu}=0$ and $\card{U_\nu}=1$,}&\\
+\mbox{if $\eta(\nu)=\acd$ then $\card{L_\nu}=1$ and $\card{U_\nu}=2$,}&\\
+\mbox{if $\eta(\nu)=\acu$ then $\card{L_\nu}=2$ and $\card{U_\nu}=1$;}&
+\end{align*}
+%-------------------
+\item\label{ItAcycl} there is no sequence $\epsilon_1,\dots,\epsilon_h$ of edges of $V$ such that $\up(\epsilon_i)=\lo(\epsilon_{i+1\pmod h})$, for $1\le i\le h$;
+%-------------------
+\item\label{ItPol} there is a \emph{polarity assignment} $\pi\colon E\to\{\pmi,\ppl\}$ such that, for every $\nu\in V$,
+\begin{enumerate}
+%---------
+\item if $\eta(\nu)\in\{\acd,\acu\}$ then $\pi(E_\nu)=\{\pmi\}$ or $\pi(E_\nu)=\{\ppl\}$;
+%---------
+\item if $\eta(\nu)\in\{\aid,\aiu\}$ then $\pi(E_\nu)=\{\pmi,\ppl\}$.
+\end{enumerate}
+\end{enumerate}
+Besides $\epsilon$, we use small numerals $\one$, $\two$, \dots\ and colours to denote edges. Atomic flows are denoted with $A$, $B$, $C$ and $D$. Given an atomic flow $A$, we say that the sets $L_\top=\{\epsilon_1,\dots,\epsilon_h\}$ and $U_\bot=\{\epsilon'_1,\dots,\epsilon'_k\}$ contain, respectively, the \emph{upper} and \emph{lower edges of $A$}; in such a case, we can represent $A$ as
+\[
+\atomicflow{
+( 0,10)*{\afvju4{\epsilon_1}{}};
+( 2,10)*{\cdots};
+( 4,10)*{\afvju4{}{\epsilon_h}};
+( 5, 6)*{\aflabelleft A};
+( 2, 5)*{\affr66};
+( 0, 0)*{\afvjd4{\epsilon'_1}{}};
+( 2, 0)*{\cdots};
+( 4, 0)*{\afvjd4{}{\epsilon'_k}};
+(-2, 0)*{\invisiblemark};
+( 6, 0)*{\invisiblemark}}
+\quad.
+\]
+In general, we represent atomic flows as directed-graph diagrams, except that the special vertices $\top$ and $\bot$ are not shown, and the labels of the vertices are explicitly shown as graphical elements. When we refer to the vertices of an atomic flow, we do not include $\top$ and $\bot$. Sometimes we identify vertices with their labels. 
+\end{defi}
+
+An atomic flow is a directed graph, whose edges are associated to atom occurrences in derivations, and the direction of the edges corresponds to the up-down direction in a derivation. Vertices are associated to points in the derivation where atom occurrences are created or destroyed, and the nature of each vertex is described by its label. Naturally, these graphs are acyclic (condition~\ref{ItAcycl}). The two special vertices $\top$ and $\bot$ represent the top and bottom of a derivation: we can consider $\top$ the vertex that creates all the atom occurrences in the premiss and $\bot$ the vertex that destroys all atom occurrences in the conclusion.
+
+The polarity assignment condition (\ref{ItPol}) ensures that atoms in(co)contractions have the same polarity, and those in (co)interactions have dual polarities (as happens in derivations). Every atomic flow has $2^n$ polarity assignments, where $n$ is the number of connected components in the graph. We should not be worried about the apparent complexity of the polarity assignment condition: in fact, we could equivalently consider two sorts of (co)contraction and (co)weakening labels, the negative and the positive ones, and ask for vertices to be joined by respecting their polarities. This is clearly a locally checkable property, much simpler than, for example, some global correctness criterion for proof nets.
+
+%---------------------------------------
+\begin{exa}
+Consider the atomic flow
+\begin{align*}
+A=(&\{\;\nu_1\;,\;\nu_2\;,\;\nu_3\;\},\\
+   &\{\;\one\;,\;\two\;,\;\three\;,\;\four\;,\;\five\;\},\\
+   &\{\;\nu_1\mapsto\aiu\;,\;\nu_2\mapsto\acu\;,\;\nu_3\mapsto\aiu\;\},\\
+   &\{\;\one\mapsto\top\;,\;\two\mapsto\top\;,\;\three\mapsto\nu_2\;,\;
+        \four\mapsto\nu_2\;,\;\five\mapsto\top\;\},\\
+   &\{\;\one\mapsto\nu_1\;,\;\two\mapsto\nu_2\;,\;\three\mapsto\nu_1\;,\;
+        \four\mapsto\nu_3\;,\;\five\mapsto\nu_3\;\})
+\quad;
+\end{align*}
+the following are three of its possible representations:
+\[
+\atomicflow{
+(10,8)*{\afacu\four{}{}{}{}\two};
+( 0,8)*{\afvjd8\one{}};
+( 4,8)*{\afvjd8{}\five};
+( 6,2)*{\afaiunw{}{}};
+( 6,0)*{\afaiuex{}{}{}\three{}{}31}}
+\quad,\qquad
+\aflower{\atomicflow{
+( 0  ,6)*{\afvjd{8}\one\ppl};
+( 6  ,6)*{\afacu\three{}{}\four\two\pmi};
+(12  ,6)*{\afvjd{8}\ppl\five};
+(10  ,0)*{\afaiunw{}{}};
+( 2  ,0)*{\afaiunw{}{}};
+(-1.5,0)*{\invisiblemark};
+(13.5,0)*{\invisiblemark}}}
+\qquad\hbox{and}\qquad
+\atomicflow{
+( 8  ,10)*{\afacu{}\three{}\four\two\ppl};
+( 0  , 8)*{\afvjd{12}\one\pmi};
+( 4  ,10)*{\afvjd{8}\five\pmi};
+( 5  , 4)*{\afex24};
+(10  , 4)*{\afvj4};
+( 2  , 0)*{\afaiunw{}{}};
+( 8  , 0)*{\afaiunw{}{}};
+(-1.5, 0)*{\invisiblemark};
+(11.5, 0)*{\invisiblemark}}
+\quad;
+\]
+\afnegspace
+in the last two diagrams, we also indicated each of the two possible polarity assignments. This flow has one cocontraction and two cointeraction vertices; it has three upper edges, $\one$, $\two$ and $\five$, and no lower edges.
+\end{exa}
+
+%---------------------------------------
+\afnegspace
+\begin{exa}
+The graph
+$\atomicflow{
+(0,4)*{\afaidnw{}{}};
+(0,0)*{\afacd{}{}{}{}{}{}}}$
+is not an atomic flow, for lack of a polarity assignment.
+\end{exa}
+
+We now define the mapping from derivations to atomic flows. As we said, the idea is that structural rules map to the respective atomic-flow vertices, and the edges trace the atoms between inference steps. We first state a fact, whose proof is immediate.
+
+%---------------------------------------
+\begin{pro}\label{PropUnFl}
+Given an\/ $\SKS$ derivation\/ $\Phi$, there is a unique atomic flow $A$ (modulo isomorphisms) such that:
+\begin{enumerate}
+%-------------------
+\item there is a surjective map between the set of atom occurrences of\/ $\Phi$ and the set of edges of $A$;
+%-------------------
+\item for each inference step $\vlsmash{\vlinf{\rho}{}{\xi\{\beta\}}{\xi\{\alpha\}}}$ of\/ $\Phi$, where $\rho\in\{\aid,\aiu,\awd,\awu,\acd,\acu\}$ and $\vlinf{\rho}{}{\beta}{\alpha}$ is a rule instance, all atom occurrences in $\xi\vlhole$ in the premiss are respectively mapped to the same edges of $A$ as the atom occurrences in $\xi\vlhole$ in the conclusion; the atom occurrences in $\vlinf{\rho}{}{\beta}{\alpha}$ are mapped to edges of $A$ such that the edges are related with vertices as indicated below, for each possible case of the inference step:
+\[
+\begin{array}{@{}ccc@{}ccc@{}}
+\vlinf{\aid}{}{\vls[a^\one.{\bar a^\two}]}{\ttt}&\mbox{to\/}&
+\vcenter{\afaid\one{}{}\two{}{}}
+\quad,&\qquad
+\vlinf{\aiu}{}{\fff}{\vls(a^\one.{\bar a^\two})}&\mbox{to\/}&
+\vcenter{\afaiu\one{}{}\two{}{}}
+\quad,\\
+\noalign{\medskip}
+\vlinf{\awd}{}{a^\one}{\fff}                    &\mbox{to\/}&
+\vcenter{\afawd{}{}{}\one{}} 
+\quad,&\qquad
+\vlinf{\awu}{}{\ttt}{a^\one}                    &\mbox{to\/}&
+\vcenter{\afawu{}{}{}\one{}}
+\quad,\\
+\noalign{\medskip}
+\vlinf{\acd}{}{a^\three}{\vls[a^\one.a^\two]}   &\mbox{to\/}&
+\vcenter{\afacd\one{}{}\two{}\three}
+\quad,&\qquad
+\vlinf{\acu}{}{\vls(a^\two.a^\three)}{a^\one}   &\mbox{to\/}&
+\vcenter{\afacu\two{}{}\three{}\one}
+\quad,\\
+\end{array}
+\]
+where the mapping is indicated by small numerals.
+%-------------------
+\item for each inference step of\/ $\Phi$ of kind
+\[\hss
+\begin{array}{@{}r@{}l@{}}
+\vlinf{\swi}{}{\xi\vlscn[(\alpha.\beta).\gamma]}
+              {\xi\vlscn(\alpha.[\beta.\gamma])}           \quad,&\qquad
+\vlinf{\med}{}{\xi\vlscn([\alpha.\gamma].[\beta.\delta])}
+              {\xi\vlscn[(\alpha.\beta).(\gamma.\delta)]}  \quad,      \\
+\noalign{\smallskip}
+\vlinf={}{\xi\vlscn[\beta.\alpha]}{\xi\vlscn[\alpha.\beta]}\quad,&\qquad
+\vlinf={}{\xi\vlscn(\beta.\alpha)}{\xi\vlscn(\alpha.\beta)}\quad,      \\
+\noalign{\smallskip}
+\vlinf={}{\xi\vlscn[\alpha.[\beta.\gamma]]}
+         {\xi\vlscn[[\alpha.\beta].\gamma]}                \quad,&\qquad
+\vlinf={}{\xi\vlscn[[\alpha.\beta].\gamma]}
+         {\xi\vlscn[\alpha.[\beta.\gamma]]}                \quad,      \\
+\noalign{\smallskip}
+\vlinf={}{\xi\vlscn(\alpha.(\beta.\gamma))}
+         {\xi\vlscn((\alpha.\beta).\gamma)}                \quad,&\qquad
+\vlinf={}{\xi\vlscn((\alpha.\beta).\gamma)}
+         {\xi\vlscn(\alpha.(\beta.\gamma))}                \quad,      \\
+\noalign{\smallskip}
+\vlinf={}{\xi\{\alpha\}}{\xi\vlscn[\alpha.\fff]}           \quad,\qquad
+\vlinf={}{\xi\vlscn[\alpha.\fff]}{\xi\{\alpha\}}           \quad,&\qquad
+\vlinf={}{\xi\{\alpha\}}{\xi\vlscn(\alpha.\ttt)}        \qquad\hbox{and\/}\qquad
+\vlinf={}{\xi\vlscn(\alpha.\ttt)}{\xi\{\alpha\}}
+\end{array}
+\]
+all the atom occurrences in $\xi\vlhole$, $\alpha$, $\beta$, $\gamma$ and $\delta$ in the premiss are respectively mapped to the same edges of $A$ as the atom occurrences in $\xi\vlhole$, $\alpha$, $\beta$, $\gamma$ and $\delta$ in the conclusion.
+\end{enumerate}
+\end{pro}
+
+%---------------------------------------
+\begin{defi}
+Given a derivation $\Phi$, we say that the unique atomic flow $A$ defined in Proposition~\ref{PropUnFl} is the atomic flow \emph{associated with} the derivation $\Phi$. Sometimes, when an atom occurrence $a$ in $\Phi$ maps to an edge $\epsilon$ in $A$, we decorate $\epsilon$ with the label $a$.
+\end{defi}
+
+%---------------------------------------
+\begin{exa}
+Figure~\ref{FigExAF} has some examples of atomic flows associated with derivations.
+\end{exa}
+
+\newcommand{\RD}[1]{#1}
+\newcommand{\GR}[1]{#1}
+\newcommand{\DO}[1]{#1}
+\newcommand{\PB}[1]{#1}
+\newcommand{\MG}[1]{#1}
+\newcommand{\SG}[1]{#1}
+\newcommand{\RS}[1]{#1}
+\newcommand{\YO}[1]{#1}
+\newcommand{\PW}[1]{#1}
+%---------------------------------------
+\begin{figure}[tbp]
+\[
+\begin{array}{@{}c@{}c@{}c@{}}
+\vlderivation                                                  {
+\vlin{=   }{}{\ttt                                  }         {
+\vlin{\aiu}{}{\vls[\fff.\ttt]                       }        {
+\vlin{=   }{}{\vls[(\GR{a}.\RD{\bar a}).\ttt]       }       {
+\vlin{\swi}{}{\vls[[(\RD{\bar a}.\GR{a}).\ttt].\ttt]}      {
+\vlin{=   }{}{\vls[(\RD{\bar a}.[\GR{a}.\ttt]).\ttt]}     {
+\vlin{\swi}{}{\vls[([\GR{a}.\ttt].\RD{\bar a}).\ttt]}    {
+\vlin{=   }{}{\vls([\GR{a}.\ttt].[\RD{\bar a}.\ttt])}   {
+\vlin{\med}{}{\vls([\GR{a}.\ttt].[\ttt.\RD{\bar a}])}  {
+\vlin{=   }{}{\vls[(\GR{a}.\ttt).(\ttt.\RD{\bar a})]} {
+\vlin{\aid}{}{\vls[\GR{a}.\RD{\bar a}]              }{
+\vlhy        {\ttt                                  }}}}}}}}}}}}
+\qquad&
+\vlderivation                                                              {
+\vlin{\aiu}{}
+   {\vls(\DO{a}.\fff)                                            }        {
+\vlin{=   }{}
+   {\vls(\DO{a}.(\PB{a}.\MG{\bar a}))                            }       {
+\vlin{\acu}{}
+   {\vls((\DO{a}.\PB{a}).\MG{\bar a})                            }      {
+\vlin{=   }{}
+   {\vls(\SG{a}.\MG{\bar a})                                     }     {
+\vlin{\aiu}{}
+   {\vls([\fff.\SG{a}].\MG{\bar a})                              }    {
+\vlin{\acd}{}
+   {\vls([(\RD{a}.\RS{\bar a}).\SG{a}].\MG{\bar a})              }   {
+\vlin{\swi}{}
+   {\vls([(\RD{a}.[\GR{\bar a}.\YO{\bar a}]).\SG{a}].\MG{\bar a})}  {
+\vlin{=   }{}
+   {\vls((\RD{a}.[[\GR{\bar a}.\YO{\bar a}].\SG{a}]).\MG{\bar a})} {
+\vlin{\aid}{}
+   {\vls(\RD{a}.[\GR{\bar a}.[\YO{\bar a}.\SG{a}]].\MG{\bar a})  }{
+\vlhy        
+   {\vls(\RD{a}.[\GR{\bar a}.\ttt].\MG{\bar a})                  }}}}}}}}}}}
+\qquad&
+\vlderivation                                                              {
+\vlin{=   }{}{\vls(([\RS{a}.\YO{b}].\PW{c}).([\GR{a}.\DO{b}].\SG{c}))}    {
+\vlin{\med}{}{\vls(([\RS{a}.\YO{b}].[\GR{a}.\DO{b}]).(\PW{c}.\SG{c}))}   {
+\vlin{\acu}{}{\vls([(\RS{a}.\GR{a}).(\YO{b}.\DO{b})].(\PW{c}.\SG{c}))}  {
+\vlin{\acu}{}{\vls([(\RS{a}.\GR{a}).(\YO{b}.\DO{b})].\MG{c})         } {
+\vlin{\acu}{}{\vls([(\RS{a}.\GR{a}).\PB{b}].\MG{c})                  }{
+\vlhy        {\vls([\RD{a}.\PB{b}].\MG{c})                           }}}}}}}\\
+\atomicflow{
+(0,0)*{\afaiucol{}{}{}{}{}{}{Green}{Red}{}};
+(0,4)*{\afaidnw{}{}}}
+\qquad&
+\atomicflow{
+( 2,14)*{\afvjcol4{Green}};
+( 0,10)*{\afvjcol{12}{Red}};
+(16,10)*{\afvjcol{12}{Magenta}};
+( 4, 8)*{\afacdcol{}{}{}{}{}{}{Green}{YellowOrange}{RawSienna}};
+(10, 8)*{\afacucol{}{}{}{}{}{}{DarkOrchid}{ProcessBlue}{SpringGreen}};
+( 2, 2)*{\afaiunw{}{}};
+( 8, 2)*{\afvjcol4{DarkOrchid}};
+(14, 2)*{\afaiunw{}{}};
+( 8,12)*{\afaidnw{}{}}}
+\qquad&
+\atomicflow{
+( 0,0)*{\afacucol{}{}{}{}{}{}{RawSienna}{Green}{Red}};
+(10,0)*{\afacucol{}{}{}{}{}{}{YellowOrange}{DarkOrchid}{ProcessBlue}};
+(20,0)*{\afacucol{}{}{}{}{}{}{Periwinkle}{SpringGreen}{Magenta}}}
+\end{array}
+\]
+\caption{Examples of atomic flows associated with derivations.}
+\label{FigExAF}
+\end{figure}
+
+Inference rules are usually called linear when they do not `create' nor `destroy' atoms. Linear rules of $\SKS$ are switch, medial and (every equation defining) rule $=$. Note that linear inference rules do not introduce any vertices in atomic flows.
+
+We now show that there is no such thing as an `invalid atomic flow', or, in other words, the mapping from derivations to atomic flows is surjective.
 
 %===============================================================================
 \section{Preliminaries}
