@@ -668,7 +668,12 @@ My preferred solution to this would be to change the definition of inference rul
 
 
 \begin{defi}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$ and $a_1,\dots,a_n$, a choice of either $a$ or $\bar a$ for each atom occuring in both an interaction and a cointeraction instance in $\Phi$, an \emph{experiment on $\Phi$ with respect to $a_1,\dots,a_n$} is a derivation from $\vls(\bar a_1.\cdots.\bar a_n)$ to $\beta$ which does not contain any cointeraction instances and which has the same size as $\Phi$ up to a polynomial.
+Given
+\begin{itemize}
+ \item a derivation $\Phi$ from $\alpha$ to $\beta$ and
+ \item a set of atoms $a_1,\dots,a_n$,
+\end{itemize}
+an \emph{experiment on $\Phi$ with respect to $a_1,\dots,a_n$} is a derivation from $\vls(\bar a_1.\cdots.\bar a_n)$ to $\beta$ which does not contain any cointeraction instances and which has the same size as $\Phi$ up to a polynomial.
 \end{defi}
 
 \begin{lem}\label{LemConstrExp}
