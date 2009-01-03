@@ -649,18 +649,13 @@ A core of a derivation $\Phi$ constructed as described in the proof of Lemma~\re
 
 \section{Experiments}
 
-
-% TODO: the definition of cone is wrong...
-
 \begin{defi}
-Given a derivation $\Phi$ containing the atom occurrence $a$,
-\begin{itemize}
- \item if $a$ is in the conclusion of an inference rule $\rho$ and $\sigma$ is a minimal renaming which renames $a$ and preserves the validity of $\rho$, then the \emph{predecessors of $a$} are the atom occurrences in the premiss of $\rho$ which are renamed by $\sigma$,
- \item the \emph{cone of $a$} is the set containing $a$ and the cones of the predecessors of $a$.
-\end{itemize}
+Given a derivation $\Phi$ containing the atom occurrence $a$. Consider the atomic flow of $\Phi$, $A$, and the edge, $\epsilon$, in $A$ mapped to by $a$. The \emph{cone of $\epsilon$} is the edges in the paths starting with $\epsilon$ and the \emph{cone of $a$} is the set of atoms mapping to edges in the cone of $\epsilon$.
 \end{defi}
 
 \Tom{
+This problem is now hidden in the definition of derivations/atomic flows.
+
 The above definition might cause problems:
 Consider $\vlinf{=}{}{\xi\vls[a_1.a_2]}{\xi\vls[a_3.a_4]}$ where $a_1,a_2,a_3,a_4$ are instances of the same atom. We want that the predecessor of $a_1=a_3$ and the predecesor of $a_2=a_4$ or the predecessor of $a_1=a_4$ and the predecessor of $a_2=a_3$. However, we might have that predecossor of $a_1=a_3$ and the predecessor of $a_2=a_3$. Which in turn would give invalid derivations when doing the substitutions later on.
 My preferred solution to this would be to change the definition of inference rule to contain information about which atom occurrences are `connected' and which are not, but I am reluctant to change any basic definitions more than I already have. Any suggestions? (This problem obviously has a solution so there is no hurry in fixing it, I am just pointing it out and will pretend like it is not an issue for the time being.)
