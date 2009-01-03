@@ -503,48 +503,57 @@ Given a context $\xi\vlhole$ and a formula $\alpha$ there exist derivations $\vl
 \end{lem}
 
 \begin{proof}
-We show how to construct the first derivation, the second one can be done by symmetry. We argue by induction on the number of atoms in $\xi\vlhole$. There are three cases to consider, where $\beta$ is not a unit:
-\begin{itemize}
-  \item $\xi\vlhole=\vlhole$,
-  \item $\xi\vlhole=\vls[\xi'\vlhole.\beta]$,
-  \item $\xi\vlhole=\vls(\xi'\vlhole.\beta)$.
-\end{itemize}
-
-For each case we can build the required derivation:
+We show how to construct the first derivation, the second one can be done by symmetry. We argue by induction on the number of atoms in $\xi\vlhole$. The base case, $\xi\vlhole=\vlhole$, is trivial and the inductive cases are:
+%  There are three cases to consider, where $\beta$ is not a unit:
+% \begin{itemize}
+%   \item $\xi\vlhole=\vlhole$,
+%   \item $\xi\vlhole=\vls[\xi'\vlhole.\beta]$,
+%   \item $\xi\vlhole=\vls(\xi'\vlhole.\beta)$.
+% \end{itemize}
 
 \[
-\vlinf{=}{}{\alpha}{\vls(\alpha.\ttt)}\quad,\qquad
 \vlderivation
 {
- \vlin{\swi}{}{\vls[\vlder{\Psi}{\{\swi\}}{\xi'\{\alpha\}}{\vls(\alpha.\xi'\{\ttt\})}.\beta]}
+ \vlin{=}{}{\xi\{\alpha\}}
  {
-  \vlhy{\vls(\alpha.[\xi'\{\ttt\}.\beta])}
+  \vlin{\swi}{}{\vls[\vlder{\Psi}{\{\swi\}}{\xi'\{\alpha\}}{\vls(\alpha.\xi'\{\ttt\})}.\beta]}
+  {
+   \vlin{=}{}{\vls(\alpha.[\xi'\{\ttt\}.\beta])}
+   {
+    \vlhy{\vls(\alpha.\xi\{\ttt\})}
+   }
+  }
  }
 }\qquad\mbox{and}\qquad
 \vlderivation
 {
- \vlin{=}{}{\vls(\vlder{\Psi'}{\{\swi\}}{\xi'\{\alpha\}}{\vls(\alpha.\xi'\{\ttt\})}.\beta)}
+ \vlin{=}{}{\xi\{\alpha\}}
  {
-  \vlhy{\vls(\alpha.(\xi'\{\ttt\}.\beta))}
+  \vlin{=}{}{\vls(\vlder{\Psi'}{\{\swi\}}{\xi'\{\alpha\}}{\vls(\alpha.\xi'\{\ttt\})}.\beta)}
+  {
+   \vlhy{\vls(\alpha.\xi\{\ttt\})}
+  }
  }
 }\quad,
 \]
-where $\Psi$ and $\Psi'$ exists by the inductive hypothesis.
+where $\beta$ is not a unit and $\Psi$ and $\Psi'$ exist by the inductive hypothesis.
 \end{proof}
 
 \newcommand{\contr}{\mathsf{c}}
 \newcommand{\cod}{{\contr{\downarrow}}}
 \newcommand{\cou}{{\contr{\uparrow}}}
 
-\begin{lem}\label{LemContr}
-Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$\\ and $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$. \end{lem}
+%TODO: Say that the proof is routine
+
+\begin{pro}\label{LemContr}
+Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$\\ and $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$. \end{pro}
 
 \begin{rem}
-For convenience we sometimes refer to these derivations as inference rules. In particular if $n=2$ we write $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ and if $n>2$ we write $\vlinf{\cod^\star}{}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlinf{\cou^\star}{}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$.
+For convenience we sometimes refer to these derivations as inference rules and denote them $\vlinf{\cod^\star}{}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlinf{\cou^\star}{}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$. In particular if $n=2$ we write $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$.
 \end{rem}
 
 \begin{defi}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$, where $a_1,\dots,a_n$ are all the distinct atoms that appear in both interaction and cointeraction instances, a \emph{core of\ $\Phi$} is defined as a derivation 
+Given a derivation $\Phi$ from $\alpha$ to $\beta$, where $a_1,\dots,a_n$ are all the distinct atoms that appear in both interaction and cointeraction instances, a \emph{core of\/ $\Phi$} is defined as a derivation 
 \[
 \vlder{}{}{\vls[\beta.(a_n.\bar a_n).\cdots.(a_1.\bar a_1)]}{\vls([a_1.\bar a_1].\cdots.[a_n.\bar a_n].\alpha)}
 \]
@@ -552,11 +561,13 @@ where the atoms $a_1,\dots,a_n$ do not occur in any interaction nor cointeractio
 \end{defi}
 
 \begin{lem}\label{LemConstrCore}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$, a core of $\Phi$ can be constructed.
+Given a derivation $\Phi$ from $\alpha$ to $\beta$, a core of\/ $\Phi$ can be constructed.
 \end{lem}
 
+%TODO: What is $\Phi'$?
+
 \begin{proof}
-Let $a_1,\dots,a_n$ be all the atoms that occur in both interaction and cointeraction instances in $\Phi$. Obtain $\Phi'$ from $\Phi$ by using Lemma~\ref{LemSuperSwitch} to perform the following transformation for each instance of $\aid$ and $\aiu$ applied to $a$ from $a_1,\dots,a_n$ in $\Phi$:
+Let $a_1,\dots,a_n$ be all the atoms that occur in both interaction and cointeraction instances in $\Phi$. For each $a$ in $a_1,\dots,a_n$ consider the instances of $\aid$ and $\aiu$ where $a$ occurs. Using Lemma~\ref{LemSuperSwitch} apply the following transformations to said rule instances:
 \[
 \vlderivation
 {
@@ -603,10 +614,15 @@ Let $a_1,\dots,a_n$ be all the atoms that occur in both interaction and cointera
    \vlhy{\alpha}
   }
  }
-}\quad.
+}\quad,
+\]
+to obtain
+\[
+\vlder{\Phi'}{}{\vls[\beta.(a_n.\bar a_n).\cdots.(a_n.\bar a_n).\cdots.(a_1.\bar a_1).\cdots.(a_1.\bar a_1)]}{\vls([a_1.\bar a_1].\cdots.[a_1.\bar a_1].\cdots.[a_n.\bar a_n].\cdots.[a_n.\bar a_n].\alpha)}
 \]
 
-Obtain the core of $\Phi$ from $\Phi'$ by using Lemma~\ref{LemContr}:
+
+Obtain a core of $\Phi$ from $\Phi'$ by using Lemma~\ref{LemContr}:
 \[
 \vlderivation
 {
@@ -627,7 +643,7 @@ Obtain the core of $\Phi$ from $\Phi'$ by using Lemma~\ref{LemContr}:
 \newcommand{\Core}{\mathsf{Core}}
 
 \begin{defi}
-A core of a derivation $\Phi$ constructed as described in the proof of Lemma~\ref{LemConstrCore} is called \emph{the canonical core of $\Phi$}, written $\Core(\Phi)$.
+A core of a derivation $\Phi$ constructed as described in the proof of Lemma~\ref{LemConstrCore} is called \emph{the canonical core of\/ $\Phi$}, written $\Core(\Phi)$.
 \end{defi}
 
 
@@ -652,7 +668,7 @@ My preferred solution to this would be to change the definition of inference rul
 
 
 \begin{defi}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$ and, $a_1,\dots,a_n$, a choice of either $a$ or $\bar a$ for each atom occuring in both an interaction and a cointeraction instance in $\Phi$ an \emph{experiment on $\Phi$ with respect to $a_1,\dots,a_n$} is a derivation from $\vls(\bar a_1.\cdots.\bar a_n)$ to $\beta$ which does not contain any cointeraction instances and which has the same size as $\Phi$ up to a polynomial.
+Given a derivation $\Phi$ from $\alpha$ to $\beta$ and $a_1,\dots,a_n$, a choice of either $a$ or $\bar a$ for each atom occuring in both an interaction and a cointeraction instance in $\Phi$, an \emph{experiment on $\Phi$ with respect to $a_1,\dots,a_n$} is a derivation from $\vls(\bar a_1.\cdots.\bar a_n)$ to $\beta$ which does not contain any cointeraction instances and which has the same size as $\Phi$ up to a polynomial.
 \end{defi}
 
 \begin{lem}\label{LemConstrExp}
@@ -663,33 +679,30 @@ Given a derivation $\Phi$ from $\alpha$ to $\beta$ and, $a_1,\dots,a_n$, a choic
 Mark the cones of the atom occurences in the conclusion of $\Core(\Phi)$ which are not in $\beta$ and which are in $a_1,\dots,a_n$ as well as the cones of both the atom occurences occuring in cointeraction instances in $\Core(\Phi)$ with $\star$. Then perform the following substitutions to obtain $\Core(\Phi)^\star$:
 \begin{itemize}
   \item substitute each occurence of $a^\star$ with $\fff$ and
-  \item substitute each structural inference rule applied to $a^\star$ as shown in Table~\ref{FigConeRed}.
-\end{itemize}
-\begin{figure}[htbp]
+  \item substitute each structural inference rule applied to $a^\star$ as follows
 \[
 \begin{array}{c}
 \vlinf{\awd}{}{a^\star}{\fff}
 \quad\rightarrow\quad
-\vlinf{=}{}{\fff}{\fff}
+\vlinf{=}{}{\fff}{\fff}\quad,
 \\
 \noalign{\bigskip}
 \vlinf{\acd}{}{a^\star}{\vls[a^\star.a^\star]}
 \quad\rightarrow\quad
-\vlinf{=}{}{\fff}{\fff}
+\vlinf{=}{}{\fff}{\fff}\quad,
 \\
 \noalign{\bigskip}
 \vlinf{\acu}{}{\vls(a^\star.a)}{a^\star}
 \quad\rightarrow\quad
-\vlinf{\awd}{}{\vls(\fff.a)}{\fff}
+\vlinf{\awd}{}{\vls(\fff.a)}{\fff}\quad\mbox{and}
 \\
 \noalign{\bigskip}
 \vlinf{\aiu}{}{\fff}{\vls(a^\star.\bar a^\star)}
 \quad\rightarrow\quad
-\vlinf{=}{}{\fff}{\vls(\fff.\fff)}
+\vlinf{=}{}{\fff}{\vls(\fff.\fff)}\quad.
 \end{array}
 \]
-\label{FigConeRed}
-\end{figure}%
+\end{itemize}
 
 Notice that since $\Phi$ is a proof we know that the atoms which occur in cointeraction instances in $\Core(\Phi)$ originate from $\awd$ instances so the above substitution yields a valid derivation.
 
