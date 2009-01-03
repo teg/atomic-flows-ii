@@ -650,19 +650,6 @@ A core of a derivation $\Phi$ constructed as described in the proof of Lemma~\re
 \section{Experiments}
 
 \begin{defi}
-Given a derivation $\Phi$ containing the atom occurrence $a$. Consider the atomic flow of $\Phi$, $A$, and the edge, $\epsilon$, in $A$ mapped to by $a$. The \emph{cone of $\epsilon$} is the edges in the paths starting with $\epsilon$ and the \emph{cone of $a$} is the set of atoms mapping to edges in the cone of $\epsilon$.
-\end{defi}
-
-\Tom{
-This problem is now hidden in the definition of derivations/atomic flows.
-
-The above definition might cause problems:
-Consider $\vlinf{=}{}{\xi\vls[a_1.a_2]}{\xi\vls[a_3.a_4]}$ where $a_1,a_2,a_3,a_4$ are instances of the same atom. We want that the predecessor of $a_1=a_3$ and the predecesor of $a_2=a_4$ or the predecessor of $a_1=a_4$ and the predecessor of $a_2=a_3$. However, we might have that predecossor of $a_1=a_3$ and the predecessor of $a_2=a_3$. Which in turn would give invalid derivations when doing the substitutions later on.
-My preferred solution to this would be to change the definition of inference rule to contain information about which atom occurrences are `connected' and which are not, but I am reluctant to change any basic definitions more than I already have. Any suggestions? (This problem obviously has a solution so there is no hurry in fixing it, I am just pointing it out and will pretend like it is not an issue for the time being.)
-}
-
-
-\begin{defi}
 Given
 \begin{itemize}
  \item a derivation $\Phi$ from $\alpha$ to $\beta$ and
@@ -670,6 +657,18 @@ Given
 \end{itemize}
 an \emph{experiment on $\Phi$ with respect to $a_1,\dots,a_n$} is a derivation from $\vls(\bar a_1.\cdots.\bar a_n)$ to $\beta$ which does not contain any cointeraction instances and which has the same size as $\Phi$ up to a polynomial.
 \end{defi}
+
+\begin{defi}
+Given a derivation $\Phi$ containing the atom occurrence $a$. Consider the atomic flow of $\Phi$, $A$, and the edge, $\epsilon$, in $A$ mapped to by $a$. The \emph{cone of $\epsilon$} is the edges in the paths starting with $\epsilon$ and the \emph{cone of $a$} is the set of atoms mapping to edges in the cone of $\epsilon$.
+\end{defi}
+
+\Tom{
+This problem is now hidden in the definition of derivations/atomic flows:
+
+The above definition might cause problems:
+Consider $\vlinf{=}{}{\xi\vls[a_1.a_2]}{\xi\vls[a_3.a_4]}$ where $a_1,a_2,a_3,a_4$ are instances of the same atom. We want that the predecessor of $a_1=a_3$ and the predecesor of $a_2=a_4$ or the predecessor of $a_1=a_4$ and the predecessor of $a_2=a_3$. However, we might have that predecossor of $a_1=a_3$ and the predecessor of $a_2=a_3$. Which in turn would give invalid derivations when doing the substitutions later on.
+My preferred solution to this would be to change the definition of inference rule to contain information about which atom occurrences are `connected' and which are not, but I am reluctant to change any basic definitions more than I already have. Any suggestions? (This problem obviously has a solution so there is no hurry in fixing it, I am just pointing it out and will pretend like it is not an issue for the time being.)
+}
 
 \begin{lem}\label{LemConstrExp}
 Given a derivation $\Phi$ from $\alpha$ to $\beta$ and, $a_1,\dots,a_n$, a choice of either $a$ or $\bar a$ for each atom occurring in both an interaction and a cointeraction instance in $\Phi$. There exists an experiment on $\Phi$ with respect to $a_1,\dots,a_n$.
@@ -679,7 +678,7 @@ Given a derivation $\Phi$ from $\alpha$ to $\beta$ and, $a_1,\dots,a_n$, a choic
 Mark the cones of the atom occurrences in the conclusion of $\Core(\Phi)$ which are not in $\beta$ and which are in $a_1,\dots,a_n$ as well as the cones of both the atom occurrences occurring in cointeraction instances in $\Core(\Phi)$ with $\star$. Then perform the following substitutions to obtain $\Core(\Phi)^\star$:
 \begin{itemize}
   \item substitute each occurrence of $a^\star$ with $\fff$ and
-  \item substitute each structural inference rule applied to $a^\star$ as follows
+  \item substitute each structural inference rule in which $a^\star$ occurrs as follows
 \[
 \begin{array}{c}
 \vlinf{\awd}{}{a^\star}{\fff}
@@ -714,7 +713,7 @@ Finally apply $\awu$ to all the atom occurrences in the conclusion of $\Core(\Ph
  {
   \vlhy{\vls(\bar a_1.\cdots.\bar a_n)}
  }
-}
+}\quad.
 \]
 \end{proof}
 
