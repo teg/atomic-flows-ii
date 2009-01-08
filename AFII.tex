@@ -82,6 +82,11 @@ Note that when we write $\xi\{a\}$, we mean that an occurrence of $a$ exists in 
                               {\scriptscriptstyle\mathbf2}}}
 \newcommand{\mk}[1]{{#1}^{\scriptscriptstyle\bullet}}
 %---------------------------------------
+% TODO: make the concatenation explcit and add an intermediate derivation between \Phi_1 and \Phi_n
+% TODO: remove the comments about the result of a substitution not necessarily being a valid derivation
+% TODO: consider removing the definition of substitution entirely
+% TODO: replace \star with another symbol throughout (as not to conflict with star on inference rules)
+% TODO: add remark about parallell derivations and how the choice we made is one out of many
 \begin{defi}
 \emph{Inference rules}, $\rho$, have one \emph{premiss} and one \emph{conclusion}, and their \emph{instances} are used in \emph{inference steps} to rewrite inside formulae. A \emph{derivation}, $\Phi$, from $\alpha$ (\emph{premiss}) to $\beta$ (\emph{conclusion}) is a chain of inference steps with $\alpha$ at the top and $\beta$ at the bottom, and is usually indicated by $\vlder{\Phi}{\mathcal S}{\beta}{\alpha}$, where $\mathcal S$ is the name of the deductive system or a set of inference rules; a \emph{proof} is a derivation from $\ttt$; besides $\Phi$, we denote derivations with $\Psi$. We denote with $\xi\{\Phi\}$ the result of including every formula of the derivation $\Phi$ from $\alpha$ to $\beta$ into the context $\xi\vlhole$: since we adopt deep inference, $\xi\{\Phi\}$ from $\xi\{\alpha\}$ to $\xi\{\beta\}$ is a valid derivation. Furthermore, $\xi\left\{\vlder{}{}{\beta_1}{\alpha_1}\right\}\cdots\left\{\vlder{}{}{\beta_n}{\alpha_n}\right\}$ denotes the concatenation of $\xi\left\{\vlder{}{}{\beta_1}{\alpha_1}\right\}\{\alpha_2\}\cdots\{\alpha_n\},\dots,\xi\{\beta_1\}\cdots\{\beta_{n-1}\}\left\{\vlder{}{}{\beta_n}{\alpha_n}\right\}$. We denote with $\Phi\{a\ot\alpha\}$ the operation of substituting $\alpha$ into a set of \emph{occurrences} of an atom $a$ in $\Phi$; the result is not necessarily a valid derivation, because some instances of rules might break; which occurrences to replace is always made clear by suitable decorations of $a$, like $a^\star$.
 \end{defi}
@@ -148,6 +153,8 @@ The rule cointeraction is also called an (\emph{atomic}) \emph{cut}. In addition
 \end{align*}
 We do not always show the instances of rule $=$, and when we do show them, we gather several contiguous instances into one. System $\KS$ is the same as $\SKS$, but without the rules $\aiu$, $\awu$ and $\acu$. A \emph{cut-free} derivation is a derivation where $\aiu$ is not used. All derivations in this paper are in $\SKS$, unless indicated otherwise.
 \end{defi}
+
+% TODO: add a remark about the unambiguity of the inference rules in particular take the example of a AND (a AND a) -> (a AND a) AND a [associativity vs. commutativity)
 
 Note that all the structural rules only apply to atoms. As shown later, equivalent structural rules applying to formulae instead of atoms can be derived from the atomic ones together with the logical rules. The fact that we can work only with atomic structural rules is essential later on.
 
@@ -499,29 +506,14 @@ Inference rules are usually called linear when they do not `create' nor `destroy
 %===============================================================================
 \section{Preliminaries}
 
-\begin{rem}
-The formalism we are using in this paper suffers from a great deal of bureaucracy. We will simplify our lives by assuming two derivations to be equivalent if they have the same atomic flow up to associativity of contraction nodes. In particular this allows us to use algorithms which strictly speaking are ambiguous, but where the output will always be unique up to this criteria.
-\end{rem}
-
-% TODO: Check how this plays with the use of `canonical proof' where no algorithm is specified	
-
-\begin{defi}
-Given an algorithm which depends on an enumeration of atoms. The output of the algorithm is said to be \emph{canonical} if it is the same for all permutations of the enumariton of atoms.
-\end{defi}
-
-
 \begin{lem}\label{LemSuperSwitch}
 Given a context $\xi\vlhole$ and a formula $\alpha$ there exist derivations $\vlder{}{\{\swi\}}{\xi\{\alpha\}}{\vls(\alpha.\xi\{\ttt\})}$ and $\vlder{}{\{\swi\}}{\vls[\xi\{\fff\}.\alpha]}{\xi\{\alpha\}}$.
 \end{lem}
 
 \begin{proof}
 We show how to construct the first derivation, the second one can be done by symmetry. We argue by induction on the number of atoms in $\xi\vlhole$. The base case, $\xi\vlhole=\vlhole$, is trivial and the inductive cases are:
-%  There are three cases to consider, where $\beta$ is not a unit:
-% \begin{itemize}
-%   \item $\xi\vlhole=\vlhole$,
-%   \item $\xi\vlhole=\vls[\xi'\vlhole.\beta]$,
-%   \item $\xi\vlhole=\vls(\xi'\vlhole.\beta)$.
-% \end{itemize}
+
+% TODO: for some \xi'\vlhole, \beta
 
 \[
 \vlderivation
@@ -560,6 +552,10 @@ where $\beta$ is not a unit and $\Psi$ and $\Psi'$ exist by the inductive hypoth
 \begin{pro}\label{LemContr}
 Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$\\ and $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$. \end{pro}
 
+% TODO: rephrase: ``refer to [...] as''
+% TODO: say what c-up and c-down are
+% TODO: fix spelling of occur/occurs everywhere
+
 \begin{rem}
 For convenience we sometimes refer to the above derivations as inference rules and denote them $\vlinf{\cod^\star}{}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlinf{\cou^\star}{}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$. In particular if $n=2$ we write $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$.
 \end{rem}
@@ -573,7 +569,7 @@ where the atoms $a_1,\dots,a_n$ do not occurr in any interaction nor cointeracti
 \end{defi}
 
 \begin{lem}\label{LemConstrCore}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$, a core of\/ $\Phi$ can be constructed.
+For any derivation $\Phi$ from $\alpha$ to $\beta$ a core of\/ $\Phi$ can be constructed.
 \end{lem}
 
 %TODO: What is $\Phi'$?
@@ -630,9 +626,10 @@ Let $a_1,\dots,a_n$ be all the atoms that occurr in both interaction and cointer
 \]
 to obtain
 \[
-\vlder{\Phi'}{}{\vls[\beta.(a_n.\bar a_n).\cdots.(a_n.\bar a_n).\cdots.(a_1.\bar a_1).\cdots.(a_1.\bar a_1)]}{\vls([a_1.\bar a_1].\cdots.[a_1.\bar a_1].\cdots.[a_n.\bar a_n].\cdots.[a_n.\bar a_n].\alpha)}
+\vlder{\Phi'}{}{\vls[\beta.(a_n.\bar a_n).\cdots.(a_n.\bar a_n).\cdots.(a_1.\bar a_1).\cdots.(a_1.\bar a_1)]}{\vls([a_1.\bar a_1].\cdots.[a_1.\bar a_1].\cdots.[a_n.\bar a_n].\cdots.[a_n.\bar a_n].\alpha)}\quad.
 \]
 
+% TODO: repetition of ``obtain''
 
 Obtain a core of $\Phi$ from $\Phi'$ by using Lemma~\ref{LemContr}:
 \[
@@ -652,10 +649,12 @@ Obtain a core of $\Phi$ from $\Phi'$ by using Lemma~\ref{LemContr}:
 \]
 \end{proof}
 
+% TODO: Claim uniqueness of atomic flow
+% TODO: make use of \mathop and consider whitespace vs. brackets
 \newcommand{\Core}{\mathsf{Core}}
 
 \begin{defi}
-A core of a derivation $\Phi$ constructed as described in the proof of Lemma~\ref{LemConstrCore} is called \emph{the canonical core of\/ $\Phi$}, written $\Core(\Phi)$.
+A core of a derivation $\Phi$, constructed as described in the proof of Lemma~\ref{LemConstrCore}, is called \emph{a canonical core of\/ $\Phi$}, written $\Core(\Phi)$.
 \end{defi}
 
 
@@ -667,24 +666,25 @@ Given
  \item a derivation $\Phi$ from $\alpha$ to $\beta$ and
  \item a set of atoms $a_1,\dots,a_n$,
 \end{itemize}
-an \emph{experiment on $\Phi$ with respect to $a_1,\dots,a_n$} is a derivation from $\vls(\bar a_1.\cdots.\bar a_n)$ to $\beta$ which does not contain any cointeraction instances and which has the same size as $\Phi$ up to a polynomial.
+an \emph{experiment on $\Phi$ with respect to $a_1,\dots,a_n$} is a derivation from $\vls(\bar a_1.\cdots.\bar a_n)$ to $\beta$ which does not contain any cointeraction instances.
 \end{defi}
+
+% TODO: check that everything in the following definition is defined. In particular ``path'' and ``starting with''
 
 \begin{defi}
-Given a derivation $\Phi$ containing the atom occurrence $a$. Consider the atomic flow of $\Phi$, $A$, and the edge, $\epsilon$, in $A$ mapped to by $a$. The \emph{cone of $\epsilon$} is the edges in the paths starting with $\epsilon$ and the \emph{cone of $a$} is the set of atoms mapping to edges in the cone of $\epsilon$.
+Given a derivation $\Phi$ containing the atom occurrence $a$, let $A$ be the atomic flow of $\Phi$ and let $\epsilon$ be the edge such that $a$ maps to $\epsilon$. The \emph{cone of $\epsilon$} is the set of edges in the paths starting with $\epsilon$ and the \emph{cone of $a$} is the set of atoms mapping to edges in the cone of $\epsilon$.
 \end{defi}
 
-\Tom{
-This problem is now hidden in the definition of derivations/atomic flows:
-
-The above definition might cause problems:
-Consider $\vlinf{=}{}{\xi\vls[a_1.a_2]}{\xi\vls[a_3.a_4]}$ where $a_1,a_2,a_3,a_4$ are instances of the same atom. We want that the predecessor of $a_1=a_3$ and the predecesor of $a_2=a_4$ or the predecessor of $a_1=a_4$ and the predecessor of $a_2=a_3$. However, we might have that predecossor of $a_1=a_3$ and the predecessor of $a_2=a_3$. Which in turn would give invalid derivations when doing the substitutions later on.
-My preferred solution to this would be to change the definition of inference rule to contain information about which atom occurrences are `connected' and which are not, but I am reluctant to change any basic definitions more than I already have. Any suggestions? (This problem obviously has a solution so there is no hurry in fixing it, I am just pointing it out and will pretend like it is not an issue for the time being.)
-}
+% TODO: define a choice of atoms and use it in the lemma
+% TODO: rephrase the lemma
 
 \begin{lem}\label{LemConstrExp}
 Given a derivation $\Phi$ from $\alpha$ to $\beta$ and, $a_1,\dots,a_n$, a choice of either $a$ or $\bar a$ for each atom occurring in both an interaction and a cointeraction instance in $\Phi$. There exists an experiment on $\Phi$ with respect to $a_1,\dots,a_n$.
 \end{lem}
+
+% TODO: ``Consider Core \Phi: there are no interactions''
+% TODO: simplify and make (more) bulletpoints
+% TODO: don't use Care \Phi ^\star, call it \Psi
 
 \begin{proof}
 Mark the cones of the atom occurrences in the conclusion of $\Core(\Phi)$ which are not in $\beta$ and which are in $a_1,\dots,a_n$ as well as the cones of both the atom occurrences occurring in cointeraction instances in $\Core(\Phi)$ with $\star$. Then perform the following substitutions to obtain $\Core(\Phi)^\star$:
@@ -705,7 +705,7 @@ Mark the cones of the atom occurrences in the conclusion of $\Core(\Phi)$ which 
 \noalign{\bigskip}
 \vlinf{\acu}{}{\vls(a^\star.a)}{a^\star}
 \quad\rightarrow\quad
-\vlinf{\awd}{}{\vls(\fff.a)}{\fff}\quad\mbox{and}
+\vlinf{\awd}{}{\vls(\fff.a)}{\fff}\quad,
 \\
 \noalign{\bigskip}
 \vlinf{\aiu}{}{\fff}{\vls(a^\star.\bar a^\star)}
@@ -715,13 +715,15 @@ Mark the cones of the atom occurrences in the conclusion of $\Core(\Phi)$ which 
 \]
 \end{itemize}
 
+% TODO: explain better:
+
 Notice that since $\Phi$ is a proof we know that the atoms which occurr in cointeraction instances in $\Core(\Phi)$ originate from $\awd$ instances so the above substitution yields a valid derivation.
 
 Finally apply $\awu$ to all the atom occurrences in the conclusion of $\Core(\Phi)^\star$ which are not in $\beta$ to obtain the experiment:
 \[
 \vlderivation
 {
- \vlde{\Core(\Phi)\{a_1^\star\ot\fff,\dots\}}{}{\vls[\beta.(\vlinf{\awu}{}{\ttt}{\bar a_1}.\fff).\cdots.(\vlinf{\awu}{}{\ttt}{\bar a_n}.\fff)]}
+ \vlde{}{}{\vls[\beta.(\vlinf{\awu}{}{\ttt}{\bar a_1}.\fff).\cdots.(\vlinf{\awu}{}{\ttt}{\bar a_n}.\fff)]}
  {
   \vlhy{\vls(\bar a_1.\cdots.\bar a_n)}
  }
@@ -729,14 +731,23 @@ Finally apply $\awu$ to all the atom occurrences in the conclusion of $\Core(\Ph
 \]
 \end{proof}
 
+% TODO: use \mathop and whitespace instead of brackets
+
 \newcommand{\Exp}{\mathsf{Exp}}
 
 \begin{defi}
-An experiment on a derivation $\Phi$ with respect to $a_1,\dots,a_n$ constructed as described in the proof of Lemma~\ref{LemConstrExp} is called \emph{the canonical experiment on $\Phi$ with respect to $a_1,\dots,a_n$}, written $\Exp(\Phi,a_1,\dots,a_n)$.
+An experiment on a derivation $\Phi$ with respect to $a_1,\dots,a_n$, constructed as described in the proof of Lemma~\ref{LemConstrExp}, is called \emph{the canonical experiment on $\Phi$ with respect to $a_1,\dots,a_n$}, written $\Exp(\Phi,a_1,\dots,a_n)$.
 \end{defi}
 
+% TODO: ``the involution'' instead of ``negation''
+% TODO: exchange A with something else
+% TODO: try a different approach: b_1 AND ... AND b_n where b_i\in\{a_i,\bar a_i\}
+% TODO: big remark or section on philosophy
+% TODO: make this into a definition and a remark on symmetry/confluence
+% TODO: remove use of canonical
+
 \begin{lem}
-Given a set of atoms of size $2n$ closed under negation. Consider an enumeration, $A$, of all the possible chocies of $n$ distinct, non-dual atoms from this set. Then $\bigvee_{\{a_1,\dots,a_n\}\in A}\vls(a_1.\cdots.a_n)$ is a tautology with a canonical proof in $\{\aid,\acu,\med,\swi\}$.
+Given a set of atoms of size $2n$ closed under negation, consider an enumeration, $A$, of all the possible choices of $n$ distinct, non-dual atoms from this set. Then $\bigvee_{\{a_1,\dots,a_n\}\in A}\vls(a_1.\cdots.a_n)$ is a tautology with a canonical proof in $\{\aid,\acu,\med,\swi\}$.
 \end{lem}
 
 \begin{proof}
@@ -765,12 +776,16 @@ Argue by induction on $n$. Let $A_k$ be $A$ restricted to $\{a_1,\dots,a_k\}$. T
 Notice that the conclusion consists of the same number of occurrences of each atom and every atom occurrs in exactly one interaction instance. It follows that each atom occurrs in the same number of cocontraction instances and hence the atomic flow of each atom is the same and the proof is canonical.
 \end{proof}
 
+% TODO: remove use of canonical
+
 \begin{thm}
 Given a proof, $\Phi$, of $\alpha$ in $\SKS$ there exists a canonical proof of $\alpha$ in $\SKS\setminus\{\aiu\}$.
 \end{thm}
 
+% TODO: remove use of canonical
+
 \begin{proof}
-Let $\{a_1,\dots,a_n,\bar a_1,\dots,\bar a_n\}$ be the set of atoms in $\Phi$ which occurr in both interaction and cointeraction instances and let $A$ be an enumeration of all the possible chocies of $n$ distinct, non-dual atoms from this set. Now build the canonical derivation:
+Let $\{a_1,\dots,a_n,\bar a_1,\dots,\bar a_n\}$ be the set of atoms in $\Phi$ which occurr in both interaction and cointeraction instances and let $A$ be an enumeration of all the possible choices of $n$ distinct, non-dual atoms from this set. Now build the canonical derivation:
 \[
 \vlderivation
 {
@@ -782,6 +797,8 @@ Let $\{a_1,\dots,a_n,\bar a_1,\dots,\bar a_n\}$ be the set of atoms in $\Phi$ wh
 \]
 \end{proof}
 
+% TODO: remove use of canonical
+
 \begin{cor}
 Given a proof of $\alpha$ in $\SKS$ there exists a canonical proof of $\alpha$ in $\KS$.
 \end{cor}
@@ -792,6 +809,8 @@ Given a proof of $\alpha$ in $\SKS$ there exists a canonical proof of $\alpha$ i
 
 \newcommand{\Norm}{\mathsf{Norm}}
 
+% TODO: ``an enumeration'': no need
+
 \begin{defi}
 The \emph{normaliser}, $\Norm(\Phi,a_1,\dots,a_n)$, is an operator taking as input an enumeration of atoms and a derivation of the form
 \[
@@ -801,6 +820,8 @@ where $\alpha$ and $\beta$ are formulae and returning a derivation of the form
 \[
 \vlder{\Norm(\Phi,a_1,\dots,a_n)}{}{\beta}{\alpha}\quad.
 \]
+
+% TODO: add (co)contractions at the top and bottom and remove the star
 
 We define $\Norm$ inductively on the number of arguments. Let $\Norm(\Phi)=\Phi$ and for $n>0$ let $\Norm(\Phi,a_1,\dots,a_n)$ be
 \newbox\DeltaTopK
