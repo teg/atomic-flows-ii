@@ -82,13 +82,22 @@ Note that when we write $\xi\{a\}$, we mean that an occurrence of $a$ exists in 
                               {\scriptscriptstyle\mathbf2}}}
 \newcommand{\mk}[1]{{#1}^{\scriptscriptstyle\bullet}}
 %---------------------------------------
-% TODO: make the concatenation explcit and add an intermediate derivation between \Phi_1 and \Phi_n
 % TODO: remove the comments about the result of a substitution not necessarily being a valid derivation
 % TODO: consider removing the definition of substitution entirely
 % TODO: replace \star with another symbol throughout (as not to conflict with star on inference rules)
 % TODO: add remark about parallell derivations and how the choice we made is one out of many
 \begin{defi}
-\emph{Inference rules}, $\rho$, have one \emph{premiss} and one \emph{conclusion}, and their \emph{instances} are used in \emph{inference steps} to rewrite inside formulae. A \emph{derivation}, $\Phi$, from $\alpha$ (\emph{premiss}) to $\beta$ (\emph{conclusion}) is a chain of inference steps with $\alpha$ at the top and $\beta$ at the bottom, and is usually indicated by $\vlder{\Phi}{\mathcal S}{\beta}{\alpha}$, where $\mathcal S$ is the name of the deductive system or a set of inference rules; a \emph{proof} is a derivation from $\ttt$; besides $\Phi$, we denote derivations with $\Psi$. We denote with $\xi\{\Phi\}$ the result of including every formula of the derivation $\Phi$ from $\alpha$ to $\beta$ into the context $\xi\vlhole$: since we adopt deep inference, $\xi\{\Phi\}$ from $\xi\{\alpha\}$ to $\xi\{\beta\}$ is a valid derivation. Furthermore, $\xi\left\{\vlder{}{}{\beta_1}{\alpha_1}\right\}\cdots\left\{\vlder{}{}{\beta_n}{\alpha_n}\right\}$ denotes the concatenation of $\xi\left\{\vlder{}{}{\beta_1}{\alpha_1}\right\}\{\alpha_2\}\cdots\{\alpha_n\},\dots,\xi\{\beta_1\}\cdots\{\beta_{n-1}\}\left\{\vlder{}{}{\beta_n}{\alpha_n}\right\}$. We denote with $\Phi\{a\ot\alpha\}$ the operation of substituting $\alpha$ into a set of \emph{occurrences} of an atom $a$ in $\Phi$; the result is not necessarily a valid derivation, because some instances of rules might break; which occurrences to replace is always made clear by suitable decorations of $a$, like $a^\star$.
+\emph{Inference rules}, $\rho$, have one \emph{premiss} and one \emph{conclusion}, and their \emph{instances} are used in \emph{inference steps} to rewrite inside formulae. A \emph{derivation}, $\Phi$, from $\alpha$ (\emph{premiss}) to $\beta$ (\emph{conclusion}) is a chain of inference steps with $\alpha$ at the top and $\beta$ at the bottom, and is usually indicated by $\vlder{\Phi}{\mathcal S}{\beta}{\alpha}$, where $\mathcal S$ is the name of the deductive system or a set of inference rules; a \emph{proof} is a derivation from $\ttt$; besides $\Phi$, we denote derivations with $\Psi$. We denote with $\xi\{\Phi\}$ the result of including every formula of the derivation $\Phi$ from $\alpha$ to $\beta$ into the context $\xi\vlhole$: since we adopt deep inference, $\xi\{\Phi\}$ from $\xi\{\alpha\}$ to $\xi\{\beta\}$ is a valid derivation. Furthermore, $\xi\left\{\vlder{}{}{\beta_1}{\alpha_1}\right\}\cdots\left\{\vlder{}{}{\beta_n}{\alpha_n}\right\}$ denotes
+\[
+\begin{array}{c}
+\xi\left\{\vlder{}{}{\beta_1}{\alpha_1}\right\}\{\alpha_2\}\cdots\{\alpha_n\}\\
+\vdots\\
+\xi\{\beta_1\}\cdots\{\beta_{i-1}\}\left\{\vlder{}{}{\beta_i}{\alpha_i}\right\}\{\alpha_{i+1}\}\cdots\{\alpha_n\}\\
+\vdots\\
+\xi\{\beta_1\}\cdots\{\beta_{n-1}\}\left\{\vlder{}{}{\beta_n}{\alpha_n}\right\}
+\end{array}\quad.
+\]
+We denote with $\Phi\{a\ot\alpha\}$ the operation of substituting $\alpha$ into a set of \emph{occurrences} of an atom $a$ in $\Phi$; the result is not necessarily a valid derivation, because some instances of rules might break; which occurrences to replace is always made clear by suitable decorations of $a$, like $a^\star$.
 \end{defi}
 
 \newcommand{\KS}{\mathsf{KS}}
@@ -820,8 +829,6 @@ where $\alpha$ and $\beta$ are formulae and returning a derivation of the form
 \[
 \vlder{\Norm(\Phi,a_1,\dots,a_n)}{}{\beta}{\alpha}\quad.
 \]
-
-% TODO: add (co)contractions at the top and bottom and remove the star
 
 We define $\Norm$ inductively on the number of arguments. Let $\Norm(\Phi)=\Phi$ and for $n>0$ let $\Norm(\Phi,a_1,\dots,a_n)$ be
 \newbox\DeltaTopK
