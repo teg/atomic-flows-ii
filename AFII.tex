@@ -21,17 +21,6 @@
 \newtheorem{defi}[thm]{Definition}
 %---------
 
-%-------------------------------------------------------- REMOVE WHEN PAPER DONE
-\newcommand{\Ale}[1]{{\color{red}\noindent {\bf A:} #1}}
-\newcommand{\Tom}[1]{{\color{green}\noindent {\bf T:} #1}}
-\newcount\todocount\todocount=0
-\newcommand{\TODO}[1]{\global\advance\todocount by1%
-            {\color{red}\noindent{\bf\the\todocount\ TODO:} #1}}\vlupdate{\TODO}
-%\renewcommand{\Ale}[1]{\relax}  % Comment/uncomment these three lines
-%\renewcommand{\Tom}[1]{\relax}  % in order to display/hide inline comments
-%\renewcommand{\TODO}[1]{\relax} %
-%-------------------------------------------------------- REMOVE WHEN PAPER DONE
-
 \begin{document}
 
 \title[Normalisation Control in Deep Inference   via Atomic Flows II]
@@ -522,8 +511,6 @@ Given a context $\xi\vlhole$ and a formula $\alpha$ there exist derivations $\vl
 \begin{proof}
 We show how to construct the first derivation, the second one can be done by symmetry. We argue by induction on the number of atoms in $\xi\vlhole$. The base case, $\xi\vlhole=\vlhole$, is trivial and the inductive cases are:
 
-% TODO: for some \xi'\vlhole, \beta
-
 \[
 \vlderivation
 {
@@ -549,7 +536,7 @@ We show how to construct the first derivation, the second one can be done by sym
  }
 }\quad,
 \]
-where $\beta$ is not a unit and $\Psi$ and $\Psi'$ exist by the inductive hypothesis.
+for some $\xi'\vlhole, \beta$ where $\beta$ is not a unit and $\Psi$ and $\Psi'$ exist by the inductive hypothesis.
 \end{proof}
 
 \newcommand{\contr}{\mathsf{c}}
