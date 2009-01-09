@@ -68,7 +68,6 @@ Note that when we write $\xi\{a\}$, we mean that an occurrence of $a$ exists in 
                               {\scriptstyle\mathbf2}
                               {\scriptstyle\mathbf2}
                               {\scriptscriptstyle\mathbf2}}}
-\newcommand{\mk}[1]{{#1}^{\scriptscriptstyle\bullet}}
 %---------------------------------------
 % TODO: replace \star with another symbol throughout (as not to conflict with star on inference rules)
 % TODO: add remark about parallell derivations and how the choice we made is one out of many
@@ -678,29 +677,31 @@ Given a derivation $\Phi$ from $\alpha$ to $\beta$ and, $a_1,\dots,a_n$, a choic
 % TODO: simplify and make (more) bulletpoints
 % TODO: don't use Core \Phi ^\star, call it \Psi
 
+\newcommand{\mk}[1]{{#1}^{\scriptscriptstyle\bullet}}
+
 \begin{proof}
-Mark the cones of the atom occurrences in the conclusion of $\Core(\Phi)$ which are not in $\beta$ and which are in $a_1,\dots,a_n$ as well as the cones of both the atom occurrences occurring in cointeraction instances in $\Core(\Phi)$ with $\star$. Then perform the following substitutions to obtain $\Core(\Phi)^\star$:
+Mark the cones of the atom occurrences in the conclusion of $\Core(\Phi)$ which are not in $\beta$ and which are in $a_1,\dots,a_n$ as well as the cones of both the atom occurrences occurring in cointeraction instances in $\Core(\Phi)$ with $\bullet$. Then perform the following substitutions to obtain $\Core(\Phi)^\star$:
 \begin{itemize}
-  \item substitute each occurrence of $a^\star$ with $\fff$ and
-  \item substitute each structural inference rule in which $a^\star$ occurrs as follows
+  \item substitute each occurrence of $\mk a$ with $\fff$ and
+  \item substitute each structural inference rule in which $\mk a$ occurrs as follows
 \[
 \begin{array}{c}
-\vlinf{\awd}{}{a^\star}{\fff}
+\vlinf{\awd}{}{\mk a}{\fff}
 \quad\rightarrow\quad
 \vlinf{=}{}{\fff}{\fff}\quad,
 \\
 \noalign{\bigskip}
-\vlinf{\acd}{}{a^\star}{\vls[a^\star.a^\star]}
+\vlinf{\acd}{}{\mk a}{\vls[\mk a.\mk a]}
 \quad\rightarrow\quad
 \vlinf{=}{}{\fff}{\fff}\quad,
 \\
 \noalign{\bigskip}
-\vlinf{\acu}{}{\vls(a^\star.a)}{a^\star}
+\vlinf{\acu}{}{\vls(\mk a.a)}{\mk a}
 \quad\rightarrow\quad
 \vlinf{\awd}{}{\vls(\fff.a)}{\fff}\quad,
 \\
 \noalign{\bigskip}
-\vlinf{\aiu}{}{\fff}{\vls(a^\star.\bar a^\star)}
+\vlinf{\aiu}{}{\fff}{\vls(\mk a.\bar {\mk a})}
 \quad\rightarrow\quad
 \vlinf{=}{}{\fff}{\vls(\fff.\fff)}\quad.
 \end{array}
