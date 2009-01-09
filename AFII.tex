@@ -500,6 +500,89 @@ Figure~\ref{FigExAF} has some examples of atomic flows associated with derivatio
 
 Inference rules are usually called linear when they do not `create' nor `destroy' atoms. Linear rules of $\SKS$ are switch, medial and (every equation defining) rule $=$. Note that linear inference rules do not introduce any vertices in atomic flows.
 
+%-------------------------------------------------------------------------------
+\subsection{Paths and Cycles}
+
+We now define the notions of `$\ai$-path' and `$\ai$-cycle' in atomic flows. Paths are sequences of adjacent edges that only `go down' or only `go up'; $\ai$-paths are formed by joining paths at interaction or cointeraction vertices; $\ai$-cycles are circular $\ai$-paths. We also define the notion of `simple edge', \emph{i.e.}, an edge connecting an interaction and a cointeraction, as in the first diagram in this paper.
+
+%---------------------------------------
+\begin{defi}
+Given an atomic flow $(V,E,\eta,\up,\lo)$ and $\epsilon_1,\dots,\epsilon_h\in E$ such that, for $1\le i<h$, we have $\lo(\epsilon_i)=\up(\epsilon_{i+1})$, $\up(\epsilon_1)=\nu$ and $\lo(\epsilon_h)=\nu'$, we say that $\epsilon_1,\dots,\epsilon_h$ is a \emph{path from $\nu$ to $\nu'$} and that $\epsilon_h,\dots,\epsilon_1$ is a \emph{path from $\nu'$ to $\nu$}; both paths have \emph{length} $h$. An \emph{$\ai$-path from $\nu$ to $\nu'$} of \emph{length} $h$ is either a path from $\nu$ to $\nu'$ of length $h$ or a sequence of edges $\epsilon_1,\dots,\epsilon_k,\epsilon_{k+1},\dots,\epsilon_h$ such that $\epsilon_k \ne \epsilon_{k+1}$ and, for some $\nu''\in V$ with $\eta(\nu'')\in\{\aid,\aiu\}$, we have that $\epsilon_1,\dots,\epsilon_k$ is an $\ai$-path from $\nu$ to $\nu''$ and $\epsilon_{k+1},\dots,\epsilon_h$ is an $\ai$-path from $\nu''$ to $\nu'$. An $\ai$-path of length $h$ is \emph{maximal} if no $\ai$-path containing its edges has length greater than $h$. An $\ai$-path from (resp., to) $\nu$ of length $h$ is a \emph{maximal\/ $\ai$-path from} (resp., \emph{to}) $\nu$ if no $\ai$-path from (resp., to) $\nu$ containing its edges has length greater than $h$. A path from an interaction to a cointeraction vertex or vice versa is called an \emph{$\ai$-connection}.
+\end{defi}
+
+%---------------------------------------
+\begin{exa}
+The atomic flow on the left has the $\ai$-paths on the right, and the paths are marked with an asterisk:
+\[
+\begin{array}{@{}c@{}c@{}}
+\atomicflow{
+( 2  ,10)*{\afaidnw{}{}};
+( 0  , 6)*{\afvju8\one{}};
+( 6  , 6)*{\afacd\two{}\three{}\four{}};
+( 8  , 8)*{\afawunw{}{}};
+(10  , 6)*{\afvjd8{}\five};
+( 8  , 0)*{\afaiunw{}{}};
+(-1.5, 0)*{\invisiblemark};
+(11.5, 0)*{\invisiblemark}}
+\qquad&
+\begin{array}{@{}lllll@{}}
+\one^*               &                &                  &           &       \\
+\one,\two            &\two^*          &\three^*          &           &       \\
+\one,\two,\four      &\two,\four^*    &\three,\four^*    &\four^*    &       \\
+\one,\two,\four,\five&\two,\four,\five&\three,\four,\five&\four,\five&\five^*\\
+\end{array}\quad.
+\\
+\end{array}
+\]
+In addition, the flow has the paths and $\ai$-paths obtained from the shown ones by inverting the order of edges, for example $\five,\four,\two,\one$ is an $\ai$-path. The $\ai$-paths from the interaction vertex are $\one$ and $\two$ and $\two,\four$ and $\two,\four,\five$; the $\ai$-paths to the contraction vertex are $\one,\two$ and $\two$ and $\three$ and $\four$ and $\five,\four$; of all the $\ai$-paths to the cointeraction vertex, $\two,\four$ is the only $\ai$-connection; the only other $\ai$-connection in the flow is $\four,\two$. The maximal $\ai$-paths are $\one,\two,\four,\five$ and $\three,\four,\five$ and their inverses. The maximal $\ai$-paths from the cointeraction vertex are $\four,\two,\one$ and $\four,\three$ and $\five$; the maximal $\ai$-paths to the contraction vertex are $\one,\two$ and $\three$ and $\five,\four$.
+\end{exa}
+
+Simple edges represent immediate causality relations between axioms and cuts. They play a crucial role in the following, in particular when they belong to $\ai$-cycles.
+
+%---------------------------------------
+\begin{defi}\label{DefSimple}
+An $\ai$-connection consisting of a single edge is called a \emph{simple edge}. A \emph{clean path} is an $\ai$-path where every $\ai$-connection is a simple edge. An \emph{$\ai$-cycle} is an $\ai$-path from a vertex to itself, where no edge appears twice; we do not distinguish $\ai$-cycles that only differ for cyclic permutations of their edges or for inversion, so, if $\epsilon_1,\dots,\epsilon_h$ is an $\ai$-cycle, then $\epsilon_2,\dots,\epsilon_h,\epsilon_1$ and $\epsilon_h,\dots,\epsilon_1$ are the same $\ai$-cycle. A \emph{fragile cycle} is an $\ai$-cycle containing a simple edge. Atomic flows and $\ai$-paths are both called \emph{cycle-free} if they do not contain $\ai$-cycles.
+\end{defi}
+
+%---------------------------------------
+\begin{exa}\label{ExExtrem}
+In the following cycle-free flow all the $\ai$-paths are clean paths; $\one$, $\two$ and $\three$ are $\ai$-connections and simple edges:
+\[
+\atomicflow{
+( 2,0)*{\afaiu{}{}\one{}{}{}};
+( 0,4)*{\afacdnw{}{}{}{}};
+( 6,4)*{\afaidnw{}{}};
+(10,0)*{\afaiu\two{}\three{}{}{}};
+(14,4)*{\afaidnw{}{}{}{}};
+(18,0)*{\afacd{}{}{}{}{}{}}}
+\quad.
+\]
+\end{exa}
+
+%---------------------------------------
+\begin{exa}
+Consider the following atomic flow:
+\nopagebreak[4]\medskip\afnegspace
+\[
+\atomicflow{
+( 8,12)*{\afaidex\one{}{}\two{}{}41};
+( 0, 6)*{\afacunw\three{}{}\four};
+(16, 6)*{\afacunw\seven{}{}\eight};
+( 8, 8)*{\afaid{}\five\six{}{}{}};
+( 4, 2)*{\afaiunw{}{}};
+(12, 2)*{\afaiunw{}{}};
+( 8, 0)*{\afaiuex{}{}{}{}{}{}51}}
+\quad.
+\]
+\afnegspace
+The flow contains two $\ai$-cycles: $\one,\four,\five,\six,\seven,\two$ and $\one,\three,\eight,\two$. The first $\ai$-cycle contains the two simple edges $\five$ and $\six$, so it is a fragile cycle; the second $\ai$-cycle does not contain any simple edge. Note that the two $\ai$-cycles are `overlapping', in the sense that edges $\one$ and $\two$ belong to both.
+\end{exa}
+
+%---------------------------------------
+\begin{rem}
+If an $\ai$-path is maximal, then it is cycle-free.
+\end{rem}
+
 %===============================================================================
 \section{Preliminaries}
 
