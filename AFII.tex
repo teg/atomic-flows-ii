@@ -783,33 +783,29 @@ Finally apply $\awu$ to all the atom occurrences in the conclusion of $\Psi$ whi
 An experiment on a derivation $\Phi$ with respect to $a_1,\dots,a_n$, constructed as described in the proof of Lemma~\ref{LemConstrExp}, is called \emph{the canonical experiment on $\Phi$ with respect to $a_1,\dots,a_n$}, written $\Exp(\Phi,a_1,\dots,a_n)$.
 \end{defi}
 
-% TODO: ``the involution'' instead of ``negation''
-% TODO: exchange A with something else
-% TODO: try a different approach: b_1 AND ... AND b_n where b_i\in\{a_i,\bar a_i\}
 % TODO: big remark or section on philosophy
-% TODO: make this into a definition and a remark on symmetry/confluence
-% TODO: remove use of canonical
+% TODO: remark on symmetry/confluence
 
-\begin{lem}
-Given a set of atoms of size $2n$ closed under negation, consider an enumeration, $A$, of all the possible choices of $n$ distinct, non-dual atoms from this set. Then $\bigvee_{\{a_1,\dots,a_n\}\in A}\vls(a_1.\cdots.a_n)$ is a tautology with a canonical proof in $\{\aid,\acu,\med,\swi\}$.
-\end{lem}
+\newcommand{\Choices}{\mathcal C}
 
-\begin{proof}
-Argue by induction on $n$. Let $A_k$ be $A$ restricted to $\{a_1,\dots,a_k\}$. The base case, $n=0$, is trivial and the inductive case is:
+\begin{defi}
+Given an enumeration of $n$ distinct atoms $\mathcal A$, consider a set, $\Choices$, of all the possible choices of $\mathcal A$, then the \emph{canonical proof of $\bigvee_{\{a_1,\dots,a_n\}\in\Choices}\vls(a_1.\cdots.a_n)$} is defined by induction on $n$:
+
+Let $\Choices_k$ be $\Choices$ restricted to the first $k$ atoms from $\mathcal A$. The base case, $n=0$, is trivial and the inductive case is:
 \[
 \vlderivation
 {
- \vlin{=}{}{\bigvee_{\{a_1,\dots,a_k\}\in A_k}\vls(a_1.\cdots.a_k)}
+ \vlin{=}{}{\bigvee_{\{a_1,\dots,a_k\}\in \Choices_k}\vls(a_1.\cdots.a_k)}
  {
-  \vlde{}{\{\swi\}}{\bigvee_{\{a_1,\dots,a_{k-1}\}\in A_{k-1}}\vls[(a_1.\cdots.a_{k-1}.a_k).(a_1.\cdots.a_{k-1}.\bar a_k)]}
+  \vlde{}{\{\swi\}}{\bigvee_{\{a_1,\dots,a_{k-1}\}\in \Choices_{k-1}}\vls[(a_1.\cdots.a_{k-1}.a_k).(a_1.\cdots.a_{k-1}.\bar a_k)]}
   {
-   \vlde{}{\{\swi\}}{\bigvee_{\{a_1,\dots,a_{k-1}\}\in A_{k-1}}\vls([a_k.\bar a_k].(a_1.\cdots.a_{k-1}).(a_1.\cdots.a_{k-1}))}
+   \vlde{}{\{\swi\}}{\bigvee_{\{a_1,\dots,a_{k-1}\}\in \Choices_{k-1}}\vls([a_k.\bar a_k].(a_1.\cdots.a_{k-1}).(a_1.\cdots.a_{k-1}))}
    {
-    \vlde{}{\{\med,\acu\}}{\vls(\bigwedge_{i=1}^{2^{k-1}}[a_k.\bar a_k].\bigvee_{\{a_1,\dots,a_{k-1}\}\in A_{k-1}}\vls((a_1.\cdots.a_{k-1}).(a_1.\cdots.a_{k-1})))}
+    \vlde{}{\{\med,\acu\}}{\vls(\bigwedge_{i=1}^{2^{k-1}}[a_k.\bar a_k].\bigvee_{\{a_1,\dots,a_{k-1}\}\in \Choices_{k-1}}\vls((a_1.\cdots.a_{k-1}).(a_1.\cdots.a_{k-1})))}
     {
-     \vlin{\aid}{}{\vls([a_k.\bar a_k].\bigvee_{\{a_1,\dots,a_{k-1}\}\in A_{k-1}}(a_1.\cdots.a_{k-1}))}
+     \vlin{\aid}{}{\vls([a_k.\bar a_k].\bigvee_{\{a_1,\dots,a_{k-1}\}\in \Choices_{k-1}}(a_1.\cdots.a_{k-1}))}
      {
-      \vlhy{\bigvee_{\{a_1,\dots,a_{k-1}\}\in A_{k-1}}\vls(a_1.\cdots.a_{k-1})}
+      \vlhy{\bigvee_{\{a_1,\dots,a_{k-1}\}\in \Choices_{k-1}}\vls(a_1.\cdots.a_{k-1})}
      }
     }
    }
@@ -817,8 +813,7 @@ Argue by induction on $n$. Let $A_k$ be $A$ restricted to $\{a_1,\dots,a_k\}$. T
  }
 }\quad.
 \]
-Notice that the conclusion consists of the same number of occurrences of each atom and every atom occurs in exactly one interaction instance. It follows that each atom occurs in the same number of cocontraction instances and hence the atomic flow of each atom is the same and the proof is canonical.
-\end{proof}
+\end{defi}
 
 % TODO: remove use of canonical
 
