@@ -683,17 +683,42 @@ Given a set, $\mathcal A$, of $n$ distinct atoms. A \emph{choice of $\mathcal A$
 Given a derivation $\Phi$ from $\alpha$ to $\beta$, let $\mathcal A$ be the set of all the distinct atoms occurring in both interaction and cointeraction instances, then given a choice of $\mathcal A$, $a_1,\dots,a_n$, there exists an experiment on $\Phi$ with respect to $a_1,\dots,a_n$.
 \end{lem}
 
-% TODO: ``Consider Core \Phi: there are no interactions''
-% TODO: simplify and make (more) bulletpoints
-% TODO: don't use Core \Phi ^\star, call it \Psi
+% TODO: Check the use of atomic flow terminology vs. derivation terminology
 
 \newcommand{\mk}[1]{{#1}^{\scriptscriptstyle\bullet}}
 
 \begin{proof}
-Mark the cones of the atom occurrences in the conclusion of $\Core(\Phi)$ which are not in $\beta$ and which are in $a_1,\dots,a_n$ as well as the cones of both the atom occurrences occurring in cointeraction instances in $\Core(\Phi)$ with $\bullet$. Then perform the following substitutions to obtain $\Core(\Phi)^\star$:
+Consider $\Core(\Phi)$ from $\vls([a_1.\bar a_1].\cdots.[a_n.\bar a_n])$ to $\vls[\beta.(a_1.\bar a_1).\cdots.(a_n.\bar a_n)]$. Note that this derivation still contains cointeraction instances, but since $\Phi$ is a proof and by the definition of $\Core$, every path from a cointeraction instance goes to a weakening instance.
+
+We now mark the following atom occurrences with $\mk\ $:
+\begin{itemize}
+\item the cones of the atom occurrences in the conclusion of $\Core(\Phi)$ which are not in $\beta$ and which are in $a_1,\dots,a_n$ and
+\item the cones of both the atom occurrences occurring in cointeraction instances.
+\end{itemize}
+This gives us
+\[
+\vlderivation
+{
+ \vlde{}{}{\vls[\beta.(\mk a_1.\bar a_1).\cdots.(\mk a_n.\bar a_n)]}
+ {
+  \vlde{}{}{\zeta\left\{\vlinf{\aiu}{}{\fff}{\vls(\mk b_1.\mk{\bar b_1})}\right\}}
+  {
+   \vlde{}{}{\vdots}
+   {
+    \vlde{}{}{\xi\left\{\vlinf{\aiu}{}{\fff}{\vls(\mk b_m.\mk{\bar b_m})}\right\}}
+    {
+     \vlhy{\vls([\mk a_1.\bar a_1].\cdots.[\mk a_n.\bar a_n])}
+    }
+   }
+  }
+ }
+}\quad.
+\]
+
+Then perform the following substitutions to obtain $\Psi$:
 \begin{itemize}
   \item substitute each occurrence of $\mk a$ with $\fff$ and
-  \item substitute each structural inference rule in which $\mk a$ occurs as follows
+  \item substitute each structural inference rule instance in which $\mk a$ occurs as follows
 \[
 \begin{array}{c}
 \vlinf{\awd}{}{\mk a}{\fff}
@@ -717,12 +742,28 @@ Mark the cones of the atom occurrences in the conclusion of $\Core(\Phi)$ which 
 \end{array}
 \]
 \end{itemize}
+This gives us
+\[
+\Psi=\vlderivation
+{
+ \vlde{}{}{\vls[\beta.(\fff.\bar a_1).\cdots.(\fff.\bar a_n)]}
+ {
+  \vlde{}{}{\xi\left\{\vlinf{=}{}{\fff}{\vls(\fff.\fff)}\right\}}
+  {
+   \vlde{}{}{\vdots}
+   {
+    \vlde{}{}{\xi\left\{\vlinf{=}{}{\fff}{\vls(\fff.\fff)}\right\}}
+    {
+     \vlhy{\vls([\fff.\bar a_1].\cdots.[\fff.\bar a_n])}
+    }
+   }
+  }
+ }
+}\quad.
+\]
+By the above remark we know that no cone will ever contain an atom occurrence occurring in an interaction instance, so $\Psi$ is a valid derivation.
 
-% TODO: explain better:
-
-Notice that since $\Phi$ is a proof we know that the atoms which occur in cointeraction instances in $\Core(\Phi)$ originate from $\awd$ instances so the above substitution yields a valid derivation.
-
-Finally apply $\awu$ to all the atom occurrences in the conclusion of $\Core(\Phi)^\star$ which are not in $\beta$ to obtain the experiment:
+Finally apply $\awu$ to all the atom occurrences in the conclusion of $\Psi$ which are not in $\beta$ to obtain the experiment:
 \[
 \vlderivation
 {
