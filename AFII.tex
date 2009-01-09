@@ -150,7 +150,7 @@ We do not always show the instances of rule $=$, and when we do show them, we ga
 \end{defi}
 
 \begin{rem}
-It is important not to confuse the repersenetation of a derivation with the actual derivation. Although the representation of derivations we use in this paper might be slightly ambigous, the actual derivations they represent contain all the needed information to disambiguate them. In particular we often ommit or collapse many equations into on,
+It is important not to confuse the repersenetation of a derivation with the actual derivation. Although the representation of derivations we use in this paper might be slightly ambigous, the actual derivations they represent contain all the needed information to disambiguate them. In particular we often ommit or collapse many equations into one, but the actual derivation contains each equation instance, and in particular it contains information about which equation was used and exactly which subformula is mapped to which metavariable in the rule. Consider the following representation of an inference rule $\vlinf{=}{}{\vls(a.(a.a))}{\vls((a.a).a)}$, this does not contain enough information to determine which $a$ in the conclusion corresponds to which $a$ in the premiss. However, the actual inference rule will also tell us if the commutative or associative equaiton was used, so this is not a problem.
 \end{rem}
 
 Note that all the structural rules only apply to atoms. As shown later, equivalent structural rules applying to formulae instead of atoms can be derived from the atomic ones together with the logical rules. The fact that we can work only with atomic structural rules is essential later on.
@@ -547,12 +547,10 @@ for some $\xi'\vlhole, \beta$ where $\beta$ is not a unit and $\Psi$ and $\Psi'$
 \begin{pro}\label{LemContr}
 Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$\\ and $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$. \end{pro}
 
-% TODO: rephrase: ``refer to [...] as''
-% TODO: say what c-up and c-down are
 % TODO: fix spelling of occur/occurs everywhere
 
 \begin{rem}
-For convenience we sometimes refer to the above derivations as inference rules and denote them $\vlinf{\cod^\star}{}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlinf{\cou^\star}{}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$. In particular if $n=2$ we write $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$.
+In the non-atomic verison of the system $\SKS$ the above derivations are repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations when $n=2$.
 \end{rem}
 
 \begin{defi}
