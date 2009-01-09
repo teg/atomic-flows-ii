@@ -640,7 +640,6 @@ Obtain a core of $\Phi$ from $\Phi'$ by using Lemma~\ref{LemContr}:
 \]
 \end{proof}
 
-% TODO: Claim uniqueness of atomic flow
 % TODO: make use of \mathop and consider whitespace vs. brackets
 \newcommand{\Core}{\mathsf{Core}}
 
@@ -648,6 +647,13 @@ Obtain a core of $\Phi$ from $\Phi'$ by using Lemma~\ref{LemContr}:
 A core of a derivation $\Phi$, constructed as described in the proof of Lemma~\ref{LemConstrCore}, is called \emph{a canonical core of\/ $\Phi$}, written $\Core(\Phi)$.
 \end{defi}
 
+The following proposition justifies calling the above construction `canonical'.
+
+% TODO: prove or make nicer
+
+\begin{pro}
+Given two cores of a derivation constructed as described in the proof of Lemma~\ref{LemConstrCore}, the atomic flows of the two cores are equal.
+\end{pro}
 
 \section{Experiments}
 
