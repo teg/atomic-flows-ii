@@ -547,8 +547,6 @@ for some $\xi'\vlhole, \beta$ where $\beta$ is not a unit and $\Psi$ and $\Psi'$
 \begin{pro}\label{LemContr}
 Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$\\ and $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$. \end{pro}
 
-% TODO: fix spelling of occur/occurs everywhere
-
 \begin{rem}
 In the non-atomic verison of the system $\SKS$ the above derivations are repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations when $n=2$.
 \end{rem}
@@ -558,7 +556,7 @@ Given a derivation $\Phi$ from $\alpha$ to $\beta$, where $a_1,\dots,a_n$ are al
 \[
 \vlder{}{}{\vls[\beta.(a_n.\bar a_n).\cdots.(a_1.\bar a_1)]}{\vls([a_1.\bar a_1].\cdots.[a_n.\bar a_n].\alpha)}
 \]
-where the atoms $a_1,\dots,a_n$ do not occurr in any interaction nor cointeraction instances.
+where the atoms $a_1,\dots,a_n$ do not occur in any interaction nor cointeraction instances.
 \end{defi}
 
 \begin{lem}\label{LemConstrCore}
@@ -568,7 +566,7 @@ For any derivation $\Phi$ from $\alpha$ to $\beta$ a core of\/ $\Phi$ can be con
 %TODO: What is $\Phi'$?
 
 \begin{proof}
-Let $a_1,\dots,a_n$ be all the atoms that occurr in both interaction and cointeraction instances in $\Phi$. For each $a$ in $a_1,\dots,a_n$ consider the instances of $\aid$ and $\aiu$ where $a$ occurrs. Using Lemma~\ref{LemSuperSwitch} apply the following transformations to said rule instances:
+Let $a_1,\dots,a_n$ be all the atoms that occur in both interaction and cointeraction instances in $\Phi$. For each $a$ in $a_1,\dots,a_n$ consider the instances of $\aid$ and $\aiu$ where $a$ occurs. Using Lemma~\ref{LemSuperSwitch} apply the following transformations to said rule instances:
 \[
 \vlderivation
 {
@@ -685,7 +683,7 @@ Given a derivation $\Phi$ from $\alpha$ to $\beta$ and, $a_1,\dots,a_n$, a choic
 Mark the cones of the atom occurrences in the conclusion of $\Core(\Phi)$ which are not in $\beta$ and which are in $a_1,\dots,a_n$ as well as the cones of both the atom occurrences occurring in cointeraction instances in $\Core(\Phi)$ with $\bullet$. Then perform the following substitutions to obtain $\Core(\Phi)^\star$:
 \begin{itemize}
   \item substitute each occurrence of $\mk a$ with $\fff$ and
-  \item substitute each structural inference rule in which $\mk a$ occurrs as follows
+  \item substitute each structural inference rule in which $\mk a$ occurs as follows
 \[
 \begin{array}{c}
 \vlinf{\awd}{}{\mk a}{\fff}
@@ -712,7 +710,7 @@ Mark the cones of the atom occurrences in the conclusion of $\Core(\Phi)$ which 
 
 % TODO: explain better:
 
-Notice that since $\Phi$ is a proof we know that the atoms which occurr in cointeraction instances in $\Core(\Phi)$ originate from $\awd$ instances so the above substitution yields a valid derivation.
+Notice that since $\Phi$ is a proof we know that the atoms which occur in cointeraction instances in $\Core(\Phi)$ originate from $\awd$ instances so the above substitution yields a valid derivation.
 
 Finally apply $\awu$ to all the atom occurrences in the conclusion of $\Core(\Phi)^\star$ which are not in $\beta$ to obtain the experiment:
 \[
@@ -768,7 +766,7 @@ Argue by induction on $n$. Let $A_k$ be $A$ restricted to $\{a_1,\dots,a_k\}$. T
  }
 }\quad.
 \]
-Notice that the conclusion consists of the same number of occurrences of each atom and every atom occurrs in exactly one interaction instance. It follows that each atom occurrs in the same number of cocontraction instances and hence the atomic flow of each atom is the same and the proof is canonical.
+Notice that the conclusion consists of the same number of occurrences of each atom and every atom occurs in exactly one interaction instance. It follows that each atom occurs in the same number of cocontraction instances and hence the atomic flow of each atom is the same and the proof is canonical.
 \end{proof}
 
 % TODO: remove use of canonical
@@ -780,7 +778,7 @@ Given a proof, $\Phi$, of $\alpha$ in $\SKS$ there exists a canonical proof of $
 % TODO: remove use of canonical
 
 \begin{proof}
-Let $\{a_1,\dots,a_n,\bar a_1,\dots,\bar a_n\}$ be the set of atoms in $\Phi$ which occurr in both interaction and cointeraction instances and let $A$ be an enumeration of all the possible choices of $n$ distinct, non-dual atoms from this set. Now build the canonical derivation:
+Let $\{a_1,\dots,a_n,\bar a_1,\dots,\bar a_n\}$ be the set of atoms in $\Phi$ which occur in both interaction and cointeraction instances and let $A$ be an enumeration of all the possible choices of $n$ distinct, non-dual atoms from this set. Now build the canonical derivation:
 \[
 \vlderivation
 {
