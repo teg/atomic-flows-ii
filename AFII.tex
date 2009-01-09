@@ -503,7 +503,7 @@ Inference rules are usually called linear when they do not `create' nor `destroy
 We now define the notion of paths in atomic flows. Paths are sequences of adjacent edges that only `go down' or only `go up'.
 %---------------------------------------
 \begin{defi}
-Given an atomic flow $(V,E,\eta,\up,\lo)$ and $\epsilon_1,\dots,\epsilon_h\in E$ such that, for $1\le i<h$, we have $\lo(\epsilon_i)=\up(\epsilon_{i+1})$, $\up(\epsilon_1)=\nu$ and $\lo(\epsilon_h)=\nu'$, we say that $\epsilon_1,\dots,\epsilon_h$ is a \emph{path from $\nu$ to $\nu'$} and that $\epsilon_h,\dots,\epsilon_1$ is a \emph{path from $\nu'$ to $\nu$}; both paths have \emph{length} $h$.
+Given an atomic flow $(V,E,\eta,\up,\lo)$ and $\epsilon_1,\dots,\epsilon_h\in E$ such that, for $1\le i<h$, we have $\lo(\epsilon_i)=\up(\epsilon_{i+1})$, $\up(\epsilon_1)=\nu$ and $\lo(\epsilon_h)=\nu'$, we say that $\epsilon_1,\dots,\epsilon_h$ is a \emph{path from $\nu$ to $\nu'$} and that $\epsilon_h,\dots,\epsilon_1$ is a \emph{path from $\nu'$ to $\nu$}. We say that a path \emph{starts with $\epsilon$} (resp., \emph{ends with $\epsilon$}) if $\epsilon$ is in the path and there is no edge $\epsilon'$ in the path such that $\up(\epsilon')=\lo(\epsilon)$ (resp., $\lo(\epsilon')=\up(\epsilon)$).
 \end{defi}
 %===============================================================================
 \section{Preliminaries}
@@ -670,8 +670,6 @@ Given
 \end{itemize}
 an \emph{experiment on $\Phi$ with respect to $a_1,\dots,a_n$} is a derivation from $\vls(\bar a_1.\cdots.\bar a_n)$ to $\beta$ which does not contain any cointeraction instances.
 \end{defi}
-
-% TODO: check that everything in the following definition is defined. In particular ``path'' and ``starting with''
 
 \begin{defi}
 Given a derivation $\Phi$ containing the atom occurrence $a$, let $A$ be the atomic flow of $\Phi$ and let $\epsilon$ be the edge such that $a$ maps to $\epsilon$. The \emph{cone of $\epsilon$} is the set of edges in the paths starting with $\epsilon$ and the \emph{cone of $a$} is the set of atoms mapping to edges in the cone of $\epsilon$.
