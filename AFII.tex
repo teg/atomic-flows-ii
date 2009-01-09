@@ -69,8 +69,6 @@ Note that when we write $\xi\{a\}$, we mean that an occurrence of $a$ exists in 
                               {\scriptstyle\mathbf2}
                               {\scriptscriptstyle\mathbf2}}}
 %---------------------------------------
-% TODO: replace \star with another symbol throughout (as not to conflict with star on inference rules)
-% TODO: add remark about parallell derivations and how the choice we made is one out of many
 \begin{defi}
 \emph{Inference rules}, $\rho$, have one \emph{premiss} and one \emph{conclusion}, and their \emph{instances} are used in \emph{inference steps} to rewrite inside formulae. A \emph{derivation}, $\Phi$, from $\alpha$ (\emph{premiss}) to $\beta$ (\emph{conclusion}) is a chain of inference steps with $\alpha$ at the top and $\beta$ at the bottom, and is usually indicated by $\vlder{\Phi}{\mathcal S}{\beta}{\alpha}$, where $\mathcal S$ is the name of the deductive system or a set of inference rules; a \emph{proof} is a derivation from $\ttt$; besides $\Phi$, we denote derivations with $\Psi$. We denote with $\xi\{\Phi\}$ the result of including every formula of the derivation $\Phi$ from $\alpha$ to $\beta$ into the context $\xi\vlhole$: since we adopt deep inference, $\xi\{\Phi\}$ from $\xi\{\alpha\}$ to $\xi\{\beta\}$ is a valid derivation. Furthermore, $\xi\left\{\vlder{}{}{\beta_1}{\alpha_1}\right\}\cdots\left\{\vlder{}{}{\beta_n}{\alpha_n}\right\}$ denotes
 \[
@@ -83,6 +81,10 @@ Note that when we write $\xi\{a\}$, we mean that an occurrence of $a$ exists in 
 \end{array}\quad.
 \]
 \end{defi}
+
+\begin{rem}
+Although the caluclus of structures does not allow for independent parts of a derivation to happen in parallell, it is a natural and more efficient way of thinking of derivations and this motivated the above notation. In a new formalism being developed by us and others, Formalism A, derivations written in parallell is a representative of the equivalence class of all possible interleavings of the said derivations. In this paper we do not need the full power of Formalism A, so for the sake of efficiency we chose a parallell derivation to stand for one particular calculus of structures derivation rather than an equivelance class.
+\end{rem}
 
 \newcommand{\KS}{\mathsf{KS}}
 \newcommand{\SKS}{\mathsf{SKS}}
