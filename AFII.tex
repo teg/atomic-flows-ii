@@ -815,32 +815,30 @@ Let $\Choices_k$ be $\Choices$ restricted to the first $k$ atoms from $\mathcal 
 \]
 \end{defi}
 
-% TODO: remove use of canonical
+% TODO: justify use of `canonical'
 
-\begin{thm}
-Given a proof, $\Phi$, of $\alpha$ in $\SKS$ there exists a canonical proof of $\alpha$ in $\SKS\setminus\{\aiu\}$.
-\end{thm}
-
-% TODO: remove use of canonical
-
-\begin{proof}
-Let $\{a_1,\dots,a_n,\bar a_1,\dots,\bar a_n\}$ be the set of atoms in $\Phi$ which occur in both interaction and cointeraction instances and let $A$ be an enumeration of all the possible choices of $n$ distinct, non-dual atoms from this set. Now build the canonical derivation:
+\begin{defi}
+Given a proof, $\Phi$, of $\alpha$ in $\SKS$, let $a_1,\dots,a_n$ be all the atoms which occur in both interaction and cointeraction instances in $\Phi$ and let $\Choices$ be all the possible choices of $a_1,\dots,a_n$, then \emph{a canonical cut-free proof obtained from $\Phi$} is:
 \[
 \vlderivation
 {
- \vlde{}{\{\acd,\med\}}{\alpha}
+ \vlin{(2^n-1)\times\cod}{}{\alpha}
  {
-  \vlpr{}{\{\aid,\acu,\swi,\med\}}{\bigvee_{\{a_1,\dots,a_n\}\in A}\vlder{\Exp(\Phi,a_1,\dots,a_n)}{\SKS\setminus\{\aiu\}}{\alpha}{\vls(a_1.\cdots.a_n)}}
+  \vlpr{}{\{\aid,\acu,\swi,\med\}}{\bigvee_{\{a_1,\dots,a_n\}\in\Choices}\left(\vlder{\Exp(\Phi,a_1,\dots,a_n)}{\SKS\setminus\{\aiu\}}{\alpha}{\vls(a_1.\cdots.a_n)}\right)}
  }
 }
 \]
-\end{proof}
+\end{defi}
 
-% TODO: remove use of canonical
+\begin{pro}
+Given a proof $\Phi$ and two canonical cut-free proofs obtained from $\Phi$, the atomic flows of the two cut-free proofs are equal.
+\end{pro}
 
-\begin{cor}
-Given a proof of $\alpha$ in $\SKS$ there exists a canonical proof of $\alpha$ in $\KS$.
-\end{cor}
+% TODO: maybe put this somewhere else
+%
+% \begin{cor}
+% Given a proof of $\alpha$ in $\SKS$ there exists a canonical proof of $\alpha$ in $\KS$.
+% \end{cor}
 
 
 %===============================================================================
