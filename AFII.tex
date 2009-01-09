@@ -47,7 +47,6 @@ Deep inference is a relatively recent development in proof theory. It is a metho
 
 \newcommand{\fff}{\mathsf f}
 \newcommand{\ttt}{\mathsf t}
-\newcommand{\ot}{\mathbin\shortleftarrow}
 
 %---------------------------------------
 \begin{defi}
@@ -71,8 +70,6 @@ Note that when we write $\xi\{a\}$, we mean that an occurrence of $a$ exists in 
                               {\scriptscriptstyle\mathbf2}}}
 \newcommand{\mk}[1]{{#1}^{\scriptscriptstyle\bullet}}
 %---------------------------------------
-% TODO: remove the comments about the result of a substitution not necessarily being a valid derivation
-% TODO: consider removing the definition of substitution entirely
 % TODO: replace \star with another symbol throughout (as not to conflict with star on inference rules)
 % TODO: add remark about parallell derivations and how the choice we made is one out of many
 \begin{defi}
@@ -86,7 +83,6 @@ Note that when we write $\xi\{a\}$, we mean that an occurrence of $a$ exists in 
 \xi\{\beta_1\}\cdots\{\beta_{n-1}\}\left\{\vlder{}{}{\beta_n}{\alpha_n}\right\}
 \end{array}\quad.
 \]
-We denote with $\Phi\{a\ot\alpha\}$ the operation of substituting $\alpha$ into a set of \emph{occurrences} of an atom $a$ in $\Phi$; the result is not necessarily a valid derivation, because some instances of rules might break; which occurrences to replace is always made clear by suitable decorations of $a$, like $a^\star$.
 \end{defi}
 
 \newcommand{\KS}{\mathsf{KS}}
@@ -680,7 +676,7 @@ Given a derivation $\Phi$ from $\alpha$ to $\beta$ and, $a_1,\dots,a_n$, a choic
 
 % TODO: ``Consider Core \Phi: there are no interactions''
 % TODO: simplify and make (more) bulletpoints
-% TODO: don't use Care \Phi ^\star, call it \Psi
+% TODO: don't use Core \Phi ^\star, call it \Psi
 
 \begin{proof}
 Mark the cones of the atom occurrences in the conclusion of $\Core(\Phi)$ which are not in $\beta$ and which are in $a_1,\dots,a_n$ as well as the cones of both the atom occurrences occurring in cointeraction instances in $\Core(\Phi)$ with $\star$. Then perform the following substitutions to obtain $\Core(\Phi)^\star$:
