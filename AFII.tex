@@ -58,6 +58,17 @@ Deep inference is a relatively recent development in proof theory. It is a metho
 Negation is only defined for atoms, which is not a limitation thanks to De Morgan laws.
 \end{rem}
 
+\begin{rem}
+For simplicity we fix an partial order of atoms. The constraints of the ordering are:
+\begin{itemize}
+\item $a<b$ or $b<a$ if $a$ and $b$ are distinct, non-dual atoms and
+\item $a<b$ implies $\bar a<b$.
+\end{itemize}
+This allows us to refer to a set of atoms as an enumeration of atoms and denote it $a_1,\dots,a_n$ if the atoms are pairwise non-dual or $a_1,\bar a_1,\dots,a_n,\bar a_n$ if they are closed under duality. When we refer to `the first $k$ atoms from a set of atoms', it is with respect to this ordering.
+
+The ordering is arbitrary and in many cases different choices of orderings give the same results. We will point this out as we go along. In those cases the only reason for the need of an ordering is that the representation we are using (formulae and derivations) are linear and force a choice.
+\end{rem}
+
 Note that when we write $\xi\{a\}$, we mean that an occurrence of $a$ exists in the formula, we singled it out and we refer specifically to that occurrence. It is important to distinguish between an atom $a$ and a set of occurrences of atom $a$ inside a formula or a derivation. In the following, we mark in various ways occurrences of atoms, and we perform several substitutions of formulae in the place of atom occurrences.
 
 \newcommand{\one}{{\mathchoice{\scriptstyle\mathbf1}
@@ -649,15 +660,11 @@ A core of a derivation $\Phi$, constructed as described in the proof of Lemma~\r
 
 The following proposition justifies calling the above construction `canonical'.
 
-% TODO: make convention about ordering of atoms and how this allows us to denote a set as an enumeration
-
 \begin{pro}
 Given two canonical cores of a derivation, possibly under two different orderings of atoms, the atomic flows of the two cores are equal.
 \end{pro}
 
 \section{Experiments}
-
-% TODO: define duality
 
 \begin{defi}
 Given
@@ -792,8 +799,6 @@ Given two canonical experiments of a derivation, possibly under two different or
 
 \begin{defi}
 Given a set of $2n$ atoms, $\mathcal A$, which is closed under duality, consider a set, $\Choices$, of all the possible choices of $\mathcal A$, then the \emph{canonical proof of }$\bigvee_{\{a_1,\dots,a_n\}\in\Choices}\vls(a_1.\cdots.a_n)$ is defined by induction on $n$:
-
-% TODO: in the definition of enumeration of atoms note that we use "firest k atoms"
 
 Let $\Choices_k$ be $\Choices$ restricted to the first $k$ atoms from $\mathcal A$. The base case, $n=0$, is trivial and the inductive case is:
 \[
