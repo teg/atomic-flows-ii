@@ -58,6 +58,8 @@ Deep inference is a relatively recent development in proof theory. It is a metho
 Negation is only defined for atoms, which is not a limitation thanks to De Morgan laws.
 \end{rem}
 
+% TODO: remove all orderings
+
 \begin{rem}
 For simplicity we fix an partial order of atoms. The constraints of the ordering are:
 \begin{itemize}
@@ -83,16 +85,26 @@ Note that when we write $\xi\{a\}$, we mean that an occurrence of $a$ exists in 
 \begin{defi}
 \emph{Inference rules}, $\rho$, have one \emph{premiss} and one \emph{conclusion}, and their \emph{instances} are used in \emph{inference steps} to rewrite inside formulae. A \emph{derivation}, $\Phi$, from $\alpha$ (\emph{premiss}) to $\beta$ (\emph{conclusion}) is a chain of inference steps with $\alpha$ at the top and $\beta$ at the bottom, and is usually indicated by $\vlder{\Phi}{\mathcal S}{\beta}{\alpha}$, where $\mathcal S$ is the name of the deductive system or a set of inference rules; a \emph{proof} is a derivation from $\ttt$; besides $\Phi$, we denote derivations with $\Psi$. We denote with $\xi\{\Phi\}$ the result of including every formula of the derivation $\Phi$ from $\alpha$ to $\beta$ into the context $\xi\vlhole$: since we adopt deep inference, $\xi\{\Phi\}$ from $\xi\{\alpha\}$ to $\xi\{\beta\}$ is a valid derivation. Furthermore, $\xi\left\{\vlder{}{}{\beta_1}{\alpha_1}\right\}\cdots\left\{\vlder{}{}{\beta_n}{\alpha_n}\right\}$ denotes
 \[
-\begin{array}{c}
-\xi\left\{\vlder{}{}{\beta_1}{\alpha_1}\right\}\{\alpha_2\}\cdots\{\alpha_n\}\\
-\vdots\\
-\xi\{\beta_1\}\cdots\{\beta_{i-1}\}\left\{\vlder{}{}{\beta_i}{\alpha_i}\right\}\{\alpha_{i+1}\}\cdots\{\alpha_n\}\\
-\vdots\\
-\xi\{\beta_1\}\cdots\{\beta_{n-1}\}\left\{\vlder{}{}{\beta_n}{\alpha_n}\right\}
-\end{array}\quad.
+\vlderivation
+{
+ \vlin{=}{}{\xi\{\beta_1\}\cdots\{\beta_{n-1}\}\left\{\vlder{}{}{\beta_n}{\alpha_n}\right\}}
+ {
+  \vlin{=}{}{\vdots}
+  {
+   \vlin{=}{}{\xi\{\beta_1\}\cdots\{\beta_{i-1}\}\left\{\vlder{}{}{\beta_i}{\alpha_i}\right\}\{\alpha_{i+1}\}\cdots\{\alpha_n\}}
+   {
+    \vlin{=}{}{\vdots}
+    {
+     \vlhy{\xi\left\{\vlder{}{}{\beta_1}{\alpha_1}\right\}\{\alpha_2\}\cdots\{\alpha_n\}}
+    }
+   }
+  }
+ }
+}\quad.
 \]
 \end{defi}
 
+% TODO: Redo (see handwritten notes)
 \begin{rem}
 Although the caluclus of structures does not allow for independent parts of a derivation to happen in parallell, it is a natural and more efficient way of thinking of derivations and this motivated the above notation. In a new formalism being developed by us and others, Formalism A, derivations written in parallell is a representative of the equivalence class of all possible interleavings of the said derivations. In this paper we do not need the full power of Formalism A, so for the sake of efficiency we chose a parallell derivation to stand for one particular calculus of structures derivation rather than an equivelance class.
 \end{rem}
@@ -160,6 +172,7 @@ The rule cointeraction is also called an (\emph{atomic}) \emph{cut}. In addition
 We do not always show the instances of rule $=$, and when we do show them, we gather several contiguous instances into one. System $\KS$ is the same as $\SKS$, but without the rules $\aiu$, $\awu$ and $\acu$. A \emph{cut-free} derivation is a derivation where $\aiu$ is not used. All derivations in this paper are in $\SKS$, unless indicated otherwise.
 \end{defi}
 
+% TODO: Redo
 \begin{rem}
 It is important not to confuse the repersenetation of a derivation with the actual derivation. Although the representation of derivations we use in this paper might be slightly ambigous, the actual derivations they represent contain all the needed information to disambiguate them. In particular we often ommit or collapse many equations into one, but the actual derivation contains each equation instance, and in particular it contains information about which equation was used and exactly which subformula is mapped to which metavariable in the rule. Consider the following representation of an inference rule $\vlinf{=}{}{\vls(a.(a.a))}{\vls((a.a).a)}$, this does not contain enough information to determine which $a$ in the conclusion corresponds to which $a$ in the premiss. However, the actual inference rule will also tell us if the commutative or associative equaiton was used, so this is not a problem.
 \end{rem}
@@ -513,8 +526,10 @@ Inference rules are usually called linear when they do not `create' nor `destroy
 
 We now define the notion of paths in atomic flows. Paths are sequences of adjacent edges that only `go down' or only `go up'.
 %---------------------------------------
+%TODO: put this where it belongs:
+% Given a path $\epsilon_1,\dots,\epsilon_n$ such that $n=1$ or $up(\epsilon_1)=lo(\epsilon_2)$, we say that \emph{$\epsilon_1$ is the bottom edge} and \emph{$\epsilon_n$ is the top edge} of $\epsilon_1,\dots,\epsilon_n$.
 \begin{defi}
-Given an atomic flow $(V,E,\eta,\up,\lo)$ and $\epsilon_1,\dots,\epsilon_h\in E$ such that, for $1\le i<h$, we have $\lo(\epsilon_i)=\up(\epsilon_{i+1})$, $\up(\epsilon_1)=\nu$ and $\lo(\epsilon_h)=\nu'$, we say that $\epsilon_1,\dots,\epsilon_h$ is a \emph{path from $\nu$ to $\nu'$} and that $\epsilon_h,\dots,\epsilon_1$ is a \emph{path from $\nu'$ to $\nu$}. We say that a path \emph{starts with $\epsilon$} (resp., \emph{ends with $\epsilon$}) if $\epsilon$ is in the path and there is no edge $\epsilon'$ in the path such that $\up(\epsilon')=\lo(\epsilon)$ (resp., $\lo(\epsilon')=\up(\epsilon)$).
+Given an atomic flow $(V,E,\eta,\up,\lo)$ and $\epsilon_1,\dots,\epsilon_h\in E$ such that, for $1\le i<h$, we have $\lo(\epsilon_i)=\up(\epsilon_{i+1})$, $\up(\epsilon_1)=\nu$ and $\lo(\epsilon_h)=\nu'$, we say that $\epsilon_1,\dots,\epsilon_h$ is a \emph{path from $\nu$ to $\nu'$} and that $\epsilon_h,\dots,\epsilon_1$ is a \emph{path from $\nu'$ to $\nu$}.
 \end{defi}
 %===============================================================================
 \section{Preliminaries}
@@ -561,14 +576,14 @@ for some $\xi'\vlhole, \beta$ where $\beta$ is not a unit and $\Psi$ and $\Psi'$
 %TODO: Say that the proof is routine
 
 \begin{pro}\label{LemContr}
-Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$\\ and $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$. \end{pro}
+Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$. \end{pro}
 
 \begin{rem}
-In the non-atomic verison of the system $\SKS$ the above derivations are repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations when $n=2$.
+In the non-atomic version of system $\SKS$ the above derivations correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlder{}{\{\acu,\med\}}{\vls(\alpha.\alpha)}{\alpha}$.
 \end{rem}
 
 \begin{defi}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$, where $a_1,\bar a_1,\dots,a_n,\bar a_n$ are all the distinct atoms that appear in both interaction and cointeraction instances, a \emph{core of\/ $\Phi$} is defined as a derivation 
+Given a derivation $\Phi$ from $\alpha$ to $\beta$, where $a_1,\bar a_1,\dots,a_n,\bar a_n$ are all the distinct atoms such that each appears in both interaction and cointeraction instances, a \emph{core of\/ $\Phi$} is defined as a derivation 
 \[
 \vlder{}{}{\vls[\beta.(a_n.\bar a_n).\cdots.(a_1.\bar a_1)]}{\vls([a_1.\bar a_1].\cdots.[a_n.\bar a_n].\alpha)}
 \]
@@ -578,6 +593,8 @@ where the atoms $a_1,\bar a_1,\dots,a_n,\bar a_n$ do not occur in any interactio
 \begin{lem}\label{LemConstrCore}
 For any derivation $\Phi$ from $\alpha$ to $\beta$ a core of\/ $\Phi$ can be constructed.
 \end{lem}
+
+%TODO: 2n?
 
 \begin{proof}
 Let $a_1,\bar a_1,\dots,a_n,\bar a_n$ be all the atoms that occur in both interaction and cointeraction instances in $\Phi$. For each pair $a,\bar a$ in $a_1,\bar a_1,\dots,a_n,\bar a_n$ consider the instances of $\aid$ and $\aiu$ where $a,\bar a$ occur. Using Lemma~\ref{LemSuperSwitch} apply the following transformations to said rule instances:
@@ -658,7 +675,11 @@ We now construct a core of $\Phi$ from $\Phi'$ by using Lemma~\ref{LemContr}:
 A core of a derivation $\Phi$, constructed as described in the proof of Lemma~\ref{LemConstrCore}, is called \emph{a canonical core of\/ $\Phi$}, written $\Core(\Phi)$.
 \end{defi}
 
+% TODO: cononicity depends on atcomic flows, not on derivations
+
 The following proposition justifies calling the above construction `canonical'.
+
+% TODO: the real point is associativity
 
 \begin{pro}
 Given two canonical cores of a derivation, possibly under two different orderings of atoms, the atomic flows of the two cores are equal.
@@ -670,7 +691,7 @@ Given two canonical cores of a derivation, possibly under two different ordering
 Given
 \begin{itemize}
  \item a derivation $\Phi$ from $\alpha$ to $\beta$ and
- \item an enumeration of pairwise non-dual atoms $a_1,\dots,a_n$,
+ \item distinct and pairwise non-dual atoms $a_1,\dots,a_n$,
 \end{itemize}
 an \emph{experiment on $\Phi$ with respect to $a_1,\dots,a_n$} is a derivation from $\vls(\bar a_1.\cdots.\bar a_n)$ to $\beta$ which does not contain any cointeraction instances.
 \end{defi}
@@ -679,27 +700,32 @@ an \emph{experiment on $\Phi$ with respect to $a_1,\dots,a_n$} is a derivation f
 Given a derivation $\Phi$ containing the atom occurrence $a$, let $A$ be the atomic flow of $\Phi$ and let $\epsilon$ be the edge such that $a$ maps to $\epsilon$. The \emph{cone of $\epsilon$} is the set of edges in the paths starting with $\epsilon$ and the \emph{cone of $a$} is the set of atom occurrences mapping to edges in the cone of $\epsilon$.
 \end{defi}
 
+% TODO: don't call it choice, call it something else. assignment?
+
 \begin{defi}
 Given a set of $2n$ atoms, $\mathcal A$, which is closed under duality, a \emph{choice of $\mathcal A$} is a subset of $\mathcal A$ of size $n$ where no two atoms are dual.
 \end{defi}
 
+% TODO: too much, the last sentence is enough
 \begin{rem}
 Given a choice of a set of $2n$ atoms closed under duality, for every dual pair, $a,\bar a$ in the original set the choice contains exactly one atom $a$ or $\bar a$. The possible number of choices is therefore $2^n$.
 \end{rem}
 
+% TODO: instead of saynig ``occuring'' say ``each of which occurs''
+
 \begin{lem}\label{LemConstrExp}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$, let $\mathcal A$ be all the atoms occurring in both interaction and cointeraction instances, then given a choice of $\mathcal A$, $a_1,\dots,a_n$, there exists an experiment on $\Phi$ with respect to $a_1,\dots,a_n$.
+Given a derivation $\Phi$ from $\alpha$ to $\beta$, let $\mathcal A$ be all the atoms occurring in both interaction and cointeraction instances and let $a_1,\dots,a_n$ be a choice of $\mathcal A$, then there exists an experiment on $\Phi$ with respect to $a_1,\dots,a_n$.
 \end{lem}
 
 \newcommand{\mk}[1]{{#1}^{\scriptscriptstyle\bullet}}
 
 \begin{proof}
-Consider $\Core(\Phi)$ from $\vls([a_1.\bar a_1].\cdots.[a_n.\bar a_n])$ to $\vls[\beta.(a_1.\bar a_1).\cdots.(a_n.\bar a_n)]$. Note that this derivation still contains cointeraction instances, but since $\Phi$ is a proof and by the definition of $\Core$, every path in the atomic flow of $\Core$ from a cointeraction nodes goes to a weakening node.
+Consider $\vlder{\Core(\Phi)}{}{\vls[\beta.(a_1.\bar a_1).\cdots.(a_n.\bar a_n)]}{\vls([a_1.\bar a_1].\cdots.[a_n.\bar a_n])}$. Note that this derivation might contain cointeraction instances, but since $\Phi$ is a proof and by the definition of $\Core$, every path in the atomic flow of $\Core(\Phi)$ from a cointeraction nodes goes to a weakening node.
 
 We now mark the following atom occurrences with$\mk\ $:
 \begin{itemize}
-\item the cones of the atom occurrences in the conclusion of $\Core(\Phi)$ which are not in $\beta$ and which are in $a_1,\dots,a_n$ and
-\item the cones of both the atom occurrences occurring in cointeraction instances.
+\item the cones of the occurrences of $a_1,\dots,a_n$ in the conclusion of $\Core(\Phi)$ which are not in $\beta$ and
+\item the cones of both the atom occurrences appearing in cointeraction instances.
 \end{itemize}
 This gives us
 \[
@@ -724,63 +750,53 @@ for some $b_1,\bar b_1,\dots,b_m,\bar b_m,\xi_1\vlhole,\xi_k\vlhole$.
 
 Then perform the following substitutions to obtain $\Psi$:
 \begin{itemize}
-  \item substitute each occurrence of $\mk a$ with $\fff$ and
-  \item substitute each structural inference rule instance in which $\mk a$ occurs as follows
+  \item substitute each occurrence of $\mk c$ with $\fff$ and
+  \item substitute each structural inference rule instance in which $\mk c$ occurs as follows
 \[
 \begin{array}{c}
-\vlinf{\awd}{}{\mk a}{\fff}
+\vlinf{\awd}{}{\mk c}{\fff}
 \quad\rightarrow\quad
 \vlinf{=}{}{\fff}{\fff}\quad,
 \\
 \noalign{\bigskip}
-\vlinf{\acd}{}{\mk a}{\vls[\mk a.\mk a]}
+\vlinf{\acd}{}{\mk c}{\vls[\mk c.\mk c]}
 \quad\rightarrow\quad
 \vlinf{=}{}{\fff}{\fff}\quad,
 \\
 \noalign{\bigskip}
-\vlinf{\acu}{}{\vls(\mk a.a)}{\mk a}
+\vlinf{\acu}{}{\vls(\mk c.c)}{\mk c}
 \quad\rightarrow\quad
-\vlinf{\awd}{}{\vls(\fff.a)}{\fff}\quad,
+\vlinf{\awd}{}{\vls(\fff.c)}{\fff}\quad,
 \\
 \noalign{\bigskip}
-\vlinf{\aiu}{}{\fff}{\vls(\mk a.\bar {\mk a})}
+\vlinf{\aiu}{}{\fff}{\vls(\mk c.\bar {\mk c})}
 \quad\rightarrow\quad
 \vlinf{=}{}{\fff}{\vls(\fff.\fff)}\quad.
 \end{array}
 \]
 \end{itemize}
-This gives us
+% TODO: Make it a proper Remark (and remove the above one)
+By the above remark we know that no cone will ever contain an atom occurrence appearing in an interaction instance, so the result of the substitution gives a valid derivation:
 \[
-\Psi=\vlderivation
-{
- \vlde{}{}{\vls[\beta.(\fff.\bar a_1).\cdots.(\fff.\bar a_n)]}
- {
-  \vlde{}{}{\xi_1\left\{\vlinf{=}{}{\fff}{\vls(\fff.\fff)}\right\}}
-  {
-   \vlde{}{}{\vdots}
-   {
-    \vlde{}{}{\xi_k\left\{\vlinf{=}{}{\fff}{\vls(\fff.\fff)}\right\}}
-    {
-     \vlhy{\vls([\fff.\bar a_1].\cdots.[\fff.\bar a_n])}
-    }
-   }
-  }
- }
-}\quad.
+\Psi=
+\vlder{}{}{\vls[\beta.(\fff.\bar a_1).\cdots.(\fff.\bar a_n)]}
+{\vls([\fff.\bar a_1].\cdots.[\fff.\bar a_n])}\quad.
 \]
-By the above remark we know that no cone will ever contain an atom occurrence occurring in an interaction instance, so $\Psi$ is a valid derivation.
 
-Finally apply $\awu$ to all the atom occurrences in the conclusion of $\Psi$ which are not in $\beta$ to obtain the experiment:
+Finally, consider the experiment:
 \[
 \vlderivation
 {
- \vlde{}{}{\vls[\beta.(\vlinf{\awu}{}{\ttt}{\bar a_1}.\fff).\cdots.(\vlinf{\awu}{}{\ttt}{\bar a_n}.\fff)]}
+ \vlde{\Psi}{}{\vls[\beta.(\vlinf{\awu}{}{\ttt}{\bar a_1}.\fff).\cdots.(\vlinf{\awu}{}{\ttt}{\bar a_n}.\fff)]}
  {
   \vlhy{\vls(\bar a_1.\cdots.\bar a_n)}
  }
 }\quad.
 \]
 \end{proof}
+
+% TODO: justify putting two \fff's into the cut
+% TODO: explain using (co)weakening reductions as per AFI
 
 \newcommand{\Exp}{\mathsf{Exp}}
 
@@ -789,7 +805,7 @@ An experiment on a derivation $\Phi$ with respect to $a_1,\dots,a_n$, constructe
 \end{defi}
 
 \begin{pro}
-Given two canonical experiments of a derivation, possibly under two different orderings of atoms, the atomic flows of the two experiments are equal.
+Given two canonical experiments of a derivation the atomic flows of the two experiments are equal modulo associativity of contractions.
 \end{pro}
 
 % TODO: big remark or section on philosophy
@@ -797,24 +813,27 @@ Given two canonical experiments of a derivation, possibly under two different or
 
 \newcommand{\Choices}{\mathcal C}
 
+% TODO: don't call it the fist $k$ atoms from A
+% TODO: call the proof ``beautiful'' or something like that
+
 \begin{defi}
-Given a set of $2n$ atoms, $\mathcal A$, which is closed under duality, consider a set, $\Choices$, of all the possible choices of $\mathcal A$, then the \emph{canonical proof of }$\bigvee_{\{a_1,\dots,a_n\}\in\Choices}\vls(a_1.\cdots.a_n)$ is defined by induction on $n$:
+Given a set of $2n$ atoms, $\mathcal A$, which is closed under duality, consider a set, $\Choices$, of all the possible choices of $\mathcal A$, then the \emph{canonical proof of }$\bigvee_{\{a_1,\dots,a_n\}\in\Choices}\vlsbr(a_1.\cdots.a_n)$ is defined by induction on $n$:
 
 Let $\Choices_k$ be $\Choices$ restricted to the first $k$ atoms from $\mathcal A$. The base case, $n=0$, is trivial and the inductive case is:
 \[
 \vlderivation
 {
- \vlin{=}{}{\bigvee_{\{a_1,\dots,a_k\}\in \Choices_k}\vls(a_1.\cdots.a_k)}
+ \vlin{=}{}{\bigvee_{\{a_1,\dots,a_k\}\in \Choices_k}\vlsbr(a_1.\cdots.a_k)}
  {
-  \vlde{}{\{\swi\}}{\bigvee_{\{a_1,\dots,a_{k-1}\}\in \Choices_{k-1}}\vls[(a_1.\cdots.a_{k-1}.a_k).(a_1.\cdots.a_{k-1}.\bar a_k)]}
+  \vlde{}{\{\swi\}}{\bigvee_{\{a_1,\dots,a_{k-1}\}\in \Choices_{k-1}}\vlsbr[(a_1.\cdots.a_{k-1}.a_k).(a_1.\cdots.a_{k-1}.\bar a_k)]}
   {
-   \vlde{}{\{\swi\}}{\bigvee_{\{a_1,\dots,a_{k-1}\}\in \Choices_{k-1}}\vls([a_k.\bar a_k].(a_1.\cdots.a_{k-1}).(a_1.\cdots.a_{k-1}))}
+   \vlde{}{\{\swi\}}{\bigvee_{\{a_1,\dots,a_{k-1}\}\in \Choices_{k-1}}\vlsbr([a_k.\bar a_k].a_1.\cdots.a_{k-1}.a_1.\cdots.a_{k-1})}
    {
-    \vlde{}{\{\med,\acu\}}{\vls(\bigwedge_{i=1}^{2^{k-1}}[a_k.\bar a_k].\bigvee_{\{a_1,\dots,a_{k-1}\}\in \Choices_{k-1}}\vls((a_1.\cdots.a_{k-1}).(a_1.\cdots.a_{k-1})))}
+    \vlde{}{\{\med,\acu\}}{\vls(\bigwedge_{i=1}^{2^{k-1}}[a_k.\bar a_k].\bigvee_{\{a_1,\dots,a_{k-1}\}\in \Choices_{k-1}}(a_1.\cdots.a_{k-1}.a_1.\cdots.a_{k-1}))}
     {
      \vlin{\aid}{}{\vls([a_k.\bar a_k].\bigvee_{\{a_1,\dots,a_{k-1}\}\in \Choices_{k-1}}(a_1.\cdots.a_{k-1}))}
      {
-      \vlhy{\bigvee_{\{a_1,\dots,a_{k-1}\}\in \Choices_{k-1}}\vls(a_1.\cdots.a_{k-1})}
+      \vlhy{\bigvee_{\{a_1,\dots,a_{k-1}\}\in \Choices_{k-1}}\vlsbr(a_1.\cdots.a_{k-1})}
      }
     }
    }
@@ -823,6 +842,13 @@ Let $\Choices_k$ be $\Choices$ restricted to the first $k$ atoms from $\mathcal 
 }\quad.
 \]
 \end{defi}
+
+% TODO: Make this proper and give a name to this thing
+%\begin{pro}
+%Any two beautiful proofs of the same formula have the same atomic flows of modulo associativity of %contraction.
+%\end{pro}
+
+% TODO: give the correct name to the top of the proof
 
 \begin{defi}
 Given a proof, $\Phi$, of $\alpha$ in $\SKS$, let $a_1,\dots,a_n$ be all the atoms which occur in both interaction and cointeraction instances in $\Phi$ and let $\Choices$ be all the possible choices of $a_1,\dots,a_n$, then \emph{a canonical cut-free proof obtained from $\Phi$} is:
@@ -838,8 +864,10 @@ Given a proof, $\Phi$, of $\alpha$ in $\SKS$, let $a_1,\dots,a_n$ be all the ato
 \end{defi}
 
 \begin{pro}
-Given a proof $\Phi$ and two canonical cut-free proofs obtained from $\Phi$, possibly under two different orderings of atoms, the atomic flows of the two canonical cut-free proofs are equal.
+Given a proof $\Phi$ and two canonical cut-free proofs obtained from $\Phi$ the atomic flows of the two canonical cut-free proofs are equal module associativity of contraction.
 \end{pro}
+
+% TODO: Check literature about rewriting modulo
 
 % TODO: maybe put this somewhere else
 %
