@@ -58,19 +58,6 @@ Deep inference is a relatively recent development in proof theory. It is a metho
 Negation is only defined for atoms, which is not a limitation thanks to De Morgan laws.
 \end{rem}
 
-% TODO: remove all orderings
-
-%\begin{rem}
-%For simplicity we fix an partial order of atoms. The constraints of the ordering are:
-%\begin{itemize}
-%\item $a<b$ or $b<a$ if $a$ and $b$ are distinct, non-dual atoms and
-%\item $a<b$ implies $\bar a<b$.
-%\end{itemize}
-%This allows us to refer to a set of atoms as an enumeration of atoms and denote it $a_1,\dots,a_n$ if the atoms are pairwise non-dual or $a_1,\bar a_1,\dots,a_n,\bar a_n$ if they are closed under duality. When we refer to `the first $k$ atoms from a set of atoms', it is with respect to this ordering.
-
-%The ordering is arbitrary and in many cases different choices of orderings give the same results. We will point this out as we go along. In those cases the only reason for the need of an ordering is that the representation we are using (formulae and derivations) are linear and force a choice.
-%\end{rem}
-
 Note that when we write $\xi\{a\}$, we mean that an occurrence of $a$ exists in the formula, we singled it out and we refer specifically to that occurrence. It is important to distinguish between an atom $a$ and a set of occurrences of atom $a$ inside a formula or a derivation. In the following, we mark in various ways occurrences of atoms, and we perform several substitutions of formulae in the place of atom occurrences.
 
 \newcommand{\one}{{\mathchoice{\scriptstyle\mathbf1}
@@ -880,8 +867,6 @@ Given a proof $\Phi$ and two canonical cut-free proofs obtained from $\Phi$ the 
 \section{Normaliser}
 
 \newcommand{\Norm}{\mathsf{Norm}}
-
-% TODO: ``an enumeration'': no need [ask Alessio about this comment, I don't get it]
 
 \begin{defi}
 The \emph{normaliser}, $\Norm(\Phi,a_1,\dots,a_n)$, is an operator taking as input a sequence of atoms and a derivation of the form
