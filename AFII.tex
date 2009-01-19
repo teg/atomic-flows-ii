@@ -570,11 +570,11 @@ In the non-atomic version of system $\SKS$ the above derivations correspond to r
 \end{rem}
 
 \begin{defi}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$, where $a_1,\bar a_1,\dots,a_n,\bar a_n$ are all the distinct atoms such that each appears in both interaction and cointeraction instances, a \emph{core of\/ $\Phi$} is defined as a derivation 
+Given a derivation $\Phi$ from $\alpha$ to $\beta$, where $a_1,\dots,a_n$ are the distinct and pairwise non-dual atoms each of which appears in both interaction and cointeraction instances, a \emph{core of\/ $\Phi$} is defined as a derivation 
 \[
 \vlder{}{}{\vls[\beta.(a_n.\bar a_n).\cdots.(a_1.\bar a_1)]}{\vls([a_1.\bar a_1].\cdots.[a_n.\bar a_n].\alpha)}
 \]
-where the atoms $a_1,\bar a_1,\dots,a_n,\bar a_n$ do not occur in any interaction nor cointeraction instances.
+where the atoms $a_1,\dots,a_n$ do not occur in any interaction nor cointeraction instances.
 \end{defi}
 
 \begin{lem}\label{LemConstrCore}
@@ -690,7 +690,7 @@ Given a derivation $\Phi$ containing the atom occurrence $a$, let $A$ be the ato
 % TODO: don't call it choice, call it something else. assignment?
 
 \begin{defi}
-Given a sequence of distinct and pairwise non-dual atoms, $a_1,\dots,a_n$, an \emph{assignment to $a_1,\dots,a_n$} is a sequence $b_1,\dots,b_n$ such that $b_i\in\{a_i,\bar a_i\}$ for every $1\leq i \leq n$.
+Given a sequence of distinct and pairwise non-dual atoms, $b_1,\dots,b_n$, an \emph{assignment to $b_1,\dots,b_n$} is a sequence $a_1,\dots,a_n$ such that $a_i\in\{b_i,\bar b_i\}$ for every $1\leq i \leq n$.
 \end{defi}
 
 The number of different assignments to a sequence of $n$ atoms is $2^n$.
