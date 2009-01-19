@@ -928,18 +928,22 @@ $\vlderivation
 \]
 \end{defi}
 
+% TODO: define weakly streamlined
+
 \begin{thm}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$, where $a_1,\dots,a_n$ are all the atoms that appear in both interaction and cointeraction instances then $\Norm(\Core(\Phi),a_1,\dots,a_n)$ is streamlined.
+Given a derivation $\Phi$ from $\alpha$ to $\beta$, where $a_1,\dots,a_n$ are all the atoms that appear in both interaction and cointeraction instances then $\Norm(\Core(\Phi),a_1,\dots,a_n)$ is weakly streamlined.
 \end{thm}
-%\begin{proof}
 
-%Consider the atomic flow of the atom $a_k$ in the derivation $\Psi_k$. Note that the interaction and cointeraction evidenced in this atomic flow are the only ones that apply to the atom $a_k$ in $\Psi$. It is straightforward to see that the given atomic flow does not contain any path from the interaction to the cointeraction. This holds for every $a_k$ so $\Psi$ is streamlined.
+\begin{proof}
+First note that any atom that did not occur in both interaction and cointeraction instances in $\Phi$, will not do it in $\Norm(\Core(\Phi),a_1,\dots,a_n)$ either.
+Consider the atomic flow of any atom $a_i$ from $a_1,\dots,a_n$. Note that the only interaction and cointeraction instances it appears in are the ones shown in $\Norm(\Core(\Phi),a_1,\dots,a_i)$. Now by studying the atomic flow of $\Norm(\Core(\Phi),a_1,\dots,a_i)$,
+\begin{center}
+\includegraphics[width=150mm]{./threeboxes.ps}
+\end{center}
+it is easy to observe that there could not be any path from the interaction vertex to the cointeraction vertex.
 
-%\begin{center}
-%\includegraphics[scale=0.5]{./threeboxes.png}
-%\end{center}
-
-%\end{proof}
+Since there are no paths from interaction vertices to cointeraction vertices, $\Norm(\Core(\Phi),a_1,\dots,a_n)$ is weakly streamlined.
+\end{proof}
 
 
 
