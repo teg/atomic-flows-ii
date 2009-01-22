@@ -803,7 +803,7 @@ instead of the more natural
 \vlinf{=}{}{\fff}{\vls(\fff.\ttt)}\quad.
 \]
 We chose to do it this way for efficiency, had we chosen to use the latter approach we would have to have twice as many substitution rules (dealing with $\ttt$ in addition to $\fff$).
-The reason the former substitution works is that we are basically in the following situation (possibly after some weakening reductions):
+The reason the former substitution works is that we are essentially in the following situation (possibly after some weakening reductions):
 \[
 \vlinf{\aiu}{}{\fff}{\vls( \vlinf{\awd}{}{\mk c}{\fff} . \vlinf{\awd}{}{\bar{\mk c}}{\fff})}\quad.
 \]
@@ -823,29 +823,31 @@ Given two canonical experiments of a derivation the atomic flows of the two expe
 % TODO: big remark or section on philosophy
 % TODO: remark on symmetry/confluence
 
-\newcommand{\Choices}{\mathcal C}
+\newcommand{\Assignments}{\mathcal A}
+\newcommand{\Sym}{\mathsf{Sym}}
 
+% TODO: is it bad to give a name to something before arguing that it is unique?
 % TODO: swap a_i with b_i?
-% TODO: call the proof ``beautiful'' or something like that
 
 \begin{defi}
-Given a sequence of distinct and pairwaise non-dual atoms, $b_1,\dots,b_n$, let $\mathcal C$ be all possible assignments to $b_1,\dots,b_n$, then the \emph{canonical proof of }$\bigvee_{\{a_1,\dots,a_n\}\in\Choices}\vlsbr(a_1.\cdots.a_n)$ is defined by induction on $n$:
+Given a sequence of distinct and pairwaise non-dual atoms, $b_1,\dots,b_n$, let $\Assignments_n$ be all possible assignments to $b_1,\dots,b_n$, then a \emph{symmetric proof of }$\bigvee_{\{a_1,\dots,a_n\}\in\Assignments}\vlsbr(a_1.\cdots.a_n)$, denoted $\Sym(b_1,\dots,b_n)$, is defined by induction on $n$:
 
-Let $\Choices_k$ be $\Choices$ restricted to $b_1,\dots,b_k$. The base case, $n=0$, is trivial and the inductive case is:
+The base case, $n=0$, is trivial and the inductive case is:
 \[
+\Sym(a_1,\dots,a_n)\quad=\quad
 \vlderivation
 {
- \vlin{=}{}{\bigvee_{\{a_1,\dots,a_k\}\in \Choices_k}\vlsbr(a_1.\cdots.a_k)}
+ \vlin{=}{}{\bigvee_{\{a_1,\dots,a_n\}\in \Assignments_n}\vlsbr(a_1.\cdots.a_n)}
  {
-  \vlde{}{\{\swi\}}{\bigvee_{\{a_1,\dots,a_{k-1}\}\in \Choices_{k-1}}\vlsbr[(a_1.\cdots.a_{k-1}.a_k).(a_1.\cdots.a_{k-1}.\bar a_k)]}
+  \vlde{}{\{\swi\}}{\bigvee_{\{a_1,\dots,a_{n-1}\}\in \Assignments_{n-1}}\vlsbr[(a_1.\cdots.a_{n-1}.a_n).(a_1.\cdots.a_{n-1}.\bar a_n)]}
   {
-   \vlde{}{\{\swi\}}{\bigvee_{\{a_1,\dots,a_{k-1}\}\in \Choices_{k-1}}\vlsbr([a_k.\bar a_k].a_1.\cdots.a_{k-1}.a_1.\cdots.a_{k-1})}
+   \vlde{}{\{\swi\}}{\bigvee_{\{a_1,\dots,a_{n-1}\}\in \Assignments_{n-1}}\vlsbr([a_n.\bar a_n].a_1.\cdots.a_{n-1}.a_1.\cdots.a_{n-1})}
    {
-    \vlde{}{\{\med,\acu\}}{\vls(\bigwedge_{i=1}^{2^{k-1}}[a_k.\bar a_k].\bigvee_{\{a_1,\dots,a_{k-1}\}\in \Choices_{k-1}}(a_1.\cdots.a_{k-1}.a_1.\cdots.a_{k-1}))}
+    \vlde{}{\{\med,\acu\}}{\vls(\bigwedge_{i=1}^{2^{n-1}}[a_n.\bar a_n].\bigvee_{\{a_1,\dots,a_{n-1}\}\in \Assignments_{n-1}}(a_1.\cdots.a_{n-1}.a_1.\cdots.a_{n-1}))}
     {
-     \vlin{\aid}{}{\vls([a_k.\bar a_k].\bigvee_{\{a_1,\dots,a_{k-1}\}\in \Choices_{k-1}}(a_1.\cdots.a_{k-1}))}
+     \vlin{\aid}{}{\vls([a_n.\bar a_n].\bigvee_{\{a_1,\dots,a_{n-1}\}\in \Assignments_{n-1}}(a_1.\cdots.a_{n-1}))}
      {
-      \vlhy{\bigvee_{\{a_1,\dots,a_{k-1}\}\in \Choices_{k-1}}\vlsbr(a_1.\cdots.a_{k-1})}
+      \vlpr{\Sym(a_1,\dots,a_{n-1})}{\{\aid,\acu,\swi,\med\}}{\bigvee_{\{a_1,\dots,a_{n-1}\}\in \Assignments_{n-1}}\vlsbr(a_1.\cdots.a_{n-1})}
      }
     }
    }
@@ -855,28 +857,26 @@ Let $\Choices_k$ be $\Choices$ restricted to $b_1,\dots,b_k$. The base case, $n=
 \]
 \end{defi}
 
-% TODO: Make this proper and give a name to this thing
-%\begin{pro}
-%Any two beautiful proofs of the same formula have the same atomic flows of modulo associativity of %contraction.
-%\end{pro}
+\begin{pro}
+Given two symmetric proofs of $\bigvee_{\{a_1,\dots,a_n\}\in\Assignments}\vlsbr(a_1.\cdots.a_n)$ the atomic flows of the two proofs are equal modulo associativity of contractions.
+\end{pro}
 
-% TODO: give the correct name to the top of the proof
 
 \begin{defi}
-Given a proof, $\Phi$, of $\alpha$ in $\SKS$, let $a_1,\dots,a_n$ be all the atoms which occur in both interaction and cointeraction instances in $\Phi$ and let $\Choices$ be all the possible assignments to $a_1,\dots,a_n$, then \emph{a canonical cut-free proof obtained from $\Phi$} is:
+Given a proof, $\Phi$, of $\alpha$ in $\SKS$, let $b_1,\dots,b_n$ be all the distinct and pairwise non-dual atoms which occur in both interaction and cointeraction instances in $\Phi$ and let $\Assignments$ be all the possible assignments to $b_1,\dots,b_n$, then \emph{a symmetric cut-free proof obtained from $\Phi$} is:
 \[
 \vlderivation
 {
  \vlin{(2^n-1)\times\cod}{}{\alpha}
  {
-  \vlpr{}{\{\aid,\acu,\swi,\med\}}{\bigvee_{\{a_1,\dots,a_n\}\in\Choices}\left(\vlder{\Exp(\Phi,a_1,\dots,a_n)}{\SKS\setminus\{\aiu\}}{\alpha}{\vls(a_1.\cdots.a_n)}\right)}
+  \vlpr{\Sym(b_1,\dots,b_n)}{\{\aid,\acu,\swi,\med\}}{\bigvee_{\{a_1,\dots,a_n\}\in\Assignments}\left(\vlder{\Exp(\Phi,a_1,\dots,a_n)}{\SKS\setminus\{\aiu\}}{\alpha}{\vls(a_1.\cdots.a_n)}\right)}
  }
 }
 \]
 \end{defi}
 
 \begin{pro}
-Given a proof $\Phi$ and two canonical cut-free proofs obtained from $\Phi$ the atomic flows of the two canonical cut-free proofs are equal module associativity of contraction.
+Given a proof $\Phi$ and two symmetric cut-free proofs obtained from $\Phi$ the atomic flows of the two canonical cut-free proofs are equal modulo associativity of contraction.
 \end{pro}
 
 % TODO: Check literature about rewriting modulo
