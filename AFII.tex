@@ -802,7 +802,7 @@ Given two canonical experiments of a derivation the atomic flows of the two expe
 \begin{defi}
 Given a sequence of distinct and pairwaise non-dual atoms, $b_1,\dots,b_n$, let $\mathcal C$ be all possible assignments to $b_1,\dots,b_n$, then the \emph{canonical proof of }$\bigvee_{\{a_1,\dots,a_n\}\in\Choices}\vlsbr(a_1.\cdots.a_n)$ is defined by induction on $n$:
 
-Let $\Choices_k$ be $\Choices$ restricted to $b_1,\dots,m_k$. The base case, $n=0$, is trivial and the inductive case is:
+Let $\Choices_k$ be $\Choices$ restricted to $b_1,\dots,b_k$. The base case, $n=0$, is trivial and the inductive case is:
 \[
 \vlderivation
 {
@@ -934,12 +934,10 @@ $\vlderivation
 Given a derivation $\Phi$ from $\alpha$ to $\beta$, where $a_1,\dots,a_n$ are all the atoms that appear in both interaction and cointeraction instances then $\Norm(\Core(\Phi),a_1,\dots,a_n)$ is weakly streamlined.
 \end{thm}
 
-% TODO: fix proof as it is a bit flaky
-
 \begin{proof}
 We argue by induction on $n$. The base case follows by the definition of $\Core$.
 
-Consider the atomic flow of $\Norm(\Core(\Phi),a_1,\dots,a_{n-1})$ where the edges mapped to by instances $a_n$ and $\bar a_n$ in the premiss and conclusion are singled out. Since this atomic flow is weakly streamlined we can represent it as follows:
+Consider the atomic flow of $\Norm(\Core(\Phi),a_1,\dots,a_{n-1})$ where the edges mapped to by $a_n$, $\bar a_n$ instances in the premiss and conclusion, but not in $\alpha$ or $\beta$ are singled out. Since this atomic flow is weakly streamlined we can represent it as follows:
 
 \[
 \atomicflow
@@ -959,7 +957,7 @@ Consider the atomic flow of $\Norm(\Core(\Phi),a_1,\dots,a_{n-1})$ where the edg
 }\quad.
 \]
 
-Now by studying the atomic flow of $\Norm(\Core(\Phi),a_1,\dots,a_i)$,
+Now consider the atomic flow of $\Norm(\Core(\Phi),a_1,\dots,a_n)$,
 \[
 \atomicflow
 {
@@ -1010,7 +1008,15 @@ Now by studying the atomic flow of $\Norm(\Core(\Phi),a_1,\dots,a_i)$,
 ( -2.5,-36)*{\afacdmexsqcol{}{}{}{}{}{}{33}{4}{Red}{}{Red}};
 }\quad,
 \]
-where $A_1,A_2,A_3$ are isomorphic to $A$ and $B_1,B_2,B_3$ are isomorphic to $B$, it is easy to observe that none of the edges that could possibly be in a path from the interaction vertex (red) coincide with any of the edges that could possibly be in a path from the cointeraction vertex (green).
+where $A_1,A_2,A_3$ are isomorphic to $A$ and $B_1,B_2,B_3$ are isomorphic to $B$.
+
+% TODO: passive form...
+
+With the assistance of the atomic flow observe the following:
+\begin{itemize}
+\item The only paths between $A_1,A_2,A_3,A_4,B_1,B_2,B_3,B_4$ are paths mapped to from $a_n$ or $\bar a_n$, so since $\Norm(\Core(\Phi),a_1,\dots,a_{n-1})$ is weakly streamlined, there is no path from an interaction vertex to a cointeraction vertex which is mapped to by $a_1,\dots,a_{n-1}$.
+\item None of the edges that could possibly be in a path from the interaction vertex (red) coincide with any of the edges that could possibly be in a path from the cointeraction vertex (green).
+\end{itemize}
 
 Since there are no paths from interaction vertices to cointeraction vertices, $\Norm(\Core(\Phi),a_1,\dots,a_n)$ is weakly streamlined.
 \end{proof}
