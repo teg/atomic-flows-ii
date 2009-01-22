@@ -697,7 +697,7 @@ The number of different assignments to a sequence of $n$ atoms is $2^n$.
 Let $A$ be an atomic flow and let $\nu$ be a vertex in $A$, then a path from $\nu$ goes to either a weakening vertex, an interaction vertex or to the $\top$ vertex. We note for later use that in the special case where $\Phi$ is a proof and $A$ is the atomic flow of $\Core(\Phi)$ a path from $\nu$ must go to a weakening; it cannot go to an interaction vertex because if the atomic flow of $\Phi$ contained a path from a cointeraction to an interaction, $\nu$ would not be in $\Core(\Phi)$; for the same reason it cannot go to $\top$ because since $\Phi$ is a proof the only paths that go to the $\top$ are the ones that go to an interaction vertex in $\Phi$.
 \end{rem}
 
-% TODO: swap a_i with b_i
+% TODO: swap a_i with b_i?
 
 \begin{lem}\label{LemConstrExp}
 Given a derivation $\Phi$ from $\alpha$ to $\beta$, let $b_1,\dots,b_n$ be the distinct and pairwise non-dual atoms each of which occurs in both interaction and cointeraction instances and let $a_1,\dots,a_n$ be an assignment to $b_1,\dots,b_n$, then there exists an experiment on $\Phi$ with respect to $a_1,\dots,a_n$.
@@ -778,8 +778,37 @@ Finally, consider the experiment:
 \]
 \end{proof}
 
-% TODO: justify putting two \fff's into the cut
-% TODO: explain using (co)weakening reductions as per AFI
+% TODO: work on the remarks
+% TODO: add reference to AFI
+
+\begin{rem}
+Another approach to obtaining an experiment on $\Phi$ with respect to $a_1,\dots,a_n$ is to consider the derivation
+\[
+\Psi=\vlder{\Core(\Phi)}{}{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(a_1.\bar a_1)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(a_n.\bar a_n)}]}{\vls([\vlinf{\awd}{}{a_1}{\fff}.\bar a_1].\cdots.[\vlinf{\awd}{}{a_n}{\fff}.\bar a_n])}\quad.
+\]
+Note that all maximal paths from a cointeraction vertex in the atomic flow of $\Psi$ go to a weakening vertex. Hence applying weakening reductions to $\Psi$ will eliminate all the cuts and yield the required experiment. 
+\end{rem}
+
+\begin{rem}
+It might be surprising that we choose to use the substitution
+\[
+\vlinf{\aiu}{}{\fff}{\vls(\mk c.\bar {\mk c})}
+\quad\rightarrow\quad
+\vlinf{=}{}{\fff}{\vls(\fff.\fff)}\quad,
+\]
+instead of the more natural
+\[
+\vlinf{\aiu}{}{\fff}{\vls(\mk c.\bar {\mk c})}
+\quad\rightarrow\quad
+\vlinf{=}{}{\fff}{\vls(\fff.\ttt)}\quad.
+\]
+We chose to do it this way for efficiency, had we chosen to use the latter approach we would have to have twice as many substitution rules (dealing with $\ttt$ in addition to $\fff$).
+The reason the former substitution works is that we are basically in the following situation (possibly after some weakening reductions):
+\[
+\vlinf{\aiu}{}{\fff}{\vls( \vlinf{\awd}{}{\mk c}{\fff} . \vlinf{\awd}{}{\bar{\mk c}}{\fff})}\quad.
+\]
+\end{rem}
+
 
 \newcommand{\Exp}{\mathsf{Exp}}
 
@@ -796,7 +825,7 @@ Given two canonical experiments of a derivation the atomic flows of the two expe
 
 \newcommand{\Choices}{\mathcal C}
 
-% TODO: swap a_i with b_i
+% TODO: swap a_i with b_i?
 % TODO: call the proof ``beautiful'' or something like that
 
 \begin{defi}
