@@ -173,6 +173,8 @@ Instead of the term `axiom' we use `interaction'; the reason is that, in deep in
 
 \subsection{Atomic Flows and Derivations}
 
+% TODO: The proof that every derivation is sequentiable is from AFI
+
 Atomic flows are somewhat similar to proof nets. However, we prove that, no matter how we freely build an atomic flow (as opposed to a proof net structure), the flow is associated with some derivation. So, atomic flows are always `sequentialisable', in proof-net parlance. In fact, atomic flows carry much less information than derivations do, because they do not keep track of the logical relations between the atoms they trace, only their structural information is retained (in the sense of structural rules, as opposed to logical ones).
 
 We can think of atomic flows as composite diagrams that are freely generated from a set of six elementary diagrams. Technically, atomic flows are special kinds of labelled directed acyclic graphs, and the properties of their vertices are dictated by their labels, which we define as follows.
@@ -201,6 +203,8 @@ We call the following six diagrams (\emph{atomic-flow}) \emph{labels}:
 \]
 Cointeraction is also called \emph{cut}.
 \end{defi}
+
+% TODO: sometimes we do not name the edges
 
 \newcommand{\ppl  }{{\mathchoice{\scriptstyle+}
                                 {\scriptstyle+}
@@ -274,21 +278,18 @@ An (\emph{atomic}) \emph{flow} is a tuple $(V,E,\eta,\up,\lo)$ such that:
 \item if $\eta(\nu)\in\{\aid,\aiu\}$ then $\pi(E_\nu)=\{\pmi,\ppl\}$.
 \end{enumerate}
 \end{enumerate}
-Besides $\epsilon$, we use small numerals $\one$, $\two$, \dots\ and colours to denote edges. Atomic flows are denoted with $A$, $B$, $C$ and $D$. Given an atomic flow $A$, we say that the sets $L_\top=\{\epsilon_1,\dots,\epsilon_h\}$ and $U_\bot=\{\epsilon'_1,\dots,\epsilon'_k\}$ contain, respectively, the \emph{upper} and \emph{lower edges of $A$}; in such a case, we can represent $A$ as
+Besides $\epsilon$, we use small numerals $\one$, $\two$, \dots\ to denote edges. Atomic flows are denoted with $A$, $B$. Given an atomic flow $A$, we say that the sets $L_\top=\{\epsilon_1,\dots,\epsilon_h\}$ and $U_\bot=\{\epsilon'_1,\dots,\epsilon'_k\}$ contain, respectively, the \emph{upper} and \emph{lower edges of $A$}; in such a case, we can represent $A$ as
 \[
 \atomicflow{
-( 0,10)*{\afvju4{\epsilon_1}{}};
-( 2,10)*{\cdots};
-( 4,10)*{\afvju4{}{\epsilon_h}};
+( 2,10)*{\afvjum4{\epsilon_1}{\epsilon_h}};
 ( 5, 6)*{\aflabelleft A};
 ( 2, 5)*{\affr66};
-( 0, 0)*{\afvjd4{\epsilon'_1}{}};
-( 2, 0)*{\cdots};
-( 4, 0)*{\afvjd4{}{\epsilon'_k}};
+( 2, 0)*{\afvjdm4{\epsilon'_1}{\epsilon'_k}};
 (-2, 0)*{\invisiblemark};
 ( 6, 0)*{\invisiblemark}}
 \quad.
 \]
+
 In general, we represent atomic flows as directed-graph diagrams, except that the special vertices $\top$ and $\bot$ are not shown, and the labels of the vertices are explicitly shown as graphical elements. When we refer to the vertices of an atomic flow, we do not include $\top$ and $\bot$. Sometimes we identify vertices with their labels. 
 \end{defi}
 
@@ -514,7 +515,8 @@ Inference rules are usually called linear when they do not `create' nor `destroy
 
 We now define the notion of paths in atomic flows. Paths are sequences of adjacent edges that only `go down' or only `go up'.
 %---------------------------------------
-%TODO: put this where it belongs:
+% TODO: define maximal paths
+% TODO: put this where it belongs:
 % Given a path $\epsilon_1,\dots,\epsilon_n$ such that $n=1$ or $up(\epsilon_1)=lo(\epsilon_2)$, we say that \emph{$\epsilon_1$ is the bottom edge} and \emph{$\epsilon_n$ is the top edge} of $\epsilon_1,\dots,\epsilon_n$.
 \begin{defi}
 Given an atomic flow $(V,E,\eta,\up,\lo)$ and $\epsilon_1,\dots,\epsilon_h\in E$ such that, for $1\le i<h$, we have $\lo(\epsilon_i)=\up(\epsilon_{i+1})$, $\up(\epsilon_1)=\nu$ and $\lo(\epsilon_h)=\nu'$, we say that $\epsilon_1,\dots,\epsilon_h$ is a \emph{path from $\nu$ to $\nu'$} and that $\epsilon_h,\dots,\epsilon_1$ is a \emph{path from $\nu'$ to $\nu$}.
@@ -570,8 +572,10 @@ Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\v
 In the non-atomic version of system $\SKS$ the above derivations correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlder{}{\{\acu,\med\}}{\vls(\alpha.\alpha)}{\alpha}$.
 \end{rem}
 
+% TODO: somehow express that a_1,\dots,a_n are all of them
+
 \begin{defi}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$, where $a_1,\dots,a_n$ are the distinct and pairwise non-dual atoms each of which appears in both interaction and cointeraction instances, a \emph{core of\/ $\Phi$} is defined as a derivation 
+Given a derivation $\Phi$ from $\alpha$ to $\beta$ and all the distinct and pairwise non-dual atoms $a_1,\dots,a_n$ each of which appears in both interaction and cointeraction instances, a \emph{core of\/ $\Phi$} is defined as a derivation 
 \[
 \vlder{}{}{\vls[\beta.(a_n.\bar a_n).\cdots.(a_1.\bar a_1)]}{\vls([a_1.\bar a_1].\cdots.[a_n.\bar a_n].\alpha)}
 \]
@@ -676,10 +680,10 @@ Given two canonical cores of a derivation, the atomic flows of the two cores are
 \begin{defi}
 Given
 \begin{itemize}
- \item a derivation $\Phi$ from $\alpha$ to $\beta$ and
+ \item a proof $\Phi$ of $\beta$ and
  \item distinct and pairwise non-dual atoms $a_1,\dots,a_n$,
 \end{itemize}
-an \emph{experiment on $\Phi$ with respect to $a_1,\dots,a_n$} is a derivation from $\vls(\bar a_1.\cdots.\bar a_n)$ to $\beta$ which does not contain any cointeraction instances.
+an \emph{experiment on $\Phi$ with respect to $a_1,\dots,a_n$} is a derivation from $\vls(a_1.\cdots.)$ to $\beta$ which does not contain any cointeraction instances.
 \end{defi}
 
 \begin{defi}
@@ -687,7 +691,7 @@ Given a derivation $\Phi$ containing the atom occurrence $a$, let $A$ be the ato
 \end{defi}
 
 \begin{defi}
-Given a sequence of distinct and pairwise non-dual atoms, $b_1,\dots,b_n$, an \emph{assignment to $b_1,\dots,b_n$} is a sequence $a_1,\dots,a_n$ such that $a_i\in\{b_i,\bar b_i\}$ for every $1\leq i \leq n$.
+Given distinct and pairwise non-dual atoms, $b_1,\dots,b_n$, an \emph{assignment to $b_1,\dots,b_n$} is a $a_1,\dots,a_n$ such that $a_i\in\{b_i,\bar b_i\}$ for every $1\leq i \leq n$.
 \end{defi}
 
 The number of different assignments to a sequence of $n$ atoms is $2^n$.
@@ -701,7 +705,7 @@ Let $A$ be an atomic flow and let $\nu$ be a vertex in $A$, then a path from $\n
 % TODO: swap a_i with b_i?
 
 \begin{lem}\label{LemConstrExp}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$, let $b_1,\dots,b_n$ be the distinct and pairwise non-dual atoms each of which occurs in both interaction and cointeraction instances and let $a_1,\dots,a_n$ be an assignment to $b_1,\dots,b_n$, then there exists an experiment on $\Phi$ with respect to $a_1,\dots,a_n$.
+Given a proof, $\Phi$, of $\beta$, let $b_1,\dots,b_n$ be the distinct and pairwise non-dual atoms each of which occurs in both interaction and cointeraction instances and let $a_1,\dots,a_n$ be an assignment to $b_1,\dots,b_n$, then there exists an experiment on $\Phi$ with respect to $a_1,\dots,a_n$.
 \end{lem}
 
 \newcommand{\mk}[1]{{#1}^{\scriptscriptstyle\bullet}}
@@ -709,14 +713,14 @@ Given a derivation $\Phi$ from $\alpha$ to $\beta$, let $b_1,\dots,b_n$ be the d
 \begin{proof}
 Consider $\vlder{\Core(\Phi)}{}{\vls[\beta.(a_1.\bar a_1).\cdots.(a_n.\bar a_n)]}{\vls([a_1.\bar a_1].\cdots.[a_n.\bar a_n])}$. We now mark the following atom occurrences with$\mk\ $:
 \begin{itemize}
-\item the cones of the occurrences of $a_1,\dots,a_n$ in the conclusion of $\Core(\Phi)$ which are not in $\beta$ and
+\item the cones of the occurrences of $\bar a_1,\dots,\bar a_n$ in the conclusion of $\Core(\Phi)$ which are not in $\beta$ and
 \item the cones of both the atom occurrences appearing in cointeraction instances.
 \end{itemize}
 This gives us
 \[
 \vlderivation
 {
- \vlde{}{}{\vls[\beta.(\mk a_1.\bar a_1).\cdots.(\mk a_n.\bar a_n)]}
+ \vlde{}{}{\vls[\beta.(a_1.\mk{\bar a_1}).\cdots.(a_n.\mk{\bar a_n})]}
  {
   \vlde{}{}{\xi_1\left\{\vlinf{\aiu}{}{\fff}{\vls(\mk b_1.\mk{\bar b_1})}\right\}}
   {
@@ -724,7 +728,7 @@ This gives us
    {
     \vlde{}{}{\xi_k\left\{\vlinf{\aiu}{}{\fff}{\vls(\mk b_m.\mk{\bar b_m})}\right\}}
     {
-     \vlhy{\vls([\mk a_1.\bar a_1].\cdots.[\mk a_n.\bar a_n])}
+     \vlhy{\vls([a_1.\mk{\bar a_1}].\cdots.[a_n.\mk{\bar a_n}])}
     }
    }
   }
@@ -754,7 +758,7 @@ Then perform the following substitutions to obtain $\Psi$:
 \vlinf{\awd}{}{\vls(\fff.c)}{\fff}\quad,
 \\
 \noalign{\bigskip}
-\vlinf{\aiu}{}{\fff}{\vls(\mk c.\bar {\mk c})}
+\vlinf{\aiu}{}{\fff}{\vls(\mk c.\mk {\bar c})}
 \quad\rightarrow\quad
 \vlinf{=}{}{\fff}{\vls(\fff.\fff)}\quad.
 \end{array}
@@ -763,17 +767,17 @@ Then perform the following substitutions to obtain $\Psi$:
 By Remark~\ref{RemAllWeak} we know that no cone will ever contain an atom occurrence appearing in an interaction instance, so the result of the substitution gives a valid derivation:
 \[
 \Psi=
-\vlder{}{}{\vls[\beta.(\fff.\bar a_1).\cdots.(\fff.\bar a_n)]}
-{\vls([\fff.\bar a_1].\cdots.[\fff.\bar a_n])}\quad.
+\vlder{}{}{\vls[\beta.(a_1.\fff).\cdots.(a_n.\fff)]}
+{\vls([a_1.\fff].\cdots.[a_n.\fff])}\quad.
 \]
 
 Finally, consider the experiment:
 \[
 \vlderivation
 {
- \vlde{\Psi}{}{\vls[\beta.(\vlinf{\awu}{}{\ttt}{\bar a_1}.\fff).\cdots.(\vlinf{\awu}{}{\ttt}{\bar a_n}.\fff)]}
+ \vlde{\Psi}{}{\vls[\beta.(\vlinf{\awu}{}{\ttt}{a_1}.\fff).\cdots.(\vlinf{\awu}{}{\ttt}{a_n}.\fff)]}
  {
-  \vlhy{\vls(\bar a_1.\cdots.\bar a_n)}
+  \vlhy{\vls(a_1.\cdots.a_n)}
  }
 }\quad.
 \]
@@ -785,7 +789,7 @@ Finally, consider the experiment:
 \begin{rem}
 Another approach to obtaining an experiment on $\Phi$ with respect to $a_1,\dots,a_n$ is to consider the derivation
 \[
-\Psi=\vlder{\Core(\Phi)}{}{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(a_1.\bar a_1)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(a_n.\bar a_n)}]}{\vls([\vlinf{\awd}{}{a_1}{\fff}.\bar a_1].\cdots.[\vlinf{\awd}{}{a_n}{\fff}.\bar a_n])}\quad.
+\Psi=\vlder{\Core(\Phi)}{}{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(a_1.\bar a_1)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(a_n.\bar a_n)}]}{\vls([a_1.\vlinf{\awd}{}{\bar a_1}{\fff}].\cdots.[a_n.\vlinf{\awd}{}{\bar a_n}{\fff}])}\quad.
 \]
 Note that all maximal paths from a cointeraction vertex in the atomic flow of $\Psi$ go to a weakening vertex. Hence applying weakening reductions to $\Psi$ will eliminate all the cuts and yield the required experiment. 
 \end{rem}
@@ -793,20 +797,20 @@ Note that all maximal paths from a cointeraction vertex in the atomic flow of $\
 \begin{rem}
 It might be surprising that we choose to use the substitution
 \[
-\vlinf{\aiu}{}{\fff}{\vls(\mk c.\bar {\mk c})}
+\vlinf{\aiu}{}{\fff}{\vls(c.\bar c)}
 \quad\rightarrow\quad
 \vlinf{=}{}{\fff}{\vls(\fff.\fff)}\quad,
 \]
 instead of the more natural
 \[
-\vlinf{\aiu}{}{\fff}{\vls(\mk c.\bar {\mk c})}
+\vlinf{\aiu}{}{\fff}{\vls(c.\bar c)}
 \quad\rightarrow\quad
 \vlinf{=}{}{\fff}{\vls(\fff.\ttt)}\quad.
 \]
 We chose to do it this way for efficiency, had we chosen to use the latter approach we would have to have twice as many substitution rules (dealing with $\ttt$ in addition to $\fff$).
 The reason the former substitution works is that we are essentially in the following situation (possibly after some weakening reductions):
 \[
-\vlinf{\aiu}{}{\fff}{\vls( \vlinf{\awd}{}{\mk c}{\fff} . \vlinf{\awd}{}{\bar{\mk c}}{\fff})}\quad.
+\vlinf{\aiu}{}{\fff}{\vls(\vlinf{\awd}{}{c}{\fff}.\vlinf{\awd}{}{\bar c}{\fff})}\quad.
 \]
 \end{rem}
 
@@ -818,7 +822,7 @@ An experiment on a derivation $\Phi$ with respect to $a_1,\dots,a_n$, constructe
 \end{defi}
 
 \begin{pro}
-Given two canonical experiments of a derivation the atomic flows of the two experiments are equal modulo associativity of contractions.
+Given two canonical experiments on the same derivation with respect to the same atoms the atomic flows of the two experiments are equal modulo associativity of contractions.
 \end{pro}
 
 % TODO: big remark or section on philosophy
@@ -859,18 +863,18 @@ The base case, $n=0$, is trivial and the inductive case is:
 \end{defi}
 
 \begin{pro}
-Given two symmetric proofs of $\bigvee_{\{a_1,\dots,a_n\}\in\Assignments}\vlsbr(a_1.\cdots.a_n)$ the atomic flows of the two proofs are equal modulo associativity of contractions.
+Given two symmetric proofs of\/ $\bigvee_{\{a_1,\dots,a_n\}\in\Assignments}\vlsbr(a_1.\cdots.a_n)$ the atomic flows of the two proofs are equal modulo associativity of contractions.
 \end{pro}
 
 
 \begin{defi}
-Given a proof, $\Phi$, of $\alpha$ in $\SKS$, let $b_1,\dots,b_n$ be all the distinct and pairwise non-dual atoms which occur in both interaction and cointeraction instances in $\Phi$ and let $\Assignments$ be all the possible assignments to $b_1,\dots,b_n$, then \emph{a symmetric cut-free proof obtained from $\Phi$} is:
+Given a proof,\/ $\Phi$, of $\beta$ in $\SKS$, let $b_1,\dots,b_n$ be all the distinct and pairwise non-dual atoms which occur in both interaction and cointeraction instances in $\Phi$ and let $\Assignments$ be all the possible assignments to $b_1,\dots,b_n$, then \emph{a symmetric cut-free proof obtained from $\Phi$} is:
 \[
 \vlderivation
 {
- \vlin{(2^n-1)\times\cod}{}{\alpha}
+ \vlin{(2^n-1)\times\cod}{}{\beta}
  {
-  \vlpr{\Sym(b_1,\dots,b_n)}{\{\aid,\acu,\swi,\med\}}{\bigvee_{\{a_1,\dots,a_n\}\in\Assignments}\left(\vlder{\Exp(\Phi,a_1,\dots,a_n)}{\SKS\setminus\{\aiu\}}{\alpha}{\vls(a_1.\cdots.a_n)}\right)}
+  \vlpr{\Sym(b_1,\dots,b_n)}{\{\aid,\acu,\swi,\med\}}{\bigvee_{\{a_1,\dots,a_n\}\in\Assignments}\left(\vlder{\Exp(\Phi,a_1,\dots,a_n)}{\SKS\setminus\{\aiu\}}{\beta}{\vls(a_1.\cdots.a_n)}\right)}
  }
 }
 \]
