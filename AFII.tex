@@ -563,26 +563,31 @@ for some $\xi'\vlhole, \beta$ where $\beta$ is not a unit and $\Psi$ and $\Psi'$
 \newcommand{\cod}{{\contr{\downarrow}}}
 \newcommand{\cou}{{\contr{\uparrow}}}
 
-%TODO: Say that the proof is routine
+\begin{lem}\label{LemGenericContraction}
+Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$.
+\end{lem}
 
-\begin{pro}\label{LemContr}
-Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$. \end{pro}
+\begin{proof}
+Routine.
+\end{proof}
 
 \begin{rem}
 In the non-atomic version of system $\SKS$ the above derivations correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlder{}{\{\acu,\med\}}{\vls(\alpha.\alpha)}{\alpha}$.
 \end{rem}
 
+\subsection{Cores}
+
 % TODO: somehow express that a_1,\dots,a_n are all of them
 
-\begin{defi}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$ and all the distinct and pairwise non-dual atoms $a_1,\dots,a_n$ each of which appears in both interaction and cointeraction instances, a \emph{core of\/ $\Phi$} is defined as a derivation 
+\begin{defi}\label{DefCore}
+Given a derivation $\Phi$ from $\alpha$ to $\beta$ and all the distinct and pairwise non-dual atoms $a_1,\dots,a_n$ each of which appears in both interaction and cointeraction instances in $\Phi$, a \emph{core of\/ $\Phi$} is defined as a derivation 
 \[
 \vlder{}{}{\vls[\beta.(a_n.\bar a_n).\cdots.(a_1.\bar a_1)]}{\vls([a_1.\bar a_1].\cdots.[a_n.\bar a_n].\alpha)}
 \]
 where the atoms $a_1,\dots,a_n$ do not occur in any interaction nor cointeraction instances.
 \end{defi}
 
-\begin{lem}\label{LemConstrCore}
+\begin{lem}\label{LemCoreExistence}
 For any derivation $\Phi$ from $\alpha$ to $\beta$ a core of\/ $\Phi$ can be constructed.
 \end{lem}
 
@@ -661,21 +666,93 @@ We now construct a core of $\Phi$ from $\Phi'$ by using Lemma~\ref{LemContr}:
 
 \newcommand{\Core}{\mathsf{Core}}
 
-\begin{defi}
-A core of a derivation $\Phi$, constructed as described in the proof of Lemma~\ref{LemConstrCore}, is called \emph{a canonical core of\/ $\Phi$}, written $\Core(\Phi)$.
-\end{defi}
-
-% TODO: cononicity depends on atcomic flows, not on derivations
-
-The following proposition justifies calling the above construction `canonical'.
-
 % TODO: define associativity of contractions
 
-\begin{pro}
-Given two canonical cores of a derivation, the atomic flows of the two cores are equal modulo associativity of contractions.
+Note that the core obtained using the construction in the above proof is not unique, several choices are made. However, we would like to argue that the cores only differ for inessential details, and in fact from the point of view of atomic flows they are all the same.
+
+\begin{pro}\label{PropUniqueCore}
+Given a derivation $\Phi$ with atomic flow
+\[
+\atomicflow
+{
+(-21, 6)*{\afvjm{4}};
+(-13, 8)*{\afaidm{}{}{}{}{}{}};
+( -5, 6)*{\afvjm{4}};
+(-18, 0)*{\affr{8}{8}};
+(-16, 2)*{A_1};
+( -8, 0)*{\affr{8}{8}};
+( -6, 2)*{B_1};
+( -5,-6)*{\afvjm{4}};
+(-13,-8)*{\afaium{}{}{}{}{}{}};
+(-21,-6)*{\afvjm{4}};
+%------------
+(0,0)*{\cdots};
+%------------
+(21, 6)*{\afvjm{4}};
+(13, 8)*{\afaidm{}{}{}{}{}{}};
+( 5, 6)*{\afvjm{4}};
+( 8, 0)*{\affr{8}{8}};
+(10, 2)*{A_n};
+(18, 0)*{\affr{8}{8}};
+(20, 2)*{B_n};
+( 5,-6)*{\afvjm{4}};
+(13,-8)*{\afaium{}{}{}{}{}{}};
+(21,-6)*{\afvjm{4}};}\quad,
+\]
+where $A_1,B_1,\dots,A_n,B_n$ do not contain interaction nor cointeraction nodes, the atomic flow of a core of $\Phi$ obtained as described in the proof of Lemma~\ref{LemCoreExistence} is
+\[
+\atomicflow
+{
+(-18,15)*{\afvj2};
+(-18,10)*{\affr{8}{8}};
+(-18, 5)*{\afvjm{2}};
+(-18, 0)*{\affr{8}{8}};
+(-16, 2)*{A_1};
+(-18,-5)*{\afvjm{2}};
+(-18,-10)*{\affr{8}{8}};
+(-18,-15)*{\afvj2};
+%
+( -8,15)*{\afvj2};
+( -8,10)*{\affr{8}{8}};
+( -8, 5)*{\afvjm{2}};
+( -8, 0)*{\affr{8}{8}};
+( -6, 2)*{B_1};
+( -8,-5)*{\afvjm{2}};
+( -8,-10)*{\affr{8}{8}};
+( -8,-15)*{\afvj2};
+%------------
+(0,0)*{\cdots};
+%------------
+( 8,15)*{\afvj2};
+( 8,10)*{\affr{8}{8}};
+( 8, 5)*{\afvjm{2}};
+( 8, 0)*{\affr{8}{8}};
+(10, 2)*{A_n};
+( 8,-5)*{\afvjm{2}};
+( 8,-10)*{\affr{8}{8}};
+( 8,-15)*{\afvj2};
+%
+(18,15)*{\afvj2};
+(18,10)*{\affr{8}{8}};
+(18, 5)*{\afvjm{2}};
+(18, 0)*{\affr{8}{8}};
+(20, 2)*{B_n};
+(18,-5)*{\afvjm{2}};
+(18,-10)*{\affr{8}{8}};
+(18,-15)*{\afvj2};
+}\quad.
+\]
 \end{pro}
 
-\section{Experiments}
+% TODO: we are talking about cores obtained as in Lemma...
+
+In other words the atomic flow of two cores are equal modulo associativity of contractions, which justifies the following definition, where we refer to a core as if it is unique.
+
+\begin{defi}\label{DefCanonicalCore}
+A core of a derivation $\Phi$, constructed as described in the proof of Lemma~\ref{LemCoreExistence}, is called \emph{a canonical core of\/ $\Phi$}, written $\Core(\Phi)$.
+\end{defi}
+
+\subsection{Experiments}
 
 \begin{defi}
 Given
@@ -824,6 +901,8 @@ An experiment on a derivation $\Phi$ with respect to $a_1,\dots,a_n$, constructe
 \begin{pro}
 Given two canonical experiments on the same derivation with respect to the same atoms the atomic flows of the two experiments are equal modulo associativity of contractions.
 \end{pro}
+
+\section{Cut-elimination}
 
 % TODO: big remark or section on philosophy
 % TODO: remark on symmetry/confluence
