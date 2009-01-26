@@ -580,7 +580,12 @@ In the non-atomic version of system $\SKS$ the above derivations correspond to r
 % TODO: somehow express that a_1,\dots,a_n are all of them
 
 \begin{defi}\label{DefCore}
-Given a derivation $\Phi$ from $\alpha$ to $\beta$ and all the distinct and pairwise non-dual atoms $a_1,\dots,a_n$ each of which appears in both interaction and cointeraction instances in $\Phi$, a \emph{core of\/ $\Phi$} is defined as a derivation 
+Given
+\begin{itemize}
+ \item a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ and
+ \item distinct and pairwise non-dual atoms $a_1,\dots,a_n$, each of which appears in both interaction and cointeraction instance in $\Phi$,
+\end{itemize}
+a \emph{core of\/ $\Phi$} is a derivation 
 \[
 \vlder{}{}{\vls[\beta.(a_n.\bar a_n).\cdots.(a_1.\bar a_1)]}{\vls([a_1.\bar a_1].\cdots.[a_n.\bar a_n].\alpha)}
 \]
@@ -766,10 +771,10 @@ A core of a derivation $\Phi$, constructed as described in the proof of Lemma~\r
 \begin{defi}
 Given
 \begin{itemize}
- \item a proof $\Phi$ of $\beta$ and
+ \item a proof $\vlproof{\Phi}{\SKS}{\beta}$ and
  \item distinct and pairwise non-dual atoms $a_1,\dots,a_n$,
 \end{itemize}
-an \emph{experiment on $\Phi$ with respect to $a_1,\dots,a_n$} is a derivation from $\vls(a_1.\cdots.)$ to $\beta$ which does not contain any cointeraction instances.
+an \emph{experiment on $\Phi$ with respect to $a_1,\dots,a_n$} is a derivation $\vlder{}{\SKS\setminus\{\aiu\}}{\beta}{\vls(a_1.\vldots.a_n)}\quad.$
 \end{defi}
 
 \begin{defi}
@@ -777,7 +782,7 @@ Given a derivation $\Phi$ containing the atom occurrence $a$, let $A$ be the ato
 \end{defi}
 
 \begin{defi}
-Given distinct and pairwise non-dual atoms, $b_1,\dots,b_n$, an \emph{assignment to $b_1,\dots,b_n$} is a $a_1,\dots,a_n$ such that $a_i\in\{b_i,\bar b_i\}$ for every $1\leq i \leq n$.
+Given distinct and pairwise non-dual atoms, $b_1,\dots,b_n$, an \emph{assignment to $b_1,\dots,b_n$} is a sequence of atoms $a_1,\dots,a_n$ such that $a_i\in\{b_i,{\bar b}_i\}$ for every $1\leq i \leq n$.
 \end{defi}
 
 The number of different assignments to a sequence of $n$ atoms is $2^n$.
@@ -797,24 +802,24 @@ Given a proof, $\Phi$, of $\beta$, let $b_1,\dots,b_n$ be the distinct and pairw
 \newcommand{\mk}[1]{{#1}^{\scriptscriptstyle\bullet}}
 
 \begin{proof}
-Consider $\vlder{\Core(\Phi)}{}{\vls[\beta.(a_1.\bar a_1).\cdots.(a_n.\bar a_n)]}{\vls([a_1.\bar a_1].\cdots.[a_n.\bar a_n])}$. We now mark the following atom occurrences with$\mk\ $:
+Consider $\vlder{\Core(\Phi)}{}{\vls[\beta.(a_1.{\bar a}_1).\cdots.(a_n.{\bar a}_n)]}{\vls([a_1.{\bar a}_1].\cdots.[a_n.{\bar a}_n])}$. We now mark the following atom occurrences with$\mk\ $:
 \begin{itemize}
-\item the cones of the occurrences of $\bar a_1,\dots,\bar a_n$ in the conclusion of $\Core(\Phi)$ which are not in $\beta$ and
+\item the cones of the occurrences of ${\bar a}_1,\dots,{\bar a}_n$ in the conclusion of $\Core(\Phi)$ which are not in $\beta$ and
 \item the cones of both the atom occurrences appearing in cointeraction instances.
 \end{itemize}
 This gives us
 \[
 \vlderivation
 {
- \vlde{}{}{\vls[\beta.(a_1.\mk{\bar a_1}).\cdots.(a_n.\mk{\bar a_n})]}
+ \vlde{}{}{\vls[\beta.(a_1.\mk{{\bar a}_1}).\cdots.(a_n.\mk{{\bar a}_n})]}
  {
-  \vlde{}{}{\xi_1\left\{\vlinf{\aiu}{}{\fff}{\vls(\mk b_1.\mk{\bar b_1})}\right\}}
+  \vlde{}{}{\xi_1\left\{\vlinf{\aiu}{}{\fff}{\vls(\mk b_1.\mk{{\bar b}_1})}\right\}}
   {
    \vlde{}{}{\vdots}
    {
-    \vlde{}{}{\xi_k\left\{\vlinf{\aiu}{}{\fff}{\vls(\mk b_m.\mk{\bar b_m})}\right\}}
+    \vlde{}{}{\xi_k\left\{\vlinf{\aiu}{}{\fff}{\vls(\mk b_m.\mk{{\bar b}_m})}\right\}}
     {
-     \vlhy{\vls([a_1.\mk{\bar a_1}].\cdots.[a_n.\mk{\bar a_n}])}
+     \vlhy{\vls([a_1.\mk{{\bar a}_1}].\cdots.[a_n.\mk{{\bar a}_n}])}
     }
    }
   }
