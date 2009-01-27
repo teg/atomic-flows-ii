@@ -583,7 +583,7 @@ In the non-atomic version of system $\SKS$ the above derivations correspond to r
 Given
 \begin{itemize}
  \item a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ and
- \item distinct and pairwise non-dual atoms $a_1,\dots,a_n$, each of which appears in both interaction and cointeraction instance in $\Phi$,
+ \item the distinct and pairwise non-dual atoms $a_1,\dots,a_n$, each of which appears in both interaction and cointeraction instance in $\Phi$,
 \end{itemize}
 a \emph{core of\/ $\Phi$} is a derivation 
 \[
@@ -651,7 +651,7 @@ to obtain
 \vlder{\Phi'}{}{\vls[\beta.(a_n.\bar a_n).\cdots.(a_n.\bar a_n).\cdots.(a_1.\bar a_1).\cdots.(a_1.\bar a_1)]}{\vls([a_1.\bar a_1].\cdots.[a_1.\bar a_1].\cdots.[a_n.\bar a_n].\cdots.[a_n.\bar a_n].\alpha)}\quad.
 \]
 
-We now construct a core of $\Phi$ from $\Phi'$ by using Lemma~\ref{LemContr}:
+We now construct a core of $\Phi$ from $\Phi'$ by using Lemma~\ref{LemGenericContraction}:
 \[
 \vlderivation
 {
@@ -702,9 +702,15 @@ Given a derivation $\Phi$ with atomic flow
 (20, 2)*{B_n};
 ( 5,-6)*{\afvjm{4}};
 (13,-8)*{\afaium{}{}{}{}{}{}};
-(21,-6)*{\afvjm{4}};}\quad,
+(21,-6)*{\afvjm{4}};
+%------------
+(28, 6)*{\afvjm4};
+(28, 0)*{\affr{8}{8}};
+(30, 2)*{C};
+(28,-6)*{\afvjm4};
+}\quad,
 \]
-where $A_1,B_1,\dots,A_n,B_n$ do not contain interaction nor cointeraction nodes, the atomic flow of a core of $\Phi$ obtained as described in the proof of Lemma~\ref{LemCoreExistence} is
+where $A_1,B_1,\dots,A_n,B_n$ do not contain interaction nor cointeraction vertices, each of them are connected subflows and $C$ does not contain a path from an interaction to a cointeraction vertex, the atomic flow of a core of\/ $\Phi$ obtained as described in the proof of Lemma~\ref{LemCoreExistence} is
 \[
 \atomicflow
 {
@@ -733,34 +739,38 @@ where $A_1,B_1,\dots,A_n,B_n$ do not contain interaction nor cointeraction nodes
 %------------
 (0,0)*{\cdots};
 %------------
-(21,10)*{\afvjm{12}};
-(17,15)*{\afvj2};
-(17,10)*{\affr{6}{8}};
-(17, 5)*{\afvjm{2}};
-(18, 0)*{\affr{8}{8}};
-(16, 2)*{A_1};
-(21,-10)*{\afvjm{12}};
-(17,-15)*{\afvj2};
-(17,-10)*{\affr{6}{8}};
-(17, -5)*{\afvjm{2}};
-%
 ( 9,15)*{\afvj2};
 ( 9,10)*{\affr{6}{8}};
 ( 9, 5)*{\afvjm{2}};
 ( 5,10)*{\afvjm{12}};
 ( 8, 0)*{\affr{8}{8}};
-( 6, 2)*{B_1};
+( 6, 2)*{A_n};
 ( 9,-15)*{\afvj2};
 ( 9,-10)*{\affr{6}{8}};
 ( 9, -5)*{\afvjm{2}};
 ( 5,-10)*{\afvjm{12}};
-( 8, 0)*{\affr{8}{8}};}\quad.
+( 8, 0)*{\affr{8}{8}};
+%
+(21,10)*{\afvjm{12}};
+(17,15)*{\afvj2};
+(17,10)*{\affr{6}{8}};
+(17, 5)*{\afvjm{2}};
+(18, 0)*{\affr{8}{8}};
+(16, 2)*{B_n};
+(21,-10)*{\afvjm{12}};
+(17,-15)*{\afvj2};
+(17,-10)*{\affr{6}{8}};
+(17, -5)*{\afvjm{2}};
+%---------
+(28, 10)*{\afvjm{12}};
+(28, 0)*{\affr{8}{8}};
+(30, 2)*{C};
+(28,-10)*{\afvjm{12}};
+}\quad.
 \]
 \end{pro}
 
-% TODO: we are talking about cores obtained as in Lemma...
-
-In other words the atomic flow of two cores are equal modulo associativity of contractions, which justifies the following definition, where we refer to a core as if it is unique.
+In other words the atomic flow of a core constructed as described in the proof of Lemma~\ref{LemCoreExistence} is unique modulo associativity of contractions, which justifies the following definition.
 
 \begin{defi}\label{DefCanonicalCore}
 A core of a derivation $\Phi$, constructed as described in the proof of Lemma~\ref{LemCoreExistence}, is called \emph{a canonical core of\/ $\Phi$}, written $\Core(\Phi)$.
@@ -876,13 +886,197 @@ Finally, consider the experiment:
 
 % TODO: work on the remarks
 % TODO: add reference to AFI
+% TODO: finish the atomic flows
 
 \begin{rem}
-Another approach to obtaining an experiment on $\Phi$ with respect to $a_1,\dots,a_n$ is to consider the derivation
+Another approach to obtaining an experiment on the proof $\Phi$, with atomic flow
 \[
-\Psi=\vlder{\Core(\Phi)}{}{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(a_1.\bar a_1)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(a_n.\bar a_n)}]}{\vls([a_1.\vlinf{\awd}{}{\bar a_1}{\fff}].\cdots.[a_n.\vlinf{\awd}{}{\bar a_n}{\fff}])}\quad.
+\atomicflow
+{
+(-13, 8)*{\afaidm{}{}{}{}{}{}};
+(-18, 0)*{\affr{8}{8}};
+(-16, 2)*{A_1};
+( -8, 0)*{\affr{8}{8}};
+( -6, 2)*{B_1};
+(-21,-6)*{\afvjm{4}};
+( -5,-6)*{\afvjm{4}};
+(-13,-8)*{\afaium{}{}{}{}{}{}};
+%------------
+(0,0)*{\cdots};
+%------------
+(13, 8)*{\afaidm{}{}{}{}{}{}};
+( 8, 0)*{\affr{8}{8}};
+(10, 2)*{A_n};
+(18, 0)*{\affr{8}{8}};
+(20, 2)*{B_n};
+(21,-6)*{\afvjm{4}};
+( 5,-6)*{\afvjm{4}};
+(13,-8)*{\afaium{}{}{}{}{}{}};
+%------------
+(28, 8)*{\afawdm{}{}{}{}};
+(28, 0)*{\affr{8}{8}};
+(30, 2)*{C_1};
+(38, 8)*{\afawdm{}{}{}{}};
+(38, 0)*{\affr{8}{8}};
+(40, 2)*{D_1};
+(25,-6)*{\afvjm{4}};
+(41,-6)*{\afvjm{4}};
+(33,-8)*{\afaium{}{}{}{}{}{}};
+%------------
+(46,0)*{\cdots};
+%------------
+(54, 8)*{\afawdm{}{}{}{}};
+(54, 0)*{\affr{8}{8}};
+(56, 2)*{C_m};
+(64, 8)*{\afawdm{}{}{}{}};
+(64, 0)*{\affr{8}{8}};
+(66, 2)*{D_m};
+(67,-6)*{\afvjm{4}};
+(51,-6)*{\afvjm{4}};
+(59,-8)*{\afaium{}{}{}{}{}{}};
+%------------
+(74, 6)*{\afvjm4};
+(74, 0)*{\affr{8}{8}};
+(76, 2)*{E};
+(74,-6)*{\afvjm4};
+}\quad,
 \]
-Note that all maximal paths from a cointeraction vertex in the atomic flow of $\Psi$ go to a weakening vertex. Hence applying weakening reductions to $\Psi$ will eliminate all the cuts and yield the required experiment. 
+with respect to $a_1,\dots,a_n$ is to consider the derivation
+\[
+\Psi=\vlder{\Core(\Phi)}{}{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(a_1.\bar a_1)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(a_n.\bar a_n)}]}{\vls([a_1.\vlinf{\awd}{}{\bar a_1}{\fff}].\cdots.[a_n.\vlinf{\awd}{}{\bar a_n}{\fff}])}\quad,
+\]
+with atomic flow
+\[
+\atomicflow
+{
+(-17,18)*{\afawd{}{}{}{}};
+(-17,10)*{\affr{6}{8}};
+(-17, 5)*{\afvjm{2}};
+(-18, 0)*{\affr{8}{8}};
+(-16, 2)*{A_1};
+(-21,-12)*{\afvjm{16}};
+(-17,-10)*{\affr{6}{8}};
+(-17, -5)*{\afvjm{2}};
+%
+(-13,-18)*{\afaiu{}{}{}{}{}{}};
+%
+( -9,16)*{\afvj4};
+( -9,10)*{\affr{6}{8}};
+( -9, 5)*{\afvjm{2}};
+( -8, 0)*{\affr{8}{8}};
+( -6, 2)*{B_1};
+( -9,-10)*{\affr{6}{8}};
+( -9, -5)*{\afvjm{2}};
+( -5,-12)*{\afvjm{16}};
+%------------
+(0,0)*{\cdots};
+%------------
+( 9,18)*{\afawd{}{}{}{}};
+( 9,10)*{\affr{6}{8}};
+( 9, 5)*{\afvjm{2}};
+( 8, 0)*{\affr{8}{8}};
+( 6, 2)*{A_n};
+( 9,-10)*{\affr{6}{8}};
+( 9, -5)*{\afvjm{2}};
+( 5,-12)*{\afvjm{16}};
+%
+(13,-18)*{\afaiu{}{}{}{}{}{}};
+%
+(17,16)*{\afvj4};
+(17,10)*{\affr{6}{8}};
+(17, 5)*{\afvjm{2}};
+(18, 0)*{\affr{8}{8}};
+(16, 2)*{B_n};
+(21,-12)*{\afvjm{16}};
+(17,-10)*{\affr{6}{8}};
+(17, -5)*{\afvjm{2}};
+%------------
+(28, 8)*{\afawdm{}{}{}{}};
+(28, 0)*{\affr{8}{8}};
+(30, 2)*{C_1};
+(38, 8)*{\afawdm{}{}{}{}};
+(38, 0)*{\affr{8}{8}};
+(40, 2)*{D_1};
+(25,-6)*{\afvjm{4}};
+(41,-6)*{\afvjm{4}};
+(33,-8)*{\afaium{}{}{}{}{}{}};
+%------------
+(46,0)*{\cdots};
+%------------
+(54, 8)*{\afawdm{}{}{}{}};
+(54, 0)*{\affr{8}{8}};
+(56, 2)*{C_m};
+(64, 8)*{\afawdm{}{}{}{}};
+(64, 0)*{\affr{8}{8}};
+(66, 2)*{D_m};
+(67,-6)*{\afvjm{4}};
+(51,-6)*{\afvjm{4}};
+(59,-8)*{\afaium{}{}{}{}{}{}};
+%------------
+(74, 6)*{\afvjm4};
+(74, 0)*{\affr{8}{8}};
+(76, 2)*{E};
+(74,-6)*{\afvjm4};
+}\quad.
+\]
+where $A_1,B_1,\dots,A_n,B_n$ do not contain interaction nor cointeraction vertices, each of them are connected subflows and $C$ does not contain a path from an interaction to a cointeraction vertex, the atomic flow of a core of\/ $\Phi$ obtained as described in the proof of Lemma~\ref{LemCoreExistence} is
+\[
+\atomicflow
+{
+(-21,10)*{\afvjm{12}};
+(-17,15)*{\afvj2};
+(-17,10)*{\affr{6}{8}};
+(-17, 5)*{\afvjm{2}};
+(-18, 0)*{\affr{8}{8}};
+(-16, 2)*{A_1};
+(-21,-10)*{\afvjm{12}};
+(-17,-15)*{\afvj2};
+(-17,-10)*{\affr{6}{8}};
+(-17, -5)*{\afvjm{2}};
+%
+( -9,15)*{\afvj2};
+( -9,10)*{\affr{6}{8}};
+( -9, 5)*{\afvjm{2}};
+( -5,10)*{\afvjm{12}};
+( -8, 0)*{\affr{8}{8}};
+( -6, 2)*{B_1};
+( -9,-15)*{\afvj2};
+( -9,-10)*{\affr{6}{8}};
+( -9, -5)*{\afvjm{2}};
+( -5,-10)*{\afvjm{12}};
+( -8, 0)*{\affr{8}{8}};
+%------------
+(0,0)*{\cdots};
+%------------
+( 9,15)*{\afvj2};
+( 9,10)*{\affr{6}{8}};
+( 9, 5)*{\afvjm{2}};
+( 5,10)*{\afvjm{12}};
+( 8, 0)*{\affr{8}{8}};
+( 6, 2)*{A_n};
+( 9,-15)*{\afvj2};
+( 9,-10)*{\affr{6}{8}};
+( 9, -5)*{\afvjm{2}};
+( 5,-10)*{\afvjm{12}};
+( 8, 0)*{\affr{8}{8}};
+%
+(21,10)*{\afvjm{12}};
+(17,15)*{\afvj2};
+(17,10)*{\affr{6}{8}};
+(17, 5)*{\afvjm{2}};
+(18, 0)*{\affr{8}{8}};
+(16, 2)*{B_n};
+(21,-10)*{\afvjm{12}};
+(17,-15)*{\afvj2};
+(17,-10)*{\affr{6}{8}};
+(17, -5)*{\afvjm{2}};
+%---------
+(28, 10)*{\afvjm{12}};
+(28, 0)*{\affr{8}{8}};
+(30, 2)*{C};
+(28,-10)*{\afvjm{12}};
+}\quad.
+\]
 \end{rem}
 
 \begin{rem}
@@ -904,7 +1098,6 @@ The reason the former substitution works is that we are essentially in the follo
 \vlinf{\aiu}{}{\fff}{\vls(\vlinf{\awd}{}{c}{\fff}.\vlinf{\awd}{}{\bar c}{\fff})}\quad.
 \]
 \end{rem}
-
 
 \newcommand{\Exp}{\mathsf{Exp}}
 
