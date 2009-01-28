@@ -49,9 +49,11 @@ Deep inference is a relatively recent development in proof theory. It is a metho
 \newcommand{\fff}{\mathsf f}
 \newcommand{\ttt}{\mathsf t}
 
+% TODO: check that we only every use the variable names in the following definition
+
 %---------------------------------------
 \begin{defi}
-\emph{Formulae}, $\alpha$, $\beta$, $\gamma$, $\delta$ are freely built from: \emph{units}, $\fff$ (false), $\ttt$ (true); \emph{atoms}, $a$, $b$, $c$, $d$, $e$; \emph{disjunction} and \emph{conjunction}, ${\vlsbr[\alpha.\beta]}$ and $\vlsbr(\alpha.\beta)$. On the set of atoms a (non-identical) involution $\bar\cdot$ is defined, and dual atom occurrences, as $a$ and $\bar a$, can appear in formulae. We denote \emph{contexts}, \emph{i.e.}, formulae with a hole, by $\xi\vlhole$ and $\zeta\vlhole$; we also use \emph{multiple} contexts, $\xi\vlhole\cdots\vlhole$, \emph{i.e.}, formulae with many holes; for example, if $\xi\{a\}$ is $\vls(b.[a.c])$, then $\xi\vlhole$ is $\vls(b.[\vlhole.c])$, $\xi\{b\}$ is $\vls(b.[b.c])$ and $\xi\vlscn(a.d)$ is $\vls(b.[(a.d).c])$; if $\xi\{a\}\{b\}\{c\}$ is $\vls(b.[(a.d).c])$ then $\xi\{b\}\{c\}\{a\}$ is $\vls(c.[(b.d).a])$.
+\emph{Formulae}, $\alpha$, $\beta$, $\gamma$, $\delta$ are freely built from: \emph{units}, $\fff$ (false), $\ttt$ (true); \emph{atoms}, $a$, $b$, $c$, $d$; \emph{disjunction} and \emph{conjunction}, ${\vlsbr[\alpha.\beta]}$ and $\vlsbr(\alpha.\beta)$. On the set of atoms a (non-identical) involution $\bar\cdot$ is defined, and dual atom occurrences, as $a$ and $\bar a$, can appear in formulae. We denote \emph{contexts}, \emph{i.e.}, formulae with a hole, by $\xi\vlhole$ and $\zeta\vlhole$; we also use \emph{multiple} contexts, $\xi\vlhole\cdots\vlhole$, \emph{i.e.}, formulae with many holes; for example, if $\xi\{a\}$ is $\vls(b.[a.c])$, then $\xi\vlhole$ is $\vls(b.[\vlhole.c])$, $\xi\{b\}$ is $\vls(b.[b.c])$ and $\xi\vlscn(a.d)$ is $\vls(b.[(a.d).c])$; if $\xi\{a\}\{b\}\{c\}$ is $\vls(b.[(a.d).c])$ then $\xi\{b\}\{c\}\{a\}$ is $\vls(c.[(b.d).a])$.
 \end{defi}
 
 %---------------------------------------
@@ -71,7 +73,7 @@ Note that when we write $\xi\{a\}$, we mean that an occurrence of $a$ exists in 
                               {\scriptscriptstyle\mathbf2}}}
 %---------------------------------------
 \begin{defi}
-\emph{Inference rules}, $\rho$, have one \emph{premiss} and one \emph{conclusion}, and their \emph{instances} are used in \emph{inference steps} to rewrite inside formulae. A \emph{derivation}, $\Phi$, from $\alpha$ (\emph{premiss}) to $\beta$ (\emph{conclusion}) is a chain of inference steps with $\alpha$ at the top and $\beta$ at the bottom, and is usually indicated by $\vlder{\Phi}{\mathcal S}{\beta}{\alpha}$, where $\mathcal S$ is the name of the deductive system or a set of inference rules; a \emph{proof} is a derivation from $\ttt$; besides $\Phi$, we denote derivations with $\Psi$. We denote with $\xi\{\Phi\}$ the result of including every formula of the derivation $\Phi$ from $\alpha$ to $\beta$ into the context $\xi\vlhole$: since we adopt deep inference, $\xi\{\Phi\}$ from $\xi\{\alpha\}$ to $\xi\{\beta\}$ is a valid derivation. Furthermore, $\xi\left\{\vlder{}{}{\beta_1}{\alpha_1}\right\}\cdots\left\{\vlder{}{}{\beta_n}{\alpha_n}\right\}$ denotes
+\emph{Inference rules}, $\rho$, have one \emph{premiss} and one \emph{conclusion}, and their \emph{instances} are used in \emph{inference steps} to rewrite inside formulae. A \emph{derivation}, $\Phi$, from $\alpha$ (\emph{premiss}) to $\beta$ (\emph{conclusion}) is a chain of inference steps with $\alpha$ at the top and $\beta$ at the bottom, and is usually indicated by $\vlder{\Phi}{\mathcal S}{\beta}{\alpha}$, where $\mathcal S$ is the name of the deductive system or a set of inference rules; a \emph{proof} is a derivation from $\ttt$; besides $\Phi$, we denote derivations with $\Psi$. We denote with $\xi\{\Phi\}$ the result of including every formula of the derivation $\vlder{\Phi}{}{\beta}{\alpha}$ into the context $\xi\vlhole$. Since we adopt deep inference, $\vlder{\xi\{\Phi\}}{}{\xi\{\beta\}}{\xi\{\alpha\}}$ is a valid derivation. Furthermore, $\xi\left\{\vlder{}{}{\beta_1}{\alpha_1}\right\}\cdots\left\{\vlder{}{}{\beta_n}{\alpha_n}\right\}$ denotes
 \[
 \vlderivation
 {
@@ -175,7 +177,7 @@ Instead of the term `axiom' we use `interaction'; the reason is that, in deep in
 
 % TODO: The proof that every derivation is sequentiable is from AFI
 
-Atomic flows are somewhat similar to proof nets. However, we prove that, no matter how we freely build an atomic flow (as opposed to a proof net structure), the flow is associated with some derivation. So, atomic flows are always `sequentialisable', in proof-net parlance. In fact, atomic flows carry much less information than derivations do, because they do not keep track of the logical relations between the atoms they trace, only their structural information is retained (in the sense of structural rules, as opposed to logical ones).
+Atomic flows are somewhat similar to proof nets. However, no matter how we freely build an atomic flow (as opposed to a proof net structure), the flow is associated with some derivation. So, atomic flows are always `sequentialisable', in proof-net parlance. In fact, atomic flows carry much less information than derivations do, because they do not keep track of the logical relations between the atoms they trace, only their structural information is retained (in the sense of structural rules, as opposed to logical ones).
 
 We can think of atomic flows as composite diagrams that are freely generated from a set of six elementary diagrams. Technically, atomic flows are special kinds of labelled directed acyclic graphs, and the properties of their vertices are dictated by their labels, which we define as follows.
 
@@ -556,8 +558,10 @@ We show how to construct the first derivation, the second one can be done by sym
  }
 }\quad,
 \]
-for some $\xi'\vlhole, \beta$ where $\beta$ is not a unit and $\Psi$ and $\Psi'$ exist by the inductive hypothesis.
+for some $\xi'\vlhole$ and $\beta$ where $\beta$ is not a unit and $\Psi$ and $\Psi'$ exist by the inductive hypothesis.
 \end{proof}
+
+We now statethe following lemma, whose proof is routine, which shows how we can generalise the (co)contraction rules to work for formulae instead of atoms.
 
 \newcommand{\contr}{\mathsf{c}}
 \newcommand{\cod}{{\contr{\downarrow}}}
@@ -566,10 +570,6 @@ for some $\xi'\vlhole, \beta$ where $\beta$ is not a unit and $\Psi$ and $\Psi'$
 \begin{lem}\label{LemGenericContraction}
 Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$.
 \end{lem}
-
-\begin{proof}
-Routine.
-\end{proof}
 
 \begin{rem}
 In the non-atomic version of system $\SKS$ the above derivations correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlder{}{\{\acu,\med\}}{\vls(\alpha.\alpha)}{\alpha}$.
