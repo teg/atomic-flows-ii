@@ -1154,58 +1154,73 @@ Given a sequence of distinct and pairwaise non-dual atoms, $b_1,\dots,b_n$, let 
 
 The base case, $n=0$, is trivial and the inductive case is:
 \[
-\Sym(a_1,\dots,a_n)\quad=\quad
+\newbox\DerCap
+\setbox\DerCap=
+\hbox{$
+\vlderivation
+{
+ \vlde{}{\{\acu,\med\}}{\bigwedge_{i=1}^{2^{n-1}}[a_n.\bar a_n]}
+ {
+  \vlin{\aid}{}{\vls[a_n.\bar a_n]}
+  {
+   \vlhy{\ttt}
+  }
+ }
+}$
+}
+\newbox\DerCap
+\setbox\DerCap=
+\hbox{$
+\vlderivation
+{
+ \vlde{}{\{\acu,\med\}}{\bigwedge_{i=1}^{2^{n-1}}\vls[a_n.\bar a_n]}
+ {
+  \vlin{\aid}{}{\vls[a_n.\bar a_n]}
+  {
+   \vlhy{\ttt}
+  }
+ }
+}$
+}
+\Sym(b_1,\dots,b_n)\quad=\quad
 \vlderivation
 {
  \vlin{=}{}{\bigvee_{\{a_1,\dots,a_n\}\in \Assignments_n}\vlsbr(a_1.\cdots.a_n)}
  {
   \vlde{}{\{\swi\}}{\bigvee_{\{a_1,\dots,a_{n-1}\}\in \Assignments_{n-1}}\vlsbr[(a_1.\cdots.a_{n-1}.a_n).(a_1.\cdots.a_{n-1}.\bar a_n)]}
   {
-   \vlde{}{\{\swi\}}{\bigvee_{\{a_1,\dots,a_{n-1}\}\in \Assignments_{n-1}}\vlsbr([a_n.\bar a_n].a_1.\cdots.a_{n-1}.a_1.\cdots.a_{n-1})}
-   {
-    \vlde{}{\{\med,\acu\}}{\vls(\bigwedge_{i=1}^{2^{n-1}}[a_n.\bar a_n].\bigvee_{\{a_1,\dots,a_{n-1}\}\in \Assignments_{n-1}}(a_1.\cdots.a_{n-1}.a_1.\cdots.a_{n-1}))}
-    {
-     \vlin{\aid}{}{\vls([a_n.\bar a_n].\bigvee_{\{a_1,\dots,a_{n-1}\}\in \Assignments_{n-1}}(a_1.\cdots.a_{n-1}))}
-     {
-      \vlpr{\Sym(a_1,\dots,a_{n-1})}{\{\aid,\acu,\swi,\med\}}{\bigvee_{\{a_1,\dots,a_{n-1}\}\in \Assignments_{n-1}}\vlsbr(a_1.\cdots.a_{n-1})}
-     }
-    }
-   }
+  \vlpr{\Sym(b_1,\dots,b_{n-1})}{\{\aid,\acu,\swi,\med\}}{\vls(\box\DerCap.\bigvee_{\{a_1,\dots,a_{n-1}\}\in \Assignments_{n-1}}(\vlinf{\acu}{}{\vls(a_1.a_1)}{a_1}.\cdots.\vlinf{\acu}{}{\vls(a_{n-1}.a_{n-1})}{a_{n-1}}))}
   }
  }
 }\quad.
 \]
 \end{defi}
 
+Note that the derivation $\Sym(b_1,\dots,b_n)$ is not unique, but it's atomic flow is unique modulo associativity of contractions:
+
 \begin{pro}
-The atomic flow of a symmetric proof of\/ $\bigvee_{\{a_1,\dots,a_n\}\in\Assignments}\vlsbr(a_1.\cdots.a_n)$ is
+The atomic flow of a $\Sym(b_1,\dots,b_n)$ is
 \[
 \atomicflow
 {
-(-21, 6)*{\afvjm{4}};
-(-13, 8)*{\afaidm{}{}{}{}{}{}};
-( -5, 6)*{\afvjm{4}};
+(-13, 8)*{\afaid{}{}{}{}{}{}};
 (-18, 0)*{\affr{8}{8}};
-(-16, 2)*{A_1};
+(-16, 2)*{b_1};
 ( -8, 0)*{\affr{8}{8}};
-( -6, 2)*{B_1};
-( -5,-6)*{\afvjm{4}};
-(-13,-8)*{\afaium{}{}{}{}{}{}};
-(-21,-6)*{\afvjm{4}};
+( -6, 2)*{\bar b_1};
+(-18,-6)*{\afvjm{4}};
+( -8,-6)*{\afvjm{4}};
 %------------
 (0,0)*{\cdots};
 %------------
-(21, 6)*{\afvjm{4}};
-(13, 8)*{\afaidm{}{}{}{}{}{}};
-( 5, 6)*{\afvjm{4}};
+(13, 8)*{\afaid{}{}{}{}{}{}};
 ( 8, 0)*{\affr{8}{8}};
-(10, 2)*{A_n};
+(10, 2)*{b_n};
 (18, 0)*{\affr{8}{8}};
-(20, 2)*{B_n};
-( 5,-6)*{\afvjm{4}};
-(13,-8)*{\afaium{}{}{}{}{}{}};
-(21,-6)*{\afvjm{4}};
-}\quad,
+(20, 2)*{\bar b_n};
+( 8,-6)*{\afvjm{4}};
+(18,-6)*{\afvjm{4}};
+}\quad.
 \]
 \end{pro}
 
