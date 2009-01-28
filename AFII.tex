@@ -1028,18 +1028,18 @@ with atomic flow
 \begin{rem}
 It might be surprising that we choose to use the substitution
 \[
-\vlinf{\aiu}{}{\fff}{\vls(c.\bar c)}
+\vlinf{\aiu}{}{\fff}{\vls(b_i.\bar b_i)}
 \quad\rightarrow\quad
 \vlinf{=}{}{\fff}{\vls(\fff.\fff)}\quad,
 \]
 instead of the more natural
 \[
-\vlinf{\aiu}{}{\fff}{\vls(c.\bar c)}
+\vlinf{\aiu}{}{\fff}{\vls(b_i.\bar b_i)}
 \quad\rightarrow\quad
 \vlinf{=}{}{\fff}{\vls(\fff.\ttt)}\quad.
 \]
-We chose to do it this way for efficiency, had we chosen to use the latter approach we would have to have twice as many substitution rules (dealing with $\ttt$ in addition to $\fff$).
-The reason the former substitution works is that we are essentially in the following situation (possibly after some weakening reductions):
+We chose to do it this way for efficiency of presentation and as not to introduce more arbitrary choice than strictly necessary in the derivations.
+The reason the former substitution works is that we are essentially in the following situation:
 \[
 \vlinf{\aiu}{}{\fff}{\vls(\vlinf{\awd}{}{c}{\fff}.\vlinf{\awd}{}{\bar c}{\fff})}\quad.
 \]
