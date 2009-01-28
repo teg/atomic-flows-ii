@@ -684,9 +684,9 @@ Given a derivation $\Phi$ with atomic flow
 (-13, 8)*{\afaidm{}{}{}{}{}{}};
 ( -5, 6)*{\afvjm{4}};
 (-18, 0)*{\affr{8}{8}};
-(-16, 2)*{A_1};
+(-16, 2)*{a_1};
 ( -8, 0)*{\affr{8}{8}};
-( -6, 2)*{B_1};
+( -6, 2)*{\bar a_1};
 ( -5,-6)*{\afvjm{4}};
 (-13,-8)*{\afaium{}{}{}{}{}{}};
 (-21,-6)*{\afvjm{4}};
@@ -697,20 +697,20 @@ Given a derivation $\Phi$ with atomic flow
 (13, 8)*{\afaidm{}{}{}{}{}{}};
 ( 5, 6)*{\afvjm{4}};
 ( 8, 0)*{\affr{8}{8}};
-(10, 2)*{A_n};
+(10, 2)*{a_n};
 (18, 0)*{\affr{8}{8}};
-(20, 2)*{B_n};
+(20, 2)*{\bar a_n};
 ( 5,-6)*{\afvjm{4}};
 (13,-8)*{\afaium{}{}{}{}{}{}};
 (21,-6)*{\afvjm{4}};
 %------------
 (28, 6)*{\afvjm4};
 (28, 0)*{\affr{8}{8}};
-(30, 2)*{C};
+(30, 2)*{A};
 (28,-6)*{\afvjm4};
 }\quad,
 \]
-where $A_1,B_1,\dots,A_n,B_n$ do not contain interaction nor cointeraction vertices, each of them are connected subflows and $C$ does not contain a path from an interaction to a cointeraction vertex, the atomic flow of a core of\/ $\Phi$ obtained as described in the proof of Lemma~\ref{LemCoreExistence} is
+where $A$ does not contain a path from an interaction to a cointeraction vertex, the atomic flow of a core of\/ $\Phi$ obtained as described in the proof of Lemma~\ref{LemCoreExistence} is
 \[
 \atomicflow
 {
@@ -719,7 +719,7 @@ where $A_1,B_1,\dots,A_n,B_n$ do not contain interaction nor cointeraction verti
 (-17,10)*{\affr{6}{8}};
 (-17, 5)*{\afvjm{2}};
 (-18, 0)*{\affr{8}{8}};
-(-16, 2)*{A_1};
+(-16, 2)*{a_1};
 (-21,-10)*{\afvjm{12}};
 (-17,-15)*{\afvj2};
 (-17,-10)*{\affr{6}{8}};
@@ -730,7 +730,7 @@ where $A_1,B_1,\dots,A_n,B_n$ do not contain interaction nor cointeraction verti
 ( -9, 5)*{\afvjm{2}};
 ( -5,10)*{\afvjm{12}};
 ( -8, 0)*{\affr{8}{8}};
-( -6, 2)*{B_1};
+( -6, 2)*{\bar a_1};
 ( -9,-15)*{\afvj2};
 ( -9,-10)*{\affr{6}{8}};
 ( -9, -5)*{\afvjm{2}};
@@ -744,7 +744,7 @@ where $A_1,B_1,\dots,A_n,B_n$ do not contain interaction nor cointeraction verti
 ( 9, 5)*{\afvjm{2}};
 ( 5,10)*{\afvjm{12}};
 ( 8, 0)*{\affr{8}{8}};
-( 6, 2)*{A_n};
+(10, 2)*{a_n};
 ( 9,-15)*{\afvj2};
 ( 9,-10)*{\affr{6}{8}};
 ( 9, -5)*{\afvjm{2}};
@@ -756,7 +756,7 @@ where $A_1,B_1,\dots,A_n,B_n$ do not contain interaction nor cointeraction verti
 (17,10)*{\affr{6}{8}};
 (17, 5)*{\afvjm{2}};
 (18, 0)*{\affr{8}{8}};
-(16, 2)*{B_n};
+(20, 2)*{\bar a_n};
 (21,-10)*{\afvjm{12}};
 (17,-15)*{\afvj2};
 (17,-10)*{\affr{6}{8}};
@@ -764,7 +764,7 @@ where $A_1,B_1,\dots,A_n,B_n$ do not contain interaction nor cointeraction verti
 %---------
 (28, 10)*{\afvjm{12}};
 (28, 0)*{\affr{8}{8}};
-(30, 2)*{C};
+(30, 2)*{A};
 (28,-10)*{\afvjm{12}};
 }\quad.
 \]
@@ -788,20 +788,10 @@ an \emph{experiment on $\Phi$ with respect to $a_1,\dots,a_n$} is a derivation $
 \end{defi}
 
 \begin{defi}
-Given a derivation $\Phi$ containing the atom occurrence $a$, let $A$ be the atomic flow of $\Phi$ and let $\epsilon$ be the edge such that $a$ maps to $\epsilon$. The \emph{cone of $\epsilon$} is the set of edges in the paths starting with $\epsilon$ and the \emph{cone of $a$} is the set of atom occurrences mapping to edges in the cone of $\epsilon$.
-\end{defi}
-
-\begin{defi}
 Given distinct and pairwise non-dual atoms, $b_1,\dots,b_n$, an \emph{assignment to $b_1,\dots,b_n$} is a sequence of atoms $a_1,\dots,a_n$ such that $a_i\in\{b_i,{\bar b}_i\}$ for every $1\leq i \leq n$.
 \end{defi}
 
 The number of different assignments to a sequence of $n$ atoms is $2^n$.
-
-%TODO: maximal paths
-
-\begin{rem}\label{RemAllWeak}
-Let $A$ be an atomic flow and let $\nu$ be a vertex in $A$, then a path from $\nu$ goes to either a weakening vertex, an interaction vertex or to the $\top$ vertex. We note for later use that in the special case where $\Phi$ is a proof and $A$ is the atomic flow of $\Core(\Phi)$ a path from $\nu$ must go to a weakening; it cannot go to an interaction vertex because if the atomic flow of $\Phi$ contained a path from a cointeraction to an interaction, $\nu$ would not be in $\Core(\Phi)$; for the same reason it cannot go to $\top$ because since $\Phi$ is a proof the only paths that go to the $\top$ are the ones that go to an interaction vertex in $\Phi$.
-\end{rem}
 
 % TODO: swap a_i with b_i?
 
@@ -809,110 +799,7 @@ Let $A$ be an atomic flow and let $\nu$ be a vertex in $A$, then a path from $\n
 Given a proof, $\Phi$, of $\beta$, let $b_1,\dots,b_n$ be the distinct and pairwise non-dual atoms each of which occurs in both interaction and cointeraction instances and let $a_1,\dots,a_n$ be an assignment to $b_1,\dots,b_n$, then there exists an experiment on $\Phi$ with respect to $a_1,\dots,a_n$.
 \end{lem}
 
-\newcommand{\mk}[1]{{#1}^{\scriptscriptstyle\bullet}}
-
 \begin{proof}
-Consider $\vlder{\Core(\Phi)}{}{\vls[\beta.(a_1.{\bar a}_1).\cdots.(a_n.{\bar a}_n)]}{\vls([a_1.{\bar a}_1].\cdots.[a_n.{\bar a}_n])}$. We now mark the following atom occurrences with$\mk\ $:
-\begin{itemize}
-\item the cones of the occurrences of ${\bar a}_1,\dots,{\bar a}_n$ in the conclusion of $\Core(\Phi)$ which are not in $\beta$ and
-\item the cones of both the atom occurrences appearing in cointeraction instances.
-\end{itemize}
-This gives us
-\[
-\vlderivation
-{
- \vlde{}{}{\vls[\beta.(a_1.\mk{{\bar a}_1}).\cdots.(a_n.\mk{{\bar a}_n})]}
- {
-  \vlde{}{}{\xi_1\left\{\vlinf{\aiu}{}{\fff}{\vls(\mk b_1.\mk{{\bar b}_1})}\right\}}
-  {
-   \vlde{}{}{\vdots}
-   {
-    \vlde{}{}{\xi_k\left\{\vlinf{\aiu}{}{\fff}{\vls(\mk b_m.\mk{{\bar b}_m})}\right\}}
-    {
-     \vlhy{\vls([a_1.\mk{{\bar a}_1}].\cdots.[a_n.\mk{{\bar a}_n}])}
-    }
-   }
-  }
- }
-}\quad,
-\]
-for some $b_1,\dots,b_m,\xi_1\vlhole,\xi_k\vlhole$.
-
-Then perform the following substitutions to obtain $\Psi$:
-\begin{itemize}
-  \item substitute each marked atom occurrence, $\mk c$, with $\fff$ and
-  \item substitute each structural inference rule instance in which $\mk c$ occurs as follows
-\[
-\begin{array}{c}
-\vlinf{\awd}{}{\mk c}{\fff}
-\quad\rightarrow\quad
-\vlinf{=}{}{\fff}{\fff}\quad,
-\\
-\noalign{\bigskip}
-\vlinf{\acd}{}{\mk c}{\vls[\mk c.\mk c]}
-\quad\rightarrow\quad
-\vlinf{=}{}{\fff}{\fff}\quad,
-\\
-\noalign{\bigskip}
-\vlinf{\acu}{}{\vls(\mk c.c)}{\mk c}
-\quad\rightarrow\quad
-\vlinf{\awd}{}{\vls(\fff.c)}{\fff}\quad,
-\\
-\noalign{\bigskip}
-\vlinf{\aiu}{}{\fff}{\vls(\mk c.\mk {\bar c})}
-\quad\rightarrow\quad
-\vlinf{=}{}{\fff}{\vls(\fff.\fff)}\quad.
-\end{array}
-\]
-\end{itemize}
-By Remark~\ref{RemAllWeak} we know that no cone will ever contain an atom occurrence appearing in an interaction instance, so the result of the substitution gives a valid derivation:
-\[
-\Psi=
-\vlder{}{}{\vls[\beta.(a_1.\fff).\cdots.(a_n.\fff)]}
-{\vls([a_1.\fff].\cdots.[a_n.\fff])}\quad.
-\]
-
-Finally, consider the experiment:
-\[
-\vlderivation
-{
- \vlde{\Psi}{}{\vls[\beta.(\vlinf{\awu}{}{\ttt}{a_1}.\fff).\cdots.(\vlinf{\awu}{}{\ttt}{a_n}.\fff)]}
- {
-  \vlhy{\vls(a_1.\cdots.a_n)}
- }
-}\quad.
-\]
-\end{proof}
-
-% TODO: work on the remarks
-% TODO: add reference to AFI
-% TODO: finish the atomic flows
-
-\begin{rem}
-It might be surprising that we choose to use the substitution
-\[
-\vlinf{\aiu}{}{\fff}{\vls(c.\bar c)}
-\quad\rightarrow\quad
-\vlinf{=}{}{\fff}{\vls(\fff.\fff)}\quad,
-\]
-instead of the more natural
-\[
-\vlinf{\aiu}{}{\fff}{\vls(c.\bar c)}
-\quad\rightarrow\quad
-\vlinf{=}{}{\fff}{\vls(\fff.\ttt)}\quad.
-\]
-We chose to do it this way for efficiency, had we chosen to use the latter approach we would have to have twice as many substitution rules (dealing with $\ttt$ in addition to $\fff$).
-The reason the former substitution works is that we are essentially in the following situation (possibly after some weakening reductions):
-\[
-\vlinf{\aiu}{}{\fff}{\vls(\vlinf{\awd}{}{c}{\fff}.\vlinf{\awd}{}{\bar c}{\fff})}\quad.
-\]
-\end{rem}
-
-% TODO: allow atomic flows to be named after the atom that maps to it
-
-\begin{rem}\label{RemExperimentExistence}
-Using the weakening reductions presented in \cite{GuGu08} we can show another approach to obtaining an experiment on the proof $\Phi$ with respect to $a_1,\dots,a_n$.
-
 Without loss of generality assume the atomic flow of $\Phi$ to be:
 \[
 \atomicflow
@@ -964,9 +851,208 @@ Without loss of generality assume the atomic flow of $\Phi$ to be:
 (74,-6)*{\afvjm4};
 }\quad,
 \]
-where the atomic flows labeled $a_1,{\bar a}_1,\dots,a_n,{\bar a_n},b_1,{\bar b_1},\dots,b_m,{\bar b}_m$ do not contain interaction nor cointeraction vertices and $A$ does not contain any cointeraction vertices. Now consider the derivation
+
+where $A$ does not contain any cointeraction vertices.
+Consider $\vlder{\Core(\Phi)}{}{\vls[\beta.(a_1.{\bar a}_1).\cdots.(a_n.{\bar a}_n)]}{\vls([a_1.{\bar a}_1].\cdots.[a_n.{\bar a}_n])}$ with atomic flow
 \[
-\Psi=\vlder{\Core(\Phi)}{}{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(a_1.\bar a_1)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(a_n.\bar a_n)}]}{\vls([a_1.\vlinf{\awd}{}{\bar a_1}{\fff}].\cdots.[a_n.\vlinf{\awd}{}{\bar a_n}{\fff}])}\quad,
+\atomicflow
+{
+(-18,16)*{\afvj4};
+(-18,10)*{\affr{8}{8}};
+(-18, 5)*{\afvjm{2}};
+(-18, 0)*{\affr{8}{8}};
+(-16, 2)*{a_1};
+(-21,-11)*{\afvjm{14}};
+(-17, -5)*{\afvjm{2}};
+(-17,-10)*{\affr{6}{8}};
+(-17,-16)*{\afvj4};
+%
+( -8,16)*{\afvj4};
+( -8,10)*{\affr{8}{8}};
+( -8, 5)*{\afvjm{2}};
+( -8, 0)*{\affr{8}{8}};
+( -6, 2)*{{\bar a}_1};
+( -9,-16)*{\afvj4};
+( -9,-10)*{\affr{6}{8}};
+( -9, -5)*{\afvjm{2}};
+( -5,-11)*{\afvjm{14}};
+%------------
+(0,0)*{\cdots};
+%------------
+( 8,16)*{\afvj4};
+( 8,10)*{\affr{8}{8}};
+( 8, 5)*{\afvjm{2}};
+( 8, 0)*{\affr{8}{8}};
+(10, 2)*{a_n};
+( 5,-11)*{\afvjm{14}};
+( 9, -5)*{\afvjm{2}};
+( 9,-10)*{\affr{6}{8}};
+( 9,-16)*{\afvj4};
+%
+(18,16)*{\afvj4};
+(18,10)*{\affr{8}{8}};
+(18, 5)*{\afvjm{2}};
+(18, 0)*{\affr{8}{8}};
+(20, 2)*{{\bar a}_n};
+(17, -5)*{\afvjm{2}};
+(17,-10)*{\affr{6}{8}};
+(17,-16)*{\afvj4};
+(21,-11)*{\afvjm{14}};
+%------------
+(28, 8)*{\afawdm{}{}{}{}};
+(28, 0)*{\affr{8}{8}};
+(30, 2)*{b_1};
+(38, 8)*{\afawdm{}{}{}{}};
+(38, 0)*{\affr{8}{8}};
+(40, 2)*{{\bar b}_1};
+(25,-6)*{\afvjm{4}};
+(41,-6)*{\afvjm{4}};
+(33,-8)*{\afaium{}{}{}{}{}{}};
+%------------
+(46,0)*{\cdots};
+%------------
+(54, 8)*{\afawdm{}{}{}{}};
+(54, 0)*{\affr{8}{8}};
+(56, 2)*{b_m};
+(64, 8)*{\afawdm{}{}{}{}};
+(64, 0)*{\affr{8}{8}};
+(66, 2)*{{\bar b}_m};
+(67,-6)*{\afvjm{4}};
+(51,-6)*{\afvjm{4}};
+(59,-8)*{\afaium{}{}{}{}{}{}};
+%------------
+(74, 0)*{\affr{8}{8}};
+(76, 2)*{A};
+(74,-6)*{\afvjm4};
+}\quad.
+\]
+
+Now obtain $\Psi$ by substituting $\fff$ for each occurrence of $\bar a_1,\dots,\bar a_n,b_1,\bar b_1,\dots,b_m,\bar b_m$ in $\Phi$:
+\[
+\vlderivation
+{
+ \vlde{\Psi}{}{\vls[\beta'.(a_1.\fff).\cdots.(a_n.\fff)]}
+ {
+  \vlhy{\vls(a_1.\cdots.a_n)}
+ }
+}\quad,
+\]
+where $\beta'$ is obtained from $\beta$ by the above substitutions. The atomic flow of $\Psi$ is:
+\[
+\atomicflow
+{
+(-8,16)*{\afvj4};
+(-8,10)*{\affr{8}{8}};
+(-8, 5)*{\afvjm{2}};
+(-8, 0)*{\affr{8}{8}};
+(-6, 2)*{a_1};
+(-11,-11)*{\afvjm{14}};
+(-7, -5)*{\afvjm{2}};
+(-7,-10)*{\affr{6}{8}};
+(-7,-16)*{\afvj4};
+%------------
+(0,0)*{\cdots};
+%------------
+( 8,16)*{\afvj4};
+( 8,10)*{\affr{8}{8}};
+( 8, 5)*{\afvjm{2}};
+( 8, 0)*{\affr{8}{8}};
+(10, 2)*{a_n};
+( 5,-11)*{\afvjm{14}};
+( 9, -5)*{\afvjm{2}};
+( 9,-10)*{\affr{6}{8}};
+( 9,-16)*{\afvj4};
+%------------
+(20, 0)*{\affr{8}{8}};
+(22, 2)*{A};
+(20,-6)*{\afvjm4};
+}\quad.
+\]
+Finally the experiment is:
+\[
+\vlderivation
+{
+ \vlde{\Psi}{}{\vls[\vlder{}{\{\awd\}}{\beta}{\beta'}.(\vlinf{\awu}{}{\ttt}{a_1}.\fff).\cdots.(\vlinf{\awu}{}{\ttt}{a_n}.\fff)]}
+ {
+  \vlhy{\vls(a_1.\cdots.a_n)}
+ }
+}\quad,
+\]
+with atomic flow
+\[
+\atomicflow
+{
+(-14,16)*{\afvj4};
+(-14,10)*{\affr{8}{8}};
+(-14, 5)*{\afvjm{2}};
+(-14, 0)*{\affr{8}{8}};
+(-12, 2)*{a_1};
+(-17,-11)*{\afvjm{14}};
+(-13, -5)*{\afvjm{2}};
+(-13,-10)*{\affr{6}{8}};
+(-13,-18)*{\afawu{}{}{}{}};
+%
+(-6,-14)*{\afawdm{}{}{}{\bar a_1}};
+%------------
+(0,0)*{\cdots};
+%------------
+( 8,16)*{\afvj4};
+( 8,10)*{\affr{8}{8}};
+( 8, 5)*{\afvjm{2}};
+( 8, 0)*{\affr{8}{8}};
+(10, 2)*{a_n};
+( 5,-11)*{\afvjm{14}};
+( 9, -5)*{\afvjm{2}};
+( 9,-10)*{\affr{6}{8}};
+( 9,-18)*{\afawu{}{}{}{}};
+%
+(16,-14)*{\afawdm{}{}{}{\bar a_n}};
+%------------
+(22,-14)*{\afawdm{}{}{}{b_1}};
+(26,-14)*{\afawdm{}{}{}{\bar b_1}};
+%------------
+(30,-14)*{\cdots};
+%------------
+(34,-14)*{\afawdm{}{}{}{b_1}};
+(38,-14)*{\afawdm{}{}{}{\bar b_1}};
+%------------
+(48, 0)*{\affr{8}{8}};
+(50, 2)*{A};
+(48,-6)*{\afvjm4};
+}\quad.
+\]
+\end{proof}
+
+% TODO: add reference to AFI
+
+\begin{rem}
+It might be surprising that we choose to use the substitution
+\[
+\vlinf{\aiu}{}{\fff}{\vls(c.\bar c)}
+\quad\rightarrow\quad
+\vlinf{=}{}{\fff}{\vls(\fff.\fff)}\quad,
+\]
+instead of the more natural
+\[
+\vlinf{\aiu}{}{\fff}{\vls(c.\bar c)}
+\quad\rightarrow\quad
+\vlinf{=}{}{\fff}{\vls(\fff.\ttt)}\quad.
+\]
+We chose to do it this way for efficiency, had we chosen to use the latter approach we would have to have twice as many substitution rules (dealing with $\ttt$ in addition to $\fff$).
+The reason the former substitution works is that we are essentially in the following situation (possibly after some weakening reductions):
+\[
+\vlinf{\aiu}{}{\fff}{\vls(\vlinf{\awd}{}{c}{\fff}.\vlinf{\awd}{}{\bar c}{\fff})}\quad.
+\]
+\end{rem}
+
+% TODO: allow atomic flows to be named after the atom that maps to it
+
+\begin{rem}\label{RemExperimentExistence}
+Using the weakening reductions presented in \cite{GuGu08} we can use another approach to obtaining an experiment on the proof $\Phi$ with respect to $a_1,\dots,a_n$:
+
+Simply consider the derivation
+\[
+\vlder{\Core(\Phi)}{}{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(a_1.\bar a_1)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(a_n.\bar a_n)}]}{\vls([a_1.\vlinf{\awd}{}{\bar a_1}{\fff}].\cdots.[a_n.\vlinf{\awd}{}{\bar a_n}{\fff}])}\quad,
 \]
 with atomic flow
 \[
@@ -1039,60 +1125,12 @@ with atomic flow
 (74, 0)*{\affr{8}{8}};
 (76, 2)*{A};
 (74,-6)*{\afvjm4};
-}\quad.
-\]
-By applying weakening reductions (which are confluent and terminating) we obtain the experiment
-\[
-\vlderivation
-{
- \vlde{}{}{\beta}
- {
-  \vlhy{\vls(a_1.\cdots.a_n)}
- }
 }\quad,
 \]
-with atomic flow
-\[
-\atomicflow
-{
-(-18,16)*{\afvj4};
-(-18,10)*{\affr{8}{8}};
-(-18, 5)*{\afvjm{2}};
-(-18, 0)*{\affr{8}{8}};
-(-16, 2)*{a_1};
-(-21,-6)*{\afvjm4};
-(-15,-8)*{\afawum{}{}{}{}};
-%
-(-10,-4)*{\afawdm{}{}{}{{\bar a}_1}};
-%------------
-( -6,0)*{\cdots};
-%------------
-(2,16)*{\afvj4};
-(2,10)*{\affr{8}{8}};
-(2, 5)*{\afvjm{2}};
-(2, 0)*{\affr{8}{8}};
-(2, 2)*{a_n};
-( 5,-8)*{\afawum{}{}{}{}};
-(-1,-6)*{\afvjm4};
-%
-(10,-4)*{\afawdm{}{}{}{{\bar a}_n}};
-%------------
-(16,0)*{\afawdm{}{}{}{b_1}};
-(20,0)*{\afawdm{}{}{}{{\bar b}_1}};
-%------------
-(24,0)*{\cdots};
-%------------
-(28,0)*{\afawdm{}{}{}{b_m}};
-(32,0)*{\afawdm{}{}{}{{\bar b}_m}};
-%------------
-(42, 0)*{\affr{8}{8}};
-(44, 2)*{A};
-(42,-6)*{\afvjm4};
-}\quad.
-\]
+and apply weakening reductions until a derivation with the desired atomic flow is obtained.
 \end{rem}
 
-Note that the atomic flow of the experiment obtained in the proof of Lemma~\ref{LemExperimentExistence} is slightly different from the atomic flow of the experiment obtained in Remark~\ref{RemExperimentExistence}. However, the important fact is that once the method for obtaining the experiment is fixed, the atomic flow of an experiment of a given proof is unique modulo associativity of contractions. This is easily seen from Remark~\ref{RemExperimentExistence}, but it is not difficult to show that the same is true for the experiments obtained in the proof of Lemma~\ref{LemExperimentExistence}. This motivates the following definition:
+Note that the atomic flow of an experiment obtained as in Lemma~\ref{LemExperimentExistence} (or Remark~\ref{RemExperimentExistence}) of a given proof is unique modulo associativity of contractions. This motivates the following definition:
 
 \newcommand{\Exp}{\mathsf{Exp}}
 
