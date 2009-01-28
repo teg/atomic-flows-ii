@@ -46,8 +46,11 @@
 
 Deep inference is a relatively recent development in proof theory. It is a methodology according to which several formalisms can be defined with excellent structural properties. The calculus of structures \cite{Gugl:06:A-System:kl} is one of them and is now well developed for classical \cite{Brun:03:Atomic-C:oz,Brun:06:Cut-Elim:cq,Brun:06:Locality:zh,BrunTiu:01:A-Local-:mz,Brun:06:Deep-Inf:qy}, intuitionistic \cite{Tiu:06:A-Local-:gf}, linear \cite{Stra:02:A-Local-:ul,Stra:03:MELL-in-:oy}, modal \cite{Brun::Deep-Seq:ay,GoreTiu:06:Classica:uq,Stou:06:A-Deep-I:rt} and commutative/non-commutative logics \cite{Gugl:06:A-System:kl,Tiu:06:A-System:ai,Stra:03:Linear-L:lp,Brus:02:A-Purely:wd,Di-G:04:Structur:wy,GuglStra:01:Non-comm:rp,GuglStra:02:A-Non-co:lq,GuglStra:02:A-Non-co:dq,Kahr:06:Reducing:hc,Kahr:07:System-B:fk}. The basic proof complexity properties of the calculus of structures are known \cite{BrusGugl:07:On-the-P:fk}. The calculus of structures promoted the discovery of a new class of proof nets for classical and linear logic \cite{LamaStra:05:Construc:qq,LamaStra:05:Naming-P:ov,LamaStra:06:From-Pro:et,StraLama:04:On-Proof:ec} (see also \cite{Guir:06:The-Thre:qt}). There exist implementations in Maude of deep-inference proof systems \cite{Kahr:07:Maude-as:lr}. For a better introduction than this, we refer the reader to \cite{Brun:03:Atomic-C:oz}.
 
+% TODO: define substitutions
+
 \newcommand{\fff}{\mathsf f}
 \newcommand{\ttt}{\mathsf t}
+\newcommand{\ot}{\mathbin\shortleftarrow}
 
 % TODO: check that we only every use the variable names in the following definition
 
@@ -589,8 +592,10 @@ a \emph{core of\/ $\Phi$} is a derivation
 \[
 \vlder{}{}{\vls[\beta.(a_n.\bar a_n).\cdots.(a_1.\bar a_1)]}{\vls([a_1.\bar a_1].\cdots.[a_n.\bar a_n].\alpha)}
 \]
-where the atoms $a_1,\dots,a_n$ do not occur in any interaction nor cointeraction instances.
+where no atom occurs in both an interaction and a cointeraction instance.
 \end{defi}
+
+% TODO: say that a core is weakly streamlined
 
 \begin{lem}\label{LemCoreExistence}
 For any derivation $\Phi$ from $\alpha$ to $\beta$ a core of\/ $\Phi$ can be constructed.
@@ -675,6 +680,32 @@ We now construct a core of $\Phi$ from $\Phi'$ by using Lemma~\ref{LemGenericCon
 
 Note that the core obtained using the construction in the above proof is not unique, several choices are made. However, we would like to argue that the cores only differ for inessential details, and in fact from the point of view of atomic flows they are all the same.
 
+\newbox\upone\setbox\upone=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afacu{}{}{}{}{}{}}}$}
+\newbox\uptwo\setbox\uptwo=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afacu{}{}{}{}{}{}}}$}
+\newbox\upthree\setbox\upthree=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afacu{}{}{}{}{}{}}}$}
+\newbox\upfour\setbox\upfour=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afacu{}{}{}{}{}{}}}$}
+\newbox\downone\setbox\downone=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afacd{}{}{}{}{}{}}}$}
+\newbox\downtwo\setbox\downtwo=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afacd{}{}{}{}{}{}}}$}
+\newbox\downthree\setbox\downthree=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afacd{}{}{}{}{}{}}}$}
+\newbox\downfour\setbox\downfour=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afacd{}{}{}{}{}{}}}$}
+
+
 \begin{pro}\label{PropUniqueCore}
 Given a derivation $\Phi$ with atomic flow
 \[
@@ -717,22 +748,26 @@ where $A$ does not contain a path from an interaction to a cointeraction vertex,
 (-21,10)*{\afvjm{12}};
 (-17,15)*{\afvj2};
 (-17,10)*{\affr{6}{8}};
+(-17,10)*{\box\upone};
 (-17, 5)*{\afvjm{2}};
 (-18, 0)*{\affr{8}{8}};
 (-16, 2)*{a_1};
 (-21,-10)*{\afvjm{12}};
 (-17,-15)*{\afvj2};
 (-17,-10)*{\affr{6}{8}};
+(-17,-10)*{\box\downone};
 (-17, -5)*{\afvjm{2}};
 %
 ( -9,15)*{\afvj2};
 ( -9,10)*{\affr{6}{8}};
+( -9,10)*{\box\uptwo};
 ( -9, 5)*{\afvjm{2}};
 ( -5,10)*{\afvjm{12}};
 ( -8, 0)*{\affr{8}{8}};
 ( -6, 2)*{\bar a_1};
 ( -9,-15)*{\afvj2};
 ( -9,-10)*{\affr{6}{8}};
+( -9,-10)*{\box\downtwo};
 ( -9, -5)*{\afvjm{2}};
 ( -5,-10)*{\afvjm{12}};
 ( -8, 0)*{\affr{8}{8}};
@@ -741,12 +776,14 @@ where $A$ does not contain a path from an interaction to a cointeraction vertex,
 %------------
 ( 9,15)*{\afvj2};
 ( 9,10)*{\affr{6}{8}};
+( 9,10)*{\box\upthree};
 ( 9, 5)*{\afvjm{2}};
 ( 5,10)*{\afvjm{12}};
 ( 8, 0)*{\affr{8}{8}};
 (10, 2)*{a_n};
 ( 9,-15)*{\afvj2};
 ( 9,-10)*{\affr{6}{8}};
+( 9,-10)*{\box\downthree};
 ( 9, -5)*{\afvjm{2}};
 ( 5,-10)*{\afvjm{12}};
 ( 8, 0)*{\affr{8}{8}};
@@ -754,12 +791,14 @@ where $A$ does not contain a path from an interaction to a cointeraction vertex,
 (21,10)*{\afvjm{12}};
 (17,15)*{\afvj2};
 (17,10)*{\affr{6}{8}};
+(17,10)*{\box\upfour};
 (17, 5)*{\afvjm{2}};
 (18, 0)*{\affr{8}{8}};
 (20, 2)*{\bar a_n};
 (21,-10)*{\afvjm{12}};
 (17,-15)*{\afvj2};
 (17,-10)*{\affr{6}{8}};
+(17,-10)*{\box\downfour};
 (17, -5)*{\afvjm{2}};
 %---------
 (28, 10)*{\afvjm{12}};
@@ -796,7 +835,7 @@ The number of different assignments to a sequence of $n$ atoms is $2^n$.
 % TODO: swap a_i with b_i?
 
 \begin{lem}\label{LemExperimentExistence}
-Given a proof, $\Phi$, of $\beta$, let $b_1,\dots,b_n$ be the distinct and pairwise non-dual atoms each of which occurs in both interaction and cointeraction instances and let $a_1,\dots,a_n$ be an assignment to $b_1,\dots,b_n$, then there exists an experiment on $\Phi$ with respect to $a_1,\dots,a_n$.
+Given a proof, $\Phi$, of $\beta$, let $b_1,\dots,b_n$ be the distinct and pairwise non-dual atoms each of which occurs in both interaction and cointeraction instances in $\Phi$ and let $a_1,\dots,a_n$ be an assignment to $b_1,\dots,b_n$, then there exists an experiment on $\Phi$ with respect to $a_1,\dots,a_n$.
 \end{lem}
 
 \begin{proof}
@@ -853,7 +892,8 @@ Without loss of generality assume the atomic flow of $\Phi$ to be:
 \]
 
 where $A$ does not contain any cointeraction vertices.
-Consider $\vlder{\Core(\Phi)}{}{\vls[\beta.(a_1.{\bar a}_1).\cdots.(a_n.{\bar a}_n)]}{\vls([a_1.{\bar a}_1].\cdots.[a_n.{\bar a}_n])}$ with atomic flow
+Now, consider the core of $\Phi$, $\vlder{\Core(\Phi)}{}{\vls[\beta.(a_1.{\bar a}_1).\cdots.(a_n.{\bar a}_n)]}{\vls([a_1.{\bar a}_1].\cdots.[a_n.{\bar a}_n])}$, with atomic flow
+% TODO: contractions and cocontractions
 \[
 \atomicflow
 {
@@ -927,17 +967,18 @@ Consider $\vlder{\Core(\Phi)}{}{\vls[\beta.(a_1.{\bar a}_1).\cdots.(a_n.{\bar a}
 }\quad.
 \]
 
-Now obtain $\Psi$ by substituting $\fff$ for each occurrence of $\bar a_1,\dots,\bar a_n,b_1,\bar b_1,\dots,b_m,\bar b_m$ in $\Phi$:
+By substituting $\fff$ for each occurrence of $\bar a_1,\dots,\bar a_n,b_1,\bar b_1,\dots,b_m,\bar b_m$ in $\Core(\Phi)$, we obtain
 \[
 \vlderivation
 {
- \vlde{\Psi}{}{\vls[\beta'.(a_1.\fff).\cdots.(a_n.\fff)]}
+ \vlde{\Core(\Phi)\{\bar a_1,\dots,\bar a_n,b_1,\bar b_1,\dots,b_m,\bar b_m\ot\fff\}}{\SKS\setminus\{\aiu\}}{\vls[\beta\{\bar a_1,\dots,\bar a_n,b_1,\bar b_1,\dots,b_m,\bar b_m\ot\fff\}.(a_1.\fff).\cdots.(a_n.\fff)]}
  {
   \vlhy{\vls(a_1.\cdots.a_n)}
  }
 }\quad,
 \]
-where $\beta'$ is obtained from $\beta$ by the above substitutions. The atomic flow of $\Psi$ is:
+with atomic flow
+% TODO: contractions and cocontractions
 \[
 \atomicflow
 {
@@ -968,17 +1009,18 @@ where $\beta'$ is obtained from $\beta$ by the above substitutions. The atomic f
 (20,-6)*{\afvjm4};
 }\quad.
 \]
-Finally the experiment is:
+Finally, an experiment on $\Phi$ with respect to $a_1,\dots,a_n$ is:
 \[
 \vlderivation
 {
- \vlde{\Psi}{}{\vls[\vlder{}{\{\awd\}}{\beta}{\beta'}.(\vlinf{\awu}{}{\ttt}{a_1}.\fff).\cdots.(\vlinf{\awu}{}{\ttt}{a_n}.\fff)]}
+ \vlde{\Core(\Phi)\{\bar a_1,\dots,\bar a_n,b_1,\bar b_1,\dots,b_m,\bar b_m\ot\fff\}}{\SKS\setminus\{\aiu\}}{\vls[\vlder{}{\{\awd\}}{\beta}{\beta\{\bar a_1,\dots,\bar a_n,b_1,\bar b_1,\dots,b_m,\bar b_m\ot\fff\}}.(\vlinf{\awu}{}{\ttt}{a_1}.\fff).\cdots.(\vlinf{\awu}{}{\ttt}{a_n}.\fff)]}
  {
   \vlhy{\vls(a_1.\cdots.a_n)}
  }
 }\quad,
 \]
 with atomic flow
+% TODO: contractions and cocontractions
 \[
 \atomicflow
 {
@@ -1038,7 +1080,7 @@ instead of the more natural
 \quad\rightarrow\quad
 \vlinf{=}{}{\fff}{\vls(\fff.\ttt)}\quad.
 \]
-We chose to do it this way for efficiency of presentation and as not to introduce more arbitrary choice than strictly necessary in the derivations.
+We chose to do it this way for efficiency of presentation and as not to introduce more arbitrary choice than strictly necessary in building the derivations.
 The reason the former substitution works is that we are essentially in the following situation:
 \[
 \vlinf{\aiu}{}{\fff}{\vls(\vlinf{\awd}{}{c}{\fff}.\vlinf{\awd}{}{\bar c}{\fff})}\quad.
@@ -1200,6 +1242,7 @@ Note that the derivation $\Sym(b_1,\dots,b_n)$ is not unique, but it's atomic fl
 
 \begin{pro}
 The atomic flow of a $\Sym(b_1,\dots,b_n)$ is
+% TODO: contractions and cocontractions
 \[
 \atomicflow
 {
