@@ -834,11 +834,27 @@ The number of different assignments to a sequence of $n$ atoms is $2^n$.
 
 % TODO: swap a_i with b_i?
 
+\newpage
+
 \begin{lem}\label{LemExperimentExistence}
-Given a proof, $\Phi$, of $\beta$, let $b_1,\dots,b_n$ be the distinct and pairwise non-dual atoms each of which occurs in both interaction and cointeraction instances in $\Phi$ and let $a_1,\dots,a_n$ be an assignment to $b_1,\dots,b_n$, then there exists an experiment on $\Phi$ with respect to $a_1,\dots,a_n$.
+Given a proof, $\vlproof{\Phi}{}{\beta}$, and atoms $a_1,\dots,a_n$ such that exactly one of $a_1,\dots,a_n$ appears in every interaction rule instance in $\Phi$, then there exists an experiment on $\Phi$ with respect to $a_1,\dots,a_n$.
 \end{lem}
 
 \begin{proof}
+Let $b_1,\dots,b_m$ be the atoms occuring in $\Phi$, except for $a_1,\dots,a_n$ and their duals. Then an experiment on $\Phi$ with respect to $a_1,\dots,a_n$ is obtained:
+\[
+\vlder{\Phi\{\bar a_1,\dots,\bar a_n,b_1,\dots,b_m\ot\fff\}}{\SKS\setminus\{\aid,\aiu\}}{\vls[\vlder{}{\awd}{\beta}{\beta\{\bar a_1,\dots,\bar a_n,b_1,\dots,b_m\ot\fff\}}.(\vlinf{\awu}{}{\ttt}{a_1}.\fff).\dots.(\vlinf{\awu}{}{\ttt}{a_1}.\fff).\dots.(\vlinf{\awu}{}{\ttt}{a_n}.\fff).\dots.(\vlinf{\awu}{}{\ttt}{a_n}.\fff)]}{\vls(\vlder{}{\{\acu\}}{\vls(a_1.\dots.a_1)}{a_1}.\dots.\vlder{}{\{\acu\}}{\vls(a_n.\dots.a_n)}{a_n})}
+\]
+\end{proof}
+
+\begin{rem}
+Note that a proof with $n$ distinct non-dual atoms occuring in interaction rule instances will have $2^n$ different experiments.
+\end{rem}
+
+\begin{rem}
+We could change Lemma~\ref{LemExperimentExistence} to make an experiment with respect to the atoms occuring in both interaction and cointeraction instances, we chose to do it this way for efficiency of presentation.
+\end{rem}
+
 Without loss of generality assume the atomic flow of $\Phi$ to be:
 \[
 \atomicflow
@@ -1063,7 +1079,7 @@ with atomic flow
 (48,-6)*{\afvjm4};
 }\quad.
 \]
-\end{proof}
+%\end{proof}
 
 % TODO: add reference to AFI
 
