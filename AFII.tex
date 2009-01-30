@@ -815,57 +815,95 @@ In other words the atomic flow of a core constructed as described in the proof o
 A core of a derivation $\Phi$, constructed as described in the proof of Lemma~\ref{LemCoreExistence}, is called \emph{a canonical core of\/ $\Phi$}, written $\Core(\Phi)$.
 \end{defi}
 
-\subsection{Experiments}
+\section{Cut-elimination}
 
-\begin{defi}
-Given
-\begin{itemize}
- \item a proof $\vlproof{\Phi}{\SKS}{\beta}$ and
- \item distinct and pairwise non-dual atoms $a_1,\dots,a_n$,
-\end{itemize}
-an \emph{experiment on $\Phi$ with respect to $a_1,\dots,a_n$} is a derivation $\vlder{}{\SKS\setminus\{\aid,\aiu\}}{\beta}{\vls(a_1.\vldots.a_n)}\quad.$
-\end{defi}
-
-\begin{lem}\label{LemExperimentExistence}
-Given a proof, $\vlproof{\Phi}{}{\beta}$, and atoms $a_1,\dots,a_n$, such that in every interaction rule instance exactly one of $a_1,\dots,a_n$ appears and every $a_1,\dots,a_n$ occurs in an interaction rule instance, then there exists an experiment on $\Phi$ with respect to $a_1,\dots,a_n$.
-\end{lem}
-
-\begin{proof}
-Let $b_1,\dots,b_m$ be the atoms occuring in $\Phi$ which do not occur in interaction rule instances, then an experiment on $\Phi$ with respect to $a_1,\dots,a_n$ can be constructed:
+\begin{rem}\label{RemUglyHack}
+The challenge when performing cut-elimination is to deal with the situation where an atom occurs in both interaction and cointeraction instances. Since that is the case we are interested in, we will assume, without loss of generality, that every atom in an $\SKS$ proof occurs in both interaction and cointeraction instances. The justification for doing this is the following: If a proof $\vlproof{\Phi}{\SKS}{\beta}$ contains the atom $a$, but $a$ does not occur in both an interaction and a cointeraction instance, we can consider the proof
 \[
-\vlder{\Phi\{\bar a_1,\dots,\bar a_n,b_1,\dots,b_m\ot\fff\}}{\SKS\setminus\{\aid,\aiu\}}{\vls[\vlder{}{\awd}{\beta}{\beta\{\bar a_1,\dots,\bar a_n,b_1,\dots,b_m\ot\fff\}}.(\vlinf{\awu}{}{\ttt}{a_1}.\fff).\dots.(\vlinf{\awu}{}{\ttt}{a_1}.\fff).\dots.(\vlinf{\awu}{}{\ttt}{a_n}.\fff).\dots.(\vlinf{\awu}{}{\ttt}{a_n}.\fff)]}{\vls(\vlder{}{\{\acu\}}{\vls(a_1.\dots.a_1)}{a_1}.\dots.\vlder{}{\{\acu\}}{\vls(a_n.\dots.a_n)}{a_n})}
+\vls[(\vlproof{\Phi}{\SKS}{\beta}.\vlinf{\aid}{}{\vls[\vlinf{\awu}{}{\ttt}{a}.\vlinf{\awu}{}{\ttt}{\bar a}]}{\ttt}).\vlinf{\aiu}{}{\fff}{\vls(\vlinf{\awd}{}{a}{\fff}.\vlinf{\awd}{}{\bar a}{\fff})}]
 \]
-\end{proof}
-
-\begin{rem}
-Note that a proof with $n$ distinct non-dual atoms occuring in interaction rule instances will have $2^n$ different experiments.
+instead.
 \end{rem}
 
+\newcommand{\Exp}{\mathsf{Exp}}
+
+\begin{defi}\label{DefExperiment}
+Given a proof, $\vlproof{\Phi}{\SKS}{\beta}$, where the distinct and non-dual atoms $a_1,\dots,a_n$ and their duals are all the atoms which occur, an \emph{experiment on $\Phi$ with respect to $a_1,\dots,a_n$}, denoted $\Exp(\Phi,a_1,\dots,a_n)$, is defined to be
+\[
+\vlder{\Phi\{\bar a_1,\dots,\bar a_n\ot\fff\}}{\SKS\setminus\{\aid,\aiu\}}{\vls[\vlder{}{\{\awd\}}{\beta}{\beta\{\bar a_1,\dots,\bar a_n\ot\fff\}}.(\vlinf{\awu}{}{\ttt}{a_1}.\fff).\dots.(\vlinf{\awu}{}{\ttt}{a_1}.\fff).\dots.(\vlinf{\awu}{}{\ttt}{a_n}.\fff).\dots.(\vlinf{\awu}{}{\ttt}{a_n}.\fff)]}{\vls(\vlder{}{\{\acu\}}{\vls(a_1.\dots.a_1)}{a_1}.\dots.\vlder{}{\{\acu\}}{\vls(a_n.\dots.a_n)}{a_n})}\quad.
+\]
+\end{defi}
+
+Note that Remark~\ref{RemUglyHack} ensures that there is at least one of $a_1,\dots,a_n$ in both the premiss and the conclusion of $\Phi\{\bar a_1,\dots,\bar a_n\ot\fff\}$.
+
 \begin{rem}
-We could change Lemma~\ref{LemExperimentExistence} to make an experiment with respect to only the atoms occuring in both interaction and cointeraction instances, but we chose not to for efficiency of presentation.
+Note that there are $2^n$ different ways of choosing $a_1,\dots,a_n$ given $\Phi$.
 \end{rem}
 
 % TODO: add reference to AFI
 
-\begin{rem}
-It might be surprising that we choose to use the substitution
+\begin{pro}
+Given a proof, $\vlproof{\Phi}{\SKS}{\beta}$, with atomic flow
 \[
-\vlinf{\aiu}{}{\fff}{\vls(b_i.\bar b_i)}
-\quad\rightarrow\quad
-\vlinf{=}{}{\fff}{\vls(\fff.\fff)}\quad,
+\atomicflow
+{
+(-18, 0)*{\affr{8}{8}};
+(-16, 2)*{a_1};
+(-21,-6)*{\afvjm4};
+%
+(-13,8)*{\afaidm{}{}{}{}{}{}};
+(-13,-8)*{\afaium{}{}{}{}{}{}};
+%
+( -8, 0)*{\affr{8}{8}};
+( -6, 2)*{\bar a_1};
+( -5,-6)*{\afvjm4};
+%------------
+(0,0)*{\cdots};
+%------------
+( 8, 0)*{\affr{8}{8}};
+(10, 2)*{a_n};
+( 5,-6)*{\afvjm4};
+%
+(13,8)*{\afaidm{}{}{}{}{}{}};
+(13,-8)*{\afaium{}{}{}{}{}{}};
+%
+(18, 0)*{\affr{8}{8}};
+(20, 2)*{\bar a_n};
+(21,-6)*{\afvjm4};
+}\quad,
 \]
-instead of the more natural
+the atomic flow of an experiment on $\Phi$ with respect to $a_1,\dots,a_n$ is
 \[
-\vlinf{\aiu}{}{\fff}{\vls(b_i.\bar b_i)}
-\quad\rightarrow\quad
-\vlinf{=}{}{\fff}{\vls(\fff.\ttt)}\quad.
+\atomicflow
+{
+( -8,16)*{\afvj4};
+( -8,10)*{\affr{8}{8}};
+( -8, 5)*{\afvjm2};
+( -8, 0)*{\affr{8}{8}};
+( -6, 2)*{a_1};
+(-11,-6)*{\afvjm4};
+( -5,-8)*{\afawum{}{}{}{}};
+%------------
+(0,5)*{\cdots};
+%------------
+( 8,16)*{\afvj4};
+( 8,10)*{\affr{8}{8}};
+( 8, 5)*{\afvjm2};
+( 8, 0)*{\affr{8}{8}};
+(10, 2)*{a_n};
+( 5,-8)*{\afawum{}{}{}{}};
+(11,-6)*{\afvjm4};
+%------------
+(18,-4)*{\afawdm{}{}{}{\bar a_1}};
+%------------
+(22,-5)*{\cdots};
+%------------
+(26,-4)*{\afawdm{}{}{}{\bar a_n}};
+}\quad.
 \]
-We chose to do it this way for efficiency of presentation and as not to introduce more arbitrary choice than strictly necessary in building the derivations.
-The reason the former substitution works is that we are essentially in the following situation:
-\[
-\vlinf{\aiu}{}{\fff}{\vls(\vlinf{\awd}{}{b_i}{\fff}.\vlinf{\awd}{}{\bar b_i}{\fff})}\quad.
-\]
-\end{rem}
+\end{pro}
+
+In other words, $\Exp(\Phi,a_1,\dots,a_n)$ is not unique, but its atomic flow is unique modulo associativity of contractions.
 
 % TODO: allow atomic flows to be named after the atom that maps to it
 
@@ -921,46 +959,10 @@ with atomic flow
 (21,-12)*{\afvjm{16}};
 (17,-10)*{\affr{6}{8}};
 (17, -5)*{\afvjm{2}};
-%------------
-(28, 8)*{\afawdm{}{}{}{}};
-(28, 0)*{\affr{8}{8}};
-(30, 2)*{b_1};
-(38, 8)*{\afawdm{}{}{}{}};
-(38, 0)*{\affr{8}{8}};
-(40, 2)*{{\bar b}_1};
-(25,-6)*{\afvjm{4}};
-(41,-6)*{\afvjm{4}};
-(33,-8)*{\afaium{}{}{}{}{}{}};
-%------------
-(46,0)*{\cdots};
-%------------
-(54, 8)*{\afawdm{}{}{}{}};
-(54, 0)*{\affr{8}{8}};
-(56, 2)*{b_m};
-(64, 8)*{\afawdm{}{}{}{}};
-(64, 0)*{\affr{8}{8}};
-(66, 2)*{{\bar b}_m};
-(67,-6)*{\afvjm{4}};
-(51,-6)*{\afvjm{4}};
-(59,-8)*{\afaium{}{}{}{}{}{}};
-%------------
-(74, 0)*{\affr{8}{8}};
-(76, 2)*{A};
-(74,-6)*{\afvjm4};
 }\quad,
 \]
 and apply weakening reductions until a derivation with the desired atomic flow is obtained.
 \end{rem}
-
-Note that the atomic flow of an experiment obtained as in Lemma~\ref{LemExperimentExistence} (or Remark~\ref{RemExperimentExistence}) of a given proof is unique modulo associativity of contractions. This motivates the following definition:
-
-\newcommand{\Exp}{\mathsf{Exp}}
-
-\begin{defi}
-An experiment on a derivation $\Phi$ with respect to $a_1,\dots,a_n$, constructed as described in the proof of Lemma~\ref{LemExperimentExistence}, is called \emph{a canonical experiment on $\Phi$ with respect to $a_1,\dots,a_n$}, written $\Exp(\Phi,a_1,\dots,a_n)$.
-\end{defi}
-
-\section{Cut-elimination}
 
 % TODO: big remark or section on philosophy
 % TODO: remark on symmetry/confluence
@@ -974,7 +976,7 @@ An experiment on a derivation $\Phi$ with respect to $a_1,\dots,a_n$, constructe
 \begin{defi}\label{DefSymmetricProof}
 Given distinct and pairwise non-dual atoms, $a_1,\dots,a_n$, define
 \begin{itemize}
-\item $\Assignments_k=\{\{b_1,\dots,b_k\}|b_i\in\{a_i,\bar a_i\}\}$ for $0\leq k\leq n$ and
+\item the set $\Assignments_k=\{\{b_1,\dots,b_k\}|b_i\in\{a_i,\bar a_i\}\}$ for $1\leq k\leq n$ and
 \item a \emph{symmetric proof of }$\bigvee_{\{b_1,\dots,b_k\}\in\Assignments_k}\vlsbr(b_1.\cdots.b_n)$, denoted $\Sym(a_1,\dots,a_k)$, by induction on $k$:
 
 The base case is $\Sym(a_1)=\vlinf{\aid}{}{\vls[a_1.\bar a_1]}{\ttt}$ and the inductive case, for $1 < k \leq n$, is:
@@ -1022,7 +1024,7 @@ The base case is $\Sym(a_1)=\vlinf{\aid}{}{\vls[a_1.\bar a_1]}{\ttt}$ and the in
 \end{itemize}
 \end{defi}
 
-Note that the derivation $\Sym(a_1,\dots,a_n)$ is not unique, but it's atomic flow is unique modulo associativity of contractions:
+Note that the derivation $\Sym(a_1,\dots,a_n)$ is not unique, but its atomic flow is unique modulo associativity of contractions:
 
 \begin{pro}
 The atomic flow of a $\Sym(a_1,\dots,a_n)$ is
