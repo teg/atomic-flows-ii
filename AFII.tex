@@ -969,21 +969,24 @@ An experiment on a derivation $\Phi$ with respect to $a_1,\dots,a_n$, constructe
 \newcommand{\Sym}{\mathsf{Sym}}
 
 % TODO: is it bad to give a name to something before arguing that it is unique?
-% TODO: swap a_i with b_i?
+
 
 \begin{defi}\label{DefSymmetricProof}
-Given distinct and pairwise non-dual atoms, $b_1,\dots,b_n$, let $\Assignments_k=\{\{a_1,\dots,a_k\}|a_i\in\{b_i,\bar b_i\}\}$ for $0\leq k\leq n$, then a \emph{symmetric proof of }$\bigvee_{\{a_1,\dots,a_k\}\in\Assignments_k}\vlsbr(a_1.\cdots.a_n)$, denoted $\Sym(b_1,\dots,b_k)$, is defined by induction on $k$:
+Given distinct and pairwise non-dual atoms, $a_1,\dots,a_n$, define
+\begin{itemize}
+\item $\Assignments_k=\{\{b_1,\dots,b_k\}|b_i\in\{a_i,\bar a_i\}\}$ for $0\leq k\leq n$ and
+\item a \emph{symmetric proof of }$\bigvee_{\{b_1,\dots,b_k\}\in\Assignments_k}\vlsbr(b_1.\cdots.b_n)$, denoted $\Sym(a_1,\dots,a_k)$, by induction on $k$:
 
-The base case, $k=0$, is trivial and the inductive case is:
+The base case is $\Sym(a_1)=\vlinf{\aid}{}{\vls[a_1.\bar a_1]}{\ttt}$ and the inductive case, for $1 < k \leq n$, is:
 \[
 \newbox\DerCap
 \setbox\DerCap=
 \hbox{$
 \vlderivation
 {
- \vlde{}{\{\acu,\med\}}{\bigwedge_{i=1}^{2^{k-1}}[a_k.\bar a_k]}
+ \vlde{}{\{\acu,\med\}}{\bigwedge_{i=1}^{2^{k-1}}[b_k.\bar b_k]}
  {
-  \vlin{\aid}{}{\vls[a_k.\bar a_k]}
+  \vlin{\aid}{}{\vls[b_k.\bar b_k]}
   {
    \vlhy{\ttt}
   }
@@ -995,42 +998,43 @@ The base case, $k=0$, is trivial and the inductive case is:
 \hbox{$
 \vlderivation
 {
- \vlde{}{\{\acu,\med\}}{\bigwedge_{i=1}^{2^{k-1}}\vls[a_k.\bar a_k]}
+ \vlde{}{\{\acu,\med\}}{\bigwedge_{i=1}^{2^{k-1}}\vls[b_k.\bar b_k]}
  {
-  \vlin{\aid}{}{\vls[a_k.\bar a_k]}
+  \vlin{\aid}{}{\vls[b_k.\bar b_k]}
   {
    \vlhy{\ttt}
   }
  }
 }$
 }
-\Sym(b_1,\dots,b_k)\quad=\quad
+\Sym(a_1,\dots,a_k)\quad=\quad
 \vlderivation
 {
- \vlin{=}{}{\bigvee_{\{a_1,\dots,a_k\}\in \Assignments_k}\vlsbr(a_1.\cdots.a_k)}
+ \vlin{=}{}{\bigvee_{\{b_1,\dots,b_k\}\in \Assignments_k}\vlsbr(b_1.\cdots.b_k)}
  {
-  \vlde{}{\{\swi\}}{\bigvee_{\{a_1,\dots,a_{k-1}\}\in \Assignments_{n-1}}\vlsbr[(a_1.\cdots.a_{k-1}.a_n).(a_1.\cdots.a_{k-1}.\bar a_k)]}
+  \vlde{}{\{\swi\}}{\bigvee_{\{b_1,\dots,b_{k-1}\}\in \Assignments_{n-1}}\vlsbr[(b_1.\cdots.b_{k-1}.b_n).(b_1.\cdots.b_{k-1}.\bar b_k)]}
   {
-  \vlpr{\Sym(b_1,\dots,b_{k-1})}{\{\aid,\acu,\swi,\med\}}{\vls(\box\DerCap.\bigvee_{\{a_1,\dots,a_{k-1}\}\in \Assignments_{k-1}}(\vlinf{\acu}{}{\vls(a_1.a_1)}{a_1}.\cdots.\vlinf{\acu}{}{\vls(a_{k-1}.a_{k-1})}{a_{k-1}}))}
+  \vlpr{\Sym(a_1,\dots,a_{k-1})}{\{\aid,\acu,\swi,\med\}}{\vls(\box\DerCap.\bigvee_{\{b_1,\dots,b_{k-1}\}\in \Assignments_{k-1}}(\vlinf{\acu}{}{\vls(b_1.b_1)}{b_1}.\cdots.\vlinf{\acu}{}{\vls(b_{k-1}.b_{k-1})}{b_{k-1}}))}
   }
  }
 }\quad.
 \]
+\end{itemize}
 \end{defi}
 
-Note that the derivation $\Sym(b_1,\dots,b_k)$ is not unique, but it's atomic flow is unique modulo associativity of contractions:
+Note that the derivation $\Sym(a_1,\dots,a_n)$ is not unique, but it's atomic flow is unique modulo associativity of contractions:
 
 \begin{pro}
-The atomic flow of a $\Sym(b_1,\dots,b_n)$ is
+The atomic flow of a $\Sym(a_1,\dots,a_n)$ is
 % TODO: contractions and cocontractions
 \[
 \atomicflow
 {
 (-13, 8)*{\afaid{}{}{}{}{}{}};
 (-18, 0)*{\affr{8}{8}};
-(-16, 2)*{b_1};
+(-16, 2)*{a_1};
 ( -8, 0)*{\affr{8}{8}};
-( -6, 2)*{\bar b_1};
+( -6, 2)*{\bar a_1};
 (-18,-6)*{\afvjm{4}};
 ( -8,-6)*{\afvjm{4}};
 %------------
@@ -1038,9 +1042,9 @@ The atomic flow of a $\Sym(b_1,\dots,b_n)$ is
 %------------
 (13, 8)*{\afaid{}{}{}{}{}{}};
 ( 8, 0)*{\affr{8}{8}};
-(10, 2)*{b_n};
+(10, 2)*{a_n};
 (18, 0)*{\affr{8}{8}};
-(20, 2)*{\bar b_n};
+(20, 2)*{\bar a_n};
 ( 8,-6)*{\afvjm{4}};
 (18,-6)*{\afvjm{4}};
 }\quad.
@@ -1049,13 +1053,13 @@ The atomic flow of a $\Sym(b_1,\dots,b_n)$ is
 
 
 \begin{defi}
-Given a proof,\/ $\Phi$, of $\beta$ in $\SKS$, let $b_1,\dots,b_n$ be all the distinct and pairwise non-dual atoms which occur in both interaction and cointeraction instances in $\Phi$ and let $\Assignments$ be all the possible assignments to $b_1,\dots,b_n$, then \emph{a symmetric cut-free proof obtained from $\Phi$} is:
+Given a proof, $\vlproof{\Phi}{}{\beta}$, and atoms $a_1,\dots,a_n$, such that in every interaction rule instance exactly one of $a_1,\dots,a_n$ appears and every $a_1,\dots,a_n$ occurs in an interaction rule instance, then \emph{a symmetric cut-free proof obtained from $\Phi$} is:
 \[
 \vlderivation
 {
  \vlin{(2^n-1)\times\cod}{}{\beta}
  {
-  \vlpr{\Sym(b_1,\dots,b_n)}{\{\aid,\acu,\swi,\med\}}{\bigvee_{\{a_1,\dots,a_n\}\in\Assignments}\left(\vlder{\Exp(\Phi,a_1,\dots,a_n)}{\SKS\setminus\{\aiu\}}{\beta}{\vls(a_1.\cdots.a_n)}\right)}
+  \vlpr{\Sym(a_1,\dots,a_n)}{\{\aid,\acu,\swi,\med\}}{\bigvee_{\{b_1,\dots,b_n\}\in\Assignments_n}\left(\vlder{\Exp(\Phi,b_1,\dots,b_n)}{\SKS\setminus\{\aiu\}}{\beta}{\vls(b_1.\cdots.b_n)}\right)}
  }
 }
 \]
