@@ -823,23 +823,15 @@ Given
  \item a proof $\vlproof{\Phi}{\SKS}{\beta}$ and
  \item distinct and pairwise non-dual atoms $a_1,\dots,a_n$,
 \end{itemize}
-an \emph{experiment on $\Phi$ with respect to $a_1,\dots,a_n$} is a derivation $\vlder{}{\SKS\setminus\{\aiu\}}{\beta}{\vls(a_1.\vldots.a_n)}\quad.$
+an \emph{experiment on $\Phi$ with respect to $a_1,\dots,a_n$} is a derivation $\vlder{}{\SKS\setminus\{\aid,\aiu\}}{\beta}{\vls(a_1.\vldots.a_n)}\quad.$
 \end{defi}
-
-\begin{defi}
-Given distinct and pairwise non-dual atoms, $b_1,\dots,b_n$, an \emph{assignment to $b_1,\dots,b_n$} is a sequence of atoms $a_1,\dots,a_n$ such that $a_i\in\{b_i,{\bar b}_i\}$ for every $1\leq i \leq n$.
-\end{defi}
-
-The number of different assignments to a sequence of $n$ atoms is $2^n$.
-
-% TODO: swap a_i with b_i?
 
 \begin{lem}\label{LemExperimentExistence}
-Given a proof, $\vlproof{\Phi}{}{\beta}$, and atoms $a_1,\dots,a_n$ occuring in interaction rule instances in $\Phi$. If in every interaction rule instance exactly one of $a_1,\dots,a_n$ appears, then there exists an experiment on $\Phi$ with respect to $a_1,\dots,a_n$.
+Given a proof, $\vlproof{\Phi}{}{\beta}$, and atoms $a_1,\dots,a_n$, such that in every interaction rule instance exactly one of $a_1,\dots,a_n$ appears and every $a_1,\dots,a_n$ occurs in an interaction rule instance, then there exists an experiment on $\Phi$ with respect to $a_1,\dots,a_n$.
 \end{lem}
 
 \begin{proof}
-Let $b_1,\dots,b_m$ be the atoms occuring in $\Phi$, except for $a_1,\dots,a_n$ and their duals. Then an experiment on $\Phi$ with respect to $a_1,\dots,a_n$ is obtained:
+Let $b_1,\dots,b_m$ be the atoms occuring in $\Phi$ which do not occur in interaction rule instances, then an experiment on $\Phi$ with respect to $a_1,\dots,a_n$ can be constructed:
 \[
 \vlder{\Phi\{\bar a_1,\dots,\bar a_n,b_1,\dots,b_m\ot\fff\}}{\SKS\setminus\{\aid,\aiu\}}{\vls[\vlder{}{\awd}{\beta}{\beta\{\bar a_1,\dots,\bar a_n,b_1,\dots,b_m\ot\fff\}}.(\vlinf{\awu}{}{\ttt}{a_1}.\fff).\dots.(\vlinf{\awu}{}{\ttt}{a_1}.\fff).\dots.(\vlinf{\awu}{}{\ttt}{a_n}.\fff).\dots.(\vlinf{\awu}{}{\ttt}{a_n}.\fff)]}{\vls(\vlder{}{\{\acu\}}{\vls(a_1.\dots.a_1)}{a_1}.\dots.\vlder{}{\{\acu\}}{\vls(a_n.\dots.a_n)}{a_n})}
 \]
@@ -850,234 +842,8 @@ Note that a proof with $n$ distinct non-dual atoms occuring in interaction rule 
 \end{rem}
 
 \begin{rem}
-We could change Lemma~\ref{LemExperimentExistence} to make an experiment with respect to the atoms occuring in both interaction and cointeraction instances, we chose to do it this way for efficiency of presentation.
+We could change Lemma~\ref{LemExperimentExistence} to make an experiment with respect to only the atoms occuring in both interaction and cointeraction instances, but we chose not to for efficiency of presentation.
 \end{rem}
-
-Without loss of generality assume the atomic flow of $\Phi$ to be:
-\[
-\atomicflow
-{
-(-13, 8)*{\afaidm{}{}{}{}{}{}};
-(-18, 0)*{\affr{8}{8}};
-(-16, 2)*{a_1};
-( -8, 0)*{\affr{8}{8}};
-( -6, 2)*{{\bar a}_1};
-(-21,-6)*{\afvjm{4}};
-( -5,-6)*{\afvjm{4}};
-(-13,-8)*{\afaium{}{}{}{}{}{}};
-%------------
-(0,0)*{\cdots};
-%------------
-(13, 8)*{\afaidm{}{}{}{}{}{}};
-( 8, 0)*{\affr{8}{8}};
-(10, 2)*{a_n};
-(18, 0)*{\affr{8}{8}};
-(20, 2)*{{\bar a}_n};
-(21,-6)*{\afvjm{4}};
-( 5,-6)*{\afvjm{4}};
-(13,-8)*{\afaium{}{}{}{}{}{}};
-%------------
-(28, 8)*{\afawdm{}{}{}{}};
-(28, 0)*{\affr{8}{8}};
-(30, 2)*{b_1};
-(38, 8)*{\afawdm{}{}{}{}};
-(38, 0)*{\affr{8}{8}};
-(40, 2)*{{\bar b}_1};
-(25,-6)*{\afvjm{4}};
-(41,-6)*{\afvjm{4}};
-(33,-8)*{\afaium{}{}{}{}{}{}};
-%------------
-(46,0)*{\cdots};
-%------------
-(54, 8)*{\afawdm{}{}{}{}};
-(54, 0)*{\affr{8}{8}};
-(56, 2)*{b_m};
-(64, 8)*{\afawdm{}{}{}{}};
-(64, 0)*{\affr{8}{8}};
-(66, 2)*{{\bar b}_m};
-(67,-6)*{\afvjm{4}};
-(51,-6)*{\afvjm{4}};
-(59,-8)*{\afaium{}{}{}{}{}{}};
-%------------
-(74, 0)*{\affr{8}{8}};
-(76, 2)*{A};
-(74,-6)*{\afvjm4};
-}\quad,
-\]
-
-where $A$ does not contain any cointeraction vertices.
-Now, consider the core of $\Phi$, $\vlder{\Core(\Phi)}{}{\vls[\beta.(a_1.{\bar a}_1).\cdots.(a_n.{\bar a}_n)]}{\vls([a_1.{\bar a}_1].\cdots.[a_n.{\bar a}_n])}$, with atomic flow
-% TODO: contractions and cocontractions
-\[
-\atomicflow
-{
-(-18,16)*{\afvj4};
-(-18,10)*{\affr{8}{8}};
-(-18, 5)*{\afvjm{2}};
-(-18, 0)*{\affr{8}{8}};
-(-16, 2)*{a_1};
-(-21,-11)*{\afvjm{14}};
-(-17, -5)*{\afvjm{2}};
-(-17,-10)*{\affr{6}{8}};
-(-17,-16)*{\afvj4};
-%
-( -8,16)*{\afvj4};
-( -8,10)*{\affr{8}{8}};
-( -8, 5)*{\afvjm{2}};
-( -8, 0)*{\affr{8}{8}};
-( -6, 2)*{{\bar a}_1};
-( -9,-16)*{\afvj4};
-( -9,-10)*{\affr{6}{8}};
-( -9, -5)*{\afvjm{2}};
-( -5,-11)*{\afvjm{14}};
-%------------
-(0,0)*{\cdots};
-%------------
-( 8,16)*{\afvj4};
-( 8,10)*{\affr{8}{8}};
-( 8, 5)*{\afvjm{2}};
-( 8, 0)*{\affr{8}{8}};
-(10, 2)*{a_n};
-( 5,-11)*{\afvjm{14}};
-( 9, -5)*{\afvjm{2}};
-( 9,-10)*{\affr{6}{8}};
-( 9,-16)*{\afvj4};
-%
-(18,16)*{\afvj4};
-(18,10)*{\affr{8}{8}};
-(18, 5)*{\afvjm{2}};
-(18, 0)*{\affr{8}{8}};
-(20, 2)*{{\bar a}_n};
-(17, -5)*{\afvjm{2}};
-(17,-10)*{\affr{6}{8}};
-(17,-16)*{\afvj4};
-(21,-11)*{\afvjm{14}};
-%------------
-(28, 8)*{\afawdm{}{}{}{}};
-(28, 0)*{\affr{8}{8}};
-(30, 2)*{b_1};
-(38, 8)*{\afawdm{}{}{}{}};
-(38, 0)*{\affr{8}{8}};
-(40, 2)*{{\bar b}_1};
-(25,-6)*{\afvjm{4}};
-(41,-6)*{\afvjm{4}};
-(33,-8)*{\afaium{}{}{}{}{}{}};
-%------------
-(46,0)*{\cdots};
-%------------
-(54, 8)*{\afawdm{}{}{}{}};
-(54, 0)*{\affr{8}{8}};
-(56, 2)*{b_m};
-(64, 8)*{\afawdm{}{}{}{}};
-(64, 0)*{\affr{8}{8}};
-(66, 2)*{{\bar b}_m};
-(67,-6)*{\afvjm{4}};
-(51,-6)*{\afvjm{4}};
-(59,-8)*{\afaium{}{}{}{}{}{}};
-%------------
-(74, 0)*{\affr{8}{8}};
-(76, 2)*{A};
-(74,-6)*{\afvjm4};
-}\quad.
-\]
-
-By substituting $\fff$ for each occurrence of $\bar a_1,\dots,\bar a_n,b_1,\bar b_1,\dots,b_m,\bar b_m$ in $\Core(\Phi)$, we obtain
-\[
-\vlderivation
-{
- \vlde{\Core(\Phi)\{\bar a_1,\dots,\bar a_n,b_1,\bar b_1,\dots,b_m,\bar b_m\ot\fff\}}{\SKS\setminus\{\aiu\}}{\vls[\beta\{\bar a_1,\dots,\bar a_n,b_1,\bar b_1,\dots,b_m,\bar b_m\ot\fff\}.(a_1.\fff).\cdots.(a_n.\fff)]}
- {
-  \vlhy{\vls(a_1.\cdots.a_n)}
- }
-}\quad,
-\]
-with atomic flow
-% TODO: contractions and cocontractions
-\[
-\atomicflow
-{
-(-8,16)*{\afvj4};
-(-8,10)*{\affr{8}{8}};
-(-8, 5)*{\afvjm{2}};
-(-8, 0)*{\affr{8}{8}};
-(-6, 2)*{a_1};
-(-11,-11)*{\afvjm{14}};
-(-7, -5)*{\afvjm{2}};
-(-7,-10)*{\affr{6}{8}};
-(-7,-16)*{\afvj4};
-%------------
-(0,0)*{\cdots};
-%------------
-( 8,16)*{\afvj4};
-( 8,10)*{\affr{8}{8}};
-( 8, 5)*{\afvjm{2}};
-( 8, 0)*{\affr{8}{8}};
-(10, 2)*{a_n};
-( 5,-11)*{\afvjm{14}};
-( 9, -5)*{\afvjm{2}};
-( 9,-10)*{\affr{6}{8}};
-( 9,-16)*{\afvj4};
-%------------
-(20, 0)*{\affr{8}{8}};
-(22, 2)*{A};
-(20,-6)*{\afvjm4};
-}\quad.
-\]
-Finally, an experiment on $\Phi$ with respect to $a_1,\dots,a_n$ is:
-\[
-\vlderivation
-{
- \vlde{\Core(\Phi)\{\bar a_1,\dots,\bar a_n,b_1,\bar b_1,\dots,b_m,\bar b_m\ot\fff\}}{\SKS\setminus\{\aiu\}}{\vls[\vlder{}{\{\awd\}}{\beta}{\beta\{\bar a_1,\dots,\bar a_n,b_1,\bar b_1,\dots,b_m,\bar b_m\ot\fff\}}.(\vlinf{\awu}{}{\ttt}{a_1}.\fff).\cdots.(\vlinf{\awu}{}{\ttt}{a_n}.\fff)]}
- {
-  \vlhy{\vls(a_1.\cdots.a_n)}
- }
-}\quad,
-\]
-with atomic flow
-% TODO: contractions and cocontractions
-\[
-\atomicflow
-{
-(-14,16)*{\afvj4};
-(-14,10)*{\affr{8}{8}};
-(-14, 5)*{\afvjm{2}};
-(-14, 0)*{\affr{8}{8}};
-(-12, 2)*{a_1};
-(-17,-11)*{\afvjm{14}};
-(-13, -5)*{\afvjm{2}};
-(-13,-10)*{\affr{6}{8}};
-(-13,-18)*{\afawu{}{}{}{}};
-%
-(-6,-14)*{\afawdm{}{}{}{\bar a_1}};
-%------------
-(0,0)*{\cdots};
-%------------
-( 8,16)*{\afvj4};
-( 8,10)*{\affr{8}{8}};
-( 8, 5)*{\afvjm{2}};
-( 8, 0)*{\affr{8}{8}};
-(10, 2)*{a_n};
-( 5,-11)*{\afvjm{14}};
-( 9, -5)*{\afvjm{2}};
-( 9,-10)*{\affr{6}{8}};
-( 9,-18)*{\afawu{}{}{}{}};
-%
-(16,-14)*{\afawdm{}{}{}{\bar a_n}};
-%------------
-(22,-14)*{\afawdm{}{}{}{b_1}};
-(26,-14)*{\afawdm{}{}{}{\bar b_1}};
-%------------
-(30,-14)*{\cdots};
-%------------
-(34,-14)*{\afawdm{}{}{}{b_1}};
-(38,-14)*{\afawdm{}{}{}{\bar b_1}};
-%------------
-(48, 0)*{\affr{8}{8}};
-(50, 2)*{A};
-(48,-6)*{\afvjm4};
-}\quad.
-\]
-%\end{proof}
 
 % TODO: add reference to AFI
 
@@ -1097,7 +863,7 @@ instead of the more natural
 We chose to do it this way for efficiency of presentation and as not to introduce more arbitrary choice than strictly necessary in building the derivations.
 The reason the former substitution works is that we are essentially in the following situation:
 \[
-\vlinf{\aiu}{}{\fff}{\vls(\vlinf{\awd}{}{c}{\fff}.\vlinf{\awd}{}{\bar c}{\fff})}\quad.
+\vlinf{\aiu}{}{\fff}{\vls(\vlinf{\awd}{}{b_i}{\fff}.\vlinf{\awd}{}{\bar b_i}{\fff})}\quad.
 \]
 \end{rem}
 
