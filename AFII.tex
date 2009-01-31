@@ -564,7 +564,82 @@ We show how to construct the first derivation, the second one can be done by sym
 for some $\xi'\vlhole$ and $\beta$ where $\beta$ is not a unit and $\Psi$ and $\Psi'$ exist by the inductive hypothesis.
 \end{proof}
 
-We now statethe following lemma, whose proof is routine, which shows how we can generalise the (co)contraction rules to work for formulae instead of atoms.
+\begin{lem}\label{LemDecompInt}
+Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ with atomic flow $A$, there exists a derivation
+\[
+\vlder{}{\SKS\setminus\{\aid,\aiu\}}{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(b_m.\bar b_m)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(b_1.\bar b_1)}]}{\vls(\vlinf{\aid}{}{\vls[a_1.\bar a_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha)}\quad,
+\]
+for some atoms $a_1,\dots,a_n,b_1,\dots,b_n$ with atomic flow $A$.
+\end{lem}
+\begin{proof}
+Using Lemma~\ref{LemSuperSwitch} apply the following transformations to each of the (co)interaction instances in $\Phi$:
+\[
+\vlderivation
+{
+ \vlde{\Psi'}{}{\delta}
+ {
+  \vlin{\aid}{}{\xi\vlsbr[a.{\bar a}]}
+  {
+   \vlde{\Psi}{}{\xi\{\ttt\}}
+   {
+    \vlhy{\gamma}
+   }
+  }
+ }
+}\quad\rightarrow\quad
+\vlderivation
+{
+ \vlde{\Psi'}{}{\delta}
+ {
+  \vlde{}{\{\swi\}}{\xi\vlsbr[a.{\bar a}]}
+  {
+   \vlhy{\vlsbr(\vlinf{\aid}{}{\vls[a.{\bar a}]}{\ttt}.\vlder{\Psi}{}{\xi\{\ttt\}}{\gamma})}
+  }
+ }
+}\qquad\mbox{and}\qquad
+\vlderivation
+{
+ \vlde{\Psi'}{}{\delta}
+ {
+  \vlin{\aid}{}{\xi\{\fff\}}
+  {
+   \vlde{\Psi}{}{\xi\vlsbr(a.{\bar a})}
+   {
+    \vlhy{\gamma}
+   }
+  }
+ }
+}\quad\rightarrow\quad
+\vlderivation
+{
+ \vlde{}{\{\swi\}}{\vlsbr[\vlder{\Psi'}{}{\delta}{\xi\{\fff\}}.\vlinf{\aiu}{}{\fff}{\vls(a.{\bar a})}]}
+ {
+  \vlde{\Psi}{}{\xi\vlsbr(a.{\bar a})}
+  {
+   \vlhy{\gamma}
+  }
+ }
+}\quad.
+\]
+Note that no structural inference rules are changed, so the atomic flow of the resulting derivation is the same as the atomic flow of $\Phi$.
+\end{proof}
+
+\begin{defi}
+Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ and an atom $a$, we define $\vlder{\Phi\{a\ot\fff\}}{}{\beta\{a\ot\fff\}}{\alpha\{a\ot\fff\}}$:
+\begin{itemize}
+\item obtain $\Phi'$ by Lemma~\ref{LemDecompInt},
+\item substitute each instance of $a$ in $\Phi'$ with $\fff$,
+\item for each $\rho\in\{\acd,\acu,\awd,\awu\}$ where $a$ occurred substitute $\rho$ with $=$ and
+\item substitute each $\vlinf{\aid}{}{\vls[a.\bar a]}{\ttt}$ and $\vlinf{\aiu}{}{\fff}{\vls(a.\bar a)}$ with $\vlinf{=}{}{\bar a}{\bar a}$ and $\vlinf{=}{}{\vls(\fff.\bar a)}{\vls(\fff.\bar a)}$, respectively.
+\end{itemize}
+We write $\Phi\{a,b\ot\fff\}$ as a shorthand for $\Phi\{a\ot\fff\}\{b\ot\fff\}$.
+\end{defi}
+
+\begin{pro}
+Given a derivation $\Phi$ containing an atom $a$, $\Phi\{a\ot\fff\}$ is a valid derivation with a unique atomic flow.
+\end{pro}
+
+We now show how we can generalise the (co)contraction rules to work for formulae instead of atoms.
 
 \newcommand{\contr}{\mathsf{c}}
 \newcommand{\cod}{{\contr{\downarrow}}}
@@ -602,56 +677,7 @@ For any derivation $\Phi$ from $\alpha$ to $\beta$ a core of\/ $\Phi$ can be con
 \end{lem}
 
 \begin{proof}
-Let $a_1,\dots,a_n$ be the distinct and pairwise non-dual atoms each of which appears in both interaction and cointeraction instances in $\Phi$. For each $a$ in $a_1,\dots,a_n$ consider the instances of $\aid$ and $\aiu$ where $a$ occurs. Using Lemma~\ref{LemSuperSwitch} apply the following transformations to said rule instances:
-\[
-\vlderivation
-{
- \vlde{\Psi'}{}{\beta}
- {
-  \vlin{\aid}{}{\xi\vlsbr[a.{\bar a}]}
-  {
-   \vlde{\Psi}{}{\xi\{\ttt\}}
-   {
-    \vlhy{\alpha}
-   }
-  }
- }
-}\quad\rightarrow\quad
-\vlderivation
-{
- \vlde{\Psi'}{}{\beta}
- {
-  \vlde{}{\{\swi\}}{\xi\vlsbr[a.{\bar a}]}
-  {
-   \vlhy{\vlsbr([a.{\bar a}].\vlder{\Psi}{}{\xi\{\ttt\}}{\alpha})}
-  }
- }
-}\qquad\mbox{and}\qquad
-\vlderivation
-{
- \vlde{\Psi'}{}{\beta}
- {
-  \vlin{\aid}{}{\xi\{\fff\}}
-  {
-   \vlde{\Psi}{}{\xi\vlsbr(a.{\bar a})}
-   {
-    \vlhy{\alpha}
-   }
-  }
- }
-}\quad\rightarrow\quad
-\vlderivation
-{
- \vlde{}{\{\swi\}}{\vlsbr[\vlder{\Psi'}{}{\beta}{\xi\{\fff\}}.(a.{\bar a})]}
- {
-  \vlde{\Psi}{}{\xi\vlsbr(a.{\bar a})}
-  {
-   \vlhy{\alpha}
-  }
- }
-}\quad,
-\]
-to obtain
+Let $a_1,\dots,a_n$ be the distinct and pairwise non-dual atoms each of which appears in both interaction and cointeraction instances in $\Phi$. Remove each (co)interaction instance where $a_1,\dots,a_n$ occurs from the result of applying Lemma~\ref{LemDecompInt} to $\Phi$. This yields
 \[
 \vlder{\Phi'}{}{\vls[\beta.(a_n.\bar a_n).\cdots.(a_n.\bar a_n).\cdots.(a_1.\bar a_1).\cdots.(a_1.\bar a_1)]}{\vls([a_1.\bar a_1].\cdots.[a_1.\bar a_1].\cdots.[a_n.\bar a_n].\cdots.[a_n.\bar a_n].\alpha)}\quad.
 \]
@@ -834,7 +860,7 @@ Given a proof, $\vlproof{\Phi}{\SKS}{\beta}$, where the distinct and non-dual at
 \]
 \end{defi}
 
-Note that Remark~\ref{RemUglyHack} ensures that there is at least one of $a_1,\dots,a_n$ in both the premiss and the conclusion of $\Phi\{\bar a_1,\dots,\bar a_n\ot\fff\}$.
+Note that Remark~\ref{RemUglyHack} ensures that there is at least one of each of $a_1,\dots,a_n$ in both the premiss and the conclusion of $\Phi\{\bar a_1,\dots,\bar a_n\ot\fff\}$.
 
 \begin{rem}
 Note that there are $2^n$ different ways of choosing $a_1,\dots,a_n$ given $\Phi$.
