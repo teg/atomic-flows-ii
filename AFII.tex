@@ -565,7 +565,7 @@ for some $\xi'\vlhole$ and $\beta$ where $\beta$ is not a unit and $\Psi$ and $\
 \end{proof}
 
 \begin{lem}\label{LemDecompInt}
-Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ with atomic flow $A$, there exists a derivation
+Given a derivation $\vlder{}{}{\beta}{\alpha}$ with atomic flow $A$, there exists a derivation
 \[
 \vlder{}{\SKS\setminus\{\aid,\aiu\}}{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(b_m.\bar b_m)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(b_1.\bar b_1)}]}{\vls(\vlinf{\aid}{}{\vls[a_1.\bar a_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha)}\quad,
 \]
@@ -626,12 +626,17 @@ Note that no structural inference rules are changed, so the atomic flow of the r
 
 \begin{defi}
 Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ and an atom $a$, we define $\vlder{\Phi\{a\ot\fff\}}{}{\beta\{a\ot\fff\}}{\alpha\{a\ot\fff\}}$:
-\begin{itemize}
-\item obtain $\Phi'$ by Lemma~\ref{LemDecompInt},
-\item substitute each instance of $a$ in $\Phi'$ with $\fff$,
-\item for each $\rho\in\{\acd,\acu,\awd,\awu\}$ where $a$ occurred substitute $\rho$ with $=$ and
-\item substitute each $\vlinf{\aid}{}{\vls[a.\bar a]}{\ttt}$ and $\vlinf{\aiu}{}{\fff}{\vls(a.\bar a)}$ with $\vlinf{=}{}{\bar a}{\bar a}$ and $\vlinf{=}{}{\vls(\fff.\bar a)}{\vls(\fff.\bar a)}$, respectively.
-\end{itemize}
+\begin{enumerate}
+\item if $\Phi$ is in $\SKS\setminus\{\aid,\aiu\}$, substitute each instance of $a$ in $\Phi$ with $\fff$ and each structural inference rule where $a$ occurred with $=$,
+\item otherwise, obtain
+\[
+\vlder{\Phi'\{a\ot\fff\}}
+{\SKS\setminus\{\aid,\aiu\}}
+{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(b_m.\bar b_m)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(b_1.\bar b_1)}.(\fff.\bar a).\vldots.(\fff.\bar a)]}
+{\vls(\bar a.\vldots.\bar a.\vlinf{\aid}{}{\vls[a_1.\bar a_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha)}\quad,
+\]
+by Lemma~\ref{LemDecompInt}.
+\end{enumerate}
 We write $\Phi\{a,b\ot\fff\}$ as a shorthand for $\Phi\{a\ot\fff\}\{b\ot\fff\}$.
 \end{defi}
 
@@ -854,7 +859,7 @@ instead.
 \newcommand{\Exp}{\mathsf{Exp}}
 
 \begin{defi}\label{DefExperiment}
-Given a proof, $\vlproof{\Phi}{\SKS}{\beta}$, where the distinct and non-dual atoms $a_1,\dots,a_n$ and their duals are all the atoms which occur, an \emph{experiment on $\Phi$ with respect to $a_1,\dots,a_n$}, denoted $\Exp(\Phi,a_1,\dots,a_n)$, is defined to be
+Given a proof, $\vlproof{\Phi}{\SKS}{\beta}$, where the distinct and non-dual atoms $a_1,\dots,a_n$ and their duals are all the atoms that occur, an \emph{experiment on $\Phi$ with respect to $a_1,\dots,a_n$}, denoted $\Exp(\Phi,a_1,\dots,a_n)$, is defined to be
 \[
 \vlder{\Phi\{\bar a_1,\dots,\bar a_n\ot\fff\}}{\SKS\setminus\{\aid,\aiu\}}{\vls[\vlder{}{\{\awd\}}{\beta}{\beta\{\bar a_1,\dots,\bar a_n\ot\fff\}}.(\vlinf{\awu}{}{\ttt}{a_1}.\fff).\dots.(\vlinf{\awu}{}{\ttt}{a_1}.\fff).\dots.(\vlinf{\awu}{}{\ttt}{a_n}.\fff).\dots.(\vlinf{\awu}{}{\ttt}{a_n}.\fff)]}{\vls(\vlder{}{\{\acu\}}{\vls(a_1.\dots.a_1)}{a_1}.\dots.\vlder{}{\{\acu\}}{\vls(a_n.\dots.a_n)}{a_n})}\quad.
 \]
@@ -863,13 +868,13 @@ Given a proof, $\vlproof{\Phi}{\SKS}{\beta}$, where the distinct and non-dual at
 Note that Remark~\ref{RemUglyHack} ensures that there is at least one of each of $a_1,\dots,a_n$ in both the premiss and the conclusion of $\Phi\{\bar a_1,\dots,\bar a_n\ot\fff\}$.
 
 \begin{rem}
-Note that there are $2^n$ different ways of choosing $a_1,\dots,a_n$ given $\Phi$.
+There are $2^n$ different ways of choosing $a_1,\dots,a_n$ given a derivation $\Phi$.
 \end{rem}
 
 % TODO: add reference to AFI
 
 \begin{pro}
-Given a proof, $\vlproof{\Phi}{\SKS}{\beta}$, with atomic flow
+Given a proof, $\Phi$, with atomic flow
 \[
 \atomicflow
 {
@@ -998,14 +1003,17 @@ and apply weakening reductions until a derivation with the desired atomic flow i
 
 % TODO: is it bad to give a name to something before arguing that it is unique?
 
-
 \begin{defi}\label{DefSymmetricProof}
 Given distinct and pairwise non-dual atoms, $a_1,\dots,a_n$, define
 \begin{itemize}
 \item the set $\Assignments_k=\{\{b_1,\dots,b_k\}|b_i\in\{a_i,\bar a_i\}\}$ for $1\leq k\leq n$ and
 \item a \emph{symmetric proof of }$\bigvee_{\{b_1,\dots,b_k\}\in\Assignments_k}\vlsbr(b_1.\cdots.b_n)$, denoted $\Sym(a_1,\dots,a_k)$, by induction on $k$:
 
-The base case is $\Sym(a_1)=\vlinf{\aid}{}{\vls[a_1.\bar a_1]}{\ttt}$ and the inductive case, for $1 < k \leq n$, is:
+The base case is
+\[
+\Sym(a_1)=\vlinf{\aid}{}{\vls[a_1.\bar a_1]}{\ttt}\quad,
+\]
+and the inductive case is
 \[
 \newbox\DerCap
 \setbox\DerCap=
@@ -1045,8 +1053,9 @@ The base case is $\Sym(a_1)=\vlinf{\aid}{}{\vls[a_1.\bar a_1]}{\ttt}$ and the in
   \vlpr{\Sym(a_1,\dots,a_{k-1})}{\{\aid,\acu,\swi,\med\}}{\vls(\box\DerCap.\bigvee_{\{b_1,\dots,b_{k-1}\}\in \Assignments_{k-1}}(\vlinf{\acu}{}{\vls(b_1.b_1)}{b_1}.\cdots.\vlinf{\acu}{}{\vls(b_{k-1}.b_{k-1})}{b_{k-1}}))}
   }
  }
-}\quad.
+}\quad,
 \]
+for $1 < k \leq n$.
 \end{itemize}
 \end{defi}
 
@@ -1081,7 +1090,7 @@ The atomic flow of a $\Sym(a_1,\dots,a_n)$ is
 
 
 \begin{defi}
-Given a proof, $\vlproof{\Phi}{}{\beta}$, and atoms $a_1,\dots,a_n$, such that in every interaction rule instance exactly one of $a_1,\dots,a_n$ appears and every $a_1,\dots,a_n$ occurs in an interaction rule instance, then \emph{a symmetric cut-free proof obtained from $\Phi$} is:
+Given a proof, $\vlproof{\Phi}{}{\beta}$, where the distinct and non-dual atoms $a_1,\dots,a_n$ and their duals are all the atoms that occur, \emph{a symmetric cut-free proof obtained from $\Phi$} is:
 \[
 \vlderivation
 {
@@ -1089,12 +1098,115 @@ Given a proof, $\vlproof{\Phi}{}{\beta}$, and atoms $a_1,\dots,a_n$, such that i
  {
   \vlpr{\Sym(a_1,\dots,a_n)}{\{\aid,\acu,\swi,\med\}}{\bigvee_{\{b_1,\dots,b_n\}\in\Assignments_n}\left(\vlder{\Exp(\Phi,b_1,\dots,b_n)}{\SKS\setminus\{\aiu\}}{\beta}{\vls(b_1.\cdots.b_n)}\right)}
  }
-}
+}\quad.
 \]
 \end{defi}
 
 \begin{pro}
-Given a proof $\Phi$ and two symmetric cut-free proofs obtained from $\Phi$ the atomic flows of the two canonical cut-free proofs are equal modulo associativity of contraction.
+Given a proof $\Phi$ with atomic flow
+\[
+\atomicflow
+{
+(-18, 0)*{\affr{8}{8}};
+(-16, 2)*{a_1};
+(-21,-6)*{\afvjm4};
+%
+(-13,8)*{\afaidm{}{}{}{}{}{}};
+(-13,-8)*{\afaium{}{}{}{}{}{}};
+%
+( -8, 0)*{\affr{8}{8}};
+( -6, 2)*{\bar a_1};
+( -5,-6)*{\afvjm4};
+%------------
+(0,0)*{\cdots};
+%------------
+( 8, 0)*{\affr{8}{8}};
+(10, 2)*{a_n};
+( 5,-6)*{\afvjm4};
+%
+(13,8)*{\afaidm{}{}{}{}{}{}};
+(13,-8)*{\afaium{}{}{}{}{}{}};
+%
+(18, 0)*{\affr{8}{8}};
+(20, 2)*{\bar a_n};
+(21,-6)*{\afvjm4};
+}\quad,
+\]
+the atomic flow of a symmetric cut-free proof obtained from $\Phi$ is
+\[
+\atomicflow
+{
+(-27,18)*{\afaid{}{}{}{}{}{}};
+%----
+(27,18)*{\afaid{}{}{}{}{}{}};
+%--------
+(-38,10)*{\affr{20}8};
+(-16,10)*{\affr{20}8};
+%----
+(16,10)*{\affr{20}8};
+(38,10)*{\affr{20}8};
+%--------
+(-44,5)*{\afvjm2};
+(-32,5)*{\afvjm2};
+(-22,5)*{\afvjm2};
+(-10,5)*{\afvjm2};
+%----
+(10,5)*{\afvjm2};
+(22,5)*{\afvjm2};
+(33,5)*{\afvjm2};
+(44,5)*{\afvjm2};
+%--------
+(-44,0)*{\affr88};
+(-42,2)*{a_1};
+(-38,0)*{\vldots};
+(-32,0)*{\affr88};
+(-30,2)*{a_1};
+(-22,0)*{\affr88};
+(-20,2)*{\bar a_1};
+(-16,0)*{\vldots};
+(-10,0)*{\affr88};
+(-8,2)*{\bar a_1};
+%----
+(0,0)*{\vldots};
+%----
+(10,0)*{\affr88};
+(12,2)*{a_n};
+(16,0)*{\vldots};
+(22,0)*{\affr88};
+(24,2)*{a_n};
+(32,0)*{\affr88};
+(34,2)*{\bar a_n};
+(38,0)*{\vldots};
+(44,0)*{\affr88};
+(46,2)*{\bar a_n};
+%--------
+(-50,-2)*{\afawdm{}{}{}{}};
+(-44,-5)*{\afvjm2};
+(-32,-5)*{\afvjm2};
+(-22,-5)*{\afvjm2};
+(-10,-5)*{\afvjm2};
+(-4,-2)*{\afawdm{}{}{}{}};
+%----
+(4,-2)*{\afawdm{}{}{}{}};
+(10,-5)*{\afvjm2};
+(22,-5)*{\afvjm2};
+(32,-5)*{\afvjm2};
+(44,-5)*{\afvjm2};
+(50,-2)*{\afawdm{}{}{}{}};
+%--------
+(-40,-10)*{\affr{24}8};
+(-14,-10)*{\affr{24}8};
+%----
+(14,-10)*{\affr{24}8};
+(40,-10)*{\affr{24}8};
+%--------
+(-40,-16)*{\afvjm4};
+(-14,-16)*{\afvjm4};
+%----
+(14,-16)*{\afvjm4};
+(40,-16)*{\afvjm4};
+}\quad.
+\]
 \end{pro}
 
 % TODO: Check literature about rewriting modulo
