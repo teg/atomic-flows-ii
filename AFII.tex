@@ -632,10 +632,10 @@ Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ and an atom $a$, we define $\
 \[
 \vlder{\Phi'\{a\ot\fff\}}
 {\SKS\setminus\{\aid,\aiu\}}
-{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(b_m.\bar b_m)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(b_1.\bar b_1)}.(\fff.\bar a).\vldots.(\fff.\bar a)]}
-{\vls(\bar a.\vldots.\bar a.\vlinf{\aid}{}{\vls[a_1.\bar a_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha)}\quad,
+{\vls[\beta\{a\ot\fff\}.\vlinf{\aiu}{}{\fff}{\vls(b_m.\bar b_m)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(b_{l+1}.\bar b_{l+1})}.(\fff.\bar a).\vldots.(\fff.\bar a)]}
+{\vls(\bar a.\vldots.\bar a.\vlinf{\aid}{}{\vls[a_{k+1}.\bar a_{k+1}]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha\{a\ot\fff\})}\quad,
 \]
-by Lemma~\ref{LemDecompInt}.
+by Lemma~\ref{LemDecompInt}, where $a=a_1,\dots,a_k,b_1,\dots,b_l$.
 \end{enumerate}
 We write $\Phi\{a,b\ot\fff\}$ as a shorthand for $\Phi\{a\ot\fff\}\{b\ot\fff\}$.
 \end{defi}
@@ -939,7 +939,7 @@ In other words, $\Exp(\Phi,a_1,\dots,a_n)$ is not unique, but its atomic flow is
 % TODO: allow atomic flows to be named after the atom that maps to it
 
 \begin{rem}\label{RemExperimentExistence}
-Using the weakening reductions presented in \cite{GuGu08} we can use another approach to obtaining an experiment on the proof $\Phi$ with respect to $a_1,\dots,a_n$:
+Using the weakening reductions presented in \cite{GuglGund:07:Normalis:lr} we can use another approach to obtaining an experiment on the proof $\Phi$ with respect to $a_1,\dots,a_n$:
 
 Simply consider the derivation
 \[
@@ -1381,10 +1381,7 @@ Since there are no paths from interaction vertices to cointeraction vertices, $\
 \end{proof}
 
 
-
-% \iflmcs\else\let\oldurl\url\renewcommand{\url}[1]{\hfill\break\oldurl{#1}}\fi
-%
-% \bibliographystyle{alpha}
-% \bibliography{di-biblio}
+\bibliographystyle{alpha}
+\bibliography{di-biblio}
 
 \end{document}
