@@ -223,6 +223,8 @@ In Formalism A, a new deep-inference formalism currently under development, the 
 For the purposes of this paper, which of these three derivations we use is inessential, as the atomic flows associated with each of them are are the same. For simplicity we let the shorthand above refer to one unique derivation, but we could just as well have worked in Formalism A.
 \end{exa}
 
+We now present some results needed later on for manipulating derivations. The main idea in this paper is to normalise proofs or derivations by making many copies, manipulating the copies and gluing them together. We first show how we can copy derivations, which means copying their premiss and conclusion:
+
 \newcommand{\contr}{\mathsf{c}}
 \newcommand{\cod}{{\contr{\downarrow}}}
 \newcommand{\cou}{{\contr{\uparrow}}}
@@ -234,6 +236,8 @@ Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\v
 \begin{rem}
 In the non-atomic version of system $\SKS$ the above derivations correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlder{}{\{\acu,\med\}}{\vls(\alpha.\alpha)}{\alpha}$.
 \end{rem}
+
+To make our normalisation procedures work, it is not enough to manipulate the derivations separately, we need to make them interact. That is to say, we need to extract a subformula from one derivation and insert it into another one, or we need to extract subformulae from several derivation and have them interact.
 
 \begin{lem}\label{LemSuperSwitch}
 Given a context $\xi\vlhole$ and a formula $\alpha$ there exist derivations $\vlder{}{\{\swi\}}{\xi\{\alpha\}}{\vls(\alpha.\xi\{\ttt\})}$ and $\vlder{}{\{\swi\}}{\vls[\xi\{\fff\}.\alpha]}{\xi\{\alpha\}}$.
@@ -269,6 +273,8 @@ We show how to construct the first derivation, the second one can be done by sym
 \]
 for some $\xi'\vlhole$ and $\beta$ where $\beta$ is not a unit and $\Psi$ and $\Psi'$ exist by the inductive hypothesis.
 \end{proof}
+
+The application of this `extraction' is going to be to extract axioms and cuts so that they can be eliminated. It is a fortunate consequence of having atomic inference rules that we can trivially transform a derivation into one where all the axioms are at the top and all the cuts at the bottom of the derivation. Note that this transformation does not affect the atomic flow since we are only adding linear inference rules and leaving the structural ones alone.
 
 % TODO: give a name to this thing
 
@@ -1208,7 +1214,9 @@ The challenge when performing cut-elimination is to deal with the situation wher
 \]
 instead.
 \end{rem}
- 
+
+The following substitution is at the core of our cut-elimination procedure. It amounts to giving a truth value assignment to an atom. We substitute $a$ with $\fff$ and then implicitly force $\bar a$ to be $\ttt$. The important point to notice here is that this is the most intrusive transformation we will perform and from the point of view of atomic flows it consists of removing the box containing the atom we are substituting.
+
 \begin{defi}
 Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ and an atom $a$, we define $\vlder{\Phi\{a\ot\fff\}}{}{\beta\{a\ot\fff\}}{\alpha\{a\ot\fff\}}$:
 \begin{enumerate}
