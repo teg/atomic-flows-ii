@@ -797,6 +797,8 @@ Given a derivation $\Phi$, let $\hat\Phi$ be the derivation obtained from $\Phi$
 %===============================================================================
 \section{Strongly Normalising Streamlining}
 
+Streamlining is an up-down symmetric generalisation of cut-elimination which applies to derivations as well as proofs. We recall the definition from \cite{GuglGund:07:Normalis:lr}:
+
 %---------------------------------------
 \begin{defi}
 An $\SKS$ derivation is \emph{streamlined} if, in its associated atomic flow, there are no paths from interaction or weakening vertices to cointeraction or coweakening vertices.
@@ -835,6 +837,8 @@ It immediately follows from the definition that the diagram below describes the 
 }\quad.
 \]
 \end{rem}
+
+From our point of view, the main challenge in streamlining a derivation is to make sure there are no paths from axioms to cuts. Once this is achieved it is straightforward to use (confluent and strongly normalising) weakening reductions to obtain a streamlined derivation. This motivates the following definition:
 
 %---------------------------------------
 \begin{defi}
