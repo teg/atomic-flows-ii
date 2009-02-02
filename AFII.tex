@@ -423,6 +423,7 @@ all the atom occurrences in $\xi\vlhole$, $\alpha$, $\beta$, $\gamma$ and $\delt
 \end{pro}
 
 %---------------------------------------
+% TODO: label subflows by atom names
 \begin{defi}
 Given a derivation $\Phi$, we say that the unique atomic flow $A$ defined in Proposition~\ref{PropUnFl} is the atomic flow \emph{associated with} the derivation $\Phi$. Sometimes, when an atom occurrence $a$ in $\Phi$ maps to an edge $\epsilon$ in $A$, we decorate $\epsilon$ with the label $a$.
 \end{defi}
@@ -569,6 +570,8 @@ We show how to construct the first derivation, the second one can be done by sym
 for some $\xi'\vlhole$ and $\beta$ where $\beta$ is not a unit and $\Psi$ and $\Psi'$ exist by the inductive hypothesis.
 \end{proof}
 
+% TODO: give a name to this thing
+
 \begin{lem}\label{LemDecompInt}
 Given a derivation $\vlder{}{}{\beta}{\alpha}$ with atomic flow $A$, there exists a derivation
 \[
@@ -665,7 +668,7 @@ Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, consider the derivation
 {\vls(\vlinf{\aid}{}{\vls[a_1.\bar a_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[a_1.\bar a_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\vlinf{\aid}{}{\vls[b_1.\bar b_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[b_k.\bar b_k]}{\ttt}.\alpha)}
 \quad,
 \]
-with the same atomic flow as $\Phi$, which exists by Lemma~\ref{LemDecompInt}, where $a_1,\dots,a_n$ are distinct and pairwise non-dual and $b_1,\dots,b_k$ has no atoms in common with $c_1,\dots,c_k$. A core of $\Phi$, denoted $\Core(\Phi)$, is defined to be any derivation of the form
+with the same atomic flow as $\Phi$, which exists by Lemma~\ref{LemDecompInt}, where $a_1,\dots,a_n$ are distinct and pairwise non-dual atoms and $b_1,\dots,b_k$ has no atoms in common with $c_1,\dots,c_k$. A core of $\Phi$, denoted $\Core(\Phi)$, is defined to be any derivation of the form
 \[
 \Core(\Phi)=\vlderivation
 {
