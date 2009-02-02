@@ -522,6 +522,18 @@ Given an atomic flow $(V,E,\eta,\up,\lo)$ and $\epsilon_1,\dots,\epsilon_h\in E$
 %===============================================================================
 \section{Preliminaries}
 
+\newcommand{\contr}{\mathsf{c}}
+\newcommand{\cod}{{\contr{\downarrow}}}
+\newcommand{\cou}{{\contr{\uparrow}}}
+
+\begin{lem}\label{LemGenericContraction}
+Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$.
+\end{lem}
+
+\begin{rem}
+In the non-atomic version of system $\SKS$ the above derivations correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlder{}{\{\acu,\med\}}{\vls(\alpha.\alpha)}{\alpha}$.
+\end{rem}
+
 \begin{lem}\label{LemSuperSwitch}
 Given a context $\xi\vlhole$ and a formula $\alpha$ there exist derivations $\vlder{}{\{\swi\}}{\xi\{\alpha\}}{\vls(\alpha.\xi\{\ttt\})}$ and $\vlder{}{\{\swi\}}{\vls[\xi\{\fff\}.\alpha]}{\xi\{\alpha\}}$.
 \end{lem}
@@ -636,20 +648,6 @@ We write $\Phi\{a,b\ot\fff\}$ as a shorthand for $\Phi\{a\ot\fff\}\{b\ot\fff\}$.
 \begin{pro}
 Given a derivation $\Phi$ containing an atom $a$, $\Phi\{a\ot\fff\}$ is a valid derivation with a unique atomic flow.
 \end{pro}
-
-We now show how we can generalise the (co)contraction rules to work for formulae instead of atoms.
-
-\newcommand{\contr}{\mathsf{c}}
-\newcommand{\cod}{{\contr{\downarrow}}}
-\newcommand{\cou}{{\contr{\uparrow}}}
-
-\begin{lem}\label{LemGenericContraction}
-Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$.
-\end{lem}
-
-\begin{rem}
-In the non-atomic version of system $\SKS$ the above derivations correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlder{}{\{\acu,\med\}}{\vls(\alpha.\alpha)}{\alpha}$.
-\end{rem}
 
 %===============================================================================
 \section{Streamlining}
