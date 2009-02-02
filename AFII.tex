@@ -655,6 +655,138 @@ Given a derivation $\Phi$ containing an atom $a$, $\Phi\{a\ot\fff\}$ is a valid 
 %===============================================================================
 \section{Streamlining}
 
+%---------------------------------------
+\begin{defi}
+An $\SKS$ derivation is \emph{streamlined} if, in its associated atomic flow, there are no paths from interaction or weakening vertices to cointeraction or coweakening vertices.
+\end{defi}
+
+%---------------------------------------
+\begin{rem}\label{RemStr}
+It immediately follows from the definition that the diagram below describes the shape of a streamlined derivation; the boxes stand for flows obtained by freely composing edges and vertices whose labels are only those indicated on the boxes:
+\[
+\newbox\boxone\setbox\boxone=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afacd{}{}{}{}{}{}}}$}
+\newbox\boxtwo\setbox\boxtwo=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afacu{}{}{}{}{}{}}}$}
+\newbox\boxthree\setbox\boxthree=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afaid{}{}{}{}{}{}}}$}
+\newbox\boxfour\setbox\boxfour=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afaiu{}{}{}{}{}{}}}$}
+\newbox\boxfive\setbox\boxfive=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afawd{}{}{}{}{}{}}}$}
+\newbox\boxsix\setbox\boxsix=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afawu{}{}{}{}{}{}}}$}
+\atomicflow{
+(-12,12)*{\afvj4};
+(-10,12)*{\cdots};
+( -8,12)*{\afvj4};
+%---
+(-15, 6)*{\copy\boxtwo};
+(-10, 6)*{\affr{28}8};
+( -5, 6)*{\copy\boxone};
+( 10, 6)*{\copy\boxthree};
+( 10, 6)*{\affr88};
+( 20, 6)*{\copy\boxfive};
+( 20, 6)*{\affr88};
+%---
+(-22, 0)*{\afvj4};
+(-20, 0)*{\cdots};
+(-18, 0)*{\afvj4};
+(-12, 0)*{\afvj4};
+(-10, 0)*{\cdots};
+( -8, 0)*{\afvj4};
+( -2, 0)*{\afvj4};
+(  0, 0)*{\cdots};
+(  2, 0)*{\afvj4};
+(  8, 0)*{\afvj4};
+( 10, 0)*{\cdots};
+( 12, 0)*{\afvj4};
+( 18, 0)*{\afvj4};
+( 20, 0)*{\cdots};
+( 22, 0)*{\afvj4};
+%---
+(-20,-6)*{\copy\boxsix};
+(-20,-6)*{\affr88};
+(-10,-6)*{\copy\boxfour};
+(-10,-6)*{\affr88};
+(  5,-6)*{\copy\boxtwo};
+( 10,-6)*{\affr{28}8};
+( 15,-6)*{\copy\boxone};
+%---
+(  8,-12)*{\afvj4};
+( 10,-12)*{\cdots};
+( 12,-12)*{\afvj4}}\quad.
+\]
+\end{rem}
+
+%---------------------------------------
+\begin{defi}
+An $\SKS$ derivation is \emph{weakly streamlined} if, in its associated atomic flow, there are no paths from interaction vertices to cointeraction vertices.
+\end{defi}
+
+%---------------------------------------
+\begin{rem}\label{RemStr}
+It immediately follows from the definition that the diagram below describes the shape of a weakly streamlined derivation; the boxes stand for flows obtained by freely composing edges and vertices whose labels are only those indicated on the boxes:
+\[
+\newbox\boxone\setbox\boxone=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afacd{}{}{}{}{}{}}}$}
+\newbox\boxtwo\setbox\boxtwo=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afacu{}{}{}{}{}{}}}$}
+\newbox\boxthree\setbox\boxthree=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afaid{}{}{}{}{}{}}}$}
+\newbox\boxfour\setbox\boxfour=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afaiu{}{}{}{}{}{}}}$}
+\newbox\boxfive\setbox\boxfive=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afawd{}{}{}{}{}{}}}$}
+\newbox\boxsix\setbox\boxsix=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afawu{}{}{}{}{}{}}}$}
+\atomicflow{
+(-7,12)*{\afvj4};
+(-5,12)*{\cdots};
+(-3,12)*{\afvj4};
+%---
+(-10, 6)*{\copy\boxtwo};
+( -5, 6)*{\affr{18}8};
+(  0, 6)*{\copy\boxone};
+( 10, 6)*{\copy\boxthree};
+( 10, 6)*{\affr88};
+( -5, 6)*{\copy\boxfive};
+%---
+(-12, 0)*{\afvj4};
+(-10, 0)*{\cdots};
+( -8, 0)*{\afvj4};
+( -2, 0)*{\afvj4};
+(  0, 0)*{\cdots};
+(  2, 0)*{\afvj4};
+(  8, 0)*{\afvj4};
+( 10, 0)*{\cdots};
+( 12, 0)*{\afvj4};
+%---
+(  5,-6)*{\copy\boxsix};
+(-10,-6)*{\copy\boxfour};
+(-10,-6)*{\affr88};
+(  0,-6)*{\copy\boxtwo};
+(  5,-6)*{\affr{18}8};
+( 10,-6)*{\copy\boxone};
+%---
+(  3,-12)*{\afvj4};
+(  5,-12)*{\cdots};
+(  7,-12)*{\afvj4}}\quad.
+\]
+\end{rem}
+
 \subsection{The Core}
 
 \newcommand{\Core}{\mathsf{Core}}
