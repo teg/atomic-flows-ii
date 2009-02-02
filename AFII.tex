@@ -660,42 +660,24 @@ In the non-atomic version of system $\SKS$ the above derivations correspond to r
 
 \subsection{Cores}
 
-% TODO: somehow express that a_1,\dots,a_n are all of them
-
 \begin{defi}\label{DefCore}
-Given
-\begin{itemize}
- \item a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ and
- \item the distinct and pairwise non-dual atoms $a_1,\dots,a_n$, each of which appears in both interaction and cointeraction instance in $\Phi$,
-\end{itemize}
-a \emph{core of\/ $\Phi$} is a derivation 
+Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, consider the derivation, obtained by Lemma~\ref{LemDecompInt}
 \[
-\vlder{}{}{\vls[\beta.(a_n.\bar a_n).\cdots.(a_1.\bar a_1)]}{\vls([a_1.\bar a_1].\cdots.[a_n.\bar a_n].\alpha)}
+\vlder{\Phi'}
+{\SKS\setminus\{\aid,\aiu\}}
+{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(c_l.\bar c_l)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(c_1.\bar c_1)}.\vlinf{\aiu}{}{\fff}{\vls(a_n.\bar a_n)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(a_n.\bar a_n)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(a_1.\bar a_1)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(a_1.\bar a_1)}]}
+{\vls(\vlinf{\aid}{}{\vls[a_1.\bar a_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[a_1.\bar a_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\vlinf{\aid}{}{\vls[b_1.\bar b_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[b_k.\bar b_k]}{\ttt}.\alpha)}
+\quad,
 \]
-where no atom occurs in both an interaction and a cointeraction instance.
-\end{defi}
-
-% TODO: say that a core is weakly streamlined
-
-\begin{lem}\label{LemCoreExistence}
-For any derivation $\Phi$ from $\alpha$ to $\beta$ a core of\/ $\Phi$ can be constructed.
-\end{lem}
-
-\begin{proof}
-Let $a_1,\dots,a_n$ be the distinct and pairwise non-dual atoms each of which appears in both interaction and cointeraction instances in $\Phi$. Remove each (co)interaction instance where $a_1,\dots,a_n$ occurs from the result of applying Lemma~\ref{LemDecompInt} to $\Phi$. This yields
-\[
-\vlder{\Phi'}{}{\vls[\beta.(a_n.\bar a_n).\cdots.(a_n.\bar a_n).\cdots.(a_1.\bar a_1).\cdots.(a_1.\bar a_1)]}{\vls([a_1.\bar a_1].\cdots.[a_1.\bar a_1].\cdots.[a_n.\bar a_n].\cdots.[a_n.\bar a_n].\alpha)}\quad.
-\]
-
-We now construct a core of $\Phi$ from $\Phi'$ by using Lemma~\ref{LemGenericContraction}:
+with the same atomic flow as $\Phi$, where $a_1,\dots,a_n$ are distinct and pairwise non-dual and $b_1,\dots,b_k$ has no atoms in common with $c_1,\dots,c_k$. A core of $\Phi$ is defined to be the derivation
 \[
 \vlderivation
 {
  \vlde{}{\{\acd,\med\}}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}
  {
-  \vlde{\Phi'}{}{\vls[\beta.(a_n.\bar a_n).\cdots.(a_n.\bar a_n).\cdots.(a_1.\bar a_1).\cdots.(a_1.\bar a_1)]}
+  \vlde{\Phi'}{}{{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(c_l.\bar c_l)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(c_1.\bar c_1)}.(a_n.\bar a_n).\cdots.(a_n.\bar a_n).\cdots.(a_1.\bar a_1).\cdots.(a_1.\bar a_1)]}}
   {
-   \vlde{}{\{\acu,\med\}}{\vls([a_1.\bar a_1].\cdots.[a_1.\bar a_1].\cdots.[a_n.\bar a_n].\cdots.[a_n.\bar a_n].\alpha)}
+   \vlde{}{\{\acu,\med\}}{{\vls([a_1.\bar a_1].\cdots.[a_1.\bar a_1].\cdots.[a_n.\bar a_n].\cdots.[a_n.\bar a_n].\vlinf{\aid}{}{\vls[b_1.\bar b_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[b_k.\bar b_k]}{\ttt}.\alpha)}}
    {
     \vlhy{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}
    }
@@ -703,11 +685,12 @@ We now construct a core of $\Phi$ from $\Phi'$ by using Lemma~\ref{LemGenericCon
  }
 }\quad.
 \]
-\end{proof}
+\end{defi}
 
 \newcommand{\Core}{\mathsf{Core}}
 
 % TODO: define associativity of contractions
+% TODO: change remark since it is no longer a proof
 
 Note that the core obtained using the construction in the above proof is not unique, several choices are made. However, we would like to argue that the cores only differ for inessential details, and in fact from the point of view of atomic flows they are all the same.
 
@@ -772,7 +755,7 @@ Given a derivation $\Phi$ with atomic flow
 (28,-6)*{\afvjm4};
 }\quad,
 \]
-where $A$ does not contain a path from an interaction to a cointeraction vertex, the atomic flow of a core of\/ $\Phi$ obtained as described in the proof of Lemma~\ref{LemCoreExistence} is
+where $A$ does not contain a path from an interaction to a cointeraction vertex, the atomic flow of a core of\/ $\Phi$ is
 \[
 \atomicflow
 {
@@ -839,6 +822,8 @@ where $A$ does not contain a path from an interaction to a cointeraction vertex,
 }\quad.
 \]
 \end{pro}
+
+% TODO: change the next informal comment and definition since it is no longer a proof
 
 In other words the atomic flow of a core constructed as described in the proof of Lemma~\ref{LemCoreExistence} is unique modulo associativity of contractions, which justifies the following definition.
 
