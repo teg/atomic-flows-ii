@@ -628,14 +628,14 @@ Note that no structural inference rules are changed, so the atomic flow of the r
 Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ and an atom $a$, we define $\vlder{\Phi\{a\ot\fff\}}{}{\beta\{a\ot\fff\}}{\alpha\{a\ot\fff\}}$:
 \begin{enumerate}
 \item if $\Phi$ is in $\SKS\setminus\{\aid,\aiu\}$, substitute each instance of $a$ in $\Phi$ with $\fff$ and each structural inference rule where $a$ occurred with $=$,
-\item otherwise, obtain
+\item otherwise, use Lemma~\ref{LemDecompInt} to obtain
 \[
 \vlder{\Phi'\{a\ot\fff\}}
 {\SKS\setminus\{\aid,\aiu\}}
 {\vls[\beta\{a\ot\fff\}.\vlinf{\aiu}{}{\fff}{\vls(b_m.\bar b_m)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(b_{l+1}.\bar b_{l+1})}.(\fff.\bar a).\vldots.(\fff.\bar a)]}
 {\vls(\bar a.\vldots.\bar a.\vlinf{\aid}{}{\vls[a_{k+1}.\bar a_{k+1}]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha\{a\ot\fff\})}\quad,
 \]
-by Lemma~\ref{LemDecompInt}, where $a=a_1,\dots,a_k,b_1,\dots,b_l$.
+such that $\Phi'$ has the same atomic flow as $\Phi$ and $a=a_1,\dots,a_k,b_1,\dots,b_l$.
 \end{enumerate}
 We write $\Phi\{a,b\ot\fff\}$ as a shorthand for $\Phi\{a\ot\fff\}\{b\ot\fff\}$.
 \end{defi}
