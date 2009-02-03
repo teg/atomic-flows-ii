@@ -73,7 +73,7 @@ Note that when we write $\xi\{a\}$, we mean that an occurrence of $a$ exists in 
                               {\scriptstyle\mathbf2}
                               {\scriptscriptstyle\mathbf2}}}
 %---------------------------------------
-\begin{defi}
+\begin{defi}\label{DefDerivation}
 \emph{Inference rules}, $\rho$, have one \emph{premiss} and one \emph{conclusion}, and their \emph{instances} are used in \emph{inference steps} to rewrite inside formulae. A \emph{derivation}, $\Phi$, from $\alpha$ (\emph{premiss}) to $\beta$ (\emph{conclusion}) is a chain of inference steps with $\alpha$ at the top and $\beta$ at the bottom, and is usually indicated by $\vlder{\Phi}{\mathcal S}{\beta}{\alpha}$, where $\mathcal S$ is the name of the deductive system or a set of inference rules; a \emph{proof} is a derivation from $\ttt$; besides $\Phi$, we denote derivations with $\Psi$. We denote with $\xi\{\Phi\}$ the result of including every formula of the derivation $\vlder{\Phi}{}{\beta}{\alpha}$ into the context $\xi\vlhole$. Since we adopt deep inference, $\vlder{\xi\{\Phi\}}{}{\xi\{\beta\}}{\xi\{\alpha\}}$ is a valid derivation. Furthermore, $\xi\left\{\vlder{}{}{\beta_1}{\alpha_1}\right\}\cdots\left\{\vlder{}{}{\beta_n}{\alpha_n}\right\}$ denotes
 \[
 \vlderivation
@@ -162,6 +162,64 @@ The rule cointeraction is also called an (\emph{atomic}) \emph{cut}. In addition
 \end{align*}
 We do not always show the instances of rule $=$, and when we do show them, we gather several contiguous instances into one. System $\KS$ is the same as $\SKS$, but without the rules $\aiu$, $\awu$ and $\acu$. A \emph{cut-free} derivation is a derivation where $\aiu$ is not used. All derivations in this paper are in $\SKS$, unless indicated otherwise.
 \end{defi}
+
+% TODO: find the right place for this example
+
+\begin{exa}\label{ExaFormalismA}
+Consider the $\SKS$ derivation
+\[
+\vls[\vlinf{\acd}{}{a}{\vls[a.a]}.\vlinf{\aiu}{}{\fff}{\vls(\vlinf{\acd}{}{b}{\vls[b.b]}.\bar b)}]\quad,
+\]
+which is a shorthand for
+\[
+\vlderivation
+{
+ \vlin{\aiu}{}{a}
+ {
+  \vlin{\acd}{}{\vls[a.(b.\bar b)]}
+  {
+   \vlin{\acd}{}{\vls[a.([b.b].\bar b)]}
+   {
+    \vlhy{\vls[a.a.([b.b].\bar b)]}
+   }
+  }
+ }
+}.
+\]
+Notice that the knowledge of the order in which derivations should be composed is implicit in Definition~\ref{DefDerivation}. In this example we used a left-to-right ordering, but we could just as well have used a right-to-left ordering:
+\[
+\vlderivation
+{
+ \vlin{\acd}{}{a}
+ {
+  \vlin{\aiu}{}{\vls[a.a]}
+  {
+   \vlin{\acd}{}{\vls[a.a.(b.\bar b)]}
+   {
+    \vlhy{\vls[a.a.([b.b].\bar b)]}
+   }
+  }
+ }
+}.
+\]
+In Formalism A, a new deep-inference formalism, currently under development, the above shorthand is a representative of the equivalence class containing both the left-to-right and right-to-left versions, in addition to the intermediate:
+\[
+\vlderivation
+{
+ \vlin{\aiu}{}{a}
+ {
+  \vlin{\acd}{}{\vls[a.(b.\bar b)]}
+  {
+   \vlin{\acd}{}{\vls[a.a.(b.\bar b)]}
+   {
+    \vlhy{\vls[a.a.([b.b].\bar b)]}
+   }
+  }
+ }
+}.
+\]
+In this paper, which of these three derivations we use is inessential, as the atomic flows of all the derivations in a Formalism A equivalence class are the same. For simplicity we let the shorthand above refer to one unique derivation, but should we wish to employ Formalism A, everything in this paper still holds.
+\end{exa}
 
 % TODO: Redo
 %\begin{rem}
