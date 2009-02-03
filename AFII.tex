@@ -294,6 +294,27 @@ Besides $\epsilon$, we use small numerals $\one$, $\two$, \dots\ to denote edges
 In general, we represent atomic flows as directed-graph diagrams, except that the special vertices $\top$ and $\bot$ are not shown, and the labels of the vertices are explicitly shown as graphical elements. When we refer to the vertices of an atomic flow, we do not include $\top$ and $\bot$. Sometimes we identify vertices with their labels. 
 \end{defi}
 
+% TODO: define the use of these things
+
+\newbox\contrup\setbox\contrup=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afacu{}{}{}{}{}{}}}$}
+\newbox\contrdown\setbox\contrdown=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afacd{}{}{}{}{}{}}}$}
+\newbox\interdown\setbox\interdown=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afaid{}{}{}{}{}{}}}$}
+\newbox\interup\setbox\interup=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afaiu{}{}{}{}{}{}}}$}
+\newbox\weakdown\setbox\weakdown=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afawd{}{}{}{}{}{}}}$}
+\newbox\weakup\setbox\weakup=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afawu{}{}{}{}{}{}}}$}
+
 An atomic flow is a directed graph, whose edges are associated to atom occurrences in derivations, and the direction of the edges corresponds to the up-down direction in a derivation. Vertices are associated to points in the derivation where atom occurrences are created or destroyed, and the nature of each vertex is described by its label. Naturally, these graphs are acyclic (condition~\ref{ItAcycl}). The two special vertices $\top$ and $\bot$ represent the top and bottom of a derivation: we can consider $\top$ the vertex that creates all the atom occurrences in the premiss and $\bot$ the vertex that destroys all atom occurrences in the conclusion.
 
 The polarity assignment condition (\ref{ItPol}) ensures that atoms in(co)contractions have the same polarity, and those in (co)interactions have dual polarities (as happens in derivations). Every atomic flow has $2^n$ polarity assignments, where $n$ is the number of connected components in the graph. We should not be worried about the apparent complexity of the polarity assignment condition: in fact, we could equivalently consider two sorts of (co)contraction and (co)weakening labels, the negative and the positive ones, and ask for vertices to be joined by respecting their polarities. This is clearly a locally checkable property, much simpler than, for example, some global correctness criterion for proof nets.
@@ -664,35 +685,17 @@ An $\SKS$ derivation is \emph{streamlined} if, in its associated atomic flow, th
 \begin{rem}\label{RemStr}
 It immediately follows from the definition that the diagram below describes the shape of a streamlined derivation; the boxes stand for flows obtained by freely composing edges and vertices whose labels are only those indicated on the boxes:
 \[
-\newbox\boxone\setbox\boxone=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afacd{}{}{}{}{}{}}}$}
-\newbox\boxtwo\setbox\boxtwo=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afacu{}{}{}{}{}{}}}$}
-\newbox\boxthree\setbox\boxthree=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afaid{}{}{}{}{}{}}}$}
-\newbox\boxfour\setbox\boxfour=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afaiu{}{}{}{}{}{}}}$}
-\newbox\boxfive\setbox\boxfive=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afawd{}{}{}{}{}{}}}$}
-\newbox\boxsix\setbox\boxsix=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afawu{}{}{}{}{}{}}}$}
 \atomicflow{
 (-12,12)*{\afvj4};
 (-10,12)*{\cdots};
 ( -8,12)*{\afvj4};
 %---
-(-15, 6)*{\copy\boxtwo};
+(-15, 6)*{\copy\contrup};
 (-10, 6)*{\affr{28}8};
-( -5, 6)*{\copy\boxone};
-( 10, 6)*{\copy\boxthree};
+( -5, 6)*{\copy\contrdown};
+( 10, 6)*{\copy\interdown};
 ( 10, 6)*{\affr88};
-( 20, 6)*{\copy\boxfive};
+( 20, 6)*{\copy\weakdown};
 ( 20, 6)*{\affr88};
 %---
 (-22, 0)*{\afvj4};
@@ -711,13 +714,13 @@ It immediately follows from the definition that the diagram below describes the 
 ( 20, 0)*{\cdots};
 ( 22, 0)*{\afvj4};
 %---
-(-20,-6)*{\copy\boxsix};
+(-20,-6)*{\copy\weakup};
 (-20,-6)*{\affr88};
-(-10,-6)*{\copy\boxfour};
+(-10,-6)*{\copy\interup};
 (-10,-6)*{\affr88};
-(  5,-6)*{\copy\boxtwo};
+(  5,-6)*{\copy\contrup};
 ( 10,-6)*{\affr{28}8};
-( 15,-6)*{\copy\boxone};
+( 15,-6)*{\copy\contrdown};
 %---
 (  8,-12)*{\afvj4};
 ( 10,-12)*{\cdots};
@@ -734,35 +737,17 @@ An $\SKS$ derivation is \emph{weakly streamlined} if, in its associated atomic f
 \begin{rem}\label{RemStr}
 It immediately follows from the definition that the diagram below describes the shape of a weakly streamlined derivation; the boxes stand for flows obtained by freely composing edges and vertices whose labels are only those indicated on the boxes:
 \[
-\newbox\boxone\setbox\boxone=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afacd{}{}{}{}{}{}}}$}
-\newbox\boxtwo\setbox\boxtwo=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afacu{}{}{}{}{}{}}}$}
-\newbox\boxthree\setbox\boxthree=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afaid{}{}{}{}{}{}}}$}
-\newbox\boxfour\setbox\boxfour=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afaiu{}{}{}{}{}{}}}$}
-\newbox\boxfive\setbox\boxfive=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afawd{}{}{}{}{}{}}}$}
-\newbox\boxsix\setbox\boxsix=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afawu{}{}{}{}{}{}}}$}
 \atomicflow{
 (-7,12)*{\afvj4};
 (-5,12)*{\cdots};
 (-3,12)*{\afvj4};
 %---
-(-10, 6)*{\copy\boxtwo};
 ( -5, 6)*{\affr{18}8};
-(  0, 6)*{\copy\boxone};
-( 10, 6)*{\copy\boxthree};
+(-10, 6)*{\copy\contrup};
+( -5, 6)*{\copy\weakdown};
+(  0, 6)*{\copy\contrdown};
 ( 10, 6)*{\affr88};
-( -5, 6)*{\copy\boxfive};
+( 10, 6)*{\copy\interdown};
 %---
 (-12, 0)*{\afvj4};
 (-10, 0)*{\cdots};
@@ -774,12 +759,12 @@ It immediately follows from the definition that the diagram below describes the 
 ( 10, 0)*{\cdots};
 ( 12, 0)*{\afvj4};
 %---
-(  5,-6)*{\copy\boxsix};
-(-10,-6)*{\copy\boxfour};
 (-10,-6)*{\affr88};
-(  0,-6)*{\copy\boxtwo};
+(-10,-6)*{\copy\interup};
 (  5,-6)*{\affr{18}8};
-( 10,-6)*{\copy\boxone};
+(  0,-6)*{\copy\contrup};
+(  5,-6)*{\copy\weakup};
+( 10,-6)*{\copy\contrdown};
 %---
 (  3,-12)*{\afvj4};
 (  5,-12)*{\cdots};
@@ -820,32 +805,6 @@ where $\Psi_1$ and $\Psi_2$ exist by Lemma~\ref{LemGenericContraction}.
 \end{defi}
 
 % TODO: define associativity of contractions
-
-\newbox\upone\setbox\upone=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afacu{}{}{}{}{}{}}}$}
-\newbox\uptwo\setbox\uptwo=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afacu{}{}{}{}{}{}}}$}
-\newbox\upthree\setbox\upthree=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afacu{}{}{}{}{}{}}}$}
-\newbox\upfour\setbox\upfour=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afacu{}{}{}{}{}{}}}$}
-\newbox\downone\setbox\downone=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afacd{}{}{}{}{}{}}}$}
-\newbox\downtwo\setbox\downtwo=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afacd{}{}{}{}{}{}}}$}
-\newbox\downthree\setbox\downthree=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afacd{}{}{}{}{}{}}}$}
-\newbox\downfour\setbox\downfour=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afacd{}{}{}{}{}{}}}$}
-
 
 \begin{pro}\label{PropUniqueCore}
 Given a derivation $\Phi$ with atomic flow
@@ -889,26 +848,26 @@ where $A$ does not contain a path from an interaction to a cointeraction vertex,
 (-21,10)*{\afvjm{12}};
 (-17,15)*{\afvj2};
 (-17,10)*{\affr{6}{8}};
-(-17,10)*{\box\upone};
+(-17,10)*{\copy\contrup};
 (-17, 5)*{\afvjm{2}};
 (-18, 0)*{\affr{8}{8}};
 (-16, 2)*{a_1};
 (-21,-10)*{\afvjm{12}};
 (-17,-15)*{\afvj2};
 (-17,-10)*{\affr{6}{8}};
-(-17,-10)*{\box\downone};
+(-17,-10)*{\copy\contrdown};
 (-17, -5)*{\afvjm{2}};
 %
 ( -9,15)*{\afvj2};
 ( -9,10)*{\affr{6}{8}};
-( -9,10)*{\box\uptwo};
+( -9,10)*{\copy\contrup};
 ( -9, 5)*{\afvjm{2}};
 ( -5,10)*{\afvjm{12}};
 ( -8, 0)*{\affr{8}{8}};
 ( -6, 2)*{\bar a_1};
 ( -9,-15)*{\afvj2};
 ( -9,-10)*{\affr{6}{8}};
-( -9,-10)*{\box\downtwo};
+( -9,-10)*{\copy\contrdown};
 ( -9, -5)*{\afvjm{2}};
 ( -5,-10)*{\afvjm{12}};
 ( -8, 0)*{\affr{8}{8}};
@@ -917,14 +876,14 @@ where $A$ does not contain a path from an interaction to a cointeraction vertex,
 %------------
 ( 9,15)*{\afvj2};
 ( 9,10)*{\affr{6}{8}};
-( 9,10)*{\box\upthree};
+( 9,10)*{\copy\contrup};
 ( 9, 5)*{\afvjm{2}};
 ( 5,10)*{\afvjm{12}};
 ( 8, 0)*{\affr{8}{8}};
 (10, 2)*{a_n};
 ( 9,-15)*{\afvj2};
 ( 9,-10)*{\affr{6}{8}};
-( 9,-10)*{\box\downthree};
+( 9,-10)*{\copy\contrdown};
 ( 9, -5)*{\afvjm{2}};
 ( 5,-10)*{\afvjm{12}};
 ( 8, 0)*{\affr{8}{8}};
@@ -932,14 +891,14 @@ where $A$ does not contain a path from an interaction to a cointeraction vertex,
 (21,10)*{\afvjm{12}};
 (17,15)*{\afvj2};
 (17,10)*{\affr{6}{8}};
-(17,10)*{\box\upfour};
+(17,10)*{\copy\contrup};
 (17, 5)*{\afvjm{2}};
 (18, 0)*{\affr{8}{8}};
 (20, 2)*{\bar a_n};
 (21,-10)*{\afvjm{12}};
 (17,-15)*{\afvj2};
 (17,-10)*{\affr{6}{8}};
-(17,-10)*{\box\downfour};
+(17,-10)*{\copy\contrdown};
 (17, -5)*{\afvjm{2}};
 %---------
 (28, 10)*{\afvjm{12}};
@@ -1176,6 +1135,7 @@ the atomic flow of an experiment on $\Phi$ with respect to $a_1,\dots,a_n$ is
 {
 ( -8,16)*{\afvj4};
 ( -8,10)*{\affr{8}{8}};
+( -8,10)*{\copy\contrup};
 ( -8, 5)*{\afvjm2};
 ( -8, 0)*{\affr{8}{8}};
 ( -6, 2)*{a_1};
@@ -1186,6 +1146,7 @@ the atomic flow of an experiment on $\Phi$ with respect to $a_1,\dots,a_n$ is
 %------------
 ( 8,16)*{\afvj4};
 ( 8,10)*{\affr{8}{8}};
+( 8,10)*{\copy\contrup};
 ( 8, 5)*{\afvjm2};
 ( 8, 0)*{\affr{8}{8}};
 (10, 2)*{a_n};
@@ -1218,21 +1179,25 @@ with atomic flow
 {
 (-18,16)*{\afvj4};
 (-18,10)*{\affr{8}{8}};
+(-18,10)*{\copy\contrup};
 (-18, 5)*{\afvjm{2}};
 (-18, 0)*{\affr{8}{8}};
 (-16, 2)*{a_1};
 (-21,-12)*{\afvjm{16}};
 (-17,-10)*{\affr{6}{8}};
+(-17,-10)*{\copy\contrdown};
 (-17, -5)*{\afvjm{2}};
 %
 (-13,-18)*{\afaiu{}{}{}{}{}{}};
 %
 ( -8,18)*{\afawd{}{}{}{}};
 ( -8,10)*{\affr{8}{8}};
+( -8,10)*{\copy\contrup};
 ( -8, 5)*{\afvjm{2}};
 ( -8, 0)*{\affr{8}{8}};
 ( -6, 2)*{{\bar a}_1};
 ( -9,-10)*{\affr{6}{8}};
+( -9,-10)*{\copy\contrdown};
 ( -9, -5)*{\afvjm{2}};
 ( -5,-12)*{\afvjm{16}};
 %------------
@@ -1240,10 +1205,12 @@ with atomic flow
 %------------
 ( 8,16)*{\afvj4};
 ( 8,10)*{\affr{8}{8}};
+( 8,10)*{\copy\contrup};
 ( 8, 5)*{\afvjm{2}};
 ( 8, 0)*{\affr{8}{8}};
 ( 6, 2)*{a_n};
 ( 9,-10)*{\affr{6}{8}};
+( 9,-10)*{\copy\contrdown};
 ( 9, -5)*{\afvjm{2}};
 ( 5,-12)*{\afvjm{16}};
 %
@@ -1251,11 +1218,13 @@ with atomic flow
 %
 (18,18)*{\afawd{}{}{}{}};
 (18,10)*{\affr{8}{8}};
+(18,10)*{\copy\contrup};
 (18, 5)*{\afvjm{2}};
 (18, 0)*{\affr{8}{8}};
 (16, 2)*{{\bar a}_n};
 (21,-12)*{\afvjm{16}};
 (17,-10)*{\affr{6}{8}};
+(17,-10)*{\copy\contrdown};
 (17, -5)*{\afvjm{2}};
 }\quad,
 \]
@@ -1405,10 +1374,14 @@ the atomic flow of a symmetric cut-free proof obtained from $\Phi$ is
 (27,18)*{\afaid{}{}{}{}{}{}};
 %--------
 (-38,10)*{\affr{20}8};
+(-38,10)*{\copy\contrup};
 (-16,10)*{\affr{20}8};
+(-16,10)*{\copy\contrup};
 %----
 (16,10)*{\affr{20}8};
+(16,10)*{\copy\contrup};
 (38,10)*{\affr{20}8};
+(38,10)*{\copy\contrup};
 %--------
 (-44,5)*{\afvjm2};
 (-32,5)*{\afvjm2};
@@ -1459,10 +1432,14 @@ the atomic flow of a symmetric cut-free proof obtained from $\Phi$ is
 (50,-2)*{\afawdm{}{}{}{}};
 %--------
 (-40,-10)*{\affr{24}8};
+(-40,-10)*{\copy\contrdown};
 (-14,-10)*{\affr{24}8};
+(-14,-10)*{\copy\contrdown};
 %----
 (14,-10)*{\affr{24}8};
+(14,-10)*{\copy\contrdown};
 (40,-10)*{\affr{24}8};
+(40,-10)*{\copy\contrdown};
 %--------
 (-40,-16)*{\afvjm4};
 (-14,-16)*{\afvjm4};
