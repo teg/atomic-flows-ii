@@ -163,6 +163,14 @@ The rule cointeraction is also called an (\emph{atomic}) \emph{cut}. In addition
 We do not always show the instances of rule $=$, and when we do show them, we gather several contiguous instances into one. System $\KS$ is the same as $\SKS$, but without the rules $\aiu$, $\awu$ and $\acu$. A \emph{cut-free} derivation is a derivation where $\aiu$ is not used. All derivations in this paper are in $\SKS$, unless indicated otherwise.
 \end{defi}
 
+\begin{rem}
+While the definition of $\SKS$ derivations is unambiguous, we will sometimes use ambiguous representations. This is not a problem, as we can always get a more detailed representation should we need to, for instance when extracting atomic flows from derivations. The ambiguity arises because we omit or collapse equations and because we do not distinguish the different equation rules. In particular we need to know if
+\[
+\vlinf{=}{}{\vls((a.a).a)}{\vls(a.(a.a))}\quad,
+\]
+is an application of associativity or commutativity to be able to map atom occurrences in the premiss to atom occurrences in the conclusion.
+\end{rem}
+
 % TODO: find the right place for this example
 
 \begin{exa}\label{ExaFormalismA}
