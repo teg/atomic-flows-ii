@@ -205,6 +205,26 @@ We call the following six diagrams (\emph{atomic-flow}) \emph{labels}:
 Cointeraction is also called \emph{cut}.
 \end{defi}
 
+
+\newbox\contrup\setbox\contrup=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afacu{}{}{}{}{}{}}}$}
+\newbox\contrdown\setbox\contrdown=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afacd{}{}{}{}{}{}}}$}
+\newbox\interdown\setbox\interdown=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afaid{}{}{}{}{}{}}}$}
+\newbox\interup\setbox\interup=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afaiu{}{}{}{}{}{}}}$}
+\newbox\weakdown\setbox\weakdown=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afawd{}{}{}{}{}{}}}$}
+\newbox\weakup\setbox\weakup=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afawu{}{}{}{}{}{}}}$}
+
 % TODO: sometimes we do not name the edges
 
 \newcommand{\ppl  }{{\mathchoice{\scriptstyle+}
@@ -282,38 +302,37 @@ An (\emph{atomic}) \emph{flow} is a tuple $(V,E,\eta,\up,\lo)$ such that:
 Besides $\epsilon$, we use small numerals $\one$, $\two$, \dots\ to denote edges. Atomic flows are denoted with $A$, $B$. Given an atomic flow $A$, we say that the sets $L_\top=\{\epsilon_1,\dots,\epsilon_h\}$ and $U_\bot=\{\epsilon'_1,\dots,\epsilon'_k\}$ contain, respectively, the \emph{upper} and \emph{lower edges of $A$}; in such a case, we can represent $A$ as
 \[
 \atomicflow{
-( 2,10)*{\afvjum4{\epsilon_1}{\epsilon_h}};
-( 5, 6)*{\aflabelleft A};
-( 2, 5)*{\affr66};
-( 2, 0)*{\afvjdm4{\epsilon'_1}{\epsilon'_k}};
-(-2, 0)*{\invisiblemark};
-( 6, 0)*{\invisiblemark}}
+(-4,0)*{\invisiblemark};
+( 0,6)*{\afvjum4{\epsilon_1}{\epsilon_h}};
+( 0,0)*{\affr88};
+( 2,2)*{A};
+( 0,-6)*{\afvjdm4{\epsilon'_1}{\epsilon'_k}};
+( 4,0)*{\invisiblemark}}
 \quad.
+\]
+
+We sometimes label an atomic flow by the image of the labeling function $\eta(V)$, \emph{e.g.}
+\[
+\atomicflow{
+(-4,8)*{\invisiblemark};
+( 0,0)*{\affr88};
+( 0,0)*{\copy\interdown};
+( 0,-6)*{\afvjm4};
+( 4,0)*{\invisiblemark}
+}\quad,\quad
+\atomicflow{
+(-6,0)*{\invisiblemark};
+( 0,6)*{\afvjm4};
+( 0,0)*{\affr{12}8};
+(-3,0)*{\copy\contrdown};
+( 3,0)*{\copy\contrup};
+( 0,-6)*{\afvjm4};
+( 6,0)*{\invisiblemark}
+}\quad.
 \]
 
 In general, we represent atomic flows as directed-graph diagrams, except that the special vertices $\top$ and $\bot$ are not shown, and the labels of the vertices are explicitly shown as graphical elements. When we refer to the vertices of an atomic flow, we do not include $\top$ and $\bot$. Sometimes we identify vertices with their labels. 
 \end{defi}
-
-% TODO: define the use of these things
-
-\newbox\contrup\setbox\contrup=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afacu{}{}{}{}{}{}}}$}
-\newbox\contrdown\setbox\contrdown=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afacd{}{}{}{}{}{}}}$}
-\newbox\interdown\setbox\interdown=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afaid{}{}{}{}{}{}}}$}
-\newbox\interup\setbox\interup=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afaiu{}{}{}{}{}{}}}$}
-\newbox\weakdown\setbox\weakdown=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afawd{}{}{}{}{}{}}}$}
-\newbox\weakup\setbox\weakup=\hbox{$
-   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
-   \atomicflow{(0,0)*{\afawu{}{}{}{}{}{}}}$}
 
 An atomic flow is a directed graph, whose edges are associated to atom occurrences in derivations, and the direction of the edges corresponds to the up-down direction in a derivation. Vertices are associated to points in the derivation where atom occurrences are created or destroyed, and the nature of each vertex is described by its label. Naturally, these graphs are acyclic (condition~\ref{ItAcycl}). The two special vertices $\top$ and $\bot$ represent the top and bottom of a derivation: we can consider $\top$ the vertex that creates all the atom occurrences in the premiss and $\bot$ the vertex that destroys all atom occurrences in the conclusion.
 
@@ -444,9 +463,9 @@ all the atom occurrences in $\xi\vlhole$, $\alpha$, $\beta$, $\gamma$ and $\delt
 \end{pro}
 
 %---------------------------------------
-% TODO: label subflows by atom names
+% TODO: this is now talking about flows, how about subflows?
 \begin{defi}
-Given a derivation $\Phi$, we say that the unique atomic flow $A$ defined in Proposition~\ref{PropUnFl} is the atomic flow \emph{associated with} the derivation $\Phi$. Sometimes, when an atom occurrence $a$ in $\Phi$ maps to an edge $\epsilon$ in $A$, we decorate $\epsilon$ with the label $a$.
+Given a derivation $\Phi$, we say that the unique atomic flow $A$ defined in Proposition~\ref{PropUnFl} is the atomic flow \emph{associated with} the derivation $\Phi$. Sometimes, when an atom occurrence $a$ in $\Phi$ maps to an edge $\epsilon$ in $A$, we decorate $\epsilon$ with the label $a$. Similarly, if an atom occurrence $a$ maps to all the edges in the atomic flow $A$, we decorate $A$ with the label $a$.
 \end{defi}
 
 %---------------------------------------
@@ -979,8 +998,6 @@ $\vlderivation
 \]
 \end{defi}
 
-% TODO: define weakly streamlined
-
 \begin{thm}
 Given a derivation $\Phi$ from $\alpha$ to $\beta$, where $a_1,\dots,a_n$ are all the atoms that appear in both interaction and cointeraction instances then $\Norm(\Core(\Phi),a_1,\dots,a_n)$ is weakly streamlined.
 \end{thm}
@@ -1164,8 +1181,6 @@ the atomic flow of an experiment on $\Phi$ with respect to $a_1,\dots,a_n$ is
 
 In other words, $\Exp(\Phi,a_1,\dots,a_n)$ is not unique, but its atomic flow is unique modulo associativity of contraction.
 
-% TODO: allow atomic flows to be named after the atom that maps to it
-
 \begin{rem}\label{RemExperimentExistence}
 The weakening reductions presented in \cite{GuglGund:07:Normalis:lr} gives us another approach to obtaining an experiment on $\Phi$ with respect to $a_1,\dots,a_n$:
 
@@ -1295,7 +1310,6 @@ for $1 < k \leq n$.
 
 \begin{pro}
 The atomic flow of a $\Sym(a_1,\dots,a_n)$ is
-% TODO: contractions and cocontractions
 \[
 \atomicflow
 {
