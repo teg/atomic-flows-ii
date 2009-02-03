@@ -95,11 +95,6 @@ Note that when we write $\xi\{a\}$, we mean that an occurrence of $a$ exists in 
 \]
 \end{defi}
 
-% TODO: Redo (see handwritten notes)
-%\begin{rem}
-%Although the caluclus of structures does not allow for independent parts of a derivation to happen in parallell, it is a natural and more efficient way of thinking of derivations and this motivated the above notation. In a new formalism being developed by us and others, Formalism A, derivations written in parallell is a representative of the equivalence class of all possible interleavings of the said derivations. In this paper we do not need the full power of Formalism A, so for the sake of efficiency we chose a parallell derivation to stand for one particular calculus of structures derivation rather than an equivelance class.
-%\end{rem}
-
 \newcommand{\KS}{\mathsf{KS}}
 \newcommand{\SKS}{\mathsf{SKS}}
 Now we define the two standard deductive systems for classical propositional logic in deep inference that are used throughout the paper. $\KS$ is analytic, in the sense that premisses only contain subformulae of conclusions, and $\SKS$ is not \cite{Brun:03:Atomic-C:oz,Brun:06:Cut-Elim:cq,Brun:06:Locality:zh,BrunTiu:01:A-Local-:mz}.
@@ -228,11 +223,6 @@ In Formalism A, a new deep-inference formalism, currently under development, the
 \]
 In this paper, which of these three derivations we use is inessential, as the atomic flows of all the derivations in a Formalism A equivalence class are the same. For simplicity we let the shorthand above refer to one unique derivation, but should we wish to employ Formalism A, everything in this paper still holds.
 \end{exa}
-
-% TODO: Redo
-%\begin{rem}
-%It is important not to confuse the repersenetation of a derivation with the actual derivation. Although the representation of derivations we use in this paper might be slightly ambigous, the actual derivations they represent contain all the needed information to disambiguate them. In particular we often ommit or collapse many equations into one, but the actual derivation contains each equation instance, and in particular it contains information about which equation was used and exactly which subformula is mapped to which metavariable in the rule. Consider the following representation of an inference rule $\vlinf{=}{}{\vls(a.(a.a))}{\vls((a.a).a)}$, this does not contain enough information to determine which $a$ in the conclusion corresponds to which $a$ in the premiss. However, the actual inference rule will also tell us if the commutative or associative equaiton was used, so this is not a problem.
-%\end{rem}
 
 Note that all the structural rules only apply to atoms. As shown later, equivalent structural rules applying to formulae instead of atoms can be derived from the atomic ones together with the logical rules. The fact that we can work only with atomic structural rules is essential later on.
 
@@ -1144,11 +1134,9 @@ Now consider the atomic flow of $\Norm(\Core(\Phi),a_1,\dots,a_n)$,
 \]
 where $A_1,A_2,A_3$ are isomorphic to $A$ and $B_1,B_2,B_3$ are isomorphic to $B$.
 
-% TODO: passive form...
-
 With the assistance of the atomic flow observe the following:
 \begin{itemize}
-\item The only paths between $A_1,A_2,A_3,A_4,B_1,B_2,B_3,B_4$ are paths mapped to from $a_n$ or $\bar a_n$, so since $\Norm(\Core(\Phi),a_1,\dots,a_{n-1})$ is weakly streamlined, there is no path from an interaction vertex to a cointeraction vertex which is mapped to by $a_1,\dots,a_{n-1}$.
+\item If $\epsilon$ is an edge connecting two of $A_1,A_2,A_3,A_4,B_1,B_2,B_3$ or $B_4$ then $a_n$ or $\bar a_n$ maps to $\epsilon$, so since $\Norm(\Core(\Phi),a_1,\dots,a_{n-1})$ is weakly streamlined and contains no interaction or cointeraction rule where $a$ or $\bar a$ occurs, there is no edge $\epsilon'$ in a path from an interaction vertex to a cointeraction vertex, such that one of $a_1,\dots,a_{n-1}$ maps to $\epsilon'$.
 \item None of the edges that could possibly be in a path from the interaction vertex (red) coincide with any of the edges that could possibly be in a path from the cointeraction vertex (green).
 \end{itemize}
 
