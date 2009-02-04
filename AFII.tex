@@ -877,6 +877,8 @@ It immediately follows from the definition that the diagram below describes the 
 
 \subsection{The Core}
 
+As a consequence of having atomic structural inference rules, deep inference allows us to trivially assume that all axioms happen in the premiss and all cuts happen in the conclusion of the derivation. Furthermore, we can (co)contract axioms and cuts so that every atom occurs in at most one axiom and at most one cut. If a derivation, $\Phi$, has this shape we can obtain a weakly streamlined derivation simply by considering all the atoms which occur in both an axiom and a cut and replacing the axiom and the cut by their conclusion and premiss respectively. This weakly streamlined derivation, clearly does not have the same premiss and conclusion as $\Phi$, but, as will be made precise later, their atomic flows are almost the same and for this reason we call this the \emph{core of $\Phi$}. The core will be the building block we will use to build a weakly streamlined derivation with the same premiss and conclusion as $\Phi$.
+
 \newcommand{\Core}{\mathsf{Core}}
 
 \begin{defi}\label{DefCore}
