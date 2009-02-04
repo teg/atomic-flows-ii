@@ -281,8 +281,6 @@ Cointeraction is also called \emph{cut}.
    \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
    \atomicflow{(0,0)*{\afawu{}{}{}{}{}{}}}$}
 
-% TODO: sometimes we do not name the edges
-
 \newcommand{\ppl  }{{\mathchoice{\scriptstyle+}
                                 {\scriptstyle+}
                                 {\scriptstyle+}
@@ -364,8 +362,9 @@ Besides $\epsilon$, we use small numerals $\one$, $\two$, \dots\ to denote edges
 ( 2,2)*{A};
 ( 0,-6)*{\afvjdm4{\epsilon'_1}{\epsilon'_k}};
 ( 4,0)*{\invisiblemark}}
-\quad.
+\quad,
 \]
+where the labels $\epsilon_1, \epsilon_h, \epsilon'_1, \epsilon'_k$ may be omitted if they are irrelevant or clear from the context.
 
 We sometimes label an atomic flow by the image of the labeling function $\eta(V)$, \emph{e.g.}
 \[
@@ -617,6 +616,9 @@ We now define the notion of paths in atomic flows. Paths are sequences of adjace
 Given an atomic flow $(V,E,\eta,\up,\lo)$ and $\epsilon_1,\dots,\epsilon_h\in E$ such that, for $1\le i<h$, we have $\lo(\epsilon_i)=\up(\epsilon_{i+1})$, $\up(\epsilon_1)=\nu$ and $\lo(\epsilon_h)=\nu'$, we say that $\epsilon_1,\dots,\epsilon_h$ is a \emph{path from $\nu$ to $\nu'$} and that $\epsilon_h,\dots,\epsilon_1$ is a \emph{path from $\nu'$ to $\nu$}.
 \end{defi}
 %===============================================================================
+
+% TODO: define associativity of contractions
+
 \section{Preliminaries}
 
 \newcommand{\contr}{\mathsf{c}}
@@ -878,8 +880,6 @@ with the same atomic flow as $\Phi$, which exists by Lemma~\ref{LemDecompInt}, w
 \]
 where $\Psi_1$ and $\Psi_2$ exist by Lemma~\ref{LemGenericContraction}.
 \end{defi}
-
-% TODO: define associativity of contractions
 
 \begin{pro}\label{PropUniqueCore}
 Given a derivation $\Phi$ with atomic flow
@@ -1517,11 +1517,6 @@ the atomic flow of a symmetric cut-free proof obtained from $\Phi$ is
 }\quad.
 \]
 \end{pro}
-
-% TODO: Check literature about rewriting modulo
-
-
-
 
 \bibliographystyle{alpha}
 \bibliography{di-biblio}
