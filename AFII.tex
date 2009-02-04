@@ -1215,6 +1215,9 @@ Since there are no paths from interaction vertices to cointeraction vertices, $\
 
 \section{Confluent Cut-elimination}
 
+We now present a strongly normalising and confluent cut-elimination procedure for proofs. It works in the same spirit as above, we make copies of the original derivation, alter them and plug them together. However, in the case of streamlining we alter all the derivations in the same way, \emph{i.e.} we extract the core, and the context in which we plug the derivations differed. Now we will alter each proof in a different way, but the context in which we plug them will all be the same. The reason we claim this procedure to be confluent is that given the atomic flow of a proof, the atomic flow of the resulting cut free proof is unique (modulo associativity of contraction).
+
+
 \begin{rem}\label{RemUglyHack}
 The challenge when performing cut-elimination is to deal with the situation where an atom occurs in both interaction and cointeraction instances. Since this is the case we are interested in, we will assume, without loss of generality, that every atom in an $\SKS$ proof occurs in both interaction and cointeraction instances. The assumption should be uncontroversial since any proof $\vlproof{\Phi}{\SKS}{\beta}$ which contains the atom $a$, but $a$ does not occur in both an interaction and a cointeraction instance, we can consider the proof
 \[
