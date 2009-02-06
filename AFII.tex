@@ -615,9 +615,13 @@ We now define the notion of paths in atomic flows. Paths are sequences of adjace
 \begin{defi}
 Given an atomic flow $(V,E,\eta,\up,\lo)$ and $\epsilon_1,\dots,\epsilon_h\in E$ such that, for $1\le i<h$, we have $\lo(\epsilon_i)=\up(\epsilon_{i+1})$, $\up(\epsilon_1)=\nu$ and $\lo(\epsilon_h)=\nu'$, we say that $\epsilon_1,\dots,\epsilon_h$ is a \emph{path from $\nu$ to $\nu'$} and that $\epsilon_h,\dots,\epsilon_1$ is a \emph{path from $\nu'$ to $\nu$}.
 \end{defi}
-%===============================================================================
 
-% TODO: define associativity of contractions
+% TODO: consider this definition
+%\begin{defi}
+%Two atomic flows $(V_1,E_1,\eta_1,\up_1,\lo_1)$ and $(V_2,E_2,\eta_2,\up_2,\lo_2)$ are equivalent, written $A_1=A_2$, if the graphs $(V_1,E_1)$ and $(V_2,E_2)$ are isomorphic.
+%\end{defi}
+
+%===============================================================================
 
 \section{Preliminaries}
 
@@ -631,6 +635,86 @@ Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\v
 
 \begin{rem}
 In the non-atomic version of system $\SKS$ the above derivations correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlder{}{\{\acu,\med\}}{\vls(\alpha.\alpha)}{\alpha}$.
+\end{rem}
+
+\newcommand{\mac}{\mathsf{ac}}
+
+\begin{defi}\label{DefModuloContr}
+The flow rewriting system consisting of the atomic flow reduction rules
+\[
+\atomicflow
+{
+(-2,2)*{\afacdnw{\one}{}{\two}{}};
+(0,-2)*{\afacd{}{}{}{}{\four}{}};
+(2,4)*{\afvju4{\three}{}}
+}\quad\rightarrow\quad
+\atomicflow
+{
+(2,2)*{\afacdnw{\two}{}{\three}{}};
+(0,-2)*{\afacd{}{}{}{}{\four}{}};
+(-2,4)*{\afvju4{\one}{}}
+}\quad,\qquad
+\atomicflow
+{
+(2,2)*{\afacdnw{\two}{}{\three}{}};
+(0,-2)*{\afacd{}{}{}{}{\four}{}};
+(-2,4)*{\afvju4{\one}{}}
+}\quad\rightarrow\quad
+\atomicflow
+{
+(-2,2)*{\afacdnw{\one}{}{\two}{}};
+(0,-2)*{\afacd{}{}{}{}{\four}{}};
+(2,4)*{\afvju4{\three}{}}
+}\quad,\qquad
+\atomicflow
+{
+(-2,-4)*{\afacunw{\two}{}{\three}{}};
+(0,2)*{\afacu{}{}{}{}{\one}{}};
+(2,-4)*{\afvju4{\four}{}}
+}\quad\rightarrow\quad
+\atomicflow
+{
+(2,-4)*{\afacunw{\three}{}{\four}{}};
+(0,2)*{\afacu{}{}{}{}{\one}{}};
+(-2,-4)*{\afvju4{\two}{}}
+}\quad,\qquad
+\atomicflow
+{
+(2,-4)*{\afacunw{\three}{}{\four}{}};
+(0,2)*{\afacu{}{}{}{}{\one}{}};
+(-2,-4)*{\afvju4{\two}{}}
+}\quad\rightarrow\quad
+\atomicflow
+{
+(-2,-4)*{\afacunw{\two}{}{\three}{}};
+(0,2)*{\afacu{}{}{}{}{\one}{}};
+(2,-4)*{\afvju4{\four}{}}
+}
+\]
+is called $\rightarrow_\mac$ and for any atomic flows $A$, $B$ we say that \emph{$A$ is equal to $B$ modulo associativity of contraction} if $A\rightarrow_\mac^\star B$.
+\end{defi}
+
+\begin{rem}
+The atomic flows
+\[
+\atomicflow{
+(-6,0)*{\invisiblemark};
+( 0,6)*{\afvjum4{\epsilon_1}{\epsilon_n}};
+( 0,0)*{\affr88};
+( 0,0)*{\copy\contrdown};
+( 0,-6)*{\afvj4};
+( 6,0)*{\invisiblemark}
+}\quad,\quad
+\atomicflow{
+(-6,0)*{\invisiblemark};
+( 0,6)*{\afvjum4{\hat\epsilon_1}{\hat\epsilon_n}};
+( 0,0)*{\affr88};
+( 0,0)*{\copy\contrdown};
+( 0,-6)*{\afvj4};
+( 6,0)*{\invisiblemark}
+}
+\]
+are equal modulo associativity of contraction.
 \end{rem}
 
 \begin{lem}\label{LemSuperSwitch}
