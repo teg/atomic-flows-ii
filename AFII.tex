@@ -639,6 +639,8 @@ Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\v
 In the non-atomic version of system $\SKS$ the above derivations correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlder{}{\{\acu,\med\}}{\vls(\alpha.\alpha)}{\alpha}$.
 \end{rem}
 
+% TODO: put this in the right place
+
 \newcommand{\mac}{\mathsf{ac}}
 
 \begin{defi}\label{DefModuloContr}
@@ -761,8 +763,9 @@ Given a derivation $\vlder{}{}{\beta}{\alpha}$ with atomic flow $A$, there exist
 \[
 \vlder{}{\SKS\setminus\{\aid,\aiu\}}{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(b_m.\bar b_m)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(b_1.\bar b_1)}]}{\vls(\vlinf{\aid}{}{\vls[a_1.\bar a_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha)}\quad,
 \]
-for some atoms $a_1,\dots,a_n,b_1,\dots,b_m$ with atomic flow $A$.
+for some atoms $a_1,\dots,a_n,b_1,\dots,b_m$, with atomic flow $A$.
 \end{lem}
+
 \begin{proof}
 Using Lemma~\ref{LemSuperSwitch} apply the following transformations to each of the (co)interaction instances in $\Phi$:
 \[
@@ -819,15 +822,15 @@ Note that no structural inference rules are changed, so the atomic flow of the r
 \begin{defi}
 Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ and an atom $a$, we define $\vlder{\Phi\{a\ot\fff\}}{}{\beta\{a\ot\fff\}}{\alpha\{a\ot\fff\}}$:
 \begin{enumerate}
-\item if $\Phi$ is in $\SKS\setminus\{\aid,\aiu\}$, substitute each instance of $a$ in $\Phi$ with $\fff$ and each structural inference rule where $a$ occurred with $=$,
-\item otherwise, use Lemma~\ref{LemDecompInt} to obtain
+\item if $\Phi$ is in $\SKS\setminus\{\aid,\aiu\}$, substitute each occurrence of $a$ with $\fff$ and each structural inference rule where $a$ occurred with $=$,
+\item otherwise, $\Psi$ exists by Lemma~\ref{LemDecompInt}, so that we can define
 \[
-\vlder{\Phi'\{a\ot\fff\}}
+\Phi\{a\ot\fff\}=\vlder{\Psi\{a\ot\fff\}}
 {\SKS\setminus\{\aid,\aiu\}}
 {\vls[\beta\{a\ot\fff\}.\vlinf{\aiu}{}{\fff}{\vls(b_m.\bar b_m)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(b_{l+1}.\bar b_{l+1})}.(\fff.\bar a).\vldots.(\fff.\bar a)]}
 {\vls(\bar a.\vldots.\bar a.\vlinf{\aid}{}{\vls[a_{k+1}.\bar a_{k+1}]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha\{a\ot\fff\})}\quad,
 \]
-such that $\Phi'$ has the same atomic flow as $\Phi$ and $a=a_1,\dots,a_k,b_1,\dots,b_l$.
+where $a=a_1=\dots=a_k=b_1=\dots=b_l$.
 \end{enumerate}
 We write $\Phi\{a,b\ot\fff\}$ as a shorthand for $\Phi\{a\ot\fff\}\{b\ot\fff\}$.
 \end{defi}
