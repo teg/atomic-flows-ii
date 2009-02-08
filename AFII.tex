@@ -1160,29 +1160,29 @@ Given a derivation $\Phi$ from $\alpha$ to $\beta$, where the distinct and non-d
 \end{thm}
 
 \begin{proof}
-We argue by induction on $n$. The base case follows by the definition of $\Core$.
+We prove the slightly stronger claim: ``$\Norm(\Core(\Phi),a_1,\dots,a_k)$ for $0\leq k \leq n$, is weakly streamlined and $a_i$ does not occur in (co)interaction instances for $k< i \leq n$'', by induction on $k$. The base case, $\Norm(\Core(\Phi))=\Core(\Phi)$, follows by Proposition~\ref{PropUniqueCore}.
 
-Consider the atomic flow of $\Norm(\Core(\Phi),a_1,\dots,a_{n-1})$ where the edges mapped to by $a_n$, $\bar a_n$ instances in the premiss and conclusion, but not in $\alpha$ or $\beta$ are singled out. Since this atomic flow is weakly streamlined we can represent it as follows:
+Consider the atomic flow of $\Norm(\Core(\Phi),a_1,\dots,a_{k-1})$ where the edges mapped to by $a_k$, $\bar a_k$ instances in the premiss and conclusion, but not in $\alpha$ or $\beta$ are singled out. Since, by the inductive hypothesis, $a_k$ does not occur in (co)interaction instances the atomic flow can be represented as follows:
 
 \[
 \atomicflow
 {
 (-8, 6)*{\afvjm{4}};
-(-2, 6)*{\afvj{4}};
-( 2, 6)*{\afvj{4}};
+(-2, 6)*{\afvju{4}{a_k}{}};
+( 2, 6)*{\afvju{4}{}{\bar a_k}};
 ( 8, 6)*{\afvjm{4}};
 (-5, 0)*{\affr{8}{8}};
 (-3, 2)*{A};
 ( 5, 0)*{\affr{8}{8}};
 ( 7, 2)*{B};
 ( 8,-6)*{\afvjm{4}};
-( 2,-6)*{\afvj{4}};
-(-2,-6)*{\afvj{4}};
+(-2,-6)*{\afvjd{4}{a_k}{}};
+( 2,-6)*{\afvjd{4}{}{\bar a_k}};
 (-8,-6)*{\afvjm{4}};
 }\quad.
 \]
 
-Now consider the atomic flow of $\Norm(\Core(\Phi),a_1,\dots,a_n)$,
+Now consider the atomic flow of $\Norm(\Core(\Phi),a_1,\dots,a_k)$,
 \[
 \atomicflow
 {
@@ -1237,11 +1237,11 @@ where $A_1,A_2,A_3$ are isomorphic to $A$ and $B_1,B_2,B_3$ are isomorphic to $B
 
 With the assistance of the atomic flow observe the following:
 \begin{itemize}
-\item If $\epsilon$ is an edge connecting two of $A_1,A_2,A_3,A_4,B_1,B_2,B_3$ or $B_4$ then $a_n$ or $\bar a_n$ maps to $\epsilon$, so since $\Norm(\Core(\Phi),a_1,\dots,a_{n-1})$ is weakly streamlined and contains no interaction or cointeraction rule where $a$ or $\bar a$ occurs, there is no edge $\epsilon'$ in a path from an interaction vertex to a cointeraction vertex, such that one of $a_1,\dots,a_{n-1}$ maps to $\epsilon'$.
-\item None of the edges that could possibly be in a path from the interaction vertex (red) coincide with any of the edges that could possibly be in a path from the cointeraction vertex (green).
+\item If $\epsilon$ is an edge connecting two of $A_1,A_2,A_3,A_4,B_1,B_2,B_3$ or $B_4$ then $a_k$ or $\bar a_k$ maps to $\epsilon$, so since $\Norm(\Core(\Phi),a_1,\dots,a_{k-1})$ is weakly streamlined and contains no (co)interaction instance where $a_k$ or $\bar a_k$ occurs, there is no edge $\epsilon'$ in a path from an interaction vertex to a cointeraction vertex, such that one of $a_1,\dots,a_{n-1}$ maps to $\epsilon'$.
+\item None of the edges that could be in a path from the interaction vertex (red) coincide with any of the edges that could be in a path from the cointeraction vertex (green).
 \end{itemize}
 
-Since there are no paths from interaction vertices to cointeraction vertices, $\Norm(\Core(\Phi),a_1,\dots,a_n)$ is weakly streamlined.
+Since there are no paths from interaction vertices to cointeraction vertices, $\Norm(\Core(\Phi),a_1,\dots,a_k)$ is weakly streamlined. Furthermore, the only atoms which occur in (co)interaction instances in $\Norm(\Core(\Phi),a_1,\dots,a_k)$ which did not in $\Norm(\Core(\Phi),a_1,\dots,a_{k-1})$ are $a_k$ and $\bar a_k$.
 \end{proof}
 
 %===========================================
