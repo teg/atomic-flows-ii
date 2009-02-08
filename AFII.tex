@@ -53,7 +53,7 @@ Deep inference is a relatively recent development in proof theory. It is a metho
 % TODO: check that we only every use the variable names in the following definition
 
 %---------------------------------------
-\begin{defi}
+\begin{defi}\emph{DefFormulae}
 \emph{Formulae}, $\alpha$, $\beta$, $\gamma$, $\delta$ are freely built from: \emph{units}, $\fff$ (false), $\ttt$ (true); \emph{atoms}, $a$, $b$, $c$, $d$; \emph{disjunction} and \emph{conjunction}, ${\vlsbr[\alpha.\beta]}$ and $\vlsbr(\alpha.\beta)$. On the set of atoms a (non-identical) involution $\bar\cdot$ is defined, and dual atom occurrences, as $a$ and $\bar a$, can appear in formulae. We denote \emph{contexts}, \emph{i.e.}, formulae with a hole, by $\xi\vlhole$ and $\zeta\vlhole$; we also use \emph{multiple} contexts, $\xi\vlhole\cdots\vlhole$, \emph{i.e.}, formulae with many holes; for example, if $\xi\{a\}$ is $\vls(b.[a.c])$, then $\xi\vlhole$ is $\vls(b.[\vlhole.c])$, $\xi\{b\}$ is $\vls(b.[b.c])$ and $\xi\vlscn(a.d)$ is $\vls(b.[(a.d).c])$; if $\xi\{a\}\{b\}\{c\}$ is $\vls(b.[(a.d).c])$ then $\xi\{b\}\{c\}\{a\}$ is $\vls(c.[(b.d).a])$.
 \end{defi}
 
@@ -62,7 +62,9 @@ Deep inference is a relatively recent development in proof theory. It is a metho
 Negation is only defined for atoms, which is not a limitation thanks to De Morgan laws.
 \end{rem}
 
-Note that when we write $\xi\{a\}$, we mean that an occurrence of $a$ exists in the formula, we singled it out and we refer specifically to that occurrence. It is important to distinguish between an atom $a$ and a set of occurrences of atom $a$ inside a formula or a derivation. In the following, we mark in various ways occurrences of atoms, and we perform several substitutions of formulae in the place of atom occurrences.
+Note that when we write $\xi\{\alpha\}$, we mean that an occurrence of $\alpha$ exists in the formula, we singled it out and we refer specifically to that occurrence.
+% no longer used:
+%It is important to distinguish between an atom $a$ and a set of occurrences of atom $a$ inside a formula or a derivation. In the following, we mark in various ways occurrences of atoms, and we perform several substitutions of formulae in the place of atom occurrences.
 
 \newcommand{\one}{{\mathchoice{\scriptstyle\mathbf1}
                               {\scriptstyle\mathbf1}
@@ -159,11 +161,11 @@ We do not always show the instances of rule $=$, and when we do show them, we ga
 \end{defi}
 
 \begin{rem}
-While the definition of $\SKS$ derivations is unambiguous, we will sometimes use ambiguous representations. This is not a problem, as we can always get a more detailed representation should we need to, for instance when extracting atomic flows from derivations. The ambiguity arises because we omit or collapse equations and because we do not distinguish the different equation rules. In particular we need to know if
+The representations of $\SKS$ derivations in this paper are sometimes ambiguous. This is not a problem, as the derivations themselves are well defined and we can always get a more detailed representation should we need to, for instance when extracting atomic flows from derivations. The ambiguity arises because we omit or collapse equations and because we do not distinguish the different equation rules. In particular we need to know if
 \[
 \vlinf{=}{}{\vls((a.a).a)}{\vls(a.(a.a))}\quad,
 \]
-is an application of associativity or commutativity to be able to map atom occurrences in the premiss to atom occurrences in the conclusion.
+is an application of associativity $\left(\vlinf{=}{}{\vls((a.b).c)}{\vls(a.(b.c))}\right)$ or commutativity $\left(\vlinf{=}{}{\vls((b.c).a)}{\vls(a.(b.c))}\right)$ to be able to map atom occurrences in the premiss to atom occurrences in the conclusion.
 \end{rem}
 
 % TODO: find the right place for this example
@@ -189,7 +191,7 @@ which is a shorthand for
  }
 }.
 \]
-Notice that the knowledge of the order in which derivations should be composed is implicit in Definition~\ref{DefDerivation}. In this example we used a left-to-right ordering, but we could just as well have used a right-to-left ordering:
+It is implicit in Definition~\ref{DefFormulae} that the ordering of holes in a formula context with multiple holes is given. This decides the order in which we `sequentialise' the short-hand representation of a derivation in Definition~\ref{DefDerivation}. In this example we used a left-to-right ordering, but we could just as well have used a right-to-left ordering:
 \[
 \vlderivation
 {
@@ -205,7 +207,7 @@ Notice that the knowledge of the order in which derivations should be composed i
  }
 }.
 \]
-In Formalism A, a new deep-inference formalism, currently under development, the above shorthand is a representative of the equivalence class containing both the left-to-right and right-to-left versions, in addition to the intermediate:
+In Formalism A, a new deep-inference formalism currently under development, the above shorthand is a representative of the equivalence class containing both the left-to-right and the right-to-left orderings, in addition to the intermediate:
 \[
 \vlderivation
 {
@@ -221,7 +223,7 @@ In Formalism A, a new deep-inference formalism, currently under development, the
  }
 }.
 \]
-In this paper, which of these three derivations we use is inessential, as the atomic flows of all the derivations in a Formalism A equivalence class are the same. For simplicity we let the shorthand above refer to one unique derivation, but should we wish to employ Formalism A, everything in this paper still holds.
+For the purposes of this paper, which of these three derivations we use is inessential, as the atomic flows associated with each of them are are the same. For simplicity we let the shorthand above refer to one unique derivation, but we could just as well have worked in Formalism A.
 \end{exa}
 
 Note that all the structural rules only apply to atoms. As shown later, equivalent structural rules applying to formulae instead of atoms can be derived from the atomic ones together with the logical rules. The fact that we can work only with atomic structural rules is essential later on.
@@ -232,7 +234,7 @@ Instead of the term `axiom' we use `interaction'; the reason is that, in deep in
 
 \subsection{Atomic Flows and Derivations}
 
-Atomic flows are somewhat similar to proof nets. However, no matter how we freely build an atomic flow (as opposed to a proof net structure), the flow is associated with some derivation\cite{GuglGund:07:Normalis:lr}. So, atomic flows are always `sequentialisable', in proof-net parlance. In fact, atomic flows carry much less information than derivations do, because they do not keep track of the logical relations between the atoms they trace, only their structural information is retained (in the sense of structural rules, as opposed to logical ones).
+Atomic flows are somewhat similar to proof nets. However, no matter how we freely build an atomic flow (as opposed to a proof net structure), the flow is associated with some derivation \cite{GuglGund:07:Normalis:lr}. So, atomic flows are always `sequentialisable', in proof-net parlance. In fact, atomic flows carry much less information than derivations do, because they do not keep track of the logical relations between the atoms they trace, only their structural information is retained (in the sense of structural rules, as opposed to logical ones).
 
 We can think of atomic flows as composite diagrams that are freely generated from a set of six elementary diagrams. Technically, atomic flows are special kinds of labelled directed acyclic graphs, and the properties of their vertices are dictated by their labels, which we define as follows.
 
@@ -366,7 +368,7 @@ Besides $\epsilon$, we use small numerals $\one$, $\two$, \dots\ to denote edges
 \]
 where the labels $\epsilon_1, \epsilon_h, \epsilon'_1, \epsilon'_k$ may be omitted if they are irrelevant or clear from the context.
 
-We sometimes label an atomic flow by the image of the labeling function $\eta(V)$, \emph{e.g.}
+We sometimes label an atomic flow by the image of the labeling function, $\eta(V)$, \emph{e.g.}
 \[
 \atomicflow{
 (-4,8)*{\invisiblemark};
@@ -391,7 +393,7 @@ In general, we represent atomic flows as directed-graph diagrams, except that th
 
 An atomic flow is a directed graph, whose edges are associated to atom occurrences in derivations, and the direction of the edges corresponds to the up-down direction in a derivation. Vertices are associated to points in the derivation where atom occurrences are created or destroyed, and the nature of each vertex is described by its label. Naturally, these graphs are acyclic (condition~\ref{ItAcycl}). The two special vertices $\top$ and $\bot$ represent the top and bottom of a derivation: we can consider $\top$ the vertex that creates all the atom occurrences in the premiss and $\bot$ the vertex that destroys all atom occurrences in the conclusion.
 
-The polarity assignment condition (\ref{ItPol}) ensures that atoms in(co)contractions have the same polarity, and those in (co)interactions have dual polarities (as happens in derivations). Every atomic flow has $2^n$ polarity assignments, where $n$ is the number of connected components in the graph. We should not be worried about the apparent complexity of the polarity assignment condition: in fact, we could equivalently consider two sorts of (co)contraction and (co)weakening labels, the negative and the positive ones, and ask for vertices to be joined by respecting their polarities. This is clearly a locally checkable property, much simpler than, for example, some global correctness criterion for proof nets.
+The polarity assignment condition (\ref{ItPol}) ensures that atoms in (co)contractions have the same polarity, and those in (co)interactions have dual polarities (as happens in derivations). Every atomic flow has $2^n$ polarity assignments, where $n$ is the number of connected components in the graph. We should not be worried about the apparent complexity of the polarity assignment condition: in fact, we could equivalently consider two sorts of (co)contraction and (co)weakening labels, the negative and the positive ones, and ask for vertices to be joined by respecting their polarities. This is clearly a locally checkable property, much simpler than, for example, some global correctness criterion for proof nets.
 
 %---------------------------------------
 \begin{exa}
