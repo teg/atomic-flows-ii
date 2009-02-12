@@ -248,7 +248,7 @@ For the purposes of this paper, which of these three derivations we use is iness
 %===============================================================================
 \section{Streamlining}
 
-Streamlining is an up-down symmetric generalisation of cut-elimination which applies to derivations as well as proofs. We recall the definition from \cite{GuglGund:07:Normalis:lr}:
+Streamlining is an up-down symmetric generalisation of cut-elimination which applies to derivations in addition to proofs. We recall the definition from \cite{GuglGund:07:Normalis:lr}:
 
 %---------------------------------------
 \begin{defi}
@@ -289,7 +289,7 @@ It immediately follows from the definition that the diagram below describes the 
 \]
 \end{rem}
 
-From our point of view, the main challenge in streamlining a derivation is to make sure there are no paths from axioms to cuts. Once this is achieved it is straightforward to use (confluent and strongly normalising) weakening reductions to obtain a streamlined derivation. This motivates the following definition:
+From our point of view, the main challenge in streamlining a derivation is to make sure there are no paths from axioms to cuts. Once this is achieved it is straightforward, as presented in \cite{GuglGund:07:Normalis:lr}, to use (confluent and strongly normalising) weakening reductions to obtain a streamlined derivation. This motivates the following definition:
 
 %---------------------------------------
 \begin{defi}
@@ -776,8 +776,6 @@ Refer to the atomic flow in Proposition~\ref{PropFlowNorm} to observe the follow
 \begin{thm}
 Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, there are atoms $a_1,\dots,a_n$ in $\Phi$ such that $\vlder{\Norm(\Core(\Phi),a_1,\dots,a_n)}{}{\beta}{\alpha}$ is weakly streamlined.
 \end{thm}
-
-% TODO: check for style
 
 \begin{proof}
 Choose $a_1,\dots,a_n$ and their duals such that no other atom maps to a path from an interaction to a cointeraction node in the atomic flow associated with $\Phi$, then the result follows by Proposition~\ref{PropStreamlinedCore} and Lemma~\ref{LemStreamlinedNorm}.
