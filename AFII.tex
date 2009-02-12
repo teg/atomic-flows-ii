@@ -53,7 +53,7 @@ Deep inference is a relatively recent development in proof theory. It is a metho
 % TODO: check that we only every use the variable names in the following definition
 
 %---------------------------------------
-\begin{defi}\emph{DefFormulae}
+\begin{defi}\label{DefFormulae}
 \emph{Formulae}, $\alpha$, $\beta$, $\gamma$, $\delta$ are freely built from: \emph{units}, $\fff$ (false), $\ttt$ (true); \emph{atoms}, $a$, $b$, $c$, $d$; \emph{disjunction} and \emph{conjunction}, ${\vlsbr[\alpha.\beta]}$ and $\vlsbr(\alpha.\beta)$. On the set of atoms a (non-identical) involution $\bar\cdot$ is defined, and dual atom occurrences, as $a$ and $\bar a$, can appear in formulae. We denote \emph{contexts}, \emph{i.e.}, formulae with a hole, by $\xi\vlhole$ and $\zeta\vlhole$; we also use \emph{multiple} contexts, $\xi\vlhole\cdots\vlhole$, \emph{i.e.}, formulae with many holes; for example, if $\xi\{a\}$ is $\vls(b.[a.c])$, then $\xi\vlhole$ is $\vls(b.[\vlhole.c])$, $\xi\{b\}$ is $\vls(b.[b.c])$ and $\xi\vlscn(a.d)$ is $\vls(b.[(a.d).c])$; if $\xi\{a\}\{b\}\{c\}$ is $\vls(b.[(a.d).c])$ then $\xi\{b\}\{c\}\{a\}$ is $\vls(c.[(b.d).a])$.
 \end{defi}
 
