@@ -714,8 +714,8 @@ Any two atomic flows containing only contraction (resp., cocontraction) vertices
 \]
 \end{rem}
 
-\begin{rem}
-For the purposes of this paper we will assume that the atomic flows of any two derivations of the form $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ (resp., $\vlder{}{\{\acu,\med\}}{\vls(\alpha.\alpha)}{\alpha}$) are equal modulo associativity of contraction. This follows from the previous remark if we consider all the atoms occurring in $\alpha$ to be distinct.
+\begin{rem}\label{RemUniquGenContr}
+For the purposes of this paper we will assume that the atomic flows of any two derivations of the form $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ (resp., $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$) are equal modulo associativity of contraction. This follows from the previous remark if we consider all the atoms occurring in $\alpha$ to be distinct.
 \end{rem}
 
 \begin{lem}\label{LemSuperSwitch}
@@ -948,7 +948,7 @@ where $\Psi_1$ and $\Psi_2$ exist by Lemma~\ref{LemGenericContraction}.
 \begin{pro}\label{PropUniqueCore}
 Given a derivation $\Phi$ with atomic flow
 \[
-\atomicflow
+A=\atomicflow
 {
 (-21, 8.5)*{\afvjm{9}};
 (-13, 8)*{\afaidm{}{}{}{}{}{}};
@@ -997,8 +997,9 @@ Given a derivation $\Phi$ with atomic flow
 ( 43,-11)*{\afvjm4};
 }\quad,
 \]
-the atomic flow of a core of\/ $\Phi$ is
+the atomic flow of $\Core(\Phi)$ is
 \[
+\Core(A)=
 \atomicflow
 {
 (-21,10)*{\afvjm{12}};
@@ -1078,8 +1079,9 @@ the atomic flow of a core of\/ $\Phi$ is
 ( 48,-5)*{\copy\contrdown};
 %---
 ( 43,-12.5)*{\afvjm7};
-}\quad.
+}\quad,
 \]
+where the subflow of $A$ labelled $a_i$ (resp., $\bar a_i$) is isomorphic to the sublfow of $\Core(A)$ labelled $a_i$ (resp., $\bar a_i$) for every $1\leq i\leq n$ and the rightmost subflow of $A$ is isomorphic to the rightmost sublfow of $\Core(A)$.
 \end{pro}
 
 In other words, $\Core(\Phi)$ is not unique, but its atomic flow is unique modulo associativity of contraction.
@@ -1273,6 +1275,7 @@ Given a derivation $\Phi$, there are $2^n$ different ways of choosing $a_1,\dots
 \begin{pro}
 Given a proof, $\Phi$, with atomic flow
 \[
+A=
 \atomicflow
 {
 (-18, 0)*{\affr{8}{8}};
@@ -1302,6 +1305,7 @@ Given a proof, $\Phi$, with atomic flow
 \]
 the atomic flow of an experiment on $\Phi$ with respect to $a_1,\dots,a_n$ is
 \[
+\Exp(A)=
 \atomicflow
 {
 ( -8,16)*{\afvj4};
@@ -1329,8 +1333,9 @@ the atomic flow of an experiment on $\Phi$ with respect to $a_1,\dots,a_n$ is
 (22,-5)*{\cdots};
 %------------
 (26,-4)*{\afawdm{}{}{}{\bar a_n}};
-}\quad.
+}\quad,
 \]
+where the subflow of $A$ labelled $a_i$ is isomorphic to the subflow of\/ $\Exp(A)$ labelled $a_i$ for every $1\leq i\leq n$.
 \end{pro}
 
 In other words, $\Exp(\Phi,a_1,\dots,a_n)$ is not unique, but its atomic flow is unique modulo associativity of contraction.
@@ -1510,6 +1515,7 @@ Given a proof, $\vlproof{\Phi}{}{\beta}$, where the distinct and non-dual atoms 
 \begin{pro}
 Given a proof $\Phi$ with atomic flow
 \[
+A=
 \atomicflow
 {
 (-18, 0)*{\affr{8}{8}};
@@ -1618,8 +1624,9 @@ the atomic flow of a symmetric cut-free proof obtained from $\Phi$ is
 %----
 (14,-16)*{\afvjm4};
 (40,-16)*{\afvjm4};
-}\quad.
+}\quad,
 \]
+where the subflow of the former atomic flow labelled $a_i$ (resp., $\bar a_i$) is isomorphic to the subflow of the latter atomic flow labelled $a_i$ (resp., $\bar a_i$) for every $1\leq i\leq n$ and the subflows labelled with contraction vertices are unique modulo associativity of contraction by Remark~\ref{RemUniquGenContr}.
 \end{pro}
 
 % TODO: need to point out that the bottom boxes are not necessarily unique modulo associativity of contractions, but this is a formality
