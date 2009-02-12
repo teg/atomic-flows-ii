@@ -828,7 +828,7 @@ Given a derivation $\Phi$, let $\hat\Phi$ be the derivation obtained from $\Phi$
 %===============================================================================
 \section{Strongly Normalising Streamlining}
 
-Streamlining is an up-down symmetric generalisation of cut-elimination which applies to derivations as well as proofs. We recall the definition from \cite{GuglGund:07:Normalis:lr}:
+Streamlining is an up-down symmetric generalisation of cut-elimination which applies to derivations in addition to proofs. We recall the definition from \cite{GuglGund:07:Normalis:lr}:
 
 %---------------------------------------
 \begin{defi}
@@ -869,7 +869,7 @@ It immediately follows from the definition that the diagram below describes the 
 \]
 \end{rem}
 
-From our point of view, the main challenge in streamlining a derivation is to make sure there are no paths from axioms to cuts. Once this is achieved it is straightforward to use (confluent and strongly normalising) weakening reductions to obtain a streamlined derivation. This motivates the following definition:
+From our point of view, the main challenge in streamlining a derivation is to make sure there are no paths from axioms to cuts. Once this is achieved it is straightforward, as presented in \cite{GuglGund:07:Normalis:lr}, to use (confluent and strongly normalising) weakening reductions to obtain a streamlined derivation. This motivates the following definition:
 
 %---------------------------------------
 \begin{defi}
@@ -1246,7 +1246,7 @@ Since there are no paths from interaction vertices to cointeraction vertices, $\
 
 \section{Confluent Cut-elimination}
 
-We now present a strongly normalising and confluent cut-elimination procedure for proofs. It works in the same spirit as above, we make copies of the original derivation, alter them and plug them together. However, in the case of streamlining we alter all the derivations in the same way, \emph{i.e.} we extract the core, and the context in which we plug the derivations differed. Now we will alter each proof in a different way, but the context in which we plug them will all be the same. The reason we claim this procedure to be confluent is that given the atomic flow of a proof, the atomic flow of the resulting cut free proof is unique (modulo associativity of contraction).
+We now present a strongly normalising and confluent cut-elimination procedure. It works in the same spirit as above, we make copies of the original proof, alter them and plug them together. The reason we claim this procedure to be confluent is that given the atomic flow of a proof, the atomic flow of the resulting cut free proof is unique (modulo associativity of contraction).
 
 
 \begin{rem}\label{RemUglyHack}
@@ -1257,7 +1257,7 @@ The challenge when performing cut-elimination is to deal with the situation wher
 instead.
 \end{rem}
 
-The following substitution is at the core of our cut-elimination procedure. It amounts to giving a truth value assignment to an atom. We substitute $a$ with $\fff$ and then implicitly force $\bar a$ to be $\ttt$. This is the most intrusive transformation we will perform on a derivation. From the point of view of atomic flows it amounts to removing the box containing the atom we are substituting.
+The following substitution is at the core of our cut-elimination procedure. It amounts to assigning a truth value to an atom. We substitute $a$ with $\fff$ and then implicitly force $\bar a$ to be $\ttt$. This is the most intrusive transformation we will perform on a derivation. From the point of view of atomic flows it amounts to removing the box containing the atom we are substituting.
 
 \begin{defi}
 Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ and an atom $a$, we define $\vlder{\Phi\{a\ot\fff\}}{}{\beta\{a\ot\fff\}}{\alpha\{a\ot\fff\}}$:
@@ -1493,7 +1493,7 @@ for $1 < k \leq n$.
 \end{itemize}
 \end{defi}
 
-From the point of view of atomic flows this proof is symmetric, that is the atomic flows of each of the atoms are pairwise isomorphic. When building the proof we have to make a choice about which atom to eliminate first, but the atomic flows forget this choice:
+From the point of view of atomic flows this proof is symmetric. That is, the atomic flows of each of the atoms are pairwise isomorphic. When building the proof we have to choose which atom to eliminate first, but the atomic flows forget this choice:
 
 \begin{pro}
 The atomic flow associated with $\Sym(a_1,\dots,a_n)$ is
@@ -1527,7 +1527,7 @@ The atomic flow associated with $\Sym(a_1,\dots,a_n)$ is
 
 In other words, $\Sym(a_1,\dots,a_n)$ is not unique, but the atomic flow associated with it is unique modulo associativity of contraction.
 
-Finally we build a cut-free proof, which is basically saying `consider every truth value assignment to the atoms in $\Phi$ and prove $\beta$ under each of them'.
+Finally we build a cut-free proof. The idea is `consider every truth value assignment to the atoms in $\Phi$ and prove that $\beta$ holds for each of them'.
 
 \begin{defi}
 Given a proof, $\vlproof{\Phi}{}{\beta}$, where the distinct and non-dual atoms $a_1,\dots,a_n$ and their duals are all the atoms that occur, \emph{a symmetric cut-free proof obtained from $\Phi$} is:
