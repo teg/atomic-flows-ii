@@ -44,6 +44,39 @@
 %===============================================================================
 \section{Introduction}
 
+%What?
+We are interested in normalising derivations in systems of propositional logic. To us normalisation is the elimination of cuts or, more generally, `dead ends' from derivations. An abstract depiction of a dead end is the following
+\[
+\atomicflow{
+( 0  , 4  )*{\afaidnw{}{}};
+( 6  , 3  )*{\afvjd6{}a};
+( 0  , 2.3)*{\aflabelright{\bar a}};
+( 2  , 2  )*{\afvj4};
+(-2  , 1  )*{\afvju6a{}};
+( 4  ,-2  )*{\afaiunw{}{}};
+(-3.5, 0  )*{\invisiblemark};
+( 7.5, 0  )*{\invisiblemark}}
+\quad,
+\]
+where the atom $\bar a$ is first created by an axiom and then destroyed by a cut (represented by horizontal bars), hence never reaching the premiss nor the conclusion of the derivation.
+
+%Why?
+We believe that understanding normalisation is crucial for solving problems related to complexity and identity of proofs. To argue about these complicated notions a simpler language is needed and in particular a language without bureaucracy.
+
+%State of affairs
+At the core of our work lies \emph{atomic flows} which were introduced in \cite{GuglGund:07:Normalis:lr}. It was shown how atomic flows are useful in defining new normal forms and in arguing about normalisation. However, the normalisation procedures presented were relatively complicated employing several different techniques. To get a more intuitive understanding of the mechanisms at play something more simplistic would be desirable.
+
+%How?
+In \cite{GuglGund:07:Normalis:lr} our focus was on local transformations of derivations and how the atomic flow of a derivation was sufficient to guide normalisation. In this paper we take this further by considering global normalisation procedures and we show that information about the axioms and cuts of a derivation and how they are connected is all that is needed to guide normalisation.
+
+%Novelty
+The newfound simplicity allows the shape of the normal derivation to be predetermined by the number of atoms being eliminated. Furthermore, we present a confluent and strongly normalising cut-elimination procedure.
+
+%Constraints
+
+%WOW!
+
+%Outline
 
 %===============================================================================
 \section{Background on Deep Inference}
