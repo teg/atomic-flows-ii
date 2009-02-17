@@ -42,6 +42,10 @@
 \maketitle
 
 %===============================================================================
+\section{Introduction}
+
+
+%===============================================================================
 \section{Background on Deep Inference}
 
 \newcommand{\fff}{\mathsf f}
@@ -221,7 +225,7 @@ For the purposes of this paper, which of these three derivations we use is iness
 
 %===============================================================================
 
-\subsection{Atomic Flows and Derivations}
+\section{Background on Atomic Flows}
 
 %---------------------------------------
 \begin{defi}
@@ -793,7 +797,7 @@ Note that no structural inference rules are changed, so the atomic flow of the r
 \end{proof}
 
 %===============================================================================
-\section{Streamlining}
+\section{Strongly Normalising Streamlining}
 
 %---------------------------------------
 \begin{defi}
@@ -1203,7 +1207,7 @@ Since there are no paths from interaction vertices to cointeraction vertices, $\
 
 %===========================================
 
-\section{Cut-elimination}
+\section{Confluent Cut-elimination}
 
 \begin{rem}\label{RemUglyHack}
 The challenge when performing cut-elimination is to deal with the situation where an atom occurs in both interaction and cointeraction instances. Since this is the case we are interested in, we will assume, without loss of generality, that every atom in an $\SKS$ proof occurs in both interaction and cointeraction instances. The assumption should be uncontroversial since any proof $\vlproof{\Phi}{\SKS}{\beta}$ which contains the atom $a$, but $a$ does not occur in both an interaction and a cointeraction instance, we can consider the proof
@@ -1212,7 +1216,7 @@ The challenge when performing cut-elimination is to deal with the situation wher
 \]
 instead.
 \end{rem}
-
+ 
 \begin{defi}
 Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ and an atom $a$, we define $\vlder{\Phi\{a\ot\fff\}}{}{\beta\{a\ot\fff\}}{\alpha\{a\ot\fff\}}$:
 \begin{enumerate}
@@ -1606,7 +1610,9 @@ the atomic flow of a symmetric cut-free proof obtained from $\Phi$ is
 where the subflow of the former atomic flow labelled $a_i$ (resp., $\bar a_i$) is isomorphic to the subflow of the latter atomic flow labelled $a_i$ (resp., $\bar a_i$) for every $1\leq i\leq n$ and the subflows labelled with contraction vertices are unique modulo associativity of contraction by Remark~\ref{RemUniquGenContr}.
 \end{pro}
 
-% TODO: need to point out that the bottom boxes are not necessarily unique modulo associativity of contractions, but this is a formality
+%===============================================================================
+\section{Conclusion}
+
 
 \bibliographystyle{alpha}
 \bibliography{di-biblio}
