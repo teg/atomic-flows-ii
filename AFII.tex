@@ -223,6 +223,116 @@ In Formalism A, a new deep-inference formalism currently under development, the 
 For the purposes of this paper, which of these three derivations we use is inessential, as the atomic flows associated with each of them are are the same. For simplicity we let the shorthand above refer to one unique derivation, but we could just as well have worked in Formalism A.
 \end{exa}
 
+\newcommand{\contr}{\mathsf{c}}
+\newcommand{\cod}{{\contr{\downarrow}}}
+\newcommand{\cou}{{\contr{\uparrow}}}
+
+\begin{lem}\label{LemGenericContraction}
+Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$.
+\end{lem}
+
+\begin{rem}
+In the non-atomic version of system $\SKS$ the above derivations correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlder{}{\{\acu,\med\}}{\vls(\alpha.\alpha)}{\alpha}$.
+\end{rem}
+
+\begin{lem}\label{LemSuperSwitch}
+Given a context $\xi\vlhole$ and a formula $\alpha$ there exist derivations $\vlder{}{\{\swi\}}{\xi\{\alpha\}}{\vls(\alpha.\xi\{\ttt\})}$ and $\vlder{}{\{\swi\}}{\vls[\xi\{\fff\}.\alpha]}{\xi\{\alpha\}}$.
+\end{lem}
+
+\begin{proof}
+We show how to construct the first derivation, the second one can be done by symmetry. We argue by induction on the number of atoms in $\xi\vlhole$. The base case, $\xi\vlhole=\vlhole$, is trivial and the inductive cases are:
+
+\[
+\vlderivation
+{
+ \vlin{=}{}{\xi\{\alpha\}}
+ {
+  \vlin{\swi}{}{\vls[\vlder{\Psi}{\{\swi\}}{\xi'\{\alpha\}}{\vls(\alpha.\xi'\{\ttt\})}.\beta]}
+  {
+   \vlin{=}{}{\vls(\alpha.[\xi'\{\ttt\}.\beta])}
+   {
+    \vlhy{\vls(\alpha.\xi\{\ttt\})}
+   }
+  }
+ }
+}\qquad\mbox{and}\qquad
+\vlderivation
+{
+ \vlin{=}{}{\xi\{\alpha\}}
+ {
+  \vlin{=}{}{\vls(\vlder{\Psi'}{\{\swi\}}{\xi'\{\alpha\}}{\vls(\alpha.\xi'\{\ttt\})}.\beta)}
+  {
+   \vlhy{\vls(\alpha.\xi\{\ttt\})}
+  }
+ }
+}\quad,
+\]
+for some $\xi'\vlhole$ and $\beta$ where $\beta$ is not a unit and $\Psi$ and $\Psi'$ exist by the inductive hypothesis.
+\end{proof}
+
+% TODO: give a name to this thing
+
+\begin{lem}\label{LemDecompInt}
+Given a derivation $\vlder{}{}{\beta}{\alpha}$ with atomic flow $A$, there exists a derivation
+\[
+\vlder{}{\SKS\setminus\{\aid,\aiu\}}{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(b_m.\bar b_m)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(b_1.\bar b_1)}]}{\vls(\vlinf{\aid}{}{\vls[a_1.\bar a_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha)}\quad,
+\]
+for some atoms $a_1,\dots,a_n,b_1,\dots,b_m$, with atomic flow $A$.
+\end{lem}
+
+\begin{proof}
+Using Lemma~\ref{LemSuperSwitch} apply the following transformations to each of the (co)interaction instances in $\Phi$:
+\[
+\vlderivation
+{
+ \vlde{\Psi'}{}{\delta}
+ {
+  \vlin{\aid}{}{\xi\vlsbr[a.{\bar a}]}
+  {
+   \vlde{\Psi}{}{\xi\{\ttt\}}
+   {
+    \vlhy{\gamma}
+   }
+  }
+ }
+}\quad\rightarrow\quad
+\vlderivation
+{
+ \vlde{\Psi'}{}{\delta}
+ {
+  \vlde{}{\{\swi\}}{\xi\vlsbr[a.{\bar a}]}
+  {
+   \vlhy{\vlsbr(\vlinf{\aid}{}{\vls[a.{\bar a}]}{\ttt}.\vlder{\Psi}{}{\xi\{\ttt\}}{\gamma})}
+  }
+ }
+}\qquad\mbox{and}\qquad
+\vlderivation
+{
+ \vlde{\Psi'}{}{\delta}
+ {
+  \vlin{\aid}{}{\xi\{\fff\}}
+  {
+   \vlde{\Psi}{}{\xi\vlsbr(a.{\bar a})}
+   {
+    \vlhy{\gamma}
+   }
+  }
+ }
+}\quad\rightarrow\quad
+\vlderivation
+{
+ \vlde{}{\{\swi\}}{\vlsbr[\vlder{\Psi'}{}{\delta}{\xi\{\fff\}}.\vlinf{\aiu}{}{\fff}{\vls(a.{\bar a})}]}
+ {
+  \vlde{\Psi}{}{\xi\vlsbr(a.{\bar a})}
+  {
+   \vlhy{\gamma}
+  }
+ }
+}\quad.
+\]
+Note that no structural inference rules are changed, so the atomic flow associated to the resulting derivation is the same as the atomic flow associated to $\Phi$.
+\end{proof}
+
 %===============================================================================
 
 \section{Background on Atomic Flows}
@@ -598,29 +708,6 @@ Figure~\ref{FigExAF} has some examples of atomic flows associated with derivatio
 Given an atomic flow $(V,E,\eta,\up,\lo)$ and $\epsilon_1,\dots,\epsilon_h\in E$ such that, for $1\le i<h$, we have $\lo(\epsilon_i)=\up(\epsilon_{i+1})$, $\up(\epsilon_1)=\nu$ and $\lo(\epsilon_h)=\nu'$, we say that $\epsilon_1,\dots,\epsilon_h$ is a \emph{path from $\nu$ to $\nu'$} and that $\epsilon_h,\dots,\epsilon_1$ is a \emph{path from $\nu'$ to $\nu$}.
 \end{defi}
 
-% TODO: consider this definition
-%\begin{defi}
-%Two atomic flows $(V_1,E_1,\eta_1,\up_1,\lo_1)$ and $(V_2,E_2,\eta_2,\up_2,\lo_2)$ are equivalent, written $A_1=A_2$, if the graphs $(V_1,E_1)$ and $(V_2,E_2)$ are isomorphic.
-%\end{defi}
-
-%===============================================================================
-
-\section{Preliminaries}
-
-\newcommand{\contr}{\mathsf{c}}
-\newcommand{\cod}{{\contr{\downarrow}}}
-\newcommand{\cou}{{\contr{\uparrow}}}
-
-\begin{lem}\label{LemGenericContraction}
-Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$.
-\end{lem}
-
-\begin{rem}
-In the non-atomic version of system $\SKS$ the above derivations correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlder{}{\{\acu,\med\}}{\vls(\alpha.\alpha)}{\alpha}$.
-\end{rem}
-
-% TODO: put this in the right place
-
 \newcommand{\mac}{\mathsf{ac}}
 
 \begin{defi}\label{DefModuloContr}
@@ -695,106 +782,8 @@ Any two atomic flows containing only contraction (resp., cocontraction) vertices
 \end{rem}
 
 \begin{rem}\label{RemUniquGenContr}
-For the purposes of this paper we will assume that the atomic flows of any two derivations of the form $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ (resp., $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$) are equal modulo associativity of contraction. This follows from the previous remark if we consider all the atoms occurring in $\alpha$ to be distinct.
+For the purposes of this paper we will assume that the atomic flows associated with any two derivations of the form $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ (resp., $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$) are equal modulo associativity of contraction. This follows from the previous remark if we consider all the atoms occurring in $\alpha$ to be distinct.
 \end{rem}
-
-\begin{lem}\label{LemSuperSwitch}
-Given a context $\xi\vlhole$ and a formula $\alpha$ there exist derivations $\vlder{}{\{\swi\}}{\xi\{\alpha\}}{\vls(\alpha.\xi\{\ttt\})}$ and $\vlder{}{\{\swi\}}{\vls[\xi\{\fff\}.\alpha]}{\xi\{\alpha\}}$.
-\end{lem}
-
-\begin{proof}
-We show how to construct the first derivation, the second one can be done by symmetry. We argue by induction on the number of atoms in $\xi\vlhole$. The base case, $\xi\vlhole=\vlhole$, is trivial and the inductive cases are:
-
-\[
-\vlderivation
-{
- \vlin{=}{}{\xi\{\alpha\}}
- {
-  \vlin{\swi}{}{\vls[\vlder{\Psi}{\{\swi\}}{\xi'\{\alpha\}}{\vls(\alpha.\xi'\{\ttt\})}.\beta]}
-  {
-   \vlin{=}{}{\vls(\alpha.[\xi'\{\ttt\}.\beta])}
-   {
-    \vlhy{\vls(\alpha.\xi\{\ttt\})}
-   }
-  }
- }
-}\qquad\mbox{and}\qquad
-\vlderivation
-{
- \vlin{=}{}{\xi\{\alpha\}}
- {
-  \vlin{=}{}{\vls(\vlder{\Psi'}{\{\swi\}}{\xi'\{\alpha\}}{\vls(\alpha.\xi'\{\ttt\})}.\beta)}
-  {
-   \vlhy{\vls(\alpha.\xi\{\ttt\})}
-  }
- }
-}\quad,
-\]
-for some $\xi'\vlhole$ and $\beta$ where $\beta$ is not a unit and $\Psi$ and $\Psi'$ exist by the inductive hypothesis.
-\end{proof}
-
-% TODO: give a name to this thing
-
-\begin{lem}\label{LemDecompInt}
-Given a derivation $\vlder{}{}{\beta}{\alpha}$ with atomic flow $A$, there exists a derivation
-\[
-\vlder{}{\SKS\setminus\{\aid,\aiu\}}{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(b_m.\bar b_m)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(b_1.\bar b_1)}]}{\vls(\vlinf{\aid}{}{\vls[a_1.\bar a_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha)}\quad,
-\]
-for some atoms $a_1,\dots,a_n,b_1,\dots,b_m$, with atomic flow $A$.
-\end{lem}
-
-\begin{proof}
-Using Lemma~\ref{LemSuperSwitch} apply the following transformations to each of the (co)interaction instances in $\Phi$:
-\[
-\vlderivation
-{
- \vlde{\Psi'}{}{\delta}
- {
-  \vlin{\aid}{}{\xi\vlsbr[a.{\bar a}]}
-  {
-   \vlde{\Psi}{}{\xi\{\ttt\}}
-   {
-    \vlhy{\gamma}
-   }
-  }
- }
-}\quad\rightarrow\quad
-\vlderivation
-{
- \vlde{\Psi'}{}{\delta}
- {
-  \vlde{}{\{\swi\}}{\xi\vlsbr[a.{\bar a}]}
-  {
-   \vlhy{\vlsbr(\vlinf{\aid}{}{\vls[a.{\bar a}]}{\ttt}.\vlder{\Psi}{}{\xi\{\ttt\}}{\gamma})}
-  }
- }
-}\qquad\mbox{and}\qquad
-\vlderivation
-{
- \vlde{\Psi'}{}{\delta}
- {
-  \vlin{\aid}{}{\xi\{\fff\}}
-  {
-   \vlde{\Psi}{}{\xi\vlsbr(a.{\bar a})}
-   {
-    \vlhy{\gamma}
-   }
-  }
- }
-}\quad\rightarrow\quad
-\vlderivation
-{
- \vlde{}{\{\swi\}}{\vlsbr[\vlder{\Psi'}{}{\delta}{\xi\{\fff\}}.\vlinf{\aiu}{}{\fff}{\vls(a.{\bar a})}]}
- {
-  \vlde{\Psi}{}{\xi\vlsbr(a.{\bar a})}
-  {
-   \vlhy{\gamma}
-  }
- }
-}\quad.
-\]
-Note that no structural inference rules are changed, so the atomic flow of the resulting derivation is the same as the atomic flow of $\Phi$.
-\end{proof}
 
 %===============================================================================
 \section{Strongly Normalising Streamlining}
@@ -957,7 +946,7 @@ A=\atomicflow
 ( 43,-11)*{\afvjm4};
 }\quad,
 \]
-the atomic flow of $\Core(\Phi)$ is
+the atomic flow associated with $\Core(\Phi)$ is
 \[
 \Core(A)=
 \atomicflow
@@ -1044,7 +1033,7 @@ the atomic flow of $\Core(\Phi)$ is
 where the subflow of $A$ labelled $a_i$ (resp., $\bar a_i$) is isomorphic to the sublfow of $\Core(A)$ labelled $a_i$ (resp., $\bar a_i$) for every $1\leq i\leq n$ and the rightmost subflow of $A$ is isomorphic to the rightmost sublfow of $\Core(A)$.
 \end{pro}
 
-In other words, $\Core(\Phi)$ is not unique, but its atomic flow is unique modulo associativity of contraction.
+In other words, $\Core(\Phi)$ is not unique, but the atomic flow associated with it is unique modulo associativity of contraction.
 
 \subsection{The Normaliser}
 
@@ -1123,7 +1112,7 @@ Given a derivation $\Phi$ from $\alpha$ to $\beta$, where the distinct and non-d
 \begin{proof}
 We prove the slightly stronger claim: ``$\Norm(\Core(\Phi),a_1,\dots,a_k)$ for $0\leq k \leq n$, is weakly streamlined and $a_i$ does not occur in (co)interaction instances for $k< i \leq n$'', by induction on $k$. The base case, $\Norm(\Core(\Phi))=\Core(\Phi)$, follows by Proposition~\ref{PropUniqueCore}.
 
-Consider the atomic flow of $\Norm(\Core(\Phi),a_1,\dots,a_{k-1})$ where the edges mapped to by $a_k$, $\bar a_k$ instances in the premiss and conclusion, but not in $\alpha$ or $\beta$ are singled out. Since, by the inductive hypothesis, $a_k$ does not occur in (co)interaction instances the atomic flow can be represented as follows:
+Consider the atomic flow associated with $\Norm(\Core(\Phi),a_1,\dots,a_{k-1})$ where the edges mapped to by $a_k$, $\bar a_k$ instances in the premiss and conclusion, but not in $\alpha$ or $\beta$ are singled out. Since, by the inductive hypothesis, $a_k$ does not occur in (co)interaction instances the atomic flow can be represented as follows:
 
 \[
 \atomicflow
@@ -1143,7 +1132,7 @@ Consider the atomic flow of $\Norm(\Core(\Phi),a_1,\dots,a_{k-1})$ where the edg
 }\quad.
 \]
 
-Now consider the atomic flow of $\Norm(\Core(\Phi),a_1,\dots,a_k)$,
+Now consider the atomic flow associated with $\Norm(\Core(\Phi),a_1,\dots,a_k)$,
 \[
 \atomicflow
 {
@@ -1284,7 +1273,7 @@ A=
 (21,-6)*{\afvjm4};
 }\quad,
 \]
-the atomic flow of an experiment on $\Phi$ with respect to $a_1,\dots,a_n$ is
+the atomic flow associated with an experiment on $\Phi$ with respect to $a_1,\dots,a_n$ is
 \[
 \Exp(A)=
 \atomicflow
@@ -1319,7 +1308,7 @@ the atomic flow of an experiment on $\Phi$ with respect to $a_1,\dots,a_n$ is
 where the subflow of $A$ labelled $a_i$ is isomorphic to the subflow of\/ $\Exp(A)$ labelled $a_i$ for every $1\leq i\leq n$.
 \end{pro}
 
-In other words, $\Exp(\Phi,a_1,\dots,a_n)$ is not unique, but its atomic flow is unique modulo associativity of contraction.
+In other words, $\Exp(\Phi,a_1,\dots,a_n)$ is not unique, but the atomic flow associated with it is unique modulo associativity of contraction.
 
 \begin{rem}\label{RemExperimentExistence}
 The weakening reductions presented in \cite{GuglGund:07:Normalis:lr} gives us another approach to obtaining an experiment on $\Phi$ with respect to $a_1,\dots,a_n$:
@@ -1449,7 +1438,7 @@ for $1 < k \leq n$.
 \end{defi}
 
 \begin{pro}
-The atomic flow of a $\Sym(a_1,\dots,a_n)$ is
+The atomic flow associated with $\Sym(a_1,\dots,a_n)$ is
 \[
 \atomicflow
 {
@@ -1478,7 +1467,7 @@ The atomic flow of a $\Sym(a_1,\dots,a_n)$ is
 \]
 \end{pro}
 
-In other words, $\Sym(a_1,\dots,a_n)$ is not unique, but its atomic flow is unique modulo associativity of contraction.
+In other words, $\Sym(a_1,\dots,a_n)$ is not unique, but the atomic flow associated with it is unique modulo associativity of contraction.
 
 \begin{defi}
 Given a proof, $\vlproof{\Phi}{}{\beta}$, where the distinct and non-dual atoms $a_1,\dots,a_n$ and their duals are all the atoms that occur, \emph{a symmetric cut-free proof obtained from $\Phi$} is:
@@ -1524,7 +1513,7 @@ A=
 (21,-6)*{\afvjm4};
 }\quad,
 \]
-the atomic flow of a symmetric cut-free proof obtained from $\Phi$ is
+the atomic flow associated with a symmetric cut-free proof obtained from $\Phi$ is
 \[
 \atomicflow
 {
