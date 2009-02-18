@@ -273,11 +273,11 @@ for some $\xi'\vlhole$ and $\beta$ where $\beta$ is not a unit and $\Psi$ and $\
 % TODO: give a name to this thing
 
 \begin{lem}\label{LemDecompInt}
-Given a derivation $\vlder{}{}{\beta}{\alpha}$ with atomic flow $A$, there exists a derivation
-\[
+Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, there exists a derivation
+\[\hat\Phi=
 \vlder{}{\SKS\setminus\{\aid,\aiu\}}{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(b_m.\bar b_m)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(b_1.\bar b_1)}]}{\vls(\vlinf{\aid}{}{\vls[a_1.\bar a_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha)}\quad,
 \]
-for some atoms $a_1,\dots,a_n,b_1,\dots,b_m$, with atomic flow $A$.
+for some atoms $a_1,\dots,a_n,b_1,\dots,b_m$.
 \end{lem}
 
 \begin{proof}
@@ -330,7 +330,6 @@ Using Lemma~\ref{LemSuperSwitch} apply the following transformations to each of 
  }
 }\quad.
 \]
-Note that no structural inference rules are changed, so the atomic flow associated to the resulting derivation is the same as the atomic flow associated to $\Phi$.
 \end{proof}
 
 %===============================================================================
@@ -784,6 +783,10 @@ Any two atomic flows containing only contraction (resp., cocontraction) vertices
 \begin{rem}\label{RemUniquGenContr}
 For the purposes of this paper we will assume that the atomic flows associated with any two derivations of the form $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ (resp., $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$) are equal modulo associativity of contraction. This follows from the previous remark if we consider all the atoms occurring in $\alpha$ to be distinct.
 \end{rem}
+
+\begin{pro}
+Given a derivation $\Phi$, let $\hat\Phi$ be the derivation obtained from $\Phi$ by Lemma~\ref{LemDecompInt}, then the atomic flow associated with $\Phi$ is isomorphic to the atomic flow associated with $\hat\Phi$.
+\end{pro}
 
 %===============================================================================
 \section{Strongly Normalising Streamlining}
