@@ -80,7 +80,7 @@ In \cite{GuglGund:07:Normalis:lr} our focus was on local transformations of deri
 The results in this paper are presented in the deep inference formalism the calculus of structures and system $\SKS$, but we strive at generality and as long as a system has atomic structural rules and linear logical rules (which is expected in deep inference), it should not be difficult to adapt our results.
 
 %Outline
-We start with a brief introduction to deep inference (Section~\ref{SectDeepInference}) and to atomic flows (Section~\ref{SectAtomicFlows}). In Section~\ref{SectPrelim} we present some machinery needed for the two (independent) main results; strongly normalising streamlining (Section~\ref{SectStreamlining}) and confluent cut-elimination (Section~\ref{SectCutElim}).
+We start with a brief introduction to deep inference (Section~\ref{SectDeepInference}) and to atomic flows (Section~\ref{SectAtomicFlows}), before presenting our two independent results; strongly normalising streamlining (Section~\ref{SectStreamlining}) and confluent cut-elimination (Section~\ref{SectCutElim}).
 
 %===============================================================================
 \section{Background on Deep Inference}\label{SectDeepInference}
@@ -270,7 +270,7 @@ In Formalism A, a new deep-inference formalism currently under development, the 
 For the purposes of this paper, which of these three derivations we use is inessential, as the atomic flows associated with each of them are are the same. For simplicity we let the shorthand above refer to one unique derivation, but we could just as well have worked in Formalism A.
 \end{exa}
 
-The idea behind the normalisation procedures we are about to present is to copy the derivation we wish to normalise, modify each copy and combine all the copies to produce a derivation on normal form. This section will establish some preliminary results and definitions we will use later on.
+The idea behind the normalisation procedures we are about to present is to copy the derivation we wish to normalise, modify each copy and combine all the copies to produce a derivation on normal form. We will now establish some preliminary results we will use later on.
 
 First we observe that we are allowed to duplicate any formula.
 
@@ -913,7 +913,7 @@ An $\SKS$ derivation is \emph{weakly streamlined} if, in its associated atomic f
 \end{defi}
 
 %---------------------------------------
-\begin{rem}\label{RemStr}
+\begin{rem}\label{RemWeakStr}
 It immediately follows from the definition that the diagram below describes the shape of a weakly streamlined derivation:
 \[
 \atomicflow{
