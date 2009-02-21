@@ -45,7 +45,7 @@
 \section{Introduction}
 
 %What?
-We are interested in normalising derivations in systems of propositional logic. To us normalisation is the elimination of cuts or, more generally, `dead ends' from derivations. An abstract depiction of a dead end is the following
+We are interested in normalising derivations in systems of propositional logic. To us, normalisation is the elimination of cuts or, more generally, `dead ends' from derivations. An abstract depiction of a dead end is the following
 \[
 \atomicflow{
 ( 0  , 4  )*{\afaidnw{}{}};
@@ -64,7 +64,7 @@ where the atom $\bar a$ is first created by an axiom and then destroyed by a cut
 We believe that understanding normalisation is crucial for solving problems related to complexity and identity of proofs. To argue about these complicated notions a simple language is needed and in particular a language without bureaucracy.
 
 %State of affairs
-At the core of our work lies \emph{atomic flows} which were introduced in \cite{GuglGund:07:Normalis:lr}. It was shown how atomic flows are useful in defining new normal forms and in arguing about normalisation. However, the normalisation procedures presented employed several different techniques and were relatively complicated. To get a more intuitive understanding of the mechanisms at play, something more simplistic would be desirable.
+At the core of our work lies \emph{atomic flows} which were introduced in \cite{GuglGund:07:Normalis:lr}. Atomic flows are graphical representations of derivations which are largely syntax independent and bureaucracy free. It was shown how atomic flows are useful in defining new normal forms and in arguing about normalisation. However, the normalisation procedures presented employed several different techniques and were relatively complicated. To get a more intuitive understanding of the mechanisms at play, something more simplistic was desired.
 
 %How?
 Using the language of atomic flows we show in this paper how we can normalise derivations using a simple cut-copy-paste approach. We cut away some parts of a derivation to normalise it, at the expense of destroying it. However, by making many copies and cutting away different parts from each of them, it is possible to paste all the pieces together and create a normal derivation.
@@ -73,7 +73,7 @@ Using the language of atomic flows we show in this paper how we can normalise de
 In \cite{GuglGund:07:Normalis:lr} our focus was on local transformations of derivations and how the atomic flow of a derivation was sufficient to guide normalisation. In this paper we take this further by considering global normalisation procedures. We show that information about the connectedness of axioms and cuts is all that is needed to guide normalisation.
 
 %WOW!
-%The newfound simplicity allows the shape of the normal derivation to be predetermined by the number of atoms being eliminated. Furthermore, we present a confluent and strongly normalising cut-elimination procedure.
+The newfound simplicity allowed us to find a strongly normalising streamlining procedure as well as a strongly normalising and confluent cut-elimination procedure.
 
 \newcommand{\SKS}{\mathsf{SKS}}
 %Constraints
@@ -270,7 +270,7 @@ In Formalism A, a new deep-inference formalism currently under development, the 
 For the purposes of this paper, which of these three derivations we use is inessential, as the atomic flows associated with each of them are are the same. For simplicity we let the shorthand above refer to one unique derivation, but we could just as well have worked in Formalism A.
 \end{exa}
 
-The idea behind the normalisation procedures we are about to present is to copy the derivation we wish to normalise, modify each copy and combine all the copies to produce a derivation on normal form. We will now establish some preliminary results we will use later on.
+The idea behind the normalisation procedures we are about to present is to copy the derivation we wish to normalise, cut away parts of each copy and combine all the copies to produce a derivation on normal form. We will now establish some preliminary results we will use later on.
 
 First we observe that we are allowed to duplicate any formula.
 
@@ -323,7 +323,10 @@ We show how to construct the first derivation, the second one can be done by sym
 for some $\xi'\vlhole$ and $\beta$ where $\beta$ is not a unit and $\Psi$ and $\Psi'$ exist by the inductive hypothesis.
 \end{proof}
 
-It is a fortunate consequence of having atomic inference rules that we can trivially extract all the axioms to the top and all the cuts to the bottom of the derivation. Note that this transformation does not affect the atomic flow since we are only adding linear inference rules and leaving the structural ones alone.
+It is a fortunate consequence of having atomic inference rules that we can trivially extract all the axioms to the top and all the cuts to the bottom of the derivation.
+
+% TODO: this can not be in this section, atomic flows have yet to be defined
+%Note that this transformation does not affect the atomic flow since we are only adding linear inference rules and leaving the structural ones alone.
 
 % TODO: give a name to this thing
 
