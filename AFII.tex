@@ -324,136 +324,10 @@ It immediately follows from the definition that the diagram below describes the 
 
 \subsection{The Core}
 
-\begin{lem}\label{LemSuperSwitch}
-Given a context $\xi\vlhole$ and a formula $\alpha$ there exist derivations $\vlder{}{\{\swi\}}{\xi\{\alpha\}}{\vls(\alpha.\xi\{\ttt\})}$ and $\vlder{}{\{\swi\}}{\vls[\xi\{\fff\}.\alpha]}{\xi\{\alpha\}}$.
-\end{lem}
-
-\begin{proof}
-We show how to construct the first derivation, the second one can be done by symmetry. We argue by induction on the number of atoms in $\xi\vlhole$. The base case, $\xi\vlhole=\vlhole$, is trivial and the inductive cases are:
-
-\[
-\vlderivation
-{
- \vlin{=}{}{\xi\{\alpha\}}
- {
-  \vlin{\swi}{}{\vls[\vlder{\Psi}{\{\swi\}}{\xi'\{\alpha\}}{\vls(\alpha.\xi'\{\ttt\})}.\beta]}
-  {
-   \vlin{=}{}{\vls(\alpha.[\xi'\{\ttt\}.\beta])}
-   {
-    \vlhy{\vls(\alpha.\xi\{\ttt\})}
-   }
-  }
- }
-}\qquad\mbox{and}\qquad
-\vlderivation
-{
- \vlin{=}{}{\xi\{\alpha\}}
- {
-  \vlin{=}{}{\vls(\vlder{\Psi'}{\{\swi\}}{\xi'\{\alpha\}}{\vls(\alpha.\xi'\{\ttt\})}.\beta)}
-  {
-   \vlhy{\vls(\alpha.\xi\{\ttt\})}
-  }
- }
-}\quad,
-\]
-for some $\xi'\vlhole$ and $\beta$ where $\beta$ is not a unit and $\Psi$ and $\Psi'$ exist by the inductive hypothesis.
-\end{proof}
-
-% TODO: give a name to this thing
-
-\begin{lem}\label{LemDecompInt}
-Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, there exists a derivation
-\[\hat\Phi=
-\vlder{}{\SKS\setminus\{\aid,\aiu\}}{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(b_m.\bar b_m)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(b_1.\bar b_1)}]}{\vls(\vlinf{\aid}{}{\vls[a_1.\bar a_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha)}\quad,
-\]
-for some atoms $a_1,\dots,a_n,b_1,\dots,b_m$.
-\end{lem}
-
-\begin{proof}
-Using Lemma~\ref{LemSuperSwitch} apply the following transformations to each of the (co)interaction instances in $\Phi$:
-\[
-\vlderivation
-{
- \vlde{\Psi'}{}{\delta}
- {
-  \vlin{\aid}{}{\xi\vlsbr[a.{\bar a}]}
-  {
-   \vlde{\Psi}{}{\xi\{\ttt\}}
-   {
-    \vlhy{\gamma}
-   }
-  }
- }
-}\quad\rightarrow\quad
-\vlderivation
-{
- \vlde{\Psi'}{}{\delta}
- {
-  \vlde{}{\{\swi\}}{\xi\vlsbr[a.{\bar a}]}
-  {
-   \vlhy{\vlsbr(\vlinf{\aid}{}{\vls[a.{\bar a}]}{\ttt}.\vlder{\Psi}{}{\xi\{\ttt\}}{\gamma})}
-  }
- }
-}\qquad\mbox{and}\qquad
-\vlderivation
-{
- \vlde{\Psi'}{}{\delta}
- {
-  \vlin{\aid}{}{\xi\{\fff\}}
-  {
-   \vlde{\Psi}{}{\xi\vlsbr(a.{\bar a})}
-   {
-    \vlhy{\gamma}
-   }
-  }
- }
-}\quad\rightarrow\quad
-\vlderivation
-{
- \vlde{}{\{\swi\}}{\vlsbr[\vlder{\Psi'}{}{\delta}{\xi\{\fff\}}.\vlinf{\aiu}{}{\fff}{\vls(a.{\bar a})}]}
- {
-  \vlde{\Psi}{}{\xi\vlsbr(a.{\bar a})}
-  {
-   \vlhy{\gamma}
-  }
- }
-}\quad.
-\]
-\end{proof}
-
-
 \newcommand{\Core}{\mathsf{Core}}
 
-\begin{defi}\label{DefCore}
-Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, consider the derivation
-\[
-\vlder{\Phi'}
-{\SKS\setminus\{\aid,\aiu\}}
-{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(c_l.\bar c_l)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(c_1.\bar c_1)}.\vlinf{\aiu}{}{\fff}{\vls(a_n.\bar a_n)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(a_n.\bar a_n)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(a_1.\bar a_1)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(a_1.\bar a_1)}]}
-{\vls(\vlinf{\aid}{}{\vls[a_1.\bar a_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[a_1.\bar a_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\vlinf{\aid}{}{\vls[b_1.\bar b_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[b_k.\bar b_k]}{\ttt}.\alpha)}
-\quad,
-\]
-with the same atomic flow as $\Phi$, which exists by Lemma~\ref{LemDecompInt}, where $a_1,\dots,a_n$ are distinct and pairwise non-dual atoms and $b_1,\dots,b_k$ has no atoms in common with $c_1,\dots,c_l$. A core of $\Phi$, denoted $\Core(\Phi)$, is defined to be any derivation of the form
-\[
-\Core(\Phi)=\vlderivation
-{
- \vlde{\Psi_2}{\{\acd,\med\}}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}
- {
-  \vlde{\Phi'}{\SKS\setminus\{\aid,\aiu\}}{{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(c_l.\bar c_l)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(c_1.\bar c_1)}.(a_n.\bar a_n).\cdots.(a_n.\bar a_n).\cdots.(a_1.\bar a_1).\cdots.(a_1.\bar a_1)]}}
-  {
-   \vlde{\Psi_1}{\{\acu,\med\}}{{\vls([a_1.\bar a_1].\cdots.[a_1.\bar a_1].\cdots.[a_n.\bar a_n].\cdots.[a_n.\bar a_n].\vlinf{\aid}{}{\vls[b_1.\bar b_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[b_k.\bar b_k]}{\ttt}.\alpha)}}
-   {
-    \vlhy{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}
-   }
-  }
- }
-}\quad,
-\]
-where $\Psi_1$ and $\Psi_2$ exist by Lemma~\ref{LemGenericContraction}.
-\end{defi}
-
-\begin{pro}\label{PropUniqueCore}
-Given a derivation $\Phi$ with atomic flow
+\begin{defi}\label{DefFlowCore}
+Given an atomic flow
 \[
 A=\atomicflow
 {
@@ -504,7 +378,7 @@ A=\atomicflow
 ( 43,-11)*{\afvjm4};
 }\quad,
 \]
-the atomic flow associated with $\Core(\Phi)$ is
+the \emph{core of $A$} is defined to be
 \[
 \Core(A)=
 \atomicflow
@@ -589,7 +463,139 @@ the atomic flow associated with $\Core(\Phi)$ is
 }\quad,
 \]
 where the subflow of $A$ labelled $a_i$ (resp., $\bar a_i$) is isomorphic to the sublfow of $\Core(A)$ labelled $a_i$ (resp., $\bar a_i$) for every $1\leq i\leq n$ and the rightmost subflow of $A$ is isomorphic to the rightmost sublfow of $\Core(A)$.
+\end{defi}
+
+\begin{defi}\label{DefCore}
+Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ with associated atomic flow $A$, a \emph{core of\/ $\Phi$} is defined to be a derivation $\vlder{\Core(\Phi)}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}$ with associated atomic flow $\Core(A)$.
+\end{defi}
+
+\begin{pro}\label{PropStreamlinedCore}
+Any $\Core(\Phi)$ is weakly streamlined.
 \end{pro}
+
+\begin{lem}\label{LemSuperSwitch}
+Given a context $\xi\vlhole$ and a formula $\alpha$ there exist derivations $\vlder{}{\{\swi\}}{\xi\{\alpha\}}{\vls(\alpha.\xi\{\ttt\})}$ and $\vlder{}{\{\swi\}}{\vls[\xi\{\fff\}.\alpha]}{\xi\{\alpha\}}$.
+\end{lem}
+
+\begin{proof}
+We show how to construct the first derivation, the second one can be done by symmetry. We argue by induction on the number of atoms in $\xi\vlhole$. The base case, $\xi\vlhole=\vlhole$, is trivial and the inductive cases are:
+
+\[
+\vlderivation
+{
+ \vlin{=}{}{\xi\{\alpha\}}
+ {
+  \vlin{\swi}{}{\vls[\vlder{\Psi}{\{\swi\}}{\xi'\{\alpha\}}{\vls(\alpha.\xi'\{\ttt\})}.\beta]}
+  {
+   \vlin{=}{}{\vls(\alpha.[\xi'\{\ttt\}.\beta])}
+   {
+    \vlhy{\vls(\alpha.\xi\{\ttt\})}
+   }
+  }
+ }
+}\qquad\mbox{and}\qquad
+\vlderivation
+{
+ \vlin{=}{}{\xi\{\alpha\}}
+ {
+  \vlin{=}{}{\vls(\vlder{\Psi'}{\{\swi\}}{\xi'\{\alpha\}}{\vls(\alpha.\xi'\{\ttt\})}.\beta)}
+  {
+   \vlhy{\vls(\alpha.\xi\{\ttt\})}
+  }
+ }
+}\quad,
+\]
+for some $\xi'\vlhole$ and $\beta$ where $\beta$ is not a unit and $\Psi$ and $\Psi'$ exist by the inductive hypothesis.
+\end{proof}
+
+\begin{lem}\label{LemDecompInt}
+Given a derivation $\vlder{}{}{\beta}{\alpha}$ with associated atomic flow $A$, there exists a derivation
+\[
+\vlder{}{\SKS\setminus\{\aid,\aiu\}}{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(b_m.\bar b_m)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(b_1.\bar b_1)}]}{\vls(\vlinf{\aid}{}{\vls[a_1.\bar a_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha)}
+\]
+with associated atomic flow $A$, for some atoms $a_1,\dots,a_n,b_1,\dots,b_m$.
+\end{lem}
+
+\begin{proof}
+Using Lemma~\ref{LemSuperSwitch} apply the following transformations to each of the (co)interaction instances in $\Phi$:
+\[
+\vlderivation
+{
+ \vlde{\Psi'}{}{\delta}
+ {
+  \vlin{\aid}{}{\xi\vlsbr[a.{\bar a}]}
+  {
+   \vlde{\Psi}{}{\xi\{\ttt\}}
+   {
+    \vlhy{\gamma}
+   }
+  }
+ }
+}\quad\rightarrow\quad
+\vlderivation
+{
+ \vlde{\Psi'}{}{\delta}
+ {
+  \vlde{}{\{\swi\}}{\xi\vlsbr[a.{\bar a}]}
+  {
+   \vlhy{\vlsbr(\vlinf{\aid}{}{\vls[a.{\bar a}]}{\ttt}.\vlder{\Psi}{}{\xi\{\ttt\}}{\gamma})}
+  }
+ }
+}\qquad\mbox{and}\qquad
+\vlderivation
+{
+ \vlde{\Psi'}{}{\delta}
+ {
+  \vlin{\aid}{}{\xi\{\fff\}}
+  {
+   \vlde{\Psi}{}{\xi\vlsbr(a.{\bar a})}
+   {
+    \vlhy{\gamma}
+   }
+  }
+ }
+}\quad\rightarrow\quad
+\vlderivation
+{
+ \vlde{}{\{\swi\}}{\vlsbr[\vlder{\Psi'}{}{\delta}{\xi\{\fff\}}.\vlinf{\aiu}{}{\fff}{\vls(a.{\bar a})}]}
+ {
+  \vlde{\Psi}{}{\xi\vlsbr(a.{\bar a})}
+  {
+   \vlhy{\gamma}
+  }
+ }
+}\quad.
+\]
+\end{proof}
+
+\begin{lem}\label{LemGenericContraction}
+Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$.
+\end{lem}
+
+\begin{thm}
+Given any derivation $\vlder{\Phi}{}{\beta}{\alpha}$, $\Core(\Phi)$ exists.
+\end{thm}
+
+\begin{proof}
+We build $\Core(\Phi)$ as follows:
+\[
+\vlderivation
+{
+ \vlde{\Psi_2}{\{\acd,\med\}}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}
+ {
+  \vlde{\Phi'}{\SKS\setminus\{\aid,\aiu\}}{{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(c_l.\bar c_l)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(c_1.\bar c_1)}.(a_n.\bar a_n).\cdots.(a_n.\bar a_n).\cdots.(a_1.\bar a_1).\cdots.(a_1.\bar a_1)]}}
+  {
+   \vlde{\Psi_1}{\{\acu,\med\}}{{\vls([a_1.\bar a_1].\cdots.[a_1.\bar a_1].\cdots.[a_n.\bar a_n].\cdots.[a_n.\bar a_n].\vlinf{\aid}{}{\vls[b_1.\bar b_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[b_k.\bar b_k]}{\ttt}.\alpha)}}
+   {
+    \vlhy{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}
+   }
+  }
+ }
+}\quad,
+\]
+where $a_1,\dots,a_n$ are distinct and pairwise non-dual atoms and there are no atoms in common between $b_1,\dots,b_k$ and their duals and $c_1,\dots,c_l$ and their duals, $\Phi'$ exists by Lemma~\ref{LemDecompInt} and $\Psi_1$ and $\Psi_2$ exist by Lemma~\ref{LemGenericContraction}.
+\end{proof}
+
 
 \subsection{The Normaliser}
 
@@ -598,12 +604,8 @@ where the subflow of $A$ labelled $a_i$ (resp., $\bar a_i$) is isomorphic to the
 \newcommand{\cod}{{\contr{\downarrow}}}
 \newcommand{\cou}{{\contr{\uparrow}}}
 
-\begin{lem}\label{LemGenericContraction}
-Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$.
-\end{lem}
-
 \begin{rem}
-In the non-atomic version of system $\SKS$ the above derivations correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlder{}{\{\acu,\med\}}{\vls(\alpha.\alpha)}{\alpha}$.
+In the non-atomic version of system $\SKS$ the derivations shown in Lemma~\ref{LemGenericContraction} correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlder{}{\{\acu,\med\}}{\vls(\alpha.\alpha)}{\alpha}$.
 \end{rem}
 
 \newcommand{\Norm}{\mathsf{Norm}}
@@ -679,7 +681,7 @@ Given a derivation $\Phi$ from $\alpha$ to $\beta$, where the distinct and non-d
 % TODO: check for style
 
 \begin{proof}
-We prove the slightly stronger claim: ``$\Norm(\Core(\Phi),a_1,\dots,a_k)$ for $0\leq k \leq n$, is weakly streamlined and $a_i$ does not occur in (co)interaction instances for $k< i \leq n$'', by induction on $k$. The base case, $\Norm(\Core(\Phi))=\Core(\Phi)$, follows by Proposition~\ref{PropUniqueCore}.
+We prove the slightly stronger claim: ``$\Norm(\Core(\Phi),a_1,\dots,a_k)$ for $0\leq k \leq n$, is weakly streamlined and $a_i$ does not occur in (co)interaction instances for $k< i \leq n$'', by induction on $k$. The base case, $\Norm(\Core(\Phi))=\Core(\Phi)$, follows by Proposition~\ref{PropStreamlinedCore}.
 
 Consider the atomic flow associated with $\Norm(\Core(\Phi),a_1,\dots,a_{k-1})$ where the edges mapped to by $a_k$, $\bar a_k$ instances in the premiss and conclusion, but not in $\alpha$ or $\beta$ are singled out. Since, by the inductive hypothesis, $a_k$ does not occur in (co)interaction instances the atomic flow can be represented as follows:
 
