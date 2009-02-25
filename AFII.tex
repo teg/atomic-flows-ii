@@ -45,7 +45,7 @@
 \section{Introduction}
 
 %What?
-We are interested in normalising derivations in systems of propositional logic. To us, normalisation is the elimination of cuts or, more generally, `dead ends' from derivations. An abstract depiction of a dead end is the following
+We are interested in normalising derivations in systems of propositional logic. To us, normalisation is the elimination of `dead ends' from derivations. An abstract depiction of a dead end is the following
 \[
 \atomicflow{
 ( 0  , 4  )*{\afaidnw{}{}};
@@ -67,7 +67,7 @@ We believe that understanding normalisation is crucial for solving problems rela
 At the core of our work lies \emph{atomic flows} which were introduced in \cite{GuglGund:07:Normalis:lr}. Atomic flows are graphical representations of derivations which are largely syntax independent and bureaucracy free. It was shown how atomic flows are useful in defining new normal forms and in arguing about normalisation. However, the normalisation procedures presented employed several different techniques and were relatively complicated. To get a more intuitive understanding of the mechanisms at play, something more simplistic was desired.
 
 %How?
-Using the language of atomic flows we show in this paper how we can normalise derivations using a simple cut-copy-paste approach. We cut away some parts of a derivation to normalise it, at the expense of destroying it. However, by making many copies and cutting away different parts from each of them, it is possible to paste all the pieces together and create a normal derivation.
+Using the language of atomic flows we show in this paper how we can normalise derivations using a simple cut-copy-paste approach. We cut away some parts of a derivation to normalise it, at the expense of destroying it. However, by making many copies, it is possible to paste all the pieces together and create a derivation on normal form.
 
 %Novelty
 In \cite{GuglGund:07:Normalis:lr} our focus was on local transformations of derivations and how the atomic flow of a derivation was sufficient to guide normalisation. In this paper we take this further by considering global normalisation procedures. We show that information about the connectedness of axioms and cuts is all that is needed to guide normalisation.
@@ -132,7 +132,7 @@ For an introduction to deep inference and atomic flows please see the full versi
 %===============================================================================
 \section{Streamlining}\label{SectStreamlining}
 
-Streamlining is an up-down symmetric generalisation of cut-elimination which applies to derivations as well as to proofs. The cut rule is not, in general, admissible from derivations, so when defining a normal form for derivations we cannot define it based on which rules it contains. We therefore define streamlining based on the shape of the atomic flow associated with a derivation. Intuitively a derivation is streamlined if its associated normal form contains no `dead ends', where a dead end is a path which does not start at the premiss nor end at the conclusion. We recall the definition from \cite{GuglGund:07:Normalis:lr}:
+Streamlining is an up-down symmetric generalisation of cut-elimination, which applies to derivations as well as to proofs. No $\SKS$ rule is, in general, admissible from derivations, so when defining a normal form for derivations we cannot define it based on which rules they contain. We therefore define streamlining based on the shape of the atomic flows associated with derivations. Intuitively a derivation is streamlined if its associated atomic flow contains no `dead ends', where a dead end is a path which does not start at the premiss nor end at the conclusion. We recall the definition from \cite{GuglGund:07:Normalis:lr}:
 
 %---------------------------------------
 \begin{defi}
@@ -212,9 +212,9 @@ It immediately follows from the definition that the diagram below describes the 
 
 \subsection{The Core}
 
-As a consequence of having atomic structural inference rules, deep inference allows us to trivially assume that all axioms occur in the premiss and all cuts occur in the conclusion of a derivation. Furthermore, we can (co)contract axioms and cuts so that every atom occurs in at most one axiom and at most one cut. If a derivation, $\Phi$, has this shape we can obtain a weakly streamlined derivation simply by considering all the atoms which occur in both an axiom and a cut and replacing the axiom and the cut by their conclusion and premiss respectively. This weakly streamlined derivation clearly does not have the same premiss and conclusion as $\Phi$, but, as will be made precise later, their atomic flows are almost the same and for this reason we call this the \emph{core of\/ $\Phi$}. The core will be the building block we will use to create a weakly streamlined derivation with the same premiss and conclusion as $\Phi$.
+The \emph{core of a derivation} is what is left after removing the axioms and cuts which causes the derivation not to be weakly streamlined. As can be seen in Definition~\ref{DefFlowCore} below this leaves most of the atomic flow associated with the original derivation untouched. This gives rise to the claim that we can do normalisation with hardly any knowledge about the structure of the derivation we are normalising.
 
-We first define the core of an atomic flow.
+We first define what the core of an atomic flow is and then the definition of the core of a derivation will follow.
 
 \newcommand{\Core}{\mathsf{Core}}
 
@@ -357,11 +357,13 @@ the \emph{core of $A$} is defined to be
 where the subflow of $A$ labelled $a_i$ (resp., $\bar a_i$) is isomorphic to the sublfow of $\Core(A)$ labelled $a_i$ (resp., $\bar a_i$) for every $1\leq i\leq n$ and the rightmost subflow of $A$ is isomorphic to the rightmost sublfow of $\Core(A)$.
 \end{defi}
 
+We now define the core of a derivation. The core is weakly streamlined at the expense of new atoms in the premiss and conclusion. In the next section we will see how we can glue several cores together to eliminate these atoms, but still obtain a weakly streamlined derivation.
+
 \begin{defi}\label{DefCore}
 Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ with associated atomic flow $A$, a \emph{core of\/ $\Phi$} is defined to be a derivation $\vlder{\Core(\Phi)}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}$ with associated atomic flow $\Core(A)$.
 \end{defi}
 
-We finally state a theorem whose proof can be found in the full version of this paper.
+To obtain the core of a derivation is straightforward, but a detailed proof can be found in the full version of this paper.
 
 \begin{thm}
 Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, $\Core(\Phi)$ exists.
@@ -369,7 +371,7 @@ Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, $\Core(\Phi)$ exists.
 
 \subsection{The Normaliser}
 
-We now show how to build a weakly streamlined derivation. We present the \emph{normaliser}, a`skeleton' with `black boxes' where we can plug the core of the derivation we want to normalise. The novelty of this method is that no knowledge of the shape of the core is required. The only information needed to build the normaliser is the number of atoms which must be eliminated from the premiss and conclusion of the core in order to get the premiss and conclusion of the original derivation. The procedure is strongly normalising, but not confluent. Two kinds of choices have to be made, the order in which the atoms are eliminated and for each atom, $a$, which comes first, $a$ or $\bar a$. It is crucial to observe that the atomic flows contain all the information needed for making these choices.
+We now show how to build a weakly streamlined derivation. We present the \emph{normaliser}, which is a `skeleton' where we can plug copies of the core of the derivation we want to normalise. The novelty of this method is that no knowledge of the shape of the core is required. The only information needed to build the normaliser is the number of atoms which must be eliminated from the premiss and conclusion of the core in order to obtain the desired derivation.
 
 \newcommand{\contr}{\mathsf{c}}
 \newcommand{\cod}{{\contr{\downarrow}}}
@@ -517,7 +519,7 @@ then the atomic flow of
 where $A_1,A_2,A_3$ are isomorphic to $A$ and $B_1,B_2,B_3$ are isomorphic to $B$ and all the edges that might be in paths from the evidenced interaction vertex are colored in red and all the edges that might be in paths from the evidenced cointeraction vertex are colored in green.
 \end{pro}
 
-We now state our main theorem whose proof can be found in the full version of this paper.
+By studying Definition~\ref{DefFlowCore} and Proposition~\ref{PropFlowNorm} we can see how a weakly streamlined derivation can be built. The proof is given in the full version of this paper.
 
 \begin{thm}
 Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, there are atoms $a_1,\dots,a_n$ in $\Phi$ such that $\vlder{\Norm(\Core(\Phi),a_1,\dots,a_n)}{}{\beta}{\alpha}$ is weakly streamlined.
