@@ -80,26 +80,14 @@ The newfound simplicity allowed us to find a strongly normalising streamlining p
 The results in this paper are presented in the deep inference formalism the calculus of structures and system $\SKS$, but we strive at generality and as long as a system has atomic structural rules and linear logical rules (which is expected in deep inference), it should not be difficult to adapt our results.
 
 %Outline
-We start with a brief introduction to deep inference (Section~\ref{SectDeepInference}) and to atomic flows (Section~\ref{SectAtomicFlows}), before presenting our main result; strongly normalising streamlining (Section~\ref{SectStreamlining}).
+For an introduction to deep inference and atomic flows please see the full version of this paper, accessible from \url{http://arxiv.org/AFII.pdf}.
 
 %===============================================================================
-\section{Background on Deep Inference}\label{SectDeepInference}
 
 \newcommand{\fff}{\mathsf f}
 \newcommand{\ttt}{\mathsf t}
 \newcommand{\ot}{\mathbin\shortleftarrow}
 
-% TODO: check that we only every use the variable names in the following definition
-
-%---------------------------------------
-\begin{defi}\label{DefFormulae}
-\emph{Formulae}, $\alpha$, $\beta$, $\gamma$, $\delta$ are freely built from: \emph{units}, $\fff$ (false), $\ttt$ (true); \emph{atoms}, $a$, $b$, $c$, $d$; \emph{disjunction} and \emph{conjunction}, ${\vlsbr[\alpha.\beta]}$ and $\vlsbr(\alpha.\beta)$. On the set of atoms a (non-identical) involution $\bar\cdot$ is defined, and dual atom occurrences, as $a$ and $\bar a$, can appear in formulae. We denote \emph{contexts}, \emph{i.e.}, formulae with a hole, by $\xi\vlhole$ and $\zeta\vlhole$; we also use \emph{multiple} contexts, $\xi\vlhole\cdots\vlhole$, \emph{i.e.}, formulae with many holes; for example, if $\xi\{a\}$ is $\vls(b.[a.c])$, then $\xi\vlhole$ is $\vls(b.[\vlhole.c])$, $\xi\{b\}$ is $\vls(b.[b.c])$ and $\xi\vlscn(a.d)$ is $\vls(b.[(a.d).c])$; if $\xi\{a\}\{b\}\{c\}$ is $\vls(b.[(a.d).c])$ then $\xi\{b\}\{c\}\{a\}$ is $\vls(c.[(b.d).a])$.
-\end{defi}
-
-%---------------------------------------
-\begin{rem}
-Negation is only defined for atoms, which is not a limitation thanks to De Morgan laws.
-\end{rem}
 
 \newcommand{\one}{{\mathchoice{\scriptstyle\mathbf1}
                               {\scriptstyle\mathbf1}
@@ -109,30 +97,6 @@ Negation is only defined for atoms, which is not a limitation thanks to De Morga
                               {\scriptstyle\mathbf2}
                               {\scriptstyle\mathbf2}
                               {\scriptscriptstyle\mathbf2}}}
-%---------------------------------------
-\begin{defi}\label{DefDerivation}
-\emph{Inference rules}, $\rho$, have one \emph{premiss} and one \emph{conclusion}, and their \emph{instances} are used in \emph{inference steps} to rewrite inside formulae. A \emph{derivation}, $\Phi$, from $\alpha$ (\emph{premiss}) to $\beta$ (\emph{conclusion}) is a chain of inference steps with $\alpha$ at the top and $\beta$ at the bottom, and is usually indicated by $\vlder{\Phi}{\mathcal S}{\beta}{\alpha}$, where $\mathcal S$ is the name of the deductive system or a set of inference rules; a \emph{proof} is a derivation from $\ttt$; besides $\Phi$, we denote derivations with $\Psi$. We denote with $\xi\{\Phi\}$ the result of including every formula of the derivation $\vlder{\Phi}{}{\beta}{\alpha}$ into the context $\xi\vlhole$. Since we adopt deep inference, $\vlder{\xi\{\Phi\}}{}{\xi\{\beta\}}{\xi\{\alpha\}}$ is a valid derivation. Furthermore, $\xi\left\{\vlder{}{}{\beta_1}{\alpha_1}\right\}\cdots\left\{\vlder{}{}{\beta_n}{\alpha_n}\right\}$ denotes
-\[
-\vlderivation
-{
- \vlin{=}{}{\xi\{\beta_1\}\cdots\{\beta_{n-1}\}\left\{\vlder{}{}{\beta_n}{\alpha_n}\right\}}
- {
-  \vlin{=}{}{\vdots}
-  {
-   \vlin{=}{}{\xi\{\beta_1\}\cdots\{\beta_{i-1}\}\left\{\vlder{}{}{\beta_i}{\alpha_i}\right\}\{\alpha_{i+1}\}\cdots\{\alpha_n\}}
-   {
-    \vlin{=}{}{\vdots}
-    {
-     \vlhy{\xi\left\{\vlder{}{}{\beta_1}{\alpha_1}\right\}\{\alpha_2\}\cdots\{\alpha_n\}}
-    }
-   }
-  }
- }
-}\quad.
-\]
-\end{defi}
-
-Now we define the standard deductive system, $\SKS$, for classical propositional logic in deep inference, which is used throughout the paper \cite{Brun:03:Atomic-C:oz,Brun:06:Cut-Elim:cq,Brun:06:Locality:zh,BrunTiu:01:A-Local-:mz}.
 
 \newcommand{\ai}{\mathsf{ai}}
 \newcommand{\aw}{\mathsf{aw}}
@@ -145,56 +109,7 @@ Now we define the standard deductive system, $\SKS$, for classical propositional
 \newcommand{\acu}{{\ac{\uparrow}}}
 \newcommand{\swi}{\mathsf{s}}
 \newcommand{\med}{\mathsf{m}}
-%---------------------------------------
-\begin{defi}
-System $\SKS$ in the calculus of structures is defined by the following \emph{structural} rules:
-\[
-\begin{array}{@{}c@{}c@{}c@{}}
-      \vlinf{\aid}{}{\vls[a.{\bar a}]}{\ttt}&
-\qquad\vlinf{\awd}{}a\fff&
-\qquad\vlinf{\acd}{}a{\vls[a.a]}\\
-\noalign{\smallskip}
-      \emph{interaction}&
-\qquad\emph{weakening}&
-\qquad\emph{contraction}\\
-\noalign{\bigskip}
-      \vlinf{\aiu}{}\fff{\vls(a.{\bar a})}&
-\qquad\vlinf{\awu}{}\ttt a&
-\qquad\vlinf{\acu}{}{\vls (a.a)}a\\
-\noalign{\smallskip}
-      \emph{cointeraction}&
-\qquad\emph{coweakening}&
-\qquad\emph{cocontraction}\\
-\end{array}\quad,
-\]
-and by the two \emph{logical} rules:
-\[
-\begin{array}{@{}c@{}c@{}}
-\vlinf{\swi}{}{\vls[(\alpha.\beta).\gamma]}{\vls(\alpha.[\beta.\gamma])}&\qquad
-\vlinf{\med}{}{\vls([\alpha.\gamma].[\beta.\delta])}
-              {\vls[(\alpha.\beta).(\gamma.\delta)]}\\
-\noalign{\smallskip}
-\emph{switch}&\qquad\emph{medial}\\
-\end{array}\quad.
-\]
-The rule cointeraction is also called an (\emph{atomic}) \emph{cut}. In addition to the rules shown, there is a rule $\vldownsmash{\vlinf={}\delta\gamma}$, such that $\gamma$ and $\delta$ are opposite sides in one of the following equations:
-\vlstore{
-\vls[\alpha.\beta]         &=\vls[\beta.\alpha]         \quad,&
-\vls[\alpha.\fff]          &=\vls[\alpha]               \quad,\\
-\vls(\alpha.\beta)         &=\vls(\beta.\alpha)         \quad,&
-\vls(\alpha.\ttt)          &=\vls(\alpha)               \quad,\\
-\vls[[\alpha.\beta].\gamma]&=\vls[\alpha.[\beta.\gamma]]\quad,&
-\vls[\ttt.\ttt]            &=\vls[\ttt]                 \quad,\\
-\vls((\alpha.\beta).\gamma)&=\vls(\alpha.(\beta.\gamma))\quad,&
-\vls(\fff.\fff)            &=\vls(\fff)                 \quad\vldot}
-\begin{align*}
-\vlread
-\end{align*}
-We do not always show the instances of rule $=$, and when we do show them, we gather several contiguous instances into one.
-\end{defi}
-
 %===============================================================================
-\section{Background on Atomic Flows}\label{SectAtomicFlows}
 
 \newbox\contrup\setbox\contrup=\hbox{$
    \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
