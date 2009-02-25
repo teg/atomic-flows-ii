@@ -136,12 +136,7 @@ Streamlining is an up-down symmetric generalisation of cut-elimination, which ap
 
 %---------------------------------------
 \begin{defi}
-An $\SKS$ derivation is \emph{streamlined} if, in its associated atomic flow, there are no paths from interaction or weakening vertices to cointeraction or coweakening vertices.
-\end{defi}
-
-%---------------------------------------
-\begin{rem}\label{RemStr}
-It immediately follows from the definition that the diagram below describes the shape of a streamlined derivation:
+An $\SKS$ derivation is \emph{streamlined} if its associated atomic flow can be represented as follows:
 \[
 \atomicflow{
 (-10,11)*{\afvjm4};
@@ -171,18 +166,13 @@ It immediately follows from the definition that the diagram below describes the 
 (  10,-11)*{\afvjm4};
 }\quad.
 \]
-\end{rem}
+\end{defi}
 
 From our point of view, the main challenge in streamlining a derivation is to make sure there are no paths from axioms to cuts. Once this is achieved it is straightforward, as shown in \cite{GuglGund:07:Normalis:lr}, to use (confluent and strongly normalising) weakening reductions to obtain a streamlined derivation. This motivates the following definition:
 
 %---------------------------------------
 \begin{defi}
-An $\SKS$ derivation is \emph{weakly streamlined} if, in its associated atomic flow, there are no paths from interaction vertices to cointeraction vertices.
-\end{defi}
-
-%---------------------------------------
-\begin{rem}\label{RemWeakStr}
-It immediately follows from the definition that the diagram below describes the shape of a weakly streamlined derivation:
+An $\SKS$ derivation is \emph{weakly streamlined} if its associated atomic flow can be represented as follows:
 \[
 \atomicflow{
 (-5, 11)*{\afvjm4};
@@ -208,7 +198,7 @@ It immediately follows from the definition that the diagram below describes the 
 (  5,-11)*{\afvjm4};
 }\quad.
 \]
-\end{rem}
+\end{defi}
 
 \subsection{The Core}
 
