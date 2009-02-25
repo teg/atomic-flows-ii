@@ -449,12 +449,12 @@ Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ with associated atomic flow $
 We finally state a theorem whose proof can be found in the full version of this paper.
 
 \begin{thm}
-Given any derivation $\vlder{\Phi}{}{\beta}{\alpha}$, $\Core(\Phi)$ exists.
+Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, $\Core(\Phi)$ exists.
 \end{thm}
 
 \subsection{The Normaliser}
 
-We now show how to build a weakly streamlined derivation. We present a `skeleton' with black boxes where we can plug the core of the derivation we want to normalise. The novelty of this method is that no knowledge of the shape of the core is required. The only information needed to build the normaliser is the number of atoms which must be eliminated from the premiss and conclusion of the core in order to get the premiss and conclusion of the original derivation. The procedure is strongly normalising, but not confluent. Two kinds of choices have to be made, the order in which the atoms are eliminated and for each atom, $a$, which comes first, $a$ or $\bar a$. It is crucial to observe that the atomic flows contain all the information needed for making these choices.
+We now show how to build a weakly streamlined derivation. We present the \emph{normaliser}, a`skeleton' with `black boxes' where we can plug the core of the derivation we want to normalise. The novelty of this method is that no knowledge of the shape of the core is required. The only information needed to build the normaliser is the number of atoms which must be eliminated from the premiss and conclusion of the core in order to get the premiss and conclusion of the original derivation. The procedure is strongly normalising, but not confluent. Two kinds of choices have to be made, the order in which the atoms are eliminated and for each atom, $a$, which comes first, $a$ or $\bar a$. It is crucial to observe that the atomic flows contain all the information needed for making these choices.
 
 \newcommand{\contr}{\mathsf{c}}
 \newcommand{\cod}{{\contr{\downarrow}}}
@@ -591,7 +591,7 @@ then the atomic flow of
 ( -8,-12.75)*{\afvjm{17.5}};
 (-30,0.25)*{\afvjmcol{43.5}{Red}};
 (-19,-27.5)*{\afacdmnwexsqcol{}{}{}{}{11}{2}{Red}{}};
-(  8,-12.75)*{\afvjmcol{17.5}{Red}};
+(  8,-12.75)*{\afvjmcol{17.5}{Red}};		
 (-14,0.25)*{\afvjmcol{43.5}{Red}};
 ( -3,-27.5)*{\afacdmnwexsqcol{}{}{}{}{11}{2}{Red}{Red}};
 %  outer
