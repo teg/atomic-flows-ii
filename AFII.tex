@@ -1,40 +1,25 @@
-\documentclass[a4paper]{amsart}
+\documentclass[a4paper]{llncs}
 
-%                  Trash .aux file after toggling
 \usepackage{stmaryrd}
 \usepackage{graphicx}
 \usepackage[margin=1in]{geometry}
 \usepackage[lutzsyntax]{virginialake}\aftrianglefalse
-\usepackage[pdfborder={0 0 0}]{hyperref}
+%\usepackage[pdfborder={0 0 0}]{hyperref}
 \usepackage[urw-garamond]{mathdesign}
 
-%--------- Theorem etc
-\newtheorem{thm}{Theorem}[section]
-\newtheorem{cor}[thm]{Corollary}
-\newtheorem{lem}[thm]{Lemma}
-\newtheorem{pro}[thm]{Proposition}
-
-\theoremstyle{remark}
-\newtheorem{rem}[thm]{Remark}
-\newtheorem{exa}[thm]{Example}
-
-\theoremstyle{definition}
-\newtheorem{defi}[thm]{Definition}
-%---------
 
 \begin{document}
 
-\title[Normalisation Control in Deep Inference   via Atomic Flows II]
-      {Normalisation Control in Deep Inference\\ via Atomic Flows II}
+\title{Normalisation Control in Deep Inference\\ via Atomic Flows II}
 
-\author{Alessio Guglielmi and Tom Gundersen}
-%\address{University of Bath, Bath BA2 7AY, UK}
+\author{Alessio Guglielmi \and Tom Gundersen}
+\institute{University of Bath, Bath BA2 7AY, UK}
 
 \thanks{This work was in part funded by an Overseas Research Scholarship and a Research Studentship, both from the University of Bath, and by the British Council Alliance Programme.}
 
-\keywords{Normalisation, deep inference, cut elimination, atomic flows}
+%\keywords{Normalisation, deep inference, cut elimination, atomic flows}
 
-\subjclass{F.4.1 Mathematical Logic---Proof theory}
+%\subjclass{F.4.1 Mathematical Logic---Proof theory}
 
 % \begin{abstract}
 % \end{abstract}
@@ -77,7 +62,7 @@ The newfound simplicity allowed us to find a strongly normalising streamlining p
 
 \newcommand{\SKS}{\mathsf{SKS}}
 %Constraints
-The results in this paper are presented in the deep inference formalism the calculus of structures and system $\SKS$, but we strive at generality and as long as a system has atomic structural rules and linear logical rules (which is expected in deep inference), it should not be difficult to adapt our results.
+The results in this paper are presented in the deep inference formalism the calculus of structures \cite{Gugl:06:A-System:kl} and system $\SKS$ \cite{BrunTiu:01:A-Local-:mz}, but we strive at generality and as long as a system has atomic structural rules and linear logical rules (which is expected in deep inference), it should not be difficult to adapt our results.
 
 %Outline
 For an introduction to deep inference and atomic flows please see the full version of this paper, accessible from \url{http://arxiv.org/AFII.pdf}.
@@ -135,7 +120,7 @@ For an introduction to deep inference and atomic flows please see the full versi
 Streamlining is an up-down symmetric generalisation of cut-elimination, which applies to derivations as well as to proofs. No $\SKS$ rule is, in general, admissible from derivations, so when defining a normal form for derivations we cannot define it based on which rules they contain. We therefore define streamlining based on the shape of the atomic flows associated with derivations. Intuitively a derivation is streamlined if its associated atomic flow contains no `dead ends', where a dead end is a path which does not start at the premiss nor end at the conclusion. We recall the definition from \cite{GuglGund:07:Normalis:lr}:
 
 %---------------------------------------
-\begin{defi}
+\begin{definition}
 An $\SKS$ derivation is \emph{streamlined} if its associated atomic flow can be represented as follows:
 \[
 \atomicflow{
@@ -166,12 +151,12 @@ An $\SKS$ derivation is \emph{streamlined} if its associated atomic flow can be 
 (  10,-11)*{\afvjm4};
 }\quad.
 \]
-\end{defi}
+\end{definition}
 
 From our point of view, the main challenge in streamlining a derivation is to make sure there are no paths from axioms to cuts. Once this is achieved it is straightforward, as shown in \cite{GuglGund:07:Normalis:lr}, to use (confluent and strongly normalising) weakening reductions to obtain a streamlined derivation. This motivates the following definition:
 
 %---------------------------------------
-\begin{defi}
+\begin{definition}
 An $\SKS$ derivation is \emph{weakly streamlined} if its associated atomic flow can be represented as follows:
 \[
 \atomicflow{
@@ -198,7 +183,7 @@ An $\SKS$ derivation is \emph{weakly streamlined} if its associated atomic flow 
 (  5,-11)*{\afvjm4};
 }\quad.
 \]
-\end{defi}
+\end{definition}
 
 \subsection{The Core}
 
@@ -208,7 +193,7 @@ We first define what the core of an atomic flow is and then the definition of th
 
 \newcommand{\Core}{\mathsf{Core}}
 
-\begin{defi}\label{DefFlowCore}
+\begin{definition}\label{DefFlowCore}
 Given an atomic flow
 \[
 A=\atomicflow
@@ -345,19 +330,19 @@ the \emph{core of $A$} is defined to be
 }\quad,
 \]
 where the subflow of $A$ labelled $a_i$ (resp., $\bar a_i$) is isomorphic to the sublfow of $\Core(A)$ labelled $a_i$ (resp., $\bar a_i$) for every $1\leq i\leq n$ and the rightmost subflow of $A$ is isomorphic to the rightmost sublfow of $\Core(A)$.
-\end{defi}
+\end{definition}
 
 We now define the core of a derivation. The core is weakly streamlined at the expense of new atoms in the premiss and conclusion. In the next section we will see how we can glue several cores together to eliminate these atoms, but still obtain a weakly streamlined derivation.
 
-\begin{defi}\label{DefCore}
+\begin{definition}\label{DefCore}
 Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ with associated atomic flow $A$, a \emph{core of\/ $\Phi$} is defined to be a derivation $\vlder{\Core(\Phi)}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}$ with associated atomic flow $\Core(A)$.
-\end{defi}
+\end{definition}
 
 To obtain the core of a derivation is straightforward, but a detailed proof can be found in the full version of this paper.
 
-\begin{thm}
+\begin{theorem}
 Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, $\Core(\Phi)$ exists.
-\end{thm}
+\end{theorem}
 
 \subsection{The Normaliser}
 
@@ -369,7 +354,7 @@ We now show how to build a weakly streamlined derivation. We present the \emph{n
 
 \newcommand{\Norm}{\mathsf{Norm}}
 
-\begin{defi}
+\begin{definition}
 The \emph{normaliser}, $\Norm(\Phi,a_1,\dots,a_n)$, is an operator taking as input a sequence of atoms and a derivation of the form
 \[
 \vlder{\Phi}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}\quad,
@@ -431,9 +416,9 @@ $\vlderivation
  }
 }\quad.
 \]
-\end{defi}
+\end{definition}
 
-\begin{pro}\label{PropFlowNorm}
+\begin{proposition}\label{PropFlowNorm}
 If the atomic flow of
 \[\vlder{\Norm(\Phi,a_1,\dots,a_{n-1})}{}{\vls[\beta.(a_n.\bar a_n)]}{\vls([a_n.\bar a_n].\alpha)}
 \quad\mbox{is}\quad
@@ -507,13 +492,13 @@ then the atomic flow of
 }\quad,
 \]
 where $A_1,A_2,A_3$ are isomorphic to $A$ and $B_1,B_2,B_3$ are isomorphic to $B$ and all the edges that might be in paths from the evidenced interaction vertex are colored in red and all the edges that might be in paths from the evidenced cointeraction vertex are colored in green.
-\end{pro}
+\end{proposition}
 
 By studying Definition~\ref{DefFlowCore} and Proposition~\ref{PropFlowNorm} we can see how a weakly streamlined derivation can be built. The proof is given in the full version of this paper.
 
-\begin{thm}
+\begin{theorem}
 Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, there are atoms $a_1,\dots,a_n$ in $\Phi$ such that $\vlder{\Norm(\Core(\Phi),a_1,\dots,a_n)}{}{\beta}{\alpha}$ is weakly streamlined.
-\end{thm}
+\end{theorem}
 
 %===========================================
 \section{Conclusion}
