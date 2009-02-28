@@ -23,7 +23,7 @@
 %TODO: don't use dead end. moreover this is just a special case
 
 %What?
-We are interested in normalising derivations in propositional logic. To us, normalisation is the elimination of `dead ends' from derivations. An abstract depiction of a dead end is the following
+We are interested in normalising derivations in propositional logic. To us, normalisation is the elimination of `unreachable' parts of derivations. An abstract depiction of an example of an unreachable part of a derivation is the following
 \[
 \atomicflow{
 ( 0  , 4  )*{\afaidnw{}{}};
@@ -43,33 +43,24 @@ where the atom $\bar a$ is first created by an axiom and then destroyed by a cut
 %Why?
 We believe that understanding normalisation is crucial for solving problems related to complexity and identity of proofs. To argue about these complicated notions a simple language is needed and in particular a language without bureaucracy.
 
-%TODO: not representation
-%TODO: I wouldn't dismiss the first paper, because it was about general techniques for eliminating simple edges, not about the best strategies.
 %State of affairs
 %TODO: we also made copies in the old paper
-At the core of our work lies \emph{atomic flows}, which were introduced in \cite{GuglGund:07:Normalis:lr}. Atomic flows are graphical representations of derivations which are largely syntax independent and bureaucracy free. It was shown how atomic flows are useful in defining new normal forms and in arguing about normalisation. However, the normalisation procedures presented employed several different techniques and were relatively complicated. To get a more intuitive understanding of the mechanisms at play, something more simplistic was desired.
+At the core of our work lies \emph{atomic flows}, which were introduced in \cite{GuglGund:07:Normalis:lr}. Atomic flows are graphs obtained by removing all logical information from derivations and only retaining the structural part. They are largely syntax independent and bureaucracy free. It was shown how atomic flows are useful in defining new normal forms and in arguing about normalisation.
 
-%TODO: It's not because you can make many copies that you can paste them together. Rather, this is due to the symmetries in deep inference.
-%How?
-Using the language of atomic flows we show in this paper how we can normalise derivations using a simple cut-copy-paste approach. We cut away some parts of a derivation to normalise it, at the expense of destroying it. However, by making many copies, it is possible to paste all the pieces together and create a derivation in normal form.
+In particular, \emph{streamlining} was defined based on atomic flows. Streamlining is an up-down symmetric generalisation of cut-elimination, which applies to derivations as well as to proofs. Intuitively a derivation is streamlined if every path in the associated atomic flow can be extended to reach the top or the bottom of the atomic flow. Seen from the point of view of derivations it means that if you pick an atom occurrence from a streamlined derivation and start tracing it both up and down, you must reach either the premiss or the conclusion. Since a proof has no atoms in its premiss (only the unit `true') it is immediate that tracing atom occurrences upwards from a cut can not lead to the premiss, so a streamlined proof is cut free.
 
-%TODO: we also had global procedures
-%Novelty
-In \cite{GuglGund:07:Normalis:lr} our focus was on local transformations of derivations and how the atomic flow of a derivation was sufficient to guide normalisation. In this paper we take this further by considering global normalisation procedures. We show that information about the connectedness of axioms and cuts is all that is needed to guide normalisation.
+A streamlining procedure was presented combining local and global transformations to streamline derivations.
 
-%TODO: newfound simplicity
-%TODO: streamlining? strongly normalising
-%WOW!
-The newfound simplicity allows us to find a strongly normalising streamlining procedure.
+In this paper we present a new streamlining procedure based on a global transformations. The moral idea is that the only information needed to guide streamlining is information about the connectedness of axioms and cuts. Furthermore, no transformation of the original derivation is required except for removing the connected axioms and cuts. Due to the symmetries of deep inference, we are able to paste together copies of the original derivation, with some axioms and cuts removed, to obtain a derivation in normal form.
+
+The novelty of this method is that the complexity of the procedure is decided by the number of atoms which occur in axioms and cuts that are eliminated, as opposed to the number of cuts. Furthermore, given the number of atoms being eliminated we can build a `skeleton' where we can plug the original derivation to obtain a streamlined derivation. This skeleton only depends on the number of atoms and not on the structure of the derivation being streamlined. As was also true of our previous results, logical inference rules and logical connectives do not play a role, which goes contrary to the tradition of cut elimination.
 
 %TODO: this can only be done inside deep inference
 \newcommand{\SKS}{\mathsf{SKS}}
 %Constraints
-The results in this paper are presented in the deep inference formalism the calculus of structures \cite{Gugl:06:A-System:kl} and system $\SKS$ \cite{BrunTiu:01:A-Local-:mz}, but we strive at generality and as long as a system has atomic structural rules and linear logical rules (which is expected in deep inference), it should not be difficult to adapt our results.
+The results in this paper are presented in the deep inference formalism the calculus of structures \cite{Gugl:06:A-System:kl} and system $\SKS$ \cite{BrunTiu:01:A-Local-:mz}, but we strive at generality and it should not be difficult to adapt our results to any deep inference formalism and any propositional system as long as we have atomic structural rules and linear logical rules (something we always expect in deep inference).
 
-%Outline
-For an introduction to deep inference and atomic flows please see the full version of this paper, accessible from \url{http://arxiv.org/AFII.pdf}.
-
+For the full version of this paper please refer to \url{http://www.jklm.no/teg/AFII.pdf}
 %===============================================================================
 
 \newcommand{\fff}{\mathsf f}
