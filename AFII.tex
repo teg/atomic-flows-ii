@@ -1,7 +1,7 @@
 \documentclass[a4paper]{llncs}
 
 \usepackage[lutzsyntax]{virginialake}\aftrianglefalse
-\usepackage[urw-garamond]{mathdesign}
+%\usepackage[urw-garamond]{mathdesign}
 
 
 \begin{document}
@@ -19,8 +19,6 @@
 \section{Introduction}
 
 %TODO: The introduction should have a better underlying scheme (what do you want to convey here?) and should contain some moral statements about what we do here.
-
-%TODO: don't use dead end. moreover this is just a special case
 
 %What?
 We are interested in normalising derivations in propositional logic. To us, normalisation is the elimination of `unreachable' parts of derivations. An abstract depiction of an example of an unreachable part of a derivation is the following
@@ -41,10 +39,9 @@ where the atom $\bar a$ is first created by an axiom and then destroyed by a cut
 %TODO: why, which problems, too generic
 %TODO: language for what
 %Why?
-We believe that understanding normalisation is crucial for solving problems related to complexity and identity of proofs. To argue about these complicated notions a simple language is needed and in particular a language without bureaucracy.
+%We believe that understanding normalisation is crucial for solving problems related to complexity and identity of proofs. To argue about these complicated notions a simple language is needed and in particular a language without bureaucracy.
 
 %State of affairs
-%TODO: we also made copies in the old paper
 At the core of our work lies \emph{atomic flows}, which were introduced in \cite{GuglGund:07:Normalis:lr}. Atomic flows are graphs obtained by removing all logical information from derivations and only retaining the structural part. They are largely syntax independent and bureaucracy free. It was shown how atomic flows are useful in defining new normal forms and in arguing about normalisation.
 
 In particular, \emph{streamlining} was defined based on atomic flows. Streamlining is an up-down symmetric generalisation of cut-elimination, which applies to derivations as well as to proofs. Intuitively a derivation is streamlined if every path in the associated atomic flow can be extended to reach the top or the bottom of the atomic flow. Seen from the point of view of derivations it means that if you pick an atom occurrence from a streamlined derivation and start tracing it both up and down, you must reach either the premiss or the conclusion. Since a proof has no atoms in its premiss (only the unit `true') it is immediate that tracing atom occurrences upwards from a cut can not lead to the premiss, so a streamlined proof is cut free.
@@ -55,7 +52,6 @@ In this paper we present a new streamlining procedure based on a global transfor
 
 The novelty of this method is that the complexity of the procedure is decided by the number of atoms which occur in axioms and cuts that are eliminated, as opposed to the number of cuts. Furthermore, given the number of atoms being eliminated we can build a `skeleton' where we can plug the original derivation to obtain a streamlined derivation. This skeleton only depends on the number of atoms and not on the structure of the derivation being streamlined. As was also true of our previous results, logical inference rules and logical connectives do not play a role, which goes contrary to the tradition of cut elimination.
 
-%TODO: this can only be done inside deep inference
 \newcommand{\SKS}{\mathsf{SKS}}
 %Constraints
 The results in this paper are presented in the deep inference formalism the calculus of structures \cite{Gugl:06:A-System:kl} and system $\SKS$ \cite{BrunTiu:01:A-Local-:mz}, but we strive at generality and it should not be difficult to adapt our results to any deep inference formalism and any propositional system as long as we have atomic structural rules and linear logical rules (something we always expect in deep inference).
