@@ -15,6 +15,8 @@
 
 \maketitle
 
+%===============================================================================
+\section{Introduction}
 
 We are interested in the normalisation of deep-inference derivations in propositional classical logic. Cuts are admissible from proofs and, dually, axioms are admissible from contradictions. However, neither are admissible from derivations. We therefore work with \emph{streamlining}, introduced in \cite{GuglGund:07:Normalis:lr}, a new, symmetric, notion of normalisation, which generalises both cut and axiom elimination.
 
@@ -36,6 +38,458 @@ In the future, we believe it will be possible to improve on these results by ext
 For the full version of this paper please refer to \url{http://cs.bath.ac.uk/ag/p/NormContrDIAtFl2.pdf}
 %===============================================================================
 
+\newcommand{\fff}{\mathsf f}
+\newcommand{\ttt}{\mathsf t}
+\newcommand{\ot}{\mathbin\shortleftarrow}
+
+
+\newcommand{\one}{{\mathchoice{\scriptstyle\mathbf1}
+                              {\scriptstyle\mathbf1}
+                              {\scriptstyle\mathbf1}
+                              {\scriptscriptstyle\mathbf1}}}
+\newcommand{\two}{{\mathchoice{\scriptstyle\mathbf2}
+                              {\scriptstyle\mathbf2}
+                              {\scriptstyle\mathbf2}
+                              {\scriptscriptstyle\mathbf2}}}
+
+\newcommand{\ai}{\mathsf{ai}}
+\newcommand{\aw}{\mathsf{aw}}
+\newcommand{\ac}{\mathsf{ac}}
+\newcommand{\aid}{{\ai{\downarrow}}}
+\newcommand{\awd}{{\aw{\downarrow}}}
+\newcommand{\acd}{{\ac{\downarrow}}}
+\newcommand{\aiu}{{\ai{\uparrow}}}
+\newcommand{\awu}{{\aw{\uparrow}}}
+\newcommand{\acu}{{\ac{\uparrow}}}
+\newcommand{\swi}{\mathsf{s}}
+\newcommand{\med}{\mathsf{m}}
+%===============================================================================
+
+\newbox\contrup\setbox\contrup=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afacu{}{}{}{}{}{}}}$}
+\newbox\contrdown\setbox\contrdown=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afacd{}{}{}{}{}{}}}$}
+\newbox\interdown\setbox\interdown=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afaid{}{}{}{}{}{}}}$}
+\newbox\interup\setbox\interup=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afaiu{}{}{}{}{}{}}}$}
+\newbox\weakdown\setbox\weakdown=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afawd{}{}{}{}{}{}}}$}
+\newbox\weakup\setbox\weakup=\hbox{$
+   \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afawu{}{}{}{}{}{}}}$}
+%===============================================================================
+\section{Streamlining}\label{SectStreamlining}
+
+%TODO: make sure we know what atomic flows are
+
+Streamlining is an up-down symmetric generalisation of cut-elimination, which applies to derivations as well as to proofs. The cut is not admissible from derivations, so we define a streamlined derivation to be a derivation with a specific shape, and in the special case when the derivation has no premiss, \emph{i.e.}, it is a proof, it is cut-free. Intuitively a derivation is streamlined if its associated atomic flow contains no `dead ends', where a dead end is a path which does not start at the premiss nor end at the conclusion. We recall the definition from \cite{GuglGund:07:Normalis:lr}:
+
+%TODO: what does the derivation mean
+
+%---------------------------------------
+\begin{definition}
+An $\SKS$ derivation is \emph{streamlined} if its associated atomic flow can be represented as follows:
+\[
+\atomicflow{
+(-10,11)*{\afvjm4};
+%---
+(-15, 5)*{\copy\contrup};
+(-10, 5)*{\affr{28}8};
+( -5, 5)*{\copy\contrdown};
+( 10, 5)*{\copy\interdown};
+( 10, 5)*{\affr88};
+( 20, 5)*{\copy\weakdown};
+( 20, 5)*{\affr88};
+%---
+(-20, 0)*{\afvjm2};
+(-10, 0)*{\afvjm2};
+(  0, 0)*{\afvjm2};
+( 10, 0)*{\afvjm2};
+( 20, 0)*{\afvjm2};
+%---
+(-20,-5)*{\copy\weakup};
+(-20,-5)*{\affr88};
+(-10,-5)*{\copy\interup};
+(-10,-5)*{\affr88};
+(  5,-5)*{\copy\contrup};
+( 10,-5)*{\affr{28}8};
+( 15,-5)*{\copy\contrdown};
+%---
+(  10,-11)*{\afvjm4};
+}\quad.
+\]
+\end{definition}
+
+%TODO: Why is cut elimination a special case of streamlining?
+%TODO: what is a path?
+
+The main challenge in streamlining a derivation is to make sure there are no paths from axioms to cuts. Once this is achieved it is straightforward, as shown in \cite{GuglGund:07:Normalis:lr}, to use (confluent and strongly normalising) weakening reductions to obtain a streamlined derivation. This motivates the following definition:
+
+%---------------------------------------
+\begin{definition}
+An $\SKS$ derivation is \emph{weakly streamlined} if its associated atomic flow can be represented as follows:
+\[
+\atomicflow{
+(-5, 11)*{\afvjm4};
+%---
+( -5, 5)*{\affr{18}8};
+(-10, 5)*{\copy\contrup};
+( -5, 5)*{\copy\weakdown};
+(  0, 5)*{\copy\contrdown};
+( 10, 5)*{\affr88};
+( 10, 5)*{\copy\interdown};
+%---
+(-10, 0)*{\afvjm2};
+(  0, 0)*{\afvjm2};
+( 10, 0)*{\afvjm2};
+%---
+(-10,-5)*{\affr88};
+(-10,-5)*{\copy\interup};
+(  5,-5)*{\affr{18}8};
+(  0,-5)*{\copy\contrup};
+(  5,-5)*{\copy\weakup};
+( 10,-5)*{\copy\contrdown};
+%---
+(  5,-11)*{\afvjm4};
+}\quad.
+\]
+\end{definition}
+
+
+%TODO: structure of the section
+
+\subsection{The Core}
+
+The \emph{core of a derivation} is obtained by removing each pair of axiom and cut instances that is connected by a path in the atomic flow associated to the derivation. As can be seen in Definition~\ref{DefFlowCore} below this leaves most of the atomic flow associated with the original derivation untouched. Furthermore the core of a derivation is clearly weakly streamlined.
+
+The core of a derivation is the basic building block we will use when creating a weakly streamlined derivation in the next subsection. Note that when creating the core the only information needed is whether two axiom and cut instances are connected or not. We do not need to study or manipulate the atomic flow any further. This is in contrast to the local procedures which were employed in \cite{GuglGund:07:Normalis:lr}.
+
+We first define what the core of an atomic flow is and then the definition of the core of a derivation will follow.
+
+\newcommand{\Core}{\mathsf{Core}}
+
+%TODO: edges are about to fall off, the space is not even
+%TODO: I'm not sure using atoms to label flows is a good idea, because, given an atom, one would expect a canonical flow to correspond to it.
+%TODO: nobody can understand this definition
+
+\begin{definition}\label{DefFlowCore}
+Given an atomic flow
+\[
+A=\atomicflow
+{
+(-21, 8.5)*{\afvjm{9}};
+(-13, 8)*{\afaidm{}{}{}{}{}{}};
+( -5, 8.5)*{\afvjm{9}};
+(-18, 0)*{\affr{8}{8}};
+(-16, 2)*{a_1};
+( -8, 0)*{\affr{8}{8}};
+( -6, 2)*{\bar a_1};
+( -5,-8.5)*{\afvjm{9}};
+(-13,-8)*{\afaium{}{}{}{}{}{}};
+(-21,-8.5)*{\afvjm{9}};
+%------------
+(0,0)*{\cdots};
+%------------
+(21, 8.5)*{\afvjm{9}};
+(13, 8)*{\afaidm{}{}{}{}{}{}};
+( 5, 8.5)*{\afvjm{9}};
+( 8, 0)*{\affr{8}{8}};
+(10, 2)*{a_n};
+(18, 0)*{\affr{8}{8}};
+(20, 2)*{\bar a_n};
+( 5,-8.5)*{\afvjm{9}};
+(13,-8)*{\afaium{}{}{}{}{}{}};
+(21,-8.5)*{\afvjm{9}};
+%------------
+(33, 11)*{\afvjm4};
+%---
+( 33, 5)*{\affr{18}8};
+( 28, 5)*{\copy\contrup};
+( 33, 5)*{\copy\weakdown};
+( 38, 5)*{\copy\contrdown};
+( 48, 5)*{\affr88};
+( 48, 5)*{\copy\interdown};
+%---
+( 28, 0)*{\afvjm2};
+( 38, 0)*{\afvjm2};
+( 48, 0)*{\afvjm2};
+%---
+( 28,-5)*{\affr88};
+( 28,-5)*{\copy\interup};
+( 43,-5)*{\affr{18}8};
+( 38,-5)*{\copy\contrup};
+( 43,-5)*{\copy\weakup};
+( 48,-5)*{\copy\contrdown};
+%---
+( 43,-11)*{\afvjm4};
+}\quad,
+\]
+the \emph{core of $A$} is defined to be
+\[
+\Core(A)=
+\atomicflow
+{
+(-21,10)*{\afvjm{12}};
+(-17,15)*{\afvj2};
+(-17,10)*{\affr{6}{8}};
+(-17,10)*{\copy\contrup};
+(-17, 5)*{\afvjm{2}};
+(-18, 0)*{\affr{8}{8}};
+(-16, 2)*{a_1};
+(-21,-10)*{\afvjm{12}};
+(-17,-15)*{\afvj2};
+(-17,-10)*{\affr{6}{8}};
+(-17,-10)*{\copy\contrdown};
+(-17, -5)*{\afvjm{2}};
+%
+( -9,15)*{\afvj2};
+( -9,10)*{\affr{6}{8}};
+( -9,10)*{\copy\contrup};
+( -9, 5)*{\afvjm{2}};
+( -5,10)*{\afvjm{12}};
+( -8, 0)*{\affr{8}{8}};
+( -6, 2)*{\bar a_1};
+( -9,-15)*{\afvj2};
+( -9,-10)*{\affr{6}{8}};
+( -9,-10)*{\copy\contrdown};
+( -9, -5)*{\afvjm{2}};
+( -5,-10)*{\afvjm{12}};
+( -8, 0)*{\affr{8}{8}};
+%------------
+(0,0)*{\cdots};
+%------------
+( 9,15)*{\afvj2};
+( 9,10)*{\affr{6}{8}};
+( 9,10)*{\copy\contrup};
+( 9, 5)*{\afvjm{2}};
+( 5,10)*{\afvjm{12}};
+( 8, 0)*{\affr{8}{8}};
+(10, 2)*{a_n};
+( 9,-15)*{\afvj2};
+( 9,-10)*{\affr{6}{8}};
+( 9,-10)*{\copy\contrdown};
+( 9, -5)*{\afvjm{2}};
+( 5,-10)*{\afvjm{12}};
+( 8, 0)*{\affr{8}{8}};
+%
+(21,10)*{\afvjm{12}};
+(17,15)*{\afvj2};
+(17,10)*{\affr{6}{8}};
+(17,10)*{\copy\contrup};
+(17, 5)*{\afvjm{2}};
+(18, 0)*{\affr{8}{8}};
+(20, 2)*{\bar a_n};
+(21,-10)*{\afvjm{12}};
+(17,-15)*{\afvj2};
+(17,-10)*{\affr{6}{8}};
+(17,-10)*{\copy\contrdown};
+(17, -5)*{\afvjm{2}};
+%---------
+(33, 12.5)*{\afvjm7};
+%---
+( 33, 5)*{\affr{18}8};
+( 28, 5)*{\copy\contrup};
+( 33, 5)*{\copy\weakdown};
+( 38, 5)*{\copy\contrdown};
+( 48, 5)*{\affr88};
+( 48, 5)*{\copy\interdown};
+%---
+( 28, 0)*{\afvjm2};
+( 38, 0)*{\afvjm2};
+( 48, 0)*{\afvjm2};
+%---
+( 28,-5)*{\affr88};
+( 28,-5)*{\copy\interup};
+( 43,-5)*{\affr{18}8};
+( 38,-5)*{\copy\contrup};
+( 43,-5)*{\copy\weakup};
+( 48,-5)*{\copy\contrdown};
+%---
+( 43,-12.5)*{\afvjm7};
+}\quad,
+\]
+where the subflow of $A$ labelled $a_i$ (resp., $\bar a_i$) is isomorphic to the subflow of $\Core(A)$ labelled $a_i$ (resp., $\bar a_i$) for every $1\leq i\leq n$ and the rightmost subflow of $A$ is isomorphic to the rightmost sublfow of $\Core(A)$.
+\end{definition}
+
+We now define the core of a derivation. The core is weakly streamlined at the expense of new atoms in the premiss and conclusion. In the next section we will see how we can glue several cores together to eliminate these atoms, but still obtain a weakly streamlined derivation.
+
+%TODO: at this point the reader is lost, what are you trying to convey?
+
+\begin{definition}\label{DefCore}
+Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ with associated atomic flow $A$, a \emph{core of\/ $\Phi$} is defined to be a derivation $\vlder{\Core(\Phi)}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}$ with associated atomic flow $\Core(A)$.
+\end{definition}
+
+To obtain the core of a derivation is straightforward and a detailed proof can be found in the full version of this paper.
+
+\begin{theorem}
+Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, the derivation $\Core(\Phi)$ exists.
+\end{theorem}
+
+\subsection{The Normaliser}
+
+%TODO: Still, obtaining the core requires knowledge of the original derivation, so, it's not quite clear what is the moral point you are trying to make.
+
+We now show how to build a weakly streamlined derivation. We present the \emph{normaliser}, which is a `skeleton' where we can plug copies of the core of the derivation we want to normalise. The novelty of this method is that no knowledge of the shape of the core is required. The only information needed to build the normaliser is the number of atoms which must be eliminated from the premiss and conclusion of the core in order to obtain the desired derivation.
+
+\newcommand{\contr}{\mathsf{c}}
+\newcommand{\cod}{{\contr{\downarrow}}}
+\newcommand{\cou}{{\contr{\uparrow}}}
+
+%TODO: the normaliser takes a derivation so it does depend on the core, contradict what was just said
+
+\newcommand{\Norm}{\mathsf{Norm}}
+
+\begin{definition}
+For every $n\geq 0$ the \emph{normaliser}, $\Norm(\Phi,a_1,\dots,a_n)$, is an operator taking as input a sequence of atoms and a derivation of the form
+\[
+\vlder{\Phi}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}\quad,
+\]
+where $\alpha$ and $\beta$ are formulae and returning a derivation of the form
+\[
+\vlder{\Norm(\Phi,a_1,\dots,a_n)}{}{\beta}{\alpha}\quad.
+\]
+
+We define $\Norm$ inductively on the number of arguments. Let $\Norm(\Phi)=\Phi$ and for $n>0$ let $\Norm(\Phi,a_1,\dots,a_n)$ be
+\newbox\DeltaTopK
+\setbox\DeltaTopK=
+\hbox{$
+\vlderivation
+{
+ \vlde{\Norm(\Phi,a_1,\dots,a_{n-1})}{}{\vls[\beta.(\vlinf{\awu}{}{\ttt}{a_n}.\bar a_n)]}
+ {
+  \vlhy{\vls(\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha)}
+ }
+}$
+}
+\newbox\DeltaBotK
+\setbox\DeltaBotK=
+\hbox{
+$\vlderivation
+{
+ \vlde{\Norm(\Phi,a_1,\dots,a_{n-1})}{}{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(a_n.\bar a_n)}]}
+ {
+  \vlhy{\vls([a_n.\vlinf{\awd}{}{\bar a_n}{\fff}].\alpha)}
+ }
+}$
+}
+\newbox\DeltaK
+\setbox\DeltaK=
+\hbox{$
+\vlderivation
+{
+ \vlde{\Norm(\Phi,a_1,\dots,a_{n-1})}{}{\vls[\beta.(a_n.\vlinf{\awu}{}{\ttt}{\bar a_n})]}
+ {
+  \vlhy{\vls([\vlinf{\awd}{}{a_n}{\fff}.\bar a_n].\alpha)}
+ }
+}$
+}
+\[
+\vlderivation
+{
+ \vlin{}{}{\beta}
+ {
+  \vlin{\swi}{}{\vls[\vlinf{}{}{\beta}{\vls[\beta.\beta]}.\box\DeltaBotK]}
+  {
+   \vlin{\swi}{}{\vls([\beta.\box\DeltaK].\alpha)}
+   {
+    \vlin{}{}{\vls(\box\DeltaTopK.\vlinf{}{}{\vls(\alpha.\alpha)}{\alpha})}
+    {
+     \vlhy{\alpha}
+    }
+   }
+  }
+ }
+}\quad.
+\]
+\end{definition}
+
+\begin{remark}\label{RemFlowNorm}
+If the atomic flow of $\vlder{\Norm(\Phi,a_1,\dots,a_{n-1})}{}{\vls[\beta.(a_n.\bar a_n)]}{\vls([a_n.\bar a_n].\alpha)}$ is
+\[
+\atomicflow
+{
+(-8, 6)*{\afvjm{4}};
+(-2, 6)*{\afvju{4}{a_n}{}};
+( 2, 6)*{\afvju{4}{}{\bar a_n}};
+( 8, 6)*{\afvjm{4}};
+(-5, 0)*{\affr{8}{8}};
+(-3, 2)*{A};
+( 5, 0)*{\affr{8}{8}};
+( 7, 2)*{B};
+( 8,-6)*{\afvjm{4}};
+(-2,-6)*{\afvjd{4}{a_n}{}};
+( 2,-6)*{\afvjd{4}{}{\bar a_n}};
+(-8,-6)*{\afvjm{4}};
+}\quad,
+\]
+then the atomic flow of $\vlder{\Norm(\Phi,a_1,\dots,a_n)}{}{\beta}{\alpha}$ is
+\[
+\atomicflow
+{
+% cocontractions
+%  outer
+(-13.5,36.5)*{\afacumexsqcol{}{}{}{}{}{}{33}{4}{}{Green}{Green}};
+(  2.5,36.5)*{\afacumexsqcol{}{}{}{}{}{}{33}{4}{}{Green}{Green}};
+%  inner
+( -8, 13)*{\afvjmcol{18}{Green}};
+( 14,  0)*{\afvjmcol{44}{Green}};
+(  3, 26)*{\afacumnwexsqcol{}{}{}{}{11}{2}{Green}{Green}};
+(  8, 13)*{\afvjm{18}};
+( 30, 0)*{\afvjmcol{44}{Green}};
+( 19, 26)*{\afacumnwexsqcol{}{}{}{}{11}{2}{}{Green}};
+% top boxes
+(-22, 34)*{\afaidcol{}{}{}{}{}{}{Red}{Red}};
+(-27, 26)*{\affr{8}{8}};
+(-25, 28)*{A_1};
+(-17, 26)*{\affr{8}{8}};
+(-15, 28)*{B_1};
+(-24, 18)*{\afawucol{}{}{}{}{}{Red}};
+( -9, 13)*{\afcjlcol{22}{18}{Red}};
+% middle boxes
+( -2,  8)*{\afawdcol{}{}{}{}{}{Green}};
+(-5, 0)*{\affr{8}{8}};
+(-3, 2)*{A_2};
+( 5, 0)*{\affr{8}{8}};
+( 7, 2)*{B_2};
+(  2, -8)*{\afawucol{}{}{}{}{}{Red}};
+% bottom boxes
+( 22,-34)*{\afaiucol{}{}{}{}{}{}{Green}{Green}};
+( 17,-26)*{\affr{8}{8}};
+( 19,-24)*{A_3};
+( 27,-26)*{\affr{8}{8}};
+( 29,-24)*{B_3};
+( 24,-18)*{\afawdcol{}{}{}{}{}{Green}};
+(  9,-13)*{\afcjlcol{22}{18}{Green}};
+% contractions
+%  inner
+( -8,-12.75)*{\afvjm{17.5}};
+(-30,0.25)*{\afvjmcol{43.5}{Red}};
+(-19,-27.5)*{\afacdmnwexsqcol{}{}{}{}{11}{2}{Red}{}};
+(  8,-12.75)*{\afvjmcol{17.5}{Red}};		
+(-14,0.25)*{\afvjmcol{43.5}{Red}};
+( -3,-27.5)*{\afacdmnwexsqcol{}{}{}{}{11}{2}{Red}{Red}};
+%  outer
+( 13.5,-36)*{\afacdmexsqcol{}{}{}{}{}{}{33}{4}{Red}{}{Red}};
+( -2.5,-36)*{\afacdmexsqcol{}{}{}{}{}{}{33}{4}{Red}{}{Red}};
+}\quad,
+\]
+where $A_1$, $A_2$, $A_3$ are isomorphic to $A$ and $B_1$, $B_2$, $B_3$ are isomorphic to $B$ and all the edges that might be in paths from the evidenced interaction vertex are colored in red and all the edges that might be in paths from the evidenced cointeraction vertex are colored in green.
+\end{remark}
+
+By studying Definition~\ref{DefFlowCore} and Proposition~\ref{RemFlowNorm} we can see how a weakly streamlined derivation can be built. The proof is given in the full version of this paper.
+
+\begin{theorem}
+Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, there are atoms $a_1,\dots,a_n$ in $\Phi$ such that $\vlder{\Norm(\Core(\Phi),a_1,\dots,a_n)}{}{\beta}{\alpha}$ is weakly streamlined.
+\end{theorem}
+
+%===========================================
+\section{Conclusion}
 
 \bibliographystyle{alpha}
 \bibliography{biblio}
