@@ -35,9 +35,8 @@ The results in this paper are presented in the deep-inference formalism the calc
 
 In the future, we believe it will be possible to improve on these results by extending them to modal \cite{Brun:07:Deep-Seq:fk,HeinStew:05:Purity-T:tg,StewStou:05:A-System:tg,Stou:06:A-Deep-I:rt} and first order \cite{Brun:04:Deep-Inf:rq,Brun:06:Cut-Elim:cq} logics and by making the procedure quasipolynomial, along the lines of a quasipolynomial cut-elimination procedure we are working on.
 
-For the full version of this paper please refer to \url{http://cs.bath.ac.uk/ag/p/NormContrDIAtFl2.pdf}
 %===============================================================================
-
+\section{Background on Deep Inference}
 \newcommand{\fff}{\mathsf f}
 \newcommand{\ttt}{\mathsf t}
 \newcommand{\ot}{\mathbin\shortleftarrow}
@@ -51,6 +50,31 @@ For the full version of this paper please refer to \url{http://cs.bath.ac.uk/ag/
                               {\scriptstyle\mathbf2}
                               {\scriptstyle\mathbf2}
                               {\scriptscriptstyle\mathbf2}}}
+%---------------------------------------
+\begin{definition}\label{DefDerivation}
+\emph{Inference rules}, $\rho$, have one \emph{premiss} and one \emph{conclusion}, and their \emph{instances} are used in \emph{inference steps} to rewrite inside formulae. A \emph{derivation}, $\Phi$, from $\alpha$ (\emph{premiss}) to $\beta$ (\emph{conclusion}) is a chain of inference steps with $\alpha$ at the top and $\beta$ at the bottom, and is usually indicated by $\vlder{\Phi}{\mathcal S}{\beta}{\alpha}$, where $\mathcal S$ is the name of the deductive system or a set of inference rules; a \emph{proof} is a derivation from $\ttt$; besides $\Phi$, we denote derivations with $\Psi$. We denote with $\xi\{\Phi\}$ the result of including every formula of the derivation $\vlder{\Phi}{}{\beta}{\alpha}$ into the context $\xi\vlhole$. Since we adopt deep inference, $\vlder{\xi\{\Phi\}}{}{\xi\{\beta\}}{\xi\{\alpha\}}$ is a valid derivation. Furthermore, $\xi\left\{\vlder{}{}{\beta_1}{\alpha_1}\right\}\cdots\left\{\vlder{}{}{\beta_n}{\alpha_n}\right\}$ denotes
+\[
+\vlderivation
+{
+ \vlin{=}{}{\xi\{\beta_1\}\cdots\{\beta_{n-1}\}\left\{\vlder{}{}{\beta_n}{\alpha_n}\right\}}
+ {
+  \vlin{=}{}{\vdots}
+  {
+   \vlin{=}{}{\xi\{\beta_1\}\cdots\{\beta_{i-1}\}\left\{\vlder{}{}{\beta_i}{\alpha_i}\right\}\{\alpha_{i+1}\}\cdots\{\alpha_n\}}
+   {
+    \vlin{=}{}{\vdots}
+    {
+     \vlhy{\xi\left\{\vlder{}{}{\beta_1}{\alpha_1}\right\}\{\alpha_2\}\cdots\{\alpha_n\}}
+    }
+   }
+  }
+ }
+}\quad.
+\]
+\end{definition}
+
+\newcommand{\KS}{\mathsf{KS}}
+Now we define the two standard deductive systems for classical propositional logic in deep inference that are used throughout the paper. $\KS$ is analytic, in the sense that premisses only contain subformulae of conclusions, and $\SKS$ is not \cite{Brun:03:Atomic-C:oz,Brun:06:Cut-Elim:cq,Brun:06:Locality:zh,BrunTiu:01:A-Local-:mz}.
 
 \newcommand{\ai}{\mathsf{ai}}
 \newcommand{\aw}{\mathsf{aw}}
@@ -63,7 +87,123 @@ For the full version of this paper please refer to \url{http://cs.bath.ac.uk/ag/
 \newcommand{\acu}{{\ac{\uparrow}}}
 \newcommand{\swi}{\mathsf{s}}
 \newcommand{\med}{\mathsf{m}}
+%---------------------------------------
+\begin{definition}
+System $\SKS$ in the calculus of structures is defined by the following \emph{structural} rules:
+\[
+\begin{array}{@{}c@{}c@{}c@{}}
+      \vlinf{\aid}{}{\vls[a.{\bar a}]}{\ttt}&
+\qquad\vlinf{\awd}{}a\fff&
+\qquad\vlinf{\acd}{}a{\vls[a.a]}\\
+\noalign{\smallskip}
+      \emph{interaction}&
+\qquad\emph{weakening}&
+\qquad\emph{contraction}\\
+\noalign{\bigskip}
+      \vlinf{\aiu}{}\fff{\vls(a.{\bar a})}&
+\qquad\vlinf{\awu}{}\ttt a&
+\qquad\vlinf{\acu}{}{\vls (a.a)}a\\
+\noalign{\smallskip}
+      \emph{cointeraction}&
+\qquad\emph{coweakening}&
+\qquad\emph{cocontraction}\\
+\end{array}\quad,
+\]
+and by the two \emph{logical} rules:
+\[
+\begin{array}{@{}c@{}c@{}}
+\vlinf{\swi}{}{\vls[(\alpha.\beta).\gamma]}{\vls(\alpha.[\beta.\gamma])}&\qquad
+\vlinf{\med}{}{\vls([\alpha.\gamma].[\beta.\delta])}
+              {\vls[(\alpha.\beta).(\gamma.\delta)]}\\
+\noalign{\smallskip}
+\emph{switch}&\qquad\emph{medial}\\
+\end{array}\quad.
+\]
+The rule cointeraction is also called an (\emph{atomic}) \emph{cut}. In addition to the rules shown, there is a rule $\vldownsmash{\vlinf={}\delta\gamma}$, such that $\gamma$ and $\delta$ are opposite sides in one of the following equations:
+%TODO: make this alignment work with the LNCS style
+\vlstore{
+\vls[\alpha.\beta]         &=\vls[\beta.\alpha]         \quad,&
+\vls[\alpha.\fff]          &=\vls[\alpha]               \quad,\\
+\vls(\alpha.\beta)         &=\vls(\beta.\alpha)         \quad,&
+\vls(\alpha.\ttt)          &=\vls(\alpha)               \quad,\\
+\vls[[\alpha.\beta].\gamma]&=\vls[\alpha.[\beta.\gamma]]\quad,&
+\vls[\ttt.\ttt]            &=\vls[\ttt]                 \quad,\\
+\vls((\alpha.\beta).\gamma)&=\vls(\alpha.(\beta.\gamma))\quad,&
+\vls(\fff.\fff)            &=\vls(\fff)                 \quad\vldot}
+%\begin{align}
+%\vlread
+%\end{align}
+We do not always show the instances of rule $=$, and when we do show them, we gather several contiguous instances into one. System $\KS$ is the same as $\SKS$, but without the rules $\aiu$, $\awu$ and $\acu$. A \emph{cut-free} derivation is a derivation where $\aiu$ is not used. All derivations in this paper are in $\SKS$, unless indicated otherwise.
+\end{definition}
+
+\begin{remark}
+The representations of $\SKS$ derivations in this paper are sometimes ambiguous. This is not a problem, as the derivations themselves are well defined and we can always get a more detailed representation should we need to, for instance when extracting atomic flows from derivations. The ambiguity arises because we omit or collapse equations and because we do not distinguish the different equation rules. In particular we need to know if
+\[
+\vlinf{=}{}{\vls((a.a).a)}{\vls(a.(a.a))}\quad,
+\]
+is an application of associativity $\left(\vlinf{=}{}{\vls((a.b).c)}{\vls(a.(b.c))}\right)$ or commutativity $\left(\vlinf{=}{}{\vls((b.c).a)}{\vls(a.(b.c))}\right)$ to be able to map atom occurrences in the premiss to atom occurrences in the conclusion.
+\end{remark}
+
+% TODO: find the right place for this example
+
+\begin{example}\label{ExaFormalismA}
+Consider the $\SKS$ derivation
+\[
+\vls[\vlinf{\acd}{}{a}{\vls[a.a]}.\vlinf{\aiu}{}{\fff}{\vls(\vlinf{\acd}{}{b}{\vls[b.b]}.\bar b)}]\quad,
+\]
+which is a shorthand for
+\[
+\vlderivation
+{
+ \vlin{\aiu}{}{a}
+ {
+  \vlin{\acd}{}{\vls[a.(b.\bar b)]}
+  {
+   \vlin{\acd}{}{\vls[a.([b.b].\bar b)]}
+   {
+    \vlhy{\vls[a.a.([b.b].\bar b)]}
+   }
+  }
+ }
+}.
+\]
+It is implicit in Definition~\ref{DefFormulae} that the ordering of holes in a formula context with multiple holes is given. This decides the order in which we `sequentialise' the short-hand representation of a derivation in Definition~\ref{DefDerivation}. In this example we used a left-to-right ordering, but we could just as well have used a right-to-left ordering:
+\[
+\vlderivation
+{
+ \vlin{\acd}{}{a}
+ {
+  \vlin{\aiu}{}{\vls[a.a]}
+  {
+   \vlin{\acd}{}{\vls[a.a.(b.\bar b)]}
+   {
+    \vlhy{\vls[a.a.([b.b].\bar b)]}
+   }
+  }
+ }
+}.
+\]
+In Formalism A, a new deep-inference formalism currently under development, the above shorthand is a representative of the equivalence class containing both the left-to-right and the right-to-left orderings, in addition to the intermediate:
+\[
+\vlderivation
+{
+ \vlin{\aiu}{}{a}
+ {
+  \vlin{\acd}{}{\vls[a.(b.\bar b)]}
+  {
+   \vlin{\acd}{}{\vls[a.a.(b.\bar b)]}
+   {
+    \vlhy{\vls[a.a.([b.b].\bar b)]}
+   }
+  }
+ }
+}.
+\]
+For the purposes of this paper, which of these three derivations we use is inessential, as the atomic flows associated with each of them are are the same. For simplicity we let the shorthand above refer to one unique derivation, but we could just as well have worked in Formalism A.
+\end{example}
 %===============================================================================
+
+\section{Background on Atomic Flows}\label{SectAtomicFlows}
 
 \newbox\contrup\setbox\contrup=\hbox{$
    \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
@@ -327,9 +467,133 @@ Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ with associated atomic flow $
 
 To obtain the core of a derivation is straightforward and a detailed proof can be found in the full version of this paper.
 
+\begin{proposition}\label{PropStreamlinedCore}
+Any $\Core(\Phi)$ is weakly streamlined.
+\end{proposition}
+
+\begin{lemma}\label{LemSuperSwitch}
+Given a context $\xi\vlhole$ and a formula $\alpha$ there exist derivations $\vlder{}{\{\swi\}}{\xi\{\alpha\}}{\vls(\alpha.\xi\{\ttt\})}$ and $\vlder{}{\{\swi\}}{\vls[\xi\{\fff\}.\alpha]}{\xi\{\alpha\}}$.
+\end{lemma}
+
+\begin{proof}
+We show how to construct the first derivation, the second one can be done by symmetry. We argue by induction on the number of atoms in $\xi\vlhole$. The base case, $\xi\vlhole=\vlhole$, is trivial and the inductive cases are:
+
+\[
+\vlderivation
+{
+ \vlin{=}{}{\xi\{\alpha\}}
+ {
+  \vlin{\swi}{}{\vls[\vlder{\Psi}{\{\swi\}}{\xi'\{\alpha\}}{\vls(\alpha.\xi'\{\ttt\})}.\beta]}
+  {
+   \vlin{=}{}{\vls(\alpha.[\xi'\{\ttt\}.\beta])}
+   {
+    \vlhy{\vls(\alpha.\xi\{\ttt\})}
+   }
+  }
+ }
+}\qquad\mbox{and}\qquad
+\vlderivation
+{
+ \vlin{=}{}{\xi\{\alpha\}}
+ {
+  \vlin{=}{}{\vls(\vlder{\Psi'}{\{\swi\}}{\xi'\{\alpha\}}{\vls(\alpha.\xi'\{\ttt\})}.\beta)}
+  {
+   \vlhy{\vls(\alpha.\xi\{\ttt\})}
+  }
+ }
+}\quad,
+\]
+for some $\xi'\vlhole$ and $\beta$ where $\beta$ is not a unit and $\Psi$ and $\Psi'$ exist by the inductive hypothesis.
+\end{proof}
+
+\begin{lemma}\label{LemDecompInt}
+Given a derivation $\vlder{}{}{\beta}{\alpha}$ with associated atomic flow $A$, there exists a derivation
+\[
+\vlder{}{\SKS\setminus\{\aid,\aiu\}}{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(b_m.\bar b_m)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(b_1.\bar b_1)}]}{\vls(\vlinf{\aid}{}{\vls[a_1.\bar a_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha)}
+\]
+with associated atomic flow $A$, for some atoms $a_1,\dots,a_n,b_1,\dots,b_m$.
+\end{lemma}
+
+\begin{proof}
+Using Lemma~\ref{LemSuperSwitch} apply the following transformations to each of the (co)interaction instances in $\Phi$:
+\[
+\vlderivation
+{
+ \vlde{\Psi'}{}{\delta}
+ {
+  \vlin{\aid}{}{\xi\vlsbr[a.{\bar a}]}
+  {
+   \vlde{\Psi}{}{\xi\{\ttt\}}
+   {
+    \vlhy{\gamma}
+   }
+  }
+ }
+}\quad\rightarrow\quad
+\vlderivation
+{
+ \vlde{\Psi'}{}{\delta}
+ {
+  \vlde{}{\{\swi\}}{\xi\vlsbr[a.{\bar a}]}
+  {
+   \vlhy{\vlsbr(\vlinf{\aid}{}{\vls[a.{\bar a}]}{\ttt}.\vlder{\Psi}{}{\xi\{\ttt\}}{\gamma})}
+  }
+ }
+}\qquad\mbox{and}\qquad
+\vlderivation
+{
+ \vlde{\Psi'}{}{\delta}
+ {
+  \vlin{\aid}{}{\xi\{\fff\}}
+  {
+   \vlde{\Psi}{}{\xi\vlsbr(a.{\bar a})}
+   {
+    \vlhy{\gamma}
+   }
+  }
+ }
+}\quad\rightarrow\quad
+\vlderivation
+{
+ \vlde{}{\{\swi\}}{\vlsbr[\vlder{\Psi'}{}{\delta}{\xi\{\fff\}}.\vlinf{\aiu}{}{\fff}{\vls(a.{\bar a})}]}
+ {
+  \vlde{\Psi}{}{\xi\vlsbr(a.{\bar a})}
+  {
+   \vlhy{\gamma}
+  }
+ }
+}\quad.
+\]
+\end{proof}
+
+\begin{lemma}\label{LemGenericContraction}
+Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$.
+\end{lemma}
+
 \begin{theorem}
 Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, the derivation $\Core(\Phi)$ exists.
 \end{theorem}
+
+\begin{proof}
+We build $\Core(\Phi)$ as follows:
+\[
+\vlderivation
+{
+ \vlde{\Psi_2}{\{\acd,\med\}}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}
+ {
+  \vlde{\Phi'}{\SKS\setminus\{\aid,\aiu\}}{{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(c_l.\bar c_l)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(c_1.\bar c_1)}.(a_n.\bar a_n).\cdots.(a_n.\bar a_n).\cdots.(a_1.\bar a_1).\cdots.(a_1.\bar a_1)]}}
+  {
+   \vlde{\Psi_1}{\{\acu,\med\}}{{\vls([a_1.\bar a_1].\cdots.[a_1.\bar a_1].\cdots.[a_n.\bar a_n].\cdots.[a_n.\bar a_n].\vlinf{\aid}{}{\vls[b_1.\bar b_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[b_k.\bar b_k]}{\ttt}.\alpha)}}
+   {
+    \vlhy{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}
+   }
+  }
+ }
+}\quad,
+\]
+where $a_1,\dots,a_n$ are distinct and pairwise non-dual atoms and there are no atoms in common between $b_1,\dots,b_k$ and their duals and $c_1,\dots,c_l$ and their duals, $\Phi'$ exists by Lemma~\ref{LemDecompInt} and $\Psi_1$ and $\Psi_2$ exist by Lemma~\ref{LemGenericContraction}.
+\end{proof}
+
 
 \subsection{The Normaliser}
 
@@ -341,10 +605,12 @@ We now show how to build a weakly streamlined derivation. We present the \emph{n
 \newcommand{\cod}{{\contr{\downarrow}}}
 \newcommand{\cou}{{\contr{\uparrow}}}
 
-%TODO: the normaliser takes a derivation so it does depend on the core, contradict what was just said
+\begin{remark}
+In the non-atomic version of system $\SKS$ the derivations shown in Lemma~\ref{LemGenericContraction} correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlder{}{\{\acu,\med\}}{\vls(\alpha.\alpha)}{\alpha}$.
+\end{remark}
 
 \newcommand{\Norm}{\mathsf{Norm}}
-
+%TODO: the normaliser takes a derivation so it does depend on the core, contradict what was just said
 \begin{definition}
 For every $n\geq 0$ the \emph{normaliser}, $\Norm(\Phi,a_1,\dots,a_n)$, is an operator taking as input a sequence of atoms and a derivation of the form
 \[
@@ -484,9 +750,29 @@ where $A_1$, $A_2$, $A_3$ are isomorphic to $A$ and $B_1$, $B_2$, $B_3$ are isom
 
 By studying Definition~\ref{DefFlowCore} and Proposition~\ref{RemFlowNorm} we can see how a weakly streamlined derivation can be built. The proof is given in the full version of this paper.
 
+\begin{lemma}\label{LemStreamlinedNorm}
+Given a derivation $\Phi$ containing the atoms $a_1,\dots,a_n$ such that\/ $\Norm(\Phi,a_1,\dots,a_{k-1})$ and\/ $\Norm(\Phi,a_1,\dots,a_k)$ exist for some $0\leq k\leq n$, if\/ $\Norm(\Phi,a_1,\dots,a_{k-1})$ is weakly streamlined and none of the atoms $a_k,\dots,a_n$ occur in interaction nor cointeraction instances in\/ $\Norm(\Phi,a_1,\dots,a_{k-1})$ then
+\begin{itemize}
+ \item none of the atoms $a_{k+1},\dots,a_n$ occur in interaction nor cointeraction instances in $\Norm(\Phi,a_1,\dots,a_k)$ and
+ \item $\Norm(\Phi,a_1,\dots,a_n)$ is weakly streamlined.
+\end{itemize}
+\end{lemma}
+
+\begin{proof}
+Refer to the atomic flow in Proposition~\ref{PropFlowNorm} to observe the following:
+\begin{itemize}
+ \item The only atoms which occur in (co)interaction instances in $\Norm(\Phi,a_1,\dots,a_k)$ which did not in $\Norm(\Phi,a_1,\dots,a_{k-1})$ are $a_k$ and $\bar a_k$.
+ \item The only interaction and cointeraction nodes mapped to by $a_k$ in the atomic flow associated with $\Norm(\Phi,a_1,\dots,a_k)$ are the once that are evidenced and since the red and the green edges never coincide there can be no path between them. Furthermore, since $\Norm(\Phi,a_1,\dots,a_{k-1})$ is weakly streamlined a path from an interaction to a cointeraction vertex in the atomic flow associated with $\Norm(\Phi,a_1,\dots,a_k)$ must contain the red edge between $B_1$ and $B_2$ or the green edge between $A_2$ and $A_3$. However, $a_k$ and $\bar a_k$ map to these edges so there can be no path from an interaction to a cointeraction vertex.
+\end{itemize}
+\end{proof}
+
 \begin{theorem}
 Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, there are atoms $a_1,\dots,a_n$ in $\Phi$ such that $\vlder{\Norm(\Core(\Phi),a_1,\dots,a_n)}{}{\beta}{\alpha}$ is weakly streamlined.
 \end{theorem}
+
+\begin{proof}
+Choose $a_1,\dots,a_n$ and their duals such that no other atom maps to a path from an interaction to a cointeraction node in the atomic flow associated with $\Phi$, then the result follows by Proposition~\ref{PropStreamlinedCore} and Lemma~\ref{LemStreamlinedNorm}.
+\end{proof}
 
 %===========================================
 \section{Conclusion}
