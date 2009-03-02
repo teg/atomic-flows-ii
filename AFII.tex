@@ -1,61 +1,43 @@
 \documentclass[a4paper]{llncs}
 
 \usepackage[lutzsyntax]{virginialake}\aftrianglefalse
-%\usepackage[urw-garamond]{mathdesign}
-
+\usepackage[urw-garamond]{mathdesign}
+\usepackage{hyperref}
 
 \begin{document}
 
 \title{Normalisation Control in Deep Inference\\ via Atomic Flows II}
 
-\author{Alessio Guglielmi\inst{1,2} \and Tom Gundersen\inst{1}}
+\author{Alessio Guglielmi\inst{1,2} and Tom Gundersen\inst{1}}
 \institute{University of Bath, Bath BA2 7AY, UK \and INRIA, Nancy-Grand Est, France}
 
 \thanks{Guglielmi is supported by EPSRC grant EP/E042805/1 \emph{Complexity and Non-determinism in Deep Inference} and by an ANR \emph{Senior Chaire d'Excellence} titled \emph{Identity and Geometric Essence of Proofs}. Gundersen is supported by an \emph{Overseas Research Scholarship} and a \emph{Research Studentship} both of the University of Bath.}
 
 \maketitle
 
-%TODO: The introduction should have a better underlying scheme (what do you want to convey here?) and should contain some moral statements about what we do here.
 
-%What?
-We are interested in normalising derivations in propositional logic. To us, normalisation is the elimination of `unreachable' parts of derivations. An abstract depiction of an example of an unreachable part of a derivation is the following
-\[
-\atomicflow{
-( 0  , 4  )*{\afaidnw{}{}};
-( 6  , 3  )*{\afvjd6{}a};
-( 0  , 2.3)*{\aflabelright{\bar a}};
-( 2  , 2  )*{\afvj4};
-(-2  , 1  )*{\afvju6a{}};
-( 4  ,-2  )*{\afaiunw{}{}};
-(-3.5, 0  )*{\invisiblemark};
-( 7.5, 0  )*{\invisiblemark}}
-\quad,
-\]
-where the atom $\bar a$ is first created by an axiom and then destroyed by a cut (represented by horizontal bars), hence never reaching the premiss nor the conclusion of the derivation.
+We are interested in the normalisation of deep-inference derivations in propositional classical logic. Cuts are admissible from proofs and, dually, axioms are admissible from contradictions. However, neither are admissible from derivations. We therefore work with \emph{streamlining}, introduced in \cite{GuglGund:07:Normalis:lr}, a new, symmetric, notion of normalisation, which generalises both cut and axiom elimination.
 
-%TODO: why, which problems, too generic
-%TODO: language for what
-%Why?
-%We believe that understanding normalisation is crucial for solving problems related to complexity and identity of proofs. To argue about these complicated notions a simple language is needed and in particular a language without bureaucracy.
+At the core of our work lie \emph{atomic flows}, which were introduced in \cite{GuglGund:07:Normalis:lr}. Atomic flows are graphs, similar to Buss flow graphs \cite{Buss:91:The-Unde:uq} and proof nets \cite{Gira:87:Linear-L:wm}, obtained from derivations by tracing their atom occurrences and forgetting everything except how atoms are created, copied, contracted and destroyed. Atomic flows are largely syntax independent and bureaucracy free (in the sense of Girard \cite{Gira:89:Geometry:sh}). We showed how atomic flows are useful in defining new normal forms for derivations and in arguing about normalisation.
 
-%State of affairs
-At the core of our work lie \emph{atomic flows}, which were introduced in \cite{GuglGund:07:Normalis:lr}. Atomic flows are graphs obtained by removing all logical information from derivations and only retaining the structural part. They are largely syntax independent and bureaucracy free. It was shown how atomic flows are useful in defining new normal forms and in arguing about normalisation.
+In particular, streamlining was defined based on atomic flows. Intuitively, a derivation is streamlined if every path in the associated atomic flow can be extended to reach the top or the bottom of the flow. Seen from the point of view of derivations it means that if you pick an atom occurrence from a streamlined derivation you can trace it up to the premiss or down to the conclusion. Since a proof has no atoms in its premiss (only the unit `true'), tracing atom occurrences upwards from a cut can not lead to the premiss. Hence, a streamlined proof is cut free.
 
-In particular, \emph{streamlining} was defined based on atomic flows. Streamlining is an up-down symmetric generalisation of cut elimination, which applies to derivations as well as to proofs. Intuitively, a derivation is streamlined if every path in the associated atomic flow can be extended to reach the top or the bottom of the atomic flow. Seen from the point of view of derivations it means that if you pick an atom occurrence from a streamlined derivation you can trace it up to the premiss or down to the conclusion. Since a proof has no atoms in its premiss (only the unit `true'), tracing atom occurrences upwards from a cut can not lead to the premiss. Hence,  a streamlined proof is cut free.
+In this paper, we present a new streamlining procedure. Similarly to our previous result the procedure is based on a particular way of gluing together pieces of derivation, which is possible due to the symmetries of deep inference. However, the novelties are that no transformation of the original derivation is needed before the pieces are glued together, and much less information about the atomic flow associated with the derivation is used to guide the procedure. In particular, we only need to know which axioms are connected with which cuts. Since we use less information, all the axioms and cuts we are eliminating are indistinguishable, so, unlike the previous procedures, no strategy for streamlining is necessary.
 
-In this paper, we present a new streamlining procedure based on a global transformation. The idea is that only information about the connectedness of axioms and cuts is needed to guide streamlining. Furthermore, no transformation of the original derivation is required, except for removing the connected axioms and cuts. Due to the symmetries of deep inference, we are able to paste together copies of the original derivation, with some axioms and cuts removed, to obtain a derivation in normal form.
+Contrary to what one might expect from cut elimination, the complexity of the procedure is not determined by the number of cuts being eliminated. The complexity is $O(2^n)$, where $n$ is the number of atoms which occur in at least one of the cuts we eliminate. In particular, every step of the procedure eliminate all the cuts where a given atom occurs, making termination a triviality.
 
-The novelty of this method is that the complexity of the procedure is decided by the number of atoms which occur in axioms and cuts that are eliminated, as opposed to the number of cuts. Furthermore, given the number of atoms being eliminated we can build a `skeleton' where we can plug the original derivation to obtain a streamlined derivation. This skeleton only depends on the number of atoms and not on the structure of the derivation being streamlined. As was also true of our previous results, logical inference rules and logical connectives do not play a role, which goes contrary to what is traditionally expected from cut elimination.
+Also somewhat surprising is the fact that if we consider the original derivation as a `black box', then the streamlined derivation only depends on the number of atoms being eliminated, not on the contents of the `black box'. We can therefore present our normalisation procedure as building a `skeleton', for a given number of atoms, in which we can plug derivations in order to streamline them.
 
 \newcommand{\SKS}{\mathsf{SKS}}
-%Constraints
-The results in this paper are presented in the deep-inference formalism the calculus of structures \cite{Gugl:06:A-System:kl}, in particular system $\SKS$ \cite{BrunTiu:01:A-Local-:mz}, but we strive at generality and it should not be difficult to adapt our results to any deep inference formalism and any propositional system as long as we have atomic structural rules and linear logical rules (something we always expect in deep inference).
+The results in this paper are presented in the deep-inference formalism the calculus of structures \cite{Gugl:06:A-System:kl}, in particular system $\SKS$ \cite{BrunTiu:01:A-Local-:mz,Brun:04:Deep-Inf:rq}, but we strive at generality and it should not be difficult to adapt our results to any deep-inference formalism and any propositional system as long as we have atomic structural rules and linear logical rules (something we always expect in deep inference and something which is not achievable elsewhere).
 
-For the full version of this paper please refer to \url{http://www.jklm.no/teg/AFII.pdf}
+In the future, we believe it will be possible to improve on these results by extending them to modal \cite{Brun:07:Deep-Seq:fk,HeinStew:05:Purity-T:tg,StewStou:05:A-System:tg,Stou:06:A-Deep-I:rt} and first order \cite{Brun:04:Deep-Inf:rq,Brun:06:Cut-Elim:cq} logics and by making the procedure quasipolynomial, along the lines of a quasipolynomial cut-elimination procedure we are working on.
+
+For the full version of this paper please refer to \url{http://cs.bath.ac.uk/ag/p/NormContrDIAtFl2.pdf}
 %===============================================================================
 
 
 \bibliographystyle{alpha}
-\bibliography{di-biblio}
+\bibliography{biblio}
 
 \end{document}
