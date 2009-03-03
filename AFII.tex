@@ -759,18 +759,18 @@ then the atomic flow of $\vlder{\Norm(\Phi,a_1,\dots,a_n)}{}{\beta}{\alpha}$ is
 where $A_1$, $A_2$, $A_3$ are isomorphic to $A$ and $B_1$, $B_2$, $B_3$ are isomorphic to $B$ and all the edges that might be in paths from the evidenced interaction vertex are colored in red and all the edges that might be in paths from the evidenced cointeraction vertex are colored in green.
 \end{remark}
 
-By studying Definition~\ref{DefFlowCore} and Proposition~\ref{RemFlowNorm} we can see how a weakly streamlined derivation can be built. The proof is given in the full version of this paper.
+By studying Definition~\ref{DefFlowCore} and Remark~\ref{RemFlowNorm} we can see how a weakly streamlined derivation can be built.
 
 \begin{lemma}\label{LemStreamlinedNorm}
 Given a derivation $\Phi$ containing the atoms $a_1,\dots,a_n$ such that\/ $\Norm(\Phi,a_1,\dots,a_{k-1})$ and\/ $\Norm(\Phi,a_1,\dots,a_k)$ exist for some $0\leq k\leq n$, if\/ $\Norm(\Phi,a_1,\dots,a_{k-1})$ is weakly streamlined and none of the atoms $a_k,\dots,a_n$ occur in interaction nor cointeraction instances in\/ $\Norm(\Phi,a_1,\dots,a_{k-1})$ then
 \begin{itemize}
  \item none of the atoms $a_{k+1},\dots,a_n$ occur in interaction nor cointeraction instances in $\Norm(\Phi,a_1,\dots,a_k)$ and
- \item $\Norm(\Phi,a_1,\dots,a_n)$ is weakly streamlined.
+ \item $\Norm(\Phi,a_1,\dots,a_k)$ is weakly streamlined.
 \end{itemize}
 \end{lemma}
 
 \begin{proof}
-Refer to the atomic flow in Proposition~\ref{PropFlowNorm} to observe the following:
+Refer to the atomic flow in Remark~\ref{RemFlowNorm} to observe the following:
 \begin{itemize}
  \item The only atoms which occur in (co)interaction instances in $\Norm(\Phi,a_1,\dots,a_k)$ which did not in $\Norm(\Phi,a_1,\dots,a_{k-1})$ are $a_k$ and $\bar a_k$.
  \item The only interaction and cointeraction nodes mapped to by $a_k$ in the atomic flow associated with $\Norm(\Phi,a_1,\dots,a_k)$ are the once that are evidenced and since the red and the green edges never coincide there can be no path between them. Furthermore, since $\Norm(\Phi,a_1,\dots,a_{k-1})$ is weakly streamlined a path from an interaction to a cointeraction vertex in the atomic flow associated with $\Norm(\Phi,a_1,\dots,a_k)$ must contain the red edge between $B_1$ and $B_2$ or the green edge between $A_2$ and $A_3$. However, $a_k$ and $\bar a_k$ map to these edges so there can be no path from an interaction to a cointeraction vertex.
@@ -782,7 +782,7 @@ Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, there are atoms $a_1,\dots,a
 \end{theorem}
 
 \begin{proof}
-Choose $a_1,\dots,a_n$ and their duals such that no other atom maps to a path from an interaction to a cointeraction node in the atomic flow associated with $\Phi$, then the result follows by Proposition~\ref{PropStreamlinedCore} and Lemma~\ref{LemStreamlinedNorm}.
+Choose $a_1,\dots,a_n$ such that no atoms except for $a_1,\dots,a_n$ and their duals, map to a path from an interaction to a cointeraction vertex in the atomic flow associated with $\Phi$, then the result follows by Proposition~\ref{PropStreamlinedCore} and Lemma~\ref{LemStreamlinedNorm}.
 \end{proof}
 
 %===========================================
