@@ -229,9 +229,9 @@ For the purposes of this paper, which of these three derivations we use is iness
 
 %TODO: make sure we know what atomic flows are
 
-Streamlining is an up-down symmetric generalisation of cut-elimination, which applies to derivations as well as to proofs. The cut is not admissible from derivations, so we define a streamlined derivation to be a derivation with a specific shape, and in the special case when the derivation has no premiss, \emph{i.e.}, it is a proof, it is cut-free. Intuitively a derivation is streamlined if its associated atomic flow contains no `dead ends', where a dead end is a path which does not start at the premiss nor end at the conclusion. We recall the definition from \cite{GuglGund:07:Normalis:lr}:
+Streamlining is an up-down symmetric generalisation of cut elimination. Cut elimination is asymmetric since the cut is only admissible from derivations without premiss. However, deep-	inference derivations are up-down symmetric so it would be natural to have a symmetric normal form. Streamlining generalises cut elimination in the sense that a streamlined derivation without premiss is cut-free. Intuitively a derivation is streamlined if every path in its associated atomic flow can be extended to reach either the top or the bottom of the flow. We recall the definition from \cite{GuglGund:07:Normalis:lr}:
 
-%TODO: what does the derivation mean
+%TODO: what does the representation mean
 
 %---------------------------------------
 \begin{definition}
@@ -270,6 +270,8 @@ An $\SKS$ derivation is \emph{streamlined} if its associated atomic flow can be 
 %TODO: Why is cut elimination a special case of streamlining?
 %TODO: what is a path?
 
+Note that a derivation with no premiss has no upper edges, so the top left box in the above atomic flow is empty and hence, so is the boxes containing the coweakening and cut vertices.
+
 The main challenge in streamlining a derivation is to make sure there are no paths from axioms to cuts. Once this is achieved it is straightforward, as shown in \cite{GuglGund:07:Normalis:lr}, to use (confluent and strongly normalising) weakening reductions to obtain a streamlined derivation. This motivates the following definition:
 
 %---------------------------------------
@@ -302,8 +304,7 @@ An $\SKS$ derivation is \emph{weakly streamlined} if its associated atomic flow 
 \]
 \end{definition}
 
-
-%TODO: structure of the section
+We will now show how to make a derivation weakly streamlined. This is done in two steps. First we extract the \emph{core} of the derivation, then we construct the \emph{normaliser}, which is used to plug several copies of the core together to create a weakly streamlined derivation.
 
 \subsection{The Core}
 
