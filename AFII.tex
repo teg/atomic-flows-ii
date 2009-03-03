@@ -308,7 +308,7 @@ We will now show how to make a derivation weakly streamlined. This is done in tw
 
 \subsection{The Core}
 
-The \emph{core of a derivation} is obtained by removing each pair of axiom and cut instances that is connected by a path in the atomic flow associated to the derivation. As can be seen in Definition~\ref{DefFlowCore} below this leaves most of the atomic flow associated with the original derivation untouched. Furthermore the core of a derivation is clearly weakly streamlined.
+The \emph{core of a derivation} is obtained by removing each pair of axiom and cut instances that is connected by a path in the atomic flow associated with the derivation. As can be seen in Definition~\ref{DefFlowCore} below this leaves most of the atomic flow associated with the original derivation untouched. Furthermore the core of a derivation is clearly weakly streamlined.
 
 The core of a derivation is the basic building block we will use when creating a weakly streamlined derivation in the next subsection. Note that when creating the core the only information needed is whether two axiom and cut instances are connected or not. We do not need to study or manipulate the atomic flow any further. This is in contrast to the local procedures which were employed in \cite{GuglGund:07:Normalis:lr}.
 
@@ -325,54 +325,58 @@ Given an atomic flow
 \[
 A=\atomicflow
 {
-(-21, 8.5)*{\afvjm{9}};
+(-20, 8.5)*{\afvjm{9}};
 (-13, 8)*{\afaidm{}{}{}{}{}{}};
-( -5, 8.5)*{\afvjm{9}};
+( -6, 8.5)*{\afvjm{9}};
 (-18, 0)*{\affr{8}{8}};
-(-16, 2)*{a_1};
+(-16, 2)*{\phi_1};
 ( -8, 0)*{\affr{8}{8}};
-( -6, 2)*{\bar a_1};
-( -5,-8.5)*{\afvjm{9}};
+( -6, 2)*{\phi'_1};
+( -6,-8.5)*{\afvjm{9}};
 (-13,-8)*{\afaium{}{}{}{}{}{}};
-(-21,-8.5)*{\afvjm{9}};
+(-20,-8.5)*{\afvjm{9}};
 %------------
 (0,0)*{\cdots};
 %------------
-(21, 8.5)*{\afvjm{9}};
+(20, 8.5)*{\afvjm{9}};
 (13, 8)*{\afaidm{}{}{}{}{}{}};
-( 5, 8.5)*{\afvjm{9}};
+( 6, 8.5)*{\afvjm{9}};
 ( 8, 0)*{\affr{8}{8}};
-(10, 2)*{a_n};
+(10, 2)*{\phi_n};
 (18, 0)*{\affr{8}{8}};
-(20, 2)*{\bar a_n};
-( 5,-8.5)*{\afvjm{9}};
+(20, 2)*{\phi'_n};
+( 6,-8.5)*{\afvjm{9}};
 (13,-8)*{\afaium{}{}{}{}{}{}};
-(21,-8.5)*{\afvjm{9}};
+(20,-8.5)*{\afvjm{9}};
 %------------
-(33, 11)*{\afvjm4};
+(35, 11)*{\afvjm4};
 %---
-( 33, 5)*{\affr{18}8};
-( 28, 5)*{\copy\contrup};
-( 33, 5)*{\copy\weakdown};
-( 38, 5)*{\copy\contrdown};
-( 48, 5)*{\affr88};
-( 48, 5)*{\copy\interdown};
+( 35, 5)*{\affr{18}8};
+( 42.8, 7)*{\psi_1};
+( 30, 5)*{\copy\contrup};
+( 35, 5)*{\copy\weakdown};
+( 40, 5)*{\copy\contrdown};
+( 50, 5)*{\affr88};
+( 52.8, 7)*{\psi_2};
+( 50, 5)*{\copy\interdown};
 %---
-( 28, 0)*{\afvjm2};
-( 38, 0)*{\afvjm2};
-( 48, 0)*{\afvjm2};
+( 30, 0)*{\afvjm2};
+( 40, 0)*{\afvjm2};
+( 50, 0)*{\afvjm2};
 %---
-( 28,-5)*{\affr88};
-( 28,-5)*{\copy\interup};
-( 43,-5)*{\affr{18}8};
-( 38,-5)*{\copy\contrup};
-( 43,-5)*{\copy\weakup};
-( 48,-5)*{\copy\contrdown};
+( 30,-5)*{\affr88};
+( 32.8,-3)*{\psi_3};
+( 30,-5)*{\copy\interup};
+( 45,-5)*{\affr{18}8};
+( 52.8,-3)*{\psi_4};
+( 40,-5)*{\copy\contrup};
+( 45,-5)*{\copy\weakup};
+( 50,-5)*{\copy\contrdown};
 %---
-( 43,-11)*{\afvjm4};
+( 45,-11)*{\afvjm4};
 }\quad,
 \]
-the \emph{core of $A$} is defined to be
+where, for $1\leq i\leq n$, $\phi_i$ is connected and contains no (co)interaction vertices, the \emph{core of $A$} is defined to be
 \[
 \Core(A)=
 \atomicflow
@@ -383,7 +387,7 @@ the \emph{core of $A$} is defined to be
 (-17,10)*{\copy\contrup};
 (-17, 5)*{\afvjm{2}};
 (-18, 0)*{\affr{8}{8}};
-(-16, 2)*{a_1};
+(-16, 2)*{\phi_1};
 (-21,-10)*{\afvjm{12}};
 (-17,-15)*{\afvj2};
 (-17,-10)*{\affr{6}{8}};
@@ -396,7 +400,7 @@ the \emph{core of $A$} is defined to be
 ( -9, 5)*{\afvjm{2}};
 ( -5,10)*{\afvjm{12}};
 ( -8, 0)*{\affr{8}{8}};
-( -6, 2)*{\bar a_1};
+( -6, 2)*{\phi'_1};
 ( -9,-15)*{\afvj2};
 ( -9,-10)*{\affr{6}{8}};
 ( -9,-10)*{\copy\contrdown};
@@ -412,7 +416,7 @@ the \emph{core of $A$} is defined to be
 ( 9, 5)*{\afvjm{2}};
 ( 5,10)*{\afvjm{12}};
 ( 8, 0)*{\affr{8}{8}};
-(10, 2)*{a_n};
+(10, 2)*{\phi_n};
 ( 9,-15)*{\afvj2};
 ( 9,-10)*{\affr{6}{8}};
 ( 9,-10)*{\copy\contrdown};
@@ -426,37 +430,40 @@ the \emph{core of $A$} is defined to be
 (17,10)*{\copy\contrup};
 (17, 5)*{\afvjm{2}};
 (18, 0)*{\affr{8}{8}};
-(20, 2)*{\bar a_n};
+(20, 2)*{\phi'_n};
 (21,-10)*{\afvjm{12}};
 (17,-15)*{\afvj2};
 (17,-10)*{\affr{6}{8}};
 (17,-10)*{\copy\contrdown};
 (17, -5)*{\afvjm{2}};
 %---------
-(33, 12.5)*{\afvjm7};
+(35, 11)*{\afvjm4};
 %---
-( 33, 5)*{\affr{18}8};
-( 28, 5)*{\copy\contrup};
-( 33, 5)*{\copy\weakdown};
-( 38, 5)*{\copy\contrdown};
-( 48, 5)*{\affr88};
-( 48, 5)*{\copy\interdown};
+( 35, 5)*{\affr{18}8};
+( 42.8, 7)*{\psi_1};
+( 30, 5)*{\copy\contrup};
+( 35, 5)*{\copy\weakdown};
+( 40, 5)*{\copy\contrdown};
+( 50, 5)*{\affr88};
+( 52.8, 7)*{\psi_2};
+( 50, 5)*{\copy\interdown};
 %---
-( 28, 0)*{\afvjm2};
-( 38, 0)*{\afvjm2};
-( 48, 0)*{\afvjm2};
+( 30, 0)*{\afvjm2};
+( 40, 0)*{\afvjm2};
+( 50, 0)*{\afvjm2};
 %---
-( 28,-5)*{\affr88};
-( 28,-5)*{\copy\interup};
-( 43,-5)*{\affr{18}8};
-( 38,-5)*{\copy\contrup};
-( 43,-5)*{\copy\weakup};
-( 48,-5)*{\copy\contrdown};
+( 30,-5)*{\affr88};
+( 32.8,-3)*{\psi_3};
+( 30,-5)*{\copy\interup};
+( 45,-5)*{\affr{18}8};
+( 52.8,-3)*{\psi_4};
+( 40,-5)*{\copy\contrup};
+( 45,-5)*{\copy\weakup};
+( 50,-5)*{\copy\contrdown};
 %---
-( 43,-12.5)*{\afvjm7};
-}\quad,
+( 45,-11)*{\afvjm4};
+}\quad.
 \]
-where the subflow of $A$ labelled $a_i$ (resp., $\bar a_i$) is isomorphic to the subflow of $\Core(A)$ labelled $a_i$ (resp., $\bar a_i$) for every $1\leq i\leq n$ and the rightmost subflow of $A$ is isomorphic to the rightmost sublfow of $\Core(A)$.
 \end{definition}
 
 We now define the core of a derivation. The core is weakly streamlined at the expense of new atoms in the premiss and conclusion. In the next section we will see how we can glue several cores together to eliminate these atoms, but still obtain a weakly streamlined derivation.
@@ -467,11 +474,13 @@ We now define the core of a derivation. The core is weakly streamlined at the ex
 Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ with associated atomic flow $A$, a \emph{core of\/ $\Phi$} is defined to be a derivation $\vlder{\Core(\Phi)}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}$ with associated atomic flow $\Core(A)$.
 \end{definition}
 
-To obtain the core of a derivation is straightforward and a detailed proof can be found in the full version of this paper.
+By looking at the atomic flows the following proposition is immediate:
 
 \begin{proposition}\label{PropStreamlinedCore}
 Any $\Core(\Phi)$ is weakly streamlined.
 \end{proposition}
+
+To obtain the core of a derivation is straightforward and we now show how.
 
 \begin{lemma}\label{LemSuperSwitch}
 Given a context $\xi\vlhole$ and a formula $\alpha$ there exist derivations $\vlder{}{\{\swi\}}{\xi\{\alpha\}}{\vls(\alpha.\xi\{\ttt\})}$ and $\vlder{}{\{\swi\}}{\vls[\xi\{\fff\}.\alpha]}{\xi\{\alpha\}}$.
