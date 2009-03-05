@@ -229,7 +229,7 @@ For the purposes of this paper, which of these three derivations we use is iness
 
 %TODO: make sure we know what atomic flows are
 
-Streamlining is an up-down symmetric generalisation of cut elimination. Cut elimination is asymmetric since the cut is only admissible from derivations without premiss. However, deep-	inference derivations are up-down symmetric so it would be natural to have a symmetric normal form. Streamlining generalises cut elimination in the sense that a streamlined derivation without premiss is cut-free. Intuitively a derivation is streamlined if every path in its associated atomic flow can be extended to reach either the top or the bottom of the flow. We recall the definition from \cite{GuglGund:07:Normalis:lr}:
+Streamlining is an up-down symmetric generalisation of cut elimination. Cut elimination is asymmetric since the cut is only admissible from derivations without premiss. However, deep-inference derivations are up-down symmetric so it would be natural to have a symmetric normal form. Streamlining generalises cut elimination in the sense that a streamlined derivation without premiss is cut-free. Intuitively a derivation is streamlined if every path in its associated atomic flow can be extended to reach either the top or the bottom of the flow. We recall the definition from \cite{GuglGund:07:Normalis:lr}:
 
 %TODO: what does the representation mean
 
@@ -270,7 +270,7 @@ An $\SKS$ derivation is \emph{streamlined} if its associated atomic flow can be 
 %TODO: Why is cut elimination a special case of streamlining?
 %TODO: what is a path?
 
-Note that a derivation with no premiss has no upper edges, so the top left box in the above atomic flow is empty and hence, so is the boxes containing the coweakening and cut vertices.
+Note that an atomic flow associated to a proof has no upper edges, so the top left and the two bottom left boxes in the above atomic flow would be empty.
 
 The main challenge in streamlining a derivation is to make sure there are no paths from axioms to cuts. Once this is achieved it is straightforward, as shown in \cite{GuglGund:07:Normalis:lr}, to use (confluent and strongly normalising) weakening reductions to obtain a streamlined derivation. This motivates the following definition:
 
@@ -304,21 +304,17 @@ An $\SKS$ derivation is \emph{weakly streamlined} if its associated atomic flow 
 \]
 \end{definition}
 
-We will now show how to make a derivation weakly streamlined. This is done in two steps. First we extract the \emph{core} of the derivation, then we construct the \emph{normaliser}, which is used to plug several copies of the core together to create a weakly streamlined derivation.
+We will now show how weakly streamline a derivation. This is done in two steps. First we extract the \emph{core} of the derivation, then we construct the \emph{normaliser}. The normaliser is used to plug several copies of the core together to create a weakly streamlined derivation.
 
 \subsection{The Core}
 
-The \emph{core of a derivation} is obtained by removing each pair of axiom and cut instances that is connected by a path in the atomic flow associated with the derivation. As can be seen in Definition~\ref{DefFlowCore} below this leaves most of the atomic flow associated with the original derivation untouched. Furthermore the core of a derivation is clearly weakly streamlined.
+In this subsection we wish to find a way to modify a derivation to make it weakly streamlined. Since weak streamlining is defined in terms of atomic flows, we will define what we do to atomic flows first and then show that an analogous transformation  can be done to derivations later. The \emph{core of an atomic flow} is obtained by removing each connected pair of axiom and cut vertices. As can be seen in Definition~\ref{DefFlowCore} below this leaves most of the atomic flow untouched and it produces a weakly streamlined atomic flow. The definition of the \emph{core of a derivation} follows naturally.
 
-The core of a derivation is the basic building block we will use when creating a weakly streamlined derivation in the next subsection. Note that when creating the core the only information needed is whether two axiom and cut instances are connected or not. We do not need to study or manipulate the atomic flow any further. This is in contrast to the local procedures which were employed in \cite{GuglGund:07:Normalis:lr}.
+Notice that the core of a derivation does not preserve the premiss and conclusion. In the next subsection we will see how we can glue several cores together to obtain a weakly streamlined derivation with the same premiss and conclusion as the original.
 
-We first define what the core of an atomic flow is and then the definition of the core of a derivation will follow.
+We now define the core of an atomic flow:
 
 \newcommand{\Core}{\mathsf{Core}}
-
-%TODO: edges are about to fall off, the space is not even
-%TODO: I'm not sure using atoms to label flows is a good idea, because, given an atom, one would expect a canonical flow to correspond to it.
-%TODO: nobody can understand this definition
 
 \begin{definition}\label{DefFlowCore}
 Given an atomic flow
@@ -466,21 +462,19 @@ where, for $1\leq i\leq n$, $\phi_i$ is connected and contains no (co)interactio
 \]
 \end{definition}
 
-We now define the core of a derivation. The core is weakly streamlined at the expense of new atoms in the premiss and conclusion. In the next section we will see how we can glue several cores together to eliminate these atoms, but still obtain a weakly streamlined derivation.
-
-%TODO: at this point the reader is lost, what are you trying to convey?
+The core of a derivation is now defined based on the core of its atomic flow:
 
 \begin{definition}\label{DefCore}
 Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ with associated atomic flow $A$, a \emph{core of\/ $\Phi$} is defined to be a derivation $\vlder{\Core(\Phi)}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}$ with associated atomic flow $\Core(A)$.
 \end{definition}
 
-By looking at the atomic flows the following proposition is immediate:
+The reason for defining the core was to get a weakly streamlined derivation. The following proposition shows that we have done this. It can easily be verified by studying the core of an atomic flow above.
 
 \begin{proposition}\label{PropStreamlinedCore}
 Any $\Core(\Phi)$ is weakly streamlined.
 \end{proposition}
 
-To obtain the core of a derivation is straightforward and we now show how.
+To extract the core of a derivation is straightforward and we now show how.
 
 \begin{lemma}\label{LemSuperSwitch}
 Given a context $\xi\vlhole$ and a formula $\alpha$ there exist derivations $\vlder{}{\{\swi\}}{\xi\{\alpha\}}{\vls(\alpha.\xi\{\ttt\})}$ and $\vlder{}{\{\swi\}}{\vls[\xi\{\fff\}.\alpha]}{\xi\{\alpha\}}$.
@@ -604,7 +598,6 @@ We build $\Core(\Phi)$ as follows:
 \]
 where $a_1,\dots,a_n$ are distinct and pairwise non-dual atoms and there are no atoms in common between $b_1,\dots,b_k$ and their duals and $c_1,\dots,c_l$ and their duals, $\Phi'$ exists by Lemma~\ref{LemDecompInt} and $\Psi_1$ and $\Psi_2$ exist by Lemma~\ref{LemGenericContraction}.
 \end{proof}
-
 
 \subsection{The Normaliser}
 
