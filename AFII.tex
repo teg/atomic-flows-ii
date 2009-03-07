@@ -3,7 +3,7 @@
 \usepackage[lutzsyntax]{virginialake}\aftrianglefalse
 \usepackage[urw-garamond]{mathdesign}
 \usepackage{hyperref}
-\usepackage{draftwatermark}
+%\usepackage{draftwatermark}
 
 \begin{document}
 
@@ -465,16 +465,16 @@ where, for $1\leq i\leq n$, $\phi_i$ is connected and contains no (co)interactio
 The core of a derivation is now defined based on the core of its atomic flow:
 
 \begin{definition}\label{DefCore}
-Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ with associated atomic flow $A$, a \emph{core of\/ $\Phi$} is defined to be a derivation $\vlder{\Core(\Phi)}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}$ with associated atomic flow $\Core(A)$.
+Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ with associated atomic flow $A$, a \emph{core of\/ $\Phi$} is defined to be a derivation $\vlder{}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}$ with associated atomic flow $\Core(A)$.
 \end{definition}
 
-The reason for defining the core was to get a weakly streamlined derivation. The following proposition shows that we have done this. It can easily be verified by studying the core of an atomic flow above.
+The reason for defining the core was to get a weakly streamlined derivation. The following proposition shows that we have done this. It can easily be verified by studying the core of the atomic flow above.
 
 \begin{proposition}\label{PropStreamlinedCore}
-Any $\Core(\Phi)$ is weakly streamlined.
+A core of a derivation is weakly streamlined.
 \end{proposition}
 
-To extract the core of a derivation is straightforward and we now show how.
+Notice that a core of a derivation is not necessarily unique. However, we will now show how a core can be extracted, and we will single out the core obtained in this way and refer to it as \emph{the core}.
 
 \begin{lemma}\label{LemSuperSwitch}
 Given a context $\xi\vlhole$ and a formula $\alpha$ there exist derivations $\vlder{}{\{\swi\}}{\xi\{\alpha\}}{\vls(\alpha.\xi\{\ttt\})}$ and $\vlder{}{\{\swi\}}{\vls[\xi\{\fff\}.\alpha]}{\xi\{\alpha\}}$.
@@ -575,8 +575,8 @@ Using Lemma~\ref{LemSuperSwitch} apply the following transformations to each of 
 Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$.
 \end{lemma}
 
-\begin{theorem}
-Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, the derivation $\Core(\Phi)$ exists.
+\begin{theorem}\label{ThmExistCore}
+Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, a core of $\Phi$ exists.
 \end{theorem}
 
 \begin{proof}
@@ -598,6 +598,10 @@ We build $\Core(\Phi)$ as follows:
 \]
 where $a_1,\dots,a_n$ are distinct and pairwise non-dual atoms and there are no atoms in common between $b_1,\dots,b_k$ and their duals and $c_1,\dots,c_l$ and their duals, $\Phi'$ exists by Lemma~\ref{LemDecompInt} and $\Psi_1$ and $\Psi_2$ exist by Lemma~\ref{LemGenericContraction}.
 \end{proof}
+
+\begin{definition}
+Given a derivation $\Phi$, a core of $\Phi$ obtained as described in the proof of Theorem~\ref{ThmExistCore} is called \emph{the core of $\Phi$}, denoted $\Core(\Phi)$.
+\end{definition}
 
 \subsection{The Normaliser}
 
