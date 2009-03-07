@@ -29,7 +29,7 @@ In this paper, we present a new streamlining procedure. Similarly to our previou
 
 Contrary to what one might expect from cut elimination, the complexity of the procedure is not determined by the number of cuts being eliminated. The complexity is $O(2^n)$, where $n$ is the number of atoms which occur in at least one of the cuts we eliminate. In particular, every step of the procedure eliminate all the cuts where a given atom occurs, making termination a triviality.
 
-Also somewhat surprising is the fact that if we consider the original derivation as a `black box', then the streamlined derivation only depends on the number of atoms being eliminated, not on the contents of the `black box'. We can therefore present our normalisation procedure as building a `skeleton', for a given number of atoms, in which we can plug derivations in order to streamline them.
+We present our streamlining procedure as an operator, called the \emph{normaliser}. The normaliser can be thought of as a `shape' with holes. To produce a weakly streamlined derivation, a derivation is inserted into the holes and the atoms of the derivation are associated with parts of the shape. Features of the shape are analogous to properties of a normalisation procedure. The fact that the shape is finite gives termination, its size givse the complexity, its asymmetries gives non-determinism, etc.
 
 \newcommand{\SKS}{\mathsf{SKS}}
 The results in this paper are presented in the deep-inference formalism the calculus of structures \cite{Gugl:06:A-System:kl}, in particular system $\SKS$ \cite{BrunTiu:01:A-Local-:mz,Brun:04:Deep-Inf:rq}, but we strive at generality and it should not be difficult to adapt our results to any deep-inference formalism and any propositional system as long as we have atomic structural rules and linear logical rules (something we always expect in deep inference and something which is not achievable elsewhere).
@@ -267,7 +267,6 @@ An $\SKS$ derivation is \emph{streamlined} if its associated atomic flow can be 
 \]
 \end{definition}
 
-%TODO: Why is cut elimination a special case of streamlining?
 %TODO: what is a path?
 
 Note that an atomic flow associated to a proof has no upper edges, so the top left and the two bottom left boxes in the above atomic flow would be empty.
@@ -575,6 +574,14 @@ Using Lemma~\ref{LemSuperSwitch} apply the following transformations to each of 
 Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$.
 \end{lemma}
 
+\newcommand{\contr}{\mathsf{c}}
+\newcommand{\cod}{{\contr{\downarrow}}}
+\newcommand{\cou}{{\contr{\uparrow}}}
+
+\begin{remark}
+In the non-atomic version of system $\SKS$ the derivations shown in Lemma~\ref{LemGenericContraction} correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlder{}{\{\acu,\med\}}{\vls(\alpha.\alpha)}{\alpha}$.
+\end{remark}
+
 \begin{theorem}\label{ThmExistCore}
 Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, a core of $\Phi$ exists.
 \end{theorem}
@@ -608,14 +615,6 @@ Given a derivation $\Phi$, a core of $\Phi$ obtained as described in the proof o
 %TODO: Still, obtaining the core requires knowledge of the original derivation, so, it's not quite clear what is the moral point you are trying to make.
 
 We now show how to build a weakly streamlined derivation. We present the \emph{normaliser}, which is a `skeleton' where we can plug copies of the core of the derivation we want to normalise. The novelty of this method is that no knowledge of the shape of the core is required. The only information needed to build the normaliser is the number of atoms which must be eliminated from the premiss and conclusion of the core in order to obtain the desired derivation.
-
-\newcommand{\contr}{\mathsf{c}}
-\newcommand{\cod}{{\contr{\downarrow}}}
-\newcommand{\cou}{{\contr{\uparrow}}}
-
-\begin{remark}
-In the non-atomic version of system $\SKS$ the derivations shown in Lemma~\ref{LemGenericContraction} correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlder{}{\{\acu,\med\}}{\vls(\alpha.\alpha)}{\alpha}$.
-\end{remark}
 
 \newcommand{\Norm}{\mathsf{Norm}}
 %TODO: the normaliser takes a derivation so it does depend on the core, contradict what was just said
