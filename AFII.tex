@@ -24,7 +24,7 @@ We are interested in the normalisation of deep-inference derivations in proposit
 
 At the core of our work lie \emph{atomic flows}, which were introduced in \cite{GuglGund:07:Normalis:lr}. Atomic flows are graphs, similar to Buss flow graphs \cite{Buss:91:The-Unde:uq} and proof nets \cite{Gira:87:Linear-L:wm}, obtained from derivations by tracing their atom occurrences and forgetting everything except how atoms are created, copied, contracted and destroyed. Atomic flows are largely syntax independent and bureaucracy free (in the sense of Girard \cite{Gira:89:Geometry:sh}). We have shown how atomic flows are useful in defining new normal forms for derivations and in arguing about normalisation.
 
-In particular, streamlining was defined based on atomic flows. Intuitively, a derivation is streamlined if every path in the associated atomic flow can be extended to reach the top or the bottom of the flow. Seen from the point of view of derivations it means; given an atom occurrence in a streamlined derivation either all possible ways of tracing the atom upwards will reach the premiss or all possible ways of tracing the atom downwards will reach the conclusion. Since a proof has no atoms in its premiss (only the unit `true'), tracing atom occurrences upwards from a cut can not lead to the premiss. Hence, a streamlined proof is cut free.
+In particular, streamlining was defined based on atomic flows. Intuitively, a derivation is streamlined if every path in the associated atomic flow can be extended to reach the top or the bottom of the flow. Seen from the point of view of derivations it means; given an atom occurrence in a streamlined derivation, either all possible ways of tracing the atom upwards will reach the premiss or all possible ways of tracing the atom downwards will reach the conclusion. Since a proof has no atoms in its premiss (only the unit `true'), tracing atom occurrences upwards from a cut can not lead to the premiss. Hence, a streamlined proof is cut free.
 
 In this paper, we present a new streamlining procedure. Similarly to our previous result the procedure is based on a particular way of gluing together pieces of derivation, which is possible due to the symmetries of deep inference. However, the novelty is that much less information about the atomic flow associated with the derivation is used to guide the procedure. In particular, we only need to know which axioms are connected with which cuts. Since we use less information, all the axioms and cuts we are eliminating are indistinguishable, so, unlike the previous procedures, no strategy for streamlining is necessary.
 
@@ -473,7 +473,7 @@ Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ with associated atomic flow $
 The reason for defining the core was to get a weakly streamlined derivation. The following proposition shows that we have done this. It can easily be verified by studying the core of the atomic flow above.
 
 \begin{proposition}\label{PropStreamlinedCore}
-A core of a derivation is weakly streamlined.
+A core of a derivation $\Phi$ is weakly streamlined and every atom which maps to a path from an interaction to a cointeraction vertex in the atomic flow associated with $\Phi$ does not occur in an interaction or cointeraction instance in a core of $\Phi$.
 \end{proposition}
 
 Notice that a core of a derivation is not necessarily unique. However, we will now show how a core can be extracted, and we will single out the core obtained in this way and refer to it as \emph{the core}.
@@ -492,11 +492,14 @@ We show how to construct the first derivation, the second one can be done by sym
 {
  \vlin{=}{}{\xi\{\alpha\}}
  {
-  \vlin{\swi}{}{\vls[\vlder{\Psi}{\{\swi\}}{\xi'\{\alpha\}}{\vls(\alpha.\xi'\{\ttt\})}.\beta]}
+  \vlin{=}{}{\vls[\vlder{\Psi}{\{\swi\}}{\xi'\{\alpha\}}{\vls(\alpha.\xi'\{\ttt\})}.\beta]}
   {
-   \vlin{=}{}{\vls(\alpha.[\xi'\{\ttt\}.\beta])}
+  \vlin{\swi}{}{\vls[(\alpha.\xi'\{\ttt\}).\beta]}
    {
-    \vlhy{\vls(\alpha.\xi\{\ttt\})}
+    \vlin{=}{}{\vls(\alpha.[\xi'\{\ttt\}.\beta])}
+    {
+     \vlhy{\vls(\alpha.\xi\{\ttt\})}
+    }
    }
   }
  }
@@ -520,7 +523,25 @@ We now show how the previous lemma can be used to pull axioms out and up and cut
 \begin{lemma}\label{LemDecompInt}
 Given a derivation $\vlder{}{}{\beta}{\alpha}$ with associated atomic flow $\phi$, there exists a derivation
 \[
-\vlder{}{\SKS\setminus\{\aid,\aiu\}}{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(b_m.\bar b_m)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(b_1.\bar b_1)}]}{\vls(\vlinf{\aid}{}{\vls[a_1.\bar a_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha)}
+\vlderivation
+{
+ \vlin{=}{}{\beta}
+ {
+  \vlin{=}{}{\vls[\beta.\vlinf{}{}{\fff}{\vls(b_m.\bar b_m)}.\cdots.\vlinf{}{}{\fff}{\vls(b_1.\bar b_1)}]}
+  {
+   \vlde{}{\SKS\setminus\{\aid,\aiu\}}{\vls[\beta.(b_m.\bar b_m).\cdots.(b_1.\bar b_1)]}
+   {
+    \vlin{=}{}{\vls([a_1.\bar a_1].\cdots.[a_n.\bar a_n].\alpha)}
+    {
+     \vlin{=}{}{\vls(\vlinf{}{}{\vls[a_1.\bar a_1]}{\ttt}.\cdots.\vlinf{}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha)}
+     {
+      \vlhy{\alpha}
+     }
+    }
+   }
+  }
+ }
+}
 \]
 with associated atomic flow $\phi$, for some atoms $a_1,\dots,a_n,b_1,\dots,b_m$.
 \end{lemma}
@@ -607,11 +628,23 @@ We build a core of $\Phi$ as follows:
 {
  \vlde{\Psi_2}{\{\acd,\med\}}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}
  {
-  \vlde{\Phi'}{\SKS\setminus\{\aid,\aiu\}}{{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(c_l.\bar c_l)}.\cdots.\vlinf{\aiu}{}{\fff}{\vls(c_1.\bar c_1)}.(a_n.\bar a_n).\cdots.(a_n.\bar a_n).\cdots.(a_1.\bar a_1).\cdots.(a_1.\bar a_1)]}}
+  \vlin{=}{}{\vls[\beta.(a_n.\bar a_n).\cdots.(a_n.\bar a_n).\cdots.(a_1.\bar a_1).\cdots.(a_1.\bar a_1)]}
   {
-   \vlde{\Psi_1}{\{\acu,\med\}}{{\vls([a_1.\bar a_1].\cdots.[a_1.\bar a_1].\cdots.[a_n.\bar a_n].\cdots.[a_n.\bar a_n].\vlinf{\aid}{}{\vls[b_1.\bar b_1]}{\ttt}.\cdots.\vlinf{\aid}{}{\vls[b_k.\bar b_k]}{\ttt}.\alpha)}}
+   \vlin{=}{}{\vls[\beta.\vlinf{}{}{\fff}{\vls(c_l.\bar c_l)}.\cdots.\vlinf{}{}{\fff}{\vls(c_1.\bar c_1)}.(a_n.\bar a_n).\cdots.(a_n.\bar a_n).\cdots.(a_1.\bar a_1).\cdots.(a_1.\bar a_1)]}
    {
-    \vlhy{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}
+    \vlde{\Phi'}{\SKS\setminus\{\aid,\aiu\}}{\vls[\beta.(c_l.\bar c_l).\cdots.(c_1.\bar c_1).(a_n.\bar a_n).\cdots.(a_n.\bar a_n).\cdots.(a_1.\bar a_1).\cdots.(a_1.\bar a_1)]}
+    {
+     \vlin{=}{}{\vls([a_1.\bar a_1].\cdots.[a_1.\bar a_1].\cdots.[a_n.\bar a_n].\cdots.[a_n.\bar a_n].[b_1.\bar b_1].\cdots.[b_k.\bar b_k].\alpha)}
+     {
+      \vlin{=}{}{\vls([a_1.\bar a_1].\cdots.[a_1.\bar a_1].\cdots.[a_n.\bar a_n].\cdots.[a_n.\bar a_n].\vlinf{}{}{\vls[b_1.\bar b_1]}{\ttt}.\cdots.\vlinf{}{}{\vls[b_k.\bar b_k]}{\ttt}.\alpha)}
+      {
+       \vlde{\Psi_1}{\{\acu,\med\}}{\vls([a_1.\bar a_1].\cdots.[a_1.\bar a_1].\cdots.[a_n.\bar a_n].\cdots.[a_n.\bar a_n].\alpha)}
+       {
+        \vlhy{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}
+       }
+      }
+     }
+    }
    }
   }
  }
@@ -626,31 +659,31 @@ Given a derivation $\Phi$, a core of $\Phi$ obtained as described in the proofs 
 
 \subsection{The Normaliser}
 
-%TODO: Still, obtaining the core requires knowledge of the original derivation, so, it's not quite clear what is the moral point you are trying to make.
+We now present the main result of our work, a family of operators called the \emph{normalisers}. Each normaliser can be thought of as a shape with holes where a derivation can be plugged. The effect of plugging a derivation into a normaliser is the same as adding axioms and cuts to the premiss and conclusion of the derivation, respectively. However, it is done in such a way as not to create any paths between the axioms and cuts we add. It should now be clear how our normalisation works: the core is obtained by removing axioms and cuts, then the normaliser adds the axioms and cuts back, in a way which preserves weak streamlining.
 
-We now show how to build a weakly streamlined derivation. We present the \emph{normaliser}, which is a `skeleton' where we can plug copies of the core of the derivation we want to normalise. The novelty of this method is that no knowledge of the shape of the core is required. The only information needed to build the normaliser is the number of atoms which must be eliminated from the premiss and conclusion of the core in order to obtain the desired derivation.
+The novelty of the normalisers is that each of them is built completely independently from the derivation we later plug into it. Which normaliser to plug a derivation into is decided by the number of atoms we want to eliminate from the premiss and conclusion of the derivation.
 
 \newcommand{\Norm}{\mathsf{Norm}}
-%TODO: the normaliser takes a derivation so it does depend on the core, contradict what was just said
 \begin{definition}
-For every $n\geq 0$ the \emph{normaliser}, $\Norm(\Phi,a_1,\dots,a_n)$, is an operator taking as input a sequence of atoms and a derivation of the form
+For every $n\geq 0$ the \emph{normaliser}, $\Norm_n(\Phi,a_1,\dots,a_n)$, is an operator taking as input a sequence of atoms and a derivation of the form
 \[
 \vlder{\Phi}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}\quad,
 \]
 where $\alpha$ and $\beta$ are formulae and returning a derivation of the form
 \[
-\vlder{\Norm(\Phi,a_1,\dots,a_n)}{}{\beta}{\alpha}\quad.
+\vlder{\Norm_n(\Phi,a_1,\dots,a_n)}{}{\beta}{\alpha}\quad.
 \]
 
-We define $\Norm$ inductively on the number of arguments. Let $\Norm(\Phi)=\Phi$ and for $n>0$ let $\Norm(\Phi,a_1,\dots,a_n)$ be
+%TODO: spacing
+We define $\Norm_n$ inductively on $n$. Let $\Norm_0(\Phi)=\Phi$ and for $n>0$ let $\Norm_n(\Phi,a_1,\dots,a_n)$ be
 \newbox\DeltaTopK
 \setbox\DeltaTopK=
 \hbox{$
 \vlderivation
 {
- \vlde{\Norm(\Phi,a_1,\dots,a_{n-1})}{}{\vls[\beta.(\vlinf{\awu}{}{\ttt}{a_n}.\bar a_n)]}
+ \vlde{\Norm_{n-1}(\Phi,a_1,\dots,a_{n-1})}{}{\vlsbr[\beta.(\vlinf{}{}{\ttt}{a_n}.\bar a_n)]}
  {
-  \vlhy{\vls(\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha)}
+  \vlhy{\vlsbr(\vlinf{}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha)}
  }
 }$
 }
@@ -659,9 +692,9 @@ We define $\Norm$ inductively on the number of arguments. Let $\Norm(\Phi)=\Phi$
 \hbox{
 $\vlderivation
 {
- \vlde{\Norm(\Phi,a_1,\dots,a_{n-1})}{}{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(a_n.\bar a_n)}]}
+ \vlde{\Norm_{n-1}(\Phi,a_1,\dots,a_{n-1})}{}{\vlsbr[\beta.\vlinf{}{}{\fff}{\vls(a_n.\bar a_n)}]}
  {
-  \vlhy{\vls([a_n.\vlinf{\awd}{}{\bar a_n}{\fff}].\alpha)}
+  \vlhy{\vlsbr([a_n.\vlinf{}{}{\bar a_n}{\fff}].\alpha)}
  }
 }$
 }
@@ -670,24 +703,42 @@ $\vlderivation
 \hbox{$
 \vlderivation
 {
- \vlde{\Norm(\Phi,a_1,\dots,a_{n-1})}{}{\vls[\beta.(a_n.\vlinf{\awu}{}{\ttt}{\bar a_n})]}
+ \vlde{\Norm_{n-1}(\Phi,a_1,\dots,a_{n-1})}{}{\vlsbr[\beta.(a_n.\vlinf{}{}{\ttt}{\bar a_n})]}
  {
-  \vlhy{\vls([\vlinf{\awd}{}{a_n}{\fff}.\bar a_n].\alpha)}
+  \vlhy{\vlsbr([\vlinf{}{}{a_n}{\fff}.\bar a_n].\alpha)}
  }
 }$
 }
 \[
 \vlderivation
 {
- \vlin{}{}{\beta}
+ \vlin{\cod}{}{\beta}
  {
-  \vlin{\swi}{}{\vls[\vlinf{}{}{\beta}{\vls[\beta.\beta]}.\box\DeltaBotK]}
+ \vlin{=}{}{\vls[\beta.\beta]}
   {
-   \vlin{\swi}{}{\vls([\beta.\box\DeltaK].\alpha)}
+   \vlin{=}{}{\vlsbr[\vlinf{\cod}{}{\beta}{\vls[\beta.\beta]}.\box\DeltaBotK]}
    {
-    \vlin{}{}{\vls(\box\DeltaTopK.\vlinf{}{}{\vls(\alpha.\alpha)}{\alpha})}
+    \vlin{\swi}{}{\vls[[\beta.\beta].(a_n.\alpha)]}
     {
-     \vlhy{\alpha}
+     \vlin{=}{}{\vls([[\beta.\beta].a_n].\alpha)}
+     {
+      \vlin{=}{}{\vls([\beta.\box\DeltaK].\alpha)}
+      {
+       \vlin{\swi}{}{\vls([\beta.(\bar a_n.\alpha)].\alpha)}
+       {
+        \vlin{=}{}{\vls(([\beta.\bar a_n].\alpha).\alpha)}
+        {
+         \vlin{=}{}{\vlsbr(\box\DeltaTopK.\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha})}
+         {
+          \vlin{\cou}{}{\vls(\alpha.\alpha)}
+          {
+           \vlhy{\alpha}
+          }
+         }
+        }
+       }
+      }
+     }
     }
    }
   }
@@ -697,7 +748,7 @@ $\vlderivation
 \end{definition}
 
 \begin{remark}\label{RemFlowNorm}
-If the atomic flow of $\vlder{\Norm(\Phi,a_1,\dots,a_{n-1})}{}{\vls[\beta.(a_n.\bar a_n)]}{\vls([a_n.\bar a_n].\alpha)}$ is
+If the atomic flow of $\vlder{\Norm_{n-1}(\Phi,a_1,\dots,a_{n-1})}{}{\vls[\beta.(a_n.\bar a_n)]}{\vls([a_n.\bar a_n].\alpha)}$ is
 \[
 \atomicflow
 {
@@ -715,7 +766,7 @@ If the atomic flow of $\vlder{\Norm(\Phi,a_1,\dots,a_{n-1})}{}{\vls[\beta.(a_n.\
 (-8,-6)*{\afvjm{4}};
 }\quad,
 \]
-then the atomic flow of $\vlder{\Norm(\Phi,a_1,\dots,a_n)}{}{\beta}{\alpha}$ is
+then the atomic flow of $\vlder{\Norm_n(\Phi,a_1,\dots,a_n)}{}{\beta}{\alpha}$ is
 \[
 \atomicflow
 {
@@ -772,27 +823,27 @@ where $\phi_1$, $\phi_2$, $\phi_3$ are isomorphic to $\phi$ and $\psi_1$, $\psi_
 By studying Definition~\ref{DefFlowCore} and Remark~\ref{RemFlowNorm} we can see how a weakly streamlined derivation can be built.
 
 \begin{lemma}\label{LemStreamlinedNorm}
-Given a derivation $\Phi$ containing the atoms $a_1,\dots,a_n$ such that\/ $\Norm(\Phi,a_1,\dots,a_{k-1})$ and\/ $\Norm(\Phi,a_1,\dots,a_k)$ exist for some $0\leq k\leq n$, if\/ $\Norm(\Phi,a_1,\dots,a_{k-1})$ is weakly streamlined and none of the atoms $a_k,\dots,a_n$ occur in interaction nor cointeraction instances in\/ $\Norm(\Phi,a_1,\dots,a_{k-1})$ then
+Given a derivation $\Phi$ containing the atoms $a_1,\dots,a_n$ such that\/ $\Norm_{k-1}(\Phi,a_1,\dots,a_{k-1})$ and\/ $\Norm_k(\Phi,a_1,\dots,a_k)$ exist for some $0<k\leq n$, if\/ $\Norm_{k-1}(\Phi,a_1,\dots,a_{k-1})$ is weakly streamlined and none of the atoms $a_k,\dots,a_n$ occur in interaction nor cointeraction instances in\/ $\Norm_{k-1}(\Phi,a_1,\dots,a_{k-1})$ then
 \begin{itemize}
- \item none of the atoms $a_{k+1},\dots,a_n$ occur in interaction nor cointeraction instances in $\Norm(\Phi,a_1,\dots,a_k)$ and
- \item $\Norm(\Phi,a_1,\dots,a_k)$ is weakly streamlined.
+ \item none of the atoms $a_{k+1},\dots,a_n$ occur in interaction nor cointeraction instances in $\Norm_k(\Phi,a_1,\dots,a_k)$ and
+ \item $\Norm_k(\Phi,a_1,\dots,a_k)$ is weakly streamlined.
 \end{itemize}
 \end{lemma}
 
 \begin{proof}
 Refer to the atomic flow in Remark~\ref{RemFlowNorm} to observe the following:
 \begin{itemize}
- \item The only atoms which occur in (co)interaction instances in $\Norm(\Phi,a_1,\dots,a_k)$ which did not in $\Norm(\Phi,a_1,\dots,a_{k-1})$ are $a_k$ and $\bar a_k$.
- \item The only interaction and cointeraction vertices mapped to by $a_k$ in the atomic flow associated with $\Norm(\Phi,a_1,\dots,a_k)$ are the once that are evidenced; and since the red and the green edges never coincide there can be no path between them. Furthermore, since $\Norm(\Phi,a_1,\dots,a_{k-1})$ is weakly streamlined a path from an interaction to a cointeraction vertex in the atomic flow associated with $\Norm(\Phi,a_1,\dots,a_k)$ must contain the red edge between $\psi_1$ and $\psi_2$ or the green edge between $\phi_2$ and $\phi_3$. However, $a_k$ and $\bar a_k$ map to these edges so there can be no path from an interaction to a cointeraction vertex.
+ \item The only atoms which occur in (co)interaction instances in $\Norm_k(\Phi,a_1,\dots,a_k)$ which did not in $\Norm_{k-1}(\Phi,a_1,\dots,a_{k-1})$ are $a_k$ and $\bar a_k$.
+ \item The only interaction and cointeraction vertices mapped to by $a_k$ in the atomic flow associated with $\Norm_k(\Phi,a_1,\dots,a_k)$ are the once that are evidenced; and since the red and the green edges never coincide there can be no path between them. Furthermore, since $\Norm_{k-1}(\Phi,a_1,\dots,a_{k-1})$ is weakly streamlined a path from an interaction to a cointeraction vertex in the atomic flow associated with $\Norm_k(\Phi,a_1,\dots,a_k)$ must contain the red edge between $\psi_1$ and $\psi_2$ or the green edge between $\phi_2$ and $\phi_3$. However, $a_k$ and $\bar a_k$ map to these edges so there can be no path from an interaction to a cointeraction vertex.
 \end{itemize}
 \end{proof}
 
 \begin{theorem}
-Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, there are atoms $a_1,\dots,a_n$ in $\Phi$ such that $\vlder{\Norm(\Core(\Phi),a_1,\dots,a_n)}{}{\beta}{\alpha}$ is weakly streamlined.
+Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, there are atoms $a_1,\dots,a_n$ in $\Phi$ such that $\vlder{\Norm_n(\Core(\Phi),a_1,\dots,a_n)}{}{\beta}{\alpha}$ is weakly streamlined.
 \end{theorem}
 
 \begin{proof}
-Choose $a_1,\dots,a_n$ such that no atoms except for $a_1,\dots,a_n$ and their duals, map to a path from an interaction to a cointeraction vertex in the atomic flow associated with $\Phi$, then the result follows by Proposition~\ref{PropStreamlinedCore} and Lemma~\ref{LemStreamlinedNorm}.
+Choose $a_1,\dots,a_n$ such that no atoms except for $a_1,\dots,a_n$ and their duals map to a path from an interaction to a cointeraction vertex in the atomic flow associated with $\Phi$, then the result follows by Proposition~\ref{PropStreamlinedCore} and Lemma~\ref{LemStreamlinedNorm}.
 \end{proof}
 
 %===========================================
