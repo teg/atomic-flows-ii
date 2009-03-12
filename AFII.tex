@@ -3,16 +3,15 @@
 \usepackage[lutzsyntax]{virginialake}\aftrianglefalse
 \usepackage[urw-garamond]{mathdesign}
 \usepackage{hyperref}
-%\usepackage{draftwatermark}
+\usepackage{draftwatermark}
 
 \begin{document}
 
-\title{Normalisation Control in Deep Inference\\ via Atomic Flows II}
+\title{Normalisation Control in Deep Inference \\ via Atomic Flows II}
 
 \author{Alessio Guglielmi\inst{1,2} and Tom Gundersen\inst{1}\thanks{Guglielmi is supported by EPSRC grant EP/E042805/1 \emph{Complexity and Non-determinism in Deep Inference} and by an ANR \emph{Senior Chaire d'Excellence} titled \emph{Identity and Geometric Essence of Proofs}. Gundersen is supported by an \emph{Overseas Research Scholarship} and a \emph{Research Studentship} both of the University of Bath.}}
 
 \institute{University of Bath, Bath BA2 7AY, UK \and INRIA, Nancy-Grand Est, France}
-
 
 \maketitle
 
@@ -27,11 +26,11 @@ At the core of our work lie \emph{atomic flows}, which were introduced in \cite{
 
 In particular, streamlining was defined based on atomic flows. Intuitively, a derivation is streamlined if every path in the associated atomic flow can be extended to reach the top or the bottom of the flow. Seen from the point of view of derivations it means; given an atom occurrence in a streamlined derivation either all possible ways of tracing the atom upwards will reach the premiss or all possible ways of tracing the atom downwards will reach the conclusion. Since a proof has no atoms in its premiss (only the unit `true'), tracing atom occurrences upwards from a cut can not lead to the premiss. Hence, a streamlined proof is cut free.
 
-In this paper, we present a new streamlining procedure. Similarly to our previous result the procedure is based on a particular way of gluing together pieces of derivation, which is possible due to the symmetries of deep inference. However, the novelties are that no transformation of the original derivation is needed before the pieces are glued together, and much less information about the atomic flow associated with the derivation is used to guide the procedure. In particular, we only need to know which axioms are connected with which cuts. Since we use less information, all the axioms and cuts we are eliminating are indistinguishable, so, unlike the previous procedures, no strategy for streamlining is necessary.
+In this paper, we present a new streamlining procedure. Similarly to our previous result the procedure is based on a particular way of gluing together pieces of derivation, which is possible due to the symmetries of deep inference. However, the novelty is that much less information about the atomic flow associated with the derivation is used to guide the procedure. In particular, we only need to know which axioms are connected with which cuts. Since we use less information, all the axioms and cuts we are eliminating are indistinguishable, so, unlike the previous procedures, no strategy for streamlining is necessary.
 
 Contrary to what one might expect from cut elimination, the complexity of the procedure is not determined by the number of cuts being eliminated. The complexity is $O(2^n)$, where $n$ is the number of atoms which occur in at least one of the cuts we eliminate. In particular, every step of the procedure eliminate all the cuts where a given atom occurs, making termination a triviality.
 
-We present our streamlining procedure as an operator, called the \emph{normaliser}. The normaliser can be thought of as a `shape' with holes. To produce a weakly streamlined derivation, a derivation is inserted into the holes and the atoms of the derivation are associated with parts of the shape. We can observe that features of the shape are analogous to properties of a normalisation procedure. The fact that the shape is finite gives termination, its size givse the complexity, its asymmetries gives non-determinism, etc.
+We present our streamlining procedure as an operator, called the \emph{normaliser}. The normaliser can be thought of as a `shape' with holes. To streamline a derivation, it is inserted into the holes of the normaliser and the atoms of the derivation are associated with parts of the shape. We can observe that features of the shape are analogous to properties of a normalisation procedure. The fact that the shape is finite gives termination, its size givse the complexity, its asymmetries gives non-determinism, etc.
 
 \newcommand{\SKS}{\mathsf{SKS}}
 The results in this paper are presented in the deep-inference formalism the calculus of structures \cite{Gugl:06:A-System:kl}, in particular system $\SKS$ \cite{BrunTiu:01:A-Local-:mz,Brun:04:Deep-Inf:rq}, but we strive at generality and it should not be difficult to adapt our results to any deep-inference formalism and any propositional system as long as we have atomic structural rules and linear logical rules (something we always expect in deep inference and something which is not achievable elsewhere).
