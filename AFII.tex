@@ -1,9 +1,12 @@
 \documentclass[a4paper]{llncs}
 
-\usepackage[lutzsyntax]{virginialake}\aftrianglefalse
-\usepackage[urw-garamond]{mathdesign}
+\usepackage[lutzsyntax]{virginialake}
+\usepackage[urw-garamond]{mathdesign} % Comment this to use Times fonts
+  \expandafter\ifx\csname leqslant\endcsname\relax\usepackage{txfonts}\fi
 \usepackage[pdfborder={0 0 0}]{hyperref}
+%\usepackage[dvipsnames,usenames]{color}
 %\usepackage{draftwatermark}
+\usepackage{amsmath}
 
 \hyphenation{co-weak-en-ing}
 \hyphenation{La-mar-che}
@@ -46,174 +49,837 @@ The results in this paper are presented in the deep-inference formalism the calc
 In the future, we believe it will be possible to improve on these results by extending them to modal \cite{Brun:07:Deep-Seq:fk,HeinStew:05:Purity-T:tg,StewStou:05:A-System:tg,Stou:06:A-Deep-I:rt} and first order \cite{Brun:04:Deep-Inf:rq,Brun:06:Cut-Elim:cq} logics and by making the procedure quasipolynomial, along the lines of a quasipolynomial cut-elimination procedure we are working on.
 
 %===============================================================================
-\section{Background on Deep Inference}
+\section{Propositional Logic in Deep Inference}\label{SectDI}
+
+In the range of the deep-inference methodology, we can define several formalisms, \emph{i.e.} general prescriptions on how to design proof systems. For example, the sequent calculus and natural deduction are formalisms in Gentzen-style proof theory, where the structure of proofs is determined by the tree structure of the formulae they prove.
+
+The first, and conceptually simplest, formalism that has been defined in deep inference is called the \emph{calculus of structures}, or \emph{CoS} \cite{Gugl:06:A-System:kl}. CoS is now well developed for classical \cite{Brun:03:Atomic-C:oz,Brun:06:Cut-Elim:cq,Brun:06:Locality:zh,BrunTiu:01:A-Local-:mz,Brun:06:Deep-Inf:qy}, intuitionistic \cite{Tiu:06:A-Local-:gf}, linear \cite{Stra:02:A-Local-:ul,Stra:03:MELL-in-:oy}, modal \cite{Brun::Deep-Seq:ay,GoreTiu:06:Classica:uq,Stou:06:A-Deep-I:rt} and com\-mu\-ta\-tive/non-commutative logics \cite{Gugl:06:A-System:kl,Tiu:06:A-System:ai,Stra:03:Linear-L:lp,Brus:02:A-Purely:wd,Di-G:04:Structur:wy,GuglStra:01:Non-comm:rp,GuglStra:02:A-Non-co:lq,GuglStra:02:A-Non-co:dq,Kahr:06:Reducing:hc,Kahr:07:System-B:fk}.
+
+The standard proof system of propositional logic in CoS is called $\SKS$. The basic proof-complexity properties of $\SKS$, and, as a consequence, of propositional logic in CoS, have been studied in \cite{BrusGugl:07:On-the-P:fk}:
+\begin{itemize}
+%---------------------------------------
+\item $\SKS$ is polynomially equivalent to Frege proof systems.
+%---------------------------------------
+\item $\SKS$ can be extended with Tseitin's extension and substitution, and the proof systems so obtained are polynomially equivalent to Frege proof systems augmented by extension and substitution.
+%---------------------------------------
+\item Analytic $\SKS$ polynomially simulates analytic Gentzen proof systems, but the converse does not hold: in fact, Statman's tautologies admit polynomial proofs in analytic $\SKS$ but, as is well known, only exponential ones in analytic Gentzen \cite{Stat:78:Bounds-f:fj}.
+%---------------------------------------
+\end{itemize}
+
+In this paper, we work in CoS and $\SKS$, but we introduce a new notation for CoS. We do so to conveniently describe certain derivations related to threshold formulae, which would seem very cumbersome otherwise (we mainly have in mind Definition~\ref{DefThrDer}). In related work, we are defining a new formalism, currently dubbed \emph{Formalism A}, which generalises CoS and formally allows for the new notation.
+
+In this section, we quickly introduce all the necessary notions. The standard reference for $\SKS$ in CoS and its typical constructions is \cite{Brun:04:Deep-Inf:rq}; an introduction to $\SKS$ with an emphasis on proof complexity is in \cite{BrusGugl:07:On-the-P:fk}.
+
 \newcommand{\fff}{\mathsf f}
 \newcommand{\ttt}{\mathsf t}
-\newcommand{\ot}{\mathbin\shortleftarrow}
+\emph{Formulae}, denoted by $\alpha$, $\beta$, $\gamma$ and $\delta$ are freely built from: \emph{units}, $\fff$ (false), $\ttt$ (true); \emph{atoms}, denoted by $a$, $b$, $c$, $d$ and $e$; \emph{disjunction} and \emph{conjunction}, ${\vlsbr[\alpha.\beta]}$ and $\vlsbr(\alpha.\beta)$. The different brackets have the only purpose of improving legibility; we usually omit external brackets of formulae, and sometimes we omit superfluous brackets under associativity. On the set of atoms a (non-identical) involution $\bar\cdot$ is defined and called \emph{negation}; $a$ and $\bar a$ are \emph{dual} atoms. We denote \emph{contexts}, \emph{i.e.}, formulae with a hole, by $\xi\vlhole$ and $\zeta\vlhole$; for example, if $\xi\vlscn[a]$ is $\vls(b.[a.c])$, then $\xi\vlhole$ is $\vls(b.[\vlhole.c])$, $\xi\{b\}$ is $\vls(b.[b.c])$ and $\xi\vlscn(a.d)$ is $\vls(b.[(a.d).c])$.
 
+Note that negation is only defined for atoms, and this is not a limitation because, thanks to De Morgan laws, negation can always be `pushed to' atoms. Also, note that there are no negative or positive atoms in an absolute sense; we can only say that if we arbitrarily consider $\bar a$ positive, then $a$ must be negative, for example.
 
-\newcommand{\one}{{\mathchoice{\scriptstyle\mathbf1}
-                              {\scriptstyle\mathbf1}
-                              {\scriptstyle\mathbf1}
-                              {\scriptscriptstyle\mathbf1}}}
-\newcommand{\two}{{\mathchoice{\scriptstyle\mathbf2}
-                              {\scriptstyle\mathbf2}
-                              {\scriptstyle\mathbf2}
-                              {\scriptscriptstyle\mathbf2}}}
-%---------------------------------------
-\begin{definition}\label{DefDerivation}
-\emph{Inference rules}, $\rho$, have one \emph{premiss} and one \emph{conclusion}, and their \emph{instances} are used in \emph{inference steps} to rewrite inside formulae. A \emph{derivation}, $\Phi$, from $\alpha$ (\emph{premiss}) to $\beta$ (\emph{conclusion}) is a chain of inference steps with $\alpha$ at the top and $\beta$ at the bottom, and is usually indicated by $\vlder{\Phi}{\mathcal S}{\beta}{\alpha}$, where $\mathcal S$ is the name of the deductive system or a set of inference rules; a \emph{proof} is a derivation from $\ttt$; besides $\Phi$, we denote derivations with $\Psi$. We denote with $\xi\{\Phi\}$ the result of including every formula of the derivation $\vlder{\Phi}{}{\beta}{\alpha}$ into the context $\xi\vlhole$. Since we adopt deep inference, $\vlder{\xi\{\Phi\}}{}{\xi\{\beta\}}{\xi\{\alpha\}}$ is a valid derivation. Furthermore, $\xi\left\{\vlder{}{}{\beta_1}{\alpha_1}\right\}\cdots\left\{\vlder{}{}{\beta_n}{\alpha_n}\right\}$ denotes
-\[
-\vlderivation
-{
- \vlin{=}{}{\xi\{\beta_1\}\cdots\{\beta_{n-1}\}\left\{\vlder{}{}{\beta_n}{\alpha_n}\right\}}
- {
-  \vlin{=}{}{\vdots}
-  {
-   \vlin{=}{}{\xi\{\beta_1\}\cdots\{\beta_{i-1}\}\left\{\vlder{}{}{\beta_i}{\alpha_i}\right\}\{\alpha_{i+1}\}\cdots\{\alpha_n\}}
-   {
-    \vlin{=}{}{\vdots}
-    {
-     \vlhy{\xi\left\{\vlder{}{}{\beta_1}{\alpha_1}\right\}\{\alpha_2\}\cdots\{\alpha_n\}}
-    }
-   }
-  }
- }
-}\quad.
-\]
-\end{definition}
+A CoS (\emph{inference}) \emph{rule} $\rho$ is an expression $\vlinf\rho{}\beta\alpha$, where the formulae $\alpha$ and $\beta$ are called \emph{premiss} and \emph{conclusion}, respectively; an inference rule \emph{instance} $\vlupsmash{\vlinf\rho{}\delta\gamma}$, where $\gamma$ and $\delta$ are instances of $\alpha$ and $\beta$, respectively, generates an (\emph{inference}) \emph{step} $\vlinf\rho{}{\xi\vlscn[\delta]}{\xi\vlscn[\gamma]}$, for each context $\xi\vlhole$. A \emph{derivation}, $\Phi$, \emph{from} $\alpha$ (\emph{premiss}) \emph{to} $\beta$ (\emph{conclusion}) is a chain of inference steps with $\alpha$ at the top and $\beta$ at the bottom, and is usually indicated by $\vlder\Phi{\mathcal S}{\beta}{\alpha}$, where $\mathcal S$ is the name of the proof system or a set of inference rules (we might omit $\Phi$ and $\mathcal S$); a \emph{proof}, often denoted by $\Pi$, is a derivation with premiss $\ttt$; besides $\Phi$, we denote derivations with $\Psi$. Sometimes we group $n\ge0$ inference steps of the same rule $\rho$ together into one step, and we label the step with $n\cdot\rho$.
 
-\newcommand{\KS}{\mathsf{KS}}
-Now we define the two standard deductive systems for classical propositional logic in deep inference that are used throughout the paper. $\KS$ is analytic, in the sense that premisses only contain subformulae of conclusions, and $\SKS$ is not \cite{Brun:03:Atomic-C:oz,Brun:06:Cut-Elim:cq,Brun:06:Locality:zh,BrunTiu:01:A-Local-:mz}.
+\newcommand{\size}[1]{{\left\vert #1\right\vert}}\vlupdate\size
+The \emph{size} $\size\alpha$ of a formula $\alpha$, and the \emph{size} $\size\Phi$ of a derivation $\Phi$, is the number of unit and atom occurrences appearing in it.
 
-\newcommand{\ai}{\mathsf{ai}}
-\newcommand{\aw}{\mathsf{aw}}
-\newcommand{\ac}{\mathsf{ac}}
-\newcommand{\aid}{{\ai{\downarrow}}}
-\newcommand{\awd}{{\aw{\downarrow}}}
-\newcommand{\acd}{{\ac{\downarrow}}}
-\newcommand{\aiu}{{\ai{\uparrow}}}
-\newcommand{\awu}{{\aw{\uparrow}}}
-\newcommand{\acu}{{\ac{\uparrow}}}
-\newcommand{\swi}{\mathsf{s}}
-\newcommand{\med}{\mathsf{m}}
-%---------------------------------------
-\begin{definition}
-System $\SKS$ in the calculus of structures is defined by the following \emph{structural} rules:
+We denote with $\alpha\{a_1/\beta_1,\dots,a_h/\beta_h\}$ the operation of simultaneously substituting formulae $\beta_1$, \dots, $\beta_h$ into all the occurrences of the atoms $a_1$, \dots, $a_h$ in the formula $\alpha$, respectively; note that the occurrences of $\bar a_1$, \dots, $\bar a_h$ are not automatically substituted. Often, we only substitute certain occurrences of atoms, and these are indicated with superscripts that establish a relation with atomic flows. As a matter of fact, we extend the notion of substitution to derivations in the natural way, but this requires a certain care. The issue is clarified in Section~\ref{SectAF} (see, in particular, Notations~\ref{NotSubst} and \ref{NotDerSubst} and Proposition~\ref{PropSubst}).
+
+\newcommand{\ai  }{\mathsf{ai}}
+\newcommand{\aw  }{\mathsf{aw}}
+\newcommand{\ac  }{\mathsf{ac}}
+\newcommand{\aid }{{\ai{\downarrow}}}
+\newcommand{\awd }{{\aw{\downarrow}}}
+\newcommand{\acd }{{\ac{\downarrow}}}
+\newcommand{\aiu }{{\ai{\uparrow}}}
+\newcommand{\awu }{{\aw{\uparrow}}}
+\newcommand{\acu }{{\ac{\uparrow}}}
+\newcommand{\swi }{\mathsf{s}}
+\newcommand{\med }{\mathsf{m}}
+\emph{System\/ $\SKS$} is a CoS proof system, defined by the following \emph{structural} inference rules:
 \[
 \begin{array}{@{}c@{}c@{}c@{}}
-      \vlinf{\aid}{}{\vls[a.{\bar a}]}{\ttt}&
-\qquad\vlinf{\awd}{}a\fff&
-\qquad\vlinf{\acd}{}a{\vls[a.a]}\\
+      \vlinf\aid{}{\vls[a.{\bar a}]}\ttt&
+\qquad\vlinf\awd{}a\fff                 &
+\qquad\vlinf\acd{}a{\vls[a.a]}          \\
 \noalign{\smallskip}
-      \emph{interaction}&
-\qquad\emph{weakening}&
-\qquad\emph{contraction}\\
+      \emph{identity}                   &
+\qquad\emph{weakening}                  &
+\qquad\emph{contraction}                \\
 \noalign{\bigskip}
-      \vlinf{\aiu}{}\fff{\vls(a.{\bar a})}&
-\qquad\vlinf{\awu}{}\ttt a&
-\qquad\vlinf{\acu}{}{\vls (a.a)}a\\
+      \vlinf\aiu{}\fff{\vls(a.{\bar a})}&
+\qquad\vlinf\awu{}\ttt a                &
+\qquad\vlinf\acu{}{\vls (a.a)}a         \\
 \noalign{\smallskip}
-      \emph{cointeraction}&
+      \emph{cut}&
 \qquad\emph{coweakening}&
 \qquad\emph{cocontraction}\\
-\end{array}\quad,
+\end{array}
+\quad,
 \]
-and by the two \emph{logical} rules:
+and by the following two \emph{logical} inference rules:
 \[
 \begin{array}{@{}c@{}c@{}}
-\vlinf{\swi}{}{\vls[(\alpha.\beta).\gamma]}{\vls(\alpha.[\beta.\gamma])}&\qquad
-\vlinf{\med}{}{\vls([\alpha.\gamma].[\beta.\delta])}
-              {\vls[(\alpha.\beta).(\gamma.\delta)]}\\
+\vlinf\swi{}{\vls[(\alpha.\beta).\gamma]}{\vls(\alpha.[\beta.\gamma])}&\qquad
+\vlinf\med{}{\vls([\alpha.\gamma].[\beta.\delta])}
+            {\vls[(\alpha.\beta).(\gamma.\delta)]}                    \\
 \noalign{\smallskip}
-\emph{switch}&\qquad\emph{medial}\\
-\end{array}\quad.
+\emph{switch}                                                         &\qquad
+\emph{medial}                                                         \\
+\end{array}
+\quad.
 \]
-The rule cointeraction is also called an (\emph{atomic}) \emph{cut}. In addition to the rules shown, there is a rule $\vldownsmash{\vlinf={}\delta\gamma}$, such that $\gamma$ and $\delta$ are opposite sides in one of the following equations:
-%TODO: make this alignment work with the LNCS style
-\vlstore{
-\vls[\alpha.\beta]         &=\vls[\beta.\alpha]         \quad,&
-\vls[\alpha.\fff]          &=\vls[\alpha]               \quad,\\
-\vls(\alpha.\beta)         &=\vls(\beta.\alpha)         \quad,&
-\vls(\alpha.\ttt)          &=\vls(\alpha)               \quad,\\
-\vls[[\alpha.\beta].\gamma]&=\vls[\alpha.[\beta.\gamma]]\quad,&
-\vls[\ttt.\ttt]            &=\vls[\ttt]                 \quad,\\
-\vls((\alpha.\beta).\gamma)&=\vls(\alpha.(\beta.\gamma))\quad,&
-\vls(\fff.\fff)            &=\vls(\fff)                 \quad\vldot}
-%\begin{align}
-%\vlread
-%\end{align}
-We do not always show the instances of rule $=$, and when we do show them, we gather several contiguous instances into one. System $\KS$ is the same as $\SKS$, but without the rules $\aiu$, $\awu$ and $\acu$. A \emph{cut-free} derivation is a derivation where $\aiu$ is not used. All derivations in this paper are in $\SKS$, unless indicated otherwise.
+In addition to these rules, there is a rule $\vlsmash{\vlinf={}\delta\gamma}$, such that $\gamma$ and $\delta$ are opposite sides in one of the following equations:
+\begin{equation}\label{Eq}
+\begin{array}{@{}r@{}l@{}r@{}l@{}}
+\vls[\alpha.\beta]         &{}=\vls[\beta.\alpha]         &\qquad\qquad
+\vls[\alpha.\fff]          &{}=\vls[\alpha]               \\
+\noalign{\smallskip}
+\vls(\alpha.\beta)         &{}=\vls(\beta.\alpha)         &\qquad\qquad
+\vls(\alpha.\ttt)          &{}=\vls(\alpha)               \\
+\noalign{\smallskip}
+\vls[[\alpha.\beta].\gamma]&{}=\vls[\alpha.[\beta.\gamma]]&\qquad\qquad
+\vls[\ttt.\ttt]            &{}=\vls[\ttt]                 \\
+\noalign{\smallskip}
+\vls((\alpha.\beta).\gamma)&{}=\vls(\alpha.(\beta.\gamma))&\qquad\qquad
+\vls(\fff.\fff)            &{}=\vls(\fff)                 
+\end{array}
+\quad.
+\end{equation}
+We do not always show the instances of rule $=$, and when we do show them, we gather several contiguous instances into one. We consider the $=$ rule as implicitly present in all systems. The first row in Figure~\ref{FigExAF} shows some $\SKS$ example derivations.
+
+The equality relation $=$ on formulae is defined by closing the equations in \eqref{Eq} by reflexivity, symmetry, transitivity and by stipulating that $\alpha=\beta$ implies $\xi\vlscn[\alpha]=\xi\vlscn[\beta]$; to indicate literal equality of the formulae $\alpha$ and $\beta$ we adopt the notation $\alpha\equiv\beta$.
+
+A \emph{cut-free} derivation is a derivation where $\aiu$ is not used, \emph{i.e.}, a derivation in $\SKS\setminus\{\aiu\}$. Of special importance in this paper is the following proof system:
+
+\newcommand{\aSKS}{\mathsf{aSKS}}
+%-------------------------------------------------------------------------------
+\begin{definition}
+\emph{Analytic\/ $\SKS$} is the system $\aSKS=\SKS\setminus\{\aiu,\awu\}$.
 \end{definition}
 
-\begin{remark}
-The representations of $\SKS$ derivations in this paper are sometimes ambiguous. This is not a problem, as the derivations themselves are well defined and we can always get a more detailed representation should we need to, for instance when extracting atomic flows from derivations. The ambiguity arises because we omit or collapse equations and because we do not distinguish the different equation rules. In particular we need to know if
+The notion of analyticity in deep inference has similarities and differences with analyticity in Gentzen formalisms. The similarities mainly reside in the normalisation theory of deep inference, which has similar properties to the Gentzen theory ones. On the other hand, analyticity in Gentzen is based on the subformula property, which guarantees certain properties on the depth of formulae in derivations. Such properties do not hold in deep inference, unless we properly restrict it. These issues are discussed in \cite{BrusGugl:07:On-Analy:uq,BrusGugl:07:On-the-P:fk,Jera::On-the-C:kx}.
+
+\newcommand  {\SKSg}{\mathsf{SKSg}}
+\newcommand  {\gw  }{\mathsf w}
+\newcommand  {\gwd }{{\gw{\downarrow}}}
+\newcommand  {\gwu }{{\gw{\uparrow}}}
+\newcommand  {\gc  }{\mathsf c}
+\renewcommand{\gcd }{{\gc{\downarrow}}}
+\newcommand  {\gcu }{{\gc{\uparrow}}}
+\newcommand  {\iden  }{\mathsf i}
+\newcommand  {\idd }{{\iden{\downarrow}}}
+Besides $\SKS$, another standard deep-inference system is $\SKSg$, which is the same as $\SKS$, except that it does not contain medial and its structural rules are not restricted to atoms. In particular, we use in this paper the rules
 \[
-\vlinf{=}{}{\vls((a.a).a)}{\vls(a.(a.a))}\quad,
+\vlinf\gwd{}\alpha\fff
+\quad,\qquad
+\vlinf\gwu{}\ttt\alpha
+\quad,\qquad
+\vlinf\gcd{}\alpha{\vls[\alpha.\alpha]}
+\qquad\text{and}\qquad
+\vlinf\gcu{}{\vls(\alpha.\alpha)}\alpha
+\quad.
 \]
-is an application of associativity $\left(\vlinf{=}{}{\vls((a.b).c)}{\vls(a.(b.c))}\right)$ or commutativity $\left(\vlinf{=}{}{\vls((b.c).a)}{\vls(a.(b.c))}\right)$ to be able to map atom occurrences in the premiss to atom occurrences in the conclusion.
+Clearly, a derivation in $\SKS$ is also a derivation in $\SKSg$. It can easily be proved that $\SKS$ and all its fragments containing the logical and $=$ rules polynomially simulate, respectively, $\SKSg$ and its corresponding fragments \cite{BrusGugl:07:On-the-P:fk}. For example, $\{\swi,\med,=,\acd\}$ polynomially simulates $\{\swi,=,\gcd\}$, and $\aSKS=\{\swi,\med,=,\aid,\awd,\acd,\acu\}$ polynomially simulates $\{\swi,=,\idd,\gwd,\gcd,\gcu\}$ (where $\idd$ is the nonatomic identity). This allows us to transfer properties from $\SKS$ to $\SKSg$; in particular, the main result in this paper, \emph{i.e.}, that $\SKS$ proofs can be transformed into analytic ones in quasipolynomial time, holds also for $\SKSg$ proofs.
+
+\newcommand{\KS}{\mathsf{KS}}
+A notable analytic system is $\KS=\{\swi,\med,=,\aid,\awd,\acd\}$, which is complete for propositional logic \cite{BrunTiu:01:A-Local-:mz,Brun:04:Deep-Inf:rq}; this, of course, entails completeness for all the systems that contain $\KS$, such as $\aSKS$ and $\SKS$.
+
+We can replace instances of nonatomic structural rules by derivations with the same premiss and conclusion, and that only contain atomic structural rules. The price to pay is a quadratic growth in size. This is stated by the following, routine proposition (keep in mind that, from now on, we consider the $=$ rule as implicitly present in all systems). An example is the rightmost upper derivation in Figure~\ref{FigExAF}, which stands for a nonatomic cocontraction.
+
+%-------------------------------------------------------------------------------
+\begin{proposition}\label{PropGenAtPol}
+Rule instances of\/ $\gwd$, $\gwu$, $\gcd$ and\/ $\gcu$ can be derived in quadratic time by derivations in\/ $\{\awd\}$, $\{\awu\}$, $\{\med,\acd\}$ and\/ $\{\med,\acu\}$, respectively.
+\end{proposition}
+
+Sometimes, we use a nonatomic rule instance to stand for some derivation in $\SKS$ that derives that instance, as per Proposition~\ref{PropGenAtPol}.
+
+For CoS proofs, we adopt a special notation that allows us considerable efficiency in describing derivations, especially in the crucial Definition~\ref {DefThrDer}. We denote with $\xi\vlscn[\Phi]$ the result of including every formula of $\Phi$ into the context $\xi\vlhole$: since we adopt deep inference, $\xi\vlscn[\Phi]$ is a valid derivation. Then, given the two derivations $\vldownsmash{\vlder\Phi{}\beta\alpha}$ and $\vldownsmash{\vlder\Psi{}\delta\gamma}$, by $\vls[\Phi.\Psi]$ and $\vls(\Phi.\Psi)$ we denote, respectively,
+\[
+\vlinf={}{\vlsbr[\beta.\;\;\;\vlder\Psi{}\delta\gamma]}
+         {\vlsbr[\vlder\Phi{}\beta\alpha\;\;\;.\gamma]}
+\qquad\text{and}\qquad
+\vlinf={}{\vlsbr(\beta.\;\;\;\vlder\Psi{}\delta\gamma)}
+         {\vlsbr(\vlder\Phi{}\beta\alpha\;\;\;.\gamma)}
+\quad,
+\]
+or any other CoS derivations obtained by interleaving $\Phi$ and $\Psi$ and respecting the specified logical relations between $\Phi$ and $\Psi$. We call this the \emph{Formalism A} notation. Examples of Formalism A derivations are in the second row of Figure~\ref {FigExAF}, in correspondence with CoS derivations in the first row. Note that we omit structural rule names in Formalism A notation (since they are easily inferable, this improves legibility).
+
+The size of CoS derivations is, obviously, at most quadratic in the size of Formalism A derivations denoting them. We use this fact implicitly throughout the paper, and we always measure the CoS size of derivations, even if we show them in Formalism A notation. Because of its convenience, the Formalism A notation is currently being developed as a full-fledged deep-inference formalism.
+
+%===============================================================================
+\section{Atomic Flows}\label{SectAF}
+
+Atomic flows, which have been introduced in \cite{GuglGund:07:Normalis:lr}, are, essentially, specialised Buss flow graphs \cite{Buss:91:The-Unde:uq}. They are particular directed graphs associated with $\SKS$ derivations: every derivation yields one atomic flow obtained by tracing the atom occurrences inside the derivation. Infinitely many derivations correspond to each atomic flow; this suggests that much of the information inside a derivation is lost in its associated atomic flow; in particular, there is no information about instances of logical rules, only structural rules play a role. As shown in \cite{GuglGund:07:Normalis:lr}, it turns out that atomic flows contain sufficient structure to control normalisation procedures, providing in particular induction measures that can be used to ensure termination. Such normalisation procedures require exponential time on the size of the derivation to be normalised. In the present work we improve the complexity of proof normalisation to quasipolynomial time, but an essential role is played by the complex logical relations of threshold formulae, which are external and independent from the given proof. This means that atomic flows are not sufficient to define the normalisation procedure; however, they still are a very convenient tool for defining and understanding several of its aspects.
+
+We can single out three features of atomic flows that, in general, and not just in this work, help in designing normalisation procedures:
+
+\begin{enumerate}
+%---------------------------------------
+\item\label{ItemUseTop} Atomic flows conveniently express the topological structure of atom occurrences in a proof. This is especially useful for defining the `simple form' of proofs, in Definition~\ref{DefSimpleForm}.
+%---------------------------------------
+\item\label{ItemUseSubst} Atomic flows provide for an efficient way to control substitutions for atom occurrences in derivations. This is especially useful for defining the `cut-free form' of proofs, in Definition~\ref{DefNorm}.
+%---------------------------------------
+\item\label{ItemUseNorm} We can define graph rewriting systems over atomic flows that control normalisation procedures on derivations. This could be used for obtaining the `analytic form' of proofs, as we do in Theorem~\ref{ThNormAn}. 
+\end{enumerate}
+Our aim now is to quickly and informally provide the necessary notions about atomic flows, especially concerning aspects \eqref{ItemUseTop} and \eqref{ItemUseSubst} above. Although the feature \eqref{ItemUseNorm} of atomic flows did help us in obtaining proofs in analytic form, we estimate that formally introducing the necessary machinery is unjustified in this paper. In fact, given our limited needs here, we can operate directly on derivations, without the intermediate support of atomic flows. Nonetheless, being aware of the underlying atomic-flow methods is useful for the reader who wishes to further investigate this matter. So, we informally provide, in Section~\ref{SectNorm}, enough material to make the connection with the atomic-flow techniques that are fully developed in \cite{GuglGund:07:Normalis:lr}.
+
+We obtain one atomic flow from each derivation by tracing all its atom occurrences and by keeping track of their creation and destruction (in identity/cut and weakening/coweakening instances), their duplication (in contraction/cocontraction instances) and their duality (in identity/cut instances). Technically, atomic flows are directed graphs of a special kind, but it is more intuitive to consider them as diagrams generated by composing \emph{elementary atomic flows} that belong to one of seven kinds.
+
+The first kind of elementary atomic flow is the \emph{edge}
+\[
+\atomicflow{
+(0,0)*{\afvj4{}{}{}{}}}\quad,
+\]
+which corresponds to one or more occurrences of the same atom in a given derivation, all of which are not active in any structural rule instance, \emph{i.e.}, they are not the atom occurrences that instantiate a structural rule.
+
+The other six kinds of elementary diagrams are associated with the six structural inference rules, as shown in Figure~\ref{FigVertAF}, and they are called \emph{vertices}; each vertex has some incident edges. At the left of each arrow, we see an instance of a structural rule, where the atom occurrences are labelled by small numerals; at the right of the arrow, we see the vertex corresponding to the rule instance, whose incident edges are labelled in accord with the atom occurrences they correspond to. We qualify each vertex according to the rule it corresponds to; for example, in a given atomic flow, we might talk about a \emph{contraction vertex}, or a \emph{cut vertex}, and so on. Instead of small numerals, sometimes we use $\epsilon$ or $\iota$ or colour to label edges (as well as atom occurrences), but we do not always use labels.
+
+\newcommand{\one  }{{\mathchoice{\scriptstyle      \mathbf1}
+                                {\scriptstyle      \mathbf1}
+                                {\scriptstyle      \mathbf1}
+                                {\scriptscriptstyle\mathbf1}}}
+\newcommand{\two  }{{\mathchoice{\scriptstyle      \mathbf2}
+                                {\scriptstyle      \mathbf2}
+                                {\scriptstyle      \mathbf2}
+                                {\scriptscriptstyle\mathbf2}}}
+\newcommand{\three}{{\mathchoice{\scriptstyle      \mathbf3}
+                                {\scriptstyle      \mathbf3}
+                                {\scriptstyle      \mathbf3}
+                                {\scriptscriptstyle\mathbf3}}}
+\newcommand{\four }{{\mathchoice{\scriptstyle      \mathbf4}
+                                {\scriptstyle      \mathbf4}
+                                {\scriptstyle      \mathbf4}
+                                {\scriptscriptstyle\mathbf4}}}
+\newcommand{\five }{{\mathchoice{\scriptstyle      \mathbf5}
+                                {\scriptstyle      \mathbf5}
+                                {\scriptstyle      \mathbf5}
+                                {\scriptscriptstyle\mathbf5}}}
+%-------------------------------------------------------------------------------
+\begin{figure}
+\[
+\begin{array}{@{}c@{}c@{}c@{}c@{}c@{}c@{}}
+\vlinf\aid{}{\vls[a^\one.\bar a^\two]}\ttt&\quad{\to}\quad
+	\atomicflow{(0,0)*{\afaid\one{}{}\two{}{}}}&\qquad\qquad
+\vlinf\awd{}{a^\one}\fff&\quad{\to}\quad
+	\atomicflow{(0,0)*{\afawd{}{}{}\one}}&\qquad\qquad
+\vlinf\acd{}{a^\three}{\vls[a^\one.a^\two]}&\quad{\to}\quad
+	\atomicflow{(0,0)*{\afacd\one{}{}\two{}\three}}
+\\
+\noalign{\bigskip}
+\vlinf\aiu{}\fff{\vls(a^\one.\bar a^\two)}&\quad{\to}\quad
+	\atomicflow{(0,0)*{\afaiu\one{}{}\two{}{}}}&\qquad\qquad
+\vlinf\awu{}\ttt{a^\one}&\quad{\to}\quad
+	\atomicflow{(0,0)*{\afawu{}{}{}\one}}&\qquad\qquad
+\vlinf\acu{}{\vls(a^\one.a^\two)}{a^\three}&\quad{\to}\quad
+	\atomicflow{(0,0)*{\afacu\one{}{}\two{}\three}}\\
+\end{array}
+\]
+\caption{Vertices of atomic flows.}
+\label{FigVertAF}
+\end{figure}
+
+All edges are directed, but we do not explicitly show the orientation. Instead, we consider it as implicitly given by the way we draw them, namely, edges are oriented along the vertical direction. So, the vertices corresponding to dual rules, in Figure~\ref{FigVertAF}, are distinct, for example, an identity vertex and a cut vertex are different because the orientation of their edges is different. On the other hand, the horizontal direction plays no role in distinguishing atomic flows; this corresponds to commutativity of logical relations.
+
+\newcommand{\ppl}{{\mathchoice{\scriptstyle+}
+                              {\scriptstyle+}
+                              {\scriptstyle+}
+                              {\scriptscriptstyle+}}}
+\newcommand{\pmi}{{\mathchoice{\scriptstyle-}
+                              {\scriptstyle-}
+                              {\scriptstyle-}
+                              {\scriptscriptstyle-}}}
+We can define (\emph{atomic}) \emph{flows} as the smallest set of diagrams containing elementary atomic flows, and closed under the composition operation consisting in identifying zero or more edges such that no cycle is created. In addition, for a diagram to be an atomic flow, it must be possible to assign it a polarity, according to the following definition. A \emph{polarity assignment} is a mapping of each edge to an element of $\{\pmi,\ppl\}$, such that the two edges of each identity or cut vertex map to different values and the three edges of each contraction or cocontraction vertex map to the same value. We denote atomic flows by $\phi$ and $\psi$.
+
+Let us see some examples. The flow
+\begin{equation}\label{ExFlow}
+\atomicflow{
+(17,12)*{\afaid{}{}{}{}{}{}};
+(-3, 8)*{\afvjd8{}{}};
+(-1, 8)*{\afvjd8{}{}};
+( 1, 8)*{\afvjd8{}{}};
+( 4, 8)*{\afvjd8{}{}};
+(10, 8)*{\afacu{}{}{}{}{}{}};
+(17, 4)*{\afaiu{}{}{}{}{}{}};
+( 6, 2)*{\afaiunw{}{}}}
+\end{equation}
+is obtained by juxtaposing (\emph{i.e.}, composing by identifying zero edges):
+\begin{itemize}
+\item three edges, 
+\item a flow obtained by composing a cut vertex with a cocontraction vertex, and
+\item a flow obtained by composing an identity vertex with a cut vertex.
+\end{itemize}
+Note that there are no cycles in the flow, and that we can find 32 different polarity assignments, \emph{i.e.}, two for each of the five connected components of the flow (this is a general rule).
+
+Let us see another example. These are three different representations of the same flow:
+\[
+\atomicflow{
+(10,8)*{\afacu\four{}{}{}{}\two};
+( 0,8)*{\afvjd8\one{}};
+( 4,8)*{\afvjd8{}\five};
+( 6,2)*{\afaiunw{}{}};
+( 6,0)*{\afaiuex{}{}{}\three{}{}31}}
+\quad,\qquad
+\atomicflow{
+( 0,6)*{\afvjd{8}\one\ppl};
+( 6,6)*{\afacu\three{}{}\four\two\pmi};
+(12,6)*{\afvjd{8}\ppl\five};
+(10,0)*{\afaiunw{}{}};
+( 2,0)*{\afaiunw{}{}}}
+\qquad\text{and}\qquad
+\atomicflow{
+( 8,10)*{\afacu{}\three{}\four\two\ppl};
+( 0, 8)*{\afvjd{12}\one\pmi};
+( 4,10)*{\afvjd{8}\five\pmi};
+( 5, 4)*{\afex24};
+(10, 4)*{\afvj4};
+( 2, 0)*{\afaiunw{}{}};
+( 8, 0)*{\afaiunw{}{}}}
+\quad,
+\]
+where we label edges to show their correspondence. In the two rightmost flows, we indicate the two different polarity assignments that are possible.
+
+The following two diagrams are not atomic flows:
+\[
+\atomicflow{
+(4,11.7)*{\afacu{}{}{}{}{}{}};
+(0, 3.7)*{\afacd{}{}{}{}{}{}};
+(8, 7.7)*{\afvj{16}};
+(4,16);(8,16)**[|<\atflowthickone>]\crv{(4,18)&(6,20)&(8,18)};
+(0,0);(8,0)**[|<\atflowthickone>]\crv{(0,-2)&(4,-4)&(8,-2)}}
+\qquad\text{and}\qquad
+\atomicflow{
+(0,4)*{\afaidnw{}{}};
+(0,0)*{\afacd{}{}{}{}{}{}}}
+\quad.
+\]
+The left one is not a flow because it contains a cycle, and the right one because there is no possible polarity assignment.
+
+Let us see how to extract atomic flows from derivations. Given an $\SKS$ derivation $\Phi$, we obtain, by the following prescriptions, a unique atomic flow $\phi$, such that there is a surjective map between atom occurrences in $\Phi$ and edges of $\phi$:
+\begin{itemize}
+%-------------------
+\item Each structural inference step in $\Phi$ is associated with one and only one vertex in $\phi$, such that active atom occurrences in the rule instance map to edges incident with the vertex. The correspondence is indicated in Figure~\ref{FigVertAF}. For example, the flow associated with the inference step at the left is indicated at the right:
+\[
+\vlinf\acd
+      {}
+      {\vls(a^\one.[b^\two.a^\five])}
+      {\vls(a^\one.[b^\two.[a^\three.a^\four]])}
+\qquad\text{and}\qquad
+\vcenter{\hbox{$\atomicflow{
+( 0,0)*{\afvjd8\one{}};
+( 4,0)*{\afvjd8\two{}};
+(10,0)*{\afacd\three{}{}\four{}\five}}$}}
+\quad.
+\]
+Note that the nonactive atoms are `traced' by associating each trace with one edge; this corresponds well to abbreviating, say, the inference step $\vldownsmash{\vlinf\acd{}{\xi\vlscn[a]}{\xi\vlscn[a.a]}}$ by $\xi\left\{\vlinf{}{}a{\vls[a.a]}\right\}$.
+%-------------------
+\item For each other inference step in $\Phi$, all the atom occurrences in the premiss are respectively mapped to the same edges of $\phi$ as the atom occurrences in the conclusion. For example, the flow associated with the inference step
+\[
+\vlinf\med
+      {}
+      {\vls(a^\one.([b^\two.d^\four]).([c^\three.e^\five]))}
+      {\vls(a^\one.[(b^\two.c^\three).(d^\four.e^\five)])}
+\qquad\text{is}\qquad
+\atomicflow{
+( 0,0)*{\afvjd8\one{}};
+( 4,0)*{\afvjd8\two{}};
+( 8,0)*{\afvjd8\three{}};
+(12,0)*{\afvjd8\four{}};
+(16,0)*{\afvjd8\five{}}}
+\quad.
+\]
+\end{itemize}
+The flow $\phi$ so obtained is called the atomic flow \emph{associated with} the derivation $\Phi$. We show three examples in Figure~\ref{FigExAF}: in the top row we see three $\SKS$ derivations in the standard CoS syntax; in the row below, we show the same derivations in the Formalism A notation; in the bottom row, we see the three corresponding atomic flows.
+
+\newcommand{\RD}[1]{{\color{Red}#1}}
+\newcommand{\GR}[1]{{\color{Green}#1}}
+\newcommand{\DO}[1]{{\color{DarkOrchid}#1}}
+\newcommand{\PB}[1]{{\color{ProcessBlue}#1}}
+\newcommand{\MG}[1]{{\color{Magenta}#1}}
+\newcommand{\SG}[1]{{\color{SpringGreen}#1}}
+\newcommand{\RS}[1]{{\color{RawSienna}#1}}
+\newcommand{\YO}[1]{{\color{YellowOrange}#1}}
+\newcommand{\PW}[1]{{\color{Periwinkle}#1}}
+%-------------------------------------------------------------------------------
+\begin{figure}
+\[
+%---------------------------------------
+\begin{array}{@{}c@{}c@{}c@{}}
+\vlderivation                                                {
+\vlin=   {}{\ttt                                  }         {
+\vlin\aiu{}{\vls[\fff.\ttt]                       }        {
+\vlin=   {}{\vls[(\GR{a}.\RD{\bar a}).\ttt]       }       {
+\vlin\swi{}{\vls[[(\RD{\bar a}.\GR{a}).\ttt].\ttt]}      {
+\vlin=   {}{\vls[(\RD{\bar a}.[\GR{a}.\ttt]).\ttt]}     {
+\vlin\swi{}{\vls[([\GR{a}.\ttt].\RD{\bar a}).\ttt]}    {
+\vlin=   {}{\vls([\GR{a}.\ttt].[\RD{\bar a}.\ttt])}   {
+\vlin\med{}{\vls([\GR{a}.\ttt].[\ttt.\RD{\bar a}])}  {
+\vlin=   {}{\vls[(\GR{a}.\ttt).(\ttt.\RD{\bar a})]} {
+\vlin\aid{}{\vls[\GR{a}.\RD{\bar a}]              }{
+\vlhy      {\ttt                                  }}}}}}}}}}}}
+\qquad&
+%-------------------
+\vlderivation                                                              {
+\vlin\aiu{}
+   {\vls(\DO{a}.\fff)                                            }        {
+\vlin=   {}
+   {\vls(\DO{a}.(\PB{a}.\MG{\bar a}))                            }       {
+\vlin\acu{}
+   {\vls((\DO{a}.\PB{a}).\MG{\bar a})                            }      {
+\vlin=   {}
+   {\vls(\SG{a}.\MG{\bar a})                                     }     {
+\vlin\aiu{}
+   {\vls([\fff.\SG{a}].\MG{\bar a})                              }    {
+\vlin\acd{}
+   {\vls([(\RD{a}.\RS{\bar a}).\SG{a}].\MG{\bar a})              }   {
+\vlin\swi{}
+   {\vls([(\RD{a}.[\GR{\bar a}.\YO{\bar a}]).\SG{a}].\MG{\bar a})}  {
+\vlin=   {}
+   {\vls((\RD{a}.[[\GR{\bar a}.\YO{\bar a}].\SG{a}]).\MG{\bar a})} {
+\vlin\aid{}
+   {\vls((\RD{a}.[\GR{\bar a}.[\YO{\bar a}.\SG{a}]]).\MG{\bar a})}{
+\vlhy        
+   {\vls((\RD{a}.[\GR{\bar a}.\ttt]).\MG{\bar a})                }}}}}}}}}}}
+\qquad&
+%-------------------
+\vlderivation                                                            {
+\vlin=   {}{\vls(([\RS{a}.\YO{b}].\PW{a}).([\GR{a}.\DO{b}].\SG{a}))}    {
+\vlin\med{}{\vls(([\RS{a}.\YO{b}].[\GR{a}.\DO{b}]).(\PW{a}.\SG{a}))}   {
+\vlin\acu{}{\vls([(\RS{a}.\GR{a}).(\YO{b}.\DO{b})].(\PW{a}.\SG{a}))}  {
+\vlin\acu{}{\vls([(\RS{a}.\GR{a}).(\YO{b}.\DO{b})].\MG{a})         } {
+\vlin\acu{}{\vls([(\RS{a}.\GR{a}).\PB{b}].\MG{a})                  }{
+\vlhy      {\vls([\RD{a}.\PB{b}].\MG{a})                           }}}}}}}
+\\
+\noalign{\bigskip}
+%---------------------------------------
+\vlderivation                                                      {
+\vlin\swi{}{\vlsbr[\vlinf{\swi}
+                         {}
+                         {\vls[\vlinf{}
+                                     {}
+                                     {\fff}
+                                     {\vls(\GR{a}.\RD{\bar a})}
+                              .
+                              \ttt]}
+                         {\vls([\GR{a}.\ttt].\RD{\bar a})}
+                  \;\;\;.
+                   \ttt
+                  ]                                            }  {
+\vlin\med{}{\vls([\GR{a}.\ttt].[\ttt.\RD{\bar a}])             } {
+\vlin{}  {}{\vls[\GR{a}.\RD{\bar a}]                           }{
+\vlhy      {\ttt                                               }}}}}
+\qquad&
+%-------------------
+\vlinf=
+      {}
+      {\vls(\DO{a}.\vlinf{}{}\fff{\vls(\PB{a}.\MG{\bar a})})}      
+      {\vlsbr(\vlinf\swi
+                    {}
+                    {\vls[\vlinf{}
+                                {}
+                                \fff
+                                {\vls(\RD{a}
+                                     .\vlinf{}
+                                            {}
+                                            {\RS{\bar a}}
+                                            {\vls[\GR{\bar a}.\YO{\bar a}]}
+                                     )}
+                         \;\;\;.
+                         \vlinf{}{}{\vls(\DO{a}.\PB{a})}{\SG{a}}
+                         ]}
+                    {\vls(\RD{a}
+                         .[\GR{\bar a}
+                          .\vlinf{}
+                                 {}
+                                 {\vls[\YO{\bar a}.\SG{a}]}
+                                 \ttt
+                          ]
+                         )}
+            \;\;\;.
+            \MG{\bar a}
+            )}
+\qquad&
+%-------------------
+\vls(\vlinf\med
+           {}
+           {\vls([\RS{a}.\YO{b}].[\GR{a}.\DO{b}])}
+           {\vls[\vlinf{}{}{\vls(\RS{a}.\GR{a})}{\RD{a}}
+                .{\vlinf{}{}{\vls(\YO{b}.\DO{b})}{\PB{b}}}
+                ]}
+    \;\;\;.
+     \vlinf{}{}{\vls(\PW{a}.\SG{a})}{\MG{a}}
+    )
+\\
+\noalign{\bigskip}
+%---------------------------------------
+\atomicflow{
+(0,0)*{\afaiucol{}{}{}{}{}{}{Green}{Red}{}};
+(0,4)*{\afaidnw{}{}}}
+\qquad&
+%-------------------
+\atomicflow{
+( 2,14)*{\afvjcol4{Green}};
+( 0,10)*{\afvjcol{12}{Red}};
+(16,10)*{\afvjcol{12}{Magenta}};
+( 4, 8)*{\afacdcol{}{}{}{}{}{}{Green}{YellowOrange}{RawSienna}};
+(10, 8)*{\afacucol{}{}{}{}{}{}{DarkOrchid}{ProcessBlue}{SpringGreen}};
+( 2, 2)*{\afaiunw{}{}};
+( 8, 2)*{\afvjcol4{DarkOrchid}};
+(14, 2)*{\afaiunw{}{}};
+( 8,12)*{\afaidnw{}{}}}
+\qquad&
+%-------------------
+\atomicflow{
+( 0,0)*{\afacucol{}{}{}{}{}{}{RawSienna}{Green}{Red}};
+( 6,0)*{\afacucol{}{}{}{}{}{}{YellowOrange}{DarkOrchid}{ProcessBlue}};
+(12,0)*{\afacucol{}{}{}{}{}{}{Periwinkle}{SpringGreen}{Magenta}}}
+\end{array}
+\]
+\caption{Examples of derivations in CoS and Formalism A notation, and associated atomic flows.}
+\label{FigExAF}
+\end{figure}
+
+Perhaps surprisingly, it can be proved that every flow is associated with infinitely many $\SKS$ derivations (see \cite{GuglGund:07:Normalis:lr}).
+
+We introduce now some graphical shortcuts. When certain details of a flow are not important, but only the vertex kinds and its upper and lower edges are, we can use boxes, labelled with all the vertex kinds that can appear in the flow they represent. For example, the following left and centre flows could represent the previously seen flow~\eqref{ExFlow}, whereas the right flow cannot:
+\[
+\vcenter{\hbox{$\newbox\boxone\setbox\boxone=\hbox{$
+   \divide\atflowunit by6\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afaid{}{}{}{}{}{}}}$}
+\newbox\boxtwo\setbox\boxtwo=\hbox{$
+   \divide\atflowunit by6\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afaiu{}{}{}{}{}{}}}$}
+\newbox\boxthree\setbox\boxthree=\hbox{$
+   \divide\atflowunit by6\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afacu{}{}{}{}{}{}}}$}
+%---------------------------------------
+\atomicflow{
+( 1   ,12)*{\afvj4};
+( 3.75,12)*{\afvj4};
+( 6.5 ,12)*{\afvj4};
+( 9.25,12)*{\afvj4};
+(12   ,12)*{\afvj4};
+(11   , 9)*{\aflabelright\phi};
+( 2   , 6)*{\copy\boxone};
+( 6   , 6)*{\copy\boxtwo};
+( 6.5 , 6)*{\affr{13}8};
+(10   , 6)*{\copy\boxthree};
+( 1   , 0)*{\afvj4};
+( 4.67, 0)*{\afvj4};
+( 8.33, 0)*{\afvj4};
+(12   , 0)*{\afvj4}}$}}
+\quad,\qquad
+\newbox\boxone\setbox\boxone=\hbox{$
+   \divide\atflowunit by6\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afawd{}{}{}{}}}$}
+\newbox\boxtwo\setbox\boxtwo=\hbox{$
+   \divide\atflowunit by6\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afaiu{}{}{}{}{}{}}}$}
+\newbox\boxthree\setbox\boxthree=\hbox{$
+   \divide\atflowunit by6\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afacu{}{}{}{}{}{}}}$}
+%---------------------------------------
+\atomicflow{
+(11  ,14  )*{\afaid{}{}{}{}{}{}};
+(-3  ,12.5)*{\afvj5};
+(-1  ,12.5)*{\afvj5};
+( 3  ,12.5)*{\afvj5};
+( 5  ,12.5)*{\afvj5};
+( 7  ,12.5)*{\afvj5};
+(-2  , 9  )*{\aflabelright\psi};
+( 7.5, 9  )*{\aflabelright{\psi'}};
+(-2  , 6  )*{\affr48};
+(-2  , 6  )*{\copy\boxone};
+( 6  , 6  )*{\affr88};
+( 4  , 6  )*{\copy\boxtwo};
+( 7  , 6  )*{\copy\boxthree};
+(13  , 6  )*{\afvj8};
+(11  ,-2  )*{\afaiu{}{}{}{}{}{}};
+(-3  ,-0.5)*{\afvj5};
+(-1  ,-0.5)*{\afvj5};
+( 3  ,-0.5)*{\afvj5};
+( 6  ,-0.5)*{\afvj5}}
+\qquad\text{and}\qquad
+\newbox\boxone\setbox\boxone=\hbox{$
+   \divide\atflowunit by6\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afawd{}{}{}{}}}$}
+\newbox\boxtwo\setbox\boxtwo=\hbox{$
+   \divide\atflowunit by6\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afacu{}{}{}{}{}{}}}$}
+\newbox\boxthree\setbox\boxthree=\hbox{$
+   \divide\atflowunit by6\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afacd{}{}{}{}{}{}}}$}
+%---------------------------------------
+\atomicflow{
+(11,14  )*{\afaid{}{}{}{}{}{}};
+(-3,12.5)*{\afvj5};
+(-1,12.5)*{\afvj5};
+( 3,12.5)*{\afvj5};
+( 5,12.5)*{\afvj5};
+( 7,12.5)*{\afvj5};
+(-2, 6  )*{\affr48};
+(-2, 6  )*{\copy\boxone};
+( 4, 6  )*{\copy\boxthree};
+( 6, 6  )*{\affr88};
+( 7, 6  )*{\copy\boxtwo};
+(13, 6  )*{\afvj8};
+(11,-2  )*{\afaiu{}{}{}{}{}{}};
+(-3,-0.5)*{\afvj5};
+(-1,-0.5)*{\afvj5};
+( 5,-0.5)*{\afvj5}}
+\quad.
+\]
+The flow at the right cannot represent flow~\eqref{ExFlow} because it has the wrong number of lower edges and because a necessary cut vertex is not allowed by the labelling of the boxes. As just shown, we sometimes label boxes with the name of the flow they represent. For example, flow $\phi$ above could represent flow~\eqref{ExFlow}, and, if the centre flow stands for \eqref{ExFlow}, then flows $\psi$ and $\psi'$ are, respectively,
+\[
+\atomicflow{
+(0,7.5)*{\afvjd9{}{}};
+(2,7.5)*{\afvjd9{}{}}}
+\qquad\text{and}\qquad
+\atomicflow{
+( 4,8  )*{\afvjd8{}{}};
+(10,8  )*{\afacu{}{}{}{}{}{}};
+( 1,7.5)*{\afvjd9{}{}};
+(14,7.5)*{\afvjd9{}{}};
+(12,2.5)*{\afvjd1{}{}};
+( 6,2  )*{\afaiunw{}{}}}
+\quad.
+\]
+When no vertex labels appear on a box, we assume that the vertices in the corresponding flow can be any (so, it does not mean that there are no vertices in the flow).
+
+We sometimes use a double line notation for representing multiple edges. For example, the following diagrams represent the same flow:
+\[
+\atomicflow{
+(0,10)*{\afvjd4{\epsilon_1}{}};
+(2,10)*{\cdots};
+(4,10)*{\afvjd4{}{\epsilon_l}};
+(4, 7)*{\aflabelright\psi};
+(2, 5)*{\affr86};
+(0, 0)*{\afvju4{\iota_1}{}};
+(2, 0)*{\cdots};
+(4, 0)*{\afvju4{}{\iota_m}}}
+\qquad\text{and}\qquad
+\atomicflow{
+(2,10)*{\afvjdm4{}{\boldsymbol\epsilon_1^l}};
+(4, 7)*{\aflabelright\psi};
+(2, 5)*{\affr86};
+(2, 0)*{\afvjum4{}{\boldsymbol\iota_1^m}}}
+\quad,
+\]
+where $l,m\ge0$; note that we use  $\boldsymbol\epsilon_1^l$ to denote the vector $(\epsilon_1,\dots,\epsilon_l)$. We might label multiple edges with one of the formulae that the associated atom occurrences form in a derivation.
+
+We extend the double line notation to collections of isomorphic flows. For example, for $m\ge0$, the following diagrams represent the same flow:
+\[
+\atomicflow{
+( 4,6)*{\afawd{}{}{\iota_1}{}};
+(14,6)*{\afawd{}{}{\iota_m}{}};
+( 0,4)*{\afvj4};
+( 7,4)*{\cdots};
+(10,4)*{\afvj4};
+( 2,0)*{\afaiunw{}{}};
+(12,0)*{\afaiunw{}{}}}
+\qquad\text{and}\qquad
+\atomicflow{
+( 4,6)*{\afawdm{}{}{}{\boldsymbol\iota_1^m}};
+( 0,4)*{\afvjm4};
+( 2,0)*{\afaiunw{}{}}}
+\quad.
+\]
+
+We observe that the flow of every $\SKS$ derivation can always be represented as a collection of $m\ge0$ connected components as follows:
+\[
+\newbox\boxone\setbox\boxone=\hbox{$
+   \divide\atflowunit by6\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afawd{}{}{}{}{}{}}}$}
+\newbox\boxtwo\setbox\boxtwo=\hbox{$
+   \divide\atflowunit by6\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afawu{}{}{}{}{}{}}}$}
+\newbox\boxthree\setbox\boxthree =\hbox{$
+   \divide\atflowunit by6\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afacd{}{}{}{}{}{}}}$}
+\newbox\boxfour\setbox\boxfour =\hbox{$
+   \divide\atflowunit by6\multiply\atflowunit by3\afsetunits
+   \atomicflow{(0,0)*{\afacu{}{}{}{}{}{}}}$}
+%---------------------------------------
+\atomicflow{
+(13  ,14  )*{\afaidmex{}{}{}{}{}{}21};
+( 2  ,12.5)*{\afvjm5};
+(24  ,12.5)*{\afvjm5};
+( 9.5, 9  )*{\aflabelright{\phi_1}};
+(24.5, 9  )*{\aflabelright{\psi_1}};
+( 1  , 6  )*{\copy\boxone};
+( 3  , 6  )*{\copy\boxtwo};
+( 5.5, 6  )*{\affr{13}8};
+( 6  , 6  )*{\copy\boxthree};
+( 9  , 6  )*{\copy\boxfour};
+(16  , 6  )*{\copy\boxone};
+(18  , 6  )*{\copy\boxtwo};
+(20.5, 6  )*{\affr{13}8};
+(21  , 6  )*{\copy\boxthree};
+(24  , 6  )*{\copy\boxfour};
+( 2  ,-0.5)*{\afvjm5};
+(24  ,-0.5)*{\afvjm5};
+(13  ,-2  )*{\afaiumex{}{}{}{}{}{}21};
+%-------------------
+(30,6)*{\cdots};
+(34,0)="A";
+"A"+(13  ,14  )*{\afaidmex{}{}{}{}{}{}21};
+"A"+( 2  ,12.5)*{\afvjm5};
+"A"+(24  ,12.5)*{\afvjm5};
+"A"+( 9  , 9  )*{\aflabelright{\phi_m}};
+"A"+(24  , 9  )*{\aflabelright{\psi_m}};
+"A"+( 1  , 6  )*{\copy\boxone};
+"A"+( 3  , 6  )*{\copy\boxtwo};
+"A"+( 5.5, 6  )*{\affr{13}8};
+"A"+( 6  , 6  )*{\copy\boxthree};
+"A"+( 9  , 6  )*{\copy\boxfour};
+"A"+(16  , 6  )*{\copy\boxone};
+"A"+(18  , 6  )*{\copy\boxtwo};
+"A"+(20.5, 6  )*{\affr{13}8};
+"A"+(21  , 6  )*{\copy\boxthree};
+"A"+(24  , 6  )*{\copy\boxfour};
+"A"+( 2  ,-0.5)*{\afvjm5};
+"A"+(24  ,-0.5)*{\afvjm5};
+"A"+(13  ,-2  )*{\afaiumex{}{}{}{}{}{}21}}
+\quad,
+\]
+such that each edge in flow $\phi_i$ is associated with some occurrence of some atom $a_i$, and each edge in flow $\psi_i$ is associated with some occurrence of atom $\bar a_i$. Note that it might happen that for $i\ne j$ we have $\vlsmash{a_i\equiv a_j}$. If we do not insist on dealing with connected components, we can adopt the same representation as above and stipulate that $i\ne j$ implies $\vlsmash{a_i\not\equiv a_j,\bar a_j}$. This would mean that the derivation only contains occurrences of atoms $a_1$, \dots, $a_m$, such that these atoms and their dual are all mutually distinct.
+
+Note that no matter how we assign a polarity, all the edges in $\phi_i$ and all those in $\psi_i$ are respectively mapped to dual polarity values. Given a polarity assignment, we talk about \emph{negative} and \emph{positive} rule instances of (co)weakening and (co)contraction rules, according to whether the edges incident with the associated vertices map to $\pmi $ or $\ppl$, respectively.
+
+In the following, when informally dealing with derivations, we freely transfer to them notions defined for their flows. For example, we can say that an atom occurrence is negative for a given polarity assignment (if the edge associated with the atom occurrence maps to $\pmi$) or that two atom occurrences are connected (if the associated edges belong to the same connected component). In fact, one of the advantages of working with flows is that they provide us with convenient geometrical notions.
+
+As we mention at the beginning of this section, atomic flows help in selectively substituting for atom occurrences. In fact, given a derivation and its associated flow, we can use edges and boxes to individuate atom occurrences inside the derivation, and then possibly substitute for them. For example, let us suppose that we are given the following associated derivation and flow:
+%TODO: fix this...
+\[
+\Phi=
+{\vlsbr[\vlderivation                                              {
+       \vlin{    }{}\fff                                         {
+       \vlin{\med}{}{\vls(\vlinf{}{}a{\vls[a.a]}
+                         .\vlinf={}{\bar a}{\vls[\fff.\bar a]})}{
+       \vlhy        {\vls[(a.\fff).(a
+                                   .\vlinf{}{}{\bar a}\fff)]   }}}}
+      \;\;\;.\bar a]}
+\qquad\text{and}\qquad
+\atomicflow{
+(0,6.1)*{\afacd{}{}{}{}{}{}};
+(4,5.8)*{\afawd{}{}{}\one};
+(8,5.6)*{\afvj9};
+(2,0  )*{\afaiunw{}{}}
+}\quad.
+\]
+We can then distinguish between the three occurrences of $\bar a$ that are mapped to edge $\one$ and the one that is not, as in
+\[
+\Phi=
+\vlsbr[\vlderivation                                                        {
+       \vlin{    }{}\fff                                                   {
+       \vlin{\med}{}{\vls(\vlinf{}{}a{\vls[a.a]}
+                         .\vlinf={}{\bar a^\one}{\vls[\fff.\bar a^\one]})}{
+       \vlhy        {\vls[(a.\fff).(a
+                                   .\vlinf{}{}{\bar a^\one}\fff)]        }}}}
+      \;\;\;.\bar a]
+\quad;
+\]
+we can also substitute for these occurrences, for example by $\{\bar a^\one/\fff\}$; such a situation occurs in the proof of Theorem~\ref{ThSimpleForm}. Note that simply substituting $\fff$ for $\bar a^\one$ would invalidate this derivation because it would break the cut and weakening instances; however, the proof of Theorem~\ref{ThSimpleForm} specifies how to fix such broken instances.
+
+We generalise this labelling mechanism to boxes. For example, we can use a different representation of the flow of $\Phi$ to individuate two classes $a^\phi$ and $\bar a^\phi$ of atom occurrences, as follows:
+\[
+\Phi=
+{\vlsbr[
+\vlderivation                                                        {
+       \vlin{    }{}\fff                                                   {
+       \vlin{\med}{}{\vls(\vlinf{}{}{a^\phi}{\vls[a.a]}
+                         .\vlinf={}{\bar a^\phi}{\vls[\fff.\bar a^\phi]})}{
+       \vlhy        {\vls[(a.\fff).(a
+                                   .\vlinf{}{}{\bar a^\phi}\fff)]        }}}}
+      \;\;\;.\bar a^\phi]}
+\qquad\text{and}\qquad
+\atomicflow{
+(0,14  )*{\afacd{}{}{}{}{}{}};
+(4,14  )*{\afvj8};
+(3, 9  )*{\aflabelright\phi};
+(1, 7  )*{\affr86};
+(4, 1.5)*{\afvj5};
+(0, 0  )*{\afaiu{}{}{}{}{}{}}
+}\quad.
+\]
+
+In order to define the notion of cut-free form (Definition~\ref{DefNorm}), we need the following proposition, which we state here because it constitutes a good exercise about atomic flows. Note that, in the following, we use several boxes labelled by $\phi$: this means that we are dealing with several copies of the same flow $\phi$.
+
+%-------------------------------------------------------------------------------
+\begin{remark}\label{NotSubst}
+Given a formula $\alpha$ inside a derivation whose associated atomic flow contains a flow $\phi$, we indicate with $a^\phi$ every occurrence of the atom $a$ in $\alpha$ whose associated edge is in $\phi$. So, as in the following Proposition~\ref {PropSubst}, $\alpha\{a^\phi/\beta,\bar a^\phi/\bar\beta\}$ stands for the formula $\alpha$ where the atom occurrences of $a$ and its dual, whose associated edges are in $\phi$, are substituted with formula $\beta$ and its dual, respectively.
 \end{remark}
 
-% TODO: find the right place for this example
+%-------------------------------------------------------------------------------
+\begin{proposition}\label{PropSubst}
+Given a derivation\/ $\vlder\Phi\SKS{\alpha'}\alpha$, let its associated flow have shape
+\[
+\atomicflow{
+( 2,10)*{\afvjdm4{}{}};
+(10,10)*{\afvjdm4{}{}};
+( 3, 7)*{\aflabelright\phi};
+(11, 7)*{\aflabelright\psi};
+( 2, 5)*{\affr66};
+(10, 5)*{\affr66};
+( 2, 0)*{\afvjum4{}{}};
+(10, 0)*{\afvjum4{}{}}}
+\quad,
+\]
+such that $\phi$ is a connected component whose edges are each associated with atom $a$ or $\bar a$; then, for any formula $\beta$, there exists a derivation
+\[
+\vlder\Psi\SKS{\alpha'\{a^\phi/\beta,\bar a^\phi/\bar\beta\}}
+              {\alpha \{a^\phi/\beta,\bar a^\phi/\bar\beta\}}
+\]
+whose associated flow is
+\[
+\atomicflow{
+( 2,10)*{\afvjdm4{}{}};
+(14,10)*{\afvjdm4{}{}};
+(22,10)*{\afvjdm4{}{}};
+( 3, 7)*{\aflabelright\phi};
+(15, 7)*{\aflabelright\phi};
+(23, 7)*{\aflabelright\psi};
+( 2, 5)*{\affr66};
+( 8, 5)*{\cdots};
+(14, 5)*{\affr66};
+(22, 5)*{\affr66};
+( 2, 0)*{\afvjum4{}{}};
+(14, 0)*{\afvjum4{}{}};
+(22, 0)*{\afvjum4{}{}};
+( 8,-4)*{\underbrace{\hskip6.5pc}_m}}
+\quad,
+\]
+where $m$ is the number of atom occurrences in $\beta$; moreover, the size of\/ $\Psi$ depends at most linearly on the size of\/ $\Phi$ and quadratically on the size of $\beta$.
+\end{proposition}
 
-\begin{example}\label{ExaFormalismA}
-Consider the $\SKS$ derivation
-\[
-\vls[\vlinf{\acd}{}{a}{\vls[a.a]}.\vlinf{\aiu}{}{\fff}{\vls(\vlinf{\acd}{}{b}{\vls[b.b]}.\bar b)}]\quad,
+%-------------------------------------------------------------------------------
+\begin{proof}
+We can proceed by structural induction on $\beta$ and then on $\phi$. For the two cases of $\beta\equiv\vls[\gamma.\delta]$ and $\beta\equiv\vls(\gamma.\delta)$ we have to consider, for each vertex of $\phi$, one of the following situations:
+\[%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% We shrank space: \qquad -> \quad
+\vlderivation                                               {
+\vlin\swi{}{\vls[\gamma.\delta.(\bar\gamma.\bar\delta)] }  { 
+\vlin\swi{}{\vls[\gamma.(\bar\gamma.[\delta.\bar\delta])]}{
+\vlhy      {\vls(\vlinf{}{}{\vls[\gamma.\bar\gamma]}\ttt
+                .\vlinf{}{}{\vls[\delta.\bar\delta]}\ttt)}}}}
+\quad,\quad
+\vls[\vlinf{}{}\gamma\fff.\vlinf{}{}\delta\fff]
+\quad,\quad
+\vls(\vlinf{}{}\gamma\fff.\vlinf{}{}\delta\fff)
+\quad,\quad
+\vls[\vlinf{}{}\gamma{\vls[\gamma.\gamma]}.\vlinf{}{}\delta{\vls[\delta.\delta]}]
+\quad,\quad
+\vlinf\med
+      {}
+      {\vls(\vlinf{}{}\gamma{\vls[\gamma.\gamma]}
+           .\vlinf{}{}\delta{\vls[\delta.\delta]})}
+      {\vls[(\gamma.\delta).(\gamma.\delta)]}
+\quad,
 \]
-which is a shorthand for
-\[
-\vlderivation
-{
- \vlin{\aiu}{}{a}
- {
-  \vlin{\acd}{}{\vls[a.(b.\bar b)]}
-  {
-   \vlin{\acd}{}{\vls[a.([b.b].\bar b)]}
-   {
-    \vlhy{\vls[a.a.([b.b].\bar b)]}
-   }
-  }
- }
-}.
-\]
-It is implicit in Definition~\ref{DefFormulae} that the ordering of holes in a formula context with multiple holes is given. This decides the order in which we `sequentialise' the short-hand representation of a derivation in Definition~\ref{DefDerivation}. In this example we used a left-to-right ordering, but we could just as well have used a right-to-left ordering:
-\[
-\vlderivation
-{
- \vlin{\acd}{}{a}
- {
-  \vlin{\aiu}{}{\vls[a.a]}
-  {
-   \vlin{\acd}{}{\vls[a.a.(b.\bar b)]}
-   {
-    \vlhy{\vls[a.a.([b.b].\bar b)]}
-   }
-  }
- }
-}.
-\]
-In Formalism A, a new deep-inference formalism currently under development, the above shorthand is a representative of the equivalence class containing both the left-to-right and the right-to-left orderings, in addition to the intermediate:
-\[
-\vlderivation
-{
- \vlin{\aiu}{}{a}
- {
-  \vlin{\acd}{}{\vls[a.(b.\bar b)]}
-  {
-   \vlin{\acd}{}{\vls[a.a.(b.\bar b)]}
-   {
-    \vlhy{\vls[a.a.([b.b].\bar b)]}
-   }
-  }
- }
-}.
-\]
-For the purposes of this paper, which of these three derivations we use is inessential, as the atomic flows associated with each of them are are the same. For simplicity we let the shorthand above refer to one unique derivation, but we could just as well have worked in Formalism A.
-\end{example}
-%===============================================================================
+and their dual ones.
+\end{proof}
 
-\section{Background on Atomic Flows}\label{SectAtomicFlows}
+%-------------------------------------------------------------------------------
+\begin{remark}\label{NotDerSubst}
+When the hypotheses of Proposition~\ref{PropSubst} are valid, we can describe $\Psi$ as $\Phi\{a^\phi/\beta,\bar a^\phi/\bar\beta\}$; one of $a^\phi/\beta$ or $\bar a^\phi/\bar\beta$ might be missing, when no identity or cut vertices are present in $\phi$.
+\end{remark}
 
 \newbox\contrup\setbox\contrup=\hbox{$
    \divide\atflowunit by5\multiply\atflowunit by3\afsetunits
