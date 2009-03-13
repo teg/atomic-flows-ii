@@ -55,6 +55,7 @@ In the range of the deep-inference methodology, we can define several formalisms
 
 The first, and conceptually simplest, formalism that has been defined in deep inference is called the \emph{calculus of structures}, or \emph{CoS} \cite{Gugl:06:A-System:kl}. CoS is now well developed for classical \cite{Brun:03:Atomic-C:oz,Brun:06:Cut-Elim:cq,Brun:06:Locality:zh,BrunTiu:01:A-Local-:mz,Brun:06:Deep-Inf:qy}, intuitionistic \cite{Tiu:06:A-Local-:gf}, linear \cite{Stra:02:A-Local-:ul,Stra:03:MELL-in-:oy}, modal \cite{Brun::Deep-Seq:ay,GoreTiu:06:Classica:uq,Stou:06:A-Deep-I:rt} and com\-mu\-ta\-tive/non-commutative logics \cite{Gugl:06:A-System:kl,Tiu:06:A-System:ai,Stra:03:Linear-L:lp,Brus:02:A-Purely:wd,Di-G:04:Structur:wy,GuglStra:01:Non-comm:rp,GuglStra:02:A-Non-co:lq,GuglStra:02:A-Non-co:dq,Kahr:06:Reducing:hc,Kahr:07:System-B:fk}.
 
+%TODO: do not focus on complexity
 The standard proof system of propositional logic in CoS is called $\SKS$. The basic proof-complexity properties of $\SKS$, and, as a consequence, of propositional logic in CoS, have been studied in \cite{BrusGugl:07:On-the-P:fk}:
 \begin{itemize}
 %---------------------------------------
@@ -66,9 +67,10 @@ The standard proof system of propositional logic in CoS is called $\SKS$. The ba
 %---------------------------------------
 \end{itemize}
 
+%TODO: do not talk about threshold formulae
 In this paper, we work in CoS and $\SKS$, but we introduce a new notation for CoS. We do so to conveniently describe certain derivations related to threshold formulae, which would seem very cumbersome otherwise (we mainly have in mind Definition~\ref{DefThrDer}). In related work, we are defining a new formalism, currently dubbed \emph{Formalism A}, which generalises CoS and formally allows for the new notation.
 
-In this section, we quickly introduce all the necessary notions. The standard reference for $\SKS$ in CoS and its typical constructions is \cite{Brun:04:Deep-Inf:rq}; an introduction to $\SKS$ with an emphasis on proof complexity is in \cite{BrusGugl:07:On-the-P:fk}.
+In this section, we quickly introduce all the necessary notions. The standard reference for $\SKS$ in CoS and its typical constructions is \cite{Brun:04:Deep-Inf:rq}.
 
 \newcommand{\fff}{\mathsf f}
 \newcommand{\ttt}{\mathsf t}
@@ -76,12 +78,7 @@ In this section, we quickly introduce all the necessary notions. The standard re
 
 Note that negation is only defined for atoms, and this is not a limitation because, thanks to De Morgan laws, negation can always be `pushed to' atoms. Also, note that there are no negative or positive atoms in an absolute sense; we can only say that if we arbitrarily consider $\bar a$ positive, then $a$ must be negative, for example.
 
-A CoS (\emph{inference}) \emph{rule} $\rho$ is an expression $\vlinf\rho{}\beta\alpha$, where the formulae $\alpha$ and $\beta$ are called \emph{premiss} and \emph{conclusion}, respectively; an inference rule \emph{instance} $\vlupsmash{\vlinf\rho{}\delta\gamma}$, where $\gamma$ and $\delta$ are instances of $\alpha$ and $\beta$, respectively, generates an (\emph{inference}) \emph{step} $\vlinf\rho{}{\xi\vlscn[\delta]}{\xi\vlscn[\gamma]}$, for each context $\xi\vlhole$. A \emph{derivation}, $\Phi$, \emph{from} $\alpha$ (\emph{premiss}) \emph{to} $\beta$ (\emph{conclusion}) is a chain of inference steps with $\alpha$ at the top and $\beta$ at the bottom, and is usually indicated by $\vlder\Phi{\mathcal S}{\beta}{\alpha}$, where $\mathcal S$ is the name of the proof system or a set of inference rules (we might omit $\Phi$ and $\mathcal S$); a \emph{proof}, often denoted by $\Pi$, is a derivation with premiss $\ttt$; besides $\Phi$, we denote derivations with $\Psi$. Sometimes we group $n\ge0$ inference steps of the same rule $\rho$ together into one step, and we label the step with $n\cdot\rho$.
-
-\newcommand{\size}[1]{{\left\vert #1\right\vert}}\vlupdate\size
-The \emph{size} $\size\alpha$ of a formula $\alpha$, and the \emph{size} $\size\Phi$ of a derivation $\Phi$, is the number of unit and atom occurrences appearing in it.
-
-We denote with $\alpha\{a_1/\beta_1,\dots,a_h/\beta_h\}$ the operation of simultaneously substituting formulae $\beta_1$, \dots, $\beta_h$ into all the occurrences of the atoms $a_1$, \dots, $a_h$ in the formula $\alpha$, respectively; note that the occurrences of $\bar a_1$, \dots, $\bar a_h$ are not automatically substituted. Often, we only substitute certain occurrences of atoms, and these are indicated with superscripts that establish a relation with atomic flows. As a matter of fact, we extend the notion of substitution to derivations in the natural way, but this requires a certain care. The issue is clarified in Section~\ref{SectAF} (see, in particular, Notations~\ref{NotSubst} and \ref{NotDerSubst} and Proposition~\ref{PropSubst}).
+A CoS (\emph{inference}) \emph{rule} $\rho$ is an expression $\vlinf\rho{}\beta\alpha$, where the formulae $\alpha$ and $\beta$ are called \emph{premiss} and \emph{conclusion}, respectively; an inference rule \emph{instance} $\vlupsmash{\vlinf\rho{}\delta\gamma}$, where $\gamma$ and $\delta$ are instances of $\alpha$ and $\beta$, respectively, generates an (\emph{inference}) \emph{step} $\vlinf\rho{}{\xi\vlscn[\delta]}{\xi\vlscn[\gamma]}$, for each context $\xi\vlhole$. A \emph{derivation}, $\Phi$, \emph{from} $\alpha$ (\emph{premiss}) \emph{to} $\beta$ (\emph{conclusion}) is a chain of inference steps with $\alpha$ at the top and $\beta$ at the bottom, and is usually indicated by $\vlder\Phi{\mathcal S}{\beta}{\alpha}$, where $\mathcal S$ is the name of the proof system or a set of inference rules (we might omit $\Phi$ and $\mathcal S$); a \emph{proof}, often denoted by $\Pi$, is a derivation with premiss $\ttt$; besides $\Phi$, we denote derivations with $\Psi$.
 
 \newcommand{\ai  }{\mathsf{ai}}
 \newcommand{\aw  }{\mathsf{aw}}
@@ -146,9 +143,12 @@ In addition to these rules, there is a rule $\vlsmash{\vlinf={}\delta\gamma}$, s
 \end{equation}
 We do not always show the instances of rule $=$, and when we do show them, we gather several contiguous instances into one. We consider the $=$ rule as implicitly present in all systems. The first row in Figure~\ref{FigExAF} shows some $\SKS$ example derivations.
 
+%TODO: remove this?
 The equality relation $=$ on formulae is defined by closing the equations in \eqref{Eq} by reflexivity, symmetry, transitivity and by stipulating that $\alpha=\beta$ implies $\xi\vlscn[\alpha]=\xi\vlscn[\beta]$; to indicate literal equality of the formulae $\alpha$ and $\beta$ we adopt the notation $\alpha\equiv\beta$.
 
 A \emph{cut-free} derivation is a derivation where $\aiu$ is not used, \emph{i.e.}, a derivation in $\SKS\setminus\{\aiu\}$. Of special importance in this paper is the following proof system:
+
+%TODO: continue here...	
 
 \newcommand{\aSKS}{\mathsf{aSKS}}
 %-------------------------------------------------------------------------------
