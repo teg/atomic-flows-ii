@@ -1,12 +1,13 @@
-\documentclass[a4paper]{llncs}
+\documentclass[a4paper]{amsart}
 
-\usepackage[lutzsyntax]{virginialake}
+\usepackage[lutzsyntax]{virginialake}\aftrianglefalse
 \usepackage[urw-garamond]{mathdesign} % Comment this to use Times fonts
   \expandafter\ifx\csname leqslant\endcsname\relax\usepackage{txfonts}\fi
 \usepackage[pdfborder={0 0 0}]{hyperref}
 %\usepackage[dvipsnames,usenames]{color}
 %\usepackage{draftwatermark}
-\usepackage{amsmath}
+
+%-------------------------------------------
 
 \hyphenation{co-weak-en-ing}
 \hyphenation{La-mar-che}
@@ -15,14 +16,35 @@
 \renewcommand{\le}{\leqslant}
 \renewcommand{\ge}{\geqslant}
 
+%-------------------------------------------
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+%-------------------------------------------
 
 \begin{document}
 
 \title{Normalisation Control in Deep Inference \\ via Atomic Flows II}
 
-\author{Alessio Guglielmi\inst{1,2} and Tom Gundersen\inst{1}\thanks{Guglielmi is supported by EPSRC grant EP/E042805/1 \emph{Complexity and Non-determinism in Deep Inference} and by an ANR \emph{Senior Chaire d'Excellence} titled \emph{Identity and Geometric Essence of Proofs}. Gundersen is supported by an \emph{Overseas Research Scholarship} and a \emph{Research Studentship} both of the University of Bath.}}
+\author{Alessio Guglielmi}
+\address{University of Bath, Bath BA2 7AY, UK \and INRIA, Nancy-Grand Est, France}
+\thanks{Guglielmi is supported by EPSRC grant EP/E042805/1 \emph{Complexity and Non-determinism in Deep Inference} and by an ANR \emph{Senior Chaire d'Excellence} titled \emph{Identity and Geometric Essence of Proofs}.}
 
-\institute{University of Bath, Bath BA2 7AY, UK \and INRIA, Nancy-Grand Est, France}
+\author{Tom Gundersen}
+\address{University of Bath, Bath BA2 7AY, UK}
+\thanks{Gundersen is supported by an \emph{Overseas Research Scholarship} and a \emph{Research Studentship} both of the University of Bath.}
+
+
+
+%===============================================================================
 
 \maketitle
 
