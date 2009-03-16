@@ -736,13 +736,11 @@ In the following, when informally dealing with derivations, we freely transfer t
 %===============================================================================
 \section{Streamlining}\label{SectStreamlining}
 
-%TODO: make sure we know what atomic flows are
+We know that the cut rule is admissible for derivations with premiss $\ttt$ (proofs) and, dually, that the axiom rule is admissible for derivations with conclusion $\fff$ (contradictions). Neither the cut nor the axiom are admissible for generic derivations, which motivated the discovery of `streamlining'. Streamlining is a generalisation of both cut and axiom elimination to derivations with no restrictions on their premiss or conclusion.
 
-Since the cut is only admissible from derivations without premiss, cut elimination is asymmetric. However, deep-inference derivations are up-down symmetric so it would be natural to have a symmetric normal form. This motivated the notion of \emph{streamlining}. Any derivation can be streamlined and it generalises cut elimination (and its dual, axiom elimination) in the sense that a streamlined proof is cut free (and a streamlined contradiction is axiom free).
+%TODO: define maximal path
 
-Intuitively a derivation is streamlined if every path in its associated atomic flow can be extended to reach either the top or the bottom of the flow. We recall the definition from \cite{GuglGund:07:Normalis:lr}:
-
-%TODO: what does the representation mean
+Intuitively, a derivation is streamlined if every maximal path in the atomic flow associated with the derivation starts at the top or ends at the bottom of the flow. We recall the definition from \cite{GuglGund:07:Normalis:lr}:
 
 %---------------------------------------
 \begin{definition}
@@ -780,9 +778,9 @@ An $\SKS$ derivation is \emph{streamlined} if its associated atomic flow can be 
 
 %TODO: what is a path?
 
-Note that an atomic flow associated with a proof has no upper edges, so the top left and the two bottom left boxes in the above atomic flow would be empty. Hence, a streamlined proof is cut-free.
+Note that an atomic flow associated with a proof has no upper edges, so the top left and the two bottom left boxes in the above atomic flow would be empty. Hence, a streamlined proof is cut free and, dually, a streamlined contradiction is axiom free.
 
-The main challenge in streamlining a derivation is to make sure there are no paths from axioms to cuts. Once this is achieved it is straightforward, as shown in \cite{GuglGund:07:Normalis:lr}, to use (confluent and strongly normalising) weakening reductions to obtain (in linear time) a streamlined derivation. This motivates the following definition:
+The main challenge in streamlining a derivation is to make sure there are no paths from axioms to cuts. Once this is achieved it is straightforward, as shown in \cite{GuglGund:07:Normalis:lr}, to use confluent and strongly normalising weakening reductions to obtain (in linear time) a streamlined derivation. This motivates the following definition:
 
 %---------------------------------------
 \begin{definition}
@@ -814,7 +812,7 @@ An $\SKS$ derivation is \emph{weakly streamlined} if its associated atomic flow 
 \]
 \end{definition}
 
-We will now show how to weakly streamline a derivation. This is done in two steps. First we extract the \emph{core} of the derivation, then we construct the \emph{normaliser}. A weakly streamlined derivation is obtained by plugging the core into the normaliser.
+We will now show how to weakly streamline a derivation. This is done in two steps. First, we extract the `core of the derivation', which amounts to removing each pair of connected axiom and cut instances, then we construct the `normaliser', which is an operator for adding pairs of axioms and cuts to a derivation in such a way that they are ensured not to be connected. A weakly streamlined derivation is obtained by applying the normaliser to the core.
 
 \subsection{The Core}
 
