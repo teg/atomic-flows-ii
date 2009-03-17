@@ -1144,9 +1144,13 @@ Given a derivation $\Phi$, the core of $\Phi$ obtained as described in the proof
 
 \subsection{The Normaliser}
 
-We now present the main result of our work, a family of operators called the \emph{normalisers}. Each normaliser can be thought of as a shape with holes where a derivation can be plugged. The effect of plugging a derivation into a normaliser is the same as adding axioms and cuts to the premiss and conclusion of the derivation, respectively. However, it is done in such a way as not to create any paths between the axioms and cuts we add. It should now be clear how our normalisation works: the core is obtained by removing axioms and cuts, then the normaliser adds the axioms and cuts back, in a way which preserves weak streamlining.
+We present here the main result of our work, a family of operators called the `normalisers'. Each normaliser can be thought of as a shape with holes where a derivation can be plugged. The effect of plugging a derivation into a normaliser is the same as adding identity and cut instances to the premiss and conclusion of the derivation, respectively. However, it is done in such a way as to not create any path between the identity and cut instances we add. It should now be clear how our normalisation works: the core is obtained by removing axiom and cut instances and the normaliser adds them back, in a way that preserves weak streamlining.
 
-The novelty of the normalisers is that each of them is built completely independently from the derivation we later plug into it. Which normaliser to plug a derivation into is decided by the number of atoms we want to eliminate from the premiss and conclusion of the derivation.
+%TODO: we don't plug in the derivation we want to normalise, but the CORE of the derivation we want to normalise
+
+The novelty of the normalisers is that they are built independently of the derivations we want to normalise. Which normaliser to plug a derivation into is decided by the number of atoms we want to eliminate from the premiss and conclusion of the derivation.
+
+%TODO: define 2\times\cou and 2\times\cod
 
 \newcommand{\Norm}{\mathsf{Norm}}
 \begin{definition}\label{DefNorm}
@@ -1154,7 +1158,7 @@ For every $n\ge 0$ the \emph{normaliser}, $\Norm_n(a_1,\dots,a_n,\Phi)$, is an o
 \[
 \vlder{\Phi}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}\quad,
 \]
-where $\alpha$ and $\beta$ are formulae and returning a derivation of the form $\vlupsmash{\vlder{\Norm_n(a_1,\dots,a_n,\Phi)}{}{\beta}{\alpha}}$. We define $\Norm_n$ inductively on $n$. Let $\Norm_0(\Phi)=\Phi$ and for $n>0$ let $\Norm_n(a_1,\dots,a_n,\Phi)$ be
+and returning a derivation of the form $\vlupsmash{\vlder{\Norm_n(a_1,\dots,a_n,\Phi)}{}{\beta}{\alpha}}$. We define $\Norm_n$ inductively on $n$. Let $\Norm_0(\Phi)=\Phi$ and, for $n>0$, let $\Norm_n(a_1,\dots,a_n,\Phi)$ be
 \newbox\DeltaTopK
 \setbox\DeltaTopK=
 \hbox{$
@@ -1208,6 +1212,8 @@ $\vlderivation
 \]
 \end{definition}
 
+%TODO: change GREEN -> BLUE
+
 \begin{remark}\label{RemFlowNorm}
 If the atomic flow of $\vlder{\Norm_{n-1}(a_1,\dots,a_{n-1},\Phi)}{}{\vls[\beta.(a_n.\bar a_n)]}{\vls([a_n.\bar a_n].\alpha)}$ is
 \[
@@ -1245,24 +1251,24 @@ then the atomic flow of $\vlder{\Norm_n(a_1,\dots,a_n,\Phi)}{}{\beta}{\alpha}$ i
 % top boxes
 (-22, 34)*{\afaidcol{}{}{}{}{}{}{Red}{Red}};
 (-27, 26)*{\affr{8}{8}};
-(-26, 28)*{\aflabelright{\phi_1}};
+(-26, 28)*{\aflabelright{\phi}};
 (-17, 26)*{\affr{8}{8}};
-(-16, 28)*{\aflabelright{\psi_1}};
+(-16, 28)*{\aflabelright{\psi}};
 (-24, 18)*{\afawucol{}{}{}{}{}{Red}};
 ( -9, 13)*{\afcjlcol{22}{18}{Red}};
 % middle boxes
 (-2,  8)*{\afawdcol{}{}{}{}{}{Green}};
 (-5, 0)*{\affr{8}{8}};
-(-4, 2)*{\aflabelright{\phi_2}};
+(-4, 2)*{\aflabelright{\phi}};
 ( 5, 0)*{\affr{8}{8}};
-( 6, 2)*{\aflabelright{\psi_2}};
+( 6, 2)*{\aflabelright{\psi}};
 (  2, -8)*{\afawucol{}{}{}{}{}{Red}};
 % bottom boxes
 ( 22,-34)*{\afaiucol{}{}{}{}{}{}{Green}{Green}};
 ( 17,-26)*{\affr{8}{8}};
-( 18,-24)*{\aflabelright{\phi_3}};
+( 18,-24)*{\aflabelright{\phi}};
 ( 27,-26)*{\affr{8}{8}};
-( 28,-24)*{\aflabelright{\psi_3}};
+( 28,-24)*{\aflabelright{\psi}};
 ( 24,-18)*{\afawdcol{}{}{}{}{}{Green}};
 (  9,-13)*{\afcjlcol{22}{18}{Green}};
 % contractions
@@ -1278,15 +1284,21 @@ then the atomic flow of $\vlder{\Norm_n(a_1,\dots,a_n,\Phi)}{}{\beta}{\alpha}$ i
 ( -2.5,-36)*{\afacdmexsqcol{}{}{}{}{}{}{33}{4}{Red}{}{Red}};
 }\quad,
 \]
-where $\phi_1$, $\phi_2$, $\phi_3$ are isomorphic to $\phi$ and $\psi_1$, $\psi_2$, $\psi_3$ are isomorphic to $\psi$ and all the edges that might be in paths from the evidenced interaction vertex are colored in red and all the edges that might be in paths from the evidenced cointeraction vertex are colored in green.
+%TODO: explain better
+where all the edges that might be in paths from the evidenced interaction vertex are colored in red and all the edges that might be in paths to the evidenced cointeraction vertex are colored in green.
 \end{remark}
 
-By studying Definition~\ref{DefFlowCore} and Remark~\ref{RemFlowNorm} we can see how a weakly streamlined derivation can be built.
+%TODO: explain `evidenced'
+%TODO: define pahts (from AFI) and make sure the `from' and `to' makes sense above
+
+By studying Definition~\ref{DefFlowCore} and Remark~\ref{RemFlowNorm}, we can see how a weakly streamlined derivation can be built.
+
+%TODO: redo lemma and proof of next theorem. check comments again.
 
 \begin{lemma}\label{LemStreamlinedNorm}
-Given a derivation $\Phi$ containing the atoms $a_1,\dots,a_n$ such that\/ $\Norm_{k-1}(a_1,\dots,a_{k-1},\Phi)$ and\/ $\Norm_k(a_1,\dots,a_k,\Phi)$ exist for some $0<k\le n$, if\/ $\Norm_{k-1}(a_1,\dots,a_{k-1},\Phi)$ is weakly streamlined and none of the atoms $a_k,\dots,a_n$ occur in interaction nor cointeraction instances in\/ $\Norm_{k-1}(a_1,\dots,a_{k-1},\Phi)$ then
+Given a derivation $\Phi$ containing the atoms $a_1,\dots,a_n$, and such that\/ $\Norm_{k-1}(a_1,\dots,a_{k-1},\Phi)$ and\/ $\Norm_k(a_1,\dots,a_k,\Phi)$ exist for some $0<k\le n$, if\/ $\Norm_{k-1}(a_1,\dots,a_{k-1},\Phi)$ is weakly streamlined and none of the atoms $a_k,\dots,a_n$ occur in interaction nor cointeraction instances in\/ $\Norm_{k-1}(a_1,\dots,a_{k-1},\Phi)$ then
 \begin{itemize}
- \item none of the atoms $a_{k+1},\dots,a_n$ occur in interaction nor cointeraction instances in $\Norm_k(a_1,\dots,a_k,\Phi)$ and
+ \item none of the atoms $a_{k+1},\dots,a_n$ occur in axiom or cut instances in $\Norm_k(a_1,\dots,a_k,\Phi)$, and
  \item $\Norm_k(a_1,\dots,a_k,\Phi)$ is weakly streamlined.
 \end{itemize}
 \end{lemma}
@@ -1298,6 +1310,8 @@ Refer to the atomic flow in Remark~\ref{RemFlowNorm} to observe the following:
  \item The only interaction and cointeraction vertices mapped to by $a_k$ in the atomic flow associated with $\Norm_k(a_1,\dots,a_k,\Phi)$ are the once that are evidenced; and since the red and the green edges never coincide there can be no path between them. Furthermore, since $\Norm_{k-1}(a_1,\dots,a_{k-1},\Phi)$ is weakly streamlined a path from an interaction to a cointeraction vertex in the atomic flow associated with $\Norm_k(a_1,\dots,a_k,\Phi)$ must contain the red edge between $\psi_1$ and $\psi_2$ or the green edge between $\phi_2$ and $\phi_3$. However, $a_k$ and $\bar a_k$ map to these edges so there can be no path from an interaction to a cointeraction vertex.
 \end{itemize}
 \end{proof}
+
+%TODO: big exclamation mark at the second derivation in the following theorem
 
 \begin{theorem}
 Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, there are atoms $a_1,\dots,a_n$ in $\Phi$ such that $\vlder{\Norm_n(a_1,\dots,a_n,\Core(\Phi))}{}{\beta}{\alpha}$ is weakly streamlined.
