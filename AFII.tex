@@ -199,11 +199,11 @@ Sometimes, we use a nonatomic rule instance to stand for some derivation in $\SK
 
 For CoS proofs, we adopt a special notation that allows us considerable efficiency in describing derivations, especially in the crucial Definition~\ref {DefThrDer}. We denote with $\xi\vlscn[\Phi]$ the result of including every formula of $\Phi$ into the context $\xi\vlhole$: since we adopt deep inference, $\xi\vlscn[\Phi]$ is a valid derivation. Then, given the two derivations $\vldownsmash{\vlder\Phi{}\beta\alpha}$ and $\vldownsmash{\vlder\Psi{}\delta\gamma}$, by $\vls[\Phi.\Psi]$ and $\vls(\Phi.\Psi)$ we denote, respectively,
 \[
-\vlinf={}{\vlsbr[\beta.\;\;\;\vlder\Psi{}\delta\gamma]}
-         {\vlsbr[\vlder\Phi{}\beta\alpha\;\;\;.\gamma]}
+\vlinf={}{\vlsbr[\beta\;\;.\;\;\vlder\Psi{}\delta\gamma]}
+         {\vlsbr[\vlder\Phi{}\beta\alpha\;\;.\;\;\gamma]}
 \qquad\text{and}\qquad
-\vlinf={}{\vlsbr(\beta.\;\;\;\vlder\Psi{}\delta\gamma)}
-         {\vlsbr(\vlder\Phi{}\beta\alpha\;\;\;.\gamma)}
+\vlinf={}{\vlsbr(\beta\;\;.\;\;\vlder\Psi{}\delta\gamma)}
+         {\vlsbr(\vlder\Phi{}\beta\alpha\;\;.\;\;\gamma)}
 \quad,
 \]
 or any other CoS derivations obtained by interleaving $\Phi$ and $\Psi$ and respecting the specified logical relations between $\Phi$ and $\Psi$. We call this the \emph{Formalism A} notation. Examples of Formalism A derivations are in the second row of Figure~\ref {FigExAF}, in correspondence with CoS derivations in the first row. Note that we omit structural rule names in Formalism A notation (since they are easily inferable, this improves legibility). Because of its convenience, the Formalism A notation is currently being developed as a full-fledged deep-inference formalism.
@@ -461,10 +461,10 @@ The flow $\phi$ so obtained is called the atomic flow \emph{associated with} the
                                      {}
                                      {\fff}
                                      {\vls(\GR{a}.\RD{\bar a})}
-                              .
+                              \;.\;
                               \ttt]}
                          {\vls([\GR{a}.\ttt].\RD{\bar a})}
-                  \;\;\;.
+                  \;\;.\;\;
                    \ttt
                   ]                                            }  {
 \vlin\med{}{\vls([\GR{a}.\ttt].[\ttt.\RD{\bar a}])             } {
@@ -474,30 +474,30 @@ The flow $\phi$ so obtained is called the atomic flow \emph{associated with} the
 %-------------------
 \vlinf=
       {}
-      {\vls(\DO{a}.\vlinf{}{}\fff{\vls(\PB{a}.\MG{\bar a})})}      
+      {\vls(\DO{a}\;.\;\vlinf{}{}\fff{\vls(\PB{a}.\MG{\bar a})})}      
       {\vlsbr(\vlinf\swi
                     {}
                     {\vls[\vlinf{}
                                 {}
                                 \fff
                                 {\vls(\RD{a}
-                                     .\vlinf{}
+                                     \;.\;\vlinf{}
                                             {}
                                             {\RS{\bar a}}
                                             {\vls[\GR{\bar a}.\YO{\bar a}]}
                                      )}
-                         \;\;\;.
+                         \;\;.\;\;
                          \vlinf{}{}{\vls(\DO{a}.\PB{a})}{\SG{a}}
                          ]}
                     {\vls(\RD{a}
-                         .[\GR{\bar a}
-                          .\vlinf{}
+                         \;.\;[\GR{\bar a}
+                          \;.\;\vlinf{}
                                  {}
                                  {\vls[\YO{\bar a}.\SG{a}]}
                                  \ttt
                           ]
                          )}
-            \;\;\;.
+            \;\;\;.\;\;\;
             \MG{\bar a}
             )}
 \qquad&
@@ -506,9 +506,9 @@ The flow $\phi$ so obtained is called the atomic flow \emph{associated with} the
            {}
            {\vls([\RS{a}.\YO{b}].[\GR{a}.\DO{b}])}
            {\vls[\vlinf{}{}{\vls(\RS{a}.\GR{a})}{\RD{a}}
-                .{\vlinf{}{}{\vls(\YO{b}.\DO{b})}{\PB{b}}}
+                \;.\;{\vlinf{}{}{\vls(\YO{b}.\DO{b})}{\PB{b}}}
                 ]}
-    \;\;\;.
+    \;\;.\;\;
      \vlinf{}{}{\vls(\PW{a}.\SG{a})}{\MG{a}}
     )
 \\
@@ -998,14 +998,11 @@ We show how to construct the first derivation, the second one can be done by sym
 {
  \vlin{=}{}{\xi\{\alpha\}}
  {
-  \vlin{=}{}{\vls[\vlder{\Psi}{\{\swi\}}{\xi'\{\alpha\}}{\vls(\alpha.\xi'\{\ttt\})}.\beta]}
+  \vlin{\swi}{}{\vlsbr[\vlder{\Psi}{\{\swi\}}{\xi'\{\alpha\}}{\vls(\alpha.\xi'\{\ttt\})}\;\;.\;\;\beta]}
   {
-  \vlin{\swi}{}{\vls[(\alpha.\xi'\{\ttt\}).\beta]}
+   \vlin{=}{}{\vls(\alpha.[\xi'\{\ttt\}.\beta])}
    {
-    \vlin{=}{}{\vls(\alpha.[\xi'\{\ttt\}.\beta])}
-    {
-     \vlhy{\vls(\alpha.\xi\{\ttt\})}
-    }
+    \vlhy{\vls(\alpha.\xi\{\ttt\})}
    }
   }
  }
@@ -1014,7 +1011,7 @@ We show how to construct the first derivation, the second one can be done by sym
 {
  \vlin{=}{}{\xi\{\alpha\}}
  {
-  \vlin{=}{}{\vls(\vlder{\Psi'}{\{\swi\}}{\xi'\{\alpha\}}{\vls(\alpha.\xi'\{\ttt\})}.\beta)}
+  \vlin{=}{}{\vlsbr(\vlder{\Psi'}{\{\swi\}}{\xi'\{\alpha\}}{\vls(\alpha.\xi'\{\ttt\})}\;\;.\;\;\beta)}
   {
    \vlhy{\vls(\alpha.\xi\{\ttt\})}
   }
@@ -1029,25 +1026,7 @@ We now show how the previous lemma can be used to pull axioms out and up and cut
 \begin{lemma}\label{LemDecompInt}
 Given a derivation $\vlder{}{}{\beta}{\alpha}$ with associated atomic flow $\phi$, there exists a derivation
 \[
-\vlderivation
-{
- \vlin{=}{}{\beta}
- {
-  \vlin{=}{}{\vls[\beta.\vlinf{}{}{\fff}{\vls(b_m.\bar b_m)}.\cdots.\vlinf{}{}{\fff}{\vls(b_1.\bar b_1)}]}
-  {
-   \vlde{}{\SKS\setminus\{\aid,\aiu\}}{\vls[\beta.(b_m.\bar b_m).\cdots.(b_1.\bar b_1)]}
-   {
-    \vlin{=}{}{\vls([a_1.\bar a_1].\cdots.[a_n.\bar a_n].\alpha)}
-    {
-     \vlin{=}{}{\vls(\vlinf{}{}{\vls[a_1.\bar a_1]}{\ttt}.\cdots.\vlinf{}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha)}
-     {
-      \vlhy{\alpha}
-     }
-    }
-   }
-  }
- }
-}
+\vlder{}{\SKS\setminus\{\aid,\aiu\}}{\vlsbr[\beta\;.\;\vlinf{}{}{\fff}{\vls(b_m.\bar b_m)}\;.\;\cdots\;.\;\vlinf{}{}{\fff}{\vls(b_1.\bar b_1)}]}{\vlsbr(\vlinf{}{}{\vls[a_1.\bar a_1]}{\ttt}\;.\;\cdots\;.\;\vlinf{}{}{\vls[a_n.\bar a_n]}{\ttt}\;.\;\alpha)}
 \]
 with associated atomic flow $\phi$, for some atoms $a_1,\dots,a_n,b_1,\dots,b_m$.
 \end{lemma}
@@ -1059,7 +1038,7 @@ Using Lemma~\ref{LemSuperSwitch} apply the following transformations to each of 
 {
  \vlde{\Psi'}{}{\delta}
  {
-  \vlin{\aid}{}{\xi\vlsbr[a.{\bar a}]}
+  \vlin{}{}{\xi\vlsbr[a.{\bar a}]}
   {
    \vlde{\Psi}{}{\xi\{\ttt\}}
    {
@@ -1074,7 +1053,7 @@ Using Lemma~\ref{LemSuperSwitch} apply the following transformations to each of 
  {
   \vlde{}{\{\swi\}}{\xi\vlsbr[a.{\bar a}]}
   {
-   \vlhy{\vlsbr(\vlinf{\aid}{}{\vls[a.{\bar a}]}{\ttt}.\vlder{\Psi}{}{\xi\{\ttt\}}{\gamma})}
+   \vlhy{\vlsbr(\vlinf{}{}{\vls[a.{\bar a}]}{\ttt}\;\;.\;\;\vlder{\Psi}{}{\xi\{\ttt\}}{\gamma})}
   }
  }
 }\qquad\mbox{and}\qquad
@@ -1082,7 +1061,7 @@ Using Lemma~\ref{LemSuperSwitch} apply the following transformations to each of 
 {
  \vlde{\Psi'}{}{\delta}
  {
-  \vlin{\aid}{}{\xi\{\fff\}}
+  \vlin{}{}{\xi\{\fff\}}
   {
    \vlde{\Psi}{}{\xi\vlsbr(a.{\bar a})}
    {
@@ -1093,7 +1072,7 @@ Using Lemma~\ref{LemSuperSwitch} apply the following transformations to each of 
 }\quad\rightarrow\quad
 \vlderivation
 {
- \vlde{}{\{\swi\}}{\vlsbr[\vlder{\Psi'}{}{\delta}{\xi\{\fff\}}.\vlinf{\aiu}{}{\fff}{\vls(a.{\bar a})}]}
+ \vlde{}{\{\swi\}}{\vlsbr[\vlder{\Psi'}{}{\delta}{\xi\{\fff\}}\;\;.\;\;\vlinf{}{}{\fff}{\vls(a.{\bar a})}]}
  {
   \vlde{\Psi}{}{\xi\vlsbr(a.{\bar a})}
   {
@@ -1129,23 +1108,11 @@ We build a core of $\Phi$ as follows:
 {
  \vlde{\Psi_2}{\{\acd,\med\}}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}
  {
-  \vlin{=}{}{\vls[\beta.(a_n.\bar a_n).\cdots.(a_n.\bar a_n).\cdots.(a_1.\bar a_1).\cdots.(a_1.\bar a_1)]}
+  \vlde{\Phi'}{\SKS\setminus\{\aid,\aiu\}}{{\vlsbr[\beta\;.\;\vlinf{}{}{\fff}{\vls(c_l.\bar c_l)}\;.\;\cdots\;.\;\vlinf{}{}{\fff}{\vls(c_1.\bar c_1)}\;.\;(a_n.\bar a_n)\;.\;\cdots\;.\;(a_n.\bar a_n)\;.\;\cdots\;.\;(a_1.\bar a_1)\;.\;\cdots\;.\;(a_1.\bar a_1)]}}
   {
-   \vlin{=}{}{\vls[\beta.\vlinf{}{}{\fff}{\vls(c_l.\bar c_l)}.\cdots.\vlinf{}{}{\fff}{\vls(c_1.\bar c_1)}.(a_n.\bar a_n).\cdots.(a_n.\bar a_n).\cdots.(a_1.\bar a_1).\cdots.(a_1.\bar a_1)]}
+   \vlde{\Psi_1}{\{\acu,\med\}}{{\vlsbr([a_1.\bar a_1]\;.\;\cdots\;.\;[a_1.\bar a_1]\;.\;\cdots\;.\;[a_n.\bar a_n]\;.\;\cdots\;.\;[a_n.\bar a_n]\;.\;\vlinf{}{}{\vls[b_1.\bar b_1]}{\ttt}\;.\;\cdots\;.\;\vlinf{}{}{\vls[b_k.\bar b_k]}{\ttt}\;.\;\alpha)}}
    {
-    \vlde{\Phi'}{\SKS\setminus\{\aid,\aiu\}}{\vls[\beta.(c_l.\bar c_l).\cdots.(c_1.\bar c_1).(a_n.\bar a_n).\cdots.(a_n.\bar a_n).\cdots.(a_1.\bar a_1).\cdots.(a_1.\bar a_1)]}
-    {
-     \vlin{=}{}{\vls([a_1.\bar a_1].\cdots.[a_1.\bar a_1].\cdots.[a_n.\bar a_n].\cdots.[a_n.\bar a_n].[b_1.\bar b_1].\cdots.[b_k.\bar b_k].\alpha)}
-     {
-      \vlin{=}{}{\vls([a_1.\bar a_1].\cdots.[a_1.\bar a_1].\cdots.[a_n.\bar a_n].\cdots.[a_n.\bar a_n].\vlinf{}{}{\vls[b_1.\bar b_1]}{\ttt}.\cdots.\vlinf{}{}{\vls[b_k.\bar b_k]}{\ttt}.\alpha)}
-      {
-       \vlde{\Psi_1}{\{\acu,\med\}}{\vls([a_1.\bar a_1].\cdots.[a_1.\bar a_1].\cdots.[a_n.\bar a_n].\cdots.[a_n.\bar a_n].\alpha)}
-       {
-        \vlhy{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}
-       }
-      }
-     }
-    }
+    \vlhy{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}
    }
   }
  }
@@ -1175,16 +1142,15 @@ where $\alpha$ and $\beta$ are formulae and returning a derivation of the form
 \vlder{\Norm_n(\Phi,a_1,\dots,a_n)}{}{\beta}{\alpha}\quad.
 \]
 
-%TODO: spacing
 We define $\Norm_n$ inductively on $n$. Let $\Norm_0(\Phi)=\Phi$ and for $n>0$ let $\Norm_n(\Phi,a_1,\dots,a_n)$ be
 \newbox\DeltaTopK
 \setbox\DeltaTopK=
 \hbox{$
 \vlderivation
 {
- \vlde{\Norm_{n-1}(\Phi,a_1,\dots,a_{n-1})}{}{\vlsbr[\beta.(\vlinf{}{}{\ttt}{a_n}.\bar a_n)]}
+ \vlde{\Norm_{n-1}(\Phi,a_1,\dots,a_{n-1})}{}{\vls[\beta.(\vlinf{\awu}{}{\ttt}{a_n}.\bar a_n)]}
  {
-  \vlhy{\vlsbr(\vlinf{}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha)}
+  \vlhy{\vls(\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha)}
  }
 }$
 }
@@ -1193,9 +1159,9 @@ We define $\Norm_n$ inductively on $n$. Let $\Norm_0(\Phi)=\Phi$ and for $n>0$ l
 \hbox{
 $\vlderivation
 {
- \vlde{\Norm_{n-1}(\Phi,a_1,\dots,a_{n-1})}{}{\vlsbr[\beta.\vlinf{}{}{\fff}{\vls(a_n.\bar a_n)}]}
+ \vlde{\Norm_{n-1}(\Phi,a_1,\dots,a_{n-1})}{}{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(a_n.\bar a_n)}]}
  {
-  \vlhy{\vlsbr([a_n.\vlinf{}{}{\bar a_n}{\fff}].\alpha)}
+  \vlhy{\vls([a_n.\vlinf{\awd}{}{\bar a_n}{\fff}].\alpha)}
  }
 }$
 }
@@ -1204,42 +1170,24 @@ $\vlderivation
 \hbox{$
 \vlderivation
 {
- \vlde{\Norm_{n-1}(\Phi,a_1,\dots,a_{n-1})}{}{\vlsbr[\beta.(a_n.\vlinf{}{}{\ttt}{\bar a_n})]}
+ \vlde{\Norm_{n-1}(\Phi,a_1,\dots,a_{n-1})}{}{\vls[\beta.(a_n.\vlinf{\awu}{}{\ttt}{\bar a_n})]}
  {
-  \vlhy{\vlsbr([\vlinf{}{}{a_n}{\fff}.\bar a_n].\alpha)}
+  \vlhy{\vls([\vlinf{\awd}{}{a_n}{\fff}.\bar a_n].\alpha)}
  }
 }$
 }
 \[
 \vlderivation
 {
- \vlin{\cod}{}{\beta}
+ \vlin{2\times\cod}{}{\beta}
  {
- \vlin{=}{}{\vls[\beta.\beta]}
+  \vlin{\swi}{}{\vlsbr[\beta\;\;\;.\;\;\;\beta\;\;\;.\;\;\;\box\DeltaBotK]}
   {
-   \vlin{=}{}{\vlsbr[\vlinf{\cod}{}{\beta}{\vls[\beta.\beta]}.\box\DeltaBotK]}
+   \vlin{\swi}{}{\vlsbr([\beta\;\;\;.\;\;\;\box\DeltaK].\alpha)}
    {
-    \vlin{\swi}{}{\vls[[\beta.\beta].(a_n.\alpha)]}
+    \vlin{2\times\cou}{}{\vlsbr(\box\DeltaTopK\;\;\;.\;\;\;\alpha\;\;\;.\;\;\;\alpha)}
     {
-     \vlin{=}{}{\vls([[\beta.\beta].a_n].\alpha)}
-     {
-      \vlin{=}{}{\vls([\beta.\box\DeltaK].\alpha)}
-      {
-       \vlin{\swi}{}{\vls([\beta.(\bar a_n.\alpha)].\alpha)}
-       {
-        \vlin{=}{}{\vls(([\beta.\bar a_n].\alpha).\alpha)}
-        {
-         \vlin{=}{}{\vlsbr(\box\DeltaTopK.\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha})}
-         {
-          \vlin{\cou}{}{\vls(\alpha.\alpha)}
-          {
-           \vlhy{\alpha}
-          }
-         }
-        }
-       }
-      }
-     }
+     \vlhy{\alpha}
     }
    }
   }
