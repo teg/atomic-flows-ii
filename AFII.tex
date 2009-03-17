@@ -827,6 +827,7 @@ We now define the core of an atomic flow:
 \newcommand{\Core}{\mathsf{Core}}
 
 %TODO: labels to edges and remark something about the uniqueness of the (co)contraction boxes
+%TODO: the boxes need not be connected...
 
 \begin{definition}\label{DefFlowCore}
 Given an atomic flow
@@ -884,7 +885,7 @@ Given an atomic flow
 ( 45,-11)*{\afvjm4};
 }\quad,
 \]
-where, for $1\le i\le n$, $\phi_i$ is connected and contains no (co)interaction vertices, the \emph{core of $\phi$} is defined to be
+where, for $1\le i\le n$, $\phi_i$ is connected and contains no (co)interaction vertices, we define the \emph{core of $\phi$} to be
 \[
 \Core(\phi)\;\;=\;\;
 \atomicflow
@@ -974,28 +975,37 @@ where, for $1\le i\le n$, $\phi_i$ is connected and contains no (co)interaction 
 \]
 \end{definition}
 
+%TODO: give an example
+
 The core of a derivation is now defined based on the core of its atomic flow:
 
 \begin{definition}\label{DefCore}
-Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ with associated atomic flow $\phi$, a \emph{core of\/ $\Phi$} is defined to be a derivation $\vlder{}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}$ with associated atomic flow $\Core(\phi)$.
+Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ with associated atomic flow $\phi$, a \emph{core of\/ $\Phi$} is defined to be a derivation
+\[
+\vlder{}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}
+\]
+with associated atomic flow $\Core(\phi)$.
 \end{definition}
 
-The reason for defining the core was to get a weakly streamlined derivation. The following proposition shows that we have done this. It can easily be verified by studying the core of the atomic flow above.
+The following proposition can easily by verified by studying the atomic flows in Definition~\ref{DefFlowCore}.
+
+%TODO: reconsider (ask about comment, can't read it)
 
 \begin{proposition}\label{PropStreamlinedCore}
-A core of a derivation $\Phi$ is weakly streamlined and every atom which maps to a path from an interaction to a cointeraction vertex in the atomic flow associated with $\Phi$ does not occur in an interaction or cointeraction instance in a core of $\Phi$.
-\end{proposition}
+A core of a derivation $\Phi$ is weakly streamlined and every atom occurrence that maps to an edge of a path between an identity and cut vertex in the atomic flow of $\Phi$ does not occur in an identity or cut instance in a core of $\Phi$.\end{proposition}
 
-Notice that a core of a derivation is not necessarily unique. However, we will now show how a core can be extracted, and we will single out the core obtained in this way and refer to it as \emph{the core}.
+%TODO: Alessio said: `why?'. Why did he say that?
 
-To be able to remove axioms and cuts from a derivation, they must first be extracted to the premiss and conclusion respectively. The following lemma shows how switches can be used to extract a subformula to the outside, both going up and going down.
+Notice that a derivation can have more than one core. However, we will now show how a core can be extracted, and we will single out the core obtained in this way and refer to it as \emph{the core}.
+
+To be able to remove identity and cut instances from a derivation, they must first be `pulled' towards the premiss and conclusion respectively. The following lemma shows how a subformula can be `pulled' towards the `outside' of the derivation, both going up and going down.
 
 \begin{lemma}\label{LemSuperSwitch}
 Given a context $\xi\vlhole$ and a formula $\alpha$ there exist derivations $\vlder{}{\{\swi\}}{\xi\{\alpha\}}{\vls(\alpha.\xi\{\ttt\})}$ and $\vlder{}{\{\swi\}}{\vls[\xi\{\fff\}.\alpha]}{\xi\{\alpha\}}$.
 \end{lemma}
 
 \begin{proof}
-We show how to construct the first derivation, the second one can be done by symmetry. We argue by induction on the number of atoms in $\xi\vlhole$. The base case, $\xi\vlhole=\vlhole$, is trivial and the inductive cases are:
+We show how to construct the first derivation, the second one can be done symmetrically. We argue by induction on the number of atoms in $\xi\vlhole$. The base case, $\xi\vlhole=\vlhole$, is trivial and the inductive cases are:
 
 \[
 \vlderivation
@@ -1025,7 +1035,7 @@ We show how to construct the first derivation, the second one can be done by sym
 for some $\xi'\vlhole$ and $\beta$ where $\beta$ is not a unit and $\Psi$ and $\Psi'$ exist by the inductive hypothesis.
 \end{proof}
 
-We now show how the previous lemma can be used to pull axioms out and up and cuts out and down, without disturbing the atomic flow.
+We now show how the previous lemma can be used to pull identity instances out and up and cut intsances out and down, without affecting the atomic flow.
 
 \begin{lemma}\label{LemDecompInt}
 Given a derivation $\vlder{}{}{\beta}{\alpha}$ with associated atomic flow $\phi$, there exists a derivation
@@ -1040,57 +1050,58 @@ Using Lemma~\ref{LemSuperSwitch} apply the following transformations to each of 
 \[
 \vlderivation
 {
- \vlde{\Psi'}{}{\delta}
+ \vlde{\Psi'}{}{\beta}
  {
   \vlin{}{}{\xi\vlsbr[a.{\bar a}]}
   {
    \vlde{\Psi}{}{\xi\{\ttt\}}
    {
-    \vlhy{\gamma}
+    \vlhy{\alpha}
    }
   }
  }
 }\quad\rightarrow\quad
 \vlderivation
 {
- \vlde{\Psi'}{}{\delta}
+ \vlde{\Psi'}{}{\beta}
  {
   \vlde{}{\{\swi\}}{\xi\vlsbr[a.{\bar a}]}
   {
-   \vlhy{\vlsbr(\vlinf{}{}{\vls[a.{\bar a}]}{\ttt}\;\;.\;\;\vlder{\Psi}{}{\xi\{\ttt\}}{\gamma})}
+   \vlhy{\vlsbr(\vlinf{}{}{\vls[a.{\bar a}]}{\ttt}\;\;.\;\;\vlder{\Psi}{}{\xi\{\ttt\}}{\alpha})}
   }
  }
 }\qquad\mbox{and}\qquad
 \vlderivation
 {
- \vlde{\Psi'}{}{\delta}
+ \vlde{\Psi'}{}{\beta}
  {
   \vlin{}{}{\xi\{\fff\}}
   {
    \vlde{\Psi}{}{\xi\vlsbr(a.{\bar a})}
    {
-    \vlhy{\gamma}
+    \vlhy{\alpha}
    }
   }
  }
 }\quad\rightarrow\quad
 \vlderivation
 {
- \vlde{}{\{\swi\}}{\vlsbr[\vlder{\Psi'}{}{\delta}{\xi\{\fff\}}\;\;.\;\;\vlinf{}{}{\fff}{\vls(a.{\bar a})}]}
+ \vlde{}{\{\swi\}}{\vlsbr[\vlder{\Psi'}{}{\beta}{\xi\{\fff\}}\;\;.\;\;\vlinf{}{}{\fff}{\vls(a.{\bar a})}]}
  {
   \vlde{\Psi}{}{\xi\vlsbr(a.{\bar a})}
   {
-   \vlhy{\gamma}
+   \vlhy{\alpha}
   }
  }
 }\quad.
 \]
 \end{proof}
 
-The way the normaliser in the next section works is by stitching together atoms from the conclusion in one copy of the core with atoms from the premiss of another copy of the core. It is therefore convenient that the number of occurrences of each atom is the same in the premiss and in the conclusion. We use (co)contractions to make sure we have exactly one occurrence of every atom.
+%TODO: rewrite and say that it is routine
+%The way the normaliser in the next section works is by stitching together atoms from the conclusion in one copy of the core with atoms from the premiss of another copy of the core. It is therefore convenient that the number of occurrences of each atom is the same in the premiss and in the conclusion. We use (co)contractions to make sure we have exactly one occurrence of every atom.
 
 \begin{lemma}\label{LemGenericContraction}
-Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$.
+Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\vlupsmash{\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}}$ and $\vlupsmash{\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}}$.
 \end{lemma}
 
 \begin{proof}
@@ -1098,7 +1109,7 @@ Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\v
 \end{proof}
 
 \begin{remark}
-In the non-atomic version of system $\SKS$ the derivations shown in Lemma~\ref{LemGenericContraction} correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlder{}{\{\acu,\med\}}{\vls(\alpha.\alpha)}{\alpha}$.
+In the non-atomic version of system $\SKS$ the derivations shown in Lemma~\ref{LemGenericContraction} correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlupsmash{\vlder{}{\{\acu,\med\}}{\vls(\alpha.\alpha)}{\alpha}}$.
 \end{remark}
 
 \begin{theorem}\label{ThmExistCore}
@@ -1106,7 +1117,7 @@ Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, a core of $\Phi$ exists.
 \end{theorem}
 
 \begin{proof}
-We build a core of $\Phi$ as follows:
+Let $\phi$ be the atomic flow of $\Phi$ and label the sublfows of $\phi$ as in Definition~\ref{DefFlowCore}. Let atom occurrences of the atoms $a_1,\dots,a_n$ map to edges in the subflows $\phi_1,\dots,\phi_n$ respectively, let atom occurrences of the atoms $b_1,\dots,b_k$ map to edges in the subflow $\psi_2$ and let atom occurrences of the atoms $c_1,\dots,c_l$ map to edges in the subflow $\psi_3$. Then we build a core of $\Phi$ as follows:
 \[
 \vlderivation
 {
@@ -1122,11 +1133,13 @@ We build a core of $\Phi$ as follows:
  }
 }\quad,
 \]
-where $a_1,\dots,a_n$ are distinct and pairwise non-dual atoms and there are no atoms in common between $b_1,\dots,b_k$ and their duals and $c_1,\dots,c_l$ and their duals, $\Phi'$ exists by Lemma~\ref{LemDecompInt} and $\Psi_1$ and $\Psi_2$ exist by Lemma~\ref{LemGenericContraction}. By studying the proofs of Lemma~\ref{LemDecompInt} and Lemma~\ref{LemGenericContraction}, we can observe that the derivation has the desired atomic flow.
+where $\Phi'$ exists by Lemma~\ref{LemDecompInt} and $\Psi_1$ and $\Psi_2$ exist by Lemma~\ref{LemGenericContraction}. By studying the proofs of Lemma~\ref{LemDecompInt} and Lemma~\ref{LemGenericContraction}, we can observe that the derivation has atomic flow $\Core(\phi)$.
 \end{proof}
 
+%TODO: in what sense is this unique
+
 \begin{definition}
-Given a derivation $\Phi$, a core of $\Phi$ obtained as described in the proofs of Lemma~\ref{LemDecompInt}, Lemma~\ref{LemGenericContraction} and Theorem~\ref{ThmExistCore} is called \emph{the core of $\Phi$}, denoted $\Core(\Phi)$.
+Given a derivation $\Phi$, the core of $\Phi$ obtained as described in the proof of Theorem~\ref{ThmExistCore} is called \emph{the core of $\Phi$}, denoted $\Core(\Phi)$.
 \end{definition}
 
 \subsection{The Normaliser}
