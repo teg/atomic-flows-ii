@@ -816,9 +816,11 @@ We will now show how to weakly streamline a derivation. This is done in two step
 
 \subsection{The Core}
 
-In this subsection we wish to find a way to modify a derivation to make it weakly streamlined. Since weak streamlining is defined in terms of atomic flows, we will define what we do to atomic flows first and then show that an analogous transformation  can be done to derivations later. The \emph{core of an atomic flow} is obtained by removing each connected pair of axiom and cut vertices. As can be seen in Definition~\ref{DefFlowCore} below this leaves most of the atomic flow untouched and the result is weakly streamlined. The definition of the \emph{core of a derivation} follows naturally.
+%TODO: reread
 
-Notice that the core of a derivation does not preserve the premiss and conclusion. In the next subsection we will see how we can glue several cores together to obtain a weakly streamlined derivation with the same premiss and conclusion as the original.
+In this subsection, we show a procedure for removing connected identities and cuts from a derivation. The result of this procedure is weakly streamlined and we call it the `core' of the derivation. We first define the procedure in terms of atomic flows, where the reason for the name `core' is made clear. We remove the top (the axioms) and the bottom (the cuts) of the atomic flow and what remains is the core. Based on the definition of the core of an atomic flow the core of a derivation follows naturally.
+
+Notice that the core of a derivation does not have the same premiss and conclusion as the original derivation. In the next subsection we will see how we can glue several cores together to obtain a weakly streamlined derivation with the correct premiss and conclusion.
 
 We now define the core of an atomic flow:
 
