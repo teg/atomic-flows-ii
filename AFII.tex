@@ -195,9 +195,9 @@ We can replace instances of nonatomic structural rules by derivations with the s
 %Rule instances of\/ $\gwd$, $\gwu$, $\gcd$ and\/ $\gcu$ can be derived in quadratic time by %derivations in\/ $\{\awd\}$, $\{\awu\}$, $\{\med,\acd\}$ and\/ $\{\med,\acu\}$, respectively.
 %\end{proposition}
 
-Sometimes, we use a nonatomic rule instance to stand for some derivation in $\SKS$ that derives that instance, as per Definition~\ref{DefNorm}.
+Sometimes, we use a nonatomic rule instance to stand for some derivation in $\SKS$ that derives that instance, as per Remark~\ref{RemGenericContraction}.
 
-For CoS proofs, we adopt a special notation that allows us considerable efficiency in describing derivations, especially in the crucial Definition~\ref {DefThrDer}. We denote with $\xi\vlscn[\Phi]$ the result of including every formula of $\Phi$ into the context $\xi\vlhole$: since we adopt deep inference, $\xi\vlscn[\Phi]$ is a valid derivation. Then, given the two derivations $\vldownsmash{\vlder\Phi{}\beta\alpha}$ and $\vldownsmash{\vlder\Psi{}\delta\gamma}$, by $\vls[\Phi.\Psi]$ and $\vls(\Phi.\Psi)$ we denote, respectively,
+For CoS proofs, we adopt a special notation that allows us considerable efficiency in describing derivations, especially in the crucial Definition~\ref{DefNorm}. We denote with $\xi\vlscn[\Phi]$ the result of including every formula of $\Phi$ into the context $\xi\vlhole$: since we adopt deep inference, $\xi\vlscn[\Phi]$ is a valid derivation. Then, given the two derivations $\vldownsmash{\vlder\Phi{}\beta\alpha}$ and $\vldownsmash{\vlder\Psi{}\delta\gamma}$, by $\vls[\Phi.\Psi]$ and $\vls(\Phi.\Psi)$ we denote, respectively,
 \[
 \vlinf={}{\vlsbr[\beta\;\;.\;\;\vlder\Psi{}\delta\gamma]}
          {\vlsbr[\vlder\Phi{}\beta\alpha\;\;.\;\;\gamma]}
@@ -736,7 +736,7 @@ In the following, when informally dealing with derivations, we freely transfer t
 %===============================================================================
 \section{Streamlining}\label{SectStreamlining}
 
-We know that the cut rule is admissible for derivations with premiss $\ttt$ (proofs) and, dually, that the identity rule is admissible for derivations with conclusion $\fff$ (contradictions). Neither the cut nor the identity are admissible for generic derivations, which motivated the discovery of `streamlining'. Streamlining is a generalisation of both cut and identity elimination to derivations with no restrictions on their premiss or conclusion.
+We know that the cut rule is admissible for derivations with premiss $\ttt$ (proofs) and, dually, that the identity rule is admissible for derivations with conclusion $\fff$ (contradictions). However, neither the cut nor the identity are admissible for generic derivations, which motivated the discovery of `streamlining'. Streamlining is a generalisation of both cut and identity elimination to derivations with no restrictions on their premiss or conclusion.
 
 %TODO: define maximal path
 
@@ -1108,7 +1108,7 @@ Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\v
 %TODO
 \end{proof}
 
-\begin{remark}
+\begin{remark}\label{RemGenericContraction}
 In the non-atomic version of system $\SKS$ the derivations shown in Lemma~\ref{LemGenericContraction} correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlupsmash{\vlder{}{\{\acu,\med\}}{\vls(\alpha.\alpha)}{\alpha}}$.
 \end{remark}
 
