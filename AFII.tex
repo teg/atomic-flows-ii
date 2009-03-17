@@ -812,7 +812,7 @@ An $\SKS$ derivation is \emph{weakly streamlined} if its associated atomic flow 
 \]
 \end{definition}
 
-We will now show how to weakly streamline a derivation. This is done in two steps. First, we extract the `core of the derivation', which amounts to removing each pair of connected identity and cut instances, then we construct the `normaliser', which is an operator that adds pairs of identity and cut instances to a derivation in such a way that they are ensured not to be connected. A weakly streamlined derivation is obtained by applying the normaliser to the core.
+In the rest of this section we show how to weakly streamline a derivation. This is done in two steps. First, we extract the `core of the derivation', which amounts to removing each pair of connected identity and cut instances, then we construct the `normaliser', which is an operator that adds pairs of identity and cut instances to a derivation in such a way that they are ensured not to be connected. A weakly streamlined derivation is obtained by applying the normaliser to the core.
 
 \subsection{The Core}
 
@@ -822,7 +822,7 @@ In this subsection, we show a procedure for removing connected identities and cu
 
 Notice that the core of a derivation does not have the same premiss and conclusion as the original derivation. In the next subsection we will see how we can glue several cores together to obtain a weakly streamlined derivation with the correct premiss and conclusion.
 
-We now define the core of an atomic flow:
+We define the core of an atomic flow:
 
 \newcommand{\Core}{\mathsf{Core}}
 
@@ -977,7 +977,7 @@ where, for $1\le i\le n$, $\phi_i$ is connected and contains no identity or cut 
 
 %TODO: give an example
 
-The core of a derivation is now defined based on the core of its atomic flow:
+The core of a derivation is defined based on the core of its atomic flow:
 
 \begin{definition}\label{DefCore}
 Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ with associated atomic flow $\phi$, a \emph{core of\/ $\Phi$} is defined to be a derivation
@@ -996,7 +996,7 @@ A core of a derivation $\Phi$ is weakly streamlined and every atom occurrence th
 
 %TODO: Alessio said: `why?'. Why did he say that?
 
-Notice that a derivation can have more than one core. However, we will now show how a core can be extracted, and we will single out the core obtained in this way and refer to it as \emph{the core}.
+Notice that a derivation can have more than one core. However, we show how a core can be extracted, and we will single out the core obtained in this way and refer to it as \emph{the core}.
 
 To be able to remove identity and cut instances from a derivation, they must first be `pulled' towards the premiss and conclusion respectively. The following lemma shows how a subformula can be `pulled' towards the `outside' of the derivation, both going up and going down.
 
@@ -1035,7 +1035,7 @@ We show how to construct the first derivation, the second one can be done symmet
 for some $\xi'\vlhole$ and $\beta$ where $\beta$ is not a unit and $\Psi$ and $\Psi'$ exist by the inductive hypothesis.
 \end{proof}
 
-We now show how the previous lemma can be used to pull identity instances out and up and cut intsances out and down, without affecting the atomic flow.
+We show how the previous lemma can be used to pull identity instances out and up and cut instances out and down, without affecting the atomic flow.
 
 \begin{lemma}\label{LemDecompInt}
 Given a derivation $\vlder{}{}{\beta}{\alpha}$ with associated atomic flow $\phi$, there exists a derivation
