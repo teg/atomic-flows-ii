@@ -147,7 +147,7 @@ and by the following two \emph{logical} inference rules:
 \quad.
 \]
 In addition to these rules, there is a rule $\vlsmash{\vlinf={}\delta\gamma}$, such that $\gamma$ and $\delta$ are opposite sides in one of the following equations:
-\begin{equation}\label{Eq}
+\begin{equation}
 \begin{array}{@{}r@{}l@{}r@{}l@{}}
 \vls[\alpha.\beta]         &{}=\vls[\beta.\alpha]         &\qquad\qquad
 \vls[\alpha.\fff]          &{}=\vls[\alpha]               \\
@@ -178,9 +178,6 @@ Besides $\SKS$, another standard deep-inference system is $\SKSg$, which is the 
 \quad.
 \]
 Clearly, a derivation in $\SKS$ is also a derivation in $\SKSg$. It can easily be proved that $\SKS$ and all its fragments containing the logical and $=$ rules polynomially simulate, respectively, $\SKSg$ and its corresponding fragments \cite{BrusGugl:07:On-the-P:fk}. For example, $\{\swi,\med,=,\acd\}$ polynomially simulates $\{\swi,=,\cod\}$.
-
-\newcommand{\KS}{\mathsf{KS}}
-A notable analytic system is $\KS=\{\swi,\med,=,\aid,\awd,\acd\}$, which is complete for propositional logic \cite{BrunTiu:01:A-Local-:mz,Brun:04:Deep-Inf:rq}; this, of course, entails completeness for all the systems that contain $\KS$, such as $\SKS$.
 
 We can replace instances of nonatomic structural rules by derivations with the same premiss and conclusion, and that only contain atomic structural rules. The price to pay is a quadratic growth in size. This is stated by the following, routine proposition (keep in mind that, from now on, we consider the $=$ rule as implicitly present in all systems). An example is the rightmost upper derivation in Figure~\ref{FigExAF}, which stands for a nonatomic cocontraction.
 
