@@ -809,7 +809,6 @@ We define the core of an atomic flow:
 \newcommand{\Core}{\mathsf{Core}}
 
 %TODO: remark something about the uniqueness of the (co)contraction boxes
-%TODO: the boxes need not be connected...
 
 \begin{definition}\label{DefFlowCore}
 Given an atomic flow
@@ -1087,8 +1086,47 @@ Given a formula $\alpha$ and a positive integer $n$, there exist derivations $\v
 \end{lemma}
 
 \begin{proof}
-%TODO
+We show how to construct the first derivation, the second one can be done symmetrically. We argue by induction on $n$. The first base case, $n=1$, is trivial and for the second base case, $n=2$, we argue by induction on the number of atom occurrences in $\alpha$. We have to consider the following base case and two inductive cases:
+\[
+\vlinf{\acd}{}{a}{\vls[a.a]}
+\qquad\hbox{,}\qquad
+\vlderivation
+{
+ \vlin{=}{}{\vls(\alpha.\beta)}
+ {
+  \vlin{\med}{}{\vlsbr(\vlder{}{\{\acd,\med\}}{\alpha}{\vls[\alpha.\alpha]}\;\;.\;\;\vlder{}{\{\acd,\med\}}{\beta}{\vls[\beta.\beta]})}
+  {
+   \vlhy{\vls[(\alpha.\beta).(\alpha.\beta)]}
+  }
+ }
+}\qquad\hbox{and}\qquad
+\vlderivation
+{
+ \vlin{=}{}{\vls[\alpha.\beta]}
+ {
+  \vlin{=}{}{\vlsbr[\vlder{}{\{\acd,\med\}}{\alpha}{\vls[\alpha.\alpha]}\;\;.\;\;\vlder{}{\{\acd,\med\}}{\beta}{\vls[\beta.\beta]}]}
+  {
+   \vlhy{\vls[[\alpha.\beta].[\alpha.\beta]]}
+  }
+ }
+}\quad.
+\]
+Finally, we show the inductive case, $n>2$:
+\[
+\vlderivation
+{
+ \vlde{}{\{\acd,\med\}}{\alpha}
+ {
+  \vlin{=}{}{\vlsbr[\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{\lfloor n/2\rfloor}\alpha}\;\;.\;\;\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n-\lfloor n/2\rfloor}\alpha}]}
+  {
+   \vlhy{\bigvee_{i=1}^{n}\alpha}
+  }
+ }
+}\quad.
+\]
 \end{proof}
+
+%TODO: comment somehow that the derivation is "unique" or cannonical
 
 \begin{remark}\label{RemGenericContraction}
 In the non-atomic version of system $\SKS$ the derivations shown in Lemma~\ref{LemGenericContraction} correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlupsmash{\vlder{}{\{\acu,\med\}}{\vls(\alpha.\alpha)}{\alpha}}$.
