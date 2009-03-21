@@ -32,7 +32,7 @@
 
 \begin{document}
 
-\title{Normalisation Control in Deep Inference \\ via Atomic Flows II}
+\title[Normalisation Control in Deep Inference via Atomic Flows II]{Normalisation Control in Deep Inference \\ via Atomic Flows II}
 
 \author{Alessio Guglielmi}
 \address{University of Bath, Bath BA2 7AY, UK \and INRIA, Nancy-Grand Est, France}
@@ -1337,24 +1337,6 @@ where all the edges that might be in paths from the evidenced identity vertex ar
 
 By studying Definition~\ref{DefFlowCore} and Remark~\ref{RemFlowNorm}, we can see how a weakly streamlined derivation can be built.
 
-%TODO: redo lemma and proof of next theorem. check comments again.
-
-\begin{lemma}\label{LemStreamlinedNorm}
-Given a derivation $\Phi$ containing the atoms $a_1,\dots,a_n$, and such that\/ $\Norm_{k-1}(a_1,\dots,a_{k-1},\Phi)$ and\/ $\Norm_k(a_1,\dots,a_k,\Phi)$ exist for some $0<k\le n$, if\/ $\Norm_{k-1}(a_1,\dots,a_{k-1},\Phi)$ is weakly streamlined and none of the atoms $a_k,\dots,a_n$ occur in identity or cut instances in\/ $\Norm_{k-1}(a_1,\dots,a_{k-1},\Phi)$ then
-\begin{itemize}
- \item none of the atoms $a_{k+1},\dots,a_n$ occur in identity or cut instances in $\Norm_k(a_1,\dots,a_k,\Phi)$, and
- \item $\Norm_k(a_1,\dots,a_k,\Phi)$ is weakly streamlined.
-\end{itemize}
-\end{lemma}
-
-\begin{proof}
-Refer to the atomic flow in Remark~\ref{RemFlowNorm} to observe the following:
-\begin{itemize}
- \item The only atoms which occur in identity or cut instances in $\Norm_k(a_1,\dots,a_k,\Phi)$ which did not in $\Norm_{k-1}(a_1,\dots,a_{k-1},\Phi)$ are $a_k$ and $\bar a_k$.
- \item The only identity and cut vertices mapped to by $a_k$ in the atomic flow associated with $\Norm_k(a_1,\dots,a_k,\Phi)$ are the once that are evidenced; and since the red and the blue edges never coincide there can be no path between them. Furthermore, since $\Norm_{k-1}(a_1,\dots,a_{k-1},\Phi)$ is weakly streamlined a path from an identity to a cut vertex in the atomic flow associated with $\Norm_k(a_1,\dots,a_k,\Phi)$ must contain the red edge between $\psi_1$ and $\psi_2$ or the blue edge between $\phi_2$ and $\phi_3$. However, $a_k$ and $\bar a_k$ map to these edges so there can be no path from an identity to a cut vertex.
-\end{itemize}
-\end{proof}
-
 %TODO: big exclamation mark at the second derivation in the following theorem
 
 \begin{theorem}
@@ -1362,7 +1344,16 @@ Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, there are atoms $a_1,\dots,a
 \end{theorem}
 
 \begin{proof}
-Choose $a_1,\dots,a_n$ such that no atoms except for $a_1,\dots,a_n$ and their duals map to a path from an identity to a cut vertex in the atomic flow associated with $\Phi$, then the result follows by Proposition~\ref{PropStreamlinedCore} and Lemma~\ref{LemStreamlinedNorm}.
+Choose $a_1,\dots,a_n$ such that no atoms except for $a_1,\dots,a_n$ and their duals map to a path from an identity to a cut vertex in the atomic flow associated with $\Phi$. By studying the atomic flow in Remark~\ref{RemFlowNorm}, observe that, for $1 \le i\le n$
+\begin{itemize}
+ \item any two disconnected subflows of $\psi$ in $\Norm_{i-1}(a_1,\dots,a_{i-1},\Core(\Phi))$ are disconnected subflows of $\Norm_i(a_1,\dots,a_i,\Core(\Phi))$, and
+ \item if $\Norm_{i-1}(a_1,\dots,a_{i-1},\Core(\Phi))$ is weakly streamlined, so is $\Norm_i(a_1,\dots,a_i,\Core(\Phi))$.
+\end{itemize}
+It therefore follows by Definition~\ref{DefFlowCore} and induction on Remark~\ref{RemFlowNorm} that
+\begin{itemize}
+ \item the atomic flow of $\Norm_{n-1}(a_1,\dots,a_{n-1},\Core(\Phi))$ has the shape of the first atomic flow in Remark~\ref{RemFlowNorm}, and
+ \item $\Norm_n(a_1,\dots,a_n,\Core(\Phi))$ is weakly streamlined.
+\end{itemize}
 \end{proof}
 
 %===========================================
