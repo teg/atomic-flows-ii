@@ -1237,13 +1237,13 @@ $\vlderivation
 %TODO: Green looks better than blue...
 
 \begin{remark}\label{RemFlowNorm}
-If the atomic flow of $\vlder{\Norm_{n-1}(a_1,\dots,a_{n-1},\Phi)}{}{\vls[\beta.(a_n.\bar a_n)]}{\vls([a_n.\bar a_n].\alpha)}$ is
+If the atomic flow of $\vlder{\Norm_{n-1}(a_1,\dots,a_{n-1},\Phi)}{}{\vls[\beta.(a_n^{\check\epsilon}.\bar a_n^{\check\epsilon'})]}{\vls([a_n^{\hat\epsilon}.\bar a_n^{\hat\epsilon'}].\alpha)}$ is
 \[
 \atomicflow
 {
 (-8, 6)*{\afvjm{4}};
-(-2, 6)*{\afvju{4}{a_n}{}};
-( 2, 6)*{\afvju{4}{}{\bar a_n}};
+(-2, 6)*{\afvju{4}{\hat\epsilon}{}};
+( 2, 6)*{\afvju{4}{}{\hat\epsilon'}};
 ( 8, 6)*{\afvjm{4}};
 (-5, 0)*{\affr{8}{8}};
 (-4, 2)*{\aflabelright\phi};
@@ -1251,8 +1251,8 @@ If the atomic flow of $\vlder{\Norm_{n-1}(a_1,\dots,a_{n-1},\Phi)}{}{\vls[\beta.
 ( 5, 0)*{\affr{8}{8}};
 ( 6, 2)*{\aflabelright{\phi'}};
 ( 8,-6)*{\afvjm{4}};
-(-2,-6)*{\afvjd{4}{a_n}{}};
-( 2,-6)*{\afvjd{4}{}{\bar a_n}};
+(-2,-6)*{\afvjd{4}{\check\epsilon}{}};
+( 2,-6)*{\afvjd{4}{}{\check\epsilon}};
 (-8,-6)*{\afvjm{4}};
 %---
 (15, 0)*{\affr{8}{8}};
@@ -1261,7 +1261,7 @@ If the atomic flow of $\vlder{\Norm_{n-1}(a_1,\dots,a_{n-1},\Phi)}{}{\vls[\beta.
 (15,-6)*{\afvjm{4}};
 }\quad,
 \]
-where $a$ maps to all the edges in $\phi$ and $\bar a$ maps to all the edges in $\phi'$, then the atomic flow of $\vlder{\Norm_n(a_1,\dots,a_n,\Phi)}{}{\beta}{\alpha}$ is
+where $a_n$ maps to all the edges in $\phi$ and $\bar a_n$ maps to all the edges in $\phi'$, then the atomic flow of $\vlder{\Norm_n(a_1,\dots,a_n,\Phi)}{}{\beta}{\alpha}$ is
 \[
 \atomicflow
 {
@@ -1288,23 +1288,23 @@ where $a$ maps to all the edges in $\phi$ and $\bar a$ maps to all the edges in 
 (-30,  0.4)*{\afvjmcol{43.2}{Red}};
 (-19,-27.5)*{\afacdmnwexsqcol{}{}{}{}{11}{2}{Red}{}};
 % top boxes
-(-22, 34)*{\afaidcol{a_n}{}{}{\bar a_n}{}{}{Red}{Red}};
-(-24, 18)*{\afawucol{}{}{a_n}{}{}{Red}};
+(-22, 34)*{\afaidcol{\hat\epsilon}{}{}{\hat\epsilon'}{}{}{Red}{Red}};
+(-24, 18)*{\afawucol{}{}{\check\epsilon}{}{}{Red}};
 ( -9, 13)*{\afcjlcol{22}{18}{Red}};
 (-27, 26)*{\affr{8}{8}};
 (-26, 28)*{\aflabelright{\phi}};
 (-17, 26)*{\affr{8}{8}};
 (-16, 28)*{\aflabelright{\phi'}};
 % middle boxes
-(-2,  8)*{\afawdcol{}{}{a_n}{}{}{Blue}};
-(  2, -8)*{\afawucol{}{}{}{\bar a_n}{}{Red}};
+(-2,  8)*{\afawdcol{}{}{\hat\epsilon}{}{}{Blue}};
+(  2, -8)*{\afawucol{}{}{}{\check\epsilon'}{}{Red}};
 (-5, 0)*{\affr{8}{8}};
 (-4, 2)*{\aflabelright{\phi}};
 ( 5, 0)*{\affr{8}{8}};
 ( 6, 2)*{\aflabelright{\phi'}};
 % bottom boxes
-( 22,-34)*{\afaiucol{a_n}{}{}{\bar a_n}{}{}{Blue}{Blue}};
-( 24,-18)*{\afawdcol{}{}{}{\bar a_n}{}{Blue}};
+( 22,-34)*{\afaiucol{\check\epsilon}{}{}{\check\epsilon'}{}{}{Blue}{Blue}};
+( 24,-18)*{\afawdcol{}{}{}{\hat\epsilon'}{}{Blue}};
 (  9,-13)*{\afcjlcol{22}{18}{Blue}};
 ( 17,-26)*{\affr{8}{8}};
 ( 18,-24)*{\aflabelright{\phi}};
