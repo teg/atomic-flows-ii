@@ -1126,11 +1126,13 @@ Finally, we show the inductive case, $n>2$:
 \]
 \end{proof}
 
-%TODO: comment somehow that the derivation is "unique" or cannonical
+%TODO: comment somehow that the derivation is "unique" or canonical
 
 \begin{remark}\label{RemGenericContraction}
 In the non-atomic version of system $\SKS$ the derivations shown in Lemma~\ref{LemGenericContraction} correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlupsmash{\vlder{}{\{\acu,\med\}}{\vls(\alpha.\alpha)}{\alpha}}$.
 \end{remark}
+
+%TODO: can be constructed
 
 \begin{theorem}\label{ThmExistCore}
 Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, a core of $\Phi$ exists.
@@ -1245,15 +1247,21 @@ If the atomic flow of $\vlder{\Norm_{n-1}(a_1,\dots,a_{n-1},\Phi)}{}{\vls[\beta.
 ( 8, 6)*{\afvjm{4}};
 (-5, 0)*{\affr{8}{8}};
 (-4, 2)*{\aflabelright\phi};
+%---
 ( 5, 0)*{\affr{8}{8}};
-( 6, 2)*{\aflabelright\psi};
+( 6, 2)*{\aflabelright{\phi'}};
 ( 8,-6)*{\afvjm{4}};
 (-2,-6)*{\afvjd{4}{a_n}{}};
 ( 2,-6)*{\afvjd{4}{}{\bar a_n}};
 (-8,-6)*{\afvjm{4}};
+%---
+(15, 0)*{\affr{8}{8}};
+(16, 2)*{\aflabelright\psi};
+(15, 6)*{\afvjm{4}};
+(15,-6)*{\afvjm{4}};
 }\quad,
 \]
-then the atomic flow of $\vlder{\Norm_n(a_1,\dots,a_n,\Phi)}{}{\beta}{\alpha}$ is
+where $a$ maps to all the edges in $\phi$ and $\bar a$ maps to all the edges in $\phi'$, then the atomic flow of $\vlder{\Norm_n(a_1,\dots,a_n,\Phi)}{}{\beta}{\alpha}$ is
 \[
 \atomicflow
 {
@@ -1262,22 +1270,22 @@ then the atomic flow of $\vlder{\Norm_n(a_1,\dots,a_n,\Phi)}{}{\beta}{\alpha}$ i
 (-13.5,36.5)*{\afacumexsqcol{}{}{}{}{}{}{33}{4}{}{Blue}{Blue}};
 (  2.5,36.5)*{\afacumexsqcol{}{}{}{}{}{}{33}{4}{}{Blue}{Blue}};
 %  inner
-( -8, 13)*{\afvjmcol{18}{Blue}};
-( 14,  0)*{\afvjmcol{44}{Blue}};
-(  3, 26)*{\afacumnwexsqcol{}{}{}{}{11}{2}{Blue}{Blue}};
-(  8, 13)*{\afvjm{18}};
-( 30, 0)*{\afvjmcol{44}{Blue}};
-( 19, 26)*{\afacumnwexsqcol{}{}{}{}{11}{2}{}{Blue}};
+( -8,12.75)*{\afvjmcol{17.4}{Blue}};
+( 14,-0.25)*{\afvjmcol{43.4}{Blue}};
+(  3,26)*{\afacumnwexsqcol{}{}{}{}{11}{2}{Blue}{Blue}};
+(  8,12.75)*{\afvjm{17.4}};
+( 30,-0.25)*{\afvjmcol{43.4}{Blue}};
+( 19,26)*{\afacumnwexsqcol{}{}{}{}{11}{2}{}{Blue}};
 % contractions
 %  outer
 ( 13.5,-36)*{\afacdmexsqcol{}{}{}{}{}{}{33}{4}{Red}{}{Red}};
 ( -2.5,-36)*{\afacdmexsqcol{}{}{}{}{}{}{33}{4}{Red}{}{Red}};
 %  inner
-(  8,-12.75)*{\afvjmcol{17.5}{Red}};		
-(-14,0.25)*{\afvjmcol{43.5}{Red}};
+(  8,-12.6)*{\afvjmcol{17.2}{Red}};		
+(-14,  0.4)*{\afvjmcol{43.2}{Red}};
 ( -3,-27.5)*{\afacdmnwexsqcol{}{}{}{}{11}{2}{Red}{Red}};
-( -8,-12.75)*{\afvjm{17.5}};
-(-30,0.25)*{\afvjmcol{43.5}{Red}};
+( -8,-12.6)*{\afvjm{17.2}};
+(-30,  0.4)*{\afvjmcol{43.2}{Red}};
 (-19,-27.5)*{\afacdmnwexsqcol{}{}{}{}{11}{2}{Red}{}};
 % top boxes
 (-22, 34)*{\afaidcol{a_n}{}{}{\bar a_n}{}{}{Red}{Red}};
@@ -1286,14 +1294,14 @@ then the atomic flow of $\vlder{\Norm_n(a_1,\dots,a_n,\Phi)}{}{\beta}{\alpha}$ i
 (-27, 26)*{\affr{8}{8}};
 (-26, 28)*{\aflabelright{\phi}};
 (-17, 26)*{\affr{8}{8}};
-(-16, 28)*{\aflabelright{\psi}};
+(-16, 28)*{\aflabelright{\phi'}};
 % middle boxes
 (-2,  8)*{\afawdcol{}{}{a_n}{}{}{Blue}};
 (  2, -8)*{\afawucol{}{}{}{\bar a_n}{}{Red}};
 (-5, 0)*{\affr{8}{8}};
 (-4, 2)*{\aflabelright{\phi}};
 ( 5, 0)*{\affr{8}{8}};
-( 6, 2)*{\aflabelright{\psi}};
+( 6, 2)*{\aflabelright{\phi'}};
 % bottom boxes
 ( 22,-34)*{\afaiucol{a_n}{}{}{\bar a_n}{}{}{Blue}{Blue}};
 ( 24,-18)*{\afawdcol{}{}{}{\bar a_n}{}{Blue}};
@@ -1301,7 +1309,23 @@ then the atomic flow of $\vlder{\Norm_n(a_1,\dots,a_n,\Phi)}{}{\beta}{\alpha}$ i
 ( 17,-26)*{\affr{8}{8}};
 ( 18,-24)*{\aflabelright{\phi}};
 ( 27,-26)*{\affr{8}{8}};
-( 28,-24)*{\aflabelright{\psi}};
+( 28,-24)*{\aflabelright{\phi'}};
+}\qquad
+\atomicflow{
+(-2.5,19)*{\afacumexsq{}{}{}{}{}{}{15}{4}};
+(-10,8.35)*{\afvjm{8.5}};
+(5,8.6)*{\afacumnwexsq{}{}{}{}{5}{2}};
+%---
+(-10,0)*{\affr88};
+( -9,2)*{\aflabelright\psi};
+(  0,0)*{\affr88};
+(  1,2)*{\aflabelright\psi};
+( 10,0)*{\affr88};
+( 11,2)*{\aflabelright\psi};
+%---
+(-10,-8.25)*{\afvjm{8.4}};
+(5,-10.3)*{\afacdmnwexsq{}{}{}{}{5}{2}};
+(-2.5,-18.5)*{\afacdmexsq{}{}{}{}{}{}{15}{4}};
 }\quad,
 \]
 %TODO: explain better
