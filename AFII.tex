@@ -1268,25 +1268,25 @@ where $a_n$ maps to all the edges in $\phi$ and $\bar a_n$ maps to all the edges
 % cocontractions
 %  outer
 (-13.5,36.5)*{\afacumexsqcol{}{}{}{}{}{}{33}{4}{}{Blue}{Blue}};
+( 3,21.3)*{\afvjmcol{17.5}{Blue}};
 (  2.5,36.5)*{\afacumexsqcol{}{}{}{}{}{}{33}{4}{}{Blue}{Blue}};
+(19,21.3)*{\afvjmcol{17.5}{Blue}};
 %  inner
-( -8,12.75)*{\afvjmcol{17.4}{Blue}};
-( 14,-0.25)*{\afvjmcol{43.4}{Blue}};
-(  3,26)*{\afacumnwexsqcol{}{}{}{}{11}{2}{Blue}{Blue}};
-(  8,12.75)*{\afvjm{17.4}};
-( 30,-0.25)*{\afvjmcol{43.4}{Blue}};
-( 19,26)*{\afacumnwexsqcol{}{}{}{}{11}{2}{}{Blue}};
+(  3,8.6)*{\afacumnwexsqcol{}{}{}{}{11}{2}{Blue}{Blue}};
+( 14,-8.95)*{\afvjmcol{26}{Blue}};
+( 19,8.6)*{\afacumnwexsqcol{}{}{}{}{11}{2}{}{Blue}};
+( 30,-8.95)*{\afvjmcol{26}{Blue}};
 % contractions
 %  outer
-( 13.5,-36)*{\afacdmexsqcol{}{}{}{}{}{}{33}{4}{Red}{}{Red}};
+(-19,-21.2)*{\afvjmcol{17.5}{Red}};
 ( -2.5,-36)*{\afacdmexsqcol{}{}{}{}{}{}{33}{4}{Red}{}{Red}};
+(-3,-21.2)*{\afvjmcol{17.5}{Red}};
+(13.5,-36)*{\afacdmexsqcol{}{}{}{}{}{}{33}{4}{Red}{}{Red}};
 %  inner
-(  8,-12.6)*{\afvjmcol{17.2}{Red}};		
-(-14,  0.4)*{\afvjmcol{43.2}{Red}};
-( -3,-27.5)*{\afacdmnwexsqcol{}{}{}{}{11}{2}{Red}{Red}};
-( -8,-12.6)*{\afvjm{17.2}};
-(-30,  0.4)*{\afvjmcol{43.2}{Red}};
-(-19,-27.5)*{\afacdmnwexsqcol{}{}{}{}{11}{2}{Red}{}};
+(-30,8.95)*{\afvjmcol{26}{Red}};
+(-19,-10.4)*{\afacdmnwexsqcol{}{}{}{}{11}{2}{Red}{}};
+(-14,8.95)*{\afvjmcol{26}{Red}};
+( -3,-10.4)*{\afacdmnwexsqcol{}{}{}{}{11}{2}{Red}{Red}};
 % top boxes
 (-22, 34)*{\afaidcol{\hat\epsilon}{}{}{\hat\epsilon'}{}{}{Red}{Red}};
 (-24, 18)*{\afawucol{}{}{\check\epsilon}{}{}{Red}};
@@ -1312,8 +1312,9 @@ where $a_n$ maps to all the edges in $\phi$ and $\bar a_n$ maps to all the edges
 ( 28,-24)*{\aflabelright{\phi'}};
 }\qquad
 \atomicflow{
-(-2.5,19)*{\afacumexsq{}{}{}{}{}{}{15}{4}};
-(-10,8.35)*{\afvjm{8.5}};
+(-2.5,36.5)*{\afacumexsq{}{}{}{}{}{}{15}{4}};
+(-10,17.1)*{\afvjm{26}};
+(5,21.35)*{\afvjm{17.5}};
 (5,8.6)*{\afacumnwexsq{}{}{}{}{5}{2}};
 %---
 (-10,0)*{\affr88};
@@ -1323,9 +1324,10 @@ where $a_n$ maps to all the edges in $\phi$ and $\bar a_n$ maps to all the edges
 ( 10,0)*{\affr88};
 ( 11,2)*{\aflabelright\psi};
 %---
-(-10,-8.25)*{\afvjm{8.4}};
+(-10,-17)*{\afvjm{25.9}};
 (5,-10.3)*{\afacdmnwexsq{}{}{}{}{5}{2}};
-(-2.5,-18.5)*{\afacdmexsq{}{}{}{}{}{}{15}{4}};
+(5,-21.25)*{\afvjm{17.4}};
+(-2.5,-36)*{\afacdmexsq{}{}{}{}{}{}{15}{4}};
 }\quad,
 \]
 %TODO: explain better
@@ -1355,6 +1357,123 @@ It therefore follows by Definition~\ref{DefFlowCore} and induction on Remark~\re
  \item $\Norm_n(a_1,\dots,a_n,\Core(\Phi))$ is weakly streamlined.
 \end{itemize}
 \end{proof}
+
+\begin{example}
+\[
+\atomicflow
+{
+(-2,8)*{\afaid{}{}{}{}{}{}};
+(3,6)*{\afvjm4};
+(0,0)*{\affr{10}8};
+(-3,-6)*{\afvjm4};
+(2,-8)*{\afaiu{}{}{}{}{}{}};
+}\qquad
+\atomicflow
+{
+(-2,8)*{\afaid{}{}{}{}{}{}};
+(3,6)*{\afvjm4};
+(0,0)*{\affr{10}8};
+(-3,-6)*{\afvjm4};
+(2,-8)*{\afaiu{}{}{}{}{}{}};
+}\qquad
+\atomicflow
+{
+(0,6)*{\afvjm4};
+(0,0)*{\affr88};
+(0,-6)*{\afvjm4};
+}
+\]
+\[
+\atomicflow
+{
+(-3,45.5)*{\afacumexsq{}{}{}{}{}{}{15}{2}};
+(-18,35.05)*{\afvjm{8.1}};
+(12,35)*{\afacumnwexsq{}{}{}{}{5}{1}};
+%------
+(-20,0)="B";
+"B"+(-4,18)="A";
+"A"+(-2,8)*{\afaid{}{}{}{}{}{}};
+"A"+(6,8.6)*{\afacumnwexsq{}{}{}{}{3}{2}};
+"A"+(0,0)*{\affr{10}8};
+"A"+(-3,-13)*{\afvjm{18}};
+"A"+(4,-8)*{\afawu{}{}{}{}};
+%---
+"B"+(0,0)="A";
+"A"+(-4,9)*{\afvj{10}};
+"A"+(0,8)*{\afawd{}{}{}{}};
+"A"+(5,15.25)*{\afvjm{13.5}};
+"A"+(5,6.25)*{\afacumnw{}{}{}{}};
+"A"+(0,0)*{\affr{10}8};
+"A"+(-5,-8.3)*{\afacdmnw{}{}{}{}};
+"A"+(-5,-15.25)*{\afvjm{13.5}};
+"A"+(0,-8)*{\afawu{}{}{}{}};
+%---
+"B"+(4,-18)="A";
+"A"+(0,9)*{\afvj{10}};
+"A"+(-4,8)*{\afawd{}{}{}{}};
+"A"+(3,13)*{\afvjm{18}};
+"A"+(0,0)*{\affr{10}8};
+"A"+(-6,-10.4)*{\afacdmnwexsq{}{}{}{}{3}{2}};
+"A"+(2,-8)*{\afaiu{}{}{}{}{}{}};
+%------
+(0,0)="B";
+"B"+(-4,18)="A";
+"A"+(-2,8)*{\afaid{}{}{}{}{}{}};
+"A"+(6,8.6)*{\afacumnwexsq{}{}{}{}{3}{2}};
+"A"+(0,0)*{\affr{10}8};
+"A"+(-3,-13)*{\afvjm{18}};
+"A"+(4,-8)*{\afawu{}{}{}{}};
+%---
+"B"+(0,0)="A";
+"A"+(-4,9)*{\afvj{10}};
+"A"+(0,8)*{\afawd{}{}{}{}};
+"A"+(5,15.25)*{\afvjm{13.5}};
+"A"+(5,6.25)*{\afacumnw{}{}{}{}};
+"A"+(0,0)*{\affr{10}8};
+"A"+(-5,-8.3)*{\afacdmnw{}{}{}{}};
+"A"+(-5,-15.25)*{\afvjm{13.5}};
+"A"+(0,-8)*{\afawu{}{}{}{}};
+%---
+"B"+(4,-18)="A";
+"A"+(0,9)*{\afvj{10}};
+"A"+(-4,8)*{\afawd{}{}{}{}};
+"A"+(3,13)*{\afvjm{18}};
+"A"+(0,0)*{\affr{10}8};
+"A"+(-6,-10.4)*{\afacdmnwexsq{}{}{}{}{3}{2}};
+"A"+(2,-8)*{\afaiu{}{}{}{}{}{}};
+%------
+(20,0)="B";
+"B"+(-4,18)="A";
+"A"+(-2,8)*{\afaid{}{}{}{}{}{}};
+"A"+(6,8.6)*{\afacumnwexsq{}{}{}{}{3}{2}};
+"A"+(0,0)*{\affr{10}8};
+"A"+(-3,-13)*{\afvjm{18}};
+"A"+(4,-8)*{\afawu{}{}{}{}};
+%---
+"B"+(0,0)="A";
+"A"+(-4,9)*{\afvj{10}};
+"A"+(0,8)*{\afawd{}{}{}{}};
+"A"+(5,15.25)*{\afvjm{13.5}};
+"A"+(5,6.25)*{\afacumnw{}{}{}{}};
+"A"+(0,0)*{\affr{10}8};
+"A"+(-5,-8.3)*{\afacdmnw{}{}{}{}};
+"A"+(-5,-15.25)*{\afvjm{13.5}};
+"A"+(0,-8)*{\afawu{}{}{}{}};
+%---
+"B"+(4,-18)="A";
+"A"+(0,9)*{\afvj{10}};
+"A"+(-4,8)*{\afawd{}{}{}{}};
+"A"+(3,13)*{\afvjm{18}};
+"A"+(0,0)*{\affr{10}8};
+"A"+(-6,-10.4)*{\afacdmnwexsq{}{}{}{}{3}{2}};
+"A"+(2,-8)*{\afaiu{}{}{}{}{}{}};
+%------
+(-22,-35)*{\afvjm9};
+(8,-37)*{\afacdmnwexsq{}{}{}{}{5}{1}};
+(-7,-45.5)*{\afacdmexsq{}{}{}{}{}{}{15}{2}};
+}
+\]
+\end{example}
 
 %===========================================
 \section{Conclusion}
