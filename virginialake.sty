@@ -4,7 +4,7 @@
 % to \vlupdate
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{virginialake}[2009/01/24 v1.13]
+\ProvidesPackage{virginialake}[2009/03/24 v1.16]
 \newif\ifvirginialakeusesxy\virginialakeusesxytrue
 \DeclareOption{noxy}{\virginialakeusesxyfalse}
 \newif\ifvirginialakepdftex\virginialakepdftexfalse
@@ -14,6 +14,7 @@
 \newif\ifvirginialakelutzsyntax\virginialakelutzsyntaxfalse
 \DeclareOption{lutzsyntax}{\virginialakelutzsyntaxtrue}
 \ProcessOptions
+\RequirePackage{fp-basic}
 \ifvirginialakeusesxy
     \RequirePackage[usenames]{color}
     \ifvirginialakepdftex
@@ -233,6 +234,8 @@
 
 \newcommand{\vlstore}{\bgroup\vlprepstructures\afterassignment\egroup
                       \global\def\vlread}
+
+\newcommand{\vlx}{\;\;\;}
 
 %----------------------------------------- END OF MACROS FOR FORMULAE/STRUCTURES
 
@@ -492,29 +495,58 @@
 \newcommand{\vliiinf}{\vlderivationinit\vliiinfaux}
 
 \catcode`@=12
-
-\newcommand{\vltraux}[3]{\vldaux
+\newcommand{\vltrauxx}[5]{\vldaux
+   {#1}
+   {#2}
+   {\vlhy{#3}}
    {}
-   {}
-   {\vlhy{#2}}
-   {}
-   {\hbox{$\xy
-          0;<\hsize,0pt>:<0pt,#3\hsize>::
+   {\hbox{$\vcenter{\xy
+          0;<\hsize,0pt>:<0pt,#4\hsize>::
           (-0.5,0.5);(0.5,0.5)**\crv{(0.1,0.6)&(-0.1,0.4)};
           (0,0)**@{-};(-0.5,0.5)**@{-};
-          (0,0.3)*{\scriptstyle #1\strut}
-          \endxy$}}
-   {}}
-
+          (0,0.273)*{\scriptstyle #5\strut}
+          \endxy}$}}
+   {\kern\deropen}}
 \catcode`\@=11
 
-\newcommand{\vltf}[6]{\vldsiiinaux{#3}{#4}{#5}\vltraux{#1}{#2}{#6}}
+\newcommand{\vltraux}[3]{\vltrauxx{}{}{#2}{#3}{#1}}
 
-\newcommand{\vltr}[5]{\vltf{#1}{#2}{#3}{#4}{#5}1}
+\newcommand{\vltrlaux}[5]{\newcount\vltrindc
+                          \ifdim\derccdim>\dercdim\vltrindc=\derccdim
+                             \else\vltrindc=\dercdim
+                             \fi
+                          \FPmul\vltrindc{\the\vltrindc}{0.25}
+                          \newdimen\vltrindd
+                          \vltrindd=\vltrindc sp
+                          \advance\vltrindd by-10pt
+   \vltrauxx{\scriptstyle #2\strut\kern-\vltrindd}
+            {\kern-\vltrindd\scriptstyle #3\strut}{#4}{#5}{#1}}
 
-\newcommand{\vltreeder}[5]{\vlderivation{\vltr{#1}{#2}{\vlhy{#3}}
-                                                      {\vlhy{#4}}
-                                                      {\vlhy{#5}}}}
+\newcommand{\vltrauxxx}[2]{{#2}\vlstemaux\vldaux
+   {}
+   {}
+   {\vlhy{#1}}
+   {\kern-\ht\strutbox\kern-\dp\strutbox}
+   {}
+   {}}
+
+\newcommand{\vltrf }[6]{\vltrauxxx{#2}
+                        {\vldsiiinaux{#3}{#4}{#5}\vltraux{#1}{}{#6}}}
+
+\newcommand{\vltrlf}[8]{\vltrauxxx{#4}
+                        {\vldsiiinaux{#5}{#6}{#7}\vltrlaux{#1}{#2}{#3}{}{#8}}}
+
+\newcommand{\vltr }[5]{\vltrf{#1}{#2}{#3}{#4}{#5}1}
+
+\newcommand{\vltrl}[7]{\vltrlf{#1}{#2}{#3}{#4}{#5}{#6}{#7}1}
+
+\newcommand{\vltreeder }[5]{\vlderivation{\vltr{#1}{#2}{\vlhy{#3}}
+                                                       {\vlhy{#4}}
+                                                       {\vlhy{#5}}}}
+
+\newcommand{\vltreederl}[7]{\vlderivation{\vltrl{#1}{#2}{#3}{#4}{\vlhy{#5}}
+                                                                {\vlhy{#6}}
+                                                                {\vlhy{#7}}}}
 
 %------------------------------------------------- END OF MACROS FOR DERIVATIONS
 
@@ -775,6 +807,14 @@
                                \crv{( 2,2)&(0,2)+<5\atflowelwidthtriangle,0pt>};
 ( 0,-4);(0,-1  )**[|<\atflowthickone>][#3]@{-}}}
 
+\newcommand\afacdexsncolaux[3]{
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(-2, 4);(0, 0.5)-<1.3\atflowelwidthtriangle,0pt>**[|<\atflowthickone>][#1]
+                           \crv{(-2,1.5)&(0,1.75)-<5\atflowelwidthtriangle,0pt>};
+( 2, 4);(0, 0.5)+<1.3\atflowelwidthtriangle,0pt>**[|<\atflowthickone>][#2]
+                           \crv{( 2,1.5)&(0,1.75)+<5\atflowelwidthtriangle,0pt>};
+( 0,-2);(0,-1  )**[|<\atflowthickone>][#3]@{-}}}
+
 \newcommand\afacdmexsqcolaux[5]{
 \newdimen\dimenmaux
 \dimenmaux=\atflowelwidth\multiply\dimenmaux by#5
@@ -806,6 +846,38 @@
                        \crv{( 2,2)+"E"&(0,2)+"I"+<5\atflowelwidthtriangle,0pt>};
 ( 0,-4)-"A";(0,-1  )+"J"**[|<\atflowthickfive>][#3]@{-};
 ( 0,-4)+"A";(0,-1  )+"K"**[|<\atflowthickfive>][#3]@{-}}}
+
+\newcommand\afacdmexsncolaux[5]{
+\newdimen\dimenmaux
+\dimenmaux=\atflowelwidth\multiply\dimenmaux by#5
+                         \divide  \dimenmaux by#4
+                         \divide  \dimenmaux by100
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+< 15\dimenmaux,  0\dimenmaux>="A";
+< 10\dimenmaux, 18\dimenmaux>="B";
+<-10\dimenmaux, 18\dimenmaux>="C";
+< 15\dimenmaux, 11\dimenmaux>="D";
+<-15\dimenmaux, 11\dimenmaux>="E";
+< 40\dimenmaux,-10\dimenmaux>="F";
+<-40\dimenmaux,-10\dimenmaux>="G";
+<  5\dimenmaux, 23\dimenmaux>="H";
+< -5\dimenmaux, 23\dimenmaux>="I";
+<-15\dimenmaux, 30\dimenmaux>="J";
+< 15\dimenmaux, 30\dimenmaux>="K";
+(-2, 4)-"A";
+( 0, 0.5)-"B"-<1.3\atflowelwidthtriangle,0pt>**[|<\atflowthickfive>][#1]
+                   \crv{(-2,1.5)-"D"&(0,1.75)-"D"-<5\atflowelwidthtriangle,0pt>};
+(-2, 4)+"A";
+( 0, 0.5)+"F"-<1.3\atflowelwidthtriangle,0pt>**[|<\atflowthickfive>][#1]
+                   \crv{(-2,1.5)+"D"&(0,1.75)+"H"-<5\atflowelwidthtriangle,0pt>};
+( 2, 4)+"A";
+( 0, 0.5)-"C"+<1.3\atflowelwidthtriangle,0pt>**[|<\atflowthickfive>][#2]
+                   \crv{( 2,1.5)-"E"&(0,1.75)-"E"+<5\atflowelwidthtriangle,0pt>};
+( 2, 4)-"A";
+( 0, 0.5)+"G"+<1.3\atflowelwidthtriangle,0pt>**[|<\atflowthickfive>][#2]
+                   \crv{( 2,1.5)+"E"&(0,1.75)+"I"+<5\atflowelwidthtriangle,0pt>};
+( 0,-2)-"A";(0,-1  )+"J"**[|<\atflowthickfive>][#3]@{-};
+( 0,-2)+"A";(0,-1  )+"K"**[|<\atflowthickfive>][#3]@{-}}}
 
 \newcommand{\afacdcoll}[9]{\multiply\atflowelwidth by#7
                              \divide\atflowelwidth by#8
@@ -855,6 +927,18 @@
 (4,2   )*{\aflabelleft   {#5}};
 (4,2   )*{\aflabelright  {#6}}}}
 
+\newcommand{\afacdexsncoll}[9]{\multiply\atflowelwidth by#7
+                                 \divide\atflowelwidth by#8
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(2  ,8 )*{\aflabelleft   {#1}};
+(2.2,9 )*{\aflabelright  {#2}};
+(5.8,9 )*{\aflabelleft   {#3}};
+(6  ,8 )*{\aflabelright  {#4}};
+(4,6   )*{\afacdexsncolaux #9};
+(4,4.75)*{\atflowdown        };
+(4,4   )*{\aflabelleft   {#5}};
+(4,4   )*{\aflabelright  {#6}}}}
+
 \newcommand{\afacdmexsqcoll}[9]{\multiply\atflowelwidth by#7
                                   \divide\atflowelwidth by#8
 \xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
@@ -867,17 +951,37 @@
 (4,2   )*{\aflabelleft            {#5}};
 (4,2   )*{\aflabelright           {#6}}}}
 
+\newcommand{\afacdmexsncoll}[9]{\multiply\atflowelwidth by#7
+                                  \divide\atflowelwidth by#8
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(2  ,8 )*{\aflabelleft            {#1}};
+(2.2,9 )*{\aflabelright           {#2}};
+(5.8,9 )*{\aflabelleft            {#3}};
+(6  ,8 )*{\aflabelright           {#4}};
+(4,6   )*{\afacdmexsncolaux #9{#7}{#8}};
+(4,4.75)*{\atflowdown                 };
+(4,4   )*{\aflabelleft            {#5}};
+(4,4   )*{\aflabelright           {#6}}}}
+
 \newcommand\afacdexcol[8]{\toks0={{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}}\afterassignment\afacdexcoldo\afrestparamss}
 
 \newcommand\afacdexsqcol[8]{\toks0={{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}}\afterassignment\afacdexsqcoldo\afrestparamss}
 
+\newcommand\afacdexsncol[8]{\toks0={{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}}\afterassignment\afacdexsncoldo\afrestparamss}
+
 \newcommand\afacdmexsqcol[8]{\toks0={{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}}\afterassignment\afacdmexsqcoldo\afrestparamss}
+
+\newcommand\afacdmexsncol[8]{\toks0={{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}}\afterassignment\afacdmexsncoldo\afrestparamss}
 
 \newcommand\afacdexcoldo  {\expandafter\afacdexcoll  \the\toks0\the\toks1}
 
 \newcommand\afacdexsqcoldo{\expandafter\afacdexsqcoll\the\toks0\the\toks1}
 
+\newcommand\afacdexsncoldo{\expandafter\afacdexsncoll\the\toks0\the\toks1}
+
 \newcommand\afacdmexsqcoldo{\expandafter\afacdmexsqcoll\the\toks0\the\toks1}
+
+\newcommand\afacdmexsncoldo{\expandafter\afacdmexsncoll\the\toks0\the\toks1}
 
 \newcommand{\afacd    }[6]{\afacdcoll   {#1}{#2}{#3}{#4}{#5}{#6}11{{}{}{}}}
 
@@ -892,8 +996,14 @@
 \newcommand{\afacdexsq
                      }[8]{\afacdexsqcoll{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}{{}{}{}}}
 
+\newcommand{\afacdexsn
+                     }[8]{\afacdexsncoll{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}{{}{}{}}}
+
 \newcommand{\afacdmexsq
                     }[8]{\afacdmexsqcoll{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}{{}{}{}}}
+
+\newcommand{\afacdmexsn
+                    }[8]{\afacdmexsncoll{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}{{}{}{}}}
 
 \newcommand\afacdnwcolaux[2]{
 \xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
@@ -918,6 +1028,13 @@
                               \crv{(-2,2)&(0,2)-<5\atflowelwidthtriangle,0pt>};
 ( 2,8);(0,0.5)+<1.3\atflowelwidthtriangle,0pt>**[|<\atflowthickone>][#2]
                               \crv{( 2,2)&(0,2)+<5\atflowelwidthtriangle,0pt>}}}
+
+\newcommand\afacdnwexsncolaux[2]{
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(-2,4);(0,0.5)-<1.3\atflowelwidthtriangle,0pt>**[|<\atflowthickone>][#1]
+                          \crv{(-2,1.5)&(0,1.75)-<5\atflowelwidthtriangle,0pt>};
+( 2,4);(0,0.5)+<1.3\atflowelwidthtriangle,0pt>**[|<\atflowthickone>][#2]
+                          \crv{( 2,1.5)&(0,1.75)+<5\atflowelwidthtriangle,0pt>}}}
 
 \newcommand\afacdmnwexsqcolaux[4]{
 \newdimen\dimenmaux
@@ -987,6 +1104,16 @@
 (5.7,9.625)*{\aflabelleft      {#3}    };
 (5.9,8.625)*{\aflabelright     {#4}    }}}
 
+\newcommand{\afacdnwexsncol}[8]{\multiply\atflowelwidth by#5
+                                  \divide\atflowelwidth by#6
+\xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
+(4  , 8.25 )*{\afacdnwexsncolaux{#7}{#8}};
+(4  , 6.375)*{\atflowdown               };
+(2  , 9.625)*{\aflabelleft      {#1}    };
+(2.2,10.625)*{\aflabelright     {#2}    };
+(5.8,10.625)*{\aflabelleft      {#3}    };
+(6  , 9.625)*{\aflabelright     {#4}    }}}
+
 \newcommand{\afacdmnwexsqcol}[8]{\multiply\atflowelwidth by#5
                                    \divide\atflowelwidth by#6
 \xybox{<\atflowelwidth,0pt>:<0pt,\atflowelheight>::
@@ -1008,6 +1135,8 @@
 \newcommand{\afacdnwex   }[6]{\afacdnwexcol   {#1}{#2}{#3}{#4}{#5}{#6}{}{}}
 
 \newcommand{\afacdnwexsq }[6]{\afacdnwexsqcol {#1}{#2}{#3}{#4}{#5}{#6}{}{}}
+
+\newcommand{\afacdnwexsn }[6]{\afacdnwexsncol {#1}{#2}{#3}{#4}{#5}{#6}{}{}}
 
 \newcommand{\afacdmnwexsq}[6]{\afacdmnwexsqcol{#1}{#2}{#3}{#4}{#5}{#6}{}{}}
 
