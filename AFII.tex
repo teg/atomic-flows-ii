@@ -1129,7 +1129,7 @@ Finally, we show the inductive case, $n>2$:
 %TODO: comment somehow that the derivation is "unique" or canonical
 
 \begin{remark}\label{RemGenericContraction}
-In the non-atomic version of system $\SKS$ the derivations shown in Lemma~\ref{LemGenericContraction} correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{\cod}{}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlinf{\cou}{}{\vls(\alpha.\alpha)}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\vls[\alpha.\alpha]}$ and $\vlupsmash{\vlder{}{\{\acu,\med\}}{\vls(\alpha.\alpha)}{\alpha}}$.
+In the non-atomic version of system $\SKS$ the derivations shown in Lemma~\ref{LemGenericContraction} correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{n\times\cod}{}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlinf{n\times\cou}{}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlupsmash{\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}}$, respectively.
 \end{remark}
 
 %TODO: can be constructed
