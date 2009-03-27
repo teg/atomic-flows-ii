@@ -9,3 +9,4 @@
 *.blg
 *.ps
 .directory
+*.synctex.gz*
