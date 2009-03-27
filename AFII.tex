@@ -800,13 +800,9 @@ In the rest of this section we show how to weakly streamline a derivation. This 
 
 %TODO: reread
 
-In this subsection, we show a procedure for removing connected identities and cuts from a derivation. The result of this procedure is weakly streamlined and we call it the `core' of the derivation. We first define the procedure in terms of atomic flows, where the reason for the name `core' is made clear. We remove the top (the identities) and the bottom (the cuts) of the atomic flow and what remains is the core. Based on the definition of the core of an atomic flow the core of a derivation follows naturally.
+In this subsection, we show a procedure for removing connected identities and cuts from a derivation at the expense of introducing more atoms to the premiss and conclusion of the derivation. The result of this procedure is weakly streamlined and we call it the `core' of the derivation. We first define the procedure in terms of atomic flows, where the reason for the name `core' is made clear. We remove the top (the identities) and the bottom (the cuts) of the atomic flow and join the new upper and lower edges by (co)contractions where possible, what remains is the core. Based on the definition of the core of an atomic flow the core of a derivation follows naturally.
 
-Notice that the core of a derivation does not have the same premiss and conclusion as the original derivation. In the next subsection we will see how we can glue several cores together to obtain a weakly streamlined derivation with the correct premiss and conclusion.
-
-We define the core of an atomic flow:
-
-\newcommand{\Core}{\mathsf{Core}}
+We define the core of an atomic flow.
 
 %TODO: remark something about the uniqueness of the (co)contraction boxes
 
@@ -967,6 +963,8 @@ Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ with associated atomic flow $
 \]
 with associated atomic flow $\Core(\phi)$.
 \end{definition}
+
+The core of a derivation does not have the same premiss and conclusion as the original derivation. In the next subsection we will see how we can glue several cores together to obtain a weakly streamlined derivation with the correct premiss and conclusion.
 
 The following proposition can easily by verified by studying the atomic flows in Definition~\ref{DefFlowCore}.
 
