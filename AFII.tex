@@ -1167,8 +1167,6 @@ Finally, we show the inductive case, $n>2$:
 In the non-atomic version of system $\SKS$ the derivations shown in Lemma~\ref{LemGenericContraction} correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{n\times\cod}{}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlinf{n\times\cou}{}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlupsmash{\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}}$, respectively.
 \end{remark}
 
-%TODO: can be constructed
-
 \begin{theorem}\label{ThmExistCore}
 Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, a core of $\Phi$ can be constructed.
 \end{theorem}
@@ -1199,7 +1197,7 @@ where $\Phi'$ exists by Lemma~\ref{LemDecompInt} and $\Psi_1$ and $\Psi_2$ exist
 Given a derivation $\Phi$, the core of $\Phi$ obtained as described in the proof of Theorem~\ref{ThmExistCore} is called \emph{the core of $\Phi$}, denoted $\Core(\Phi)$.
 \end{definition}
 
-\subsection{The Normaliser}
+\subsection{The Normaliser}\label{SectNorm} 
 
 We present here the main result of our work, a family of operators called the `normalisers'. Each normaliser can be thought of as a shape with holes where a derivation can be plugged. The effect of plugging a derivation into a normaliser is the same as adding identity and cut instances to the premiss and conclusion of the derivation, respectively. However, it is done in such a way as to not create any path between the identity and cut instances we add. It should now be clear how our normalisation works: the core is obtained by removing identity and cut instances and the normaliser adds them back, in a way that preserves weak streamlining.
 
