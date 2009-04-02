@@ -1427,6 +1427,7 @@ It therefore follows by Definition~\ref{DefFlowCore} and induction on Remark~\re
 \end{proof}
 
 \begin{example}
+Given a derivation $\Phi$ where the atoms $a$ and $b$ occur, such that the atomic flow associated with $\Phi$ is
 \[
 \atomicflow
 {
@@ -1452,8 +1453,9 @@ It therefore follows by Definition~\ref{DefFlowCore} and induction on Remark~\re
 (0,0)*{\affr88};
 (2,2)*{\aflabelright{\psi}};
 (0,-6)*{\afvjm4};
-}
+}\quad,
 \]
+where $\phi_1$ is the atomic flow associated with $a$, $\phi_2$ is the atomic flow associated with $b$ and $a$ and $b$ are the only non-weakly-streamlined atoms, then the atomic flow associated with $\Norm_2(a,b,\Core(\Phi))$ is
 \[
 \atomicflow
 {
@@ -1491,7 +1493,7 @@ It therefore follows by Definition~\ref{DefFlowCore} and induction on Remark~\re
 "A"+( 0, 0)*{\affr{10}{8}};
 "A"+( 2, 2)*{\aflabelright{\phi_1}};
 % join one
-"A"+(4,-9)*{\afvj{10}};
+"A"+(4,-9)*{\afvjcol{10}{Red}};
 % middle boxes
 "B"="A";
 "A"+(-4, 8)*{\afawd{}{}{}{}{}};
@@ -1499,7 +1501,7 @@ It therefore follows by Definition~\ref{DefFlowCore} and induction on Remark~\re
 "A"+( 0, 0)*{\affr{10}{8}};
 "A"+( 2, 2)*{\aflabelright{\phi_1}};
 % join two
-"A"+(0,-9)*{\afvj{10}};
+"A"+(0,-9)*{\afvjcol{10}{Red}};
 % bottom boxes
 "B"+"D"="A";
 "A"+(2,-8)*{\afaiu{}{}{}{}{}{}};
@@ -1529,7 +1531,7 @@ It therefore follows by Definition~\ref{DefFlowCore} and induction on Remark~\re
 "A"+( 0, 0)*{\affr{10}{8}};
 "A"+( 2, 2)*{\aflabelright{\phi_1}};
 % join one
-"A"+(4,-9)*{\afvj{10}};
+"A"+(4,-9)*{\afvjcol{10}{Red}};
 % middle boxes
 "B"="A";
 "A"+(-4, 8)*{\afawd{}{}{}{}{}};
@@ -1537,7 +1539,7 @@ It therefore follows by Definition~\ref{DefFlowCore} and induction on Remark~\re
 "A"+( 0, 0)*{\affr{10}{8}};
 "A"+( 2, 2)*{\aflabelright{\phi_1}};
 % join two
-"A"+(0,-9)*{\afvj{10}};
+"A"+(0,-9)*{\afvjcol{10}{Red}};
 % bottom boxes
 "B"+"D"="A";
 "A"+(2,-8)*{\afaiu{}{}{}{}{}{}};
@@ -1567,7 +1569,7 @@ It therefore follows by Definition~\ref{DefFlowCore} and induction on Remark~\re
 "A"+( 0, 0)*{\affr{10}{8}};
 "A"+( 2, 2)*{\aflabelright{\phi_1}};
 % join one
-"A"+(4,-9)*{\afvj{10}};
+"A"+(4,-9)*{\afvjcol{10}{Red}};
 % middle boxes
 "B"="A";
 "A"+(-4, 8)*{\afawd{}{}{}{}{}};
@@ -1575,7 +1577,7 @@ It therefore follows by Definition~\ref{DefFlowCore} and induction on Remark~\re
 "A"+( 0, 0)*{\affr{10}{8}};
 "A"+( 2, 2)*{\aflabelright{\phi_1}};
 % join two
-"A"+(0,-9)*{\afvj{10}};
+"A"+(0,-9)*{\afvjcol{10}{Red}};
 % bottom boxes
 "B"+"D"="A";
 "A"+(2,-8)*{\afaiu{}{}{}{}{}{}};
@@ -1630,15 +1632,15 @@ It therefore follows by Definition~\ref{DefFlowCore} and induction on Remark~\re
 "A"+(14,2)*{\aflabelright{\phi_2}};
 %-
 "A"+(-8,-8)*{\afcjl88};
-"A"+(0,-8)*{\afcjl{16}8};
+"A"+(0,-8)*{\afcjlcol{16}8{Red}};
 %-
 "A"+(-8,-8)*{\afcjrm88};
-"A"+(8,-8)*{\afcjl88};
 "A"+(0,-8)*{\afvj8};
+"A"+(8,-8)*{\afcjlcol88{Red}};
 %
 "A"+(0,-8)*{\afcjrm{16}8};
 "A"+(8,-8)*{\afcjr88};
-"A"+(16,-8)*{\afvj8};
+"A"+(16,-8)*{\afvjcol8{Red}};
 %
 "A"+(  0,-16)*{\affr{10}8};
 "A"+(  0,-16)*{\copy\contrdown};
@@ -1646,7 +1648,7 @@ It therefore follows by Definition~\ref{DefFlowCore} and induction on Remark~\re
 "A"+( 12,-16)*{\copy\contrdown};
 %---
 "A"+(0,-24)*{\afawu{}{}{}{}};
-"A"+(12,-25)*{\afvj{10}};
+"A"+(12,-25)*{\afvjcol{10}{Red}};
 % === BOX TWO ===
 "A"+"D"="A";
 %-
@@ -1658,15 +1660,15 @@ It therefore follows by Definition~\ref{DefFlowCore} and induction on Remark~\re
 "A"+(  0,16)*{\copy\contrup};
 %-
 "A"+(-16,8)*{\afvj8};
-"A"+(-8,8)*{\afcjr88};
+"A"+(-8,8)*{\afcjrcol88{Red}};
 "A"+(0,8)*{\afcjrm{16}8};
 %
 "A"+(-8,8)*{\afcjl88};
-"A"+(0,8)*{\afvj8};
+"A"+(0,8)*{\afvjcol8{Red}};
 "A"+(8,8)*{\afcjrm88};
 %
 "A"+(0,8)*{\afcjl{16}8};
-"A"+(8,8)*{\afcjl88};
+"A"+(8,8)*{\afcjlcol88{Red}};
 %-
 "A"+(-12,0)*{\affr{10}8};
 "A"+(0,0)*{\affr{10}8};
@@ -1675,15 +1677,15 @@ It therefore follows by Definition~\ref{DefFlowCore} and induction on Remark~\re
 "A"+(2,2)*{\aflabelright{\phi_2}};
 "A"+(14,2)*{\aflabelright{\phi_2}};
 %-
-"A"+(-8,-8)*{\afcjl88};
+"A"+(-8,-8)*{\afcjlcol88{Red}};
 "A"+(0,-8)*{\afcjl{16}8};
 %-
 "A"+(-8,-8)*{\afcjrm88};
+"A"+(0,-8)*{\afvjcol8{Red}};
 "A"+(8,-8)*{\afcjl88};
-"A"+(0,-8)*{\afvj8};
 %
 "A"+(0,-8)*{\afcjrm{16}8};
-"A"+(8,-8)*{\afcjr88};
+"A"+(8,-8)*{\afcjrcol88{Red}};
 "A"+(16,-8)*{\afvj8};
 %
 "A"+(  0,-16)*{\affr{10}8};
@@ -1692,7 +1694,7 @@ It therefore follows by Definition~\ref{DefFlowCore} and induction on Remark~\re
 "A"+( 12,-16)*{\copy\contrdown};
 %---
 "A"+(12,-24)*{\afawu{}{}{}{}};
-"A"+(0,-25)*{\afvj{10}};
+"A"+(0,-25)*{\afvjcol{10}{Red}};
 % === BOX THREE ===
 "A"+"D"="A";
 %-
@@ -1703,15 +1705,15 @@ It therefore follows by Definition~\ref{DefFlowCore} and induction on Remark~\re
 "A"+(  0,16)*{\affr{10}8};
 "A"+(  0,16)*{\copy\contrup};
 %-
-"A"+(-16,8)*{\afvj8};
+"A"+(-16,8)*{\afvjcol8{Red}};
 "A"+(-8,8)*{\afcjr88};
 "A"+(0,8)*{\afcjrm{16}8};
 %
-"A"+(-8,8)*{\afcjl88};
+"A"+(-8,8)*{\afcjlcol88{Red}};
 "A"+(0,8)*{\afvj8};
 "A"+(8,8)*{\afcjrm88};
 %
-"A"+(0,8)*{\afcjl{16}8};
+"A"+(0,8)*{\afcjlcol{16}8{Red}};
 "A"+(8,8)*{\afcjl88};
 %-
 "A"+(-12,0)*{\affr{10}8};
@@ -1813,8 +1815,9 @@ It therefore follows by Definition~\ref{DefFlowCore} and induction on Remark~\re
 "A"+(-10,-14.5)*{\afvjm{21}};
 "A"+(0,-14.5)*{\afvjm{21}};
 "A"+(10,-14.5)*{\afvjm{21}};
-}
+}\quad.
 \]
+By comparing the flow associated with $a$ and the flow associated with $b$ in $\Norm_2(a,b,\Core(\Phi))$ we can see why the procedure is non-confluent. We could trivially change our procedure to make the subflows more simial by cocontracting (resp., contracting) the interaction (resp., cut) vertices in the first subflow and permuting the weakening (resp., coweakening) vertices down (resp., up) in the second subflow. However, the subflows marked in red will still differ.
 \end{example} 
 %===========================================
 \section{Conclusion}
