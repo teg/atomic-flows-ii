@@ -1396,8 +1396,108 @@ where $a$ is mapped to all the edges in $\phi$ and $\bar a$ is mapped to all the
 (0,-29)*{\affr{22}8};
 (0,-29)*{\copy\contrdown};
 (0,-34.5)*{\afvjm3};
-}\quad,
+}
 \]
+and the atomic flow of $\vlder{\Norm_{n+1}(a_1,\dots,a_n,\bar a,\Phi)}{}{\beta}{\alpha}$ is
+\[
+\atomicflow
+{
+(0,-18)="D";
+(0,-9)="Dhalf";
+%% cocontractions
+(0,0)="A";
+%left
+"A"+(-11,16.5)*{\afvjmcol{3}{OliveGreen}};
+"A"+"D"+(-14,14.5)*{\afvjmcol{21}{OliveGreen}};
+"A"+"Dhalf"+(-11,10.5)*{\afvjm{11}};
+"A"+(-8,5.5)*{\afvjm3};
+"A"+(-11,11)*{\affr88};
+"A"+(-11,11)*{\copy\contrup};
+%right
+"A"+(11,16.5)*{\afvjmcol{3}{OliveGreen}};
+"A"+(8,5.5)*{\afvjm3};
+"A"+"Dhalf"+(11,10.5)*{\afvjmcol{11}{OliveGreen}};
+"A"+"D"+(14,14.5)*{\afvjmcol{21}{OliveGreen}};
+"A"+(11,11)*{\affr88};
+"A"+(11,11)*{\copy\contrup};
+%% contractions
+"D"+"D"="A";
+%left
+"A"+(-14,-14.5)-"D"*{\afvjmcol{21}{Red}};
+"A"+(-11,-10.5)-"Dhalf"*{\afvjmcol{11}{Red}};
+"A"+(-8,-5.5)*{\afvjm3};
+"A"+(-11,-16.5)*{\afvjmcol{3}{Red}};
+"A"+(-11,-11)*{\affr88};
+"A"+(-11,-11)*{\copy\contrdown};
+%right
+"A"+(8,-5.5)*{\afvjm3};
+"A"+(11,-10.5)-"Dhalf"*{\afvjm{11}};
+"A"+(14,-14.5)-"D"*{\afvjmcol{21}{Red}};
+"A"+(11,-16.5)*{\afvjmcol{3}{Red}};
+"A"+(11,-11)*{\affr88};
+"A"+(11,-11)*{\copy\contrdown};
+% top boxes
+(0,0)="A";
+"A"+(-11,-13)*{\afcjrmcol{6}{18}{Red}};
+"A"+(11,-13)*{\afcjlmcol{6}{18}{Red}};
+"A"+( 0,  8)*{\afaidcol{\one}{}{}{\two}{}{}{Red}{Red}};
+"A"+( 2, -8)*{\afawucol{}{}{\four}{}{}{Red}};
+"A"+(-5,  0)*{\affr{8}{8}};
+"A"+(-4,  2)*{\aflabelright{\phi}};
+"A"+( 5,  0)*{\affr{8}{8}};
+"A"+( 4,  2)*{\aflabelright{\phi'}};
+% join one
+"A"+(-2,-9)*{\afvjcol{10}{Red}};
+% middle boxes
+"A"+"D"="A";
+"A"+(-9.5,9)*{\afcjlm{3}{10}};
+"A"+(9.5,9)*{\afcjrmcol{3}{10}{OliveGreen}};
+"A"+(-9.5,-9)*{\afcjrmcol{3}{10}{Red}};
+"A"+(9.5,-9)*{\afcjlm{3}{10}};
+"A"+( 2, 8)*{\afawdcol{}{}{\two}{}{}{OliveGreen}};
+"A"+(-2,-8)*{\afawucol{}{}{}{\three}{}{Red}};
+"A"+(-5, 0)*{\affr{8}{8}};
+"A"+(-4, 2)*{\aflabelright{\phi}};
+"A"+( 5, 0)*{\affr{8}{8}};
+"A"+( 6, 2)*{\aflabelright{\phi'}};
+% join two
+"A"+( 2,-9)*{\afvjcol{10}{OliveGreen}};
+% bottom boxes
+"A"+"D"="A";
+"A"+(-11,13)*{\afcjlmcol{6}{18}{OliveGreen}};
+"A"+(11,13)*{\afcjrmcol{6}{18}{OliveGreen}};
+"A"+( 0,-8)*{\afaiucol{\three}{}{}{\four}{}{}{OliveGreen}{OliveGreen}};
+"A"+(-2, 8)*{\afawdcol{}{}{}{\one}{}{OliveGreen}};
+"A"+(-5, 0)*{\affr{8}{8}};
+"A"+(-4, 2)*{\aflabelright{\phi}};
+"A"+( 5, 0)*{\affr{8}{8}};
+"A"+( 6, 2)*{\aflabelright{\phi'}};
+}\quad
+\atomicflow{
+(0,34.5)*{\afvjm3};
+(0,29)*{\affr{22}8};
+(0,29)*{\copy\contrup};
+%---
+(-10,14.5)*{\afvjm{21}};
+(0,14.5)*{\afvjm{21}};
+(10,14.5)*{\afvjm{21}};
+%---
+(-10,0)*{\affr88};
+( -9,2)*{\aflabelright\psi};
+(  0,0)*{\affr88};
+(  1,2)*{\aflabelright\psi};
+( 10,0)*{\affr88};
+( 11,2)*{\aflabelright\psi};
+%---
+(-10,-14.5)*{\afvjm{21}};
+(0,-14.5)*{\afvjm{21}};
+(10,-14.5)*{\afvjm{21}};
+%---
+(0,-29)*{\affr{22}8};
+(0,-29)*{\copy\contrdown};
+(0,-34.5)*{\afvjm3};
+}\quad,
+\] 
 %TODO: explain better
 where all the edges that might be in paths from the evidenced identity vertex are colored in red and all the edges that might be in paths to the evidenced cut vertex are colored in green.
 \end{remark}
