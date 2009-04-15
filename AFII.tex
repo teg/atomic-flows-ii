@@ -800,8 +800,7 @@ A derivation is \emph{weakly streamlined} if its associated atomic flow can be r
 An atom $a$ is \emph{weakly streamlined in $\Phi$} if the atomic flow associated with $a$ in $\Phi$ is weakly streamlined.
 \end{definition}
 
-In the rest of this section we show how to weakly streamline a derivation. This is done in two steps. First, we extract the `core of the derivation', which amounts to removing each pair of connected identity and cut instances, then we construct the `normaliser', which is an operator that adds pairs of identity and cut instances to a derivation in such a way that they are ensured not to be connected. A weakly streamlined derivation is obtained by applying the normaliser to the core.
-
+In the rest of this section we show how to weakly streamline a derivation. This is done in two steps. First, we extract the `core of the derivation', which amounts to removing all the identity and cut instances where non-weakly-streamlined atoms occur. As a result of removing identity and cut instances the premiss and conclusion of the core will contain one extra occurrence of each non-weakly-streamlined atom compared to the original derivation. Finally, we apply the `normaliser' to the core. The normaliser is an operator that creates a weakly-streamlined derivation with the same premiss and conclusion as the original derivation.
 \subsection{The Core}
 
 %TODO: reread
