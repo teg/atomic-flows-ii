@@ -863,29 +863,29 @@ Given an atomic flow
 \[
 \phi\;\;=\;\;\atomicflow
 {
-(-20, 8.5)*{\afvjdm{9}{\hat\epsilon_1}{}};
+(-20, 8.5)*{\afvjdm{9}{\epsilon_1}{}};
 (-13, 8)*{\afaidm{}{}{}{}{}{}};
-( -6, 8.5)*{\afvjdm{9}{}{\hat\epsilon'_1}};
+( -6, 8.5)*{\afvjdm{9}{}{\epsilon'_1}};
 (-18, 0)*{\affr{8}{8}};
 (-17, 2)*{\aflabelright{\phi_1}};
 ( -8, 0)*{\affr{8}{8}};
 ( -7, 2)*{\aflabelright{\phi'_1}};
-( -6,-8.5)*{\afvjum{9}{}{\check\epsilon'_1}};
+( -6,-8.5)*{\afvjum{9}{}{\iota'_1}};
 (-13,-8)*{\afaium{}{}{}{}{}{}};
-(-20,-8.5)*{\afvjum{9}{\check\epsilon_1}{}};
+(-20,-8.5)*{\afvjum{9}{\iota_1}{}};
 %------------
 (0,0)*{\cdots};
 %------------
-(20, 8.5)*{\afvjdm{9}{}{\hat\epsilon'_n}};
+(20, 8.5)*{\afvjdm{9}{}{\epsilon'_n}};
 (13, 8)*{\afaidm{}{}{}{}{}{}};
-( 6, 8.5)*{\afvjdm{9}{\hat\epsilon_n}{}};
+( 6, 8.5)*{\afvjdm{9}{\epsilon_n}{}};
 ( 8, 0)*{\affr{8}{8}};
 ( 9, 2)*{\aflabelright{\phi_n}};
 (18, 0)*{\affr{8}{8}};
 (19, 2)*{\aflabelright{\phi'_n}};
-( 6,-8.5)*{\afvjum{9}{\check\epsilon_n}{}};
+( 6,-8.5)*{\afvjum{9}{\iota_n}{}};
 (13,-8)*{\afaium{}{}{}{}{}{}};
-(20,-8.5)*{\afvjum{9}{}{\check\epsilon'_n}};
+(20,-8.5)*{\afvjum{9}{}{\iota'_n}};
 %------------
 (  35,11.5)*{\afvjm3};
 %---
@@ -898,9 +898,9 @@ Given an atomic flow
 (51.5, 8)*{\aflabelright{\psi_2}};
 (  50, 6)*{\copy\interdown};
 %---
-( 30, 0)*{\afvjum4{}{\epsilon_1}};
-( 40, 0)*{\afvjum4{}{\epsilon_2}};
-( 50, 0)*{\afvjum4{}{\epsilon_3}};
+( 30, 0)*{\afvjum4{}{\tilde\epsilon_1}};
+( 40, 0)*{\afvjum4{}{\tilde\epsilon_2}};
+( 50, 0)*{\afvjum4{}{\tilde\epsilon_3}};
 %---
 (  30,-6)*{\affr88};
 (31.5,-4)*{\aflabelright{\psi_3}};
@@ -918,14 +918,14 @@ where, for $1\le i\le n$, $\phi_i$ and $\phi'_i$ contain no identity or cut vert
 \[
 \atomicflow
 {
-(-21,10)*{\afvjdm{12}{\hat\epsilon_1}{}};
+(-21,10)*{\afvjdm{12}{\epsilon_1}{}};
 (-17,15)*{\afvj2};
 (-17,10)*{\affr{6}{8}};
 (-17,10)*{\copy\contrup};
 (-17, 5)*{\afvjm{2}};
 (-18, 0)*{\affr{8}{8}};
 (-17, 2)*{\aflabelright{\phi_1}};
-(-21,-10)*{\afvjum{12}{\check\epsilon_1}{}};
+(-21,-10)*{\afvjum{12}{\iota_1}{}};
 (-17,-15)*{\afvj2};
 (-17,-10)*{\affr{6}{8}};
 (-17,-10)*{\copy\contrdown};
@@ -935,14 +935,14 @@ where, for $1\le i\le n$, $\phi_i$ and $\phi'_i$ contain no identity or cut vert
 ( -9,10)*{\affr{6}{8}};
 ( -9,10)*{\copy\contrup};
 ( -9, 5)*{\afvjm{2}};
-( -5,10)*{\afvjdm{12}{}{\hat\epsilon'_1}};
+( -5,10)*{\afvjdm{12}{}{\epsilon'_1}};
 ( -8, 0)*{\affr{8}{8}};
 ( -7, 2)*{\aflabelright{\phi'_1}};
 ( -9,-15)*{\afvj2};
 ( -9,-10)*{\affr{6}{8}};
 ( -9,-10)*{\copy\contrdown};
 ( -9, -5)*{\afvjm{2}};
-( -5,-10)*{\afvjum{12}{}{\check\epsilon'_1}};
+( -5,-10)*{\afvjum{12}{}{\iota'_1}};
 ( -8, 0)*{\affr{8}{8}};
 %------------
 (0,0)*{\cdots};
@@ -951,24 +951,24 @@ where, for $1\le i\le n$, $\phi_i$ and $\phi'_i$ contain no identity or cut vert
 ( 9,10)*{\affr{6}{8}};
 ( 9,10)*{\copy\contrup};
 ( 9, 5)*{\afvjm{2}};
-( 5,10)*{\afvjdm{12}{\hat\epsilon_n}{}};
+( 5,10)*{\afvjdm{12}{\epsilon_n}{}};
 ( 8, 0)*{\affr{8}{8}};
 ( 9, 2)*{\aflabelright{\phi_n}};
 ( 9,-15)*{\afvj2};
 ( 9,-10)*{\affr{6}{8}};
 ( 9,-10)*{\copy\contrdown};
 ( 9, -5)*{\afvjm{2}};
-( 5,-10)*{\afvjum{12}{\check\epsilon_n}{}};
+( 5,-10)*{\afvjum{12}{\iota_n}{}};
 ( 8, 0)*{\affr{8}{8}};
 %
-(21,10)*{\afvjdm{12}{}{\hat\epsilon'_n}};
+(21,10)*{\afvjdm{12}{}{\epsilon'_n}};
 (17,15)*{\afvj2};
 (17,10)*{\affr{6}{8}};
 (17,10)*{\copy\contrup};
 (17, 5)*{\afvjm{2}};
 (18, 0)*{\affr{8}{8}};
 (19, 2)*{\aflabelright{\phi'_n}};
-(21,-10)*{\afvjum{12}{}{\check\epsilon'_n}};
+(21,-10)*{\afvjum{12}{}{\iota'_n}};
 (17,-15)*{\afvj2};
 (17,-10)*{\affr{6}{8}};
 (17,-10)*{\copy\contrdown};
@@ -985,9 +985,9 @@ where, for $1\le i\le n$, $\phi_i$ and $\phi'_i$ contain no identity or cut vert
 (51.5, 8)*{\aflabelright{\psi_2}};
 (  50, 6)*{\copy\interdown};
 %---
-( 30, 0)*{\afvjum4{}{\epsilon_1}};
-( 40, 0)*{\afvjum4{}{\epsilon_2}};
-( 50, 0)*{\afvjum4{}{\epsilon_3}};
+( 30, 0)*{\afvjum4{}{\tilde\epsilon_1}};
+( 40, 0)*{\afvjum4{}{\tilde\epsilon_2}};
+( 50, 0)*{\afvjum4{}{\tilde\epsilon_3}};
 %---
 (  30,-6)*{\affr88};
 (31.5,-4)*{\aflabelright{\psi_3}};
