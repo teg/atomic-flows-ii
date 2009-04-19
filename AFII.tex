@@ -53,9 +53,7 @@
 
 %TODO: say something clever at the start of the second sentence
 
-%TODO: the dual of a proof is not a contradiction... i can't remember the correct word. Find out and change throughout
-
-We are interested in the normalisation of deep-inference derivations in propositional classical logic. Cuts are admissible from proofs and, dually, identities are admissible from contradictions. However, neither are admissible from derivations. We therefore work with \emph{streamlining}, introduced in \cite{GuglGund:07:Normalis:lr}, a new, symmetric, notion of normalisation for derivations, which generalises both cut and identity elimination.
+We are interested in the normalisation of deep-inference derivations in propositional classical logic. Cuts are admissible from proofs and, dually, identities are admissible from refutations. However, neither are admissible from derivations. We therefore work with \emph{streamlining}, introduced in \cite{GuglGund:07:Normalis:lr}, a new, symmetric, notion of normalisation for derivations, which generalises both cut and identity elimination.
 
 At the core of our work lie \emph{atomic flows}, which were introduced in \cite{GuglGund:07:Normalis:lr}. Atomic flows are graphs, similar to Buss flow graphs \cite{Buss:91:The-Unde:uq} and proof nets \cite{Gira:87:Linear-L:wm}, obtained from derivations by tracing their atom occurrences and forgetting everything except how atoms are created, copied, contracted and destroyed. Atomic flows are largely syntax independent and bureaucracy free (in the sense of Girard \cite{Gira:89:Geometry:sh}). We have shown how atomic flows are useful in defining new normal forms for derivations and in arguing about normalisation.
 
@@ -102,7 +100,7 @@ In this section, we quickly introduce all the necessary notions. The standard re
 
 Note that negation is only defined for atoms, and this is not a limitation because, thanks to De Morgan laws, negation can always be `pushed to' atoms. Also, note that there are no negative or positive atoms in an absolute sense; we can only say that if we arbitrarily consider $\bar a$ positive, then $a$ must be negative, for example.
 
-A CoS (\emph{inference}) \emph{rule} $\rho$ is an expression $\vlinf\rho{}\beta\alpha$, where the formulae $\alpha$ and $\beta$ are called \emph{premiss} and \emph{conclusion}, respectively; an inference rule \emph{instance} $\vlupsmash{\vlinf\rho{}\delta\gamma}$, where $\gamma$ and $\delta$ are instances of $\alpha$ and $\beta$, respectively, generates an (\emph{inference}) \emph{step} $\vlinf\rho{}{\xi\vlscn[\delta]}{\xi\vlscn[\gamma]}$, for each context $\xi\vlhole$. A \emph{derivation}, $\Phi$, \emph{from} $\alpha$ (\emph{premiss}) \emph{to} $\beta$ (\emph{conclusion}) is a chain of inference steps with $\alpha$ at the top and $\beta$ at the bottom, and is usually indicated by $\vlder\Phi{\mathcal S}{\beta}{\alpha}$, where $\mathcal S$ is the name of the proof system or a set of inference rules (we might omit $\Phi$ and $\mathcal S$); a \emph{proof} is a derivation with premiss $\ttt$ and a \emph{contradiction} is a derivation with conclusion $\fff$; besides $\Phi$, we denote derivations with $\Psi$.
+A CoS (\emph{inference}) \emph{rule} $\rho$ is an expression $\vlinf\rho{}\beta\alpha$, where the formulae $\alpha$ and $\beta$ are called \emph{premiss} and \emph{conclusion}, respectively; an inference rule \emph{instance} $\vlupsmash{\vlinf\rho{}\delta\gamma}$, where $\gamma$ and $\delta$ are instances of $\alpha$ and $\beta$, respectively, generates an (\emph{inference}) \emph{step} $\vlinf\rho{}{\xi\vlscn[\delta]}{\xi\vlscn[\gamma]}$, for each context $\xi\vlhole$. A \emph{derivation}, $\Phi$, \emph{from} $\alpha$ (\emph{premiss}) \emph{to} $\beta$ (\emph{conclusion}) is a chain of inference steps with $\alpha$ at the top and $\beta$ at the bottom, and is usually indicated by $\vlder\Phi{\mathcal S}{\beta}{\alpha}$, where $\mathcal S$ is the name of the proof system or a set of inference rules (we might omit $\Phi$ and $\mathcal S$); a \emph{proof} is a derivation with premiss $\ttt$ and a \emph{refutation} is a derivation with conclusion $\fff$; besides $\Phi$, we denote derivations with $\Psi$.
 
 \newcommand{\ai  }{\mathsf{ai}}
 \newcommand{\aw  }{\mathsf{aw}}
@@ -769,9 +767,9 @@ In the following, when informally dealing with derivations, we freely transfer t
 %===============================================================================
 \section{Streamlining}\label{SectStreamlining}
 
-We know that the cut rule is admissible for derivations with premiss $\ttt$ (proofs) and, dually, that the identity rule is admissible for derivations with conclusion $\fff$ (contradictions). However, neither the cut nor the identity are admissible for generic derivations, which motivated the definition of `streamlining'. Streamlining is a generalisation of both cut and identity elimination to derivations with no restrictions on their premiss or conclusion.
+We know that the cut rule is admissible for derivations with premiss $\ttt$ (proofs) and, dually, that the identity rule is admissible for derivations with conclusion $\fff$ (refutations). However, neither the cut nor the identity are admissible for generic derivations, which motivated the definition of `streamlining'. Streamlining is a generalisation of both cut and identity elimination to derivations with no restrictions on their premiss or conclusion.
 
-%TODO: define path and maximal path
+%TODO: which way do we direct the paths? (depends on which way we direct the edges)
 
 Intuitively, a derivation is streamlined if every maximal path in the atomic flow associated with the derivation starts at the top or ends at the bottom of the flow. We recall the definition from \cite{GuglGund:07:Normalis:lr}:
 
@@ -809,7 +807,7 @@ A derivation is \emph{streamlined} if its associated atomic flow can be represen
 \]
 \end{definition}
 
-Note that an atomic flow associated with a proof has no upper edges, so the top left and the two bottom left boxes in the above atomic flow would be empty. Hence, a streamlined proof is cut free and, dually, a streamlined contradiction is identity free.
+Note that an atomic flow associated with a proof has no upper edges, so the top left and the two bottom left boxes in the above atomic flow would be empty. Hence, a streamlined proof is cut free and, dually, a streamlined refutation is identity free.
 
 The main challenge in streamlining a derivation is to make sure there are no path from an identity instance to a cut instance. Once this is achieved it is straightforward, as shown in \cite{GuglGund:07:Normalis:lr}, to use confluent and strongly normalising weakening reductions to obtain (in linear time) a streamlined derivation. This motivates the following definition:
 
