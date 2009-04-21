@@ -762,6 +762,8 @@ We observe that the flow of every $\SKS$ derivation can always be represented as
 \]
 such that each edge in flow $\phi_i$ is associated with some occurrence of some atom $a_i$, and each edge in flow $\psi_i$ is associated with some occurrence of atom $\bar a_i$. Note that it might happen that for $i\ne j$ we have $\vlsmash{a_i\equiv a_j}$. If we do not insist on dealing with connected components, we can adopt the same representation as above and stipulate that $i\ne j$ implies $\vlsmash{a_i\not\equiv a_j,\bar a_j}$. This would mean that the derivation only contains occurrences of atoms $a_1$, \dots, $a_m$, such that these atoms and their dual are all mutually distinct.
 
+%TODO: make a formal definition:
+
 Given a derivation $\Phi$ where the atom $a$ occurs, we say that the atomic flow associated with $a$ in $\Phi$ is the smallest subflow of the atomic flow associated with $\Phi$ containing all the edges mapped to from occurrences of $a$ and $\bar a$.
 
 %TODO: last sentence? add a paragraph
@@ -779,7 +781,7 @@ Intuitively, a derivation is streamlined if every maximal path in the atomic flo
 
 %---------------------------------------
 \begin{definition}
-A derivation is \emph{streamlined} if its associated atomic flow can be represented as follows:
+A derivation is \emph{streamlined} if its associated atomic flow can be represented as 
 \[
 \atomicflow{
 (-10,11)*{\afvjm4};
@@ -817,7 +819,7 @@ The main challenge in streamlining a derivation is to make sure there are no pat
 
 %---------------------------------------
 \begin{definition}
-A derivation is \emph{weakly streamlined} if its associated atomic flow can be represented as follows:
+A derivation is \emph{weakly streamlined} if its associated atomic flow can be represented as
 \[
 \atomicflow{
 (-5, 11)*{\afvjm4};
@@ -843,9 +845,6 @@ A derivation is \emph{weakly streamlined} if its associated atomic flow can be r
 (  5,-11)*{\afvjm4};
 }\quad.
 \]
-\end{definition}
-
-\begin{definition}
 An atom $a$ is \emph{weakly streamlined in $\Phi$} if the atomic flow associated with $a$ in $\Phi$ is weakly streamlined.
 \end{definition}
 
@@ -1005,8 +1004,6 @@ where, for $1\le i\le n$, $\phi_i$ and $\phi'_i$ contain no identity or cut vert
 
 %TODO: give an example
 
-%TODO: redo (moved)
-
 \begin{proposition}\label{PropAssoContr}
 Given an atomic flow $\phi$, two cores of $\phi$ are equivalent modulo associativity of contraction.
 \end{proposition}
@@ -1036,8 +1033,6 @@ The following proposition can easily by verified by studying the atomic flows in
 \begin{proposition}\label{PropStreamlinedCore}
 A core of a derivation $\Phi$ is weakly streamlined and every non-weakly-streamlined atom in $\Phi$ does not occur in an identity or cut instance in a core of $\Phi$.
 \end{proposition}
-
-%TODO: Alessio said: `why?'. Why did he say that?
 
 It is not immediate that a core of a derivation is unique. In fact, given a derivation we can construct several cores with trivial differences. However, we show how a core can be extracted, and we will single out the core obtained in this way and refer to it as \emph{the core}.
 
@@ -1193,7 +1188,7 @@ Finally, we show the inductive case, $n>2$:
 \end{proof}
 
 \begin{remark}\label{RemGenericContraction}
-In the non-atomic version of system $\SKS$ the derivations shown in Lemma~\ref{LemGenericContraction} correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{n\times\cod}{}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlinf{n\times\cou}{}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlupsmash{\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}}$, respectively.
+In the non-atomic version of system $\SKS$ the derivations shown in Lemma~\ref{LemGenericContraction} correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{n\cdot\cod}{}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlinf{n\cdot\cou}{}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlupsmash{\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}}$, respectively.
 \end{remark}
 
 \begin{remark}
@@ -1232,17 +1227,17 @@ Given a derivation $\Phi$, the core of $\Phi$ obtained as described in the proof
 
 \subsection{The Normaliser}\label{SectNorm} 
 
-We present here the main result of our work, a family of operators called the `normalisers'. Each normaliser can be thought of as a shape with holes where a derivation can be plugged. The effect of plugging a derivation into a normaliser is the same as adding identity and cut instances to the premiss and conclusion of the derivation, respectively. However, it is done in such a way as to not create any path between the identity and cut instances we add. It should now be clear how our normalisation works: the core is obtained by removing identity and cut instances and the normaliser adds them back, in a way that preserves weak streamlining.
+%COMMENT: what does it mean? Proposal: write a direct explanation: 'Normalisation works like this: * we remove... *we add back...'
+We present here the main result of our work, a family of operators called the `normalisers'. Each normaliser is a scheme with variables that we can instantiate with a derivation. The effect of plugging a derivation into a normaliser is the same as adding identity and cut instances to the premiss and conclusion of the derivation, respectively. However, it is done in such a way as to not create any path between the identity and cut instances we add. It should now be clear how our normalisation works: the core is obtained by removing identity and cut instances and the normaliser adds them back, in a way that preserves weak streamlining.
 
-%TODO: we don't plug in the derivation we want to normalise, but the CORE of the derivation we want to normalise
-
-The novelty of the normalisers is that they are built independently of the derivations we want to normalise. Which normaliser to plug a derivation into is decided by the number of atoms we want to eliminate from the premiss and conclusion of the derivation.
+%TODO: say this somewhere else:
+%The novelty of the normalisers is that they are built independently of the derivations we want to normalise. Which normaliser to plug a derivation into is decided by the number of atoms we want to eliminate from the premiss and conclusion of the derivation.
 
 \newcommand{\Norm}{\mathsf{Norm}}
 \begin{definition}\label{DefNorm}
-For every $n\ge 0$ the \emph{normaliser}, $\Norm_n(a_1,\dots,a_n,\Phi)$, is an operator taking as input the atoms $a_1,\dots,a_n$ and the derivation
+For every $n\ge 0$ the \emph{normaliser of degree $n$}, $\Norm_n$, is an operator whose arguments are the atoms $a_1,\dots,a_n$ and any derivation $\Phi$ of the form
 \[
-\vlder{\Phi}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}\quad,
+\vlder{}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}\quad,
 \]
 and returning the derivation $\vlupsmash{\vlder{\Norm_n(a_1,\dots,a_n,\Phi)}{}{\beta}{\alpha}}$. We define $\Norm_n$ inductively on $n$. Let $\Norm_0(\Phi)=\Phi$ and, for $n>0$, let $\Norm_n(a_1,\dots,a_n,\Phi)$ be
 \newbox\DeltaTopK
@@ -1250,9 +1245,9 @@ and returning the derivation $\vlupsmash{\vlder{\Norm_n(a_1,\dots,a_n,\Phi)}{}{\
 \hbox{$
 \vlderivation
 {
- \vlde{\Norm_{n-1}(a_1,\dots,a_{n-1},\Phi)}{}{\vls[\beta.(\vlinf{\awu}{}{\ttt}{a_n}.\bar a_n)]}
+ \vlde{\Norm_{n-1}(a_1,\dots,a_{n-1},\Phi)}{}{\vlsbr[\beta.(\vlinf{}{}{\ttt}{a_n}.\bar a_n)]}
  {
-  \vlhy{\vls(\vlinf{\aid}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha)}
+  \vlhy{\vlsbr(\vlinf{}{}{\vls[a_n.\bar a_n]}{\ttt}.\alpha)}
  }
 }$
 }
@@ -1261,9 +1256,9 @@ and returning the derivation $\vlupsmash{\vlder{\Norm_n(a_1,\dots,a_n,\Phi)}{}{\
 \hbox{
 $\vlderivation
 {
- \vlde{\Norm_{n-1}(a_1,\dots,a_{n-1},\Phi)}{}{\vls[\beta.\vlinf{\aiu}{}{\fff}{\vls(a_n.\bar a_n)}]}
+ \vlde{\Norm_{n-1}(a_1,\dots,a_{n-1},\Phi)}{}{\vlsbr[\beta.\vlinf{}{}{\fff}{\vls(a_n.\bar a_n)}]}
  {
-  \vlhy{\vls([a_n.\vlinf{\awd}{}{\bar a_n}{\fff}].\alpha)}
+  \vlhy{\vlsbr([a_n.\vlinf{}{}{\bar a_n}{\fff}].\alpha)}
  }
 }$
 }
@@ -1272,22 +1267,22 @@ $\vlderivation
 \hbox{$
 \vlderivation
 {
- \vlde{\Norm_{n-1}(a_1,\dots,a_{n-1},\Phi)}{}{\vls[\beta.(a_n.\vlinf{\awu}{}{\ttt}{\bar a_n})]}
+ \vlde{\Norm_{n-1}(a_1,\dots,a_{n-1},\Phi)}{}{\vlsbr[\beta.(a_n.\vlinf{}{}{\ttt}{\bar a_n})]}
  {
-  \vlhy{\vls([\vlinf{\awd}{}{a_n}{\fff}.\bar a_n].\alpha)}
+  \vlhy{\vlsbr([\vlinf{}{}{a_n}{\fff}.\bar a_n].\alpha)}
  }
 }$
 }
 \[
 \vlderivation
 {
- \vlin{2\times\cod}{}{\beta}
+ \vlin{2\cdot\cod}{}{\beta}
  {
   \vlin{\swi}{}{\vlsbr[\beta\;\;\;.\;\;\;\beta\;\;\;.\;\;\;\box\DeltaBotK]}
   {
    \vlin{\swi}{}{\vlsbr([\beta\;\;\;.\;\;\;\box\DeltaK].\alpha)}
    {
-    \vlin{2\times\cou}{}{\vlsbr(\box\DeltaTopK\;\;\;.\;\;\;\alpha\;\;\;.\;\;\;\alpha)}
+    \vlin{2\cdot\cou}{}{\vlsbr(\box\DeltaTopK\;\;\;.\;\;\;\alpha\;\;\;.\;\;\;\alpha)}
     {
      \vlhy{\alpha}
     }
@@ -1298,8 +1293,12 @@ $\vlderivation
 \]
 \end{definition}
 
+%TODO: structural rules' labels everywhere... remove them? even repeated generic contraction?
+
+%TODO: repeated use of labels? missing labels... superposition of colors. (co)weakening vertices are too close
+
 \begin{remark}\label{RemFlowNorm}
-If the atomic flow of $\vlder{\Norm_n(a_1,\dots,a_n,\Phi)}{}{\vls[\beta.(a^{\three}.\bar a^{\four})]}{\vls([a^{\one}.\bar a^{\two}].\alpha)}$ is
+Let the atomic flow of $\vlder{\Norm_n(a_1,\dots,a_n,\Phi)}{}{\vls[\beta.(a^{\three}.\bar a^{\four})]}{\vls([a^{\one}.\bar a^{\two}].\alpha)}$ be
 \[
 \atomicflow
 {
@@ -1323,7 +1322,7 @@ If the atomic flow of $\vlder{\Norm_n(a_1,\dots,a_n,\Phi)}{}{\vls[\beta.(a^{\thr
 (15,-6)*{\afvjm{4}};
 }\quad,
 \]
-where $a$ is mapped to all the edges in $\phi$ and $\bar a$ is mapped to all the edges in $\phi'$, then the atomic flow of $\vlder{\Norm_{n+1}(a_1,\dots,a_n,a,\Phi)}{}{\beta}{\alpha}$ is
+such that $a$ is mapped to all the edges in $\phi$ and $\bar a$ is mapped to all the edges in $\phi'$; then the atomic flow of $\vlder{\Norm_{n+1}(a_1,\dots,a_n,a,\Phi)}{}{\beta}{\alpha}$ is
 \[
 \atomicflow
 {
@@ -1370,7 +1369,7 @@ where $a$ is mapped to all the edges in $\phi$ and $\bar a$ is mapped to all the
 "A"+(-5,  0)*{\affr{8}{8}};
 "A"+(-4,  2)*{\aflabelright{\phi}};
 "A"+( 5,  0)*{\affr{8}{8}};
-"A"+( 4,  2)*{\aflabelright{\phi'}};
+"A"+( 6,  2)*{\aflabelright{\phi'}};
 % join one
 "A"+(2,-9)*{\afvjcol{10}{Red}};
 % middle boxes
@@ -1424,128 +1423,131 @@ where $a$ is mapped to all the edges in $\phi$ and $\bar a$ is mapped to all the
 }\quad,
 \] 
 %TODO: explain better
-where all the edges that might be in paths from the evidenced identity vertex are colored in red and all the edges that might be in paths to the evidenced cut vertex are colored in green.
+where all the edges that might be in paths from the shown identity vertex are colored in red and all the edges that might be in paths to the shown cut vertex are colored in green.
 \end{remark}
-\begin{remark}
-Dually, if we work on $\bar a$ instead of $a$, the atomic flow of $\vlder{\Norm_{n+1}(a_1,\dots,a_n,\bar a,\Phi)}{}{\beta}{\alpha}$ is
-\[
-\atomicflow
-{
-(0,-18)="D";
-(0,-9)="Dhalf";
-%% cocontractions
-(0,0)="A";
-%left
-"A"+(-11,16.5)*{\afvjmcol{3}{OliveGreen}};
-"A"+"D"+(-14,14.5)*{\afvjmcol{21}{OliveGreen}};
-"A"+"Dhalf"+(-11,10.5)*{\afvjm{11}};
-"A"+(-8,5.5)*{\afvjm3};
-"A"+(-11,11)*{\affr88};
-"A"+(-11,11)*{\copy\contrup};
-%right
-"A"+(11,16.5)*{\afvjmcol{3}{OliveGreen}};
-"A"+(8,5.5)*{\afvjm3};
-"A"+"Dhalf"+(11,10.5)*{\afvjmcol{11}{OliveGreen}};
-"A"+"D"+(14,14.5)*{\afvjmcol{21}{OliveGreen}};
-"A"+(11,11)*{\affr88};
-"A"+(11,11)*{\copy\contrup};
-%% contractions
-"D"+"D"="A";
-%left
-"A"+(-14,-14.5)-"D"*{\afvjmcol{21}{Red}};
-"A"+(-11,-10.5)-"Dhalf"*{\afvjmcol{11}{Red}};
-"A"+(-8,-5.5)*{\afvjm3};
-"A"+(-11,-16.5)*{\afvjmcol{3}{Red}};
-"A"+(-11,-11)*{\affr88};
-"A"+(-11,-11)*{\copy\contrdown};
-%right
-"A"+(8,-5.5)*{\afvjm3};
-"A"+(11,-10.5)-"Dhalf"*{\afvjm{11}};
-"A"+(14,-14.5)-"D"*{\afvjmcol{21}{Red}};
-"A"+(11,-16.5)*{\afvjmcol{3}{Red}};
-"A"+(11,-11)*{\affr88};
-"A"+(11,-11)*{\copy\contrdown};
-% top boxes
-(0,0)="A";
-"A"+(-11,-13)*{\afcjrmcol{6}{18}{Red}};
-"A"+(11,-13)*{\afcjlmcol{6}{18}{Red}};
-"A"+( 0,  8)*{\afaidcol{\one}{}{}{\two}{}{}{Red}{Red}};
-"A"+( 2, -8)*{\afawucol{}{}{\four}{}{}{Red}};
-"A"+(-5,  0)*{\affr{8}{8}};
-"A"+(-4,  2)*{\aflabelright{\phi}};
-"A"+( 5,  0)*{\affr{8}{8}};
-"A"+( 4,  2)*{\aflabelright{\phi'}};
-% join one
-"A"+(-2,-9)*{\afvjcol{10}{Red}};
-% middle boxes
-"A"+"D"="A";
-"A"+(-9.5,9)*{\afcjlm{3}{10}};
-"A"+(9.5,9)*{\afcjrmcol{3}{10}{OliveGreen}};
-"A"+(-9.5,-9)*{\afcjrmcol{3}{10}{Red}};
-"A"+(9.5,-9)*{\afcjlm{3}{10}};
-"A"+( 2, 8)*{\afawdcol{}{}{\two}{}{}{OliveGreen}};
-"A"+(-2,-8)*{\afawucol{}{}{}{\three}{}{Red}};
-"A"+(-5, 0)*{\affr{8}{8}};
-"A"+(-4, 2)*{\aflabelright{\phi}};
-"A"+( 5, 0)*{\affr{8}{8}};
-"A"+( 6, 2)*{\aflabelright{\phi'}};
-% join two
-"A"+( 2,-9)*{\afvjcol{10}{OliveGreen}};
-% bottom boxes
-"A"+"D"="A";
-"A"+(-11,13)*{\afcjlmcol{6}{18}{OliveGreen}};
-"A"+(11,13)*{\afcjrmcol{6}{18}{OliveGreen}};
-"A"+( 0,-8)*{\afaiucol{\three}{}{}{\four}{}{}{OliveGreen}{OliveGreen}};
-"A"+(-2, 8)*{\afawdcol{}{}{}{\one}{}{OliveGreen}};
-"A"+(-5, 0)*{\affr{8}{8}};
-"A"+(-4, 2)*{\aflabelright{\phi}};
-"A"+( 5, 0)*{\affr{8}{8}};
-"A"+( 6, 2)*{\aflabelright{\phi'}};
-}\quad
-\atomicflow{
-(0,34.5)*{\afvjm3};
-(0,29)*{\affr{22}8};
-(0,29)*{\copy\contrup};
-%---
-(-10,14.5)*{\afvjm{21}};
-(0,14.5)*{\afvjm{21}};
-(10,14.5)*{\afvjm{21}};
-%---
-(-10,0)*{\affr88};
-( -9,2)*{\aflabelright\psi};
-(  0,0)*{\affr88};
-(  1,2)*{\aflabelright\psi};
-( 10,0)*{\affr88};
-( 11,2)*{\aflabelright\psi};
-%---
-(-10,-14.5)*{\afvjm{21}};
-(0,-14.5)*{\afvjm{21}};
-(10,-14.5)*{\afvjm{21}};
-%---
-(0,-29)*{\affr{22}8};
-(0,-29)*{\copy\contrdown};
-(0,-34.5)*{\afvjm3};
-}\quad.
-\]
-In other words, the procedure works both if we choose $a$ and $\bar a$, but the outputs are not the same.
-\end{remark}
+%\begin{remark}
+%Dually, if we work on $\bar a$ instead of $a$, the atomic flow of $\vlder{\Norm_{n+1}(a_1,\dots,a_n,\bar a,\Phi)}{}{\beta}{\alpha}$ is
+%\[
+%\atomicflow
+%{
+%(0,-18)="D";
+%(0,-9)="Dhalf";
+%%% cocontractions
+%(0,0)="A";
+%%left
+%"A"+(-11,16.5)*{\afvjmcol{3}{OliveGreen}};
+%"A"+"D"+(-14,14.5)*{\afvjmcol{21}{OliveGreen}};
+%"A"+"Dhalf"+(-11,10.5)*{\afvjm{11}};
+%"A"+(-8,5.5)*{\afvjm3};
+%"A"+(-11,11)*{\affr88};
+%"A"+(-11,11)*{\copy\contrup};
+%%right
+%"A"+(11,16.5)*{\afvjmcol{3}{OliveGreen}};
+%"A"+(8,5.5)*{\afvjm3};
+%"A"+"Dhalf"+(11,10.5)*{\afvjmcol{11}{OliveGreen}};
+%"A"+"D"+(14,14.5)*{\afvjmcol{21}{OliveGreen}};
+%"A"+(11,11)*{\affr88};
+%"A"+(11,11)*{\copy\contrup};
+%%% contractions
+%"D"+"D"="A";
+%%left
+%"A"+(-14,-14.5)-"D"*{\afvjmcol{21}{Red}};
+%"A"+(-11,-10.5)-"Dhalf"*{\afvjmcol{11}{Red}};
+%"A"+(-8,-5.5)*{\afvjm3};
+%"A"+(-11,-16.5)*{\afvjmcol{3}{Red}};
+%"A"+(-11,-11)*{\affr88};
+%"A"+(-11,-11)*{\copy\contrdown};
+%%right
+%"A"+(8,-5.5)*{\afvjm3};
+%"A"+(11,-10.5)-"Dhalf"*{\afvjm{11}};
+%"A"+(14,-14.5)-"D"*{\afvjmcol{21}{Red}};
+%"A"+(11,-16.5)*{\afvjmcol{3}{Red}};
+%"A"+(11,-11)*{\affr88};
+%"A"+(11,-11)*{\copy\contrdown};
+%% top boxes
+%(0,0)="A";
+%"A"+(-11,-13)*{\afcjrmcol{6}{18}{Red}};
+%"A"+(11,-13)*{\afcjlmcol{6}{18}{Red}};
+%"A"+( 0,  8)*{\afaidcol{\one}{}{}{\two}{}{}{Red}{Red}};
+%"A"+( 2, -8)*{\afawucol{}{}{\four}{}{}{Red}};
+%"A"+(-5,  0)*{\affr{8}{8}};
+%"A"+(-4,  2)*{\aflabelright{\phi}};
+%"A"+( 5,  0)*{\affr{8}{8}};
+%"A"+( 6,  2)*{\aflabelright{\phi'}};
+%% join one
+%"A"+(-2,-9)*{\afvjcol{10}{Red}};
+%% middle boxes
+%"A"+"D"="A";
+%"A"+(-9.5,9)*{\afcjlm{3}{10}};
+%"A"+(9.5,9)*{\afcjrmcol{3}{10}{OliveGreen}};
+%"A"+(-9.5,-9)*{\afcjrmcol{3}{10}{Red}};
+%"A"+(9.5,-9)*{\afcjlm{3}{10}};
+%"A"+( 2, 8)*{\afawdcol{}{}{\two}{}{}{OliveGreen}};
+%"A"+(-2,-8)*{\afawucol{}{}{}{\three}{}{Red}};
+%"A"+(-5, 0)*{\affr{8}{8}};
+%"A"+(-4, 2)*{\aflabelright{\phi}};
+%"A"+( 5, 0)*{\affr{8}{8}};
+%"A"+( 6, 2)*{\aflabelright{\phi'}};
+%% join two
+%"A"+( 2,-9)*{\afvjcol{10}{OliveGreen}};
+%% bottom boxes
+%"A"+"D"="A";
+%"A"+(-11,13)*{\afcjlmcol{6}{18}{OliveGreen}};
+%"A"+(11,13)*{\afcjrmcol{6}{18}{OliveGreen}};
+%"A"+( 0,-8)*{\afaiucol{\three}{}{}{\four}{}{}{OliveGreen}{OliveGreen}};
+%"A"+(-2, 8)*{\afawdcol{}{}{}{\one}{}{OliveGreen}};
+%"A"+(-5, 0)*{\affr{8}{8}};
+%"A"+(-4, 2)*{\aflabelright{\phi}};
+%"A"+( 5, 0)*{\affr{8}{8}};
+%"A"+( 6, 2)*{\aflabelright{\phi'}};
+%}\quad
+%\atomicflow{
+%(0,34.5)*{\afvjm3};
+%(0,29)*{\affr{22}8};
+%(0,29)*{\copy\contrup};
+%%---
+%(-10,14.5)*{\afvjm{21}};
+%(0,14.5)*{\afvjm{21}};
+%(10,14.5)*{\afvjm{21}};
+%%---
+%(-10,0)*{\affr88};
+%( -9,2)*{\aflabelright\psi};
+%(  0,0)*{\affr88};
+%(  1,2)*{\aflabelright\psi};
+%( 10,0)*{\affr88};
+%( 11,2)*{\aflabelright\psi};
+%%---
+%(-10,-14.5)*{\afvjm{21}};
+%(0,-14.5)*{\afvjm{21}};
+%(10,-14.5)*{\afvjm{21}};
+%%---
+%(0,-29)*{\affr{22}8};
+%(0,-29)*{\copy\contrdown};
+%(0,-34.5)*{\afvjm3};
+%}\quad.
+%\]
+%In other words, the procedure works both if we choose $a$ and $\bar a$, but the outputs are not the same.
+%\end{remark}
+%TODO: if reinstating the above remark, check comments from Alessio on 21/4/09
 
 %TODO: explain `evidenced'
-%TODO: define pahts (from AFI) and make sure the `from' and `to' makes sense above
 
 By studying Definition~\ref{DefFlowCore} and Remark~\ref{RemFlowNorm}, we can see how a weakly streamlined derivation can be built.
 
+%TODO: spacing of lists throughout the paper
+
 \begin{theorem}
-Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ and all the non-weakly-streamlined atoms $a_1,\bar a_1,\dots,a_n,\bar a_n$ in $\Phi$, the derivation $\vlder{\Norm_n(a_1,\dots,a_n,\Core(\Phi))}{}{\beta}{\alpha}$ is weakly streamlined.
+Given a derivation $\Phi$ and all the non-weakly-streamlined atoms $a_1,\bar a_1,\dots,a_n,\bar a_n$ in $\Phi$, the derivation $\Norm_n(a_1,\dots,a_n,\Core(\Phi))$ is weakly streamlined and has the same premiss and conclusion as $\Phi$.
 \end{theorem}
 
+% discuss comments made on 21/4/09 with alessio
 \begin{proof}
-By studying the atomic flow in Remark~\ref{RemFlowNorm}, observe that, for $1 \le i\le n$
+In the atomic flow in Remark~\ref{RemFlowNorm}, observe that, for $1 \le i\le n$
 \begin{itemize}
  \item any two disconnected subflows of $\psi$ in $\Norm_{i-1}(a_1,\dots,a_{i-1},\Core(\Phi))$ are disconnected subflows of $\Norm_i(a_1,\dots,a_i,\Core(\Phi))$, and
  \item if $\Norm_{i-1}(a_1,\dots,a_{i-1},\Core(\Phi))$ is weakly streamlined, so is $\Norm_i(a_1,\dots,a_i,\Core(\Phi))$.
 \end{itemize}
-It therefore follows by Definition~\ref{DefFlowCore} and induction on Remark~\ref{RemFlowNorm} that
+It therefore follows, by Definition~\ref{DefFlowCore} and induction on Remark~\ref{RemFlowNorm}, that
 \begin{itemize}
  \item the atomic flow of $\Norm_{n-1}(a_1,\dots,a_{n-1},\Core(\Phi))$ has the shape of the first atomic flow in Remark~\ref{RemFlowNorm}, and
  \item $\Norm_n(a_1,\dots,a_n,\Core(\Phi))$ is weakly streamlined.
