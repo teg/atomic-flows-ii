@@ -1535,13 +1535,13 @@ where all the edges that might be in paths from the shown identity vertex are co
 
 \newcommand{\Norm}{\mathsf{Norm}}
 \begin{definition}
-For every $n\ge0$ the \emph{normaliser of degree n}, $\Norm_n$, is an operator whose arguments are the atoms $a_1,\dots,a_n$ and a derivation $\vlder{\Phi}{}{\beta}{\alpha}$and whose output is \\$\Break(a_n,\Break(\dots(\Break(a_1,\Core(\Phi)))\dots))$.
+For every $n\ge0$ the \emph{normaliser of degree n}, $\Norm_n$, is an operator whose arguments are the atoms $a_1$, $\dots$, $a_n$ and a derivation $\Phi$, such that $a_1$, $\bar a$, $\dots$, $a_n$, $\bar a_n$ are all the non-weakly-streamlined atoms in $\Phi$. $\Norm_n(a_1,\dots,a_n,\Phi)$ is defined to be $\Break(a_1,\Break(\dots(\Break(a_n,\Core(\Phi)))\dots))$.
 \end{definition}
 
 %TODO: spacing of lists throughout the paper
 
 \begin{theorem}
-Given a derivation $\Phi$ and all the non-weakly-streamlined atoms $a_1,\bar a_1,\dots,a_n,\bar a_n$ in $\Phi$, the derivation $\Norm_n(a_1,\dots,a_n,\Phi)$ is weakly streamlined and has the same premiss and conclusion as $\Phi$.
+Given a derivation $\Phi$ and all the non-weakly-streamlined atoms $a_1$, $\bar a_1$, $\dots$, $a_n$, $\bar a_n$ in $\Phi$, the derivation $\Norm_n(a_1,\dots,a_n,\Phi)$ is weakly streamlined and has the same premiss and conclusion as $\Phi$.
 \end{theorem}
 
 % discuss comments made on 21/4/09 with alessio
