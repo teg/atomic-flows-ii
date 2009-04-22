@@ -1247,7 +1247,7 @@ and whose output is
 {
  \vlde{\Phi}{}{\vlsbr[\beta.(\vlinf{}{}{\ttt}{a}.\bar a)]}
  {
-  \vlhy{\vlsbr(\vlinf{}{}{\vls[a.\bar a]}{\ttt}.\alpha)}
+  \vlhy{\vls([a.\bar a].\alpha)}
  }
 }$
 }
@@ -1267,7 +1267,7 @@ and whose output is
 \hbox{
 $\vlderivation
 {
- \vlde{\Phi}{}{\vlsbr[\beta.\vlinf{}{}{\fff}{\vls(a.\bar a)}]}
+ \vlde{\Phi}{}{\vls[\beta.(a.\bar a)]}
  {
   \vlhy{\vlsbr([a.\vlinf{}{}{\bar a}{\fff}].\alpha)}
  }
@@ -1276,15 +1276,15 @@ $\vlderivation
 \[
 \vlderivation
 {
- \vlin{2\cdot\cod}{}{\beta}
+ \vlin{=}{}{\vls[\vlinf{}{}{\beta}{\vls[\beta.\beta.\beta]}.(a.\bar a)]}
  {
   \vlin{\swi}{}{\vlsbr[\beta\;\;\;.\;\;\;\beta\;\;\;.\;\;\;\box\DeltaBotK]}
   {
    \vlin{\swi}{}{\vlsbr([\beta\;\;\;.\;\;\;\box\DeltaK].\alpha)}
    {
-    \vlin{2\cdot\cou}{}{\vlsbr(\box\DeltaTopK\;\;\;.\;\;\;\alpha\;\;\;.\;\;\;\alpha)}
+    \vlin{=}{}{\vlsbr(\box\DeltaTopK\;\;\;.\;\;\;\alpha\;\;\;.\;\;\;\alpha)}
     {
-     \vlhy{\alpha}
+     \vlhy{\vls([a.\bar a].\vlinf{}{}{\vls(\alpha.\alpha.\alpha)}{\alpha})}
     }
    }
   }
@@ -1293,7 +1293,7 @@ $\vlderivation
 \]
 \end{definition}
 
-%TODO: structural rules' labels everywhere... remove them? even repeated generic contraction?
+%TODO: structural rules' labels everywhere... remove them? even repeated generic contraction? (need to change the remark where we define them if we do)
 
 %TODO: repeated use of labels? missing labels... superposition of colors. (co)weakening vertices are too close
 
@@ -1322,7 +1322,7 @@ Let the atomic flow of $\vlder{\Phi}{}{\vls[\beta.(a^{\three}.\bar a^{\four})]}{
 (15,-6)*{\afvjm{4}};
 }\quad,
 \]
-then the atomic flow of $\vlder{\Break(a,\Phi)}{}{\beta}{\alpha}$ is
+then the atomic flow of $\vlder{\Break(a,\Phi)}{}{\vls[\beta.(a^{\three}.\bar a^{\four})]}{\vls([a^{\one}.\bar a^{\two}].\alpha)}$ is
 \[
 \atomicflow
 {
@@ -1364,34 +1364,40 @@ then the atomic flow of $\vlder{\Break(a,\Phi)}{}{\beta}{\alpha}$ is
 (0,0)="A";
 "A"+(-11,-13)*{\afcjrmcol{6}{18}{Red}};
 "A"+(11,-13)*{\afcjlmcol{6}{18}{Red}};
-"A"+( 0,  8)*{\afaidcol{\one}{}{}{\two}{}{}{Red}{Red}};
-"A"+(-2, -8)*{\afawucol{}{}{\three}{}{}{Red}};
+%"A"+( 0,  8)*{\afaidcol{\one}{}{}{\two}{}{}{Red}{Red}};
+"A"+(-2, 11)*{\afvjdcol{14}{\one}{}{Red}};
+"A"+( 2, 11)*{\afvjdcol{14}{}{\two}{Red}};
+"A"+(-2, -8)*{\afawucol{}{}{\three'}{}{}{Red}};
 "A"+(-5,  0)*{\affr{8}{8}};
 "A"+(-4,  2)*{\aflabelright{\phi}};
 "A"+( 5,  0)*{\affr{8}{8}};
 "A"+( 6,  2)*{\aflabelright{\phi'}};
 % join one
-"A"+(2,-9)*{\afvjcol{10}{Red}};
+"A"+(2,-6.5)*{\afvjdcol5{}{\four'}{Red}};
+"A"+(2,-11.5)*{\afvjucol5{}{\two''}{Red}};
 % middle boxes
 "A"+"D"="A";
 "A"+(-9.5,9)*{\afcjlmcol{3}{10}{OliveGreen}};
 "A"+(9.5,9)*{\afcjrm{3}{10}};
 "A"+(-9.5,-9)*{\afcjrm{3}{10}};
 "A"+(9.5,-9)*{\afcjlmcol{3}{10}{Red}};
-"A"+(-2, 8)*{\afawdcol{}{}{\one}{}{}{OliveGreen}};
-"A"+( 2,-8)*{\afawucol{}{}{}{\four}{}{Red}};
+"A"+(-2, 8)*{\afawdcol{}{}{\one''}{}{}{OliveGreen}};
+"A"+( 2,-8)*{\afawucol{}{}{}{\four''}{}{Red}};
 "A"+(-5, 0)*{\affr{8}{8}};
 "A"+(-4, 2)*{\aflabelright{\phi}};
 "A"+( 5, 0)*{\affr{8}{8}};
 "A"+( 6, 2)*{\aflabelright{\phi'}};
 % join two
-"A"+(-2,-9)*{\afvjcol{10}{OliveGreen}};
+"A"+(-2,-6.5)*{\afvjdcol5{\three''}{}{OliveGreen}};
+"A"+(-2,-11.5)*{\afvjucol5{\one'}{}{OliveGreen}};
 % bottom boxes
 "A"+"D"="A";
 "A"+(-11,13)*{\afcjlmcol{6}{18}{OliveGreen}};
 "A"+(11,13)*{\afcjrmcol{6}{18}{OliveGreen}};
-"A"+( 0,-8)*{\afaiucol{\three}{}{}{\four}{}{}{OliveGreen}{OliveGreen}};
-"A"+( 2, 8)*{\afawdcol{}{}{}{\two}{}{OliveGreen}};
+"A"+(-2,-11)*{\afvjucol{14}{\three}{}{OliveGreen}};
+"A"+( 2,-11)*{\afvjucol{14}{}{\four}{OliveGreen}};
+%"A"+( 0,-8)*{\afaiucol{\three}{}{}{\four}{}{}{OliveGreen}{OliveGreen}};
+"A"+( 2, 8)*{\afawdcol{}{}{}{\two'}{}{OliveGreen}};
 "A"+(-5, 0)*{\affr{8}{8}};
 "A"+(-4, 2)*{\aflabelright{\phi}};
 "A"+( 5, 0)*{\affr{8}{8}};
@@ -1422,8 +1428,7 @@ then the atomic flow of $\vlder{\Break(a,\Phi)}{}{\beta}{\alpha}$ is
 (0,-34.5)*{\afvjm3};
 }\quad,
 \] 
-%TODO: explain better
-where all the edges that might be in paths from the shown identity vertex are colored in red and all the edges that might be in paths to the shown cut vertex are colored in green. Note that the red and the green paths never meet, so there is no path from the shown identity vertex to the shown cut vertex and if $\phi$ and $\phi'$ contain no interaction or cut vertices, then $a$ is weakly streamlined.
+where all the edges that might be in paths starting with $\one$ or $\two$ are colored in red and all the edges that might be in paths ending with $\three$ or $\four$ are colored in green. Note that the red and the green paths never meet, so there is no path from $\one$ to $\three$ or from $\two$ to $\four$.
 \end{remark}
 %\begin{remark}
 %Dually, if we work on $\bar a$ instead of $a$, the atomic flow of $\vlder{\Break_{n+1}(a_1,\dots,a_n,\bar a,\Phi)}{}{\beta}{\alpha}$ is
@@ -1535,7 +1540,11 @@ where all the edges that might be in paths from the shown identity vertex are co
 
 \newcommand{\Norm}{\mathsf{Norm}}
 \begin{definition}
-For every $n\ge0$ the \emph{normaliser of degree n}, $\Norm_n$, is an operator whose arguments are the atoms $a_1$, $\dots$, $a_n$ and a derivation $\Phi$, such that $a_1$, $\bar a$, $\dots$, $a_n$, $\bar a_n$ are all the non-weakly-streamlined atoms in $\Phi$. $\Norm_n(a_1,\dots,a_n,\Phi)$ is defined to be $\Break(a_1,\Break(\dots(\Break(a_n,\Core(\Phi)))\dots))$.
+For every $n\ge0$ the \emph{normaliser of degree n}, $\Norm_n$, is an operator whose arguments are the atoms $a_1$, $\dots$, $a_n$ and a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, such that $a_1$, $\bar a$, $\dots$, $a_n$, $\bar a_n$ are all the non-weakly-streamlined atoms in $\Phi$. Let $\Psi=\Break(a_1,\Break(\dots(\Break(a_n,\Core(\Phi)))\dots))$, then $\Norm_n(a_1,\dots,a_n,\Phi)$ is defined to be
+\[
+\vlder{\Psi}{}{\vlsbr[\beta\;.\;\vlinf{}{}{\fff}{\vls(a_1.\bar a_1)}\;.\;\cdots\;.\;\vlinf{}{}{\fff}{\vls(a_n.\bar a_n)}]}{\vlsbr(\vlinf{}{}{\vls[a_1.\bar a_1]}{\ttt}\;.\;\cdots\;.\;\vlinf{}{}{\vls[a_n.\bar a_n]}{\ttt}\;.\;\alpha)}\quad.
+\]
+
 \end{definition}
 
 %TODO: spacing of lists throughout the paper
