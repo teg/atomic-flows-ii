@@ -1571,40 +1571,53 @@ where $\phi_1$ is the atomic flow associated with $a$, $\phi_2$ is the atomic fl
 \atomicflow
 {
 %cocontraction - top
-(4,37.5)*{\afvjm{3}};
-(4,32)*{\affr{50}8};
-(4,32)*{\copy\contrup};
+(12,43.5)*{\afvjm{3}};
+(12,38)*{\affr{34}8};
+(12,38)*{\copy\contrup};
+(-18,46)*{\afaidex{}{}{}{}{}{}31};
+(-24,38)*{\affr{10}8};
+(-24,38)*{\copy\contrup};
+(-12,38)*{\affr{10}8};
+(-12,38)*{\copy\contrup};
 %contraction - bot
-(-4,-32)*{\affr{50}8};
-(-4,-32)*{\copy\contrdown};
-(-4,-37.5)*{\afvjm{3}};
+(-12,-43.5)*{\afvjm{3}};
+(-12,-38)*{\affr{34}8};
+(-12,-38)*{\copy\contrdown};
+(18,-46)*{\afaiuex{}{}{}{}{}{}31};
+(24,-38)*{\affr{10}8};
+(24,-38)*{\copy\contrdown};
+(12,-38)*{\affr{10}8};
+(12,-38)*{\copy\contrdown};
 %---------------------
-(4,-18)="D";
-(0,-9)="Dhalf";
+(4,-20)="D";
+(0,-10)="Dhalf";
 %----------------
 %%first
 (-20,0)="B";
 % cocontractions
 "B"-"D"-"D"-(-12,7)="A";
-%left
-"A"+"Dhalf"+"Dhalf"+(4,-4)*{\afvjm{42}};
-"A"+"Dhalf"+(0,-4)*{\afvjm{24}};
-"A"+(-4,-4)*{\afvjm6};
+"A"+(4,-4)*{\afcjrm{16}{10}};
+"A"+(8,-4)*{\afcjrm{16}{10}};
+"A"+(12,-4)*{\afcjrm{16}{10}};
+"A"+"Dhalf"+"Dhalf"+(4,-9)*{\afvjm{40}};
+"A"+"Dhalf"+(0,-9)*{\afvjm{20}};
+"A"+(-12,-4)*{\afvj{10}};
+"A"+(-4,-4)*{\afcjr{8}{10}};
 % contractions
 "B"+"D"+"D"+(-12,7)="A";
-%right
-"A"+(4,4)*{\afvjm6};
-"A"+(0,4)-"Dhalf"*{\afvjm{24}};
-"A"+(-4,4)-"Dhalf"-"Dhalf"*{\afvjm{42}};
+"A"+(4,4)*{\afvjm{10}};
+"A"+(0,4)-"Dhalf"*{\afvjm{30}};
+"A"+(-4,4)-"Dhalf"-"Dhalf"*{\afvjm{50}};
+"A"-(-20,-4)*{\afcjl{24}{10}};
+"A"-(-28,-4)*{\afcjl{32}{10}};
 %---
 % top boxes
 "B"-"D"="A";
-"A"+(-2, 8)*{\afaid{}{}{}{}{}{}};
 "A"+( 0,-8)*{\afawu{}{}{}{}{}};
 "A"+( 0, 0)*{\affr{10}{8}};
 "A"+( 2, 2)*{\aflabelright{\phi_1}};
 % join one
-"A"+(4,-9)*{\afvjcol{10}{Red}};
+"A"+(4,-10)*{\afvjcol{12}{Red}};
 % middle boxes
 "B"="A";
 "A"+(-4, 8)*{\afawd{}{}{}{}{}};
@@ -1612,10 +1625,9 @@ where $\phi_1$ is the atomic flow associated with $a$, $\phi_2$ is the atomic fl
 "A"+( 0, 0)*{\affr{10}{8}};
 "A"+( 2, 2)*{\aflabelright{\phi_1}};
 % join two
-"A"+(0,-9)*{\afvjcol{10}{Red}};
+"A"+(0,-10)*{\afvjcol{12}{Red}};
 % bottom boxes
 "B"+"D"="A";
-"A"+(2,-8)*{\afaiu{}{}{}{}{}{}};
 "A"+(0, 8)*{\afawd{}{}{}{}{}};
 "A"+(0, 0)*{\affr{10}{8}};
 "A"+( 2, 2)*{\aflabelright{\phi_1}};
@@ -1624,25 +1636,30 @@ where $\phi_1$ is the atomic flow associated with $a$, $\phi_2$ is the atomic fl
 (0,0)="B";
 % cocontractions
 "B"-"D"-"D"-(-12,7)="A";
-%left
-"A"+"Dhalf"+"Dhalf"+(4,-4)*{\afvjm{42}};
-"A"+"Dhalf"+(0,-4)*{\afvjm{24}};
-"A"+(-4,-4)*{\afvjm6};
+"A"+(0,-4)*{\afcjrm8{10}};
+"A"+(4,-4)*{\afcjrm8{10}};
+"A"+(8,-4)*{\afcjrm8{10}};
+"A"+"Dhalf"+"Dhalf"+(4,-9)*{\afvjm{40}};
+"A"+"Dhalf"+(0,-9)*{\afvjm{20}};
+"A"+(-20,-4)*{\afcjl{16}{10}};
+"A"+(-12,-4)*{\afcjl{8}{10}};
 % contractions
 "B"+"D"+"D"+(-12,7)="A";
-%right
-"A"+(4,4)*{\afvjm6};
-"A"+(0,4)-"Dhalf"*{\afvjm{24}};
-"A"+(-4,4)-"Dhalf"-"Dhalf"*{\afvjm{42}};
+"A"-(0,-4)*{\afcjrm8{10}};
+"A"-(4,-4)*{\afcjrm8{10}};
+"A"-(8,-4)*{\afcjrm8{10}};
+"A"-"Dhalf"-"Dhalf"-(4,-9)*{\afvjm{40}};
+"A"-"Dhalf"-(0,-9)*{\afvjm{20}};
+"A"-(-20,-4)*{\afcjl{16}{10}};
+"A"-(-12,-4)*{\afcjl{8}{10}};
 %---
 % top boxes
 "B"-"D"="A";
-"A"+(-2, 8)*{\afaid{}{}{}{}{}{}};
 "A"+( 0,-8)*{\afawu{}{}{}{}{}};
 "A"+( 0, 0)*{\affr{10}{8}};
 "A"+( 2, 2)*{\aflabelright{\phi_1}};
 % join one
-"A"+(4,-9)*{\afvjcol{10}{Red}};
+"A"+(4,-10)*{\afvjcol{12}{Red}};
 % middle boxes
 "B"="A";
 "A"+(-4, 8)*{\afawd{}{}{}{}{}};
@@ -1650,10 +1667,9 @@ where $\phi_1$ is the atomic flow associated with $a$, $\phi_2$ is the atomic fl
 "A"+( 0, 0)*{\affr{10}{8}};
 "A"+( 2, 2)*{\aflabelright{\phi_1}};
 % join two
-"A"+(0,-9)*{\afvjcol{10}{Red}};
+"A"+(0,-10)*{\afvjcol{12}{Red}};
 % bottom boxes
 "B"+"D"="A";
-"A"+(2,-8)*{\afaiu{}{}{}{}{}{}};
 "A"+(0, 8)*{\afawd{}{}{}{}{}};
 "A"+(0, 0)*{\affr{10}{8}};
 "A"+( 2, 2)*{\aflabelright{\phi_1}};
@@ -1662,25 +1678,28 @@ where $\phi_1$ is the atomic flow associated with $a$, $\phi_2$ is the atomic fl
 (20,0)="B";
 % cocontractions
 "B"-"D"-"D"-(-12,7)="A";
-%left
-"A"+"Dhalf"+"Dhalf"+(4,-4)*{\afvjm{42}};
-"A"+"Dhalf"+(0,-4)*{\afvjm{24}};
-"A"+(-4,-4)*{\afvjm6};
+"A"+"Dhalf"+"Dhalf"+(4,-4)*{\afvjm{50}};
+"A"+"Dhalf"+(0,-4)*{\afvjm{30}};
+"A"+(-4,-4)*{\afvjm{10}};
+"A"+(-20,-4)*{\afcjl{24}{10}};
+"A"+(-28,-4)*{\afcjl{32}{10}};
 % contractions
 "B"+"D"+"D"+(-12,7)="A";
-%right
-"A"+(4,4)*{\afvjm6};
-"A"+(0,4)-"Dhalf"*{\afvjm{24}};
-"A"+(-4,4)-"Dhalf"-"Dhalf"*{\afvjm{42}};
+"A"-(4,-4)*{\afcjrm{16}{10}};
+"A"-(8,-4)*{\afcjrm{16}{10}};
+"A"-(12,-4)*{\afcjrm{16}{10}};
+"A"-"Dhalf"-"Dhalf"-(4,-9)*{\afvjm{40}};
+"A"-"Dhalf"-(0,-9)*{\afvjm{20}};
+"A"-(-12,-4)*{\afvj{10}};
+"A"-(-4,-4)*{\afcjr{8}{10}};
 %---
 % top boxes
 "B"-"D"="A";
-"A"+(-2, 8)*{\afaid{}{}{}{}{}{}};
 "A"+( 0,-8)*{\afawu{}{}{}{}{}};
 "A"+( 0, 0)*{\affr{10}{8}};
 "A"+( 2, 2)*{\aflabelright{\phi_1}};
 % join one
-"A"+(4,-9)*{\afvjcol{10}{Red}};
+"A"+(4,-10)*{\afvjcol{12}{Red}};
 % middle boxes
 "B"="A";
 "A"+(-4, 8)*{\afawd{}{}{}{}{}};
@@ -1688,10 +1707,9 @@ where $\phi_1$ is the atomic flow associated with $a$, $\phi_2$ is the atomic fl
 "A"+( 0, 0)*{\affr{10}{8}};
 "A"+( 2, 2)*{\aflabelright{\phi_1}};
 % join two
-"A"+(0,-9)*{\afvjcol{10}{Red}};
+"A"+(0,-10)*{\afvjcol{12}{Red}};
 % bottom boxes
 "B"+"D"="A";
-"A"+(2,-8)*{\afaiu{}{}{}{}{}{}};
 "A"+(0, 8)*{\afawd{}{}{}{}{}};
 "A"+(0, 0)*{\affr{10}{8}};
 "A"+( 2, 2)*{\aflabelright{\phi_1}};
@@ -1700,19 +1718,19 @@ where $\phi_1$ is the atomic flow associated with $a$, $\phi_2$ is the atomic fl
 \[
 \atomicflow
 {
-(12,-50)="D";
+(12,-52)="D";
 % cocontractions
 (18,-11)="A";
 %
 "A"+(6,5.5)*{\afvjm3};
 "A"+(6,0)*{\affr{34}8};
 "A"+(6,0)*{\copy\contrup};
-"A"+(2,-29)*{\afvjm{50}};
-"A"+(6,-29)*{\afvjm{50}};
-"A"+(10,-33)*{\afvjm{58}};
-"A"+(14,-54)*{\afvjm{100}};
-"A"+(18,-54)*{\afvjm{100}};
-"A"+(22,-58)*{\afvjm{108}};
+"A"+(2,-30)*{\afvjm{52}};
+"A"+(6,-30)*{\afvjm{52}};
+"A"+(10,-34)*{\afvjm{60}};
+"A"+(14,-56)*{\afvjm{104}};
+"A"+(18,-56)*{\afvjm{104}};
+"A"+(22,-60)*{\afvjm{112}};
 % === BOX ONE ===
 (0,-27)="A";
 %-
@@ -1759,7 +1777,7 @@ where $\phi_1$ is the atomic flow associated with $a$, $\phi_2$ is the atomic fl
 "A"+( 12,-16)*{\copy\contrdown};
 %---
 "A"+(0,-24)*{\afawu{}{}{}{}};
-"A"+(12,-25)*{\afvjcol{10}{Red}};
+"A"+(12,-26)*{\afvjcol{12}{Red}};
 % === BOX TWO ===
 "A"+"D"="A";
 %-
@@ -1805,7 +1823,7 @@ where $\phi_1$ is the atomic flow associated with $a$, $\phi_2$ is the atomic fl
 "A"+( 12,-16)*{\copy\contrdown};
 %---
 "A"+(12,-24)*{\afawu{}{}{}{}};
-"A"+(0,-25)*{\afvjcol{10}{Red}};
+"A"+(0,-26)*{\afvjcol{12}{Red}};
 % === BOX THREE ===
 "A"+"D"="A";
 %-
@@ -1852,14 +1870,14 @@ where $\phi_1$ is the atomic flow associated with $a$, $\phi_2$ is the atomic fl
 "A"+( 12,-16)*{\copy\contrdown};
 %-
 "A"+(  6,-24)*{\afaiuex{}{}{}{}{}{}31};
-%---
+% contractions
 "A"+(-20,-16)="A";
-"A"+(-20,58)*{\afvjm{108}};
-"A"+(-16,54)*{\afvjm{100}};
-"A"+(-12,54)*{\afvjm{100}};
-"A"+(-8,33)*{\afvjm{58}};
-"A"+(-4,29)*{\afvjm{50}};
-"A"+( 0,29)*{\afvjm{50}};
+"A"+(-20,60)*{\afvjm{112}};
+"A"+(-16,56)*{\afvjm{104}};
+"A"+(-12,56)*{\afvjm{104}};
+"A"+(-8,34)*{\afvjm{60}};
+"A"+(-4,30)*{\afvjm{52}};
+"A"+( 0,30)*{\afvjm{52}};
 "A"+(-4,0)*{\affr{34}8};
 "A"+(-4,0)*{\copy\contrdown};
 "A"+(-4,-5.5)*{\afvjm3};
