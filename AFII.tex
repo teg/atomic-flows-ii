@@ -1297,7 +1297,7 @@ $\vlderivation
 
 %TODO: repeated use of labels? missing labels... superposition of colors. (co)weakening vertices are too close
 
-\begin{remark}\label{RemFlowNorm}
+\begin{proposition}\label{PropFlowNorm}
 Let the atomic flow of $\vlder{\Phi}{}{\vls[\beta.(a^{\three}.\bar a^{\four})]}{\vls([a^{\one}.\bar a^{\two}].\alpha)}$ be
 \[
 \atomicflow
@@ -1315,56 +1315,50 @@ Let the atomic flow of $\vlder{\Phi}{}{\vls[\beta.(a^{\three}.\bar a^{\four})]}{
 (-2,-6)*{\afvjd{4}{\three}{}};
 ( 2,-6)*{\afvjd{4}{}{\four}};
 (-8,-6)*{\afvjm{4}};
-%---
-(15, 0)*{\affr{8}{8}};
-(16, 2)*{\aflabelright\psi};
-(15, 6)*{\afvjm{4}};
-(15,-6)*{\afvjm{4}};
 }\quad,
 \]
 then the atomic flow of $\vlder{\Break(a,\Phi)}{}{\vls[\beta.(a^{\three}.\bar a^{\four})]}{\vls([a^{\one}.\bar a^{\two}].\alpha)}$ is
 \[
 \atomicflow
 {
-(0,-18)="D";
-(0,-9)="Dhalf";
+(0,-20)="D";
+(0,-10)="Dhalf";
 %% cocontractions
 (0,0)="A";
 %left
 "A"+(-11,16.5)*{\afvjmcol{3}{OliveGreen}};
-"A"+"D"+(-14,14.5)*{\afvjmcol{21}{OliveGreen}};
-"A"+"Dhalf"+(-11,10.5)*{\afvjmcol{11}{OliveGreen}};
+"A"+"D"+(-14,15.5)*{\afvjmcol{23}{OliveGreen}};
+"A"+"Dhalf"+(-11,11.5)*{\afvjmcol{11}{OliveGreen}};
 "A"+(-8,5.5)*{\afvjm3};
 "A"+(-11,11)*{\affr88};
 "A"+(-11,11)*{\copy\contrup};
 %right
 "A"+(11,16.5)*{\afvjmcol{3}{OliveGreen}};
 "A"+(8,5.5)*{\afvjm3};
-"A"+"Dhalf"+(11,10.5)*{\afvjm{11}};
-"A"+"D"+(14,14.5)*{\afvjmcol{21}{OliveGreen}};
+"A"+"Dhalf"+(11,11.5)*{\afvjm{11}};
+"A"+"D"+(14,15.5)*{\afvjmcol{23}{OliveGreen}};
 "A"+(11,11)*{\affr88};
 "A"+(11,11)*{\copy\contrup};
 %% contractions
 "D"+"D"="A";
 %left
-"A"+(-14,-14.5)-"D"*{\afvjmcol{21}{Red}};
-"A"+(-11,-10.5)-"Dhalf"*{\afvjm{11}};
+"A"+(-14,-15.5)-"D"*{\afvjmcol{23}{Red}};
+"A"+(-11,-11.5)-"Dhalf"*{\afvjm{11}};
 "A"+(-8,-5.5)*{\afvjm3};
 "A"+(-11,-16.5)*{\afvjmcol{3}{Red}};
 "A"+(-11,-11)*{\affr88};
 "A"+(-11,-11)*{\copy\contrdown};
 %right
 "A"+(8,-5.5)*{\afvjm3};
-"A"+(11,-10.5)-"Dhalf"*{\afvjmcol{11}{Red}};
-"A"+(14,-14.5)-"D"*{\afvjmcol{21}{Red}};
+"A"+(11,-11.5)-"Dhalf"*{\afvjmcol{11}{Red}};
+"A"+(14,-15.5)-"D"*{\afvjmcol{23}{Red}};
 "A"+(11,-16.5)*{\afvjmcol{3}{Red}};
 "A"+(11,-11)*{\affr88};
 "A"+(11,-11)*{\copy\contrdown};
 % top boxes
 (0,0)="A";
-"A"+(-11,-13)*{\afcjrmcol{6}{18}{Red}};
-"A"+(11,-13)*{\afcjlmcol{6}{18}{Red}};
-%"A"+( 0,  8)*{\afaidcol{\one}{}{}{\two}{}{}{Red}{Red}};
+"A"+(-11,-14)*{\afcjrmcol{6}{20}{Red}};
+"A"+(11,-14)*{\afcjlmcol{6}{20}{Red}};
 "A"+(-2, 11)*{\afvjdcol{14}{\one}{}{Red}};
 "A"+( 2, 11)*{\afvjdcol{14}{}{\two}{Red}};
 "A"+(-2, -8)*{\afawucol{}{}{\three'}{}{}{Red}};
@@ -1373,14 +1367,14 @@ then the atomic flow of $\vlder{\Break(a,\Phi)}{}{\vls[\beta.(a^{\three}.\bar a^
 "A"+( 5,  0)*{\affr{8}{8}};
 "A"+( 6,  2)*{\aflabelright{\phi'}};
 % join one
-"A"+(2,-6.5)*{\afvjdcol5{}{\four'}{Red}};
-"A"+(2,-11.5)*{\afvjucol5{}{\two''}{Red}};
+"A"+(2,-7)*{\afvjdcol6{}{\four'}{Red}};
+"A"+(2,-13)*{\afvjucol6{}{\two''}{Red}};
 % middle boxes
 "A"+"D"="A";
-"A"+(-9.5,9)*{\afcjlmcol{3}{10}{OliveGreen}};
-"A"+(9.5,9)*{\afcjrm{3}{10}};
-"A"+(-9.5,-9)*{\afcjrm{3}{10}};
-"A"+(9.5,-9)*{\afcjlmcol{3}{10}{Red}};
+"A"+(-9.5,10)*{\afcjlmcol{3}{12}{OliveGreen}};
+"A"+(9.5,10)*{\afcjrm{3}{12}};
+"A"+(-9.5,-10)*{\afcjrm{3}{12}};
+"A"+(9.5,-10)*{\afcjlmcol{3}{12}{Red}};
 "A"+(-2, 8)*{\afawdcol{}{}{\one''}{}{}{OliveGreen}};
 "A"+( 2,-8)*{\afawucol{}{}{}{\four''}{}{Red}};
 "A"+(-5, 0)*{\affr{8}{8}};
@@ -1388,48 +1382,23 @@ then the atomic flow of $\vlder{\Break(a,\Phi)}{}{\vls[\beta.(a^{\three}.\bar a^
 "A"+( 5, 0)*{\affr{8}{8}};
 "A"+( 6, 2)*{\aflabelright{\phi'}};
 % join two
-"A"+(-2,-6.5)*{\afvjdcol5{\three''}{}{OliveGreen}};
-"A"+(-2,-11.5)*{\afvjucol5{\one'}{}{OliveGreen}};
+"A"+(-2, -7)*{\afvjdcol6{\three''}{}{OliveGreen}};
+"A"+(-2,-13)*{\afvjucol6{\one'}{}{OliveGreen}};
 % bottom boxes
 "A"+"D"="A";
-"A"+(-11,13)*{\afcjlmcol{6}{18}{OliveGreen}};
-"A"+(11,13)*{\afcjrmcol{6}{18}{OliveGreen}};
+"A"+(-11,14)*{\afcjlmcol{6}{20}{OliveGreen}};
+"A"+(11,14)*{\afcjrmcol{6}{20}{OliveGreen}};
 "A"+(-2,-11)*{\afvjucol{14}{\three}{}{OliveGreen}};
 "A"+( 2,-11)*{\afvjucol{14}{}{\four}{OliveGreen}};
-%"A"+( 0,-8)*{\afaiucol{\three}{}{}{\four}{}{}{OliveGreen}{OliveGreen}};
 "A"+( 2, 8)*{\afawdcol{}{}{}{\two'}{}{OliveGreen}};
 "A"+(-5, 0)*{\affr{8}{8}};
 "A"+(-4, 2)*{\aflabelright{\phi}};
 "A"+( 5, 0)*{\affr{8}{8}};
 "A"+( 6, 2)*{\aflabelright{\phi'}};
-}\quad
-\atomicflow{
-(0,34.5)*{\afvjm3};
-(0,29)*{\affr{22}8};
-(0,29)*{\copy\contrup};
-%---
-(-10,14.5)*{\afvjm{21}};
-(0,14.5)*{\afvjm{21}};
-(10,14.5)*{\afvjm{21}};
-%---
-(-10,0)*{\affr88};
-( -9,2)*{\aflabelright\psi};
-(  0,0)*{\affr88};
-(  1,2)*{\aflabelright\psi};
-( 10,0)*{\affr88};
-( 11,2)*{\aflabelright\psi};
-%---
-(-10,-14.5)*{\afvjm{21}};
-(0,-14.5)*{\afvjm{21}};
-(10,-14.5)*{\afvjm{21}};
-%---
-(0,-29)*{\affr{22}8};
-(0,-29)*{\copy\contrdown};
-(0,-34.5)*{\afvjm3};
 }\quad,
 \] 
 where all the edges that might be in paths starting with $\one$ or $\two$ are colored in red and all the edges that might be in paths ending with $\three$ or $\four$ are colored in green. Note that the red and the green paths never meet, so there is no path from $\one$ to $\three$ or from $\two$ to $\four$.
-\end{remark}
+\end{proposition}
 %\begin{remark}
 %Dually, if we work on $\bar a$ instead of $a$, the atomic flow of $\vlder{\Break_{n+1}(a_1,\dots,a_n,\bar a,\Phi)}{}{\beta}{\alpha}$ is
 %\[
@@ -1536,7 +1505,7 @@ where all the edges that might be in paths starting with $\one$ or $\two$ are co
 %TODO: if reinstating the above remark, check comments from Alessio on 21/4/09
 
 %TODO: check if we want to rephrase this since things changed:
-%By studying Definition~\ref{DefFlowCore} and Remark~\ref{RemFlowNorm}, we can see how a weakly streamlined derivation can be built.
+%By studying Definition~\ref{DefFlowCore} and Remark~\ref{PropFlowNorm}, we can see how a weakly streamlined derivation can be built.
 
 \newcommand{\Norm}{\mathsf{Norm}}
 \begin{definition}
@@ -1556,14 +1525,14 @@ Given a derivation $\Phi$ and all the non-weakly-streamlined atoms $a_1$, $\bar 
 % discuss comments made on 21/4/09 with alessio
 \begin{proof}
 %TODO:redo
-%In the atomic flow in Remark~\ref{RemFlowNorm}, observe that, for $1 \le i\le n$
+%In the atomic flow in Remark~\ref{PropFlowNorm}, observe that, for $1 \le i\le n$
 %\begin{itemize}
 % \item any two disconnected subflows of $\psi$ in $\Norm_{i-1}(a_1,\dots,a_{i-1},\Core(\Phi))$ are disconnected subflows of $\Norm_i(a_1,\dots,a_i,\Core(\Phi))$, and
 % \item if $\Norm_{i-1}(a_1,\dots,a_{i-1},\Core(\Phi))$ is weakly streamlined, so is $\Norm_i(a_1,\dots,a_i,\Core(\Phi))$.
 %\end{itemize}
-%It therefore follows, by Definition~\ref{DefFlowCore} and induction on Remark~\ref{RemFlowNorm}, that
+%It therefore follows, by Definition~\ref{DefFlowCore} and induction on Remark~\ref{PropFlowNorm}, that
 %\begin{itemize}
-% \item the atomic flow of $\Norm_{n-1}(a_1,\dots,a_{n-1},\Core(\Phi))$ has the shape of the first atomic flow in Remark~\ref{RemFlowNorm}, and
+% \item the atomic flow of $\Norm_{n-1}(a_1,\dots,a_{n-1},\Core(\Phi))$ has the shape of the first atomic flow in Remark~\ref{PropFlowNorm}, and
 % \item $\Norm_n(a_1,\dots,a_n,\Core(\Phi))$ is weakly streamlined.
 %\end{itemize}
 \end{proof}
