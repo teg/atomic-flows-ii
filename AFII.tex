@@ -1235,19 +1235,23 @@ We present here the main result of our work, a family of operators called the `n
 
 \newcommand{\Break}{\mathsf{Break}}
 \begin{definition}\label{DefBreak}
-The \emph{path breaker}, $\Break$, is an operator whose arguments are the atom $a$ and any derivation $\Phi$ of the form
+The \emph{path breaker}, $\Break$, is an operator whose arguments are the atom occurrences $\epsilon$  and $\iota$ and any derivation
 \[
-\vlder{}{}{\vls[\beta.(a.\bar a)]}{\vls([a.\bar a].\alpha)}\quad,
+\vlder{\Phi}{}{\beta}{\alpha}\quad,
 \]
-and whose output is
+where $\alpha=\vls([a^\epsilon.\bar a].\gamma)$ and $\beta=\vls[\delta.(a^\iota.\bar a)]$
+and such that
 \newbox\DeltaTopK
 \setbox\DeltaTopK=
 \hbox{$
 \vlderivation
 {
- \vlde{\Phi}{}{\vlsbr[\beta.(\vlinf{}{}{\ttt}{a}.\bar a)]}
+ \vlin{=}{}{\vlsbr[\delta.(\vlinf{}{}{\ttt}{a}.\bar a)]}
  {
-  \vlhy{\vls([a.\bar a].\alpha)}
+  \vlde{\Phi}{}{\beta}
+  {
+   \vlhy{\alpha}
+  }
  }
 }$
 }
@@ -1256,46 +1260,63 @@ and whose output is
 \hbox{$
 \vlderivation
 {
- \vlde{\Phi}{}{\vlsbr[\beta.(a.\vlinf{}{}{\ttt}{\bar a})]}
+ \vlin{=}{}{\vlsbr[\delta.(a.\vlinf{}{}{\ttt}{\bar a})]}
  {
-  \vlhy{\vlsbr([\vlinf{}{}{a}{\fff}.\bar a].\alpha)}
+  \vlde{\Phi}{}{\beta}
+  {
+   \vlin{=}{}{\alpha}
+   {
+    \vlhy{\vlsbr([\vlinf{}{}{a}{\fff}.\bar a].\gamma)}
+   }
+  }
  }
 }$
 }
 \newbox\DeltaBotK
 \setbox\DeltaBotK=
-\hbox{
-$\vlderivation
+\hbox{$
+\vlderivation
 {
- \vlde{\Phi}{}{\vls[\beta.(a.\bar a)]}
+ \vlde{\Phi}{}{\beta}
  {
-  \vlhy{\vlsbr([a.\vlinf{}{}{\bar a}{\fff}].\alpha)}
+  \vlin{=}{}{\alpha}
+  {
+   \vlhy{\vlsbr([a.\vlinf{}{}{\bar a}{\fff}].\gamma)}
+  }
  }
 }$
 }
 \[
+\Break(\epsilon,\iota,\Phi)=
 \vlderivation
 {
- \vlin{=}{}{\vls[\vlinf{}{}{\beta}{\vls[\beta.\beta.\beta]}.(a.\bar a)]}
+ \vlin{=}{}{\vls[\vlinf{2\cdot\cod}{}{\delta}{\vls[\delta.\delta.\delta]}\;.\;(a^\iota.\bar a)]}
  {
-  \vlin{\swi}{}{\vlsbr[\beta\;\;\;.\;\;\;\beta\;\;\;.\;\;\;\box\DeltaBotK]}
+  \vlin{=}{}{\vlsbr[\delta\;\;\;.\;\;\;\delta\;\;\;.\;\;\;\box\DeltaBotK]}
   {
-   \vlin{\swi}{}{\vlsbr([\beta\;\;\;.\;\;\;\box\DeltaK].\alpha)}
+   \vlin{\swi}{}{\vls[\delta.\delta.(a.\gamma)]}
    {
-    \vlin{=}{}{\vlsbr(\box\DeltaTopK\;\;\;.\;\;\;\alpha\;\;\;.\;\;\;\alpha)}
+    \vlin{=}{}{\vls([\delta.\delta.a].\gamma)}
     {
-     \vlhy{\vls([a.\bar a].\vlinf{}{}{\vls(\alpha.\alpha.\alpha)}{\alpha})}
+     \vlin{=}{}{\vlsbr([\delta\;\;\;.\;\;\;\box\DeltaK].\gamma)}
+     {
+      \vlin{=}{}{\vls(\vlinf{\swi}{}{\vls[\delta.(\bar a.\gamma)]}{\vls([\delta.\bar a].\gamma)}\;.\;\gamma)}
+      {
+       \vlin{=}{}{\vlsbr(\box\DeltaTopK\;\;\;.\;\;\;\gamma\;\;\;.\;\;\;\gamma)}
+       {
+        \vlhy{\vls([a^\epsilon.\bar a]\;.\;\vlinf{2\cdot\cou}{}{\vls(\gamma.\gamma.\gamma)}{\gamma})}
+       }
+      }
+     }
     }
    }
   }
- }
+ } 
 }\quad.
 \]
 \end{definition}
 
-%TODO: structural rules' labels everywhere... remove them? even repeated generic contraction? (need to change the remark where we define them if we do)
-
-%TODO: repeated use of labels? missing labels... superposition of colors. (co)weakening vertices are too close
+%TODO: superposition of colors
 
 \begin{proposition}\label{PropFlowNorm}
 Let the atomic flow of $\vlder{\Phi}{}{\vls[\beta.(a^{\three}.\bar a^{\four})]}{\vls([a^{\one}.\bar a^{\two}].\alpha)}$ be
@@ -1310,14 +1331,16 @@ Let the atomic flow of $\vlder{\Phi}{}{\vls[\beta.(a^{\three}.\bar a^{\four})]}{
 (-4, 2)*{\aflabelright\phi};
 %---
 ( 5, 0)*{\affr{8}{8}};
-( 6, 2)*{\aflabelright{\phi'}};
+( 6, 2)*{\aflabelright{\psi}};
 ( 8,-6)*{\afvjm{4}};
 (-2,-6)*{\afvjd{4}{\three}{}};
 ( 2,-6)*{\afvjd{4}{}{\four}};
 (-8,-6)*{\afvjm{4}};
 }\quad,
 \]
-then the atomic flow of $\vlder{\Break(a,\Phi)}{}{\vls[\beta.(a^{\three}.\bar a^{\four})]}{\vls([a^{\one}.\bar a^{\two}].\alpha)}$ is
+for some flows $\phi$ and $\psi$ then there is no path between $\one$ and $\three$ or between $\two$ and $\four$ in the atomic flow of $\Break(\one,\three,\Phi)$.
+\end{proposition}
+\begin{figure}
 \[
 \atomicflow
 {
@@ -1365,7 +1388,7 @@ then the atomic flow of $\vlder{\Break(a,\Phi)}{}{\vls[\beta.(a^{\three}.\bar a^
 "A"+(-5,  0)*{\affr{8}{8}};
 "A"+(-4,  2)*{\aflabelright{\phi}};
 "A"+( 5,  0)*{\affr{8}{8}};
-"A"+( 6,  2)*{\aflabelright{\phi'}};
+"A"+( 6,  2)*{\aflabelright{\psi}};
 % join one
 "A"+(2,-7)*{\afvjdcol6{}{\four'}{Red}};
 "A"+(2,-13)*{\afvjucol6{}{\two''}{Red}};
@@ -1380,7 +1403,7 @@ then the atomic flow of $\vlder{\Break(a,\Phi)}{}{\vls[\beta.(a^{\three}.\bar a^
 "A"+(-5, 0)*{\affr{8}{8}};
 "A"+(-4, 2)*{\aflabelright{\phi}};
 "A"+( 5, 0)*{\affr{8}{8}};
-"A"+( 6, 2)*{\aflabelright{\phi'}};
+"A"+( 6, 2)*{\aflabelright{\psi}};
 % join two
 "A"+(-2, -7)*{\afvjdcol6{\three''}{}{OliveGreen}};
 "A"+(-2,-13)*{\afvjucol6{\one'}{}{OliveGreen}};
@@ -1394,11 +1417,17 @@ then the atomic flow of $\vlder{\Break(a,\Phi)}{}{\vls[\beta.(a^{\three}.\bar a^
 "A"+(-5, 0)*{\affr{8}{8}};
 "A"+(-4, 2)*{\aflabelright{\phi}};
 "A"+( 5, 0)*{\affr{8}{8}};
-"A"+( 6, 2)*{\aflabelright{\phi'}};
+"A"+( 6, 2)*{\aflabelright{\psi}};
 }\quad,
-\] 
-where all the edges that might be in paths starting with $\one$ or $\two$ are colored in red and all the edges that might be in paths ending with $\three$ or $\four$ are colored in green. Note that the red and the green paths never meet, so there is no path from $\one$ to $\three$ or from $\two$ to $\four$.
-\end{proposition}
+\]
+\caption{The atomic flow of $\Break(\one,\three,\Phi)$}
+\label{FigFlowBreak}
+\end{figure}
+
+\begin{proof}
+Refer to the atomic flow of $\Break(\one,\three,\Phi)$ in Figure~\ref{FigFlowBreak}.
+All the edges that might be in paths starting with $\one$ or $\two$ are colored in red and all the edges that might be in paths ending with $\three$ or $\four$ are colored in green. Since the red and the green paths never meet there is no path from $\one$ to $\three$ or from $\two$ to $\four$.
+\end{proof}
 %\begin{remark}
 %Dually, if we work on $\bar a$ instead of $a$, the atomic flow of $\vlder{\Break_{n+1}(a_1,\dots,a_n,\bar a,\Phi)}{}{\beta}{\alpha}$ is
 %\[
@@ -1509,8 +1538,18 @@ where all the edges that might be in paths starting with $\one$ or $\two$ are co
 
 \newcommand{\Norm}{\mathsf{Norm}}
 \begin{definition}
-For every $n\ge0$ the \emph{normaliser of degree n}, $\Norm_n$, is an operator whose arguments are the atoms $a_1$, $\dots$, $a_n$ and a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, such that $a_1$, $\bar a$, $\dots$, $a_n$, $\bar a_n$ are all the non-weakly-streamlined atoms in $\Phi$. Let $\Psi=\Break(a_1,\Break(\dots(\Break(a_n,\Core(\Phi)))\dots))$, then $\Norm_n(a_1,\dots,a_n,\Phi)$ is defined to be
+For every $n\ge0$ the \emph{normaliser of degree n}, $\Norm_n$, is an operator whose arguments are the atoms $a_1$, $\dots$, $a_n$ and a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, such that $a_1$, $\bar a$, $\dots$, $a_n$, $\bar a_n$ are all the non-weakly-streamlined atoms in $\Phi$. Let
 \[
+\Core(\Phi)=
+\vlder{}{}{\vls[\beta.(a_1^{\iota_1}.\bar a_1).\dots.(a_n^{\iota_n}.\bar a_n)]}{\vls([a_1^{\epsilon_1}.\bar a_1].\dots.[a_n^{\epsilon_n}.\bar a_n].\alpha)}
+\]
+and let
+\[
+\Psi=\Break(\epsilon_1,\iota_1,\Break(\dots(\Break(\epsilon_n,\iota_n,\Core(\Phi)))\dots))\quad,
+\]
+then
+\[
+\Norm_n(a_1,\dots,a_n,\Phi)=
 \vlder{\Psi}{}{\vlsbr[\beta\;.\;\vlinf{}{}{\fff}{\vls(a_1.\bar a_1)}\;.\;\cdots\;.\;\vlinf{}{}{\fff}{\vls(a_n.\bar a_n)}]}{\vlsbr(\vlinf{}{}{\vls[a_1.\bar a_1]}{\ttt}\;.\;\cdots\;.\;\vlinf{}{}{\vls[a_n.\bar a_n]}{\ttt}\;.\;\alpha)}\quad.
 \]
 
