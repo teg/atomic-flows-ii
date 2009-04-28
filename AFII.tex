@@ -344,7 +344,7 @@ The left one is not a flow because it contains a cycle, and the right one becaus
 
 %TODO: Check that it is ok to say "an edge from x to y" (taken from Wikipedia). at the moment the path is directed, in AFI it was not. this we can fix, but we should check the rest of the paper.
 
-Given two vertices, $\nu_0$ and $\nu_n$, in an atomic flow $\phi$ a \emph{path from $\nu_0$ to $\nu_n$ in $\phi$} is a sequence of edges $\epsilon_1,\dots,\epsilon_n$ in $\phi$ such that there exist vertices $\nu_0,\dots,\nu_n$ in $\phi$ where for every $0<i\leq n$ $\epsilon_i$ is an edge from $\nu_{i-1}$ to $\nu_i$. A path, $\epsilon_1,\dots,\epsilon_n$, is a \emph{maximal path in $\phi$} if there is no edge $\epsilon$ in $\phi$ such that $\epsilon_1,\dots,\epsilon_n,\epsilon$ or $\epsilon,\epsilon_1,\dots,\epsilon_n$ is a path in $\phi$.
+Given two vertices, $\nu_0$ and $\nu_n$, in an atomic flow $\phi$, a \emph{path from $\nu_0$ to $\nu_n$ in $\phi$} is a sequence of edges $\epsilon_1,\dots,\epsilon_n$ in $\phi$ such that there exist vertices $\nu_1,\dots,\nu_{n-1}$ in $\phi$ such that, for every $1\le i\le n$, $\epsilon_i$ is an edge from $\nu_{i-1}$ to $\nu_i$. A path $\epsilon_1,\dots,\epsilon_n$ is a \emph{maximal path in $\phi$} if there is no edge $\epsilon$ in $\phi$ such that $\epsilon_1,\dots,\epsilon_n,\epsilon$ or $\epsilon,\epsilon_1,\dots,\epsilon_n$ is a path in $\phi$.
 
 Let us see how to extract atomic flows from derivations. Given an $\SKS$ derivation $\Phi$, we obtain, by the following prescriptions, a unique atomic flow $\phi$, such that there is a surjective map between atom occurrences in $\Phi$ and edges of $\phi$:
 \begin{itemize}
