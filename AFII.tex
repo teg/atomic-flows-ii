@@ -1235,12 +1235,11 @@ We present here the main result of our work, a family of operators called the `n
 
 \newcommand{\Break}{\mathsf{Break}}
 \begin{definition}\label{DefBreak}
-The \emph{path breaker}, $\Break$, is an operator whose arguments are the atom occurrences $\epsilon$  and $\iota$ and any derivation
+The \emph{path breaker}, $\Break$, is an operator whose arguments are the atom occurrences $a^\epsilon$  and $a^\iota$ and any derivation
 \[
 \vlder{\Phi}{}{\beta}{\alpha}\quad,
 \]
-where $\alpha=\vls([a^\epsilon.\bar a].\gamma)$ and $\beta=\vls[\delta.(a^\iota.\bar a)]$
-and such that
+where $\alpha=\vls([a^\epsilon.\bar a].\gamma)$ and $\beta=\vls[\delta.(a^\iota.\bar a)]$, and such that
 \newbox\DeltaTopK
 \setbox\DeltaTopK=
 \hbox{$
@@ -1287,7 +1286,7 @@ and such that
 }$
 }
 \[
-\Break(\epsilon,\iota,\Phi)=
+\Break(\Phi,a^\epsilon,a^\iota)=
 \vlderivation
 {
  \vlin{=}{}{\vls[\vlinf{2\cdot\cod}{}{\delta}{\vls[\delta.\delta.\delta]}\;.\;(a^\iota.\bar a)]}
@@ -1338,7 +1337,7 @@ Let the atomic flow of $\vlder{\Phi}{}{\vls[\beta.(a^{\three}.\bar a^{\four})]}{
 (-8,-6)*{\afvjm{4}};
 }\quad,
 \]
-for some flows $\phi$ and $\psi$ then there is no path between $\one$ and $\three$ or between $\two$ and $\four$ in the atomic flow of $\Break(\one,\three,\Phi)$.
+for some flows $\phi$ and $\psi$ then there is no path between $\one$ and $\three$ or between $\two$ and $\four$ in the atomic flow of $\Break(\Phi,a^\one,a^\three)$.
 \end{proposition}
 \begin{figure}
 \[
@@ -1420,12 +1419,12 @@ for some flows $\phi$ and $\psi$ then there is no path between $\one$ and $\thre
 "A"+( 6, 2)*{\aflabelright{\psi}};
 }\quad,
 \]
-\caption{The atomic flow of $\Break(\one,\three,\Phi)$}
+\caption{The atomic flow of $\Break(\Phi,\one,\three)$}
 \label{FigFlowBreak}
 \end{figure}
 
 \begin{proof}
-Refer to the atomic flow of $\Break(\one,\three,\Phi)$ in Figure~\ref{FigFlowBreak}.
+Refer to the atomic flow of $\Break(\Phi,a^\one,a^\three)$ in Figure~\ref{FigFlowBreak}.
 All the edges that might be in paths starting with $\one$ or $\two$ are colored in red and all the edges that might be in paths ending with $\three$ or $\four$ are colored in green. Since the red and the green paths never meet there is no path from $\one$ to $\three$ or from $\two$ to $\four$.
 \end{proof}
 %\begin{remark}
@@ -1545,7 +1544,7 @@ For every $n\ge0$ the \emph{normaliser of degree n}, $\Norm_n$, is an operator w
 \]
 and let
 \[
-\Psi=\Break(\epsilon_1,\iota_1,\Break(\dots(\Break(\epsilon_n,\iota_n,\Core(\Phi)))\dots))\quad,
+\Psi=\Break(\Break(\dots(\Break(\Core(\Phi),a^{\epsilon_n}_n,a^{\iota_n}_n))\dots),a^{\epsilon_1}_1,a^{\iota_1}_1)\quad,
 \]
 then
 \[
