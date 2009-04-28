@@ -848,7 +848,15 @@ A derivation is \emph{weakly streamlined} if its associated atomic flow can be r
 An atom $a$ is \emph{weakly streamlined in $\Phi$} if the atomic flow associated with $a$ in $\Phi$ is weakly streamlined.
 \end{definition}
 
-In the rest of this section we show how to weakly streamline a derivation. This is done in two steps. First, we extract the `core of the derivation', which amounts to removing all the identity and cut instances where non-weakly-streamlined atoms occur. As a result of removing identity and cut instances the premiss and conclusion of the core will contain one extra occurrence of each non-weakly-streamlined atom compared to the original derivation. Finally, we apply the `normaliser' to the core. The normaliser is an operator that, by gluing together copies of the core, creates a weakly-streamlined derivation with the same premiss and conclusion as the original derivation.
+In the rest of this section we show how to weakly streamline a derivation. This is done in three steps:
+\begin{enumerate}
+\item remove identity and cut instances, at the expense of creating new atom occurrences in the premiss and conclusion of the derivation;
+\item break the paths between all the atom occurrences added in the first step, at the expense of growing the derivation exponentially; and
+\item remove the atom occurrences created in the first step by adding identity and cut instances.
+\end{enumerate}
+
+In this way we create a new derivation with the same premiss and conclusion as the original one, but whose atomic flow has no paths from identity to cut vertices.
+
 \subsection{The Core}
 
 %TODO: reread
@@ -1226,12 +1234,6 @@ Given a derivation $\Phi$, the core of $\Phi$ obtained as described in the proof
 \end{definition}
 
 \subsection{The Normaliser}\label{SectNorm} 
-
-%COMMENT: what does it mean? Proposal: write a direct explanation: 'Normalisation works like this: * we remove... *we add back...'
-We present here the main result of our work, a family of operators called the `normalisers'. Each normaliser is a scheme with variables that we can instantiate with a derivation. The effect of plugging a derivation into a normaliser is the same as adding identity and cut instances to the premiss and conclusion of the derivation, respectively. However, it is done in such a way as to not create any path between the identity and cut instances we add. It should now be clear how our normalisation works: the core is obtained by removing identity and cut instances and the normaliser adds them back, in a way that preserves weak streamlining.
-
-%TODO: say this somewhere else:
-%The novelty of the normalisers is that they are built independently of the derivations we want to normalise. Which normaliser to plug a derivation into is decided by the number of atoms we want to eliminate from the premiss and conclusion of the derivation.
 
 \newcommand{\Break}{\mathsf{Break}}
 \begin{definition}\label{DefBreak}
