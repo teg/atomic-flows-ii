@@ -1348,6 +1348,22 @@ for some flows $\phi$ and $\psi$, then there are no paths from $\one$ to $\three
 \[
 \atomicflow
 {
+(-8, 6)*{\afvjm{4}};
+(-2, 6)*{\afvju{4}{\one}{}};
+( 2, 6)*{\afvju{4}{}{\two}};
+( 8, 6)*{\afvjm{4}};
+(-5, 0)*{\affr{8}{8}};
+(-4, 2)*{\aflabelright\phi};
+%---
+( 5, 0)*{\affr{8}{8}};
+( 6, 2)*{\aflabelright{\psi}};
+( 8,-6)*{\afvjm{4}};
+(-2,-6)*{\afvjd{4}{\three}{}};
+( 2,-6)*{\afvjd{4}{}{\four}};
+(-8,-6)*{\afvjm{4}};
+}\qquad
+\atomicflow
+{
 %%%%% RED %%%%%
 (0,-20)="D";
 (0,-10)="Dhalf";
@@ -1443,7 +1459,7 @@ for some flows $\phi$ and $\psi$, then there are no paths from $\one$ to $\three
 "A"+( 6, 2)*{\aflabelright{\psi}};
 }\quad,
 \]
-\caption{The atomic flow of $\Break(\Phi,\one,\three)$}
+\caption{The atomic flow of a derivation $\Phi$ and the atomic flow of $\Break(\Phi,a^\one,a^\three)$.}
 \label{FigFlowBreak}
 \end{figure}
 
