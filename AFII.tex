@@ -1042,7 +1042,7 @@ The core of a derivation does not have the same premiss and conclusion as the or
 The following proposition can easily by verified by studying the atomic flows in Definition~\ref{DefFlowCore}.
 
 \begin{proposition}\label{PropStreamlinedCore}
-A core of a derivation $\Phi$ is weakly streamlined and every non-weakly-streamlined atom in $\Phi$ does not occur in an identity or cut instance in a core of $\Phi$.
+A core of a derivation $\Phi$ is weakly streamlined and every non-weakly-streamlined atom in $\Phi$ does not occur in an identity or cut instance in a core of\/ $\Phi$.
 \end{proposition}
 
 It is not immediate that a core of a derivation is unique. In fact, given a derivation we can construct several cores with trivial differences. However, we show how a core can be extracted, and we will single out the core obtained in this way and refer to it as \emph{the core}.
@@ -1050,7 +1050,7 @@ It is not immediate that a core of a derivation is unique. In fact, given a deri
 To be able to remove identity and cut instances from a derivation, they must first be `pulled' towards the premiss and conclusion respectively. The following lemma shows how a subformula can be `pulled' towards the `outside' of the derivation, both going up and going down.
 
 \begin{lemma}\label{LemSuperSwitch}
-Given a context $\xi\vlhole$ and a formula $\alpha$ there exist derivations $\vlder{}{\{\swi\}}{\xi\{\alpha\}}{\vls(\alpha.\xi\{\ttt\})}$ and $\vlder{}{\{\swi\}}{\vls[\xi\{\fff\}.\alpha]}{\xi\{\alpha\}}$.
+Given a context $\xi\vlhole$ and a formula $\alpha$ there exist derivations $\vldownsmash{\vlder{}{\{\swi\}}{\xi\{\alpha\}}{\vls(\alpha.\xi\{\ttt\})}}$ and $\vlder{}{\{\swi\}}{\vls[\xi\{\fff\}.\alpha]}{\xi\{\alpha\}}$.
 \end{lemma}
 
 \begin{proof}
@@ -1291,7 +1291,7 @@ where $\alpha=\vls([a^\epsilon.\bar a].\gamma)$ and $\beta=\vls[\delta.(a^\iota.
 }$
 }
 \[
-\Break(\Phi,a^\epsilon,a^\iota)=
+\Break(\Phi,a^\epsilon,a^\iota)\quad=\quad
 \vlderivation
 {
  \vlin{=}{}{\vls[\vlinf{2\cdot\cod}{}{\delta}{\vls[\delta.\delta.\delta]}\;.\;(a^\iota.\bar a)]}
@@ -1302,7 +1302,7 @@ where $\alpha=\vls([a^\epsilon.\bar a].\gamma)$ and $\beta=\vls[\delta.(a^\iota.
    {
     \vlin{=}{}{\vls(\gamma.[a.[\delta.\delta]])}
     {
-     \vlin{=}{}{\vlsbr([\delta\;\;\;.\;\;\;\box\DeltaK].\gamma)}
+     \vlin{=}{}{\vlsbr([\delta\;\;\;\;\;.\;\;\;\;\;\box\DeltaK]\;\;\;\;\;.\;\;\;\;\;\gamma)}
      {
       \vlin{=}{}{\vls(\vlinf{\swi}{}{\vls[(\gamma.\bar a).\delta]}{\vls(\gamma.[\bar a.\delta])}\;.\;\gamma)}
       {
@@ -1345,44 +1345,21 @@ If the atomic flow of $\vlder{\Phi}{}{\vls[\beta.(a^{\three}.\bar a^{\four})]}{\
 for some flows $\phi$ and $\psi$, then there are no paths from $\one$ to $\three$ and no paths from $\two$ to $\four$ in the atomic flow of\/ $\Break(\Phi,a^\one,a^\three)$.
 \end{proposition}
 \begin{figure}
-%order the colors (top to bottom: red, green, black)
 \[
 \atomicflow
 {
+%%%%% RED %%%%%
 (0,-20)="D";
 (0,-10)="Dhalf";
-%% cocontractions
-(0,0)="A";
-%left
-"A"+(-11,16.5)*{\afvjmcol{3}{OliveGreen}};
-"A"+"D"+(-14,15.5)*{\afvjmcol{23}{OliveGreen}};
-"A"+"Dhalf"+(-11,11.5)*{\afvjmcol{11}{OliveGreen}};
-"A"+(-8,5.5)*{\afvjm3};
-"A"+(-11,11)*{\affr88};
-"A"+(-11,11)*{\copy\contrup};
-%right
-"A"+(11,16.5)*{\afvjmcol{3}{OliveGreen}};
-"A"+(8,5.5)*{\afvjm3};
-"A"+"Dhalf"+(11,11.5)*{\afvjm{11}};
-"A"+"D"+(14,15.5)*{\afvjmcol{23}{OliveGreen}};
-"A"+(11,11)*{\affr88};
-"A"+(11,11)*{\copy\contrup};
 %% contractions
 "D"+"D"="A";
 %left
 "A"+(-14,-15.5)-"D"*{\afvjmcol{23}{Red}};
-"A"+(-11,-11.5)-"Dhalf"*{\afvjm{11}};
-"A"+(-8,-5.5)*{\afvjm3};
 "A"+(-11,-16.5)*{\afvjmcol{3}{Red}};
-"A"+(-11,-11)*{\affr88};
-"A"+(-11,-11)*{\copy\contrdown};
 %right
-"A"+(8,-5.5)*{\afvjm3};
 "A"+(11,-11.5)-"Dhalf"*{\afvjmcol{11}{Red}};
 "A"+(14,-15.5)-"D"*{\afvjmcol{23}{Red}};
 "A"+(11,-16.5)*{\afvjmcol{3}{Red}};
-"A"+(11,-11)*{\affr88};
-"A"+(11,-11)*{\copy\contrdown};
 % top boxes
 (0,0)="A";
 "A"+(-11,-14)*{\afcjrmcol{6}{20}{Red}};
@@ -1390,25 +1367,27 @@ for some flows $\phi$ and $\psi$, then there are no paths from $\one$ to $\three
 "A"+(-2, 11)*{\afvjdcol{14}{\one}{}{Red}};
 "A"+( 2, 11)*{\afvjdcol{14}{}{\two}{Red}};
 "A"+(-2, -8)*{\afawucol{}{}{\three'}{}{}{Red}};
-"A"+(-5,  0)*{\affr{8}{8}};
-"A"+(-4,  2)*{\aflabelright{\phi}};
-"A"+( 5,  0)*{\affr{8}{8}};
-"A"+( 6,  2)*{\aflabelright{\psi}};
 % join one
 "A"+(2,-7)*{\afvjdcol6{}{\four'}{Red}};
 "A"+(2,-13)*{\afvjucol6{}{\two''}{Red}};
 % middle boxes
 "A"+"D"="A";
-"A"+(-9.5,10)*{\afcjlmcol{3}{12}{OliveGreen}};
-"A"+(9.5,10)*{\afcjrm{3}{12}};
-"A"+(-9.5,-10)*{\afcjrm{3}{12}};
 "A"+(9.5,-10)*{\afcjlmcol{3}{12}{Red}};
-"A"+(-2, 8)*{\afawdcol{}{}{\one''}{}{}{OliveGreen}};
 "A"+( 2,-8)*{\afawucol{}{}{}{\four''}{}{Red}};
-"A"+(-5, 0)*{\affr{8}{8}};
-"A"+(-4, 2)*{\aflabelright{\phi}};
-"A"+( 5, 0)*{\affr{8}{8}};
-"A"+( 6, 2)*{\aflabelright{\psi}};
+%%%%% GREEN %%%%%
+%% cocontractions
+(0,0)="A";
+%left
+"A"+(-11,16.5)*{\afvjmcol{3}{OliveGreen}};
+"A"+"D"+(-14,15.5)*{\afvjmcol{23}{OliveGreen}};
+"A"+"Dhalf"+(-11,11.5)*{\afvjmcol{11}{OliveGreen}};
+%right
+"A"+(11,16.5)*{\afvjmcol{3}{OliveGreen}};
+"A"+"D"+(14,15.5)*{\afvjmcol{23}{OliveGreen}};
+% middle boxes
+"A"+"D"="A";
+"A"+(-9.5,10)*{\afcjlmcol{3}{12}{OliveGreen}};
+"A"+(-2, 8)*{\afawdcol{}{}{\one''}{}{}{OliveGreen}};
 % join two
 "A"+(-2, -7)*{\afvjdcol6{\three''}{}{OliveGreen}};
 "A"+(-2,-13)*{\afvjucol6{\one'}{}{OliveGreen}};
@@ -1419,6 +1398,45 @@ for some flows $\phi$ and $\psi$, then there are no paths from $\one$ to $\three
 "A"+(-2,-11)*{\afvjucol{14}{\three}{}{OliveGreen}};
 "A"+( 2,-11)*{\afvjucol{14}{}{\four}{OliveGreen}};
 "A"+( 2, 8)*{\afawdcol{}{}{}{\two'}{}{OliveGreen}};
+%%%%% BLACK %%%%%
+%% cocontractions
+(0,0)="A";
+%left
+"A"+(-8,5.5)*{\afvjm3};
+"A"+(-11,11)*{\affr88};
+"A"+(-11,11)*{\copy\contrup};
+%right
+"A"+(8,5.5)*{\afvjm3};
+"A"+"Dhalf"+(11,11.5)*{\afvjm{11}};
+"A"+(11,11)*{\affr88};
+"A"+(11,11)*{\copy\contrup};
+%% contractions
+"D"+"D"="A";
+%left
+"A"+(-11,-11.5)-"Dhalf"*{\afvjm{11}};
+"A"+(-8,-5.5)*{\afvjm3};
+"A"+(-11,-11)*{\affr88};
+"A"+(-11,-11)*{\copy\contrdown};
+%right
+"A"+(8,-5.5)*{\afvjm3};
+"A"+(11,-11)*{\affr88};
+"A"+(11,-11)*{\copy\contrdown};
+% top boxes
+(0,0)="A";
+"A"+(-5,  0)*{\affr{8}{8}};
+"A"+(-4,  2)*{\aflabelright{\phi}};
+"A"+( 5,  0)*{\affr{8}{8}};
+"A"+( 6,  2)*{\aflabelright{\psi}};
+% middle boxes
+"A"+"D"="A";
+"A"+(9.5,10)*{\afcjrm{3}{12}};
+"A"+(-9.5,-10)*{\afcjrm{3}{12}};
+"A"+(-5, 0)*{\affr{8}{8}};
+"A"+(-4, 2)*{\aflabelright{\phi}};
+"A"+( 5, 0)*{\affr{8}{8}};
+"A"+( 6, 2)*{\aflabelright{\psi}};
+% bottom boxes
+"A"+"D"="A";
 "A"+(-5, 0)*{\affr{8}{8}};
 "A"+(-4, 2)*{\aflabelright{\phi}};
 "A"+( 5, 0)*{\affr{8}{8}};
