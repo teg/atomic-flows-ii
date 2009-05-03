@@ -1472,7 +1472,7 @@ A stronger version of Proposition~\ref{PropFlowNorm}, without any restrictions o
 
 \newcommand{\Norm}{\mathsf{Norm}}
 \begin{definition}
-For every $n\ge0$ the \emph{normaliser of degree n}, $\Norm_n$, is an operator whose arguments are the atoms $a_1$, $\dots$, $a_n$ and a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, such that $a_1$, $\bar a$, $\dots$, $a_n$, $\bar a_n$ are all the non-weakly-streamlined atoms in $\Phi$. Let
+For every $n\ge0$ the \emph{normaliser of degree n}, $\Norm_n$, is an operator whose arguments are a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ and the order of the atoms $a_1$, $\dots$, $a_n$, such that $a_1$, $\dots$, $a_n$ and their duals are all the non-weakly-streamlined atoms in $\Phi$. Let
 \[
 \Core(\Phi)=
 \vlder{}{}{\vls[\beta.(a_1^{\iota_1}.\bar a_1).\dots.(a_n^{\iota_n}.\bar a_n)]}{\vls([a_1^{\epsilon_1}.\bar a_1].\dots.[a_n^{\epsilon_n}.\bar a_n].\alpha)}
@@ -1483,7 +1483,7 @@ and let
 \]
 then
 \[
-\Norm_n(a_1,\dots,a_n,\Phi)=
+\Norm_n(\Phi,a_1,\dots,a_n)=
 \vlder{\Psi}{}{\vlsbr[\beta\;.\;\vlinf{}{}{\fff}{\vls(a_1.\bar a_1)}\;.\;\cdots\;.\;\vlinf{}{}{\fff}{\vls(a_n.\bar a_n)}]}{\vlsbr(\vlinf{}{}{\vls[a_1.\bar a_1]}{\ttt}\;.\;\cdots\;.\;\vlinf{}{}{\vls[a_n.\bar a_n]}{\ttt}\;.\;\alpha)}\quad.
 \]
 
@@ -1492,7 +1492,7 @@ then
 %TODO: spacing of lists throughout the paper
 
 \begin{theorem}
-Given a derivation $\Phi$ and all the non-weakly-streamlined atoms $a_1$, $\bar a_1$, $\dots$, $a_n$, $\bar a_n$ in $\Phi$, the derivation $\Norm_n(a_1,\dots,a_n,\Phi)$ is weakly streamlined and has the same premiss and conclusion as $\Phi$.
+Given a derivation $\Phi$ and all the non-weakly-streamlined atoms $a_1$, $\bar a_1$, $\dots$, $a_n$, $\bar a_n$ in $\Phi$, the derivation $\Norm_n(\Phi,a_1,\dots,a_n)$ is weakly streamlined and has the same premiss and conclusion as $\Phi$.
 \end{theorem}
 
 % discuss comments made on 21/4/09 with alessio
@@ -1539,7 +1539,7 @@ Given a derivation $\Phi$ where the atoms $a$ and $b$ occur, such that the atomi
 (0,-6)*{\afvjm4};
 }\quad,
 \]
-where $\phi_1$ is the atomic flow associated with $a$, $\phi_2$ is the atomic flow associated with $b$ and $a$ and $b$ are the only non-weakly-streamlined atoms in $\Phi$, then the atomic flow associated with $\Norm_2(a,b,\Phi)$ is
+where $\phi_1$ is the atomic flow associated with $a$, $\phi_2$ is the atomic flow associated with $b$ and $a$ and $b$ are the only non-weakly-streamlined atoms in $\Phi$, then the atomic flow associated with $\Norm_2(\Phi,a,b)$ is
 \[
 \atomicflow
 {
