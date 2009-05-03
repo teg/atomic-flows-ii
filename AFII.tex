@@ -869,7 +869,7 @@ In this subsection, we show a procedure for removing connected identities and cu
 We define the core of an atomic flow.
 
 \begin{definition}\label{DefFlowCore}
-Given an atomic flow
+Given a derivation $\Phi$, with unique, non-weakly-streamlined atoms $a_1$, $\dots$, $a_n$, and the atomic flow associated with $\Phi$
 \[
 \phi\;\;=\;\;\atomicflow
 {
@@ -924,7 +924,7 @@ Given an atomic flow
 ( 45,-11.5)*{\afvjm3};
 }\quad,
 \]
-where, for $1\le i\le n$, $\phi_i$ and $\phi'_i$ contain no identity or cut vertices and the subflow consisting of $\phi_i$, $\phi'_i$ and the identity and cut vertices connecting them is a connected subflow, we define a \emph{core of $\phi$} to be
+where, for $1\le i\le n$, $\phi_i$ and $\phi'_i$ do not contain identity or cut vertices and the subflow consisting of $\phi_i$, $\phi'_i$ and the identity and cut vertices connecting them is the non-weakly-streamlined atomic flow associated with the atom $a_i$, we define a \emph{core of $\phi$} to be
 \[
 \atomicflow
 {
