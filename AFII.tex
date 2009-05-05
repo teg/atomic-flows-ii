@@ -1521,35 +1521,47 @@ Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ and an ordered choice of comp
 \end{proof}
 
 \begin{example}
-Given a derivation $\Phi$ where the atoms $a$ and $b$ occur, such that the atomic flow associated with $\Phi$ is
+Given a derivation $\Phi$ with atomic flow
 \[
-\atomicflow
+\phi\;\;=\;\;\atomicflow
 {
-(-2,8)*{\afaid{}{}{}{}{}{}};
-(4,6)*{\afvjm4};
-(0,0)*{\affr{10}8};
-(2,2)*{\aflabelright{\phi_1}};
-(-4,-6)*{\afvjm4};
-(2,-8)*{\afaiu{}{}{}{}{}{}};
+(-13,0)*{\affr{22}{20}};
+(-5,8)*{\aflabelright{\phi_1}};
+%
+(-20, 9)*{\afvjm{10}};
+(-13, 8)*{\afaid{}{}{}{}{}{}};
+( -6, 9)*{\afvjm{10}};
+(-18, 0)*{\affr{8}{8}};
+(-17, 2)*{\aflabelright{\phi'_1}};
+( -8, 0)*{\affr{8}{8}};
+( -7, 2)*{\aflabelright{\phi''_1}};
+( -6,-9)*{\afvjm{10}};
+(-13,-8)*{\afaiu{}{}{}{}{}{}};
+(-20,-9)*{\afvjm{10}};
+%------------
+(13,0)*{\affr{22}{20}};
+(21,8)*{\aflabelright{\phi_2}};
+%
+(20, 9)*{\afvjm{10}};
+(13, 8)*{\afaid{}{}{}{}{}{}};
+( 6, 9)*{\afvjm{10}};
+( 8, 0)*{\affr{8}{8}};
+( 9, 2)*{\aflabelright{\phi'_n}};
+(18, 0)*{\affr{8}{8}};
+(19, 2)*{\aflabelright{\phi''_n}};
+( 6,-9)*{\afvjm{10}};
+(13,-8)*{\afaiu{}{}{}{}{}{}};
+(20,-9)*{\afvjm{10}};
 }\qquad
 \atomicflow
 {
-(-2,8)*{\afaid{}{}{}{}{}{}};
-(4,6)*{\afvjm4};
-(0,0)*{\affr{10}8};
-(2,2)*{\aflabelright{\phi_2}};
-(-4,-6)*{\afvjm4};
-(2,-8)*{\afaiu{}{}{}{}{}{}};
-}\qquad
-\atomicflow
-{
-(0,6)*{\afvjm4};
+(0,9)*{\afvjm{10}};
 (0,0)*{\affr88};
 (2,2)*{\aflabelright{\psi}};
-(0,-6)*{\afvjm4};
+(0,-9)*{\afvjm{10}};
 }\quad,
 \]
-where $\phi_1$ is the atomic flow associated with $a$, $\phi_2$ is the atomic flow associated with $b$ and $a$ and $b$ are the only non-weakly-streamlined atoms in $\Phi$, then the atomic flow associated with $\Norm_2(a,b,\Phi)$ is
+where $\phi'_1$, $\phi''_1$, $\phi'_2$ and $\phi''_2$ contain no identity and no cut vertices and $\phi_1$ and $\phi_2$ are connected, non-weakly-streamlined subflows, the atomic flow of $\Norm_2(\Phi,\phi'_1,\phi'_2)$ is
 \[
 \atomicflow
 {
