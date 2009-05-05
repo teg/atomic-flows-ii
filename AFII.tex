@@ -1478,20 +1478,22 @@ A stronger version of Proposition~\ref{PropFlowNorm}, without any restrictions o
 
 \subsection{The Normaliser}\label{SectNorm}
 
+%TODO: make sure it is ok to talk about a choice from Phi when it is only defined for phi
+
 \newcommand{\Norm}{\mathsf{Norm}}
 \begin{definition}
-For every $n\ge0$ the \emph{normaliser of degree n}, $\Norm_n$, is an operator whose arguments are the atoms $a_1$, $\dots$, $a_n$ and a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, such that $a_1$, $\bar a$, $\dots$, $a_n$, $\bar a_n$ are all the non-weakly-streamlined atoms in $\Phi$. Let
+For every $n\ge0$ the \emph{normaliser of degree n}, $\Norm_n$, is an operator whose arguments are a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ and an ordered choice of components from $\Phi$, $\phi_1$, $\dots$, $\phi_n$. Let
 \[
 \Core(\Phi)=
 \vlder{}{}{\vls[\beta.(a_1^{\iota_1}.\bar a_1).\dots.(a_n^{\iota_n}.\bar a_n)]}{\vls([a_1^{\epsilon_1}.\bar a_1].\dots.[a_n^{\epsilon_n}.\bar a_n].\alpha)}
 \]
-and let
+such that for every $1\le i\le n$, we have that $\epsilon_i$ (resp., $\iota_i$) is the new top (resp., bottom) edge of $\phi_i$, and let
 \[
 \Psi=\Break(\Break(\dots(\Break(\Core(\Phi),a^{\epsilon_n}_n,a^{\iota_n}_n))\dots),a^{\epsilon_1}_1,a^{\iota_1}_1)\quad,
 \]
 then
 \[
-\Norm_n(a_1,\dots,a_n,\Phi)=
+\Norm_n(\Phi,\phi_1,\dots,\phi_n)=
 \vlder{\Psi}{}{\vlsbr[\beta\;.\;\vlinf{}{}{\fff}{\vls(a_1.\bar a_1)}\;.\;\cdots\;.\;\vlinf{}{}{\fff}{\vls(a_n.\bar a_n)}]}{\vlsbr(\vlinf{}{}{\vls[a_1.\bar a_1]}{\ttt}\;.\;\cdots\;.\;\vlinf{}{}{\vls[a_n.\bar a_n]}{\ttt}\;.\;\alpha)}\quad.
 \]
 
@@ -1500,7 +1502,7 @@ then
 %TODO: spacing of lists throughout the paper
 
 \begin{theorem}
-Given a derivation $\Phi$ and all the non-weakly-streamlined atoms $a_1$, $\bar a_1$, $\dots$, $a_n$, $\bar a_n$ in $\Phi$, the derivation $\Norm_n(a_1,\dots,a_n,\Phi)$ is weakly streamlined and has the same premiss and conclusion as $\Phi$.
+Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ and an ordered choice of components from $\Phi$, $\phi_1$, $\dots$, $\phi_n$, the derivation $\Norm_n(\Phi,\phi_1,\dots,\phi_n)$ is weakly streamlined and has the same premiss and conclusion as $\Phi$.
 \end{theorem}
 
 % discuss comments made on 21/4/09 with alessio
