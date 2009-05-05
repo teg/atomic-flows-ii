@@ -934,63 +934,63 @@ where, for $1\le i\le n$, $\phi'_i$ and $\phi''_i$ contain no identity and no cu
 \[
 \atomicflow
 {
-(-21,10)*{\afvjdm{12}{\boldsymbol\epsilon'_1}{}};
-(-17,15)*{\afvj2};
+(-21,11)*{\afvjdm{14}{\boldsymbol\epsilon'_1}{}};
+(-17,16)*{\afvjd4{}{\lambda'_1}};
 (-17,10)*{\affr{6}{8}};
 (-17,10)*{\copy\contrup};
 (-17, 5)*{\afvjm{2}};
 (-18, 0)*{\affr{8}{8}};
 (-17, 2)*{\aflabelright{\phi'_1}};
-(-21,-10)*{\afvjum{12}{\boldsymbol\iota'_1}{}};
-(-17,-15)*{\afvj2};
+(-21,-11)*{\afvjum{14}{\boldsymbol\iota'_1}{}};
+(-17,-16)*{\afvju4{}{\mu'_1}};
 (-17,-10)*{\affr{6}{8}};
 (-17,-10)*{\copy\contrdown};
 (-17, -5)*{\afvjm{2}};
 %
-( -9,15)*{\afvj2};
+( -9,16)*{\afvjd4{}{\lambda''_1}};
 ( -9,10)*{\affr{6}{8}};
 ( -9,10)*{\copy\contrup};
 ( -9, 5)*{\afvjm{2}};
-( -5,10)*{\afvjdm{12}{}{\boldsymbol\epsilon''_1}};
+( -5,11)*{\afvjdm{14}{}{\boldsymbol\epsilon''_1}};
 ( -8, 0)*{\affr{8}{8}};
 ( -7, 2)*{\aflabelright{\phi''_1}};
-( -9,-15)*{\afvj2};
+( -9,-16)*{\afvju4{}{\mu''_1}};
 ( -9,-10)*{\affr{6}{8}};
 ( -9,-10)*{\copy\contrdown};
 ( -9, -5)*{\afvjm{2}};
-( -5,-10)*{\afvjum{12}{}{\boldsymbol\iota''_1}};
+( -5,-11)*{\afvjum{14}{}{\boldsymbol\iota''_1}};
 ( -8, 0)*{\affr{8}{8}};
 %------------
 (0,0)*{\cdots};
 %------------
-( 9,15)*{\afvj2};
+( 9,16)*{\afvjd4{}{\lambda'_n}};
 ( 9,10)*{\affr{6}{8}};
 ( 9,10)*{\copy\contrup};
 ( 9, 5)*{\afvjm{2}};
-( 5,10)*{\afvjdm{12}{\boldsymbol\epsilon'_n}{}};
+( 5,11)*{\afvjdm{14}{\boldsymbol\epsilon'_n}{}};
 ( 8, 0)*{\affr{8}{8}};
 ( 9, 2)*{\aflabelright{\phi'_n}};
-( 9,-15)*{\afvj2};
+( 9,-16)*{\afvju4{}{\mu'_n}};
 ( 9,-10)*{\affr{6}{8}};
 ( 9,-10)*{\copy\contrdown};
 ( 9, -5)*{\afvjm{2}};
-( 5,-10)*{\afvjum{12}{\boldsymbol\iota'_n}{}};
+( 5,-11)*{\afvjum{14}{\boldsymbol\iota'_n}{}};
 ( 8, 0)*{\affr{8}{8}};
 %
-(21,10)*{\afvjdm{12}{}{\boldsymbol\epsilon''_n}};
-(17,15)*{\afvj2};
+(21,11)*{\afvjdm{14}{}{\boldsymbol\epsilon''_n}};
+(17,16)*{\afvjd4{}{\lambda''_n}};
 (17,10)*{\affr{6}{8}};
 (17,10)*{\copy\contrup};
 (17, 5)*{\afvjm{2}};
 (18, 0)*{\affr{8}{8}};
 (19, 2)*{\aflabelright{\phi''_n}};
-(21,-10)*{\afvjum{12}{}{\boldsymbol\iota''_n}};
-(17,-15)*{\afvj2};
+(21,-11)*{\afvjum{14}{}{\boldsymbol\iota''_n}};
+(17,-16)*{\afvju4{}{\mu''_n}};
 (17,-10)*{\affr{6}{8}};
 (17,-10)*{\copy\contrdown};
 (17, -5)*{\afvjm{2}};
 %---------
-(  35,11.5)*{\afvjm3};
+(  35,14)*{\afvjm8};
 %---
 (  35, 6)*{\affr{18}8};
 (41.5, 8)*{\aflabelright{\psi_1}};
@@ -1014,9 +1014,11 @@ where, for $1\le i\le n$, $\phi'_i$ and $\phi''_i$ contain no identity and no cu
 (  45,-6)*{\copy\weakup};
 (  50,-6)*{\copy\contrdown};
 %---
-( 45,-11.5)*{\afvjm3};
+( 45,-14)*{\afvjm8};
 }\quad.
 \]
+For every $1\le i\le n$, the \emph{new top edge of $\phi'_i$ (resp., $\phi''_i$)} is $\lambda'_i$ (resp., $\lambda''_i$), the \emph{new bottom edge of $\phi'_i$ (resp., $\phi''_i$)} is $\mu'_i$ (resp., $\mu''_i$) and the \emph{new top (resp., bottom) edges of $\phi_i$} are $\lambda'_i$ and $\lambda''_i$ (resp., $\mu'_i$ and $\mu''_i$).
+An \emph{ordered choice of components from $\phi$} is a sequence $\tilde\phi_1$, $\dots$, $\tilde\phi_n$, such that, for every $1\le i\le n$, we have $\tilde\phi_i=\phi_i$ or $\tilde\phi_i=\phi_i'$.
 \end{definition}
 
 %TODO: give an example
@@ -1036,11 +1038,11 @@ Given an atomic flow $\phi$ we denote the core of $\phi$ by $\Core(\phi)$.
 A core of a derivation is defined based on the core of its atomic flow:
 
 \begin{definition}\label{DefCore}
-Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ with associated atomic flow $\phi$, a \emph{core of\/ $\Phi$} is defined to be a derivation
+Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ with associated atomic flow $\phi$, such that $\phi$ contains the non-weakly-streamlined, connected subflows $\phi_1$, $\dots$, $\phi_n$, a \emph{core of\/ $\Phi$} is defined to be a derivation
 \[
-\vlder{}{}{\vls[\beta.(a_n.{\bar a_n}).\cdots.(a_1.{\bar a_1})]}{\vls([a_1.{\bar a_1}].\cdots.[a_n.{\bar a_n}].\alpha)}
+\vlder{}{}{\vls[\beta.(a^{\mu'_n}_n.{\bar a^{\mu''_n}_n}).\cdots.(a^{\mu'_1}_1.{\bar a^{\mu'_1}_1})]}{\vls([a^{\lambda'_1}_1.{\bar a^{\lambda''_1}_1}].\cdots.[a^{\lambda'_n}_n.{\bar a^{\lambda'_n}_n}].\alpha)}
 \]
-with associated atomic flow $\Core(\phi)$.
+with associated atomic flow $\Core(\phi)$, such that, for every $1\le i\le n$, $\lambda'_i$ and $\lambda''_i$ (resp., $\mu'_i$ and $\mu''_i$) are the new top (resp., bottom) edges of $\phi_i$.
 \end{definition}
 
 The core of a derivation does not have the same premiss and conclusion as the original derivation. In the next subsection we will see how we can glue several cores together to obtain a weakly streamlined derivation with the correct premiss and conclusion.
