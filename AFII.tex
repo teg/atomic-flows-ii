@@ -1340,8 +1340,14 @@ If the atomic flow of $\vlder{\Phi}{}{\vls[\beta.(a^{\three}.\bar a^{\four})]}{\
 (-8,-6)*{\afvjm{4}};
 }\quad,
 \]
-for some flows $\phi$ and $\psi$, then there are no paths from $\one$ to $\three$ and no paths from $\two$ to $\four$ in the atomic flow of\/ $\Break(\Phi,a^\one,a^\three)$.
+for some flows $\phi$ and $\psi$, then there are no paths from the top edge $\epsilon$ to the bottom edge $\iota$ in the atomic flow of\/ $\Break(\Phi,a^\one,a^\three)$ if
+\begin{enumerate}
+	\item $\epsilon=\one$ and $\iota=\three$;
+	\item $\epsilon=\two$ and $\iota=\four$; or
+	\item there is no path from $\epsilon$ to $\iota$ in the atomic flow of $\Phi$.
+\end{enumerate}
 \end{proposition}
+
 \begin{figure}
 \[
 \atomicflow
@@ -1463,7 +1469,7 @@ for some flows $\phi$ and $\psi$, then there are no paths from $\one$ to $\three
 
 \begin{proof}
 Refer to the atomic flow of $\Break(\Phi,a^\one,a^\three)$ in Figure~\ref{FigFlowBreak}.
-All the edges that might be in paths from $\one$ or $\two$ are coloured in red and all the edges that might be in paths to $\three$ or $\four$ are coloured in green. Since the red and the green paths do not overlap, there are no paths from $\one$ to $\three$ and no paths from $\two$ to $\four$.
+All the edges that might be in paths from $\one$ or $\two$ are coloured in red and all the edges that might be in paths to $\three$ or $\four$ are coloured in green. Since the red and the green paths do not overlap, there are no paths from $\one$ to $\three$ and no paths from $\two$ to $\four$. Furthermore, by referring to Figure~\ref{FigFlowBreak} observe that if there is a path from the upper edge $\epsilon$ to the lower edge $\iota$ the path must pass through one of the three copies of either $\phi$ or $\psi$, hence there must be a path from $\epsilon$ to $\iota$ in the atomic flow of $\Phi$.
 \end{proof}
 
 \begin{remark}
