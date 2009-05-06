@@ -1320,7 +1320,7 @@ The \emph{path breaker}, $\Break$, is an operator whose arguments are a derivati
 
 %TODO: superposition of colors
 
-\begin{proposition}\label{PropFlowNorm}
+\begin{proposition}\label{PropPathBreak}
 If the atomic flow of $\vlder{\Phi}{}{\vls[\beta.(a^{\three}.\bar a^{\four})]}{\vls([a^{\one}.\bar a^{\two}].\alpha)}$ is of shape
 \[
 \atomicflow
@@ -1494,7 +1494,6 @@ then
 \Norm_n(\Phi,\phi_1,\dots,\phi_n)=
 \vlder{\Psi}{}{\vlsbr[\beta\;.\;\vlinf{}{}{\fff}{\vls(a_1.\bar a_1)}\;.\;\cdots\;.\;\vlinf{}{}{\fff}{\vls(a_n.\bar a_n)}]}{\vlsbr(\vlinf{}{}{\vls[a_1.\bar a_1]}{\ttt}\;.\;\cdots\;.\;\vlinf{}{}{\vls[a_n.\bar a_n]}{\ttt}\;.\;\alpha)}\quad.
 \]
-
 \end{definition}
 
 %TODO: spacing of lists throughout the paper
@@ -1503,19 +1502,13 @@ then
 Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ and an ordered choice of components from $\Phi$, $\phi_1$, $\dots$, $\phi_n$, the derivation $\Norm_n(\Phi,\phi_1,\dots,\phi_n)$ is weakly streamlined and has the same premiss and conclusion as $\Phi$.
 \end{theorem}
 
-% discuss comments made on 21/4/09 with alessio
 \begin{proof}
-%TODO:redo
-%In the atomic flow in Remark~\ref{PropFlowNorm}, observe that, for $1 \le i\le n$
-%\begin{itemize}
-% \item any two disconnected subflows of $\psi$ in $\Norm_{i-1}(a_1,\dots,a_{i-1},\Core(\Phi))$ are disconnected subflows of $\Norm_i(a_1,\dots,a_i,\Core(\Phi))$, and
-% \item if $\Norm_{i-1}(a_1,\dots,a_{i-1},\Core(\Phi))$ is weakly streamlined, so is $\Norm_i(a_1,\dots,a_i,\Core(\Phi))$.
-%\end{itemize}
-%It therefore follows, by Definition~\ref{DefFlowCore} and induction on Remark~\ref{PropFlowNorm}, that
-%\begin{itemize}
-% \item the atomic flow of $\Norm_{n-1}(a_1,\dots,a_{n-1},\Core(\Phi))$ has the shape of the first atomic flow in Remark~\ref{PropFlowNorm}, and
-% \item $\Norm_n(a_1,\dots,a_n,\Core(\Phi))$ is weakly streamlined.
-%\end{itemize}
+Let
+\[
+\Norm_n(\Phi,\phi_1,\dots,\phi_n)=
+\vlder{\Psi}{}{\vlsbr[\beta\;.\;\vlinf{}{}{\fff}{\vls(a^{\iota_1}_1.\bar a^{\iota'_1}_1)}\;.\;\cdots\;.\;\vlinf{}{}{\fff}{\vls(a^{\iota_n}_n.\bar a^{\iota'_n}_n)}]}{\vlsbr(\vlinf{}{}{\vls[a^{\epsilon_1}_1.\bar a^{\epsilon'_1}_1]}{\ttt}\;.\;\cdots\;.\;\vlinf{}{}{\vls[a^{\epsilon_n}_n.\bar a^{\epsilon_n}_n]}{\ttt}\;.\;\alpha)}\quad.
+\]
+By induction on Proposition~\ref{PropPathBreak} it follows that, for $1\le i\le n$, there are no paths from $a^{\epsilon_i}_i$ to $a^{\iota_i}_i$ and no paths from $\bar a^{\epsilon'_i}_i$ to $\bar a^{\iota'_i}_i$. It then follows, by Definition~\ref{DefFlowCore}, that $\Norm_n(\Phi,\phi_1,\dots,\phi_n)$ is weakly streamlined.
 \end{proof}
 
 \begin{example}
