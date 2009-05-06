@@ -1017,7 +1017,7 @@ where, for $1\le i\le n$, $\phi'_i$ and $\phi''_i$ contain no identity and no cu
 ( 45,-14)*{\afvjm8};
 }\quad.
 \]
-For every $1\le i\le n$, the \emph{new top edge of $\phi'_i$ (resp., $\phi''_i$)} is $\lambda'_i$ (resp., $\lambda''_i$), the \emph{new bottom edge of $\phi'_i$ (resp., $\phi''_i$)} is $\mu'_i$ (resp., $\mu''_i$) and the \emph{new top (resp., bottom) edges of $\phi_i$} are $\lambda'_i$ and $\lambda''_i$ (resp., $\mu'_i$ and $\mu''_i$).
+For every $1\le i\le n$, the \emph{new upper edge of $\phi'_i$ (resp., $\phi''_i$)} is $\lambda'_i$ (resp., $\lambda''_i$), the \emph{new lower edge of $\phi'_i$ (resp., $\phi''_i$)} is $\mu'_i$ (resp., $\mu''_i$) and the \emph{new upper (resp., lower) edges of $\phi_i$} are $\lambda'_i$ and $\lambda''_i$ (resp., $\mu'_i$ and $\mu''_i$).
 An \emph{ordered choice of components from $\phi$} is a sequence $\tilde\phi_1$, $\dots$, $\tilde\phi_n$, such that, for every $1\le i\le n$, we have $\tilde\phi_i=\phi_i$ or $\tilde\phi_i=\phi_i'$.
 \end{definition}
 
@@ -1042,7 +1042,7 @@ Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ with associated atomic flow $
 \[
 \vlder{}{}{\vls[\beta.(a^{\mu'_n}_n.{\bar a^{\mu''_n}_n}).\cdots.(a^{\mu'_1}_1.{\bar a^{\mu'_1}_1})]}{\vls([a^{\lambda'_1}_1.{\bar a^{\lambda''_1}_1}].\cdots.[a^{\lambda'_n}_n.{\bar a^{\lambda'_n}_n}].\alpha)}
 \]
-with associated atomic flow $\Core(\phi)$, such that, for every $1\le i\le n$, $\lambda'_i$ and $\lambda''_i$ (resp., $\mu'_i$ and $\mu''_i$) are the new top (resp., bottom) edges of $\phi_i$.
+with associated atomic flow $\Core(\phi)$, such that, for every $1\le i\le n$, $\lambda'_i$ and $\lambda''_i$ (resp., $\mu'_i$ and $\mu''_i$) are the new upper (resp., lower) edges of $\phi_i$.
 \end{definition}
 
 The core of a derivation does not have the same premiss and conclusion as the original derivation. In the next subsection we will see how we can glue several cores together to obtain a weakly streamlined derivation with the correct premiss and conclusion.
@@ -1340,7 +1340,7 @@ If the atomic flow of $\vlder{\Phi}{}{\vls[\beta.(a^{\three}.\bar a^{\four})]}{\
 (-8,-6)*{\afvjm{4}};
 }\quad,
 \]
-for some flows $\phi$ and $\psi$, then there are no paths from the top edge $\epsilon$ to the bottom edge $\iota$ in the atomic flow of\/ $\Break(\Phi,a^\one,a^\three)$ if
+for some flows $\phi$ and $\psi$, then there are no paths from the upper edge $\epsilon$ to the lower edge $\iota$ in the atomic flow of\/ $\Break(\Phi,a^\one,a^\three)$ if
 \begin{enumerate}
 	\item $\epsilon=\one$ and $\iota=\three$;
 	\item $\epsilon=\two$ and $\iota=\four$; or
@@ -1485,7 +1485,7 @@ For every $n\ge0$ the \emph{normaliser of degree n}, $\Norm_n$, is an operator w
 \Core(\Phi)=
 \vlder{}{}{\vls[\beta.(a_1^{\iota_1}.\bar a_1).\dots.(a_n^{\iota_n}.\bar a_n)]}{\vls([a_1^{\epsilon_1}.\bar a_1].\dots.[a_n^{\epsilon_n}.\bar a_n].\alpha)}
 \]
-such that for every $1\le i\le n$, we have that $\epsilon_i$ (resp., $\iota_i$) is the new top (resp., bottom) edge of $\phi_i$, and let
+such that for every $1\le i\le n$, we have that $\epsilon_i$ (resp., $\iota_i$) is the new upper (resp., lower) edge of $\phi_i$, and let
 \[
 \Psi=\Break(\Break(\dots(\Break(\Core(\Phi),a^{\epsilon_n}_n,a^{\iota_n}_n))\dots),a^{\epsilon_1}_1,a^{\iota_1}_1)\quad,
 \]
