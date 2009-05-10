@@ -1043,7 +1043,7 @@ We say that $\phi_1$, $\dots$, $\phi_n$ is an \emph{ordered choice of components
 Given an atomic flow $\phi$, two cores of $\phi$ are equivalent modulo associativity of contraction.
 \end{proposition}
 
-By Proposition~\ref{PropAssoContr} we can consider a core of an atomic flow to be unique and we will refer to \emph{the core}.
+By Proposition~\ref{PropAssoContr} we can consider a core of an atomic flow to be unique and we therefore refer to \emph{the core}.
 
 \newcommand{\Core}{\mathsf{Core}}
 
@@ -1063,7 +1063,7 @@ Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ with associated atomic flow $
 with associated atomic flow $\Core(\phi)$, such that, for every $1\le i\le n$, $\lambda'_i$ and $\lambda''_i$ (resp., $\mu'_i$ and $\mu''_i$) are the new upper (resp., lower) edges of $\phi_i$.
 \end{definition}
 
-The core of a derivation does not have the same premiss and conclusion as the original derivation. In the next subsection we will see how we can glue several cores together to obtain a weakly streamlined derivation with the correct premiss and conclusion.
+The core of a derivation does not have the same premiss and conclusion as the original derivation. In the next subsection we see how we can glue several cores together to obtain a weakly streamlined derivation with the correct premiss and conclusion.
 
 The following proposition can easily by verified by studying the atomic flows in Definition~\ref{DefFlowCore}.
 
@@ -1071,9 +1071,9 @@ The following proposition can easily by verified by studying the atomic flows in
 A core of a derivation $\Phi$ is weakly streamlined and every non-weakly-streamlined atom in $\Phi$ does not occur in an identity or cut instance in a core of\/ $\Phi$.
 \end{proposition}
 
-It is not immediate that a core of a derivation is unique. In fact, given a derivation we can construct several cores with trivial differences. However, we show how a core can be extracted, and we will single out the core obtained in this way and refer to it as \emph{the core}.
+Given a derivation, we can construct several cores with trivial differences. However, we show how a core can be extracted, and we will single out the core obtained in this way and refer to it as \emph{the core}.
 
-To be able to remove identity and cut instances from a derivation, they must first be `pulled' towards the premiss and conclusion respectively. The following lemma shows how a subformula can be `pulled' towards the `outside' of the derivation, both going up and going down.
+To be able to remove identity and cut instances from a derivation, they must first be `pulled' towards the premiss and conclusion, respectively. The following lemma shows how a subformula can be `pulled' towards the `outside' of the derivation, both going up and going down.
 
 \begin{lemma}\label{LemSuperSwitch}
 Given a context $\xi\vlhole$ and a formula $\alpha$ there exist derivations $\vldownsmash{\vlder{}{\{\swi\}}{\xi\{\alpha\}}{\vls(\alpha.\xi\{\ttt\})}}$ and $\vlder{}{\{\swi\}}{\vls[\xi\{\fff\}.\alpha]}{\xi\{\alpha\}}$.
@@ -1227,7 +1227,7 @@ The derivations shown in Lemma~\ref{LemGenericContraction} can be constructed in
 \end{remark}
 
 \begin{theorem}\label{ThmExistCore}
-Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, a core of $\Phi$ can be constructed.
+Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, a core of\/ $\Phi$ can be constructed.
 \end{theorem}
 
 \begin{proof}
@@ -1253,7 +1253,7 @@ where $\Phi'$ exists by Lemma~\ref{LemDecompInt} and $\Psi_1$ and $\Psi_2$ exist
 %TODO: by the above remarks it is obvious how this is unique, but maybe we should make a final remark?
 
 \begin{definition}
-Given a derivation $\Phi$, the core of $\Phi$ obtained as described in the proof of Theorem~\ref{ThmExistCore} is called \emph{the core of $\Phi$}, denoted $\Core(\Phi)$.
+Given a derivation $\Phi$, the core of $\Phi$ obtained as described in the proof of Theorem~\ref{ThmExistCore} is called \emph{the core of\/ $\Phi$}, denoted $\Core(\Phi)$.
 \end{definition}
 
 \subsection{The Path Breaker}\label{SectBreak} 
@@ -1502,7 +1502,7 @@ A stronger version of Proposition~\ref{PropFlowNorm}, without any restrictions o
 
 \newcommand{\Norm}{\mathsf{Norm}}
 \begin{definition}
-For every $n\ge0$ the \emph{normaliser of degree n}, $\Norm_n$, is an operator whose arguments are a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, with atomic flow $\phi$, and $\phi_1$, $\dots$, $\phi_n$, an ordered choice of components from $\phi$. Let
+For every $n\ge0$ the \emph{normaliser of degree n}, $\Norm_n$, is an operator whose arguments are a derivation $\vlder{\Phi}{}{\beta}{\alpha}$, with atomic flow $\phi$, and $\phi_1$, $\dots$, $\phi_n$, an ordered choice of components from $\phi$; let
 \[
 \Core(\Phi)=
 \vlder{}{}{\vls[\beta.(a_1^{\iota_1}.\bar a_1).\dots.(a_n^{\iota_n}.\bar a_n)]}{\vls([a_1^{\epsilon_1}.\bar a_1].\dots.[a_n^{\epsilon_n}.\bar a_n].\alpha)}
