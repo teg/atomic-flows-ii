@@ -81,24 +81,27 @@ In the future, we believe it will be possible to improve on these results by ext
 %===============================================================================
 \section{Propositional Logic in Deep Inference}\label{SectDI}
 
+\Tom{"For example" sounds wrong here. It is not examples of deep inference formalisms.}
+
 In the range of the deep-inference methodology, we can define several formalisms, \emph{i.e.} general prescriptions on how to design proof systems. For example, the sequent calculus and natural deduction are formalisms in Gentzen-style proof theory, where the structure of proofs is determined by the tree structure of the formulae they prove.
 
 The first, and conceptually simplest, formalism that has been defined in deep inference is called the \emph{calculus of structures}, or \emph{CoS} \cite{Gugl:06:A-System:kl}. CoS is now well developed for classical \cite{Brun:03:Atomic-C:oz,Brun:06:Cut-Elim:cq,Brun:06:Locality:zh,BrunTiu:01:A-Local-:mz,Brun:06:Deep-Inf:qy}, intuitionistic \cite{Tiu:06:A-Local-:gf}, linear \cite{Stra:02:A-Local-:ul,Stra:03:MELL-in-:oy}, modal \cite{Brun::Deep-Seq:ay,GoreTiu:06:Classica:uq,Stou:06:A-Deep-I:rt} and com\-mu\-ta\-tive/non-commutative logics \cite{Gugl:06:A-System:kl,Tiu:06:A-System:ai,Stra:03:Linear-L:lp,Brus:02:A-Purely:wd,Di-G:04:Structur:wy,GuglStra:01:Non-comm:rp,GuglStra:02:A-Non-co:lq,GuglStra:02:A-Non-co:dq,Kahr:06:Reducing:hc,Kahr:07:System-B:fk}.
 
-%TODO: do not focus on complexity
-The standard proof system of propositional logic in CoS is called $\SKS$. The basic proof-complexity properties of $\SKS$, and, as a consequence, of propositional logic in CoS, have been studied in \cite{BrusGugl:07:On-the-P:fk}:
-\begin{itemize}
-%---------------------------------------
-\item $\SKS$ is polynomially equivalent to Frege proof systems.
-%---------------------------------------
-\item $\SKS$ can be extended with Tseitin's extension and substitution, and the proof systems so obtained are polynomially equivalent to Frege proof systems augmented by extension and substitution.
-%---------------------------------------
-\item Analytic $\SKS$ polynomially simulates analytic Gentzen proof systems, but the converse does not hold: in fact, Statman's tautologies admit polynomial proofs in analytic $\SKS$ but, as is well known, only exponential ones in analytic Gentzen \cite{Stat:78:Bounds-f:fj}.
-%---------------------------------------
-\end{itemize}
+\Tom{Say what the basics of SKS are and where it has been studied in respect to this paper.}
+The standard proof system of propositional logic in CoS is called $\SKS$.
+%The basic proof-complexity properties of $\SKS$, and, as a consequence, of propositional logic in CoS, have been studied in \cite{BrusGugl:07:On-the-P:fk}:
+%\begin{itemize}
+%%---------------------------------------
+%\item $\SKS$ is polynomially equivalent to Frege proof systems.
+%%---------------------------------------
+%\item $\SKS$ can be extended with Tseitin's extension and substitution, and the proof systems so obtained are polynomially equivalent to Frege proof systems augmented by extension and substitution.
+%%---------------------------------------
+%\item Analytic $\SKS$ polynomially simulates analytic Gentzen proof systems, but the converse does not hold: in fact, Statman's tautologies admit polynomial proofs in analytic $\SKS$ but, as is well known, only exponential ones in analytic Gentzen \cite{Stat:78:Bounds-f:fj}.
+%%---------------------------------------
+%\end{itemize}
 
-%TODO: do not talk about threshold formulae
-In this paper, we work in CoS and $\SKS$, but we introduce a new notation for CoS. We do so to conveniently describe certain derivations related to threshold formulae, which would seem very cumbersome otherwise (we mainly have in mind Definition~\ref{DefThrDer}). In related work, we are defining a new formalism, currently dubbed \emph{Formalism A}, which generalises CoS and formally allows for the new notation.
+\Tom{Talk about `ways of composing derivations' instead of `certain derivations related to threshold formulae'}
+In this paper, we work in CoS and $\SKS$, but we introduce a new notation for CoS. We do so to conveniently describe certain ways of composing derivations, which would seem very cumbersome otherwise (we mainly have in mind Definition~\ref{DefPathBreak}). In related work, we are defining a new formalism, currently dubbed \emph{Formalism A}, which generalises CoS and formally allows for the new notation.
 
 In this section, we quickly introduce all the necessary notions. The standard reference for $\SKS$ in CoS and its typical constructions is \cite{Brun:04:Deep-Inf:rq}.
 
@@ -173,24 +176,23 @@ In addition to these rules, there is a rule $\vlsmash{\vlinf={}\delta\gamma}$, s
 \end{equation}
 We do not always show the instances of rule $=$, and when we do show them, we gather several contiguous instances into one. We consider the $=$ rule as implicitly present in all systems. The first row in Figure~\ref{FigExAF} shows some $\SKS$ example derivations.
 
-\newcommand  {\SKSg}{\mathsf{SKSg}}
-\newcommand{\contr}{\mathsf{c}}
-\newcommand{\cod}{{\contr{\downarrow}}}
-\newcommand{\cou}{{\contr{\uparrow}}}
-Besides $\SKS$, another standard deep-inference system is $\SKSg$, which is the same as $\SKS$, except that it does not contain medial and its structural rules are not restricted to atoms. In particular, we use in this paper the rules
-\[
-\vlinf\cod{}\alpha{\vls[\alpha.\alpha]}
-\qquad\text{and}\qquad
-\vlinf\cou{}{\vls(\alpha.\alpha)}\alpha
-\quad.
-\]
-Clearly, a derivation in $\SKS$ is also a derivation in $\SKSg$. It can easily be proved that $\SKS$ and all its fragments containing the logical and $=$ rules polynomially simulate, respectively, $\SKSg$ and its corresponding fragments \cite{BrusGugl:07:On-the-P:fk}. For example, $\{\swi,\med,=,\acd\}$ polynomially simulates $\{\swi,=,\cod\}$.
 
-We can replace instances of nonatomic structural rules by derivations with the same premiss and conclusion, and that only contain atomic structural rules. The price to pay is a quadratic growth in size. An example is the rightmost upper derivation in Figure~\ref{FigExAF}, which stands for a nonatomic cocontraction.
+\Tom{Removed all talk of SKSg, but define contraction up and down later on in a remark}
+%\newcommand  {\SKSg}{\mathsf{SKSg}}
+%Besides $\SKS$, another standard deep-inference system is $\SKSg$, which is the same as $\SKS$, except that it does not contain medial and its structural rules are not restricted to atoms. In particular, we use in this paper the rules
+%\[
+%\vlinf\cod{}\alpha{\vls[\alpha.\alpha]}
+%\qquad\text{and}\qquad
+%\vlinf\cou{}{\vls(\alpha.\alpha)}\alpha
+%\quad.
+%\]
+%Clearly, a derivation in $\SKS$ is also a derivation in $\SKSg$. It can easily be proved that $\SKS$ and all its fragments containing the logical and $=$ rules polynomially simulate, respectively, $\SKSg$ and its corresponding fragments \cite{BrusGugl:07:On-the-P:fk}. For example, $\{\swi,\med,=,\acd\}$ polynomially simulates $\{\swi,=,\cod\}$.
 
-Sometimes, we use a nonatomic rule instance to stand for some derivation in $\SKS$ that derives that instance, as per Remark~\ref{RemGenericContraction}.
+%We can replace instances of nonatomic structural rules by derivations with the same premiss and conclusion, and that only contain atomic structural rules. The price to pay is a quadratic growth in size. An example is the rightmost upper derivation in Figure~\ref{FigExAF}, which stands for a nonatomic cocontraction.
 
-For CoS proofs, we adopt a special notation that allows us considerable efficiency in describing derivations, especially in the crucial Definition~\ref{DefNorm}. We denote with $\xi\vlscn[\Phi]$ the result of including every formula of $\Phi$ into the context $\xi\vlhole$: since we adopt deep inference, $\xi\vlscn[\Phi]$ is a valid derivation. Then, given the two derivations $\vldownsmash{\vlder\Phi{}\beta\alpha}$ and $\vldownsmash{\vlder\Psi{}\delta\gamma}$, by $\vls[\Phi.\Psi]$ and $\vls(\Phi.\Psi)$ we denote, respectively,
+%Sometimes, we use a nonatomic rule instance to stand for some derivation in $\SKS$ that derives that instance, as per Remark~\ref{RemGenericContraction}.
+
+For CoS proofs, we adopt a special notation that allows us considerable efficiency in describing derivations, especially in the crucial Definition~\ref{DefPathBreak}. We denote with $\xi\vlscn[\Phi]$ the result of including every formula of $\Phi$ into the context $\xi\vlhole$: since we adopt deep inference, $\xi\vlscn[\Phi]$ is a valid derivation. Then, given the two derivations $\vldownsmash{\vlder\Phi{}\beta\alpha}$ and $\vldownsmash{\vlder\Psi{}\delta\gamma}$, by $\vls[\Phi.\Psi]$ and $\vls(\Phi.\Psi)$ we denote, respectively,
 \[
 \vlinf={}{\vlsbr[\beta\;\;.\;\;\vlder\Psi{}\delta\gamma]}
          {\vlsbr[\vlder\Phi{}\beta\alpha\;\;.\;\;\gamma]}
@@ -204,20 +206,21 @@ or any other CoS derivations obtained by interleaving $\Phi$ and $\Psi$ and resp
 %===============================================================================
 \section{Atomic Flows}\label{SectAF}
 
-Atomic flows, which have been introduced in \cite{GuglGund:07:Normalis:lr}, are, essentially, specialised Buss flow graphs \cite{Buss:91:The-Unde:uq}. They are particular directed graphs associated with $\SKS$ derivations: every derivation yields one atomic flow obtained by tracing the atom occurrences inside the derivation. Infinitely many derivations correspond to each atomic flow; this suggests that much of the information inside a derivation is lost in its associated atomic flow; in particular, there is no information about instances of logical rules, only structural rules play a role. As shown in \cite{GuglGund:07:Normalis:lr}, it turns out that atomic flows contain sufficient structure to control normalisation procedures, providing in particular induction measures that can be used to ensure termination. Such normalisation procedures require exponential time on the size of the derivation to be normalised. In the present work we improve the complexity of proof normalisation to quasipolynomial time, but an essential role is played by the complex logical relations of threshold formulae, which are external and independent from the given proof. This means that atomic flows are not sufficient to define the normalisation procedure; however, they still are a very convenient tool for defining and understanding several of its aspects.
+\Tom{Changed last two sentences... Need to rewrite the last one}
+Atomic flows, which have been introduced in \cite{GuglGund:07:Normalis:lr}, are, essentially, specialised Buss flow graphs \cite{Buss:91:The-Unde:uq}. They are particular directed graphs associated with $\SKS$ derivations: every derivation yields one atomic flow obtained by tracing the atom occurrences inside the derivation. Infinitely many derivations correspond to each atomic flow; this suggests that much of the information inside a derivation is lost in its associated atomic flow; in particular, there is no information about instances of logical rules, only structural rules play a role. As shown in \cite{GuglGund:07:Normalis:lr}, it turns out that atomic flows contain sufficient structure to control normalisation procedures, providing in particular induction measures that can be used to ensure termination. Such normalisation procedures \Tom{state a problem about the old stuff}. In the present work we show a strongly normalising procedure and we greatly restrict the non-confluency. As in our previous work all the necessary information to perform normalisation is contained in the atomic flows. Furthermore, we now use much less of the available information compared to before.
 
 We can single out three features of atomic flows that, in general, and not just in this work, help in designing normalisation procedures:
 
-%TODO: rewrite
+\Tom{Changed the second item completely (need to rewrite), talk about cut free proofs instead of analytic proofs.}
 \begin{enumerate}
 %---------------------------------------
-\item\label{ItemUseTop} Atomic flows conveniently express the topological structure of atom occurrences in a proof. This is especially useful for defining the `simple form' of proofs, in Definition~\ref{DefSimpleForm}.
+\item\label{ItemUseTop} Atomic flows conveniently express the topological structure of atom occurrences in a proof. This is especially useful for defining the `core' of derivations, in Definitions~\ref{DefDerCore} and \ref{DefFlowCore}.
 %---------------------------------------
-\item\label{ItemUseSubst} Atomic flows provide for an efficient way to control substitutions for atom occurrences in derivations. This is especially useful for defining the `cut-free form' of proofs, in Definition~\ref{DefNorm}.
+\item\label{ItemUseUnique} Atomic flows forget much bureaucracy, so whereas it is near to impossible to define procedures which give us unique derivations, without making arbitrary choices, the atomic flows of the derivations are often unique. \Tom{refer to the places where we say that atomic flows are unique modulo associativity of contraction}.
 %---------------------------------------
-\item\label{ItemUseNorm} We can define graph rewriting systems over atomic flows that control normalisation procedures on derivations. This could be used for obtaining the `analytic form' of proofs, as we do in Theorem~\ref{ThNormAn}. 
+\item\label{ItemUseNorm} We can define graph rewriting systems over atomic flows that control normalisation procedures on derivations. This could be used for obtaining cut-free proofs, as we do in Theorem~\ref{TODO}. 
 \end{enumerate}
-Our aim now is to quickly and informally provide the necessary notions about atomic flows, especially concerning aspects \eqref{ItemUseTop} and \eqref{ItemUseSubst} above. Although the feature \eqref{ItemUseNorm} of atomic flows did help us in obtaining proofs in analytic form, we estimate that formally introducing the necessary machinery is unjustified in this paper. In fact, given our limited needs here, we can operate directly on derivations, without the intermediate support of atomic flows. Nonetheless, being aware of the underlying atomic-flow methods is useful for the reader who wishes to further investigate this matter. So, we informally provide, in Section~\ref{SectNorm}, enough material to make the connection with the atomic-flow techniques that are fully developed in \cite{GuglGund:07:Normalis:lr}.
+Our aim now is to quickly and informally provide the necessary notions about atomic flows, especially concerning aspects \eqref{ItemUseTop} and \eqref{ItemUseUnique} above. Although the feature \eqref{ItemUseNorm} of atomic flows did help us in obtaining cut-free proofs, we estimate that formally introducing the necessary machinery is unjustified in this paper. In fact, given our limited needs here, we can operate directly on derivations, without the intermediate support of atomic flows. Nonetheless, being aware of the underlying atomic-flow methods is useful for the reader who wishes to further investigate this matter. So, we informally provide, in Section~\ref{TODO}, enough material to make the connection with the atomic-flow techniques that are fully developed in \cite{GuglGund:07:Normalis:lr}.
 
 We obtain one atomic flow from each derivation by tracing all its atom occurrences and by keeping track of their creation and destruction (in identity/cut and weakening/coweakening instances), their duplication (in contraction/cocontraction instances) and their duality (in identity/cut instances). Technically, atomic flows are directed graphs of a special kind, but it is more intuitive to consider them as diagrams generated by composing \emph{elementary atomic flows} that belong to one of seven kinds.
 
@@ -352,7 +355,7 @@ The following two diagrams are not atomic flows:
 \]
 The left one is not a flow because it contains a cycle, and the right one because there is no possible polarity assignment.
 
-%TODO: Add the definition of 'upper' and 'lower' edges of vertices and flows. say what it means to be an edge from x to y. at the moment a path from x to y is not a path from y to x unlike in AFI. this we can fix, but we should check the rest of the paper.
+\Tom{The definition of path is correct, but not complete. It does however include all the paths we care about in this paper. We would also need to add that $\epsilon_1$, $\dots$, $\epsilon_n$ is a path from $\nu_n$ to $\nu_0$ and from $\epsilon_n$ to $\epsilon_0$ for the definition to coincide with Atomic Flows 1.}
 
 Given two vertices $\nu_0$ and $\nu_n$ in an atomic flow $\phi$, a sequence of edges $\epsilon_1,\dots,\epsilon_n$ in $\phi$ is a \emph{path from $\nu_0$ to $\nu_n$ in $\phi$} or a \emph{path from $\epsilon_1$ to $\epsilon_n$ in $\phi$} if there exist vertices $\nu_1,\dots,\nu_{n-1}$ in $\phi$ such that, for every $1\le i\le n$, $\epsilon_i$ is a lower edge of $\nu_{i-1}$ and an upper edge of $\nu_i$. A path $\epsilon_1,\dots,\epsilon_n$ is a \emph{maximal path in $\phi$} if there is no edge $\epsilon$ in $\phi$ such that $\epsilon_1,\dots,\epsilon_n,\epsilon$ or $\epsilon,\epsilon_1,\dots,\epsilon_n$ is a path in $\phi$.
 
@@ -638,6 +641,8 @@ The flow at the right cannot represent flow~\eqref{ExFlow} because it has the wr
 \]
 When no vertex labels appear on a box, we assume that the vertices in the corresponding flow can be any (so, it does not mean that there are no vertices in the flow).
 
+\Tom{Made the following more ambiguous (as this is all we need in the rest of the paper). The double lines are now labelled with a boldface label without indicating the number of edges. Removed sentence about labeling edges with formulae.}
+
 We sometimes use a double line notation for representing multiple edges. For example, the following diagrams represent the same flow:
 \[
 \atomicflow{
@@ -651,14 +656,15 @@ We sometimes use a double line notation for representing multiple edges. For exa
 (4, 0)*{\afvju4{}{\iota_m}}}
 \qquad\text{and}\qquad
 \atomicflow{
-(2,10)*{\afvjdm4{}{\boldsymbol\epsilon_1^l}};
+(2,10)*{\afvjdm4{}{\boldsymbol\epsilon}};
 (4, 7)*{\aflabelright\psi};
 (2, 5)*{\affr86};
-(2, 0)*{\afvjum4{}{\boldsymbol\iota_1^m}}}
+(2, 0)*{\afvjum4{}{\boldsymbol\iota}}}
 \quad,
 \]
-where $l,m\ge0$; note that we use  $\boldsymbol\epsilon_1^l$ to denote the vector $(\epsilon_1,\dots,\epsilon_l)$. We might label multiple edges with one of the formulae that the associated atom occurrences form in a derivation.
+where $l,m\ge0$; where we use  $\boldsymbol\epsilon$ to denote the vector $(\epsilon_1,\dots,\epsilon_l)$.
 
+\Tom{Removed sub and super script from the labels in the second atomic flow. In accordance with the convention above.}
 We extend the double line notation to collections of isomorphic flows. For example, for $m\ge0$, the following diagrams represent the same flow:
 \[
 \atomicflow{
@@ -671,13 +677,13 @@ We extend the double line notation to collections of isomorphic flows. For examp
 (12,0)*{\afaiunw{}{}}}
 \qquad\text{and}\qquad
 \atomicflow{
-( 4,6)*{\afawdm{}{}{}{\boldsymbol\iota_1^m}};
+( 4,6)*{\afawdm{}{}{}{\boldsymbol\iota}};
 ( 0,4)*{\afvjm4};
 ( 2,0)*{\afaiunw{}{}}}
 \quad.
 \]
 
-\Tom{Added definition (long time ago).}
+\Tom{Added definition.}
 
 \begin{definition}
 An atomic flow is \emph{unique modulo associativity of contraction} if it is unique modulo the equivalence relation generated by the following flow rewriting system:
@@ -727,61 +733,64 @@ In particular, the following atomic flows are unique modulo associativity of con
 }\quad.
 \]
 
-Considering atomic flows modulo associativity of contraction should be uncontroversial, as we could instead have transformed all the derivations and their associated atomic flows to a canonical form.
+\Tom{Added comment:}
 
-%TODO: note that this is different from what we use later...
+Considering atomic flows modulo associativity of contraction is uncontroversial, as we could instead have transformed all the derivations and their associated atomic flows to a canonical form.
+
+\Tom{why $m$ and not $n$? Removed comment about not insisting on connected components, because we DO insist on connected components. If we decide to have a remark later on which does not insist on connectedness, then I suggest we explain all of this in the remark.}
+
 We observe that the flow of every $\SKS$ derivation can always be represented as a collection of $m\ge0$ connected components as follows:
 \[
 %---------------------------------------
 \atomicflow{
-(13  ,14  )*{\afaidmex{}{}{}{}{}{}21};
-( 2  ,12.5)*{\afvjm5};
-(24  ,12.5)*{\afvjm5};
-( 9.5, 9  )*{\aflabelright{\phi_1}};
-(24.5, 9  )*{\aflabelright{\psi_1}};
-( 1  , 6  )*{\copy\weakdown};
-( 3  , 6  )*{\copy\weakup};
-( 5.5, 6  )*{\affr{13}8};
-( 6  , 6  )*{\copy\contrdown};
-( 9  , 6  )*{\copy\contrup};
-(16  , 6  )*{\copy\weakdown};
-(18  , 6  )*{\copy\weakup};
-(20.5, 6  )*{\affr{13}8};
-(21  , 6  )*{\copy\contrdown};
-(24  , 6  )*{\copy\contrup};
-( 2  ,-0.5)*{\afvjm5};
-(24  ,-0.5)*{\afvjm5};
-(13  ,-2  )*{\afaiumex{}{}{}{}{}{}21};
+(13  ,8  )*{\afaidmex{}{}{}{}{}{}21};
+( 2  ,6.5)*{\afvjm5};
+(24  ,6.5)*{\afvjm5};
+( 9.5, 3  )*{\aflabelright{\phi'_1}};
+(24.5, 3  )*{\aflabelright{\phi''_1}};
+( 1  , 0  )*{\copy\weakdown};
+( 3  , 0  )*{\copy\weakup};
+( 5.5, 0  )*{\affr{13}8};
+( 6  , 0  )*{\copy\contrdown};
+( 9  , 0  )*{\copy\contrup};
+(16  , 0  )*{\copy\weakdown};
+(18  , 0  )*{\copy\weakup};
+(20.5, 0  )*{\affr{13}8};
+(21  , 0  )*{\copy\contrdown};
+(24  , 0  )*{\copy\contrup};
+( 2  ,-6.5)*{\afvjm5};
+(24  ,-6.5)*{\afvjm5};
+(13  ,-8  )*{\afaiumex{}{}{}{}{}{}21};
 %-------------------
-(30,6)*{\cdots};
+(30,0)*{\cdots};
 (34,0)="A";
-"A"+(13  ,14  )*{\afaidmex{}{}{}{}{}{}21};
-"A"+( 2  ,12.5)*{\afvjm5};
-"A"+(24  ,12.5)*{\afvjm5};
-"A"+( 9  , 9  )*{\aflabelright{\phi_m}};
-"A"+(24  , 9  )*{\aflabelright{\psi_m}};
-"A"+( 1  , 6  )*{\copy\weakdown};
-"A"+( 3  , 6  )*{\copy\weakup};
-"A"+( 5.5, 6  )*{\affr{13}8};
-"A"+( 6  , 6  )*{\copy\contrdown};
-"A"+( 9  , 6  )*{\copy\contrup};
-"A"+(16  , 6  )*{\copy\weakdown};
-"A"+(18  , 6  )*{\copy\weakup};
-"A"+(20.5, 6  )*{\affr{13}8};
-"A"+(21  , 6  )*{\copy\contrdown};
-"A"+(24  , 6  )*{\copy\contrup};
-"A"+( 2  ,-0.5)*{\afvjm5};
-"A"+(24  ,-0.5)*{\afvjm5};
-"A"+(13  ,-2  )*{\afaiumex{}{}{}{}{}{}21}}
-\quad,
+"A"+(13  ,8  )*{\afaidmex{}{}{}{}{}{}21};
+"A"+( 2  ,6.5)*{\afvjm5};
+"A"+(24  ,6.5)*{\afvjm5};
+"A"+( 9  , 3  )*{\aflabelright{\phi'_m}};
+"A"+(24  , 3  )*{\aflabelright{\phi''_m}};
+"A"+( 1  , 0  )*{\copy\weakdown};
+"A"+( 3  , 0  )*{\copy\weakup};
+"A"+( 5.5, 0  )*{\affr{13}8};
+"A"+( 6  , 0  )*{\copy\contrdown};
+"A"+( 9  , 0  )*{\copy\contrup};
+"A"+(16  , 0  )*{\copy\weakdown};
+"A"+(18  , 0  )*{\copy\weakup};
+"A"+(20.5, 0  )*{\affr{13}8};
+"A"+(21  , 0  )*{\copy\contrdown};
+"A"+(24  , 0  )*{\copy\contrup};
+"A"+( 2  ,-6.5)*{\afvjm5};
+"A"+(24  ,-6.5)*{\afvjm5};
+"A"+(13  ,-8  )*{\afaiumex{}{}{}{}{}{}21};
+}\quad,
 \]
-such that each edge in flow $\phi_i$ is associated with some occurrence of some atom $a_i$, and each edge in flow $\psi_i$ is associated with some occurrence of atom $\bar a_i$. Note that it might happen that for $i\ne j$ we have $\vlsmash{a_i\equiv a_j}$. If we do not insist on dealing with connected components, we can adopt the same representation as above and stipulate that $i\ne j$ implies $\vlsmash{a_i\not\equiv a_j,\bar a_j}$. This would mean that the derivation only contains occurrences of atoms $a_1$, \dots, $a_m$, such that these atoms and their dual are all mutually distinct.
+such that each edge in flow $\phi'_i$ is associated with some occurrence of some atom $a_i$, and each edge in flow $\phi''_i$ is associated with some occurrence of atom $\bar a_i$. Note that it might happen that for $i\ne j$ we have $\vlsmash{a_i\equiv a_j}$.
 
 \begin{definition}
 Given a derivation $\Phi$ where the atom $a$ occurs, we say that the atomic flow associated with $a$ in $\Phi$ is the smallest subflow of the atomic flow associated with $\Phi$ containing all the edges mapped to from occurrences of $a$ and $\bar a$.
 \end{definition}
 
-%TODO: last sentence? add a paragraph
+\Tom{at the very end of writing the paper check what if anything of this paragraph is applicable.}
 In the following, when informally dealing with derivations, we freely transfer to them notions defined for their flows. For example, we can say that an atom occurrence is negative for a given polarity assignment (if the edge associated with the atom occurrence maps to $\pmi$) or that two atom occurrences are connected (if the associated edges belong to the same connected component). In fact, one of the advantages of working with flows is that they provide us with convenient geometrical notions.
 
 
@@ -1037,6 +1046,8 @@ We say that $\phi_1$, $\dots$, $\phi_n$ is an \emph{ordered choice of components
 
 \Tom{In previous definition: The ordered choice of components is given by the definition and needs not be made explicit.}
 
+\Tom{`Make 4.3 and 4.4 into a remark, use this in def 4.5'. I haven't figured out how to do this elegantly.}
+
 %TODO: give an example
 
 \begin{proposition}\label{PropAssoContr}
@@ -1055,7 +1066,7 @@ A core of a derivation is defined based on the core of its atomic flow:
 
 \Tom{Changed definition to make sure that the atom occurrences in the premiss and in the conclusion pair up the way they should.}
 
-\begin{definition}\label{DefCore}
+\begin{definition}\label{DefDerCore}
 Given a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ with associated atomic flow $\phi$, such that $\phi_1$, $\dots$, $\phi_n$ are all the non-weakly-streamlined, connected subflows of $\phi$, a \emph{core of\/ $\Phi$} is defined to be a derivation
 \[
 \vlder{}{}{\vls[\beta.(a^{\mu'_n}_n.{\bar a^{\mu''_n}_n}).\cdots.(a^{\mu'_1}_1.{\bar a^{\mu'_1}_1})]}{\vls([a^{\lambda'_1}_1.{\bar a^{\lambda''_1}_1}].\cdots.[a^{\lambda'_n}_n.{\bar a^{\lambda'_n}_n}].\alpha)}
@@ -1218,6 +1229,9 @@ Finally, we show the inductive case, $n>2$:
 \]
 \end{proof}
 
+\newcommand{\contr}{\mathsf{c}}
+\newcommand{\cod}{{\contr{\downarrow}}}
+\newcommand{\cou}{{\contr{\uparrow}}}
 \begin{remark}\label{RemGenericContraction}
 In the non-atomic version of system $\SKS$ the derivations shown in Lemma~\ref{LemGenericContraction} correspond to repeated applications of (co)contractions. For this reason we sometimes write the inference rules $\vlinf{n\cdot\cod}{}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlinf{n\cdot\cou}{}{\bigwedge_{i=1}^{n}\alpha}{\alpha}$ instead of the derivations $\vlder{}{\{\acd,\med\}}{\alpha}{\bigvee_{i=1}^{n}\alpha}$ and $\vlupsmash{\vlder{}{\{\acu,\med\}}{\bigwedge_{i=1}^{n}\alpha}{\alpha}}$, respectively.
 \end{remark}
@@ -1259,7 +1273,7 @@ Given a derivation $\Phi$, the core of $\Phi$ obtained as described in the proof
 \subsection{The Path Breaker}\label{SectBreak} 
 
 \newcommand{\Break}{\mathsf{Break}}
-\begin{definition}\label{DefBreak}
+\begin{definition}\label{DefPathBreak}
 The \emph{path breaker}, $\Break$, is an operator whose arguments are a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ and the atom occurrences $a^\lambda$ and $a^\mu$, such that $\alpha=\vls([a^\lambda.\bar a].\gamma)$, $\beta=\vls[\delta.(a^\mu.\bar a)]$ and
 \newbox\DeltaTopK
 \setbox\DeltaTopK=
