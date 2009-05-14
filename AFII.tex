@@ -1274,13 +1274,13 @@ Given a derivation $\Phi$, the core of $\Phi$ obtained as described in the proof
 
 \newcommand{\Break}{\mathsf{Break}}
 \begin{definition}\label{DefPathBreak}
-The \emph{path breaker}, $\Break$, is an operator whose arguments are a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ and the atom occurrences $a^\lambda$ and $a^\mu$, such that $\alpha=\vls([a^\lambda.\bar a].\gamma)$, $\beta=\vls[\delta.(a^\mu.\bar a)]$ and
+The \emph{path breaker}, $\Break$, is an operator whose arguments are a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ and the atom occurrences $a^\lambda$ and $a^\mu$, such that $\alpha=\vls([a^\lambda.\bar a].\gamma)$, $\beta=\vls[\delta.(a^\mu.\bar a)]$ and the results are a derivation and two atom occurrences $a^\epsilon$ and $a^\iota$ such that $\Break(\Phi,a^\lambda,a^\mu)=(\Psi,a^\epsilon,a^\iota)$, where:
 \newbox\DeltaTopK
 \setbox\DeltaTopK=
 \hbox{$
 \vlderivation
 {
- \vlin{=}{}{\vlsbr[\delta.(\vlinf{}{}{\ttt}{a}.\bar a)]}
+ \vlin{=}{}{\vls[\delta.(\vlinf{}{}{\ttt}{a^{\mu'}}.\bar a)]}
  {
   \vlde{\Phi}{}{\beta}
   {
@@ -1294,13 +1294,13 @@ The \emph{path breaker}, $\Break$, is an operator whose arguments are a derivati
 \hbox{$
 \vlderivation
 {
- \vlin{=}{}{\vlsbr[\delta.(a.\vlinf{}{}{\ttt}{\bar a})]}
+ \vlin{=}{}{\vls[\delta.(a^{\epsilon'}.\vlinf{}{}{\ttt}{\bar a})]}
  {
   \vlde{\Phi}{}{\beta}
   {
    \vlin{=}{}{\alpha}
    {
-    \vlhy{\vlsbr([\vlinf{}{}{a}{\fff}.\bar a].\gamma)}
+    \vlhy{\vls([\vlinf{}{}{a^{\lambda'}}{\fff}.\bar a].\gamma)}
    }
   }
  }
@@ -1315,22 +1315,22 @@ The \emph{path breaker}, $\Break$, is an operator whose arguments are a derivati
  {
   \vlin{=}{}{\alpha}
   {
-   \vlhy{\vlsbr([a.\vlinf{}{}{\bar a}{\fff}].\gamma)}
+   \vlhy{\vls([a^{\epsilon'}.\vlinf{}{}{\bar a}{\fff}].\gamma)}
   }
  }
 }$
 }
 \[
-\Break(\Phi,a^\epsilon,a^\iota)\quad=\quad
+\Psi\quad=\quad
 \vlderivation
 {
- \vlin{=}{}{\vls[\vlinf{2\cdot\cod}{}{\delta}{\vls[\delta.\delta.\delta]}\;.\;(a^\mu.\bar a)]}
+ \vlin{=}{}{\vls[\vlinf{2\cdot\cod}{}{\delta}{\vls[\delta.\delta.\delta]}\;.\;(a^\iota.\bar a)]}
  {
   \vlin{=}{}{\vlsbr[\delta\;\;\;.\;\;\;\delta\;\;\;.\;\;\;\box\DeltaBotK]}
   {
-   \vlin{\swi}{}{\vls[(\gamma.a).[\delta.\delta]]}
+   \vlin{\swi}{}{\vls[(\gamma.a^{\epsilon'}).[\delta.\delta]]}
    {
-    \vlin{=}{}{\vls(\gamma.[a.[\delta.\delta]])}
+    \vlin{=}{}{\vls(\gamma.[a^{\epsilon'}.[\delta.\delta]])}
     {
      \vlin{=}{}{\vlsbr([\delta\;\;\;\;\;.\;\;\;\;\;\box\DeltaK]\;\;\;\;\;.\;\;\;\;\;\gamma)}
      {
@@ -1338,7 +1338,7 @@ The \emph{path breaker}, $\Break$, is an operator whose arguments are a derivati
       {
        \vlin{=}{}{\vlsbr(\box\DeltaTopK\;\;\;.\;\;\;\gamma\;\;\;.\;\;\;\gamma)}
        {
-        \vlhy{\vls([a^\lambda.\bar a]\;.\;\vlinf{2\cdot\cou}{}{\vls(\gamma.\gamma.\gamma)}{\gamma})}
+        \vlhy{\vls([a^\epsilon.\bar a]\;.\;\vlinf{2\cdot\cou}{}{\vls(\gamma.\gamma.\gamma)}{\gamma})}
        }
       }
      }
@@ -1346,8 +1346,9 @@ The \emph{path breaker}, $\Break$, is an operator whose arguments are a derivati
    }
   }
  } 
-}\quad.
+}\quad,
 \]
+where $\epsilon$, $\lambda'$ and $\epsilon'$ correspond to $\lambda$ and $\mu'$, $\epsilon'$ and $\iota$ correspond to $\mu$ in the atomic flow of $\Phi$.
 \end{definition}
 
 %TODO: superposition of colors
@@ -1355,13 +1356,13 @@ The \emph{path breaker}, $\Break$, is an operator whose arguments are a derivati
 \Tom{Changed the next proposition.}
 
 \begin{proposition}\label{PropPathBreak}
-If the atomic flow of $\vlder{\Phi}{}{\vls[\beta.(a^{\three}.\bar a^{\four})]}{\vls([a^{\one}.\bar a^{\two}].\alpha)}$ is of shape
+If the atomic flow of $\vlder{\Phi}{}{\vls[\beta.(a^{\mu}.\bar a^{\mu'})]}{\vls([a^{\lambda}.\bar a^{\lambda'}].\alpha)}$ is of shape
 \[
 \atomicflow
 {
 (-8, 6)*{\afvjm{4}};
-(-2, 6)*{\afvju{4}{\one}{}};
-( 2, 6)*{\afvju{4}{}{\two}};
+(-2, 6)*{\afvju{4}{\lambda}{}};
+( 2, 6)*{\afvju{4}{}{\lambda'}};
 ( 8, 6)*{\afvjm{4}};
 (-5, 0)*{\affr{8}{8}};
 (-4, 2)*{\aflabelright\phi};
@@ -1369,17 +1370,16 @@ If the atomic flow of $\vlder{\Phi}{}{\vls[\beta.(a^{\three}.\bar a^{\four})]}{\
 ( 5, 0)*{\affr{8}{8}};
 ( 6, 2)*{\aflabelright{\psi}};
 ( 8,-6)*{\afvjm{4}};
-(-2,-6)*{\afvjd{4}{\three}{}};
-( 2,-6)*{\afvjd{4}{}{\four}};
+(-2,-6)*{\afvjd{4}{\mu}{}};
+( 2,-6)*{\afvjd{4}{}{\mu'}};
 (-8,-6)*{\afvjm{4}};
 }\quad,
 \]
-for some flows $\phi$ and $\psi$, then there are no paths from the upper edge $\lambda$ to the lower edge $\mu$ in the atomic flow of\/ $\Break(\Phi,a^\one,a^\three)$ if
-\begin{enumerate}
-	\item $\lambda=\one$ and $\mu=\three$;
-	\item $\lambda=\two$ and $\mu=\four$; or
-	\item there is no path from $\lambda$ to $\mu$ in the atomic flow of $\Phi$.
-\end{enumerate}
+for some flows $\phi$ and $\psi$ and if $\Break(\Phi,a^\lambda,a^\mu)=\left(\vlder{\Psi}{}{\beta}{\alpha},a^\epsilon,a^\iota\right)$, where $\alpha=\vls([a^\epsilon.\bar a^{\epsilon'}].\gamma)$ and $\beta=\vls[\delta.(a^\iota.\bar a^{\iota'})]$, then
+\begin{itemize}
+	\item there are no paths from $\epsilon$ to $\iota$ and no paths from $\epsilon'$ to $\iota'$ in the atomic flow of $\Psi$; and
+	\item there are no paths from an upper path $\epsilon''$ to a lower path $\iota''$ in the atomic flow of $\Psi$ unless there is a path from the corresponding upper path $\lambda''$ to the lower path $\mu''$ in the atomic flow of $\Phi$.
+\end{itemize}
 \end{proposition}
 
 \begin{figure}
@@ -1387,8 +1387,8 @@ for some flows $\phi$ and $\psi$, then there are no paths from the upper edge $\
 \atomicflow
 {
 (-8, 6)*{\afvjm{4}};
-(-2, 6)*{\afvju{4}{\one}{}};
-( 2, 6)*{\afvju{4}{}{\two}};
+(-2, 6)*{\afvju{4}{\lambda}{}};
+( 2, 6)*{\afvju{4}{}{\lambda'}};
 ( 8, 6)*{\afvjm{4}};
 (-5, 0)*{\affr{8}{8}};
 (-4, 2)*{\aflabelright\phi};
@@ -1396,10 +1396,10 @@ for some flows $\phi$ and $\psi$, then there are no paths from the upper edge $\
 ( 5, 0)*{\affr{8}{8}};
 ( 6, 2)*{\aflabelright{\psi}};
 ( 8,-6)*{\afvjm{4}};
-(-2,-6)*{\afvjd{4}{\three}{}};
-( 2,-6)*{\afvjd{4}{}{\four}};
+(-2,-6)*{\afvjd{4}{\mu}{}};
+( 2,-6)*{\afvjd{4}{}{\mu'}};
 (-8,-6)*{\afvjm{4}};
-}\qquad
+}\qquad\qquad
 \atomicflow
 {
 %%%%% RED %%%%%
@@ -1418,16 +1418,16 @@ for some flows $\phi$ and $\psi$, then there are no paths from the upper edge $\
 (0,0)="A";
 "A"+(-11,-14)*{\afcjrmcol{6}{20}{Red}};
 "A"+(11,-14)*{\afcjlmcol{6}{20}{Red}};
-"A"+(-2, 11)*{\afvjdcol{14}{\one}{}{Red}};
-"A"+( 2, 11)*{\afvjdcol{14}{}{\two}{Red}};
-"A"+(-2, -8)*{\afawucol{}{}{\three'}{}{}{Red}};
+"A"+(-2, 11)*{\afvjdcol{14}{\epsilon}{}{Red}};
+"A"+( 2, 11)*{\afvjdcol{14}{}{\epsilon'}{Red}};
+"A"+(-2, -8)*{\afawucol{}{}{\mu}{}{}{Red}};
 % join one
-"A"+(2,-7)*{\afvjdcol6{}{\four'}{Red}};
-"A"+(2,-13)*{\afvjucol6{}{\two'}{Red}};
+"A"+(2,-7)*{\afvjdcol6{}{\mu'}{Red}};
+"A"+(2,-13)*{\afvjucol6{}{\lambda'}{Red}};
 % middle boxes
 "A"+"D"="A";
 "A"+(9.5,-10)*{\afcjlmcol{3}{12}{Red}};
-"A"+( 2,-8)*{\afawucol{}{}{}{\four''}{}{Red}};
+"A"+( 2,-8)*{\afawucol{}{}{}{\mu'}{}{Red}};
 %%%%% GREEN %%%%%
 %% cocontractions
 (0,0)="A";
@@ -1441,17 +1441,17 @@ for some flows $\phi$ and $\psi$, then there are no paths from the upper edge $\
 % middle boxes
 "A"+"D"="A";
 "A"+(-9.5,10)*{\afcjlmcol{3}{12}{OliveGreen}};
-"A"+(-2, 8)*{\afawdcol{}{}{\one'}{}{}{OliveGreen}};
+"A"+(-2, 8)*{\afawdcol{}{}{\lambda}{}{}{OliveGreen}};
 % join two
-"A"+(-2, -7)*{\afvjdcol6{\three''}{}{OliveGreen}};
-"A"+(-2,-13)*{\afvjucol6{\one''}{}{OliveGreen}};
+"A"+(-2, -7)*{\afvjdcol6{\mu}{}{OliveGreen}};
+"A"+(-2,-13)*{\afvjucol6{\lambda}{}{OliveGreen}};
 % bottom boxes
 "A"+"D"="A";
 "A"+(-11,14)*{\afcjlmcol{6}{20}{OliveGreen}};
 "A"+(11,14)*{\afcjrmcol{6}{20}{OliveGreen}};
-"A"+(-2,-11)*{\afvjucol{14}{\three}{}{OliveGreen}};
-"A"+( 2,-11)*{\afvjucol{14}{}{\four}{OliveGreen}};
-"A"+( 2, 8)*{\afawdcol{}{}{}{\two''}{}{OliveGreen}};
+"A"+(-2,-11)*{\afvjucol{14}{\iota}{}{OliveGreen}};
+"A"+( 2,-11)*{\afvjucol{14}{}{\iota'}{OliveGreen}};
+"A"+( 2, 8)*{\afawdcol{}{}{}{\lambda'}{}{OliveGreen}};
 %%%%% BLACK %%%%%
 %% cocontractions
 (0,0)="A";
@@ -1495,24 +1495,27 @@ for some flows $\phi$ and $\psi$, then there are no paths from the upper edge $\
 "A"+(-4, 2)*{\aflabelright{\phi}};
 "A"+( 5, 0)*{\affr{8}{8}};
 "A"+( 6, 2)*{\aflabelright{\psi}};
-}\quad,
+}
 \]
-\caption{The atomic flow of a derivation $\Phi$ and the atomic flow of $\Break(\Phi,a^\one,a^\three)$.}
+\caption{The atomic flows of $\Phi$ (left) and $\Psi$ (right) such that $\Break(\Phi,a^\lambda,a^\mu)=(\Psi,a^\epsilon,a^\iota)$.}
 \label{FigFlowBreak}
 \end{figure}
 
 \begin{proof}
-Refer to the atomic flow of $\Break(\Phi,a^\one,a^\three)$ in Figure~\ref{FigFlowBreak}.
-All the edges that might be in paths from $\one$ or $\two$ are coloured in red and all the edges that might be in paths to $\three$ or $\four$ are coloured in green. Since the red and the green paths do not overlap, there are no paths from $\one$ to $\three$ and no paths from $\two$ to $\four$. Furthermore, by referring to Figure~\ref{FigFlowBreak} observe that if there is a path from the upper edge $\lambda$ to the lower edge $\mu$ the path must pass through one of the three copies of either $\phi$ or $\psi$, hence there must be a path from $\lambda$ to $\mu$ in the atomic flow of $\Phi$.
+Refer to the atomics in Figure~\ref{FigFlowBreak}.
+\begin{itemize}
+	\item All the edges that might be in paths from $\epsilon$ or $\epsilon'$ are coloured in red and all the edges that might be in paths to $\iota$ or $\iota'$ are coloured in green. Since the red and the green paths do not overlap, there are no paths from $\epsilon$ to $\iota$ and no paths from $\epsilon'$ to $\iota'$; and
+	\item If there is a path from an upper edge $\epsilon''$ to a lower edge $\mu''$ in the atomic flow of $\Psi$ the path must pass through one of the three copies of either $\phi$ or $\psi$, hence there must be a path from the corresponding upper edge $\lambda''$ to the corresponding lower edge $\mu''$ in the atomic flow of $\Phi$.
+\end{itemize}
 \end{proof}
 
+\Tom{Changed `restriction' into `assumption'. I don't know if this improves anything... I thought it would be clear.}
+
 \begin{remark}
-A stronger version of Proposition~\ref{PropPathBreak}, without any restrictions on the atomic flow of $\Phi$, also holds. However, assuming $\phi$ and $\psi$ are disjoint makes the atomic flow of $\Break(\Phi,a^\one,a^\three)$ easier to visualise and the stronger version of the proposition is not needed for the main result in this paper.
+A stronger version of Proposition~\ref{PropPathBreak}, without any assumptions about the atomic flow of $\Phi$, also holds. However, assuming $\phi$ and $\psi$ are disconnected makes the atomic flow of $\Psi$ easier to visualise and the stronger version of the proposition is not needed for the main result in this paper.
 \end{remark}
 
 \subsection{The Normaliser}\label{SectNorm}
-
-\Tom{Talking about ordered choice of components from the atomic flow and not the derivation.}
 
 \newcommand{\Norm}{\mathsf{Norm}}
 \begin{definition}
