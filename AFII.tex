@@ -1272,9 +1272,11 @@ Given a derivation $\Phi$, the core of $\Phi$ obtained as described in the proof
 
 \subsection{The Path Breaker}\label{SectBreak} 
 
+\Tom{Explain `correspondence'.}
+
 \newcommand{\Break}{\mathsf{Break}}
 \begin{definition}\label{DefPathBreak}
-The \emph{path breaker}, $\Break$, is an operator whose arguments are a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ and the atom occurrences $a^\lambda$ and $a^\mu$, such that $\alpha=\vls([a^\lambda.\bar a].\gamma)$, $\beta=\vls[\delta.(a^\mu.\bar a)]$ and the results are a derivation and two atom occurrences $a^\epsilon$ and $a^\iota$ such that $\Break(\Phi,a^\lambda,a^\mu)=(\Psi,a^\epsilon,a^\iota)$, where:
+The \emph{path breaker}, $\Break$, is an operator whose arguments are a derivation $\vlder{\Phi}{}{\beta}{\alpha}$ and the atom occurrences $a^\lambda$ and $a^\mu$, such that $\alpha=\vlsmallbrackets\vls([a^\lambda.\bar a].\gamma)$, $\beta=\vls[\delta.(a^\mu.\bar a)]$, and the results are a derivation and two atom occurrences $a^\epsilon$ and $a^\iota$ such that $\Break(\Phi,a^\lambda,a^\mu)=(\Psi,a^\epsilon,a^\iota)$, where:
 \newbox\DeltaTopK
 \setbox\DeltaTopK=
 \hbox{$
@@ -1328,9 +1330,9 @@ The \emph{path breaker}, $\Break$, is an operator whose arguments are a derivati
  {
   \vlin{=}{}{\vlsbr[\delta\;\;\;.\;\;\;\delta\;\;\;.\;\;\;\box\DeltaBotK]}
   {
-   \vlin{\swi}{}{\vls[(\gamma.a^{\epsilon'}).[\delta.\delta]]}
+   \vlin{\swi}{}{\vlsmallbrackets\vls[(\gamma.a^{\epsilon'}).[\delta.\delta]]}
    {
-    \vlin{=}{}{\vls(\gamma.[a^{\epsilon'}.[\delta.\delta]])}
+    \vlin{=}{}{\vlsmallbrackets\vls(\gamma.[a^{\epsilon'}.[\delta.\delta]])}
     {
      \vlin{=}{}{\vlsbr([\delta\;\;\;\;\;.\;\;\;\;\;\box\DeltaK]\;\;\;\;\;.\;\;\;\;\;\gamma)}
      {
@@ -1356,7 +1358,7 @@ where $\epsilon$, $\lambda'$ and $\epsilon'$ correspond to $\lambda$ and $\mu'$,
 \Tom{Changed the next proposition.}
 
 \begin{proposition}\label{PropPathBreak}
-If the atomic flow of $\vlder{\Phi}{}{\vls[\beta.(a^{\mu}.\bar a^{\mu'})]}{\vls([a^{\lambda}.\bar a^{\lambda'}].\alpha)}$ is of shape
+If, for some flows $\phi$ and $\psi$, the atomic flow of $\vlder{\Phi}{}{\vlsmallbrackets\vls[\beta.(a^{\mu}.\bar a^{\mu'})]}{\vlsmallbrackets\vls([a^{\lambda}.\bar a^{\lambda'}].\alpha)}$ is of shape
 \[
 \atomicflow
 {
@@ -1375,9 +1377,9 @@ If the atomic flow of $\vlder{\Phi}{}{\vls[\beta.(a^{\mu}.\bar a^{\mu'})]}{\vls(
 (-8,-6)*{\afvjm{4}};
 }\quad,
 \]
-for some flows $\phi$ and $\psi$ and if $\Break(\Phi,a^\lambda,a^\mu)=\left(\vlder{\Psi}{}{\beta}{\alpha},a^\epsilon,a^\iota\right)$, where $\alpha=\vls([a^\epsilon.\bar a^{\epsilon'}].\gamma)$ and $\beta=\vls[\delta.(a^\iota.\bar a^{\iota'})]$, then
+and if\/ $\Break(\Phi,a^\lambda,a^\mu)=\left(\vlder{\Psi}{}{\beta}{\alpha},a^\epsilon,a^\iota\right)$, where $\alpha=\vlsmallbrackets\vls([a^\epsilon.\bar a^{\epsilon'}].\gamma)$ and $\beta=\vlsmallbrackets\vls[\delta.(a^\iota.\bar a^{\iota'})]$, then
 \begin{itemize}
-	\item there are no paths from $\epsilon$ to $\iota$ and no paths from $\epsilon'$ to $\iota'$ in the atomic flow of $\Psi$; and
+	\item there are no paths from $\epsilon$ to $\iota$ and no paths from $\epsilon'$ to $\iota'$ in the atomic flow of\/ $\Psi$; and
 	\item there are no paths from an upper path $\epsilon''$ to a lower path $\iota''$ in the atomic flow of $\Psi$ unless there is a path from the corresponding upper path $\lambda''$ to the lower path $\mu''$ in the atomic flow of $\Phi$.
 \end{itemize}
 \end{proposition}
